@@ -6,7 +6,8 @@
 - [x] Initial three public API connectors, persisted observations, lifecycle, conservative dedupe, API and worker baseline.
 - [x] SmartRecruiters and Personio implemented with two live tenants each (5/78 platform evidence).
 - [x] First enterprise risk investigation recorded in docs/ENTERPRISE_RESEARCH.md.
-- [ ] Verify full Compose/PostgreSQL/Redis path and deploy a reviewer demo.
+- [x] Verify full Compose/PostgreSQL/Redis/web startup and proxies in GitHub Actions.
+- [ ] Deploy a hosted reviewer demo and verify live ingestion there.
 - [ ] Frontend redesign against docs/PRODUCT_DESIGN.md; browser tests for existing source/run management, preserved search state and responsive job details.
 
 ## Immediate acquisition risks (planning order, not verified access claims)
