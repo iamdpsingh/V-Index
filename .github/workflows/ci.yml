@@ -49,3 +49,27 @@ jobs:
           cache-dependency-path: apps/web/package-lock.json
       - run: npm ci
       - run: npm run build
+
+  stack:
+    runs-on: ubuntu-latest
+    env:
+      ADMIN_TOKEN: ci-stack-only-token
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and launch the actual stack
+        run: docker compose up --build -d
+      - name: Check API, database, Redis and web proxy
+        run: |
+          curl -fsS --retry 15 --retry-connrefused --retry-delay 2 http://127.0.0.1:8000/health
+          curl -fsS --retry 15 --retry-connrefused --retry-delay 2 http://127.0.0.1:3000/ -o /dev/null
+          curl -fsS http://127.0.0.1:3000/api/v1/jobs | python3 -c 'import json,sys; data=json.load(sys.stdin); assert data["total"] == 0 and data["items"] == []'
+          curl -fsS http://127.0.0.1:3000/openapi.json | python3 -c 'import json,sys; data=json.load(sys.stdin); assert "/api/v1/jobs" in data["paths"]'
+          docker compose exec -T redis redis-cli ping
+          docker compose exec -T api /app/.venv/bin/alembic current
+          test "$(docker compose ps --status running -q worker | wc -l | tr -d ' ')" = 1
+      - name: Capture service logs on failure
+        if: failure()
+        run: docker compose logs --no-color
+      - name: Remove the ephemeral CI stack
+        if: always()
+        run: docker compose down -v
