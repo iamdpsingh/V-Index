@@ -34,6 +34,12 @@ services:
   api:
     <<: *backend
     ports: ["127.0.0.1:8000:8000"]
+    healthcheck:
+      test: ["CMD", "/app/.venv/bin/python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=3)"]
+      interval: 3s
+      timeout: 5s
+      start_period: 10s
+      retries: 20
     depends_on:
       migrate:
         condition: service_completed_successfully
@@ -52,6 +58,8 @@ services:
     environment:
       API_INTERNAL_URL: http://api:8000
     ports: ["127.0.0.1:3000:3000"]
-    depends_on: [api]
+    depends_on:
+      api:
+        condition: service_healthy
 volumes:
   postgres-data:
