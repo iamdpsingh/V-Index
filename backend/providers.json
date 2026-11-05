@@ -1,0 +1,1241 @@
+[
+  {
+    "name": "ADP",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "HIGH",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "ApplicantPro",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "MEDIUM",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "Ashby",
+    "kind": "ats",
+    "implementation_status": "IMPLEMENTED",
+    "evidence_status": "LIVE_VERIFIED",
+    "risk": "LOW",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [
+      {
+        "provider": "Ashby",
+        "url": "https://jobs.ashbyhq.com/Ashby",
+        "at": "2026-11-05T16:12:30.620155+00:00",
+        "revision": "uncommitted-initial-build",
+        "count": 72,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "payload_sha256": "9fdcab7c089ce328ef84acfb198fcb503dad1d0ce5d135924c1b0cd11662d417"
+      },
+      {
+        "provider": "Ashby",
+        "url": "https://jobs.ashbyhq.com/ramp",
+        "at": "2026-11-05T16:12:31.885831+00:00",
+        "revision": "uncommitted-initial-build",
+        "count": 171,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "payload_sha256": "0abcbb456eca6d34d76b004f2659bcb5ae73b402247ec8ac6016c49f8544df88"
+      }
+    ],
+    "last_run_at": "2026-11-05T16:12:31.885831+00:00",
+    "extraction_count": 243,
+    "failure_reason": null,
+    "limitations": [
+      "Point-in-time public API enumeration; deployment and continuous operation unverified"
+    ]
+  },
+  {
+    "name": "Avature",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "HIGH",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "BambooHR",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "MEDIUM",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "BrassRing",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "HIGH",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "Breezy HR",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "MEDIUM",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "CareerPlug",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "MEDIUM",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "Comeet",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "MEDIUM",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "CSOD",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "HIGH",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "Dayforce",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "HIGH",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "Deel",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "MEDIUM",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "Dover",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "MEDIUM",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "Eightfold AI",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "HIGH",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "FirstStage",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "MEDIUM",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "Freshteam",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "MEDIUM",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "Gem.com",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "MEDIUM",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "GoHire",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "MEDIUM",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "Greenhouse",
+    "kind": "ats",
+    "implementation_status": "IMPLEMENTED",
+    "evidence_status": "LIVE_VERIFIED",
+    "risk": "LOW",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [
+      {
+        "provider": "Greenhouse",
+        "url": "https://job-boards.greenhouse.io/stripe",
+        "at": "2026-11-05T16:12:00.144082+00:00",
+        "revision": "uncommitted-initial-build",
+        "count": 760,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "payload_sha256": "c3c761d02cf1a2240874ee1003520185582765a7bc8f282b77bf954811e730f9"
+      },
+      {
+        "provider": "Greenhouse",
+        "url": "https://job-boards.greenhouse.io/cloudflare",
+        "at": "2026-11-05T16:12:03.873708+00:00",
+        "revision": "uncommitted-initial-build",
+        "count": 463,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "payload_sha256": "a95e082e0cfdf600de20e67448c6ec4cde17046b7e0f7a13a296dc50929a3c2b"
+      }
+    ],
+    "last_run_at": "2026-11-05T16:12:03.873708+00:00",
+    "extraction_count": 1223,
+    "failure_reason": null,
+    "limitations": [
+      "Point-in-time public API enumeration; deployment and continuous operation unverified"
+    ]
+  },
+  {
+    "name": "HiBob",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "MEDIUM",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "HireBridge",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "MEDIUM",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "HireHive",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "MEDIUM",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "Hireology",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "MEDIUM",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "HiringThing",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "MEDIUM",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "iCIMS",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "HIGH",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "iSolvedHire",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "MEDIUM",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "JazzHR",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "MEDIUM",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "Jobvite",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "MEDIUM",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "JOIN.com",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "MEDIUM",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "Kula.ai",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "MEDIUM",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "Lever.co",
+    "kind": "ats",
+    "implementation_status": "IMPLEMENTED",
+    "evidence_status": "LIVE_VERIFIED",
+    "risk": "LOW",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [
+      {
+        "provider": "Lever.co",
+        "url": "https://jobs.lever.co/spotify",
+        "at": "2026-11-05T16:12:05.858259+00:00",
+        "revision": "uncommitted-initial-build",
+        "count": 87,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "payload_sha256": "fd9296dd08072e89761b5f557c53142e5119db5415d5ec0dd7b808b1cb607572"
+      },
+      {
+        "provider": "Lever.co",
+        "url": "https://jobs.lever.co/palantir",
+        "at": "2026-11-05T16:12:12.069780+00:00",
+        "revision": "uncommitted-initial-build",
+        "count": 307,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "payload_sha256": "49f9d04760471da2a427e70278ac55b7390e68ba908dc355cfccb5f50a1620cc"
+      }
+    ],
+    "last_run_at": "2026-11-05T16:12:12.069780+00:00",
+    "extraction_count": 394,
+    "failure_reason": null,
+    "limitations": [
+      "Point-in-time public API enumeration; deployment and continuous operation unverified"
+    ]
+  },
+  {
+    "name": "Manatal",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "MEDIUM",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "Oracle Recruiting",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "HIGH",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "PageUp",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "MEDIUM",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "Paradox",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "HIGH",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "Paycom",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "HIGH",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "Paycor",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "MEDIUM",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "Paylocity",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "MEDIUM",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "Personio",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "MEDIUM",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "Phenom People",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "HIGH",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "Pinpoint",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "MEDIUM",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "Polymer",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "MEDIUM",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "Recooty",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "MEDIUM",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "Recruitee",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "MEDIUM",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "Rippling",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "MEDIUM",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "Rival",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "MEDIUM",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "SAP SuccessFactors",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "HIGH",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "SmartRecruiters",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "MEDIUM",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "talentReef",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "MEDIUM",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "Taleo",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "HIGH",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "Teamtailor",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "MEDIUM",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "Trakstar",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "MEDIUM",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "TriNet",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "MEDIUM",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "UltiPro",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "HIGH",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "WeRecruit",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "MEDIUM",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "Workable",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "MEDIUM",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "Workday",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "HIGH",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "Zoho Recruit",
+    "kind": "ats",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "MEDIUM",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "Niceboard",
+    "kind": "job_board",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "HIGH",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "WP Job Manager",
+    "kind": "job_board",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "HIGH",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "JobKit",
+    "kind": "job_board",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "HIGH",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "Jobboardly",
+    "kind": "job_board",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "HIGH",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "Jobiqo",
+    "kind": "job_board",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "HIGH",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "JBoard.io",
+    "kind": "job_board",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "HIGH",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "JobBoardFire",
+    "kind": "job_board",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "HIGH",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "SmartJobBoard",
+    "kind": "job_board",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "HIGH",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "JobBoard.io",
+    "kind": "job_board",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "HIGH",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "Wiley Madgex",
+    "kind": "job_board",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "HIGH",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "Talenetic",
+    "kind": "job_board",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "HIGH",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "JobMount",
+    "kind": "job_board",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "HIGH",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "CareerSiteCloud",
+    "kind": "job_board",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "HIGH",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "JobBoard.com",
+    "kind": "job_board",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "HIGH",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "Artha",
+    "kind": "job_board",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "HIGH",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "jobboardsoftware.com",
+    "kind": "job_board",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "HIGH",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "jobBoardHQ",
+    "kind": "job_board",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "HIGH",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "Nodex",
+    "kind": "job_board",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "HIGH",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "eJobBoard",
+    "kind": "job_board",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "HIGH",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  },
+  {
+    "name": "ejobsitesoftware.com",
+    "kind": "job_board",
+    "implementation_status": "NOT_STARTED",
+    "evidence_status": "NOT_STARTED",
+    "risk": "HIGH",
+    "risk_basis": "Planning estimate; not validated provider behavior",
+    "examples": [],
+    "last_run_at": null,
+    "extraction_count": null,
+    "failure_reason": null,
+    "limitations": [
+      "Connector not implemented"
+    ]
+  }
+]

@@ -1,0 +1,11 @@
+# V-Index shared engineering instructions
+
+Develop only in this repository. Preserve existing work and canonical remote https://github.com/iamdpsingh/V-Index. Primary branch: main. No force pushes or secrets. Do not count stubs, fixtures or unit tests as live coverage.
+
+Codex owns backend/, scripts/, database migrations, deployment, CI and shared API specifications. Antigravity owns apps/web/ and browser tests in its own branch/worktree. Read docs/ANTIGRAVITY_HANDOFF.md first. Never run both tools in the same worktree. Coordinate through commits and reviewed merges; no assumption of agent messaging. No external agent has been launched by this repository setup.
+
+Before editing, inspect git status and relevant files. Tests: uv run pytest; uv run ruff check backend scripts; uv run mypy. Web: cd apps/web && npm ci && npm run build. Keep lockfiles committed. Document real failures, do not invent evidence.
+
+Never infer closures from failures, malformed payloads or partial pagination. Require complete enumeration plus two misses separated by 24 hours. Keep original observations and links. Validate URLs, use fixed public API hosts, disable redirects and environment proxies, bound response sizes and retries. Never bypass access controls. UI renders descriptions as text.
+
+All 78 platform names must remain distinct (JBoard.io and JobBoard.io are different). Coverage evidence belongs in evidence/ and backend/providers.json. Do not mark the acquisition criteria complete while blockers remain.

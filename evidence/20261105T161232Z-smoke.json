@@ -1,0 +1,68 @@
+[
+  {
+    "provider": "Greenhouse",
+    "url": "https://job-boards.greenhouse.io/stripe",
+    "at": "2026-11-05T16:12:00.144082+00:00",
+    "revision": "uncommitted-initial-build",
+    "count": 760,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "payload_sha256": "c3c761d02cf1a2240874ee1003520185582765a7bc8f282b77bf954811e730f9"
+  },
+  {
+    "provider": "Greenhouse",
+    "url": "https://job-boards.greenhouse.io/cloudflare",
+    "at": "2026-11-05T16:12:03.873708+00:00",
+    "revision": "uncommitted-initial-build",
+    "count": 463,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "payload_sha256": "a95e082e0cfdf600de20e67448c6ec4cde17046b7e0f7a13a296dc50929a3c2b"
+  },
+  {
+    "provider": "Lever.co",
+    "url": "https://jobs.lever.co/spotify",
+    "at": "2026-11-05T16:12:05.858259+00:00",
+    "revision": "uncommitted-initial-build",
+    "count": 87,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "payload_sha256": "fd9296dd08072e89761b5f557c53142e5119db5415d5ec0dd7b808b1cb607572"
+  },
+  {
+    "provider": "Lever.co",
+    "url": "https://jobs.lever.co/palantir",
+    "at": "2026-11-05T16:12:12.069780+00:00",
+    "revision": "uncommitted-initial-build",
+    "count": 307,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "payload_sha256": "49f9d04760471da2a427e70278ac55b7390e68ba908dc355cfccb5f50a1620cc"
+  },
+  {
+    "provider": "Ashby",
+    "url": "https://jobs.ashbyhq.com/Ashby",
+    "at": "2026-11-05T16:12:30.620155+00:00",
+    "revision": "uncommitted-initial-build",
+    "count": 72,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "payload_sha256": "9fdcab7c089ce328ef84acfb198fcb503dad1d0ce5d135924c1b0cd11662d417"
+  },
+  {
+    "provider": "Ashby",
+    "url": "https://jobs.ashbyhq.com/ramp",
+    "at": "2026-11-05T16:12:31.885831+00:00",
+    "revision": "uncommitted-initial-build",
+    "count": 171,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "payload_sha256": "0abcbb456eca6d34d76b004f2659bcb5ae73b402247ec8ac6016c49f8544df88"
+  }
+]

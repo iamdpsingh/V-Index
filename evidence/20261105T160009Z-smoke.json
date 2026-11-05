@@ -1,0 +1,68 @@
+[
+  {
+    "provider": "Greenhouse",
+    "url": "https://job-boards.greenhouse.io/stripe",
+    "at": "2026-11-05T15:59:50.168992+00:00",
+    "revision": "uncommitted-initial-build",
+    "count": 760,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "payload_sha256": "c3c761d02cf1a2240874ee1003520185582765a7bc8f282b77bf954811e730f9"
+  },
+  {
+    "provider": "Greenhouse",
+    "url": "https://job-boards.greenhouse.io/cloudflare",
+    "at": "2026-11-05T15:59:52.048836+00:00",
+    "revision": "uncommitted-initial-build",
+    "count": 463,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "payload_sha256": "a95e082e0cfdf600de20e67448c6ec4cde17046b7e0f7a13a296dc50929a3c2b"
+  },
+  {
+    "provider": "Lever.co",
+    "url": "https://jobs.lever.co/lever",
+    "at": "2026-11-05T15:59:53.786451+00:00",
+    "revision": "uncommitted-initial-build",
+    "count": 0,
+    "status": "FAILED",
+    "complete": true,
+    "error": "No jobs; extraction not proven",
+    "payload_sha256": "06cf889c8e58cdfa360b1e94e05bc022cc131251c799619120622f06c8cd3543"
+  },
+  {
+    "provider": "Lever.co",
+    "url": "https://jobs.lever.co/palantir",
+    "at": "2026-11-05T15:59:55.609365+00:00",
+    "revision": "uncommitted-initial-build",
+    "count": 307,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "payload_sha256": "49f9d04760471da2a427e70278ac55b7390e68ba908dc355cfccb5f50a1620cc"
+  },
+  {
+    "provider": "Ashby",
+    "url": "https://jobs.ashbyhq.com/Ashby",
+    "at": "2026-11-05T16:00:06.774032+00:00",
+    "revision": "uncommitted-initial-build",
+    "count": 72,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "payload_sha256": "9fdcab7c089ce328ef84acfb198fcb503dad1d0ce5d135924c1b0cd11662d417"
+  },
+  {
+    "provider": "Ashby",
+    "url": "https://jobs.ashbyhq.com/ramp",
+    "at": "2026-11-05T16:00:08.233866+00:00",
+    "revision": "uncommitted-initial-build",
+    "count": 171,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "payload_sha256": "0abcbb456eca6d34d76b004f2659bcb5ae73b402247ec8ac6016c49f8544df88"
+  }
+]

@@ -1,0 +1,94 @@
+import asyncio
+from contextlib import nullcontext
+from unittest.mock import Mock
+
+import pytest
+from fastapi.testclient import TestClient
+from sqlalchemy import select
+from test_lifecycle import posting
+from vindex import api, worker
+from vindex.db import Observation, Run
+from vindex.ingest import ingest
+from vindex.schemas import Enumeration
+
+
+@pytest.fixture
+def client(database, monkeypatch):
+    monkeypatch.setattr(api, "Session", database)
+    monkeypatch.setenv("ADMIN_TOKEN", "test-secret")
+    return TestClient(api.app)
+
+
+def test_api_auth_validation_and_duplicate_sources(client):
+    body = {"url": "https://jobs.ashbyhq.com/example", "company": "Example"}
+    headers = {"Authorization": "Bearer test-secret"}
+    assert client.post("/api/v1/sources", json=body).status_code == 401
+    assert client.post("/api/v1/sources", json=body, headers=headers).status_code == 201
+    assert client.post("/api/v1/sources", json=body, headers=headers).status_code == 409
+    assert (
+        client.post(
+            "/api/v1/sources", json={**body, "url": "https://127.0.0.1/a"}, headers=headers
+        ).status_code
+        == 422
+    )
+    assert client.post("/api/v1/sources/1/refresh", headers=headers).status_code == 202
+    assert client.post("/api/v1/sources/99/refresh", headers=headers).status_code == 404
+    assert client.get("/health").json() == {"status": "ok"}
+
+
+def test_search_filter_pagination_and_literal_wildcard(client, database, source):
+    with database() as s:
+        ingest(
+            s,
+            source,
+            Enumeration(
+                jobs=[
+                    posting(),
+                    posting(
+                        external_id="2",
+                        title="Analyst",
+                        location="Paris",
+                        application_url="https://example.com/jobs/2",
+                    ),
+                ],
+                complete=True,
+            ),
+        )
+        s.commit()
+    result = client.get("/api/v1/jobs?keyword=engineer&company=example&location=london").json()
+    assert result["total"] == 1
+    assert result["items"][0]["sources"][0]["status"] == "open"
+    assert client.get("/api/v1/jobs?limit=1&offset=1").json()["items"][0]["title"] == "Engineer"
+    assert client.get("/api/v1/jobs?keyword=%25").json()["total"] == 0
+    assert client.get("/api/v1/jobs?limit=0").status_code == 422
+    assert client.get("/api/v1/jobs/1").status_code == 200
+    assert client.get("/api/v1/jobs/99").status_code == 404
+
+
+def test_exact_provider_inventory(client):
+    rows = client.get("/api/v1/providers").json()
+    assert len(rows) == 78
+    assert len({r["name"] for r in rows}) == 78
+    assert sum(r["kind"] == "ats" for r in rows) == 58
+
+
+def test_fetch_failure_recorded_without_closing(database, source, monkeypatch):
+    with database() as s:
+        ingest(s, source, Enumeration(jobs=[posting()], complete=True))
+        s.commit()
+    monkeypatch.setattr(worker, "Session", database)
+    redis = Mock()
+    redis.lock.return_value = nullcontext()
+    monkeypatch.setattr(worker.Redis, "from_url", lambda url: redis)
+
+    async def failed(self):
+        raise ValueError("Incomplete pagination")
+
+    monkeypatch.setattr(worker.PublicConnector, "discover", failed)
+    run_id = asyncio.run(worker.refresh(source.id))
+    with database() as s:
+        run = s.get(Run, run_id)
+        assert run.status == "failed"
+        assert "Incomplete pagination" in run.error
+        obs = s.scalar(select(Observation))
+        assert obs.status == "open" and obs.missing_count == 0
