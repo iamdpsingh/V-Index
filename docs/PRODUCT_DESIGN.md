@@ -2,6 +2,8 @@
 
 ## Owner direction
 
+Scope clarification: the requested change is visual presentation only. The challenge objective, required functionality and backend requirements remain unchanged. Candidate interaction ideas below do not expand implementation scope; preserve the existing workflows while designing their appearance.
+
 The objective remains the 78-platform job indexer challenge. The owner explicitly requires a distinctive frontend, deliberate visual craft and excellent backend engineering. The current interface is a working scaffold; it is not the final design. Treat visual identity, interaction quality and data reliability as release requirements alongside coverage.
 
 ## Product concept: an index you can inspect

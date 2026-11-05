@@ -1,0 +1,50 @@
+[
+  {
+    "provider": "smartrecruiters",
+    "url": "https://api.smartrecruiters.com/v1/companies/SmartRecruiters/postings?limit=2",
+    "at": "2026-11-05T16:31:13.447512+00:00",
+    "status": 200,
+    "location": null,
+    "bytes": 3556
+  },
+  {
+    "provider": "smartrecruiters",
+    "url": "https://api.smartrecruiters.com/v1/companies/Colliers/postings?limit=2",
+    "at": "2026-11-05T16:31:13.101338+00:00",
+    "status": 200,
+    "location": null,
+    "bytes": 2911
+  },
+  {
+    "provider": "personio",
+    "url": "https://personio.jobs.personio.de/xml?language=en",
+    "at": "2026-11-05T16:31:13.185820+00:00",
+    "status": 200,
+    "location": null,
+    "bytes": 72
+  },
+  {
+    "provider": "personio",
+    "url": "https://ecoplan.jobs.personio.de/xml?language=en",
+    "at": "2026-11-05T16:31:13.160328+00:00",
+    "status": 404,
+    "location": null,
+    "bytes": 2472
+  },
+  {
+    "provider": "workday",
+    "url": "https://nvidia.wd5.myworkdayjobs.com/robots.txt",
+    "at": "2026-11-05T16:31:13.461044+00:00",
+    "status": 200,
+    "location": null,
+    "bytes": 258
+  },
+  {
+    "provider": "workday",
+    "url": "https://nvidia.wd5.myworkdayjobs.com/en-US/NVIDIAExternalCareerSite",
+    "at": "2026-11-05T16:31:13.779341+00:00",
+    "status": 200,
+    "location": null,
+    "bytes": 6416
+  }
+]

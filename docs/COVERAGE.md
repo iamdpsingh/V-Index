@@ -44,7 +44,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | Paycom | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | Paycor | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Paylocity | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
-| Personio | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
+| Personio | ats | IMPLEMENTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Phenom People | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | Pinpoint | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Polymer | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
@@ -53,7 +53,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | Rippling | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Rival | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | SAP SuccessFactors | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
-| SmartRecruiters | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
+| SmartRecruiters | ats | IMPLEMENTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | talentReef | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Taleo | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | Teamtailor | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |

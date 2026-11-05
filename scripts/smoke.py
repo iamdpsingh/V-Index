@@ -1,5 +1,6 @@
 """Live connector smoke evidence. Does not require a database or Redis."""
 
+import argparse
 import asyncio
 import hashlib
 import json
@@ -8,7 +9,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 import httpx
-from vindex.connectors.public import PublicConnector
+from vindex.connectors.registry import create_connector
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
@@ -24,6 +25,22 @@ EXAMPLES = [
     ("Lever.co", "lever", "palantir", "Palantir", "https://jobs.lever.co/palantir"),
     ("Ashby", "ashby", "Ashby", "Ashby", "https://jobs.ashbyhq.com/Ashby"),
     ("Ashby", "ashby", "ramp", "Ramp", "https://jobs.ashbyhq.com/ramp"),
+    (
+        "SmartRecruiters",
+        "smartrecruiters",
+        "SmartRecruiters",
+        "SmartRecruiters",
+        "https://careers.smartrecruiters.com/SmartRecruiters",
+    ),
+    (
+        "SmartRecruiters",
+        "smartrecruiters",
+        "Colliers",
+        "Colliers",
+        "https://careers.smartrecruiters.com/Colliers",
+    ),
+    ("Personio", "personio-de", "matrix42", "Matrix42", "https://matrix42.jobs.personio.de"),
+    ("Personio", "personio-de", "planqc-gmbh", "planqc", "https://planqc-gmbh.jobs.personio.de"),
 ]
 
 
@@ -48,30 +65,48 @@ def report():
 
 
 async def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--provider",
+        action="append",
+        choices=sorted({row[0] for row in EXAMPLES}),
+        help="Check only selected providers (repeatable)",
+    )
+    selected = parser.parse_args().provider
+    examples = [row for row in EXAMPLES if not selected or row[0] in selected]
     results = []
-    revision = (
-        subprocess.check_output(
+    try:
+        revision = subprocess.check_output(
             ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True, stderr=subprocess.DEVNULL
         ).strip()
-        if (ROOT / ".git/refs/heads/main").exists()
-        else "uncommitted-initial-build"
+    except subprocess.CalledProcessError:
+        revision = "uncommitted-initial-build"
+    dirty = bool(
+        subprocess.check_output(["git", "status", "--porcelain"], cwd=ROOT, text=True).strip()
     )
+    code_hash = hashlib.sha256()
+    for file in sorted((ROOT / "backend/vindex").rglob("*.py")) + [Path(__file__).resolve()]:
+        code_hash.update(str(file.relative_to(ROOT)).encode())
+        code_hash.update(file.read_bytes())
     async with httpx.AsyncClient(
         timeout=30, trust_env=False, headers={"User-Agent": "V-Index/0.1 public-job-indexer"}
     ) as client:
-        for name, provider, slug, company, url in EXAMPLES:
+        for name, provider, slug, company, url in examples:
             result = dict(
                 provider=name,
                 url=url,
                 at=datetime.now(UTC).isoformat(),
                 revision=revision,
+                working_tree_dirty_at_start=dirty,
+                code_sha256=code_hash.hexdigest(),
                 count=0,
                 status="FAILED",
                 complete=False,
                 error=None,
             )
             try:
-                batch = await PublicConnector(provider, slug, company, client).discover()
+                async with asyncio.timeout(600):
+                    batch = await create_connector(provider, slug, company, client).discover()
                 result.update(
                     count=len(batch.jobs),
                     complete=batch.complete,
@@ -87,6 +122,7 @@ async def main():
                     )
             except Exception as e:
                 result["error"] = f"{type(e).__name__}: {e}"
+            result["finished_at"] = datetime.now(UTC).isoformat()
             results.append(result)
             print(json.dumps(result), flush=True)
             await asyncio.sleep(0.5)
@@ -97,11 +133,13 @@ async def main():
         runs = [r for r in results if r["provider"] == row["name"]]
         if runs:
             row.update(
+                implementation_status="IMPLEMENTED",
                 examples=runs,
-                last_run_at=max(r["at"] for r in runs),
+                last_run_at=max(r["finished_at"] for r in runs),
                 extraction_count=sum(r["count"] for r in runs),
                 evidence_status="LIVE_VERIFIED"
-                if all(r["status"] == "LIVE_VERIFIED" for r in runs)
+                if len({r["url"] for r in runs}) >= 2
+                and all(r["status"] == "LIVE_VERIFIED" for r in runs)
                 else "FAILED",
                 failure_reason="; ".join(r["error"] for r in runs if r["error"]) or None,
                 limitations=[

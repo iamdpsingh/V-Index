@@ -12,3 +12,13 @@ Provider API references:
 - https://developers.ashbyhq.com/docs/public-job-posting-api
 
 Adding a provider requires schema fixtures, completeness/pagination tests, failure tests, multiple live tenants, coverage evidence, constraints and documentation. Structured public API first, feed/JSON-LD second, HTML third, browser only with evidence of necessity. Custom-domain detection is backlog.
+
+## Cohort 2
+
+Detection and construction now live in `vindex.connectors.registry`; only implemented providers have factory entries. Provider codes personio-de/personio-com select the documented hosted-domain variant but count as one Personio platform. SmartRecruiters detects careers.smartrecruiters.com and jobs.smartrecruiters.com. Personio detects exactly one validated tenant label under jobs.personio.de/com. Arbitrary custom domains remain unsupported.
+
+SmartRecruiters rejects changed totals/offsets, repeated IDs, non-public listings, mismatched detail IDs and any failed/missing detail. Descriptions combine source job-ad sections as plain text. Publication retains releasedDate, which is source release time, not necessarily original creation.
+
+Personio reads the full default XML feed using defusedxml with DTD/entities disabled. If descriptions are empty, it tries documented en/de/fr/es/nl/it/pt feed translations; enrichment retains original XML and the chosen translation language. Translation IDs cannot expand the original snapshot. If descriptions remain missing, the run fails. createdAt is retained as source metadata without relabelling it publication date. Salary source text and multiple offices are preserved; no salary currency/unit or remote inference is invented.
+
+All implemented connectors use bounded PublicHTTP reads with provider-controlled hosts, HTTPS, no redirects, 20 MB decompressed response limits and three-attempt retry budgets. Retry-After up to 30 seconds is honored inline; longer waits fail into durable source cooldown.

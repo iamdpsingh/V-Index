@@ -32,10 +32,16 @@ uv run pytest
 uv run ruff check backend scripts
 uv run mypy
 PYTHONPATH=backend uv run python scripts/smoke.py
+# Focus on a cohort:
+PYTHONPATH=backend uv run python scripts/smoke.py --provider SmartRecruiters --provider Personio
 ```
 
 Smoke requests public provider APIs and writes timestamped evidence. Inspect failures rather than treating all requests as successful. See [coverage](docs/COVERAGE.md), [deployment](docs/DEPLOYMENT.md), [frontend handoff](docs/ANTIGRAVITY_HANDOFF.md) and [backlog](docs/BACKLOG.md).
 
 ## Status and limits
 
-Only Greenhouse, Lever (including EU endpoint support) and Ashby are implemented. Actual evidence is separate from implementation status. Other 75 entries are planning records, not connectors. PostgreSQL/Redis deployment and browser verification must be validated in an environment with those services. No hosted demo or remote push is implied by local files. Acquisition readiness requires all acceptance criteria in docs/ACCEPTANCE_TESTS.md.
+Greenhouse, Lever (including EU endpoint support), Ashby, SmartRecruiters and Personio are implemented. Actual evidence is separate from implementation status. Other 73 entries are planning records, not connectors. PostgreSQL/Redis integration tests run when TEST_DATABASE_URL and TEST_REDIS_URL are configured; full container deployment still needs verification. No hosted demo or remote push is implied by local files. Acquisition readiness requires all acceptance criteria in docs/ACCEPTANCE_TESTS.md.
+
+### Service-backed tests
+
+Set `TEST_DATABASE_URL` to a PostgreSQL database where the test user may create schemas, and `TEST_REDIS_URL` to a dedicated test Redis database (for example database 15). Run `uv run pytest`. Each SQL test creates, migrates and removes only its own randomly named schema; existing tables are not modified. Without these variables, service-dependent cases are explicitly skipped. CI provisions PostgreSQL and Redis. Tests do not fetch live jobs; use the separate smoke harness for actual provider evidence.

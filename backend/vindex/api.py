@@ -8,7 +8,7 @@ from fastapi import Depends, FastAPI, Header, HTTPException, Query
 from sqlalchemy import func, select, text
 from sqlalchemy.exc import IntegrityError
 
-from vindex.connectors.public import detect
+from vindex.connectors.registry import detect
 from vindex.db import Job, Observation, Run, Session, Source, now
 from vindex.schemas import RunOut, SearchOut, SourceCreate, SourceOut
 

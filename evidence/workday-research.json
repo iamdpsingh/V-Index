@@ -1,0 +1,11 @@
+{
+  "provider": "Workday",
+  "at": "2026-11-05T16:34:49.566848+00:00",
+  "url": "https://nvidia.wd5.myworkdayjobs.com/wday/cxs/nvidia/NVIDIAExternalCareerSite/jobs",
+  "http_status": 200,
+  "method": "POST (read-only career search)",
+  "body_sha256": "5e38af5124ffecd5772fd05b64d1b105004ba8e85558100b28e48dc0b564ec26",
+  "implemented": false,
+  "total": 2000,
+  "first_page_count": 20
+}

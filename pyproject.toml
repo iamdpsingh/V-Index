@@ -2,9 +2,24 @@
 name = "v-index"
 version = "0.1.0"
 requires-python = ">=3.12"
-dependencies = ["fastapi>=0.115,<1", "uvicorn>=0.34,<1", "httpx>=0.28,<1", "sqlalchemy>=2.0,<3", "psycopg[binary]>=3.2,<4", "alembic>=1.14,<2", "redis>=5,<7", "beautifulsoup4>=4.12,<5"]
+dependencies = [
+    "fastapi>=0.115,<1",
+    "uvicorn>=0.34,<1",
+    "httpx>=0.28,<1",
+    "sqlalchemy>=2.0,<3",
+    "psycopg[binary]>=3.2,<4",
+    "alembic>=1.14,<2",
+    "redis>=5,<7",
+    "beautifulsoup4>=4.12,<5",
+    "defusedxml>=0.7,<1",
+]
 [dependency-groups]
-dev = ["pytest>=8,<10", "ruff>=0.11,<1", "mypy>=1.15,<2"]
+dev = [
+    "pytest>=8,<10",
+    "ruff>=0.11,<1",
+    "mypy>=1.15,<2",
+    "types-defusedxml>=0.7,<1",
+]
 [tool.pytest.ini_options]
 pythonpath = ["backend"]
 testpaths = ["backend/tests"]

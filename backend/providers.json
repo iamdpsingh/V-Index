@@ -418,7 +418,13 @@
     "failure_reason": null,
     "limitations": [
       "Connector not implemented"
-    ]
+    ],
+    "research": {
+      "status": "INVESTIGATED",
+      "date": "2026-11-05",
+      "reference": "docs/ENTERPRISE_RESEARCH.md",
+      "coverage_claim": false
+    }
   },
   {
     "name": "iSolvedHire",
@@ -561,7 +567,13 @@
     "failure_reason": null,
     "limitations": [
       "Connector not implemented"
-    ]
+    ],
+    "research": {
+      "status": "INVESTIGATED",
+      "date": "2026-11-05",
+      "reference": "docs/ENTERPRISE_RESEARCH.md",
+      "coverage_claim": false
+    }
   },
   {
     "name": "PageUp",
@@ -641,7 +653,7 @@
   {
     "name": "Personio",
     "kind": "ats",
-    "implementation_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
     "evidence_status": "NOT_STARTED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
@@ -650,7 +662,7 @@
     "extraction_count": null,
     "failure_reason": null,
     "limitations": [
-      "Connector not implemented"
+      "Multi-tenant full smoke validation pending"
     ]
   },
   {
@@ -771,12 +783,18 @@
     "failure_reason": null,
     "limitations": [
       "Connector not implemented"
-    ]
+    ],
+    "research": {
+      "status": "INVESTIGATED",
+      "date": "2026-11-05",
+      "reference": "docs/ENTERPRISE_RESEARCH.md",
+      "coverage_claim": false
+    }
   },
   {
     "name": "SmartRecruiters",
     "kind": "ats",
-    "implementation_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
     "evidence_status": "NOT_STARTED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
@@ -785,7 +803,7 @@
     "extraction_count": null,
     "failure_reason": null,
     "limitations": [
-      "Connector not implemented"
+      "Multi-tenant full smoke validation pending"
     ]
   },
   {
@@ -816,7 +834,13 @@
     "failure_reason": null,
     "limitations": [
       "Connector not implemented"
-    ]
+    ],
+    "research": {
+      "status": "INVESTIGATED",
+      "date": "2026-11-05",
+      "reference": "docs/ENTERPRISE_RESEARCH.md",
+      "coverage_claim": false
+    }
   },
   {
     "name": "Teamtailor",
@@ -921,7 +945,13 @@
     "failure_reason": null,
     "limitations": [
       "Connector not implemented"
-    ]
+    ],
+    "research": {
+      "status": "INVESTIGATED",
+      "date": "2026-11-05",
+      "reference": "docs/ENTERPRISE_RESEARCH.md",
+      "coverage_claim": false
+    }
   },
   {
     "name": "Zoho Recruit",

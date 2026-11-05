@@ -84,7 +84,9 @@ def test_fetch_failure_recorded_without_closing(database, source, monkeypatch):
     async def failed(self):
         raise ValueError("Incomplete pagination")
 
-    monkeypatch.setattr(worker.PublicConnector, "discover", failed)
+    monkeypatch.setattr(
+        worker, "create_connector", lambda *args: Mock(discover=lambda: failed(None))
+    )
     run_id = asyncio.run(worker.refresh(source.id))
     with database() as s:
         run = s.get(Run, run_id)

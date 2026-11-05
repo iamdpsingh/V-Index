@@ -2,13 +2,13 @@
 
 import asyncio
 import html
-import random
 import re
 from typing import Any, Protocol
 from urllib.parse import urlsplit
 
 import httpx
 from bs4 import BeautifulSoup
+from vindex.connectors.http import PublicHTTP
 from vindex.schemas import Enumeration, JobInput
 
 HOSTS = {
@@ -56,28 +56,7 @@ class PublicConnector:
         else:
             host = "api.eu.lever.co" if self.provider == "lever-eu" else "api.lever.co"
             url = f"https://{host}/v0/postings/{self.slug}?mode=json&skip={cursor}&limit=100"
-        if urlsplit(url).hostname not in API_HOSTS:
-            raise ValueError("Outbound host rejected")
-        for attempt in range(3):
-            try:
-                async with self.client.stream("GET", url, follow_redirects=False) as response:
-                    if response.status_code == 429 or response.status_code >= 500:
-                        response.raise_for_status()
-                    if response.status_code != 200:
-                        raise ValueError(f"Upstream HTTP {response.status_code}")
-                    body = bytearray()
-                    async for chunk in response.aiter_bytes():
-                        body.extend(chunk)
-                        if len(body) > 20_000_000:
-                            raise ValueError("Response exceeds 20 MB limit")
-                    import json
-
-                    return json.loads(body)
-            except (httpx.TransportError, httpx.HTTPStatusError):
-                if attempt == 2:
-                    raise
-                await asyncio.sleep(min(30, 2**attempt + random.random()))
-        raise RuntimeError("Retry budget exhausted")
+        return await PublicHTTP(self.client, API_HOSTS).json(url)
 
     def parse(self, payload: Any) -> list[JobInput]:
         rows = payload if self.provider.startswith("lever") else payload["jobs"]
