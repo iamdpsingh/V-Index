@@ -5,7 +5,7 @@
 - [x] Contracts, exact 78-provider inventory and isolated frontend handoff.
 - [x] Three public API connectors, persisted observations, lifecycle, conservative dedupe, API and worker baseline.
 - [ ] Verify full Compose/PostgreSQL/Redis path and deploy a reviewer demo.
-- [ ] Frontend browser tests and source/run management interface.
+- [ ] Frontend redesign against docs/PRODUCT_DESIGN.md; browser tests for existing source/run management, preserved search state and responsive job details.
 
 ## Immediate acquisition risks (planning order, not verified access claims)
 - Investigate Workday, Oracle Recruiting/Taleo, SAP SuccessFactors, iCIMS, ADP, BrassRing and CSOD early: tenant variations, pagination, public accessibility and complete enumeration.
