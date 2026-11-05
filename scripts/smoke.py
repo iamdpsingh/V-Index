@@ -143,7 +143,18 @@ async def main():
                 else "FAILED",
                 failure_reason="; ".join(r["error"] for r in runs if r["error"]) or None,
                 limitations=[
-                    "Point-in-time public API enumeration; deployment and continuous operation unverified"
+                    "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
+                    *(
+                        {
+                            "Personio": [
+                                "Live tenants use .de; .com route is implemented but not live-tested",
+                                "XML feed must be enabled; incomplete translated descriptions fail the run",
+                            ],
+                            "SmartRecruiters": [
+                                "Every posting requires a detail request; very large boards may exceed the ten-minute budget"
+                            ],
+                        }.get(row["name"], [])
+                    ),
                 ],
             )
     (ROOT / "backend/providers.json").write_text(json.dumps(rows, indent=2) + "\n")

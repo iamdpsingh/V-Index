@@ -276,3 +276,21 @@ def test_personio_language_feed_cannot_expand_snapshot():
             "personio-de",
             lambda r: httpx.Response(200, content=translated if r.url.query else default),
         )
+
+
+def test_smartrecruiters_live_optional_title_only_section():
+    payload = json.loads(
+        (ROOT / "evidence/smartrecruiters-Colliers-optional-section.json").read_text()
+    )
+    assert any("text" not in section for section in payload["jobAd"]["sections"].values())
+    job = SmartRecruitersConnector("smartrecruiters", "Colliers", "Colliers", None).parse(payload)[
+        0
+    ]
+    assert job.description and job.title == payload["name"]
+
+
+def test_smartrecruiters_company_blurb_cannot_replace_missing_job_description():
+    payload = detail("1")
+    payload["jobAd"]["sections"] = {"companyDescription": {"text": "About our company"}}
+    with pytest.raises(ValueError, match="no job description"):
+        SmartRecruitersConnector("smartrecruiters", "example", "Example", None).parse(payload)

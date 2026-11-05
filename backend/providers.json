@@ -40,27 +40,33 @@
       {
         "provider": "Ashby",
         "url": "https://jobs.ashbyhq.com/Ashby",
-        "at": "2026-11-05T16:15:21.466472+00:00",
-        "revision": "df3899c2560bd3fcf195a77760053182cf4a5267",
+        "at": "2026-11-05T16:42:17.673682+00:00",
+        "revision": "4ca9ea02ed1fc3f24bcb58f28719bf9dc256b8c5",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "0434fd2569028920f341babd8ee1223eb0356822a8083789f9c9e41a13c9b0aa",
         "count": 72,
         "status": "LIVE_VERIFIED",
         "complete": true,
         "error": null,
-        "payload_sha256": "9fdcab7c089ce328ef84acfb198fcb503dad1d0ce5d135924c1b0cd11662d417"
+        "payload_sha256": "9fdcab7c089ce328ef84acfb198fcb503dad1d0ce5d135924c1b0cd11662d417",
+        "finished_at": "2026-11-05T16:42:18.458960+00:00"
       },
       {
         "provider": "Ashby",
         "url": "https://jobs.ashbyhq.com/ramp",
-        "at": "2026-11-05T16:15:22.787393+00:00",
-        "revision": "df3899c2560bd3fcf195a77760053182cf4a5267",
+        "at": "2026-11-05T16:42:18.960219+00:00",
+        "revision": "4ca9ea02ed1fc3f24bcb58f28719bf9dc256b8c5",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "0434fd2569028920f341babd8ee1223eb0356822a8083789f9c9e41a13c9b0aa",
         "count": 171,
         "status": "LIVE_VERIFIED",
         "complete": true,
         "error": null,
-        "payload_sha256": "0abcbb456eca6d34d76b004f2659bcb5ae73b402247ec8ac6016c49f8544df88"
+        "payload_sha256": "45458c09c4ee0d19bd018202c0b638a18e443395dbd217b283f55cde2addb864",
+        "finished_at": "2026-11-05T16:42:19.453089+00:00"
       }
     ],
-    "last_run_at": "2026-11-05T16:15:22.787393+00:00",
+    "last_run_at": "2026-11-05T16:42:19.453089+00:00",
     "extraction_count": 243,
     "failure_reason": null,
     "limitations": [
@@ -303,28 +309,34 @@
       {
         "provider": "Greenhouse",
         "url": "https://job-boards.greenhouse.io/stripe",
-        "at": "2026-11-05T16:14:59.243674+00:00",
-        "revision": "df3899c2560bd3fcf195a77760053182cf4a5267",
-        "count": 760,
+        "at": "2026-11-05T16:41:51.675554+00:00",
+        "revision": "4ca9ea02ed1fc3f24bcb58f28719bf9dc256b8c5",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "0434fd2569028920f341babd8ee1223eb0356822a8083789f9c9e41a13c9b0aa",
+        "count": 762,
         "status": "LIVE_VERIFIED",
         "complete": true,
         "error": null,
-        "payload_sha256": "63244ee0798ed7610a00b2bac03af1e6a682c132babcc8ffbd9eae79ce1259b5"
+        "payload_sha256": "89c82bb54faec438fd15727797c7ecf942fa480ead3e37663b32259a3708885f",
+        "finished_at": "2026-11-05T16:41:53.148288+00:00"
       },
       {
         "provider": "Greenhouse",
         "url": "https://job-boards.greenhouse.io/cloudflare",
-        "at": "2026-11-05T16:15:02.652639+00:00",
-        "revision": "df3899c2560bd3fcf195a77760053182cf4a5267",
-        "count": 463,
+        "at": "2026-11-05T16:41:53.649516+00:00",
+        "revision": "4ca9ea02ed1fc3f24bcb58f28719bf9dc256b8c5",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "0434fd2569028920f341babd8ee1223eb0356822a8083789f9c9e41a13c9b0aa",
+        "count": 464,
         "status": "LIVE_VERIFIED",
         "complete": true,
         "error": null,
-        "payload_sha256": "a95e082e0cfdf600de20e67448c6ec4cde17046b7e0f7a13a296dc50929a3c2b"
+        "payload_sha256": "baf6e63c64203b74282dc114c4c9f0d21647ec561fcad3137a16c6659a6651e4",
+        "finished_at": "2026-11-05T16:41:54.721525+00:00"
       }
     ],
-    "last_run_at": "2026-11-05T16:15:02.652639+00:00",
-    "extraction_count": 1223,
+    "last_run_at": "2026-11-05T16:41:54.721525+00:00",
+    "extraction_count": 1226,
     "failure_reason": null,
     "limitations": [
       "Point-in-time public API enumeration; deployment and continuous operation unverified"
@@ -512,27 +524,33 @@
       {
         "provider": "Lever.co",
         "url": "https://jobs.lever.co/spotify",
-        "at": "2026-11-05T16:15:04.978130+00:00",
-        "revision": "df3899c2560bd3fcf195a77760053182cf4a5267",
+        "at": "2026-11-05T16:41:55.222748+00:00",
+        "revision": "4ca9ea02ed1fc3f24bcb58f28719bf9dc256b8c5",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "0434fd2569028920f341babd8ee1223eb0356822a8083789f9c9e41a13c9b0aa",
         "count": 87,
         "status": "LIVE_VERIFIED",
         "complete": true,
         "error": null,
-        "payload_sha256": "fd9296dd08072e89761b5f557c53142e5119db5415d5ec0dd7b808b1cb607572"
+        "payload_sha256": "fd9296dd08072e89761b5f557c53142e5119db5415d5ec0dd7b808b1cb607572",
+        "finished_at": "2026-11-05T16:42:06.151410+00:00"
       },
       {
         "provider": "Lever.co",
         "url": "https://jobs.lever.co/palantir",
-        "at": "2026-11-05T16:15:08.968734+00:00",
-        "revision": "df3899c2560bd3fcf195a77760053182cf4a5267",
+        "at": "2026-11-05T16:42:06.652630+00:00",
+        "revision": "4ca9ea02ed1fc3f24bcb58f28719bf9dc256b8c5",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "0434fd2569028920f341babd8ee1223eb0356822a8083789f9c9e41a13c9b0aa",
         "count": 307,
         "status": "LIVE_VERIFIED",
         "complete": true,
         "error": null,
-        "payload_sha256": "49f9d04760471da2a427e70278ac55b7390e68ba908dc355cfccb5f50a1620cc"
+        "payload_sha256": "49f9d04760471da2a427e70278ac55b7390e68ba908dc355cfccb5f50a1620cc",
+        "finished_at": "2026-11-05T16:42:17.172545+00:00"
       }
     ],
-    "last_run_at": "2026-11-05T16:15:08.968734+00:00",
+    "last_run_at": "2026-11-05T16:42:17.172545+00:00",
     "extraction_count": 394,
     "failure_reason": null,
     "limitations": [
@@ -654,15 +672,44 @@
     "name": "Personio",
     "kind": "ats",
     "implementation_status": "IMPLEMENTED",
-    "evidence_status": "NOT_STARTED",
+    "evidence_status": "LIVE_VERIFIED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
+    "examples": [
+      {
+        "provider": "Personio",
+        "url": "https://matrix42.jobs.personio.de",
+        "at": "2026-11-05T16:42:26.231528+00:00",
+        "revision": "4ca9ea02ed1fc3f24bcb58f28719bf9dc256b8c5",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "0434fd2569028920f341babd8ee1223eb0356822a8083789f9c9e41a13c9b0aa",
+        "count": 34,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "payload_sha256": "644044b042d9de34bb5d2158d3e4a51088a8fd581e68840614b5f11ddd5f4079",
+        "finished_at": "2026-11-05T16:42:28.448582+00:00"
+      },
+      {
+        "provider": "Personio",
+        "url": "https://planqc-gmbh.jobs.personio.de",
+        "at": "2026-11-05T16:42:28.949771+00:00",
+        "revision": "4ca9ea02ed1fc3f24bcb58f28719bf9dc256b8c5",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "0434fd2569028920f341babd8ee1223eb0356822a8083789f9c9e41a13c9b0aa",
+        "count": 17,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "payload_sha256": "c3f724e1edaa224ddc7b205586106a1d265b7bd8f161638906b5ab6526d1d544",
+        "finished_at": "2026-11-05T16:42:30.895286+00:00"
+      }
+    ],
+    "last_run_at": "2026-11-05T16:42:30.895286+00:00",
+    "extraction_count": 51,
     "failure_reason": null,
     "limitations": [
-      "Multi-tenant full smoke validation pending"
+      "Point-in-time public API enumeration; deployment and continuous operation unverified"
     ]
   },
   {
@@ -795,15 +842,43 @@
     "name": "SmartRecruiters",
     "kind": "ats",
     "implementation_status": "IMPLEMENTED",
-    "evidence_status": "NOT_STARTED",
+    "evidence_status": "FAILED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
-    "failure_reason": null,
+    "examples": [
+      {
+        "provider": "SmartRecruiters",
+        "url": "https://careers.smartrecruiters.com/SmartRecruiters",
+        "at": "2026-11-05T16:42:19.954339+00:00",
+        "revision": "4ca9ea02ed1fc3f24bcb58f28719bf9dc256b8c5",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "0434fd2569028920f341babd8ee1223eb0356822a8083789f9c9e41a13c9b0aa",
+        "count": 2,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "payload_sha256": "67bbbd9e9e54dce2669ba93556c49a72e5b7b8e5a7755aa021185b2a7faf53d4",
+        "finished_at": "2026-11-05T16:42:22.892651+00:00"
+      },
+      {
+        "provider": "SmartRecruiters",
+        "url": "https://careers.smartrecruiters.com/Colliers",
+        "at": "2026-11-05T16:42:23.393206+00:00",
+        "revision": "4ca9ea02ed1fc3f24bcb58f28719bf9dc256b8c5",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "0434fd2569028920f341babd8ee1223eb0356822a8083789f9c9e41a13c9b0aa",
+        "count": 0,
+        "status": "FAILED",
+        "complete": false,
+        "error": "KeyError: 'text'",
+        "finished_at": "2026-11-05T16:42:25.730230+00:00"
+      }
+    ],
+    "last_run_at": "2026-11-05T16:42:25.730230+00:00",
+    "extraction_count": 2,
+    "failure_reason": "KeyError: 'text'",
     "limitations": [
-      "Multi-tenant full smoke validation pending"
+      "Point-in-time public API enumeration; deployment and continuous operation unverified"
     ]
   },
   {

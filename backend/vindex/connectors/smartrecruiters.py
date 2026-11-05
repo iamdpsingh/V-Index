@@ -26,10 +26,12 @@ class SmartRecruitersConnector:
             raise ValueError("Non-public posting rejected")
         location = payload.get("location", {})
         sections = payload["jobAd"]["sections"]
+        if not text(sections.get("jobDescription", {}).get("text", "")).strip():
+            raise ValueError("Posting detail has no job description")
         description = "\n\n".join(
-            text(section.get("title", "") + "\n" + section["text"])
+            text(section.get("title", "") + "\n" + section.get("text", ""))
             for section in sections.values()
-            if section
+            if section and section.get("text")
         )
         if not description.strip():
             raise ValueError("Posting detail has no description")
