@@ -93,10 +93,9 @@ export async function apiFetch<T>(
 
   if (!response.ok) {
     const body = await response.json().catch(() => ({}));
+    const detail = typeof body.detail === 'string' ? body.detail : '';
     throw new Error(
-      typeof body.detail === 'string'
-        ? body.detail
-        : `Request failed (${response.status})`
+      detail ? `${detail} (${response.status})` : `Request failed (${response.status})`
     );
   }
 

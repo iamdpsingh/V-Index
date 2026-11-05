@@ -1,8 +1,8 @@
 'use client';
 
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState, useCallback } from 'react';
 import { apiFetch, type JobOut, type SearchOut } from '../lib/api';
-import { formatDate } from '../lib/format';
+import { formatDate, formatSalary } from '../lib/format';
 
 interface JobSearchProps {
   token: string;
@@ -14,26 +14,78 @@ const PAGE_SIZE = 25;
 
 export default function JobSearch({ error, onError }: JobSearchProps) {
   const [filters, setFilters] = useState({ keyword: '', company: '', location: '' });
-  const [applied, setApplied] = useState(filters);
+  const [applied, setApplied] = useState({ keyword: '', company: '', location: '' });
   const [offset, setOffset] = useState(0);
   const [results, setResults] = useState<SearchOut>({ total: 0, items: [], limit: PAGE_SIZE, offset: 0 });
   const [busy, setBusy] = useState(true);
   const [selected, setSelected] = useState<JobOut | null>(null);
+  const [initialHydrated, setInitialHydrated] = useState(false);
+
+  // Sync state from URL query parameters on initial mount and browser back/forward
+  const readUrlState = useCallback(() => {
+    if (typeof window === 'undefined') return;
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get('q') || params.get('keyword') || '';
+    const comp = params.get('company') || '';
+    const loc = params.get('location') || '';
+    const off = Math.max(0, parseInt(params.get('offset') || '0', 10) || 0);
+
+    const newFilters = { keyword: q, company: comp, location: loc };
+    setFilters(newFilters);
+    setApplied(newFilters);
+    setOffset(off);
+    setInitialHydrated(true);
+  }, []);
 
   useEffect(() => {
+    readUrlState();
+    const handlePopState = () => readUrlState();
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [readUrlState]);
+
+  // Update URL search parameters when search/pagination changes
+  const updateUrl = useCallback((newApplied: typeof applied, newOffset: number, selectedId?: number | null) => {
+    if (typeof window === 'undefined') return;
+    const params = new URLSearchParams();
+    if (newApplied.keyword) params.set('keyword', newApplied.keyword);
+    if (newApplied.company) params.set('company', newApplied.company);
+    if (newApplied.location) params.set('location', newApplied.location);
+    if (newOffset > 0) params.set('offset', String(newOffset));
+    if (selectedId) params.set('selected', String(selectedId));
+
+    const newQuery = params.toString();
+    const newUrl = newQuery ? `?${newQuery}` : window.location.pathname;
+    window.history.pushState(null, '', newUrl);
+  }, []);
+
+  // Fetch jobs whenever applied filters or offset change
+  useEffect(() => {
+    if (!initialHydrated) return;
     let active = true;
     setBusy(true);
     onError('');
 
-    apiFetch<SearchOut>(
-      `jobs?${new URLSearchParams({
-        ...applied,
-        limit: String(PAGE_SIZE),
-        offset: String(offset),
-      })}`
-    )
+    const searchParams = new URLSearchParams({
+      ...applied,
+      limit: String(PAGE_SIZE),
+      offset: String(offset),
+    });
+
+    apiFetch<SearchOut>(`jobs?${searchParams.toString()}`)
       .then((data) => {
-        if (active) setResults(data);
+        if (!active) return;
+        setResults(data);
+
+        // Check if URL specified a selected job ID
+        if (typeof window !== 'undefined') {
+          const params = new URLSearchParams(window.location.search);
+          const selId = params.get('selected');
+          if (selId) {
+            const found = data.items.find((item) => String(item.id) === selId);
+            if (found) setSelected(found);
+          }
+        }
       })
       .catch((e: Error) => {
         if (active) onError(e.message);
@@ -45,23 +97,38 @@ export default function JobSearch({ error, onError }: JobSearchProps) {
     return () => {
       active = false;
     };
-  }, [applied, offset]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [applied, offset, initialHydrated]); // eslint-disable-line react-hooks/exhaustive-deps
 
   function handleSearch(e: FormEvent) {
     e.preventDefault();
     setOffset(0);
     setApplied({ ...filters });
     setSelected(null);
+    updateUrl(filters, 0, null);
+  }
+
+  function handleSelectJob(job: JobOut) {
+    setSelected(job);
+    updateUrl(applied, offset, job.id);
+  }
+
+  function handleClearSelection() {
+    setSelected(null);
+    updateUrl(applied, offset, null);
   }
 
   function prevPage() {
-    setOffset(Math.max(0, offset - PAGE_SIZE));
+    const nextOffset = Math.max(0, offset - PAGE_SIZE);
+    setOffset(nextOffset);
     setSelected(null);
+    updateUrl(applied, nextOffset, null);
   }
 
   function nextPage() {
-    setOffset(offset + PAGE_SIZE);
+    const nextOffset = offset + PAGE_SIZE;
+    setOffset(nextOffset);
     setSelected(null);
+    updateUrl(applied, nextOffset, null);
   }
 
   const totalPages = results.total;
@@ -72,7 +139,7 @@ export default function JobSearch({ error, onError }: JobSearchProps) {
 
   return (
     <>
-      {/* Search form */}
+      {/* Search form — compact with clear labels */}
       <form className="search" onSubmit={handleSearch}>
         {(['keyword', 'company', 'location'] as const).map((key) => (
           <label key={key}>
@@ -105,10 +172,10 @@ export default function JobSearch({ error, onError }: JobSearchProps) {
         <span>Recently indexed first</span>
       </div>
 
-      {/* Job layout */}
-      <div className="job-layout">
+      {/* Job layout: searchable index on the left, inspectable job record on the right */}
+      <div className={`job-layout ${selected ? 'has-selection' : ''}`}>
         {/* Results list */}
-        <section aria-label="Search results" aria-busy={busy}>
+        <section aria-label="Search results" aria-busy={busy} className="job-list-section">
           {/* Empty state */}
           {!busy && !error && results.items.length === 0 && (
             <div className="empty">
@@ -117,7 +184,7 @@ export default function JobSearch({ error, onError }: JobSearchProps) {
             </div>
           )}
 
-          {/* Job cards */}
+          {/* Job cards with reference index numbers */}
           {!busy &&
             results.items.map((job) => (
               <article
@@ -125,21 +192,29 @@ export default function JobSearch({ error, onError }: JobSearchProps) {
                 className={`job-card ${selected?.id === job.id ? 'selected' : ''}`}
               >
                 <div className="job-top">
-                  <span>{job.company}</span>
-                  <span className="pill">{job.remote_status || 'Workplace unspecified'}</span>
+                  <span className="job-company">{job.company}</span>
+                  <div className="job-top-meta">
+                    <span className="ref-number" title={`Index reference #${job.id}`}>
+                      № {String(job.id).padStart(4, '0')}
+                    </span>
+                    <span className="pill">{job.remote_status || 'Workplace unspecified'}</span>
+                  </div>
                 </div>
                 <h2>
                   <button
                     className="job-title"
-                    onClick={() => setSelected(job)}
+                    onClick={() => handleSelectJob(job)}
                     aria-expanded={selected?.id === job.id}
                   >
                     {job.title}
                   </button>
                 </h2>
-                <p>{job.location || 'Location unspecified'}</p>
+                <p className="job-location">{job.location || 'Location unspecified'}</p>
                 <div className="job-bottom">
                   <span>{job.employment_type || 'Employment type unspecified'}</span>
+                  {job.salary && formatSalary(job.salary) && (
+                    <span className="salary-pill">{formatSalary(job.salary)}</span>
+                  )}
                   <span>
                     {job.sources.length} {job.sources.length === 1 ? 'source' : 'sources'} · checked{' '}
                     {formatDate(job.sources[0]?.last_checked_at ?? null)}
@@ -160,46 +235,111 @@ export default function JobSearch({ error, onError }: JobSearchProps) {
           </div>
         </section>
 
-        {/* Detail aside */}
-        <aside>
+        {/* Detail aside / Inspectable job record */}
+        <aside className={selected ? 'mobile-visible' : ''}>
           {selected ? (
-            <>
-              <div className="eyebrow">{selected.company}</div>
-              <h2>{selected.title}</h2>
-              <p>{selected.location}</p>
-              {selected.application_url.startsWith('https://') ? (
-                <a
-                  className="apply"
-                  href={selected.application_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
+            <div className="job-record">
+              {/* Mobile return button */}
+              <div className="mobile-return-bar">
+                <button
+                  type="button"
+                  className="mobile-back-btn"
+                  onClick={handleClearSelection}
+                  aria-label="Return to search results"
                 >
-                  Apply at original source ↗
-                </a>
-              ) : (
-                <span className="apply" title="Apply link unavailable or not HTTPS">
-                  Apply at original source ↗
-                </span>
-              )}
+                  ← Return to results
+                </button>
+              </div>
+
+              <div className="record-header">
+                <div className="eyebrow-row">
+                  <span className="eyebrow">{selected.company}</span>
+                  <span className="record-ref">№ {String(selected.id).padStart(4, '0')}</span>
+                </div>
+                <h2>{selected.title}</h2>
+                <p className="record-location">{selected.location || 'Location unspecified'}</p>
+
+                {/* Metadata badges — only reserved when supplied by source */}
+                <div className="record-tags">
+                  {selected.remote_status && (
+                    <span className="pill">{selected.remote_status}</span>
+                  )}
+                  {selected.employment_type && (
+                    <span className="pill">{selected.employment_type}</span>
+                  )}
+                  {selected.salary && formatSalary(selected.salary) && (
+                    <span className="pill good">{formatSalary(selected.salary)}</span>
+                  )}
+                  {selected.published_at && (
+                    <span className="pill" title="Original publication timestamp">
+                      Published {new Date(selected.published_at).toLocaleDateString()}
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              {/* Apply action — verified HTTPS rel=noopener noreferrer */}
+              <div className="apply-action">
+                {selected.application_url && selected.application_url.startsWith('https://') ? (
+                  <a
+                    className="apply"
+                    href={selected.application_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Apply at original source ↗
+                  </a>
+                ) : (
+                  <span className="apply non-link" title="Apply destination is not a direct HTTPS link">
+                    Apply at original source ↗
+                  </span>
+                )}
+              </div>
+
               <h3>About the role</h3>
               <p className="description">
                 {selected.description || 'The source did not provide a description.'}
               </p>
-              <h3>Source history</h3>
-              {selected.sources.map((s) => (
-                <p key={s.source_id}>
-                  <a href={s.source_url} target="_blank" rel="noopener noreferrer">
-                    Original listing ↗
-                  </a>
-                  <br />
-                  <small>
-                    {s.status} · checked {formatDate(s.last_checked_at)}
-                  </small>
-                </p>
-              ))}
-            </>
+
+              {/* Quiet provenance rail / Source history */}
+              <div className="provenance-section">
+                <h3>Source history</h3>
+                <div className="provenance-rail">
+                  {selected.sources.map((s) => (
+                    <div key={s.source_id} className="provenance-item">
+                      <div className="prov-header">
+                        <span className={`status-badge ${s.status === 'ACTIVE' ? 'good' : ''}`}>
+                          {s.status}
+                        </span>
+                        <span className="prov-time">checked {formatDate(s.last_checked_at)}</span>
+                      </div>
+                      <div className="prov-links">
+                        <a
+                          href={s.source_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="prov-link"
+                        >
+                          Original listing ↗
+                        </a>
+                        {s.application_url && s.application_url !== s.source_url && (
+                          <a
+                            href={s.application_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="prov-link"
+                          >
+                            Application target ↗
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           ) : (
-            <>
+            <div className="empty-aside">
               <div className="eyebrow">TRACEABLE BY DESIGN</div>
               <h2>Every role has a source.</h2>
               <p>
@@ -211,10 +351,11 @@ export default function JobSearch({ error, onError }: JobSearchProps) {
                 Listings are refreshed on a schedule. Missing roles need reconfirmation before they
                 close.
               </p>
-            </>
+            </div>
           )}
         </aside>
       </div>
     </>
   );
 }
+

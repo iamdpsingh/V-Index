@@ -14,7 +14,11 @@ function classifyError(e: Error): string {
   if (msg.includes('401') || msg.toLowerCase().includes('unauthorized')) {
     return 'Invalid token';
   }
-  if (msg.includes('409') || msg.toLowerCase().includes('already exists')) {
+  if (
+    msg.includes('409') ||
+    msg.toLowerCase().includes('already exists') ||
+    msg.toLowerCase().includes('already registered')
+  ) {
     return 'Source already exists';
   }
   if (msg.includes('422')) {
@@ -219,11 +223,19 @@ export default function SourcesAdmin({ token, onTokenChange }: SourcesAdminProps
                 <td>
                   #{r.id} / #{r.source_id}
                 </td>
-                <td>{r.status}</td>
+                <td>
+                  <span
+                    className={`pill ${
+                      r.status === 'SUCCESS' ? 'good' : r.status === 'FAILED' ? 'pill-fail' : ''
+                    }`}
+                  >
+                    {r.status}
+                  </span>
+                </td>
                 <td>{r.count}</td>
                 <td>{formatDate(r.started_at)}</td>
                 <td>{formatDate(r.finished_at)}</td>
-                <td>{r.error || '—'}</td>
+                <td className={r.error ? 'cell-error' : ''}>{r.error || '—'}</td>
               </tr>
             ))}
           </tbody>

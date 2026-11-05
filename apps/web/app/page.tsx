@@ -27,12 +27,27 @@ export default function Home() {
   const [token, setToken] = useState('');
   const [error, setError] = useState('');
 
+  // Sync tab with URL search params on mount and on popstate
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const params = new URLSearchParams(window.location.search);
+    const t = params.get('tab');
+    if (t === 'jobs' || t === 'sources' || t === 'coverage') {
+      setTab(t);
+    }
+    const handlePopState = () => {
+      const p = new URLSearchParams(window.location.search);
+      const curTab = p.get('tab');
+      if (curTab === 'jobs' || curTab === 'sources' || curTab === 'coverage') {
+        setTab(curTab);
+      }
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
   // Providers are fetched once at mount — used by both page intro and CoveragePage
   useEffect(() => {
-    apiFetch<Provider[]>('providers').catch(() => {
-      /* non-fatal: coverage tab will show empty table */
-    });
-
     apiFetch<Provider[]>('providers')
       .then(setProviders)
       .catch((e: Error) => setError(e.message));
@@ -41,6 +56,16 @@ export default function Home() {
   function switchTab(next: Tab) {
     setTab(next);
     setError('');
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      if (next === 'jobs') {
+        params.delete('tab');
+      } else {
+        params.set('tab', next);
+      }
+      const q = params.toString();
+      window.history.pushState(null, '', q ? `?${q}` : window.location.pathname);
+    }
   }
 
   // Counts for the index-note — LIVE_VERIFIED is evidence, not same as implemented
