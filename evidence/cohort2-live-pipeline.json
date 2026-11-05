@@ -1,0 +1,40 @@
+{
+  "at": "2026-11-05T16:45:22.680654+00:00",
+  "database": "local SQLite",
+  "lease_backend": "local Redis",
+  "sources": [
+    4,
+    5
+  ],
+  "runs": [
+    {
+      "id": 5,
+      "source_id": 5,
+      "started_at": "2026-11-05T16:45:20.270945",
+      "finished_at": "2026-11-05T16:45:22.157041",
+      "status": "success",
+      "count": 17,
+      "error": null
+    },
+    {
+      "id": 4,
+      "source_id": 4,
+      "started_at": "2026-11-05T16:45:17.321671",
+      "finished_at": "2026-11-05T16:45:20.263990",
+      "status": "success",
+      "count": 2,
+      "error": null
+    }
+  ],
+  "searches": {
+    "SmartRecruiters": {
+      "total": 2,
+      "sample_title": "Customer support Representative"
+    },
+    "PlanQC": {
+      "total": 17,
+      "sample_title": "Unsolicited Application"
+    }
+  },
+  "complete": true
+}

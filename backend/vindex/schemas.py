@@ -10,6 +10,7 @@ class JobInput(BaseModel):
     title: str = Field(min_length=1)
     company: str = Field(min_length=1)
     description: str
+    quality_flags: list[str] = Field(default_factory=list)
     location: str = ""
     source_url: str
     application_url: str
@@ -53,6 +54,7 @@ class JobOut(BaseModel):
     title: str
     company: str
     description: str
+    quality_flags: list[str] = Field(default_factory=list)
     location: str
     source_url: str
     application_url: str

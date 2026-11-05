@@ -202,7 +202,7 @@ def test_smartrecruiters_partial_results_never_complete(failure):
             payload["jobAd"]["sections"] = {}
         return httpx.Response(200, json=payload)
 
-    with pytest.raises(ValueError):
+    with pytest.raises((ValueError, KeyError)):
         discover("smartrecruiters", handler)
 
 
@@ -292,5 +292,18 @@ def test_smartrecruiters_live_optional_title_only_section():
 def test_smartrecruiters_company_blurb_cannot_replace_missing_job_description():
     payload = detail("1")
     payload["jobAd"]["sections"] = {"companyDescription": {"text": "About our company"}}
-    with pytest.raises(ValueError, match="no job description"):
+    with pytest.raises(KeyError, match="jobDescription"):
         SmartRecruitersConnector("smartrecruiters", "example", "Example", None).parse(payload)
+
+
+def test_smartrecruiters_explicitly_empty_source_description_is_flagged():
+    payload = json.loads(
+        (ROOT / "evidence/smartrecruiters-Colliers-missing-description.json").read_text()
+    )
+    assert payload["jobAd"]["sections"]["jobDescription"]["text"] == ""
+    job = SmartRecruitersConnector("smartrecruiters", "Colliers", "Colliers", None).parse(payload)[
+        0
+    ]
+    assert job.quality_flags == ["role_description_missing"]
+    assert "Company Description" in job.description
+    assert job.raw == payload

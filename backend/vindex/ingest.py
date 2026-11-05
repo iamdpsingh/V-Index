@@ -50,7 +50,9 @@ def ingest(session: Session, source: Source, batch: Enumeration, checked=None) -
     }
     for item in batch.jobs:
         data = item.model_dump(mode="json")
-        fingerprint = digest({k: v for k, v in data.items() if k != "raw"})
+        fingerprint = digest(
+            {k: v for k, v in data.items() if k != "raw" and not (k == "quality_flags" and not v)}
+        )
         obs = existing.get(item.external_id)
         key = identity(item)
         canonical = session.scalar(select(Job).where(Job.identity == key))

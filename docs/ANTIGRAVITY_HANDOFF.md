@@ -19,3 +19,5 @@ Required browser checks: mobile and desktop, keyboard search/filter/pagination, 
 ## Backend cohort 2 integration note
 
 The API now also accepts SmartRecruiters and Personio hosted boards. Supported-source copy should follow the actual implemented provider inventory rather than hardcoding the original three. No frontend files were changed during this backend cohort. The owner's latest clarification limits the design change to appearance; the objective and required functionality are unchanged. Enterprise investigation is in ENTERPRISE_RESEARCH.md and does not imply platform coverage.
+
+Job list items now include additive `quality_flags: string[]` (default empty). A source can explicitly omit its role text; `role_description_missing` records that fact while preserving the other source-provided ad sections. If all description text is blank, `description_missing` is also present. Include these facts in the existing job-detail metadata treatment; do not imply the role text was extracted when the source left it empty. The OpenAPI snapshot includes this field.

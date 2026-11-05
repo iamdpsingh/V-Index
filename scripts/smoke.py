@@ -5,6 +5,7 @@ import asyncio
 import hashlib
 import json
 import subprocess
+from collections import Counter
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -109,6 +110,9 @@ async def main():
                     batch = await create_connector(provider, slug, company, client).discover()
                 result.update(
                     count=len(batch.jobs),
+                    quality_flag_counts=dict(
+                        Counter(flag for job in batch.jobs for flag in job.quality_flags)
+                    ),
                     complete=batch.complete,
                     status="LIVE_VERIFIED" if batch.complete and batch.jobs else "FAILED",
                     error=None if batch.jobs else "No jobs; extraction not proven",
@@ -151,7 +155,8 @@ async def main():
                                 "XML feed must be enabled; incomplete translated descriptions fail the run",
                             ],
                             "SmartRecruiters": [
-                                "Every posting requires a detail request; very large boards may exceed the ten-minute budget"
+                                "Every posting requires a detail request; very large boards may exceed the ten-minute budget",
+                                "Explicitly blank role descriptions are preserved and flagged role_description_missing; source text is not invented",
                             ],
                         }.get(row["name"], [])
                     ),

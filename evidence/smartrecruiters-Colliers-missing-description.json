@@ -1,0 +1,104 @@
+{
+  "id": "744000138964069",
+  "name": "Senior Engineer",
+  "uuid": "890b0026-34fa-4463-a6b6-8223f390b06d",
+  "jobId": "09e176c6-94c1-4abe-90eb-3cd1cf72e088",
+  "jobAdId": "609862f1-7c9d-43b9-aa9d-e1cc6400819c",
+  "defaultJobAd": true,
+  "refNumber": "REF6807W",
+  "company": {
+    "name": "Colliers",
+    "identifier": "Colliers"
+  },
+  "location": {
+    "city": "Melbourne",
+    "region": "VIC",
+    "country": "au",
+    "remote": false,
+    "hybrid": false,
+    "latitude": "-37.8136276",
+    "longitude": "144.9630576",
+    "fullLocation": "Melbourne, VIC, Australia"
+  },
+  "customField": [
+    {
+      "fieldId": "COUNTRY",
+      "fieldLabel": "Country/Region",
+      "valueId": "au",
+      "valueLabel": "Australia"
+    },
+    {
+      "fieldId": "58b7e4d5e4b0885c92cd98e0",
+      "fieldLabel": "Department",
+      "valueId": "3580156",
+      "valueLabel": "Engineering & Design"
+    },
+    {
+      "fieldId": "55d27b6ee4b03992da0dcef1",
+      "fieldLabel": "Brands",
+      "valueId": "default",
+      "valueLabel": "Colliers"
+    },
+    {
+      "fieldId": "5faa09d54c1cd03a2c8d1824",
+      "fieldLabel": "Employment Category",
+      "valueId": "1",
+      "valueLabel": "Permanent Full Time"
+    }
+  ],
+  "releasedDate": "2026-07-21T23:52:40.198Z",
+  "creator": {
+    "name": "",
+    "avatarUrl": ""
+  },
+  "postingUrl": "https://jobs.smartrecruiters.com/Colliers/744000138964069-senior-engineer",
+  "applyUrl": "https://jobs.smartrecruiters.com/Colliers/744000138964069-senior-engineer?oga=true",
+  "referralUrl": "https://jobs.smartrecruiters.com/external-referrals/company/Colliers/publication/890b0026-34fa-4463-a6b6-8223f390b06d?dcr_ci=Colliers",
+  "jobAd": {
+    "sections": {
+      "companyDescription": {
+        "title": "Company Description",
+        "text": "<p>Colliers (NASDAQ, TSX: CIGI) is a leading diversified professional services and investment management company. With operations in 64 countries, our 17,000 enterprising professionals work collaboratively to provide expert real estate and investment advice to clients.</p><p>The Colliers Engineering and Design team specialises in civil, infrastructure, water engineering, town planning and urban design. Key services provided to developers in this service line include site assessment and due diligence, planning approvals and engineering design through to completion of construction.</p>"
+      },
+      "jobDescription": {
+        "title": "Job Description",
+        "text": ""
+      },
+      "qualifications": {
+        "title": "Qualifications",
+        "text": ""
+      },
+      "additionalInformation": {
+        "title": "Additional Information",
+        "text": "<p>At Colliers, we are enterprising. What sets us apart is not what we do, but how we do it. Our people are passionate, take personal responsibility and always do what\u2019s right for our clients, people and communities. We accelerate their success by empowering them to think and act differently to drive exceptional results.&#xa0;</p><p>With circa 9,000 experts in Asia Pacific, our enterprising culture and decentralised operating model allows us to act with speed in local markets, seizing opportunities to innovate and accelerate the success of our clients and our people.</p><p>Our collaborative culture sets us apart. We help experts become true specialists and provide the long-term structure and platform to accelerate their success.</p><p>We foster&#xa0;an environment in which everyone at Colliers feels respected and comfortable bringing their authentic selves to do their best work. It\u2019s our people who set us apart and we actively recruit people who represent the diversity of the communities in which we operate. We take great pride in doing what\u2019s right and operating in ways that benefit the business, our people, our clients, our communities, and the environment.</p><p>Experts join experts, and we welcome you to join us as we lead the industry into the future.</p><p><strong>Please apply with your CV or contact Jasmine Mims at jasmine.mims@colliers.com.</strong></p><p><strong>Please be advised that applications&#xa0;will&#xa0;only be accepted directly rather than via recruitment agencies.</strong></p>"
+      }
+    }
+  },
+  "active": true,
+  "visibility": "PUBLIC",
+  "industry": {
+    "id": "civil_engineering",
+    "label": "Civil Engineering"
+  },
+  "function": {
+    "id": "engineering",
+    "label": "Engineering"
+  },
+  "department": {
+    "id": 3580156,
+    "label": "Engineering & Design"
+  },
+  "experienceLevel": {
+    "id": "mid_senior_level",
+    "label": "Mid-Senior Level"
+  },
+  "typeOfEmployment": {
+    "id": "permanent",
+    "label": "Full-time"
+  },
+  "language": {
+    "code": "en",
+    "label": "English",
+    "labelNative": "English (US)"
+  }
+}

@@ -679,37 +679,39 @@
       {
         "provider": "Personio",
         "url": "https://matrix42.jobs.personio.de",
-        "at": "2026-11-05T16:42:26.231528+00:00",
-        "revision": "4ca9ea02ed1fc3f24bcb58f28719bf9dc256b8c5",
+        "at": "2026-11-05T16:44:34.847095+00:00",
+        "revision": "5882bc6537c8a9fdcaa0c8cccdd29481dcfa03c7",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "0434fd2569028920f341babd8ee1223eb0356822a8083789f9c9e41a13c9b0aa",
+        "code_sha256": "788dd3a8e291df65a503d18b3590d460bb7cb629712aa6c63da24b2b0192426b",
         "count": 34,
         "status": "LIVE_VERIFIED",
         "complete": true,
         "error": null,
         "payload_sha256": "644044b042d9de34bb5d2158d3e4a51088a8fd581e68840614b5f11ddd5f4079",
-        "finished_at": "2026-11-05T16:42:28.448582+00:00"
+        "finished_at": "2026-11-05T16:44:37.171680+00:00"
       },
       {
         "provider": "Personio",
         "url": "https://planqc-gmbh.jobs.personio.de",
-        "at": "2026-11-05T16:42:28.949771+00:00",
-        "revision": "4ca9ea02ed1fc3f24bcb58f28719bf9dc256b8c5",
+        "at": "2026-11-05T16:44:37.673051+00:00",
+        "revision": "5882bc6537c8a9fdcaa0c8cccdd29481dcfa03c7",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "0434fd2569028920f341babd8ee1223eb0356822a8083789f9c9e41a13c9b0aa",
+        "code_sha256": "788dd3a8e291df65a503d18b3590d460bb7cb629712aa6c63da24b2b0192426b",
         "count": 17,
         "status": "LIVE_VERIFIED",
         "complete": true,
         "error": null,
         "payload_sha256": "c3f724e1edaa224ddc7b205586106a1d265b7bd8f161638906b5ab6526d1d544",
-        "finished_at": "2026-11-05T16:42:30.895286+00:00"
+        "finished_at": "2026-11-05T16:44:39.531738+00:00"
       }
     ],
-    "last_run_at": "2026-11-05T16:42:30.895286+00:00",
+    "last_run_at": "2026-11-05T16:44:39.531738+00:00",
     "extraction_count": 51,
     "failure_reason": null,
     "limitations": [
-      "Point-in-time public API enumeration; deployment and continuous operation unverified"
+      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
+      "Live tenants use .de; .com route is implemented but not live-tested",
+      "XML feed must be enabled; incomplete translated descriptions fail the run"
     ]
   },
   {
@@ -849,36 +851,37 @@
       {
         "provider": "SmartRecruiters",
         "url": "https://careers.smartrecruiters.com/SmartRecruiters",
-        "at": "2026-11-05T16:42:19.954339+00:00",
-        "revision": "4ca9ea02ed1fc3f24bcb58f28719bf9dc256b8c5",
+        "at": "2026-11-05T16:43:50.893157+00:00",
+        "revision": "5882bc6537c8a9fdcaa0c8cccdd29481dcfa03c7",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "0434fd2569028920f341babd8ee1223eb0356822a8083789f9c9e41a13c9b0aa",
+        "code_sha256": "788dd3a8e291df65a503d18b3590d460bb7cb629712aa6c63da24b2b0192426b",
         "count": 2,
         "status": "LIVE_VERIFIED",
         "complete": true,
         "error": null,
         "payload_sha256": "67bbbd9e9e54dce2669ba93556c49a72e5b7b8e5a7755aa021185b2a7faf53d4",
-        "finished_at": "2026-11-05T16:42:22.892651+00:00"
+        "finished_at": "2026-11-05T16:43:53.493933+00:00"
       },
       {
         "provider": "SmartRecruiters",
         "url": "https://careers.smartrecruiters.com/Colliers",
-        "at": "2026-11-05T16:42:23.393206+00:00",
-        "revision": "4ca9ea02ed1fc3f24bcb58f28719bf9dc256b8c5",
+        "at": "2026-11-05T16:43:53.995244+00:00",
+        "revision": "5882bc6537c8a9fdcaa0c8cccdd29481dcfa03c7",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "0434fd2569028920f341babd8ee1223eb0356822a8083789f9c9e41a13c9b0aa",
+        "code_sha256": "788dd3a8e291df65a503d18b3590d460bb7cb629712aa6c63da24b2b0192426b",
         "count": 0,
         "status": "FAILED",
         "complete": false,
-        "error": "KeyError: 'text'",
-        "finished_at": "2026-11-05T16:42:25.730230+00:00"
+        "error": "ValueError: Posting detail has no job description",
+        "finished_at": "2026-11-05T16:44:34.345767+00:00"
       }
     ],
-    "last_run_at": "2026-11-05T16:42:25.730230+00:00",
+    "last_run_at": "2026-11-05T16:44:34.345767+00:00",
     "extraction_count": 2,
-    "failure_reason": "KeyError: 'text'",
+    "failure_reason": "ValueError: Posting detail has no job description",
     "limitations": [
-      "Point-in-time public API enumeration; deployment and continuous operation unverified"
+      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
+      "Every posting requires a detail request; very large boards may exceed the ten-minute budget"
     ]
   },
   {

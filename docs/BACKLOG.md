@@ -13,10 +13,12 @@
 - Prototype an auditable HTML/JSON-LD connector base only after access/robots/SSRF controls are designed; no generic parser counts as platform coverage.
 
 ## Hardening and correctness
-- PostgreSQL-backed integration tests, transaction race/recovery tests, automated stale-run finalization.
+- [x] PostgreSQL migrations/API/lifecycle and real Redis serialization/transaction rollback integration tests; CI provisions both services.
+- [ ] Wider transaction races, process termination/restart recovery and automated stale-run finalization.
 - Immutable run snapshots, before/after event data, conflict-aware canonical field enrichment and richer conservative dedupe.
 - Provider publication timestamps/detail enrichment; structured locations and salary unit normalization, without inferring missing facts.
-- Honor Retry-After; distributed per-host request budgets, structured logs, heartbeat and stale-source alerts.
+- [x] Honor bounded Retry-After delays and fail into source cooldown for longer delays.
+- [ ] Distributed per-host request budgets, structured logs, heartbeat and stale-source alerts.
 - Gateway auth/rate limits, egress DNS/IP controls, non-root web image, deployment security review, backup restore drill.
 - PostgreSQL full-text search and measured indexes when benchmark warrants.
 

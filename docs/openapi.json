@@ -428,6 +428,13 @@
             "type": "string",
             "title": "Description"
           },
+          "quality_flags": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Quality Flags"
+          },
           "location": {
             "type": "string",
             "title": "Location"

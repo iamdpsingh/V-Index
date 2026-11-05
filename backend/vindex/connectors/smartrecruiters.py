@@ -26,21 +26,23 @@ class SmartRecruitersConnector:
             raise ValueError("Non-public posting rejected")
         location = payload.get("location", {})
         sections = payload["jobAd"]["sections"]
-        if not text(sections.get("jobDescription", {}).get("text", "")).strip():
-            raise ValueError("Posting detail has no job description")
+        # Distinguish an explicitly blank source field from a missing/changed schema.
+        role_description = text(sections["jobDescription"]["text"])
+        quality_flags = [] if role_description.strip() else ["role_description_missing"]
         description = "\n\n".join(
             text(section.get("title", "") + "\n" + section.get("text", ""))
             for section in sections.values()
             if section and section.get("text")
         )
         if not description.strip():
-            raise ValueError("Posting detail has no description")
+            quality_flags.append("description_missing")
         return [
             JobInput(
                 external_id=str(payload["id"]),
                 title=payload["name"],
                 company=payload.get("company", {}).get("name") or self.company,
                 description=description,
+                quality_flags=quality_flags,
                 location=location.get("fullLocation")
                 or ", ".join(
                     str(location[k]) for k in ("city", "region", "country") if location.get(k)
@@ -86,7 +88,12 @@ class SmartRecruitersConnector:
                 detail = await self.http.json(f"{self.base}/{posting_id}")
                 if str(detail["id"]) != posting_id:
                     raise ValueError("Posting detail identifier mismatch")
-                jobs.extend(self.parse(detail))
+                try:
+                    jobs.extend(self.parse(detail))
+                except (ValueError, KeyError, TypeError) as error:
+                    raise ValueError(
+                        f"Posting {posting_id} detail invalid: {type(error).__name__}: {error}"
+                    ) from error
                 seen.add(posting_id)
                 await asyncio.sleep(0.2)
             if len(jobs) == total:
