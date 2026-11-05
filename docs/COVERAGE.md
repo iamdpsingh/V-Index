@@ -44,7 +44,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | Paycom | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | Paycor | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Paylocity | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
-| Personio | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 51 | 2026-11-05T16:44:39.531738+00:00 | https://matrix42.jobs.personio.de (34; LIVE_VERIFIED); https://planqc-gmbh.jobs.personio.de (17; LIVE_VERIFIED)  |
+| Personio | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 51 | 2026-11-05T16:49:55.782699+00:00 | https://matrix42.jobs.personio.de (34; LIVE_VERIFIED); https://planqc-gmbh.jobs.personio.de (17; LIVE_VERIFIED)  |
 | Phenom People | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | Pinpoint | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Polymer | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
@@ -53,7 +53,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | Rippling | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Rival | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | SAP SuccessFactors | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
-| SmartRecruiters | ats | IMPLEMENTED | FAILED | MEDIUM | 2 | 2026-11-05T16:44:34.345767+00:00 | https://careers.smartrecruiters.com/SmartRecruiters (2; LIVE_VERIFIED); https://careers.smartrecruiters.com/Colliers (0; FAILED) ValueError: Posting detail has no job description |
+| SmartRecruiters | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 90 | 2026-11-05T16:49:50.960317+00:00 | https://careers.smartrecruiters.com/SmartRecruiters (2; LIVE_VERIFIED); https://careers.smartrecruiters.com/Colliers (88; LIVE_VERIFIED)  |
 | talentReef | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Taleo | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | Teamtailor | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |

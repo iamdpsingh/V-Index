@@ -679,33 +679,35 @@
       {
         "provider": "Personio",
         "url": "https://matrix42.jobs.personio.de",
-        "at": "2026-11-05T16:44:34.847095+00:00",
-        "revision": "5882bc6537c8a9fdcaa0c8cccdd29481dcfa03c7",
+        "at": "2026-11-05T16:49:51.461632+00:00",
+        "revision": "1e9d1f043747fa1e329977090e932dd7bd5d2add",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "788dd3a8e291df65a503d18b3590d460bb7cb629712aa6c63da24b2b0192426b",
+        "code_sha256": "c3feb8137523f3e5b244933009b5611e701869c164ddd811ea78c918f20a4945",
         "count": 34,
         "status": "LIVE_VERIFIED",
         "complete": true,
         "error": null,
-        "payload_sha256": "644044b042d9de34bb5d2158d3e4a51088a8fd581e68840614b5f11ddd5f4079",
-        "finished_at": "2026-11-05T16:44:37.171680+00:00"
+        "quality_flag_counts": {},
+        "payload_sha256": "c3070ea0938be8a8c4eada19e9d11b68cbc5745e801a2794ca3f6af61a2e663e",
+        "finished_at": "2026-11-05T16:49:53.551613+00:00"
       },
       {
         "provider": "Personio",
         "url": "https://planqc-gmbh.jobs.personio.de",
-        "at": "2026-11-05T16:44:37.673051+00:00",
-        "revision": "5882bc6537c8a9fdcaa0c8cccdd29481dcfa03c7",
+        "at": "2026-11-05T16:49:54.052799+00:00",
+        "revision": "1e9d1f043747fa1e329977090e932dd7bd5d2add",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "788dd3a8e291df65a503d18b3590d460bb7cb629712aa6c63da24b2b0192426b",
+        "code_sha256": "c3feb8137523f3e5b244933009b5611e701869c164ddd811ea78c918f20a4945",
         "count": 17,
         "status": "LIVE_VERIFIED",
         "complete": true,
         "error": null,
-        "payload_sha256": "c3f724e1edaa224ddc7b205586106a1d265b7bd8f161638906b5ab6526d1d544",
-        "finished_at": "2026-11-05T16:44:39.531738+00:00"
+        "quality_flag_counts": {},
+        "payload_sha256": "4977364b1f8e225be7862b14d55b1ff32784b09b517cce2209e6fc93e0f1e048",
+        "finished_at": "2026-11-05T16:49:55.782699+00:00"
       }
     ],
-    "last_run_at": "2026-11-05T16:44:39.531738+00:00",
+    "last_run_at": "2026-11-05T16:49:55.782699+00:00",
     "extraction_count": 51,
     "failure_reason": null,
     "limitations": [
@@ -844,44 +846,50 @@
     "name": "SmartRecruiters",
     "kind": "ats",
     "implementation_status": "IMPLEMENTED",
-    "evidence_status": "FAILED",
+    "evidence_status": "LIVE_VERIFIED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
     "examples": [
       {
         "provider": "SmartRecruiters",
         "url": "https://careers.smartrecruiters.com/SmartRecruiters",
-        "at": "2026-11-05T16:43:50.893157+00:00",
-        "revision": "5882bc6537c8a9fdcaa0c8cccdd29481dcfa03c7",
+        "at": "2026-11-05T16:48:24.563951+00:00",
+        "revision": "1e9d1f043747fa1e329977090e932dd7bd5d2add",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "788dd3a8e291df65a503d18b3590d460bb7cb629712aa6c63da24b2b0192426b",
+        "code_sha256": "c3feb8137523f3e5b244933009b5611e701869c164ddd811ea78c918f20a4945",
         "count": 2,
         "status": "LIVE_VERIFIED",
         "complete": true,
         "error": null,
-        "payload_sha256": "67bbbd9e9e54dce2669ba93556c49a72e5b7b8e5a7755aa021185b2a7faf53d4",
-        "finished_at": "2026-11-05T16:43:53.493933+00:00"
+        "quality_flag_counts": {},
+        "payload_sha256": "b627ade163837a9223e9132e5d6ae634c535a2a231b7a79e6e64eb4c256e28ea",
+        "finished_at": "2026-11-05T16:48:27.793571+00:00"
       },
       {
         "provider": "SmartRecruiters",
         "url": "https://careers.smartrecruiters.com/Colliers",
-        "at": "2026-11-05T16:43:53.995244+00:00",
-        "revision": "5882bc6537c8a9fdcaa0c8cccdd29481dcfa03c7",
+        "at": "2026-11-05T16:48:28.294856+00:00",
+        "revision": "1e9d1f043747fa1e329977090e932dd7bd5d2add",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "788dd3a8e291df65a503d18b3590d460bb7cb629712aa6c63da24b2b0192426b",
-        "count": 0,
-        "status": "FAILED",
-        "complete": false,
-        "error": "ValueError: Posting detail has no job description",
-        "finished_at": "2026-11-05T16:44:34.345767+00:00"
+        "code_sha256": "c3feb8137523f3e5b244933009b5611e701869c164ddd811ea78c918f20a4945",
+        "count": 88,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {
+          "role_description_missing": 1
+        },
+        "payload_sha256": "1d6068e63920121266724fbf54c8ddcf243055462158e53807f550270965b38e",
+        "finished_at": "2026-11-05T16:49:50.960317+00:00"
       }
     ],
-    "last_run_at": "2026-11-05T16:44:34.345767+00:00",
-    "extraction_count": 2,
-    "failure_reason": "ValueError: Posting detail has no job description",
+    "last_run_at": "2026-11-05T16:49:50.960317+00:00",
+    "extraction_count": 90,
+    "failure_reason": null,
     "limitations": [
       "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
-      "Every posting requires a detail request; very large boards may exceed the ten-minute budget"
+      "Every posting requires a detail request; very large boards may exceed the ten-minute budget",
+      "Explicitly blank role descriptions are preserved and flagged role_description_missing; source text is not invented"
     ]
   },
   {
