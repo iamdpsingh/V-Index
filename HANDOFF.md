@@ -1,6 +1,6 @@
 # Current checkpoint — 2026-11-05
 
-Initial vertical slice is implemented in the canonical repository root. No remote push or hosted deployment has been performed. No external frontend agent was launched. See docs/ANTIGRAVITY_HANDOFF.md for branch ownership, API contracts and next frontend work.
+Initial vertical slice is implemented in the canonical repository root. The initial implementation, live evidence and pitch clarification have been pushed to origin/main. No hosted deployment has been performed. No external frontend agent was launched. See docs/ANTIGRAVITY_HANDOFF.md for branch ownership, API contracts and next frontend work.
 
 Three implemented providers have non-empty complete live enumerations across two independent tenants each. This is 3/78 platform connector evidence, not acquisition acceptance. First failed Lever-self-board run is retained in evidence. The SQLite/Redis worker stored 1,139 genuine jobs across Stripe, Palantir and Ashby. Local vindex.db is ignored and is not a fixture or portable deployment artifact.
 

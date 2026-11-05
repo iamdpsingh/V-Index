@@ -9,3 +9,5 @@ Before editing, inspect git status and relevant files. Tests: uv run pytest; uv 
 Never infer closures from failures, malformed payloads or partial pagination. Require complete enumeration plus two misses separated by 24 hours. Keep original observations and links. Validate URLs, use fixed public API hosts, disable redirects and environment proxies, bound response sizes and retries. Never bypass access controls. UI renders descriptions as text.
 
 All 78 platform names must remain distinct (JBoard.io and JobBoard.io are different). Coverage evidence belongs in evidence/ and backend/providers.json. Do not mark the acquisition criteria complete while blockers remain.
+
+Product quality: read docs/PRODUCT_DESIGN.md for the owner’s frontend identity and backend quality requirements. The current UI is a scaffold, not the final design. Require real-data visual and interaction review; never replace engineering correctness or coverage evidence with visual polish.

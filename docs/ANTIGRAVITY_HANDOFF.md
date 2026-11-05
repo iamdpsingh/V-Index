@@ -10,6 +10,8 @@ Admin bearer token is user-entered in memory; never bake it into NEXT_PUBLIC_ or
 
 ## Product direction
 
+Read [PRODUCT_DESIGN.md](PRODUCT_DESIGN.md) before frontend work. The owner requires a distinctive product identity and deliberate interaction design; the current scaffold is not the final visual standard. That brief extends the direction below and includes the required review gate.
+
 A restrained editorial search workspace: warm off-white, dark ink, clear typography, green status accents with labels, compact useful controls. Avoid decorative metrics, fake logos, stock marketing filler and dashboard chrome. Search results lead with job/company/location and real source metadata; show honest empty/loading/error states. Descriptions render as text. Original apply links must be HTTPS and use rel=noopener noreferrer. Mobile controls stack with visible labels. Coverage page must show actual provider names and limitations, including unimplemented providers.
 
 Required browser checks: mobile and desktop, keyboard search/filter/pagination, source submission errors and duplicate sources, sync failure display, detail/apply links, long descriptions/locations, empty index, coverage differentiation, contrast and focus states. Initial scaffold browser behavior is not considered verified until actual browser tests run. Do not remove production gaps from backlog merely to polish the demo.

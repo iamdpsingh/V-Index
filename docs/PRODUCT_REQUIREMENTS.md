@@ -7,3 +7,7 @@ Required outcome: a continuously refreshed search index spanning exactly 58 ATS 
 Source lifecycle must distinguish complete snapshots, partial results, access restrictions and transport failures. Closure requires documented grace/reconfirmation. Same opening across sources retains provenance; distinct roles remain separate. Reviewer gets repository, working demo, live coverage checklist, sanitized fixtures, run timestamps/counts/errors, deployment/runbooks/costs and dependency inventory.
 
 No fake demo data or counts, no superficial connector stubs, no placeholder claims. The acquisition offer and conditions require verification with the organizer; this repository does not assert guaranteed acceptance.
+
+## Initial pitch clarification
+
+The founder reports that the original pitch described a competitive selection: Vaya will acquire the company that executes the job-board indexer challenge best for $10,000, with no users or revenue required. Meeting the technical checklist should not be represented as guaranteeing acquisition. Prioritize reliable complete coverage, current data, reviewer evidence and a maintainable handoff. Python and Airflow were mentioned as relevant experience in the invitation; this does not establish Airflow as a required implementation technology. The current Redis-backed scheduling architecture remains the baseline pending demonstrated need for a different orchestrator.
