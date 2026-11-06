@@ -1,0 +1,32 @@
+[
+  {
+    "provider": "Recooty",
+    "url": "https://careerspage.io/augusto-digital",
+    "at": "2026-11-06T08:32:51.264619+00:00",
+    "revision": "8afe94f250f2dcdf37e78d959ea8e86f8ed28a3c",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "fd36de99d12192f0e3e5118a62619cf1ddb5fe68e9b7798c2184c8abeccba1e6",
+    "count": 2,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "7091ac0904ce7fc123e2f0287394e74560a72f844cff6d558534a323cf4c1c4e",
+    "finished_at": "2026-11-06T08:32:55.275603+00:00"
+  },
+  {
+    "provider": "Recooty",
+    "url": "https://careerspage.io/recooty-inc",
+    "at": "2026-11-06T08:32:55.776993+00:00",
+    "revision": "8afe94f250f2dcdf37e78d959ea8e86f8ed28a3c",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "fd36de99d12192f0e3e5118a62619cf1ddb5fe68e9b7798c2184c8abeccba1e6",
+    "count": 26,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "2a3a964eb4474fedd2cf3c5838b48957dd231ab553ed9005a46654cb79129cbf",
+    "finished_at": "2026-11-06T08:33:21.660966+00:00"
+  }
+]
