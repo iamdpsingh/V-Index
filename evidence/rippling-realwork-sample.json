@@ -38,7 +38,8 @@
       "title": "RealWork Jobs",
       "boardURL": "https://ats.rippling.com/realwork/jobs",
       "companyName": "RealWork",
-      "isTest": false
+      "isTest": false,
+      "groupJobsByLocation": true
     },
     "job": {
       "uuid": "2ea7971a-a867-4e55-96a0-d843a2fac423",

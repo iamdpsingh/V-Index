@@ -1,0 +1,32 @@
+[
+  {
+    "provider": "Rippling",
+    "url": "https://ats.rippling.com/realwork/jobs",
+    "at": "2026-11-06T12:24:29.952389+00:00",
+    "revision": "47b0d4f68d638ce2abab9b90987d285f11cb78b4",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "6e3672314dff4f8debdfa21e07f6c8c6b046a712bb9057e12830961cbca05477",
+    "count": 5,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "0b9da0cf90cb4fe1751c3d51e159eddd6fb97b4ca4ea6e9d6e411eebf33f49e9",
+    "finished_at": "2026-11-06T12:24:36.771900+00:00"
+  },
+  {
+    "provider": "Rippling",
+    "url": "https://ats.rippling.com/sas/jobs",
+    "at": "2026-11-06T12:24:37.273190+00:00",
+    "revision": "47b0d4f68d638ce2abab9b90987d285f11cb78b4",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "6e3672314dff4f8debdfa21e07f6c8c6b046a712bb9057e12830961cbca05477",
+    "count": 6,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "10e1645170e43538e96d5c9e423fc278d9ad63404d467cb608309e897b05d466",
+    "finished_at": "2026-11-06T12:24:45.518767+00:00"
+  }
+]

@@ -14,6 +14,8 @@ from vindex.connectors.registry import create_connector
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
+    ("Kula.ai", "kula", "fwg-internal", "Frontwise Group", "https://careers.kula.ai/fwg-internal"),
+    ("Kula.ai", "kula", "massive-bio", "Massive Bio", "https://careers.kula.ai/massive-bio"),
     ("Rippling", "rippling", "realwork", "RealWork", "https://ats.rippling.com/realwork/jobs"),
     (
         "Rippling",
@@ -324,6 +326,13 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "Kula.ai": [
+                                "Native careers.kula.ai public rendered template only; no browser script execution, private API or application submission",
+                                "Complete embedded public jobs array must match every unique visible native link; named employer, one account and public visibility flags required",
+                                "Maximum 400 mandatory JobPosting details, matching canonical URL/title/employer/identifier and native application controls; final full public roster reconfirmed",
+                                "No authoritative independent total or upstream transactional snapshot; empty, changed, hidden, partial or failed collections abort without reconciliation",
+                                "All source office locations and supplied publication/workplace/employment/salary metadata retained; form/EEO settings and unresolved Flight description references excluded",
+                            ],
                             "Rippling": [
                                 "Native ats.rippling.com public Next SSR template only; regional/custom domains and alternate templates unsupported",
                                 "Complete unfiltered single-page collection only: explicit page/size/totalItems/totalPages must match all unique UUIDs and visible links; multi-page/empty boards fail closed",
