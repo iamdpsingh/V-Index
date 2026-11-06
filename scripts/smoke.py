@@ -289,12 +289,12 @@ async def main():
                                 "Original publication dates and structured salaries are not established by this template; provided source text remains in original description/header observations",
                             ],
                             "Jobboardly": [
-                                "Hosted jobboardly.com HTML listings only; custom-domain registration and redirecting hosted aliases are unsupported",
+                                "Hosted jobboardly.com public XML feed plus full HTML pagination; custom-domain registration and redirecting aliases unsupported",
                                 "Explicit sequential Next controls, range counters, unique links and successful JobPosting/apply details are required",
-                                "Maximum 400 details/100 pages; empty pages fail closed rather than proving closures",
+                                "XML path: at most 5000 jobs/100 HTML pages and 20 MB per feed; HTML-only fallback remains capped at 400 details; empty feeds/pages fail closed",
                                 "JSON-LD preserves salary, employment type, locations and datePosted; explicit visible workplace labels are preserved",
                                 "Email-only applications retain the mailto destination in raw, use the original HTTPS posting as the application entry point, and carry application_by_email",
-                                "Completeness follows the public pagination contract plus first-page reconfirmation, not a transactional upstream snapshot",
+                                "Full XML record set and all HTML pages must agree and be reconfirmed; any change/failure aborts, not a transactional upstream snapshot",
                             ],
                             "Pinpoint": [
                                 "Documented public postings.json full collection; legacy jobs.json is intentionally not used because it omits secondary postings",
