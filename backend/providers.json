@@ -660,16 +660,51 @@
     "name": "Jobvite",
     "kind": "ats",
     "implementation_status": "IMPLEMENTED",
-    "evidence_status": "NOT_STARTED",
+    "evidence_status": "LIVE_VERIFIED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
+    "examples": [
+      {
+        "provider": "Jobvite",
+        "url": "https://jobs.jobvite.com/iboss/jobs",
+        "at": "2026-11-06T08:35:53.565337+00:00",
+        "revision": "9d0323320ec69cc8e1c4b48d81e26ce5c028fee2",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "f9b5818cbbe049ff9a8ba6202a86aaa894062b9308c4c1008cd345674c42c0a4",
+        "count": 35,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "12b598c023ab3412b2235d5dedc6e1237e1d9d136cdd9df128b082dca2e42d6d",
+        "finished_at": "2026-11-06T08:36:23.775622+00:00"
+      },
+      {
+        "provider": "Jobvite",
+        "url": "https://jobs.jobvite.com/optimas/jobs",
+        "at": "2026-11-06T08:36:24.276898+00:00",
+        "revision": "9d0323320ec69cc8e1c4b48d81e26ce5c028fee2",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "f9b5818cbbe049ff9a8ba6202a86aaa894062b9308c4c1008cd345674c42c0a4",
+        "count": 23,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "24e83735e0a6939bd58743def3a3747d94cc752225f3506c3273a7aad8c2e81c",
+        "finished_at": "2026-11-06T08:36:44.397712+00:00"
+      }
+    ],
+    "last_run_at": "2026-11-06T08:36:44.397712+00:00",
+    "extraction_count": 58,
     "failure_reason": null,
     "limitations": [
-      "Hosted unfiltered jobs.jobvite.com tables only; maximum 400 mandatory matching details",
-      "Empty/paginated/alternate templates and custom domains unsupported; live multi-employer verification pending"
+      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
+      "Hosted jobs.jobvite.com unfiltered server-rendered Open Positions tables only; custom domains and alternate/paginated templates unsupported",
+      "No authoritative total is supplied; complete bounded table membership/title reconfirmation establishes the observed template snapshot",
+      "Maximum 400 details; every page must match listed title, employer title, native job ID, category/location metadata and native apply link",
+      "All explicit detail locations retained; salary/employment/original-publication fields absent as independent metadata remain unknown, source description retained intact",
+      "Empty, malformed, failed or changed enumerations abort without closures; no application form is fetched or submitted"
     ]
   },
   {

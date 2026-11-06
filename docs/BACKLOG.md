@@ -2,7 +2,7 @@
 
 ## Current coverage-first status — November 6
 
-17/78 platforms have point-in-time non-empty complete connector runs across two independent employers. Eighteen connectors are implemented; Jobboardly remains FAILED/partial because its second configured board did not complete. There are 60 unimplemented platforms plus that partial platform and the documented bounds on existing connectors. Latest owner instruction: Codex prioritizes reaching today's coverage target and then takes over premium frontend/branding, documented account screens and browser tests, preserving existing Antigravity work. Target November 6 IST: 35 total verified platforms, requiring 18 additional verified platforms from this baseline; do not mark the target achieved without evidence. See ANTIGRAVITY_START_HERE.md and LIVE_INDEX_REQUIREMENTS.md. Production readiness and acquisition completion remain unproven.
+20/78 platforms have point-in-time non-empty complete connector runs across two independent supported sites. Twenty connectors are implemented and 58 remain unimplemented. Jobboardly's earlier large-board blocker is resolved for feed-enabled hosted boards: 31 Recruiter Jobs and 1,324 Pennsylvania Communications records matched full HTML rosters; HTML-only fallback remains capped at 400 details. Codex owns coverage and will take over the premium frontend after today's 35-total target; 15 additional verifications are still required. Preserve existing Antigravity work. Production readiness and full acquisition completion remain unproven.
 
 ## First slice
 - [x] Inspect empty folder/remote; initialize canonical main without replacing history.
@@ -14,8 +14,10 @@
 - [x] Add HireHive public structured templates; AMCS Group 59 and Echelon DC 6 complete live jobs (14/78 point-in-time evidence).
 - [x] GoHire: DineAmic Hospitality 22 and Digital Shift 23 full live jobs; scheduled Digital Shift ingestion/search verified. Count now 15/78.
 - [x] Polymer: ChemFinity Technologies 4 and Gencores 2 complete live jobs; scheduled ChemFinity ingestion/search verified. Count now 16/78.
+- [x] Recooty: Augusto Digital 2 and Recooty Inc. 26 complete live jobs.
+- [x] Jobvite: iboss 35 and Optimas Solutions 23 complete live jobs; current point-in-time total 20/78.
 - [x] Manatal: Quantile Health 2 and Munich Ventures 10 complete live jobs; point-in-time total now 17/78.
-- [ ] Finish Jobboardly multi-board verification: Recruiter jobs indexed; Pennsylvania Communications exceeds the current detail budget and its full run timed out. Preserve failure evidence and resolve capacity/completeness before marking this platform verified.
+- [x] Jobboardly multi-board verification via documented full XML feeds plus twice-enumerated HTML rosters; 31 Recruiter Jobs and 1,324 Pennsylvania Communications jobs. Earlier HTML failures remain recorded.
 - [x] First enterprise risk investigation recorded in docs/ENTERPRISE_RESEARCH.md.
 - [x] Verify full Compose/PostgreSQL/Redis/web startup and proxies in GitHub Actions.
 - [ ] Deploy a hosted reviewer demo and verify live ingestion there.
@@ -60,4 +62,4 @@
 - [x] Exercise private flows through the real Docker web proxy in CI.
 - [ ] Antigravity signup/login/profile/resume/recommendation screens and browser tests (owner explicitly retained frontend ownership there).
 - [ ] Email ownership verification, identity recovery, parser isolation/abuse testing and hosted HTTPS release checks.
-- [ ] Remaining 60 provider implementations, Jobboardly multi-board verification and bounded connector expansion. These remain Codex's priority and acquisition acceptance gates before Codex begins frontend implementation.
+- [ ] Remaining 58 provider implementations and bounded connector expansion. These remain Codex's priority and acquisition acceptance gates before Codex begins frontend implementation.
