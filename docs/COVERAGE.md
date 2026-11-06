@@ -12,7 +12,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | Avature | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | BambooHR | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | BrassRing | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
-| Breezy HR | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
+| Breezy HR | ats | IMPLEMENTED | FAILED | MEDIUM | 6 | 2026-11-06T03:10:32.638508+00:00 | https://vald.breezy.hr (0; FAILED); https://subscribe.breezy.hr (6; LIVE_VERIFIED) ValueError: Expected exactly one Breezy JobPosting detail |
 | CareerPlug | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Comeet | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | CSOD | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
@@ -56,7 +56,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | SmartRecruiters | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 90 | 2026-11-05T16:49:50.960317+00:00 | https://careers.smartrecruiters.com/SmartRecruiters (2; LIVE_VERIFIED); https://careers.smartrecruiters.com/Colliers (88; LIVE_VERIFIED)  |
 | talentReef | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Taleo | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
-| Teamtailor | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
+| Teamtailor | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 26 | 2026-11-06T03:09:11.551818+00:00 | https://clearroute.teamtailor.com (22; LIVE_VERIFIED); https://omny.teamtailor.com (4; LIVE_VERIFIED)  |
 | Trakstar | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | TriNet | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | UltiPro | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
