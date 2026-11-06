@@ -127,3 +127,22 @@ def test_encoded_title_and_host_boundaries():
     for url in ("https://a.b.hire.trakstar.com/", "https://example.hire.trakstar.com.evil.com/"):
         with pytest.raises(ValueError):
             detect(url)
+
+
+def test_observed_literal_newlines_in_legacy_description_are_preserved():
+    payload = schema()
+    payload["description"] = "&lt;p&gt;Build\nsystems&lt;/p&gt;"
+    body = detail(payload).replace("\\n", "\n")
+    job = run(body=body).jobs[0]
+    assert "Build" in job.description and "systems" in job.description
+    assert "jsonld_literal_whitespace" in job.quality_flags
+    assert job.raw["legacy_jsonld_scripts"]
+
+
+@pytest.mark.parametrize("literal", ["\x00", "\x01", "\x1f"])
+def test_unexpected_literal_control_characters_still_abort(literal):
+    payload = schema()
+    payload["description"] = "Build\nsystems"
+    body = detail(payload).replace("\\n", literal)
+    with pytest.raises((ValueError, json.JSONDecodeError)):
+        run(body=body)

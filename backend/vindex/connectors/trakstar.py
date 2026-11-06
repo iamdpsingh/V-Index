@@ -69,10 +69,22 @@ class TrakstarConnector:
             raise ValueError("Invalid Trakstar detail document")
         identifier = path.strip("/").split("/")[1]
         soup = BeautifulSoup(body, "html.parser")
-        docs = [
-            json.loads(script.get_text())
-            for script in soup.select('script[type="application/ld+json"]')
-        ]
+        docs = []
+        legacy_scripts = []
+        for script in soup.select('script[type="application/ld+json"]'):
+            source = script.get_text()
+            try:
+                document = json.loads(source)
+            except json.JSONDecodeError as error:
+                if not error.msg.startswith("Invalid control character") or any(
+                    ord(c) < 32 and c not in "\r\n\t" for c in source
+                ):
+                    raise
+                # The observed legacy template embeds literal description newlines.
+                # Accept only whitespace control characters; do not repair JSON syntax.
+                document = json.loads(source, strict=False)
+                legacy_scripts.append(source)
+            docs.append(document)
         docs = [d for d in docs if isinstance(d, dict) and d.get("@type") == "JobPosting"]
         if len(docs) != 1:
             raise ValueError("Missing unique Trakstar JobPosting")
@@ -102,13 +114,16 @@ class TrakstarConnector:
         employment = row.get("employmentType")
         if isinstance(employment, list):
             employment = ", ".join(employment)
+        flags = [] if description else ["description_missing"]
+        if legacy_scripts:
+            flags.append("jsonld_literal_whitespace")
         return [
             JobInput(
                 external_id=identifier,
                 title=listing["title"],
                 company=company,
                 description=description,
-                quality_flags=[] if description else ["description_missing"],
+                quality_flags=flags,
                 location=place,
                 source_url=self.origin + path,
                 application_url=self.origin + path + "?apply=true",
@@ -116,7 +131,11 @@ class TrakstarConnector:
                 remote_status=listing["workplace"] or row.get("jobLocationType"),
                 salary=row.get("baseSalary"),
                 published_at=row.get("datePosted"),
-                raw={"listing": listing, "jobposting": row},
+                raw={
+                    "listing": listing,
+                    "jobposting": row,
+                    "legacy_jsonld_scripts": legacy_scripts,
+                },
             )
         ]
 
