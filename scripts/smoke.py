@@ -15,6 +15,20 @@ from vindex.connectors.registry import create_connector
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
     (
+        "JazzHR",
+        "jazzhr",
+        "lapmasterwolters",
+        "Lapmaster Wolters",
+        "https://lapmasterwolters.applytojob.com/apply",
+    ),
+    (
+        "JazzHR",
+        "jazzhr",
+        "belaytechnologies",
+        "Belay Technologies",
+        "https://belaytechnologies.applytojob.com/apply",
+    ),
+    (
         "Jobboardly",
         "jobboardly",
         "recruiter-jobs",
@@ -190,6 +204,13 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "JazzHR": [
+                                "Hosted applytojob.com Current Openings templates only; custom domains and alternative templates remain unsupported",
+                                "No source total is supplied; completeness follows the full server-rendered Current Openings list and a final link/title reconfirmation",
+                                "Maximum 400 details; empty, truncated, unexpectedly paginated or malformed lists fail closed",
+                                "Every detail requires matching canonical URL/title, employer identity, description and native application form; no form is submitted",
+                                "Original publication dates and structured salaries are not established by this template; provided source text remains in original description/header observations",
+                            ],
                             "Jobboardly": [
                                 "Hosted jobboardly.com HTML listings only; custom-domain registration and redirecting hosted aliases are unsupported",
                                 "Explicit sequential Next controls, range counters, unique links and successful JobPosting/apply details are required",
