@@ -21,7 +21,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | Dover | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Eightfold AI | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | FirstStage | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
-| Freshteam | ats | IMPLEMENTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
+| Freshteam | ats | IMPLEMENTED | FAILED | MEDIUM | 0 | 2026-11-06T12:04:11.541732+00:00 | https://sequoiaat.freshteam.com/jobs (0; FAILED); https://talent360.freshteam.com/jobs (0; FAILED) ValueError: Freshteam title/ID/remote/native application mismatch; ValueError: Freshteam title/ID/remote/native application mismatch |
 | Gem.com | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | GoHire | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 45 | 2026-11-06T07:43:13.012881+00:00 | https://jobs.gohire.io/dineamic-hospitality-fniota1h/ (22; LIVE_VERIFIED); https://jobs.gohire.io/digital-shift-o0hrqw5o/ (23; LIVE_VERIFIED)  |
 | Greenhouse | ats | IMPLEMENTED | LIVE_VERIFIED | LOW | 1226 | 2026-11-05T16:41:54.721525+00:00 | https://job-boards.greenhouse.io/stripe (762; LIVE_VERIFIED); https://job-boards.greenhouse.io/cloudflare (464; LIVE_VERIFIED)  |
@@ -29,7 +29,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | HireBridge | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | HireHive | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 65 | 2026-11-06T06:55:14.734024+00:00 | https://amcsgroup.hirehive.com (59; LIVE_VERIFIED); https://echelon-dc.hirehive.com (6; LIVE_VERIFIED)  |
 | Hireology | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
-| HiringThing | ats | IMPLEMENTED | FAILED | MEDIUM | 2 | 2026-11-06T11:49:57.606360+00:00 | https://math-learning-center.hiringthing.com/ (2; LIVE_VERIFIED); https://rtrjobs.hiringthing.com/ (0; FAILED) ValueError: Invalid HiringThing native job link |
+| HiringThing | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 5 | 2026-11-06T12:04:24.524963+00:00 | https://math-learning-center.hiringthing.com/ (2; LIVE_VERIFIED); https://rtrjobs.hiringthing.com/ (3; LIVE_VERIFIED)  |
 | iCIMS | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | iSolvedHire | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 5 | 2026-11-06T08:53:54.959321+00:00 | https://uasystem.isolvedhire.com/jobs/ (2; LIVE_VERIFIED); https://verifiedcredentials.isolvedhire.com/jobs/ (3; LIVE_VERIFIED)  |
 | JazzHR | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 119 | 2026-11-06T03:41:01.947707+00:00 | https://lapmasterwolters.applytojob.com/apply (6; LIVE_VERIFIED); https://belaytechnologies.applytojob.com/apply (113; LIVE_VERIFIED)  |

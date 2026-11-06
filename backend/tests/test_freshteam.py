@@ -141,3 +141,10 @@ def test_validated_tenant_detection():
     for url in ("https://a.b.freshteam.com/jobs", "https://example.freshteam.com.evil.com/jobs"):
         with pytest.raises(ValueError):
             detect(url)
+
+
+def test_source_title_padding_is_normalized_but_preserved_raw():
+    payload = schema()
+    payload["title"] = " Engineer "
+    job = run(job=payload).jobs[0]
+    assert job.title == "Engineer" and job.raw["jobposting"]["title"] == " Engineer "
