@@ -40,6 +40,7 @@ class ProfileInput(BaseModel):
     skills: list[Term] = Field(default_factory=list, max_length=50)
     preferred_locations: list[Term] = Field(default_factory=list, max_length=10)
     remote_only: bool = False
+    use_resume_skills: bool = True
     experience_years: int | None = Field(default=None, ge=0, le=60)
 
 
