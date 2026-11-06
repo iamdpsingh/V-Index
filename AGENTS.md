@@ -13,3 +13,5 @@ All 78 platform names must remain distinct (JBoard.io and JobBoard.io are differ
 Product quality: read docs/PRODUCT_DESIGN.md for the owner’s frontend identity and backend quality requirements. The current UI is a scaffold, not the final design. Require real-data visual and interaction review; never replace engineering correctness or coverage evidence with visual polish.
 
 Owner update (2026-11-06): target November 7 IST; add private accounts, saved profiles/resumes and professional-term job recommendations without replacing the indexer challenge. The owner explicitly retained frontend work with Antigravity. See docs/ANTIGRAVITY_ACCOUNTS_HANDOFF.md. Make small substantive commits; do not inflate counts with empty commits. Never commit credentials, personal resumes or account data.
+
+Latest owner priority (2026-11-06): complete full live coverage first; pause additional accounts, frontend polish and deployment work until coverage is complete. Preserve implemented features. Sunday November 8 was discussed as a target, not promised full coverage. See docs/DELIVERY_PLAN.md.
