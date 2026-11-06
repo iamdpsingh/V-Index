@@ -1,1 +1,26 @@
-{"name":"v-index-web","version":"0.1.0","private":true,"scripts":{"dev":"next dev --hostname 127.0.0.1","build":"next build","start":"next start --hostname 0.0.0.0","typecheck":"tsc --noEmit"},"dependencies":{"next":"^16.4.5","react":"^19.3.1","react-dom":"^19.3.1"},"devDependencies":{"@tailwindcss/postcss":"^4.3.4","@types/node":"^26.6.6","@types/react":"^19.3.0","postcss":"^8.5.32","tailwindcss":"^4.3.4","typescript":"^7.0.2"}}
+{
+  "name": "v-index-web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --hostname 127.0.0.1",
+    "build": "next build",
+    "start": "next start --hostname 0.0.0.0",
+    "typecheck": "tsc --noEmit",
+    "test:browser": "playwright test"
+  },
+  "dependencies": {
+    "next": "^16.4.5",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.1",
+    "@tailwindcss/postcss": "^4.3.4",
+    "@types/node": "^26.6.6",
+    "@types/react": "^19.3.0",
+    "postcss": "^8.5.32",
+    "tailwindcss": "^4.3.4",
+    "typescript": "^7.0.2"
+  }
+}
