@@ -60,9 +60,11 @@ def detail(path=ONE, identifier=1, *, schema=True, apply=True, canonical=True):
     )
 
 
-def run(pages=None, bodies=None, confirmation=None, robots="User-agent: *\nAllow: /"):
+def run(
+    pages=None, bodies=None, confirmation=None, robots="User-agent: *\nAllow: /", requests_out=None
+):
     calls = 0
-    requests = []
+    requests = requests_out if requests_out is not None else []
 
     async def discover():
         def handler(request):
@@ -198,6 +200,41 @@ def test_missing_private_or_ambiguous_details_rejected(body):
 def test_robots_disallow_is_respected():
     with pytest.raises(ValueError, match="robots"):
         run(robots="User-agent: *\nDisallow: /jobs")
+
+
+def test_over_budget_roster_fails_before_any_detail_fetch(monkeypatch):
+    monkeypatch.setattr("vindex.connectors.jobboardly.MAX_DETAILS", 1)
+    requests = []
+    with pytest.raises(ValueError, match="detail budget"):
+        run(pages={1: page([ONE], next_page=2), 2: page([TWO], start=2)}, requests_out=requests)
+    assert requests == [ORIGIN + "/robots.txt", ORIGIN + "/jobs", ORIGIN + "/jobs?page=2"]
+
+
+def test_changes_on_later_page_are_reconfirmed_even_when_first_page_stays_same():
+    async def check():
+        counts = {1: 0, 2: 0}
+
+        def handler(request):
+            if request.url.path == "/robots.txt":
+                return httpx.Response(200, text="User-agent: *\nAllow: /")
+            if request.url.path == "/jobs":
+                number = int(request.url.params.get("page", "1"))
+                counts[number] += 1
+                body = (
+                    page([ONE], next_page=2)
+                    if number == 1
+                    else page([TWO if counts[2] == 1 else "/jobs/changed-cccccccc"], start=2)
+                )
+                return httpx.Response(200, text=body)
+            return httpx.Response(
+                200, text=detail(ONE, 1) if request.url.path == ONE else detail(TWO, 2)
+            )
+
+        async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
+            await create_connector("jobboardly", "example", "Board", client).discover()
+
+    with pytest.raises(ValueError, match="listing changed"):
+        asyncio.run(check())
 
 
 def test_hosted_board_detection_and_unsafe_suffix_rejection():

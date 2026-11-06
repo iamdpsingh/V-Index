@@ -15,6 +15,7 @@ from vindex.connectors.teamtailor import TENANT
 from vindex.schemas import Enumeration, JobInput
 
 JOB_PATH = re.compile(r"/jobs/[a-z0-9-]+-[a-f0-9]{8}")
+MAX_DETAILS = 400
 
 
 class JobboardlyConnector:
@@ -240,35 +241,40 @@ class JobboardlyConnector:
             )
         ]
 
-    async def discover(self) -> Enumeration:
-        policy = await RobotsPolicy.load(self.http, self.origin)
-        policy.check(f"{self.origin}/jobs")
+    async def listings(self, policy: RobotsPolicy) -> list[str]:
         seen_paths: set[str] = set()
-        jobs: list[JobInput] = []
-        first_paths = []
+        all_paths: list[str] = []
         for page in range(1, 101):
             url = f"{self.origin}/jobs" + (f"?page={page}" if page > 1 else "")
             policy.check(url)
             await asyncio.sleep(policy.delay())
             paths, has_next = self.page(await self.fetch(page - 1), page, len(seen_paths) + 1)
-            if page == 1:
-                first_paths = paths
             for path in paths:
                 if path in seen_paths:
                     raise ValueError("Repeated JobBoardly page or listing")
-                if len(jobs) >= 400:
-                    raise ValueError("JobBoardly exceeds 400-detail budget; snapshot incomplete")
-                policy.check(self.origin + path)
-                await asyncio.sleep(policy.delay())
-                job = self.parse((path, await self.http.read(self.origin + path)))[0]
-                if any(j.external_id == job.external_id for j in jobs):
-                    raise ValueError("Duplicate JobBoardly detail identifier")
-                jobs.append(job)
+                if len(all_paths) >= MAX_DETAILS:
+                    raise ValueError(
+                        f"JobBoardly exceeds {MAX_DETAILS}-detail budget; snapshot incomplete"
+                    )
+                all_paths.append(path)
                 seen_paths.add(path)
             if not has_next:
-                await asyncio.sleep(policy.delay())
-                confirmed, confirmed_next = self.page(await self.fetch(), 1, 1)
-                if confirmed != first_paths or confirmed_next != (page > 1):
-                    raise ValueError("JobBoardly first page changed during enumeration")
-                return Enumeration(jobs=jobs, complete=True)
+                return all_paths
         raise ValueError("JobBoardly page budget exceeded")
+
+    async def discover(self) -> Enumeration:
+        policy = await RobotsPolicy.load(self.http, self.origin)
+        paths = await self.listings(policy)
+        jobs = []
+        seen_ids = set()
+        for path in paths:
+            policy.check(self.origin + path)
+            await asyncio.sleep(policy.delay())
+            job = self.parse((path, await self.http.read(self.origin + path)))[0]
+            if job.external_id in seen_ids:
+                raise ValueError("Duplicate JobBoardly detail identifier")
+            seen_ids.add(job.external_id)
+            jobs.append(job)
+        if await self.listings(policy) != paths:
+            raise ValueError("JobBoardly complete listing changed during enumeration")
+        return Enumeration(jobs=jobs, complete=True)
