@@ -154,7 +154,7 @@ def test_listed_and_mandatory_detail_metadata_must_match(key, value):
     "sections",
     [
         [],
-        [{"name": "Description", "order": 1, "value": None}],
+        [{"name": "Description", "order": 1, "value": 7}],
         [
             {"name": "Description", "order": 1, "value": "A"},
             {"name": "Requirements", "order": 1, "value": "B"},
@@ -210,3 +210,12 @@ def test_location_specific_postings_keep_their_own_uid_and_original_link():
     value["location"]["location_uid"] = "DD.004"
     with pytest.raises(ValueError):
         run(html=board([value]), data=data, position_uid=value["uid"])
+
+
+def test_explicit_null_optional_section_is_preserved_without_inventing_text():
+    d = detail()
+    d["details"].append({"name": "What we offer", "order": 3, "value": None})
+    j = run(data=d).jobs[0]
+    assert j.description == "Build systems\n\nKnow Python"
+    assert j.quality_flags == ["description_section_missing"]
+    assert j.raw["detail_sections"][2]["value"] is None

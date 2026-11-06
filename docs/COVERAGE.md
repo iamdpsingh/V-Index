@@ -14,7 +14,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | BrassRing | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | Breezy HR | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 81 | 2026-11-06T03:16:14.203649+00:00 | https://vald.breezy.hr (75; LIVE_VERIFIED); https://subscribe.breezy.hr (6; LIVE_VERIFIED)  |
 | CareerPlug | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 10 | 2026-11-06T12:34:45.510649+00:00 | https://app.careerplug.com/accounts/576036 (2; LIVE_VERIFIED); https://app.careerplug.com/accounts/579908 (8; LIVE_VERIFIED)  |
-| Comeet | ats | IMPLEMENTED | FAILED | MEDIUM | 7 | 2026-11-06T17:00:07.914392+00:00 | https://www.comeet.com/jobs/oriient/EA.005 (7; LIVE_VERIFIED); https://www.comeet.com/jobs/webbing/46.00E (0; FAILED) ValueError: Comeet public row employer/UID/internal-state/native link mismatch |
+| Comeet | ats | IMPLEMENTED | FAILED | MEDIUM | 7 | 2026-11-06T17:07:12.585020+00:00 | https://www.comeet.com/jobs/oriient/EA.005 (7; LIVE_VERIFIED); https://www.comeet.com/jobs/webbing/46.00E (0; FAILED) ValueError: Malformed or duplicate Comeet detail section |
 | CSOD | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | Dayforce | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | Deel | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |

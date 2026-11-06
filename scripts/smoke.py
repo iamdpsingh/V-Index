@@ -14,6 +14,14 @@ from vindex.connectors.registry import create_connector
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
+    ("WeRecruit", "werecruit", "epec", "EPEC", "https://careers.werecruit.io/fr/epec"),
+    (
+        "WeRecruit",
+        "werecruit",
+        "ctlog-international",
+        "CTLOG INTERNATIONAL",
+        "https://careers.werecruit.io/fr/ctlog-international",
+    ),
     ("Comeet", "comeet", "oriient~EA.005", "Oriient", "https://www.comeet.com/jobs/oriient/EA.005"),
     ("Comeet", "comeet", "webbing~46.00E", "Webbing", "https://www.comeet.com/jobs/webbing/46.00E"),
     ("Zoho Recruit", "zoho-eu", "mywork", "MyWork", "https://mywork.zohorecruit.eu/jobs/Careers"),
@@ -408,6 +416,14 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "WeRecruit": [
+                                "Native careers.werecruit.io French tenant full public site-map template only; empty/alternate/custom templates unsupported",
+                                "All unique native offer IDs, full description/profile/benefits and mandatory matching public JobPosting/application controls required; maximum 400 jobs",
+                                "Explicit spontaneous-application pools retained as excluded source metadata; navigation redirects never followed; no application submitted",
+                                "Full sitemap and tenant identity reconfirmed after every mandatory detail; failed/changed/partial requests abort without closures",
+                                "Preserve supplied salary, employment, original publication, location and explicit workplace metadata; unknown values remain unknown",
+                                "No independent total or atomic source snapshot; bounded point-in-time evidence does not establish production freshness",
+                            ],
                             "Comeet": [
                                 "Native www.comeet.com company public COMPANY_DATA/COMPANY_POSITIONS_DATA plus documented Careers API 2.0 details only; no employee/candidate/account APIs",
                                 "Only listed is_internal=false positions with matching company UID/name/slug and scoped native URLs; at most 200 unique mandatory details, no empty/partial reconciliation",

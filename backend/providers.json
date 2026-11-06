@@ -309,35 +309,35 @@
       {
         "provider": "Comeet",
         "url": "https://www.comeet.com/jobs/oriient/EA.005",
-        "at": "2026-11-06T16:59:43.592703+00:00",
-        "revision": "722399da4c0d11c3b5bf87da42500e98ada1974f",
+        "at": "2026-11-06T17:06:31.364668+00:00",
+        "revision": "42162014fa904291aa49e60d10a10629cdf6712e",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "7d374002050e39fc335fe8d8016203d17767b4c0a87c2d5ea4973077eaab1283",
+        "code_sha256": "b0329102f555fdb3c77032d25c49594abdc50aa2ac0b6f0e04ab6b7d97a987d6",
         "count": 7,
         "status": "LIVE_VERIFIED",
         "complete": true,
         "error": null,
         "quality_flag_counts": {},
         "payload_sha256": "711d3cc064061de2f03e8e0e6fc64ab427ce50d295ea6b92d35167b807271f79",
-        "finished_at": "2026-11-06T17:00:04.347932+00:00"
+        "finished_at": "2026-11-06T17:06:57.003915+00:00"
       },
       {
         "provider": "Comeet",
         "url": "https://www.comeet.com/jobs/webbing/46.00E",
-        "at": "2026-11-06T17:00:04.849308+00:00",
-        "revision": "722399da4c0d11c3b5bf87da42500e98ada1974f",
+        "at": "2026-11-06T17:06:57.505208+00:00",
+        "revision": "42162014fa904291aa49e60d10a10629cdf6712e",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "7d374002050e39fc335fe8d8016203d17767b4c0a87c2d5ea4973077eaab1283",
+        "code_sha256": "b0329102f555fdb3c77032d25c49594abdc50aa2ac0b6f0e04ab6b7d97a987d6",
         "count": 0,
         "status": "FAILED",
         "complete": false,
-        "error": "ValueError: Comeet public row employer/UID/internal-state/native link mismatch",
-        "finished_at": "2026-11-06T17:00:07.914392+00:00"
+        "error": "ValueError: Malformed or duplicate Comeet detail section",
+        "finished_at": "2026-11-06T17:07:12.585020+00:00"
       }
     ],
-    "last_run_at": "2026-11-06T17:00:07.914392+00:00",
+    "last_run_at": "2026-11-06T17:07:12.585020+00:00",
     "extraction_count": 7,
-    "failure_reason": "ValueError: Comeet public row employer/UID/internal-state/native link mismatch",
+    "failure_reason": "ValueError: Malformed or duplicate Comeet detail section",
     "limitations": [
       "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
       "Native www.comeet.com company public COMPANY_DATA/COMPANY_POSITIONS_DATA plus documented Careers API 2.0 details only; no employee/candidate/account APIs",

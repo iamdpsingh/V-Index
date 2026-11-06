@@ -156,19 +156,24 @@ class ComeetConnector:
         for item in details:
             if (
                 not isinstance(item["name"], str)
-                or not isinstance(item["value"], str)
+                or (item["value"] is not None and not isinstance(item["value"], str))
                 or type(item["order"]) is not int
                 or item["order"] in orders
             ):
-                raise ValueError("Malformed or duplicate Comeet detail section")
+                raise ValueError(
+                    f"Comeet {row['uid']} malformed detail section: name={item.get('name')!r}, order={item.get('order')!r}, value_type={type(item.get('value')).__name__}"
+                )
             orders.add(item["order"])
             sections.append({k: item[k] for k in ("name", "value", "order")})
         sections.sort(key=lambda item: item["order"])
-        description = "\n\n".join(text(s["value"]) for s in sections if text(s["value"]))
+        description = "\n\n".join(
+            text(s["value"]) for s in sections if s["value"] is not None and text(s["value"])
+        )
         salaries = [
             text(s["value"])
             for s in sections
             if s["name"].strip().lower() in {"salary", "compensation", "salary range"}
+            and s["value"] is not None
             and text(s["value"])
         ]
         location = row["location"]
@@ -187,7 +192,12 @@ class ComeetConnector:
                 title=row["name"],
                 company=board["name"],
                 description=description,
-                quality_flags=[] if description else ["description_missing"],
+                quality_flags=(["description_missing"] if not description else [])
+                + (
+                    ["description_section_missing"]
+                    if any(s["value"] is None for s in sections)
+                    else []
+                ),
                 location="; ".join(dict.fromkeys(labels)),
                 source_url=row["url_comeet_hosted_page"],
                 application_url=row["url_comeet_hosted_page"],
