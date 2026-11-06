@@ -13,6 +13,7 @@ from sqlalchemy.exc import IntegrityError
 
 from vindex.accounts.api import router as account_router
 from vindex.accounts.middleware import PRIVATE_PREFIXES, PrivateRequestMiddleware
+from vindex.accounts.resume_api import router as resume_router
 from vindex.connectors.registry import detect
 from vindex.db import Job, Observation, Run, Session, Source, now
 from vindex.schemas import RunOut, SearchOut, SourceCreate, SourceOut
@@ -20,6 +21,7 @@ from vindex.schemas import RunOut, SearchOut, SourceCreate, SourceOut
 app = FastAPI(title="V-Index", version="0.1.0")
 app.add_middleware(PrivateRequestMiddleware)
 app.include_router(account_router)
+app.include_router(resume_router)
 
 
 @app.exception_handler(RequestValidationError)
