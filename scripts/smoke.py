@@ -14,6 +14,10 @@ from vindex.connectors.registry import create_connector
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
+    ("Teamtailor", "teamtailor", "clearroute", "ClearRoute", "https://clearroute.teamtailor.com"),
+    ("Teamtailor", "teamtailor", "omny", "Omny", "https://omny.teamtailor.com"),
+    ("Breezy HR", "breezy", "vald", "VALD", "https://vald.breezy.hr"),
+    ("Breezy HR", "breezy", "subscribe", "SUBSCRIBE", "https://subscribe.breezy.hr"),
     ("Greenhouse", "greenhouse", "stripe", "Stripe", "https://job-boards.greenhouse.io/stripe"),
     (
         "Greenhouse",
@@ -160,6 +164,18 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "Teamtailor": [
+                                "Hosted teamtailor.com tenants only; custom domains remain unsupported",
+                                "Feeds with next_url or at least 100 items fail closed until pagination is supported",
+                                "JSON Feed and RSS identifiers must match; workplace/location metadata is joined by UUID",
+                                "Application URL is the original career posting entry point, not a separately fetched application form",
+                            ],
+                            "Breezy HR": [
+                                "Hosted breezy.hr tenants only; custom domains remain unsupported",
+                                "Maximum 400 details; empty feeds fail closed because an authoritative empty-board marker is not established",
+                                "Feed IDs must match public board links; every description and application link requires a successful detail fetch",
+                                "Hosted JSON/HTML interfaces are observed public interfaces without a vendor stability guarantee",
+                            ],
                             "Workday": [
                                 "Hosted myworkdayjobs.com sites only; myworkdaysite.com/custom domains are unsupported",
                                 "Boards above 400 jobs or reported totals at/above 2000 fail closed; large-board completeness is not claimed",
