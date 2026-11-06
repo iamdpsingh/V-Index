@@ -1,5 +1,7 @@
 # Operations
 
+Continuous-index behavior, current schedule limits and production acceptance are specified in LIVE_INDEX_REQUIREMENTS.md. The latest owner instruction runs Antigravity's frontend work in parallel with Codex coverage; the frontend entry brief is ANTIGRAVITY_START_HERE.md. A static frontend deployment alone does not keep sources refreshed.
+
 Use /health for API/database liveness; it does not claim worker or provider health. Authenticated /api/v1/runs shows source failures. /api/v1/sources shows due times and consecutive failures. Provider implementation/evidence is exposed separately at /api/v1/providers. Worker logs include source/run IDs, counts and failure type. Structured JSON logging and worker heartbeat alerting remain backlog.
 
 A failing source backs off to a maximum 24-hour interval. Investigate the run error, upstream changes and access policy. Never convert failure into a successful empty enumeration. Mark blocked providers honestly and do not bypass restrictions. Source refresh endpoint schedules a retry. A worker rechecks due time after acquiring its Redis lease to avoid replaying stale scheduler selections. HTTP Retry-After up to 30 seconds is honored inline; longer waits fail into the persisted cooldown. Redis unavailable prevents refreshes and produces infrastructure errors; existing jobs stay searchable.

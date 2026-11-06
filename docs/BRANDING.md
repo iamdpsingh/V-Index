@@ -19,4 +19,4 @@ The name and tagline are selected. Typography, final mark and visual execution r
 
 ## Product truth and priority
 
-Branding does not change the acquisition objective, the required 78 distinct platforms, data integrity rules, privacy requirements or budget. All public coverage claims must follow backend/providers.json and evidence. Full live coverage remains the immediate engineering priority; frontend polish, account screens and deployment work stay paused until that priority is satisfied.
+Branding does not change the acquisition objective, the required 78 distinct platforms, data integrity rules, privacy requirements or budget. All public coverage claims must follow backend/providers.json and evidence. The latest owner instruction resumes Antigravity's premium frontend, brand assets and documented account screens in parallel while Codex prioritizes coverage. Follow ANTIGRAVITY_START_HERE.md and LIVE_INDEX_REQUIREMENTS.md. Production deployment still requires its documented operational, security and budget gates.
