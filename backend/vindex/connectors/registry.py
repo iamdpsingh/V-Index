@@ -11,6 +11,7 @@ from vindex.connectors.careerplug import CareerPlugConnector
 from vindex.connectors.comeet import TENANT as COMEET_TENANT
 from vindex.connectors.comeet import UID as COMEET_UID
 from vindex.connectors.comeet import ComeetConnector
+from vindex.connectors.csod import CSODConnector
 from vindex.connectors.firststage import FirstStageConnector
 from vindex.connectors.freshteam import FreshteamConnector
 from vindex.connectors.gohire import SLUG as GOHIRE_SLUG
@@ -72,6 +73,12 @@ def detect(url: str) -> tuple[str, str]:
         match = re.fullmatch(rf"({TENANT})\.{re.escape(suffix)}", p.hostname or "")
         if match:
             return provider, match[1]
+    csod = re.fullmatch(rf"({TENANT})\.csod\.com", p.hostname or "")
+    if csod:
+        match = re.fullmatch(r"/ux/ats/careersite/([1-9][0-9]{0,5})/home/?", p.path)
+        if not match or p.fragment or (p.query and parse_qs(p.query) != {"c": [csod[1]]}):
+            raise ValueError("Expected an unfiltered native CSOD public career-site home URL")
+        return "csod", csod[1] + "~" + match[1]
     if re.fullmatch(ORACLE_HOST, p.hostname or ""):
         match = re.fullmatch(
             rf"/hcmUI/CandidateExperience/en/sites/({ORACLE_SITE})(?:/jobs)?/?", p.path
@@ -207,13 +214,15 @@ def detect(url: str) -> tuple[str, str]:
         return detect_original(url)
     except ValueError as error:
         raise ValueError(
-            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire, HiringThing, Freshteam, Trakstar, Rippling, Kula.ai, CareerPlug, TriNet, HireBridge, JOIN.com, Hireology, Paylocity, Zoho Recruit, Comeet, WeRecruit, FirstStage and Oracle Recruiting"
+            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire, HiringThing, Freshteam, Trakstar, Rippling, Kula.ai, CareerPlug, TriNet, HireBridge, JOIN.com, Hireology, Paylocity, Zoho Recruit, Comeet, WeRecruit, FirstStage, Oracle Recruiting and CSOD"
         ) from error
 
 
 def create_connector(
     provider: str, slug: str, company: str, client: httpx.AsyncClient
 ) -> Connector:
+    if provider == "csod":
+        return CSODConnector(provider, slug, company, client)
     if provider == "oracle":
         return OracleConnector(provider, slug, company, client)
     if provider == "firststage":

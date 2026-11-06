@@ -15,6 +15,20 @@ from vindex.connectors.registry import create_connector
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
     (
+        "CSOD",
+        "csod",
+        "portstephens~1",
+        "Port Stephens Council",
+        "https://portstephens.csod.com/ux/ats/careersite/1/home?c=portstephens",
+    ),
+    (
+        "CSOD",
+        "csod",
+        "nswconnect~1",
+        "NSW Government",
+        "https://nswconnect.csod.com/ux/ats/careersite/1/home?c=nswconnect",
+    ),
+    (
         "Oracle Recruiting",
         "oracle",
         "eoja.fa.ap1.oraclecloud.com~CX",
@@ -438,6 +452,16 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "CSOD": [
+                                "Native tenant.csod.com /ux/ats/careersite/{id}/home public anonymous context and supported English cultures only; custom templates/new cloud search services unsupported",
+                                "Negative anonymous browser identity must equal active site configuration; native public token stays in request-scoped memory and is never retained in jobs/evidence/log URLs",
+                                "Native career-site v1 search with explicit unfiltered request, total and 25-job pages; all pages enumerated up to 200 mandatory jobs and final full roster/site reconfirmed",
+                                "Each job requires matching public detail and complete native advertisement: externalDescription may only say default; failed or incomplete advertisements abort without reconciliation",
+                                "Application URL may identify another public career site within same tenant for the identical job ID; preserve original source and advertised application links without requesting/submitting forms",
+                                "All public native locations, full ad including source pay/employment text, original culture-formatted postingEffectiveDate preserved; employer explicitly supplied by source configuration and flagged",
+                                "Structured pay/employment/workplace normalization not provided by this template; missing values remain unknown; owners/reviewers/hiring-manager IDs and tracking/session state excluded",
+                                "Bounded point-in-time coverage does not establish production freshness or every CSOD deployment",
+                            ],
                             "Oracle Recruiting": [
                                 "Native English Oracle Fusion Candidate Experience sites only, fixed validated oraclecloud.com host families; custom domains and other Oracle/Taleo products remain distinct",
                                 "Only anonymous public native-client advertised CE search and listed-ID detail routes; no ICE/internal-candidate, preview, employee, application, resume or account endpoints",

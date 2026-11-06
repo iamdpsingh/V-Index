@@ -1,0 +1,36 @@
+[
+  {
+    "provider": "Oracle Recruiting",
+    "url": "https://eoja.fa.ap1.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX/jobs",
+    "at": "2026-11-06T17:41:08.874999+00:00",
+    "revision": "b81560eeb944f45ce9ee187c0797b17aa00ee3e9",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "e1254475e05c27a88a8b9d063506f335d2c59c98fe1076c222356416a2c5cea5",
+    "count": 28,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {
+      "company_from_source_configuration": 28
+    },
+    "payload_sha256": "5195a29061ac3484336c117816b786c98a4cdb516db47eaf61e85b5b857d4b79",
+    "finished_at": "2026-11-06T17:41:38.710044+00:00"
+  },
+  {
+    "provider": "Oracle Recruiting",
+    "url": "https://eifn.fa.us6.oraclecloud.com/hcmUI/CandidateExperience/en/sites/ExternalCareerSite/jobs",
+    "at": "2026-11-06T17:41:39.211018+00:00",
+    "revision": "b81560eeb944f45ce9ee187c0797b17aa00ee3e9",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "e1254475e05c27a88a8b9d063506f335d2c59c98fe1076c222356416a2c5cea5",
+    "count": 25,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {
+      "company_from_source_configuration": 25
+    },
+    "payload_sha256": "43c02d8cc200773b05c264f8882d0d6e976e0a081b6bd05c98c3ad6328c95165",
+    "finished_at": "2026-11-06T17:42:06.317144+00:00"
+  }
+]

@@ -2,7 +2,7 @@
 
 ## Current coverage-first status — November 6
 
-33/78 platforms have complete non-empty point-in-time runs across two independent supported sites. Today's target is now 45; 12 more are required at this update. Frontend is ON HOLD; keep new commits local and do not push until 45 is verified. HireBridge remains partial pending corrected full employer runs. All production/acquisition gates remain open.
+38/78 platforms have complete non-empty point-in-time runs across two independent supported sites. Today's target is 45; 7 more are required at this update. Frontend is ON HOLD; keep new commits local and do not push until 45 is verified. HireBridge, Comeet, WeRecruit, FirstStage and Oracle Recruiting now have complete two-employer evidence; CSOD is under validation. All production/acquisition gates remain open.
 
 ## First slice
 - [x] Inspect empty folder/remote; initialize canonical main without replacing history.
