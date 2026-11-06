@@ -30,6 +30,7 @@ from vindex.connectors.manatal import ManatalConnector
 from vindex.connectors.oracle import HOST as ORACLE_HOST
 from vindex.connectors.oracle import SITE as ORACLE_SITE
 from vindex.connectors.oracle import OracleConnector
+from vindex.connectors.pageup import PageUpConnector
 from vindex.connectors.paylocity import PaylocityConnector
 from vindex.connectors.personio import PersonioConnector
 from vindex.connectors.pinpoint import PinpointConnector
@@ -74,6 +75,11 @@ def detect(url: str) -> tuple[str, str]:
         match = re.fullmatch(rf"({TENANT})\.{re.escape(suffix)}", p.hostname or "")
         if match:
             return provider, match[1]
+    if p.hostname == "careers.pageuppeople.com":
+        match = re.fullmatch(r"/([1-9][0-9]{0,5})/cw/(en(?:-us)?)/listing/?", p.path)
+        if not match or p.query or p.fragment:
+            raise ValueError("Expected an unfiltered native PageUp career listing URL")
+        return "pageup", match[1] + "~" + match[2]
     icims = re.fullmatch(rf"({TENANT})\.icims\.com", p.hostname or "")
     if icims:
         if (
@@ -224,13 +230,15 @@ def detect(url: str) -> tuple[str, str]:
         return detect_original(url)
     except ValueError as error:
         raise ValueError(
-            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire, HiringThing, Freshteam, Trakstar, Rippling, Kula.ai, CareerPlug, TriNet, HireBridge, JOIN.com, Hireology, Paylocity, Zoho Recruit, Comeet, WeRecruit, FirstStage, Oracle Recruiting, CSOD and iCIMS"
+            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire, HiringThing, Freshteam, Trakstar, Rippling, Kula.ai, CareerPlug, TriNet, HireBridge, JOIN.com, Hireology, Paylocity, Zoho Recruit, Comeet, WeRecruit, FirstStage, Oracle Recruiting, CSOD, iCIMS and PageUp"
         ) from error
 
 
 def create_connector(
     provider: str, slug: str, company: str, client: httpx.AsyncClient
 ) -> Connector:
+    if provider == "pageup":
+        return PageUpConnector(provider, slug, company, client)
     if provider == "icims":
         return ICIMSConnector(provider, slug, company, client)
     if provider == "csod":

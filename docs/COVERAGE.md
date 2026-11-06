@@ -30,7 +30,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | HireHive | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 65 | 2026-11-06T06:55:14.734024+00:00 | https://amcsgroup.hirehive.com (59; LIVE_VERIFIED); https://echelon-dc.hirehive.com (6; LIVE_VERIFIED)  |
 | Hireology | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 7 | 2026-11-06T13:05:16.366235+00:00 | https://careers.hireology.com/beachchevrolet (4; LIVE_VERIFIED); https://careers.hireology.com/pipprinting01151 (3; LIVE_VERIFIED)  |
 | HiringThing | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 5 | 2026-11-06T12:04:24.524963+00:00 | https://math-learning-center.hiringthing.com/ (2; LIVE_VERIFIED); https://rtrjobs.hiringthing.com/ (3; LIVE_VERIFIED)  |
-| iCIMS | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
+| iCIMS | ats | IMPLEMENTED | LIVE_VERIFIED | HIGH | 74 | 2026-11-06T18:04:06.601240+00:00 | https://careers-iomart.icims.com/jobs/search (10; LIVE_VERIFIED); https://careers-fedwriters.icims.com/jobs/search (64; LIVE_VERIFIED)  |
 | iSolvedHire | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 5 | 2026-11-06T08:53:54.959321+00:00 | https://uasystem.isolvedhire.com/jobs/ (2; LIVE_VERIFIED); https://verifiedcredentials.isolvedhire.com/jobs/ (3; LIVE_VERIFIED)  |
 | JazzHR | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 119 | 2026-11-06T03:41:01.947707+00:00 | https://lapmasterwolters.applytojob.com/apply (6; LIVE_VERIFIED); https://belaytechnologies.applytojob.com/apply (113; LIVE_VERIFIED)  |
 | Jobvite | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 58 | 2026-11-06T08:36:44.397712+00:00 | https://jobs.jobvite.com/iboss/jobs (35; LIVE_VERIFIED); https://jobs.jobvite.com/optimas/jobs (23; LIVE_VERIFIED)  |

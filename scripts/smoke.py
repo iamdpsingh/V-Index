@@ -14,6 +14,20 @@ from vindex.connectors.registry import create_connector
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
+    (
+        "PageUp",
+        "pageup",
+        "1220~en",
+        "Adelaide University",
+        "https://careers.pageuppeople.com/1220/cw/en/listing/",
+    ),
+    (
+        "PageUp",
+        "pageup",
+        "1132~en-us",
+        "University of North Dakota",
+        "https://careers.pageuppeople.com/1132/cw/en-us/listing/",
+    ),
     ("iCIMS", "icims", "careers-iomart", "iomart", "https://careers-iomart.icims.com/jobs/search"),
     (
         "iCIMS",
@@ -460,6 +474,15 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "PageUp": [
+                                "Native careers.pageuppeople.com numeric tenant/cw/en or en-us listing template only; custom/mobile/other-site templates unsupported",
+                                "Both native current and unfiltered-search widgets must agree exactly; 20-item pages plus explicit More Jobs remaining counter, up to 200 mandatory details, complete final roster reconfirmed",
+                                "Every detail must bind canonical URL, title, locations and closing metadata to listed job and native secure.dcN.pageuppeople.com apply URL for identical tenant/job; no apply page requested or submitted",
+                                "Human external requisition number may differ from numeric URL ID (e.g. H498332); preserve both without coercion or loss of source identity",
+                                "Full native job-details HTML/text, source salary/remuneration labels, work type, location, Advertised datetime and closing observations preserved; missing structured workplace remains unknown",
+                                "Employer explicitly supplied by source configuration and flagged; source pay text is preserved without guessing currency or units; empty/failed/partial/changed snapshots abort without closures",
+                                "Bounded point-in-time coverage does not establish all PageUp templates or hosted production freshness",
+                            ],
                             "iCIMS": [
                                 "Classic native tenant.icims.com public iframe search and JobPosting detail template only; no authenticated Job Portal/Profile APIs, applications or candidate state",
                                 "Enumerate every explicit Page N of M, 50 jobs on nonfinal pages, at most 8 pages; unique scoped IDs and entire roster reconfirmed after mandatory details",

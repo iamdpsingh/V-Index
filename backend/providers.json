@@ -909,16 +909,55 @@
   {
     "name": "iCIMS",
     "kind": "ats",
-    "implementation_status": "NOT_STARTED",
-    "evidence_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
+    "evidence_status": "LIVE_VERIFIED",
     "risk": "HIGH",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
+    "examples": [
+      {
+        "provider": "iCIMS",
+        "url": "https://careers-iomart.icims.com/jobs/search",
+        "at": "2026-11-06T18:02:14.205647+00:00",
+        "revision": "5a7f3f9709eb473d203e161476d52cad4a507afa",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "443ff7c22ddefe6db6dd1fe46e03d67a3d263e7c179e024116cd4e074b109d00",
+        "count": 10,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "b6f08f1da77fa4cb5385404fe7f980b15f8d5e30f49ddd4338eeec340992650c",
+        "finished_at": "2026-11-06T18:02:31.263228+00:00"
+      },
+      {
+        "provider": "iCIMS",
+        "url": "https://careers-fedwriters.icims.com/jobs/search",
+        "at": "2026-11-06T18:02:31.764503+00:00",
+        "revision": "5a7f3f9709eb473d203e161476d52cad4a507afa",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "443ff7c22ddefe6db6dd1fe46e03d67a3d263e7c179e024116cd4e074b109d00",
+        "count": 64,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "ab71d464ddc6a7ac6fb70bfdb050bcbba144ced1eba921cfae99eb07c7dd73c2",
+        "finished_at": "2026-11-06T18:04:06.601240+00:00"
+      }
+    ],
+    "last_run_at": "2026-11-06T18:04:06.601240+00:00",
+    "extraction_count": 74,
     "failure_reason": null,
     "limitations": [
-      "Connector not implemented"
+      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
+      "Classic native tenant.icims.com public iframe search and JobPosting detail template only; no authenticated Job Portal/Profile APIs, applications or candidate state",
+      "Enumerate every explicit Page N of M, 50 jobs on nonfinal pages, at most 8 pages; unique scoped IDs and entire roster reconfirmed after mandatory details",
+      "No independent total is supplied; completeness follows full native page enumeration and final reconfirmation; empty/malformed/changed snapshots never reconcile closures",
+      "Full native description sections including sibling platform headings and nested rich text must agree with JobPosting apart from whitespace; preserve salary sections, all locations, employment and explicit Work Site labels",
+      "Source jobPosting datePosted retained as provided with provenance; it is not independently verified as original publication and some deployments emit apparently generated/stale dates",
+      "Native Apply control verified without requesting/submitting it; stable original public posting is application entry; rotating hashed control parameter never retained",
+      "Explicit PRACTICE postings that state no real job/no hire are fully fetched and validated, retained as excluded metadata with source link/checksum, and never counted as jobs",
+      "Single source employer identity required across all details; custom/alternate templates and mixed-brand boards unsupported; bounded evidence does not establish production freshness"
     ],
     "research": {
       "status": "INVESTIGATED",
