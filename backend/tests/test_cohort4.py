@@ -236,3 +236,102 @@ def test_cohort4_detection(url, expected):
 def test_cohort4_rejects_unsafe_hosts(url):
     with pytest.raises(ValueError):
         detect(url)
+
+
+def workable_payload():
+    return {
+        "name": "Example",
+        "jobs": [
+            {
+                "shortcode": "A12B34",
+                "title": "Engineer",
+                "description": "<p>Build systems</p>",
+                "requirements": "<p>Python</p>",
+                "benefits": "<p>Leave</p>",
+                "url": "https://apply.workable.com/j/A12B34",
+                "application_url": "https://apply.workable.com/j/A12B34/apply",
+                "published_on": "2026-11-01",
+                "created_at": "2025-01-01",
+                "employment_type": "Full-time",
+                "workplace_type": "hybrid",
+                "locations": [
+                    {"city": "London", "country": "UK"},
+                    {"city": "Paris", "country": "France"},
+                ],
+                "salary": {"salary_from": 50000, "salary_currency": "GBP"},
+            }
+        ],
+    }
+
+
+def workable_handler(payload=None, confirmation=None, status=200):
+    calls = 0
+
+    def handle(request):
+        nonlocal calls
+        assert request.url.host == "apply.workable.com"
+        if request.url.path == "/robots.txt":
+            return httpx.Response(200, text="User-agent: *\nAllow: /")
+        assert (
+            str(request.url)
+            == "https://apply.workable.com/api/v1/widget/accounts/example?details=true"
+        )
+        calls += 1
+        data = confirmation if calls > 1 and confirmation is not None else payload
+        return httpx.Response(status, json=data if data is not None else workable_payload())
+
+    return handle
+
+
+def test_workable_public_collection_preserves_fields():
+    batch = run("workable", workable_handler())
+    job = batch.jobs[0]
+    assert batch.complete and job.description == "Build systems\n\nPython\n\nLeave"
+    assert job.location == "London, UK; Paris, France"
+    assert job.remote_status == "hybrid" and job.salary["salary_currency"] == "GBP"
+    assert job.published_at.year == 2026 and job.raw["created_at"] == "2025-01-01"
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        lambda p: p.pop("jobs"),
+        lambda p: p.update(jobs={}),
+        lambda p: p.update(name=""),
+        lambda p: p.update(next_url="https://evil.com"),
+        lambda p: p["jobs"].append(copy.deepcopy(p["jobs"][0])),
+        lambda p: p["jobs"][0].pop("description"),
+        lambda p: p["jobs"][0].update(application_url="javascript:alert(1)"),
+        lambda p: p["jobs"][0].update(shortcode="../bad"),
+    ],
+)
+def test_workable_malformed_and_partial_rejected(mutation):
+    payload = workable_payload()
+    mutation(payload)
+    with pytest.raises((ValueError, KeyError, TypeError)):
+        run("workable", workable_handler(payload))
+
+
+def test_workable_changed_collection_or_failed_request_not_empty_success():
+    for handler in (
+        workable_handler(confirmation={"name": "Example", "jobs": []}),
+        workable_handler(status=403),
+    ):
+        with pytest.raises(ValueError):
+            run("workable", handler)
+
+
+def test_workable_explicit_empty_named_collection():
+    batch = run("workable", workable_handler({"name": "Example", "jobs": []}))
+    assert batch.complete and batch.jobs == []
+
+
+def test_workable_url_detection():
+    assert detect("https://apply.workable.com/learnworlds/j/A12B34/") == ("workable", "learnworlds")
+    for url in (
+        "https://apply.workable.com/j/A12B34",
+        "https://apply.workable.com/api/",
+        "https://apply.workable.com.evil.com/learnworlds/",
+    ):
+        with pytest.raises(ValueError):
+            detect(url)

@@ -11,6 +11,7 @@ from vindex.connectors.public import detect as detect_original
 from vindex.connectors.recruitee import RecruiteeConnector
 from vindex.connectors.smartrecruiters import SmartRecruitersConnector
 from vindex.connectors.teamtailor import TENANT, TeamtailorConnector
+from vindex.connectors.workable import WorkableConnector
 from vindex.connectors.workday import HOST_PATTERN, SITE_PATTERN, WorkdayConnector
 
 PERSONIO_HOST = re.compile(r"([a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)\.jobs\.personio\.(de|com)")
@@ -24,6 +25,11 @@ def detect(url: str) -> tuple[str, str]:
         match = re.fullmatch(rf"({TENANT})\.{re.escape(suffix)}", p.hostname or "")
         if match:
             return provider, match[1]
+    if p.hostname == "apply.workable.com":
+        slug = p.path.strip("/").split("/")[0]
+        if not re.fullmatch(TENANT, slug) or slug in {"j", "api"}:
+            raise ValueError("Expected a Workable account career URL, not a bare job URL")
+        return "workable", slug
     workday = HOST_PATTERN.fullmatch(p.hostname or "")
     if workday:
         parts = p.path.strip("/").split("/")
@@ -52,13 +58,15 @@ def detect(url: str) -> tuple[str, str]:
         return detect_original(url)
     except ValueError as error:
         raise ValueError(
-            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor and Breezy HR"
+            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR and Workable"
         ) from error
 
 
 def create_connector(
     provider: str, slug: str, company: str, client: httpx.AsyncClient
 ) -> Connector:
+    if provider == "workable":
+        return WorkableConnector(provider, slug, company, client)
     if provider == "teamtailor":
         return TeamtailorConnector(provider, slug, company, client)
     if provider == "breezy":

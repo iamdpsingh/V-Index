@@ -14,6 +14,14 @@ from vindex.connectors.registry import create_connector
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
+    ("Workable", "workable", "careers", "Workable", "https://apply.workable.com/careers/"),
+    (
+        "Workable",
+        "workable",
+        "learnworlds",
+        "LearnWorlds",
+        "https://apply.workable.com/learnworlds/",
+    ),
     ("Teamtailor", "teamtailor", "clearroute", "ClearRoute", "https://clearroute.teamtailor.com"),
     ("Teamtailor", "teamtailor", "omny", "Omny", "https://omny.teamtailor.com"),
     ("Breezy HR", "breezy", "vald", "VALD", "https://vald.breezy.hr"),
@@ -164,6 +172,12 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "Workable": [
+                                "Uses the public jobs collection with details=true on the fixed apply.workable.com widget host",
+                                "Bare /j/shortcode URLs lack an account identifier; register an account career page instead",
+                                "Custom-domain registration remains unsupported; all locations and source publication fields are preserved",
+                                "No authoritative total is supplied; completeness follows the documented full-collection contract and an ID-set reconfirmation",
+                            ],
                             "Teamtailor": [
                                 "Hosted teamtailor.com tenants only; custom domains remain unsupported",
                                 "Feeds with next_url or at least 100 items fail closed until pagination is supported",
