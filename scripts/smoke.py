@@ -14,6 +14,20 @@ from vindex.connectors.registry import create_connector
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
+    (
+        "Oracle Recruiting",
+        "oracle",
+        "eoja.fa.ap1.oraclecloud.com~CX",
+        "Hansen Technologies",
+        "https://eoja.fa.ap1.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX/jobs",
+    ),
+    (
+        "Oracle Recruiting",
+        "oracle",
+        "eifn.fa.us6.oraclecloud.com~ExternalCareerSite",
+        "Datavail",
+        "https://eifn.fa.us6.oraclecloud.com/hcmUI/CandidateExperience/en/sites/ExternalCareerSite/jobs",
+    ),
     ("FirstStage", "firststage", "firststage", "First", "https://firststage.firststage.co/jobs"),
     (
         "FirstStage",
@@ -424,6 +438,15 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "Oracle Recruiting": [
+                                "Native English Oracle Fusion Candidate Experience sites only, fixed validated oraclecloud.com host families; custom domains and other Oracle/Taleo products remain distinct",
+                                "Only anonymous public native-client advertised CE search and listed-ID detail routes; no ICE/internal-candidate, preview, employee, application, resume or account endpoints",
+                                "Active public site metadata and complete unfiltered search total required, 100 jobs/page up to 400 mandatory details; all pages and site metadata reconfirmed",
+                                "Full external description/responsibilities/qualifications/company sections, explicit workplace/employment/original publication, secondary and native work locations retained; contact/hiring-manager/internal text excluded",
+                                "Absent native SEO employer uses explicitly supplied source company with company_from_source_configuration flag; never guess from prose/domain; source display/legal names may differ",
+                                "Pay embedded in full descriptions and public custom fields preserved; no guessed currency, amounts or units; custom-field salary normalization remains unsupported",
+                                "Only roster-listed IDs requested, regardless of ApplyWhenNotPostedFlag; missing/failed/changed/partial snapshots abort without closures; bounded evidence is not production freshness",
+                            ],
                             "FirstStage": [
                                 "First/FirstStage native tenant.firststage.co/jobs SSR unfiltered list template only; custom/alternate templates unsupported",
                                 "Require explicit unique-job total equal native IDs; identical multi-location group copies deduplicated only within this source; conflicting copies rejected; maximum 400 mandatory details",
