@@ -1,0 +1,56 @@
+{
+  "at": "2026-11-06T03:50:41.648610+00:00",
+  "platform": "Jobboardly",
+  "url": "https://pennsylvania-communications.jobboardly.com/jobs",
+  "scope": "List-page completeness investigation only, not successful detail extraction or live coverage",
+  "pages": [
+    {
+      "page": 1,
+      "count": 50,
+      "has_next": true
+    },
+    {
+      "page": 2,
+      "count": 50,
+      "has_next": true
+    },
+    {
+      "page": 3,
+      "count": 50,
+      "has_next": true
+    },
+    {
+      "page": 4,
+      "count": 50,
+      "has_next": true
+    },
+    {
+      "page": 5,
+      "count": 50,
+      "has_next": true
+    },
+    {
+      "page": 6,
+      "count": 50,
+      "has_next": true
+    },
+    {
+      "page": 7,
+      "count": 50,
+      "has_next": true
+    },
+    {
+      "page": 8,
+      "count": 50,
+      "has_next": true
+    },
+    {
+      "page": 9,
+      "count": 50,
+      "has_next": true
+    }
+  ],
+  "listed_count": 450,
+  "terminal_reached": false,
+  "finished_at": "2026-11-06T03:51:12.150956+00:00"
+}

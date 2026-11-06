@@ -534,16 +534,52 @@
   {
     "name": "JazzHR",
     "kind": "ats",
-    "implementation_status": "NOT_STARTED",
-    "evidence_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
+    "evidence_status": "LIVE_VERIFIED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
+    "examples": [
+      {
+        "provider": "JazzHR",
+        "url": "https://lapmasterwolters.applytojob.com/apply",
+        "at": "2026-11-06T03:36:54.694427+00:00",
+        "revision": "ecaac678cf672f93d0932493fcf7d1a36b795558",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "b03679629b1a06ca1c33befa438d20a22038e26c017d741a7d66a8e3f2a39bfd",
+        "count": 6,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "b9dcc1deae4f62d483422cebf5aa69474f9aefbc861f3e2a5e9f1ab88c9d2898",
+        "finished_at": "2026-11-06T03:37:10.990530+00:00"
+      },
+      {
+        "provider": "JazzHR",
+        "url": "https://belaytechnologies.applytojob.com/apply",
+        "at": "2026-11-06T03:37:11.491813+00:00",
+        "revision": "ecaac678cf672f93d0932493fcf7d1a36b795558",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "b03679629b1a06ca1c33befa438d20a22038e26c017d741a7d66a8e3f2a39bfd",
+        "count": 113,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "ad12bbecebaf34c6bf6d14cec9addcf867be1dbf66ca72f199cedfad59d3a87e",
+        "finished_at": "2026-11-06T03:41:01.947707+00:00"
+      }
+    ],
+    "last_run_at": "2026-11-06T03:41:01.947707+00:00",
+    "extraction_count": 119,
     "failure_reason": null,
     "limitations": [
-      "Connector not implemented"
+      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
+      "Hosted applytojob.com Current Openings templates only; custom domains and alternative templates remain unsupported",
+      "No source total is supplied; completeness follows the full server-rendered Current Openings list and a final link/title reconfirmation",
+      "Maximum 400 details; empty, truncated, unexpectedly paginated or malformed lists fail closed",
+      "Every detail requires matching canonical URL/title, employer identity, description and native application form; no form is submitted",
+      "Original publication dates and structured salaries are not established by this template; provided source text remains in original description/header observations"
     ]
   },
   {
@@ -1363,35 +1399,35 @@
       {
         "provider": "Jobboardly",
         "url": "https://recruiter-jobs.jobboardly.com/jobs",
-        "at": "2026-11-06T03:30:15.912894+00:00",
-        "revision": "e31dcaa505296023c66f9c2344756654e5546f84",
+        "at": "2026-11-06T03:41:02.448954+00:00",
+        "revision": "ecaac678cf672f93d0932493fcf7d1a36b795558",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "ebf343e9b2e42d07514b770919dffbfb34cf34b3817a92e4873b42977cccc4bb",
+        "code_sha256": "b03679629b1a06ca1c33befa438d20a22038e26c017d741a7d66a8e3f2a39bfd",
         "count": 31,
         "status": "LIVE_VERIFIED",
         "complete": true,
         "error": null,
         "quality_flag_counts": {},
-        "payload_sha256": "58839ff2d42d24d8f076785ec2b46df058c0e67085c4fc6532a3cf41ca665a0a",
-        "finished_at": "2026-11-06T03:31:05.853733+00:00"
+        "payload_sha256": "20af7f498e16f6d178f7134f427cd2fcadcb2a8569dd9dd348fb4b93fba2d169",
+        "finished_at": "2026-11-06T03:42:03.568965+00:00"
       },
       {
         "provider": "Jobboardly",
         "url": "https://pennsylvania-communications.jobboardly.com/jobs",
-        "at": "2026-11-06T03:31:06.354988+00:00",
-        "revision": "e31dcaa505296023c66f9c2344756654e5546f84",
+        "at": "2026-11-06T03:42:04.070179+00:00",
+        "revision": "ecaac678cf672f93d0932493fcf7d1a36b795558",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "ebf343e9b2e42d07514b770919dffbfb34cf34b3817a92e4873b42977cccc4bb",
+        "code_sha256": "b03679629b1a06ca1c33befa438d20a22038e26c017d741a7d66a8e3f2a39bfd",
         "count": 0,
         "status": "FAILED",
         "complete": false,
-        "error": "ValueError: JobBoardly full public JobPosting detail missing",
-        "finished_at": "2026-11-06T03:31:49.022793+00:00"
+        "error": "TimeoutError: ",
+        "finished_at": "2026-11-06T03:52:04.080461+00:00"
       }
     ],
-    "last_run_at": "2026-11-06T03:31:49.022793+00:00",
+    "last_run_at": "2026-11-06T03:52:04.080461+00:00",
     "extraction_count": 31,
-    "failure_reason": "ValueError: JobBoardly full public JobPosting detail missing",
+    "failure_reason": "TimeoutError: ",
     "limitations": [
       "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
       "Hosted jobboardly.com HTML listings only; custom-domain registration and redirecting hosted aliases are unsupported",

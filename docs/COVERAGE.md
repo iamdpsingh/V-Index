@@ -32,7 +32,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | HiringThing | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | iCIMS | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | iSolvedHire | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
-| JazzHR | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
+| JazzHR | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 119 | 2026-11-06T03:41:01.947707+00:00 | https://lapmasterwolters.applytojob.com/apply (6; LIVE_VERIFIED); https://belaytechnologies.applytojob.com/apply (113; LIVE_VERIFIED)  |
 | Jobvite | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | JOIN.com | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Kula.ai | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
@@ -67,7 +67,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | Niceboard | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | WP Job Manager | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | JobKit | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
-| Jobboardly | job_board | IMPLEMENTED | FAILED | HIGH | 31 | 2026-11-06T03:31:49.022793+00:00 | https://recruiter-jobs.jobboardly.com/jobs (31; LIVE_VERIFIED); https://pennsylvania-communications.jobboardly.com/jobs (0; FAILED) ValueError: JobBoardly full public JobPosting detail missing |
+| Jobboardly | job_board | IMPLEMENTED | FAILED | HIGH | 31 | 2026-11-06T03:52:04.080461+00:00 | https://recruiter-jobs.jobboardly.com/jobs (31; LIVE_VERIFIED); https://pennsylvania-communications.jobboardly.com/jobs (0; FAILED) TimeoutError:  |
 | Jobiqo | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | JBoard.io | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | JobBoardFire | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
