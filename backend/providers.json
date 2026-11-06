@@ -1399,35 +1399,35 @@
       {
         "provider": "Jobboardly",
         "url": "https://recruiter-jobs.jobboardly.com/jobs",
-        "at": "2026-11-06T03:41:02.448954+00:00",
-        "revision": "ecaac678cf672f93d0932493fcf7d1a36b795558",
+        "at": "2026-11-06T03:55:02.478603+00:00",
+        "revision": "4f17e286b5e80c0e7f7c18179e6555d3f4fb0a59",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "b03679629b1a06ca1c33befa438d20a22038e26c017d741a7d66a8e3f2a39bfd",
+        "code_sha256": "ad64435c21c47329720b951eaa7a81949bb26bf5fc2ea27566a0666c121aee11",
         "count": 31,
         "status": "LIVE_VERIFIED",
         "complete": true,
         "error": null,
         "quality_flag_counts": {},
         "payload_sha256": "20af7f498e16f6d178f7134f427cd2fcadcb2a8569dd9dd348fb4b93fba2d169",
-        "finished_at": "2026-11-06T03:42:03.568965+00:00"
+        "finished_at": "2026-11-06T03:56:00.440888+00:00"
       },
       {
         "provider": "Jobboardly",
         "url": "https://pennsylvania-communications.jobboardly.com/jobs",
-        "at": "2026-11-06T03:42:04.070179+00:00",
-        "revision": "ecaac678cf672f93d0932493fcf7d1a36b795558",
+        "at": "2026-11-06T03:56:00.942162+00:00",
+        "revision": "4f17e286b5e80c0e7f7c18179e6555d3f4fb0a59",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "b03679629b1a06ca1c33befa438d20a22038e26c017d741a7d66a8e3f2a39bfd",
+        "code_sha256": "ad64435c21c47329720b951eaa7a81949bb26bf5fc2ea27566a0666c121aee11",
         "count": 0,
         "status": "FAILED",
         "complete": false,
-        "error": "TimeoutError: ",
-        "finished_at": "2026-11-06T03:52:04.080461+00:00"
+        "error": "ValueError: JobBoardly exceeds 400-detail budget; snapshot incomplete",
+        "finished_at": "2026-11-06T03:56:21.828213+00:00"
       }
     ],
-    "last_run_at": "2026-11-06T03:52:04.080461+00:00",
+    "last_run_at": "2026-11-06T03:56:21.828213+00:00",
     "extraction_count": 31,
-    "failure_reason": "TimeoutError: ",
+    "failure_reason": "ValueError: JobBoardly exceeds 400-detail budget; snapshot incomplete",
     "limitations": [
       "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
       "Hosted jobboardly.com HTML listings only; custom-domain registration and redirecting hosted aliases are unsupported",

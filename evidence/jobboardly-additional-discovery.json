@@ -1,0 +1,15 @@
+{
+  "recorded_at": "2026-11-06T03:57:47.664906+00:00",
+  "scope": "Summary of additional observed hosted-site probes in this session, not live coverage or successful extraction",
+  "platform": "Jobboardly",
+  "observations": [
+    {
+      "url": "https://newtomedia.jobboardly.com/jobs",
+      "error": "ValueError: JobBoardly listed links disagree with page range"
+    },
+    {
+      "url": "https://jobboardsearch.jobboardly.com/jobs",
+      "error": "UpstreamStatusError: Upstream HTTP 302"
+    }
+  ]
+}

@@ -67,7 +67,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | Niceboard | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | WP Job Manager | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | JobKit | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
-| Jobboardly | job_board | IMPLEMENTED | FAILED | HIGH | 31 | 2026-11-06T03:52:04.080461+00:00 | https://recruiter-jobs.jobboardly.com/jobs (31; LIVE_VERIFIED); https://pennsylvania-communications.jobboardly.com/jobs (0; FAILED) TimeoutError:  |
+| Jobboardly | job_board | IMPLEMENTED | FAILED | HIGH | 31 | 2026-11-06T03:56:21.828213+00:00 | https://recruiter-jobs.jobboardly.com/jobs (31; LIVE_VERIFIED); https://pennsylvania-communications.jobboardly.com/jobs (0; FAILED) ValueError: JobBoardly exceeds 400-detail budget; snapshot incomplete |
 | Jobiqo | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | JBoard.io | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | JobBoardFire | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |

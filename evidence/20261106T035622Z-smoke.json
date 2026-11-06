@@ -1,0 +1,30 @@
+[
+  {
+    "provider": "Jobboardly",
+    "url": "https://recruiter-jobs.jobboardly.com/jobs",
+    "at": "2026-11-06T03:55:02.478603+00:00",
+    "revision": "4f17e286b5e80c0e7f7c18179e6555d3f4fb0a59",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "ad64435c21c47329720b951eaa7a81949bb26bf5fc2ea27566a0666c121aee11",
+    "count": 31,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "20af7f498e16f6d178f7134f427cd2fcadcb2a8569dd9dd348fb4b93fba2d169",
+    "finished_at": "2026-11-06T03:56:00.440888+00:00"
+  },
+  {
+    "provider": "Jobboardly",
+    "url": "https://pennsylvania-communications.jobboardly.com/jobs",
+    "at": "2026-11-06T03:56:00.942162+00:00",
+    "revision": "4f17e286b5e80c0e7f7c18179e6555d3f4fb0a59",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "ad64435c21c47329720b951eaa7a81949bb26bf5fc2ea27566a0666c121aee11",
+    "count": 0,
+    "status": "FAILED",
+    "complete": false,
+    "error": "ValueError: JobBoardly exceeds 400-detail budget; snapshot incomplete",
+    "finished_at": "2026-11-06T03:56:21.828213+00:00"
+  }
+]
