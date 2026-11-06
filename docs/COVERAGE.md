@@ -10,7 +10,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | ApplicantPro | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Ashby | ats | IMPLEMENTED | LIVE_VERIFIED | LOW | 243 | 2026-11-05T16:42:19.453089+00:00 | https://jobs.ashbyhq.com/Ashby (72; LIVE_VERIFIED); https://jobs.ashbyhq.com/ramp (171; LIVE_VERIFIED)  |
 | Avature | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
-| BambooHR | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
+| BambooHR | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 25 | 2026-11-06T03:18:07.998376+00:00 | https://anaergia.bamboohr.com/careers (20; LIVE_VERIFIED); https://concept2.bamboohr.com/careers (5; LIVE_VERIFIED)  |
 | BrassRing | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | Breezy HR | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 81 | 2026-11-06T03:16:14.203649+00:00 | https://vald.breezy.hr (75; LIVE_VERIFIED); https://subscribe.breezy.hr (6; LIVE_VERIFIED)  |
 | CareerPlug | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |

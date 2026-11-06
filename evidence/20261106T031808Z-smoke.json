@@ -1,0 +1,36 @@
+[
+  {
+    "provider": "BambooHR",
+    "url": "https://anaergia.bamboohr.com/careers",
+    "at": "2026-11-06T03:17:41.836880+00:00",
+    "revision": "3a9592ec39601091d14421a0e89aee4b8bed16aa",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "867cde745b34fe69e9dfceaa0dd41758113dde9744f81e4f7ff1e08682856ae6",
+    "count": 20,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {
+      "workplace_type_unmapped": 20
+    },
+    "payload_sha256": "20ae9996313573c129c0262cf92fdb56809e8ebfb1db7ffe5a48a68e698898e4",
+    "finished_at": "2026-11-06T03:17:58.918773+00:00"
+  },
+  {
+    "provider": "BambooHR",
+    "url": "https://concept2.bamboohr.com/careers",
+    "at": "2026-11-06T03:17:59.419965+00:00",
+    "revision": "3a9592ec39601091d14421a0e89aee4b8bed16aa",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "867cde745b34fe69e9dfceaa0dd41758113dde9744f81e4f7ff1e08682856ae6",
+    "count": 5,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {
+      "workplace_type_unmapped": 5
+    },
+    "payload_sha256": "2a22e73c976bd2f14c21c783b879c4edb46732c1ab9e06c60cf50516622da10a",
+    "finished_at": "2026-11-06T03:18:07.998376+00:00"
+  }
+]
