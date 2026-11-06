@@ -21,6 +21,7 @@ class HiringThingConnector:
         if provider != "hiringthing" or not re.fullmatch(TENANT, slug):
             raise ValueError("Invalid HiringThing tenant")
         self.origin = f"https://{slug}.hiringthing.com"
+        self.metadata_hosts = {f"{slug}.hiringthing.com", f"{slug}.oasisrecruit.com"}
         self.http = PublicHTTP(client, {f"{slug}.hiringthing.com"})
 
     def path(self, value: str) -> str:
@@ -29,7 +30,7 @@ class HiringThingConnector:
             p.query
             or p.fragment
             or p.netloc
-            and (p.scheme != "https" or p.netloc != urlsplit(self.origin).netloc)
+            and (p.scheme != "https" or p.netloc not in self.metadata_hosts)
             or not p.netloc
             and p.scheme
             or not re.fullmatch(r"/job/[1-9][0-9]*/[a-z0-9-]+", p.path)
@@ -71,18 +72,29 @@ class HiringThingConnector:
         channel = root.find("channel")
         if root.tag != "rss" or channel is None or channel.findtext("title") != company + " Jobs":
             raise ValueError("HiringThing RSS employer identity mismatch")
+        channel_url = urlsplit(channel.findtext("link") or "")
+        if (
+            channel_url.scheme != "https"
+            or channel_url.netloc not in self.metadata_hosts
+            or channel_url.path not in ("", "/")
+            or channel_url.query
+            or channel_url.fragment
+        ):
+            raise ValueError("HiringThing RSS channel host is unsupported")
         result = {}
         for item in channel.findall("item"):
             link = item.findtext("link") or ""
             path = self.path(link)
             if (
-                not link.startswith(self.origin + "/job/")
+                urlsplit(link).scheme != "https"
+                or urlsplit(link).netloc != channel_url.netloc
                 or path in result
                 or item.findtext("title") != rows.get(path)
             ):
                 raise ValueError("HiringThing RSS/list job identity mismatch")
             result[path] = {
                 "title": item.findtext("title"),
+                "source_url": link,
                 "location": item.findtext("location") or "",
                 "description_html": item.findtext("{http://search.yahoo.com/mrss/}description"),
                 "xml": ET.tostring(item, encoding="unicode"),
@@ -111,9 +123,9 @@ class HiringThingConnector:
         if (
             not observed
             or canonical is None
-            or canonical.get("href") != url
+            or canonical.get("href") != feed["source_url"]
             or og is None
-            or og.get("content") != url
+            or og.get("content") != feed["source_url"]
             or heading is None
             or heading.get_text(" ", strip=True) != feed["title"]
         ):
@@ -127,7 +139,7 @@ class HiringThingConnector:
             or job["title"] != feed["title"]
             or job["company_name"] != company
             or job["url"] != path
-            or job["joblink_url"] != url
+            or job["joblink_url"] != feed["source_url"]
             or job["hidden?"] is not False
         ):
             raise ValueError("HiringThing public application job identity/visibility mismatch")

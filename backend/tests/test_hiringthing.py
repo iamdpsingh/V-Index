@@ -28,7 +28,7 @@ def board():
 
 def feed(title="Engineer", link=None):
     return (
-        '<rss xmlns:media="http://search.yahoo.com/mrss/"><channel><title>Example Jobs</title><item><title>'
+        '<rss xmlns:media="http://search.yahoo.com/mrss/"><channel><title>Example Jobs</title><link>https://example.hiringthing.com</link><item><title>'
         + title
         + "</title><link>"
         + escape(link or ORIGIN + PATH)
@@ -70,7 +70,13 @@ def detail(data=None):
 
 
 def run(
-    rss=None, data=None, confirm=None, roster=None, status=200, robots="User-agent: *\nAllow: /"
+    rss=None,
+    data=None,
+    confirm=None,
+    roster=None,
+    status=200,
+    robots="User-agent: *\nAllow: /",
+    detail_alias=None,
 ):
     calls = 0
 
@@ -87,7 +93,10 @@ def run(
                 value = confirm if calls > 1 and confirm is not None else rss
                 return httpx.Response(200, text=value if value is not None else feed())
             assert request.url.path == PATH
-            return httpx.Response(status, text=detail(data))
+            body = detail(data)
+            if detail_alias:
+                body = body.replace(ORIGIN, detail_alias)
+            return httpx.Response(status, text=body)
 
         async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
             return await create_connector("hiringthing", "example", "Configured", client).discover()
@@ -146,3 +155,12 @@ def test_distinct_numeric_ids_are_required_and_detection_is_host_bounded():
     for url in ("https://a.b.hiringthing.com/", "https://example.hiringthing.com.evil.com/"):
         with pytest.raises(ValueError):
             detect(url)
+
+
+def test_same_tenant_oasis_metadata_alias_never_becomes_a_request_host():
+    alias = "https://example.oasisrecruit.com"
+    data = job()
+    data["joblink_url"] = alias + PATH
+    observed = run(rss=feed().replace(ORIGIN, alias), data=data, detail_alias=alias).jobs[0]
+    assert observed.source_url == observed.application_url == ORIGIN + PATH
+    assert observed.raw["rss"]["source_url"] == alias + PATH
