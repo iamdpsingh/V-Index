@@ -13,6 +13,7 @@ from vindex.connectors.gohire import SLUG as GOHIRE_SLUG
 from vindex.connectors.gohire import GoHireConnector
 from vindex.connectors.hirebridge import HireBridgeConnector
 from vindex.connectors.hirehive import HireHiveConnector
+from vindex.connectors.hireology import HireologyConnector
 from vindex.connectors.hiringthing import HiringThingConnector
 from vindex.connectors.jazzhr import JazzHRConnector
 from vindex.connectors.jobboardly import JobboardlyConnector
@@ -61,6 +62,11 @@ def detect(url: str) -> tuple[str, str]:
         match = re.fullmatch(rf"({TENANT})\.{re.escape(suffix)}", p.hostname or "")
         if match:
             return provider, match[1]
+    if p.hostname == "careers.hireology.com":
+        matched = re.fullmatch(rf"/({TENANT})/?", p.path)
+        if not matched or p.query or p.fragment:
+            raise ValueError("Expected an unfiltered native Hireology employer URL")
+        return "hireology", matched[1]
     if p.hostname == "join.com":
         matched = re.fullmatch(rf"/companies/({TENANT})/?", p.path)
         if not matched or p.query or p.fragment:
@@ -155,13 +161,15 @@ def detect(url: str) -> tuple[str, str]:
         return detect_original(url)
     except ValueError as error:
         raise ValueError(
-            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire, HiringThing, Freshteam, Trakstar, Rippling, Kula.ai, CareerPlug, TriNet, HireBridge and JOIN.com"
+            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire, HiringThing, Freshteam, Trakstar, Rippling, Kula.ai, CareerPlug, TriNet, HireBridge, JOIN.com and Hireology"
         ) from error
 
 
 def create_connector(
     provider: str, slug: str, company: str, client: httpx.AsyncClient
 ) -> Connector:
+    if provider == "hireology":
+        return HireologyConnector(provider, slug, company, client)
     if provider == "join":
         return JoinConnector(provider, slug, company, client)
     if provider == "hirebridge":

@@ -14,6 +14,20 @@ from vindex.connectors.registry import create_connector
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
+    (
+        "Hireology",
+        "hireology",
+        "beachchevrolet",
+        "Beach Chevrolet",
+        "https://careers.hireology.com/beachchevrolet",
+    ),
+    (
+        "Hireology",
+        "hireology",
+        "pipprinting01151",
+        "PIP / Dynamark",
+        "https://careers.hireology.com/pipprinting01151",
+    ),
     ("JOIN.com", "join", "2open", "2 OPEN CHINA ECOMMERCE", "https://join.com/companies/2open"),
     ("JOIN.com", "join", "joinit", "Join GmbH", "https://join.com/companies/joinit"),
     (
@@ -370,6 +384,14 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "Hireology": [
+                                "Native careers.hireology.com/{careersPath} shell and explicitly public api.hireology.com/v2/public/careers routes only; no frontend token, authorization header or private API used",
+                                "Complete first public API page only: count must equal all unique rows, page=1, page_size=10; larger, empty, duplicate, blind or mismatched employer collections abort",
+                                "Mandatory public detail for each listed ID must exactly match all retained job fields; native career/application paths, organization IDs and named employer validated",
+                                "Native description page is the application entry; no form endpoint, login, submission, third-party apply token or candidate configuration requested or retained",
+                                "All public location labels/employment/description retained; positive source compensation preserved without inventing currency; zero-filled compensation stays unknown",
+                                "created_at retained raw and never substituted for missing original posting date; false remote flag preserved raw without guessing onsite/hybrid; full board/collection reconfirmed",
+                            ],
                             "JOIN.com": [
                                 "Native join.com/companies/{domain} current pageData SSR template; explicit public page=1 collection only, legacy initialState/custom/locale variants unsupported",
                                 "Single complete page only: page=1, pageCount=1, perPage=5 and total equals all unique visible job links and stable job IDs; empty/filtered/multipage or extra spontaneous-application counts abort",
