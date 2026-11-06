@@ -37,7 +37,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | JOIN.com | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Kula.ai | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Lever.co | ats | IMPLEMENTED | LIVE_VERIFIED | LOW | 394 | 2026-11-05T16:42:17.172545+00:00 | https://jobs.lever.co/spotify (87; LIVE_VERIFIED); https://jobs.lever.co/palantir (307; LIVE_VERIFIED)  |
-| Manatal | ats | IMPLEMENTED | FAILED | MEDIUM | 0 | 2026-11-06T07:57:32.194052+00:00 | https://www.careers-page.com/quantilehealth (0; FAILED); https://www.careers-page.com/munich-ventures-2 (0; FAILED) ValueError: Missing Manatal visible listings; ValueError: Missing Manatal visible listings |
+| Manatal | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 12 | 2026-11-06T08:00:22.119713+00:00 | https://www.careers-page.com/quantilehealth (2; LIVE_VERIFIED); https://www.careers-page.com/munich-ventures-2 (10; LIVE_VERIFIED)  |
 | Oracle Recruiting | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | PageUp | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Paradox | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |

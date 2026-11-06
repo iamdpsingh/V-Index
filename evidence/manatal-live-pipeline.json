@@ -1,0 +1,30 @@
+{
+  "started_at": "2026-11-06T08:01:17.086048+00:00",
+  "revision": "f19ea28cf53c71ba0873742412e6531fcfebcf69",
+  "database": "local SQLite",
+  "lease_backend": "local Redis",
+  "scope": "Actual source registration and scheduled worker, not direct connector invocation",
+  "source": {
+    "id": 18,
+    "provider": "manatal",
+    "slug": "quantilehealth",
+    "company": "Quantile Health",
+    "url": "https://www.careers-page.com/quantilehealth",
+    "refresh_minutes": 360,
+    "next_check": "2026-11-06T08:01:17.128085Z",
+    "failures": 0
+  },
+  "run": {
+    "id": 32,
+    "source_id": 18,
+    "started_at": "2026-11-06T08:01:30.537258Z",
+    "finished_at": "2026-11-06T08:01:37.168355Z",
+    "status": "success",
+    "count": 2,
+    "error": null
+  },
+  "searchable_records_with_source_provenance": 2,
+  "active_index_total": 1310,
+  "finished_at": "2026-11-06T08:01:37.473662+00:00",
+  "complete": true
+}

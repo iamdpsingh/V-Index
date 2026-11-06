@@ -35,3 +35,7 @@ Two more source types are available through the existing source form/API: Recrui
 ## Explicit new feature handoff — 2026-11-06
 
 The owner retained frontend ownership with Antigravity and requested account/profile/resume/recommendation screens. Read [ANTIGRAVITY_ACCOUNTS_HANDOFF.md](ANTIGRAVITY_ACCOUNTS_HANDOFF.md) and [ACCOUNTS_API.md](ACCOUNTS_API.md). This is an explicit feature expansion; the original indexing objective and coverage requirements remain unchanged.
+
+## GoHire, Polymer and Manatal integration — November 6
+
+The existing source form now accepts GoHire jobs.gohire.io/{board}, Polymer jobs.polymer.co/{organization}, and Manatal www.careers-page.com/{tenant} URLs. No new frontend configuration fields are needed. Use the live provider matrix for counts/limits: GoHire is English/hosted/bounded, Polymer requires explicit complete single-page metadata, and Manatal supports its legacy hosted template and validated pagination. A failed/unsupported source must show its actual run error, never an empty-success or closed-all state. Salary objects retain source text or source currency/range fields; do not invent a unit or period. Optional metadata remains unknown when absent. No frontend files changed in this cohort.

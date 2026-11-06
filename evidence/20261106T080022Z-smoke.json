@@ -1,0 +1,32 @@
+[
+  {
+    "provider": "Manatal",
+    "url": "https://www.careers-page.com/quantilehealth",
+    "at": "2026-11-06T08:00:01.316768+00:00",
+    "revision": "f19ea28cf53c71ba0873742412e6531fcfebcf69",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "ac1936ad57860365ad4e54d63281c9417f9ca9038ad4b72962cff037de7da66d",
+    "count": 2,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "7b8111427c2bc6ba21102fba4f0b24010732d8cf79cfd73ddb7d7601f1f4e5f0",
+    "finished_at": "2026-11-06T08:00:08.631311+00:00"
+  },
+  {
+    "provider": "Manatal",
+    "url": "https://www.careers-page.com/munich-ventures-2",
+    "at": "2026-11-06T08:00:09.132583+00:00",
+    "revision": "f19ea28cf53c71ba0873742412e6531fcfebcf69",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "ac1936ad57860365ad4e54d63281c9417f9ca9038ad4b72962cff037de7da66d",
+    "count": 10,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "4991bceaeadc2e7b1dd7e3c4f8e6d16d8f425a8790bfa8c03046120e51116df2",
+    "finished_at": "2026-11-06T08:00:22.119713+00:00"
+  }
+]
