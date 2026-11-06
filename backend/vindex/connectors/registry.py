@@ -30,6 +30,8 @@ from vindex.connectors.rippling import RipplingConnector
 from vindex.connectors.smartrecruiters import SmartRecruitersConnector
 from vindex.connectors.teamtailor import TENANT, TeamtailorConnector
 from vindex.connectors.trakstar import TrakstarConnector
+from vindex.connectors.trinet import SLUG as TRINET_SLUG
+from vindex.connectors.trinet import TriNetConnector
 from vindex.connectors.workable import WorkableConnector
 from vindex.connectors.workday import HOST_PATTERN, SITE_PATTERN, WorkdayConnector
 
@@ -57,6 +59,11 @@ def detect(url: str) -> tuple[str, str]:
         match = re.fullmatch(rf"({TENANT})\.{re.escape(suffix)}", p.hostname or "")
         if match:
             return provider, match[1]
+    if p.hostname == "app.trinethire.com":
+        matched = re.fullmatch(rf"/companies/({TRINET_SLUG})/jobs/?", p.path)
+        if not matched or len(matched[1]) > 100 or p.query or p.fragment:
+            raise ValueError("Expected an unfiltered TriNet Hire company jobs URL")
+        return "trinet", matched[1]
     if p.hostname == "app.careerplug.com":
         matched = re.fullmatch(r"/accounts/([1-9][0-9]{0,14})/?", p.path)
         if not matched or p.query or p.fragment:
@@ -130,13 +137,15 @@ def detect(url: str) -> tuple[str, str]:
         return detect_original(url)
     except ValueError as error:
         raise ValueError(
-            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire, HiringThing, Freshteam, Trakstar, Rippling, Kula.ai and CareerPlug"
+            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire, HiringThing, Freshteam, Trakstar, Rippling, Kula.ai, CareerPlug and TriNet"
         ) from error
 
 
 def create_connector(
     provider: str, slug: str, company: str, client: httpx.AsyncClient
 ) -> Connector:
+    if provider == "trinet":
+        return TriNetConnector(provider, slug, company, client)
     if provider == "careerplug":
         return CareerPlugConnector(provider, slug, company, client)
     if provider == "kula":

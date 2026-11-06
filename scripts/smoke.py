@@ -15,6 +15,20 @@ from vindex.connectors.registry import create_connector
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
     (
+        "TriNet",
+        "trinet",
+        "69740-ark-investment-management",
+        "ARK Investment Management",
+        "https://app.trinethire.com/companies/69740-ark-investment-management/jobs",
+    ),
+    (
+        "TriNet",
+        "trinet",
+        "665804-stridepath-consulting",
+        "Stridepath Consulting",
+        "https://app.trinethire.com/companies/665804-stridepath-consulting/jobs",
+    ),
+    (
         "CareerPlug",
         "careerplug",
         "576036",
@@ -340,6 +354,14 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "TriNet": [
+                                "Native app.trinethire.com/companies/{ID-slug}/jobs complete public table template only; custom, confidential and paginated variants unsupported",
+                                "All named Role/Type/Location table rows and unique native links must agree; maximum 400 mandatory details; empty, changed, malformed or failed collections abort",
+                                "Detail native form/job ID/title/company/Open Graph URL and employment type must match; no application submitted or form tokens/configuration retained",
+                                "Both board location label and detail physical location retained; Remote normalized only from an explicit Remote board label",
+                                "No independent total or transactional upstream snapshot; full roster reconfirmed; original publication date absent in this template remains unknown",
+                                "Full description HTML/text and header metadata retained; supplied salary labels preserved as source text, without inferring pay values from prose",
+                            ],
                             "CareerPlug": [
                                 "Native app.careerplug.com/accounts/{numeric ID} English public ItemList template only; custom domains, brands, locale and paginated registration unsupported",
                                 "Contiguous positions, explicit numberOfItems and full named position selector must agree; empty collections and counts at or above the observed 30-record ceiling abort",
