@@ -20,6 +20,7 @@ from vindex.connectors.hirebridge import HireBridgeConnector
 from vindex.connectors.hirehive import HireHiveConnector
 from vindex.connectors.hireology import HireologyConnector
 from vindex.connectors.hiringthing import HiringThingConnector
+from vindex.connectors.icims import ICIMSConnector
 from vindex.connectors.jazzhr import JazzHRConnector
 from vindex.connectors.jobboardly import JobboardlyConnector
 from vindex.connectors.jobvite import JobviteConnector
@@ -73,6 +74,15 @@ def detect(url: str) -> tuple[str, str]:
         match = re.fullmatch(rf"({TENANT})\.{re.escape(suffix)}", p.hostname or "")
         if match:
             return provider, match[1]
+    icims = re.fullmatch(rf"({TENANT})\.icims\.com", p.hostname or "")
+    if icims:
+        if (
+            p.path.rstrip("/") not in {"/jobs", "/jobs/search", "/jobs/intro"}
+            or p.fragment
+            or (p.query and parse_qs(p.query) != {"ss": ["1"]})
+        ):
+            raise ValueError("Expected an unfiltered native iCIMS public jobs source")
+        return "icims", icims[1]
     csod = re.fullmatch(rf"({TENANT})\.csod\.com", p.hostname or "")
     if csod:
         match = re.fullmatch(r"/ux/ats/careersite/([1-9][0-9]{0,5})/home/?", p.path)
@@ -214,13 +224,15 @@ def detect(url: str) -> tuple[str, str]:
         return detect_original(url)
     except ValueError as error:
         raise ValueError(
-            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire, HiringThing, Freshteam, Trakstar, Rippling, Kula.ai, CareerPlug, TriNet, HireBridge, JOIN.com, Hireology, Paylocity, Zoho Recruit, Comeet, WeRecruit, FirstStage, Oracle Recruiting and CSOD"
+            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire, HiringThing, Freshteam, Trakstar, Rippling, Kula.ai, CareerPlug, TriNet, HireBridge, JOIN.com, Hireology, Paylocity, Zoho Recruit, Comeet, WeRecruit, FirstStage, Oracle Recruiting, CSOD and iCIMS"
         ) from error
 
 
 def create_connector(
     provider: str, slug: str, company: str, client: httpx.AsyncClient
 ) -> Connector:
+    if provider == "icims":
+        return ICIMSConnector(provider, slug, company, client)
     if provider == "csod":
         return CSODConnector(provider, slug, company, client)
     if provider == "oracle":

@@ -14,6 +14,14 @@ from vindex.connectors.registry import create_connector
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
+    ("iCIMS", "icims", "careers-iomart", "iomart", "https://careers-iomart.icims.com/jobs/search"),
+    (
+        "iCIMS",
+        "icims",
+        "careers-fedwriters",
+        "FedWriters, Inc.",
+        "https://careers-fedwriters.icims.com/jobs/search",
+    ),
     (
         "CSOD",
         "csod",
@@ -452,6 +460,16 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "iCIMS": [
+                                "Classic native tenant.icims.com public iframe search and JobPosting detail template only; no authenticated Job Portal/Profile APIs, applications or candidate state",
+                                "Enumerate every explicit Page N of M, 50 jobs on nonfinal pages, at most 8 pages; unique scoped IDs and entire roster reconfirmed after mandatory details",
+                                "No independent total is supplied; completeness follows full native page enumeration and final reconfirmation; empty/malformed/changed snapshots never reconcile closures",
+                                "Full native description sections including sibling platform headings and nested rich text must agree with JobPosting apart from whitespace; preserve salary sections, all locations, employment and explicit Work Site labels",
+                                "Source jobPosting datePosted retained as provided with provenance; it is not independently verified as original publication and some deployments emit apparently generated/stale dates",
+                                "Native Apply control verified without requesting/submitting it; stable original public posting is application entry; rotating hashed control parameter never retained",
+                                "Explicit PRACTICE postings that state no real job/no hire are fully fetched and validated, retained as excluded metadata with source link/checksum, and never counted as jobs",
+                                "Single source employer identity required across all details; custom/alternate templates and mixed-brand boards unsupported; bounded evidence does not establish production freshness",
+                            ],
                             "CSOD": [
                                 "Native tenant.csod.com /ux/ats/careersite/{id}/home public anonymous context and supported English cultures only; custom templates/new cloud search services unsupported",
                                 "Negative anonymous browser identity must equal active site configuration; native public token stays in request-scoped memory and is never retained in jobs/evidence/log URLs",

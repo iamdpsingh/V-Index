@@ -42,7 +42,7 @@ Smoke requests public provider APIs and writes timestamped evidence. Inspect fai
 
 ## Status and limits
 
-38 of the 78 required platforms have point-in-time live evidence across two independent employers or boards. The owner’s current target is **45 live-verified platforms**, with frontend on hold and new commits kept local until 45 is verified. Implementation, live evidence and production readiness remain separate. See the authoritative examples and limitations in [coverage](docs/COVERAGE.md).
+39 of the 78 required platforms have point-in-time live evidence across two independent employers or boards. The owner’s current target is **45 live-verified platforms**, with frontend on hold and new commits kept local until 45 is verified. Implementation, live evidence and production readiness remain separate. See the authoritative examples and limitations in [coverage](docs/COVERAGE.md).
 
 Codex prioritizes today's 45-platform coverage target. Frontend work remains on hold, with existing Antigravity work preserved. See [the frontend execution brief](docs/ANTIGRAVITY_START_HERE.md) and [continuous-index requirements](docs/LIVE_INDEX_REQUIREMENTS.md). The November 6 IST target is 45 total verified platforms; it is not achieved coverage. PostgreSQL/Redis integration tests run when TEST_DATABASE_URL and TEST_REDIS_URL are configured. The full container stack passes the documented CI startup/proxy checks; hosted operation is not yet verified. New commits remain local at the owner’s instruction; do not push until 45 platforms are live-verified. No hosted reviewer demo has been deployed. Acquisition readiness requires all acceptance criteria in docs/ACCEPTANCE_TESTS.md.
 

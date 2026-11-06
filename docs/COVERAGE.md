@@ -15,7 +15,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | Breezy HR | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 81 | 2026-11-06T03:16:14.203649+00:00 | https://vald.breezy.hr (75; LIVE_VERIFIED); https://subscribe.breezy.hr (6; LIVE_VERIFIED)  |
 | CareerPlug | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 10 | 2026-11-06T12:34:45.510649+00:00 | https://app.careerplug.com/accounts/576036 (2; LIVE_VERIFIED); https://app.careerplug.com/accounts/579908 (8; LIVE_VERIFIED)  |
 | Comeet | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 33 | 2026-11-06T17:26:30.311458+00:00 | https://www.comeet.com/jobs/oriient/EA.005 (7; LIVE_VERIFIED); https://www.comeet.com/jobs/webbing/46.00E (26; LIVE_VERIFIED)  |
-| CSOD | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
+| CSOD | ats | IMPLEMENTED | LIVE_VERIFIED | HIGH | 49 | 2026-11-06T17:50:13.376323+00:00 | https://portstephens.csod.com/ux/ats/careersite/1/home?c=portstephens (8; LIVE_VERIFIED); https://nswconnect.csod.com/ux/ats/careersite/1/home?c=nswconnect (41; LIVE_VERIFIED)  |
 | Dayforce | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | Deel | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Dover | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
