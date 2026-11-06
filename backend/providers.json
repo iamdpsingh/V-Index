@@ -1344,16 +1344,49 @@
     "name": "Rippling",
     "kind": "ats",
     "implementation_status": "IMPLEMENTED",
-    "evidence_status": "NOT_STARTED",
+    "evidence_status": "FAILED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
-    "failure_reason": null,
+    "examples": [
+      {
+        "provider": "Rippling",
+        "url": "https://ats.rippling.com/realwork/jobs",
+        "at": "2026-11-06T12:16:07.645876+00:00",
+        "revision": "c702b124a91e5c00a15c69c549494ba5537df2cc",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "23ffcd537d00ae856533d693e07cfab66fb59871a64139442de0b09b9f4d7781",
+        "count": 5,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "40f3b0c70c242e257bbc3e01372e462da9070b3b68f30dedd25ec67c207a74fb",
+        "finished_at": "2026-11-06T12:16:15.482440+00:00"
+      },
+      {
+        "provider": "Rippling",
+        "url": "https://ats.rippling.com/sas/jobs",
+        "at": "2026-11-06T12:16:15.983742+00:00",
+        "revision": "c702b124a91e5c00a15c69c549494ba5537df2cc",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "23ffcd537d00ae856533d693e07cfab66fb59871a64139442de0b09b9f4d7781",
+        "count": 0,
+        "status": "FAILED",
+        "complete": false,
+        "error": "ValueError: Unsupported Rippling jobs query",
+        "finished_at": "2026-11-06T12:16:17.479557+00:00"
+      }
+    ],
+    "last_run_at": "2026-11-06T12:16:17.479557+00:00",
+    "extraction_count": 5,
+    "failure_reason": "ValueError: Unsupported Rippling jobs query",
     "limitations": [
-      "Native ats.rippling.com complete single-page public SSR template only; explicit totals and mandatory matching details",
-      "Regional/custom domains, alternate/multi-page/empty boards unsupported; independent multi-employer live verification pending"
+      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
+      "Native ats.rippling.com public Next SSR template only; regional/custom domains and alternate templates unsupported",
+      "Complete unfiltered single-page collection only: explicit page/size/totalItems/totalPages must match all unique UUIDs and visible links; multi-page/empty boards fail closed",
+      "Non-test board identity and every detail UUID/title/company/listed-state/locations/native Apply button must match; full public collection reconfirmed",
+      "All full description sections, structured source workplace/employment labels and supplied pay ranges retained; createdOn remains raw, never substituted for absent datePosted",
+      "Signed asset URLs, candidate/form/EEO configuration and unrelated public state excluded; no browser/challenge execution or private platform API requested"
     ]
   },
   {
@@ -1532,40 +1565,48 @@
     "name": "Trakstar",
     "kind": "ats",
     "implementation_status": "IMPLEMENTED",
-    "evidence_status": "FAILED",
+    "evidence_status": "LIVE_VERIFIED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
     "examples": [
       {
         "provider": "Trakstar",
         "url": "https://bsglaw.hire.trakstar.com/",
-        "at": "2026-11-06T12:11:36.518116+00:00",
-        "revision": "268dffd870270eab6cbc7c9fe4abae6f23bf5145",
+        "at": "2026-11-06T12:16:17.980782+00:00",
+        "revision": "c702b124a91e5c00a15c69c549494ba5537df2cc",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "c2fb8f69ec4de107424834240e67720dba9dcac2dc6d056688d27975d265f1c4",
-        "count": 0,
-        "status": "FAILED",
-        "complete": false,
-        "error": "JSONDecodeError: Invalid control character at: line 5 column 33 (char 167)",
-        "finished_at": "2026-11-06T12:11:40.107239+00:00"
+        "code_sha256": "23ffcd537d00ae856533d693e07cfab66fb59871a64139442de0b09b9f4d7781",
+        "count": 3,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {
+          "jsonld_literal_whitespace": 3
+        },
+        "payload_sha256": "ca3ce1939d9644aa1b480f0f2e119fd5616fbafcae474f479968cb35fcd377e3",
+        "finished_at": "2026-11-06T12:16:24.025893+00:00"
       },
       {
         "provider": "Trakstar",
         "url": "https://worksuites.hire.trakstar.com/",
-        "at": "2026-11-06T12:11:40.607799+00:00",
-        "revision": "268dffd870270eab6cbc7c9fe4abae6f23bf5145",
+        "at": "2026-11-06T12:16:24.527160+00:00",
+        "revision": "c702b124a91e5c00a15c69c549494ba5537df2cc",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "c2fb8f69ec4de107424834240e67720dba9dcac2dc6d056688d27975d265f1c4",
-        "count": 0,
-        "status": "FAILED",
-        "complete": false,
-        "error": "JSONDecodeError: Invalid control character at: line 5 column 92 (char 218)",
-        "finished_at": "2026-11-06T12:11:44.084766+00:00"
+        "code_sha256": "23ffcd537d00ae856533d693e07cfab66fb59871a64139442de0b09b9f4d7781",
+        "count": 11,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {
+          "jsonld_literal_whitespace": 11
+        },
+        "payload_sha256": "97b7578c5008a826d8328baca604273a5a77089cc0d93182fd21979505ba6f88",
+        "finished_at": "2026-11-06T12:16:37.653365+00:00"
       }
     ],
-    "last_run_at": "2026-11-06T12:11:44.084766+00:00",
-    "extraction_count": 0,
-    "failure_reason": "JSONDecodeError: Invalid control character at: line 5 column 33 (char 167); JSONDecodeError: Invalid control character at: line 5 column 92 (char 218)",
+    "last_run_at": "2026-11-06T12:16:37.653365+00:00",
+    "extraction_count": 14,
+    "failure_reason": null,
     "limitations": [
       "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
       "Native tenant.hire.trakstar.com complete View-N-Openings template only; pagination beyond first page/custom domains/alternate templates unsupported",

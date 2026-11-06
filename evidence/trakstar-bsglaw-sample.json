@@ -1,0 +1,55 @@
+{
+  "external_id": "fk0z3nh",
+  "title": "Associate Attorney - Workers' Compensation",
+  "company": "Berman Sobin Gross LLP",
+  "description": "We are a Maryland law firm with an excellent reputation in personal injury and workers\u2019 compensation. Our Gaithersburg office is seeking a motivated, Maryland-barred Associate Attorney to join our dynamic team. The ideal candidate would have some experience handling workers\u2019 compensation or personal injury cases but experience is not required. We are looking for a driven, confident, and team-oriented candidate who is ready to represent clients effectively in court. Judicial law clerks are encouraged to apply. We take pride in cultivating a supportive, collaborative, and positive work environment, offering competitive base salaries, bonus opportunities, and a comprehensive benefits package.\u00a0Take the next step in your legal career\u2014join our team and make a meaningful impact. Please submit your cover letter, resume, and a writing sample for consideration. Maryland Bar required and D.C. Bar is a plus. Job Type: Full-time Pay: $70,000.00 - $100,000.00 per year Benefits: 401(k) Dental insurance Flexible schedule Flexible spending account Health insurance Life insurance Paid time off Vision insurance Experience: Attorney: 2 years (Preferred) License/Certification: Maryland Bar License (Required) Work Location: In person",
+  "quality_flags": [
+    "jsonld_literal_whitespace"
+  ],
+  "location": "Gaithersburg, Maryland, United States",
+  "source_url": "https://bsglaw.hire.trakstar.com/jobs/fk0z3nh/",
+  "application_url": "https://bsglaw.hire.trakstar.com/jobs/fk0z3nh/?apply=true",
+  "employment_type": "FULL_TIME",
+  "remote_status": null,
+  "salary": null,
+  "published_at": "2026-02-17T00:00:00",
+  "raw": {
+    "listing": {
+      "title": "Associate Attorney - Workers' Compensation",
+      "metadata": "Full-time",
+      "workplace": null
+    },
+    "jobposting": {
+      "@context": "http://schema.org/",
+      "@type": "JobPosting",
+      "title": "Associate Attorney - Workers&#x27; Compensation",
+      "description": "&lt;div&gt;\n&lt;p&gt;We are a Maryland law firm with an excellent reputation in personal injury and workers&amp;rsquo; compensation. Our Gaithersburg office is seeking a motivated, Maryland-barred Associate Attorney to join our dynamic team. The ideal candidate would have some experience handling workers&amp;rsquo; compensation or personal injury cases but experience is not required. We are looking for a driven, confident, and team-oriented candidate who is ready to represent clients effectively in court. Judicial law clerks are encouraged to apply.&lt;/p&gt;\n&lt;p&gt;We take pride in cultivating a supportive, collaborative, and positive work environment, offering competitive base salaries, bonus opportunities, and a comprehensive benefits package.&amp;nbsp;Take the next step in your legal career&amp;mdash;join our team and make a meaningful impact. Please submit your cover letter, resume, and a writing sample for consideration.&lt;/p&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;Maryland Bar required and D.C. Bar is a plus.&lt;/p&gt;\n&lt;p&gt;Job Type: Full-time&lt;/p&gt;\n&lt;/div&gt;\n&lt;div&gt;\n&lt;p&gt;Pay: $70,000.00 - $100,000.00 per year&lt;/p&gt;\n&lt;/div&gt;\n&lt;div&gt;\n&lt;p&gt;Benefits:&lt;/p&gt;\n&lt;ul&gt;\n&lt;li&gt;401(k)&lt;/li&gt;\n&lt;li&gt;Dental insurance&lt;/li&gt;\n&lt;li&gt;Flexible schedule&lt;/li&gt;\n&lt;li&gt;Flexible spending account&lt;/li&gt;\n&lt;li&gt;Health insurance&lt;/li&gt;\n&lt;li&gt;Life insurance&lt;/li&gt;\n&lt;li&gt;Paid time off&lt;/li&gt;\n&lt;li&gt;Vision insurance&lt;/li&gt;\n&lt;/ul&gt;\n&lt;/div&gt;\n&lt;div&gt;\n&lt;p&gt;Experience:&lt;/p&gt;\n&lt;ul&gt;\n&lt;li&gt;Attorney: 2 years (Preferred)&lt;/li&gt;\n&lt;/ul&gt;\n&lt;p&gt;License/Certification:&lt;/p&gt;\n&lt;ul&gt;\n&lt;li&gt;Maryland Bar License (Required)&lt;/li&gt;\n&lt;/ul&gt;\n&lt;/div&gt;\n&lt;div&gt;\n&lt;p&gt;Work Location: In person&lt;/p&gt;\n&lt;/div&gt;",
+      "jobLocation": {
+        "@type": "Place",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Gaithersburg",
+          "addressRegion": "Maryland",
+          "postalCode": "20877",
+          "addressCountry": "United States"
+        }
+      },
+      "datePosted": "2026-02-17",
+      "employmentType": "FULL_TIME",
+      "identifier": {
+        "@type": "PropertyValue",
+        "name": "Berman Sobin Gross LLP",
+        "value": "fk0z3nh"
+      },
+      "hiringOrganization": {
+        "@type": "Organization",
+        "name": "Berman Sobin Gross LLP",
+        "logo": "https://d1zx4fn8ox8446.cloudfront.net/filemanager.rboxfile/36cc6df94e9045f3ae132eec1d1fbc3b/Website_Logo__2.jpg",
+        "sameAs": "http://www.bsglaw.com"
+      }
+    },
+    "legacy_jsonld_scripts": [
+      " {\n    \"@context\" : \"http://schema.org/\",\n    \"@type\" : \"JobPosting\",\n    \"title\" : \"Associate Attorney - Workers&#x27; Compensation\",\n    \"description\" : \"&lt;div&gt;\n&lt;p&gt;We are a Maryland law firm with an excellent reputation in personal injury and workers&amp;rsquo; compensation. Our Gaithersburg office is seeking a motivated, Maryland-barred Associate Attorney to join our dynamic team. The ideal candidate would have some experience handling workers&amp;rsquo; compensation or personal injury cases but experience is not required. We are looking for a driven, confident, and team-oriented candidate who is ready to represent clients effectively in court. Judicial law clerks are encouraged to apply.&lt;/p&gt;\n&lt;p&gt;We take pride in cultivating a supportive, collaborative, and positive work environment, offering competitive base salaries, bonus opportunities, and a comprehensive benefits package.&amp;nbsp;Take the next step in your legal career&amp;mdash;join our team and make a meaningful impact. Please submit your cover letter, resume, and a writing sample for consideration.&lt;/p&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;Maryland Bar required and D.C. Bar is a plus.&lt;/p&gt;\n&lt;p&gt;Job Type: Full-time&lt;/p&gt;\n&lt;/div&gt;\n&lt;div&gt;\n&lt;p&gt;Pay: $70,000.00 - $100,000.00 per year&lt;/p&gt;\n&lt;/div&gt;\n&lt;div&gt;\n&lt;p&gt;Benefits:&lt;/p&gt;\n&lt;ul&gt;\n&lt;li&gt;401(k)&lt;/li&gt;\n&lt;li&gt;Dental insurance&lt;/li&gt;\n&lt;li&gt;Flexible schedule&lt;/li&gt;\n&lt;li&gt;Flexible spending account&lt;/li&gt;\n&lt;li&gt;Health insurance&lt;/li&gt;\n&lt;li&gt;Life insurance&lt;/li&gt;\n&lt;li&gt;Paid time off&lt;/li&gt;\n&lt;li&gt;Vision insurance&lt;/li&gt;\n&lt;/ul&gt;\n&lt;/div&gt;\n&lt;div&gt;\n&lt;p&gt;Experience:&lt;/p&gt;\n&lt;ul&gt;\n&lt;li&gt;Attorney: 2 years (Preferred)&lt;/li&gt;\n&lt;/ul&gt;\n&lt;p&gt;License/Certification:&lt;/p&gt;\n&lt;ul&gt;\n&lt;li&gt;Maryland Bar License (Required)&lt;/li&gt;\n&lt;/ul&gt;\n&lt;/div&gt;\n&lt;div&gt;\n&lt;p&gt;Work Location: In person&lt;/p&gt;\n&lt;/div&gt;\",\n\n    \"jobLocation\" : {\n        \"@type\" : \"Place\",\n        \"address\" : {\n            \"@type\" : \"PostalAddress\",\n            \"addressLocality\" : \"Gaithersburg\",\n            \"addressRegion\" : \"Maryland\",\n            \"postalCode\" : \"20877\",\n            \"addressCountry\": \"United States\"\n        }\n    },\n\n    \"datePosted\" : \"2026-02-17\",\n    \"employmentType\" : \"FULL_TIME\",\n\n    \"identifier\": {\n        \"@type\": \"PropertyValue\",\n        \"name\": \"Berman Sobin Gross LLP\",\n        \"value\": \"fk0z3nh\"\n    },\n\n    \"hiringOrganization\" : {\n        \"@type\" : \"Organization\",\n        \"name\" : \"Berman Sobin Gross LLP\"\n         \n            , \"logo\" : \"https://d1zx4fn8ox8446.cloudfront.net/filemanager.rboxfile/36cc6df94e9045f3ae132eec1d1fbc3b/Website_Logo__2.jpg\"\n        \n         ,\"sameAs\": \"http://www.bsglaw.com\"\n    }\n}\n"
+    ]
+  }
+}

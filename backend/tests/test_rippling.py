@@ -29,6 +29,7 @@ def board():
         "boardURL": ORIGIN + "/example/jobs",
         "companyName": "Example",
         "isTest": False,
+        "groupJobsByLocation": True,
         "logo": {"url": "signed-asset-excluded"},
     }
 
@@ -203,3 +204,12 @@ def test_only_actual_source_posting_date_is_promoted():
     for url in (ORIGIN + "/", "https://ats.rippling.com.evil.com/example/jobs"):
         with pytest.raises(ValueError):
             detect(url)
+
+
+def test_public_grouping_mode_false_is_not_a_private_visibility_flag():
+    listing = listing_state()
+    detail = detail_state()
+    listing["apiData"]["jobBoard"]["groupJobsByLocation"] = False
+    listing["dehydratedState"]["queries"][0]["queryKey"][3] = False
+    detail["apiData"]["jobBoard"]["groupJobsByLocation"] = False
+    assert run(listing=listing, detail=detail).complete

@@ -50,14 +50,14 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | Polymer | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 6 | 2026-11-06T07:47:46.726853+00:00 | https://jobs.polymer.co/chemfinitytech (4; LIVE_VERIFIED); https://jobs.polymer.co/gencores-inc (2; LIVE_VERIFIED)  |
 | Recooty | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 28 | 2026-11-06T08:33:21.660966+00:00 | https://careerspage.io/augusto-digital (2; LIVE_VERIFIED); https://careerspage.io/recooty-inc (26; LIVE_VERIFIED)  |
 | Recruitee | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 29 | 2026-11-06T01:42:58.731786+00:00 | https://natilik.recruitee.com (6; LIVE_VERIFIED); https://bunq.recruitee.com (23; LIVE_VERIFIED)  |
-| Rippling | ats | IMPLEMENTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
+| Rippling | ats | IMPLEMENTED | FAILED | MEDIUM | 5 | 2026-11-06T12:16:17.479557+00:00 | https://ats.rippling.com/realwork/jobs (5; LIVE_VERIFIED); https://ats.rippling.com/sas/jobs (0; FAILED) ValueError: Unsupported Rippling jobs query |
 | Rival | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | SAP SuccessFactors | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | SmartRecruiters | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 90 | 2026-11-05T16:49:50.960317+00:00 | https://careers.smartrecruiters.com/SmartRecruiters (2; LIVE_VERIFIED); https://careers.smartrecruiters.com/Colliers (88; LIVE_VERIFIED)  |
 | talentReef | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Taleo | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | Teamtailor | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 26 | 2026-11-06T03:09:11.551818+00:00 | https://clearroute.teamtailor.com (22; LIVE_VERIFIED); https://omny.teamtailor.com (4; LIVE_VERIFIED)  |
-| Trakstar | ats | IMPLEMENTED | FAILED | MEDIUM | 0 | 2026-11-06T12:11:44.084766+00:00 | https://bsglaw.hire.trakstar.com/ (0; FAILED); https://worksuites.hire.trakstar.com/ (0; FAILED) JSONDecodeError: Invalid control character at: line 5 column 33 (char 167); JSONDecodeError: Invalid control character at: line 5 column 92 (char 218) |
+| Trakstar | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 14 | 2026-11-06T12:16:37.653365+00:00 | https://bsglaw.hire.trakstar.com/ (3; LIVE_VERIFIED); https://worksuites.hire.trakstar.com/ (11; LIVE_VERIFIED)  |
 | TriNet | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | UltiPro | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | WeRecruit | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |

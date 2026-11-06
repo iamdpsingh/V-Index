@@ -42,6 +42,7 @@ class RipplingConnector:
         if (
             board["boardType"] != "RIPPLING"
             or board["slug"] != self.slug
+            or type(board["groupJobsByLocation"]) is not bool
             or board["isTest"] is not False
             or board["boardURL"] != self.board_url
             or not isinstance(board["companyName"], str)
@@ -49,7 +50,16 @@ class RipplingConnector:
         ):
             raise ValueError("Rippling board identity/test-state mismatch")
         return {
-            k: board[k] for k in ("boardType", "slug", "title", "boardURL", "companyName", "isTest")
+            k: board[k]
+            for k in (
+                "boardType",
+                "slug",
+                "title",
+                "boardURL",
+                "companyName",
+                "isTest",
+                "groupJobsByLocation",
+            )
         }
 
     def listings(self, body: bytes) -> tuple[dict, dict[str, dict]]:
@@ -66,7 +76,7 @@ class RipplingConnector:
             raise ValueError("Missing unique Rippling public jobs collection")
         query = queries[0]
         key = query["queryKey"]
-        if len(key) != 5 or key[3] is not True:
+        if len(key) != 5 or type(key[3]) is not bool or key[3] != board["groupJobsByLocation"]:
             raise ValueError("Unsupported Rippling jobs query")
         params = key[4]
         if (
