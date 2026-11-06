@@ -67,7 +67,10 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | Niceboard | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | WP Job Manager | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | JobKit | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
-| Jobboardly | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
+| Jobboardly | job_board | IMPLEMENTED | FAILED | HIGH | 31 | 2026-11-06T03:29:08.089606+00:00 | https://recruiter-jobs.jobboardly.com/jobs (31; LIVE_VERIFIED); https://pennsylvania-communications.jobboardly.com/jobs (0; FAILED) ValidationError: 1 validation error for JobInput
+application_url
+  Value error, Expected an HTTPS link without credentials [type=value_error, input_value='mailto:info@trueblue-exhibits.com', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.14/v/value_error |
 | Jobiqo | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | JBoard.io | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | JobBoardFire | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |

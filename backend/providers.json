@@ -1355,16 +1355,50 @@
   {
     "name": "Jobboardly",
     "kind": "job_board",
-    "implementation_status": "NOT_STARTED",
-    "evidence_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
+    "evidence_status": "FAILED",
     "risk": "HIGH",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
-    "failure_reason": null,
+    "examples": [
+      {
+        "provider": "Jobboardly",
+        "url": "https://recruiter-jobs.jobboardly.com/jobs",
+        "at": "2026-11-06T03:28:02.957066+00:00",
+        "revision": "7e26683dd6471da2c664706c1b8452cce9c7f045",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "b92840e4cc23aca2fa8b9033d2cc8e561b1f8d8cb56652b0d469ec9d82a93cad",
+        "count": 31,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "58839ff2d42d24d8f076785ec2b46df058c0e67085c4fc6532a3cf41ca665a0a",
+        "finished_at": "2026-11-06T03:28:59.459289+00:00"
+      },
+      {
+        "provider": "Jobboardly",
+        "url": "https://pennsylvania-communications.jobboardly.com/jobs",
+        "at": "2026-11-06T03:28:59.960594+00:00",
+        "revision": "7e26683dd6471da2c664706c1b8452cce9c7f045",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "b92840e4cc23aca2fa8b9033d2cc8e561b1f8d8cb56652b0d469ec9d82a93cad",
+        "count": 0,
+        "status": "FAILED",
+        "complete": false,
+        "error": "ValidationError: 1 validation error for JobInput\napplication_url\n  Value error, Expected an HTTPS link without credentials [type=value_error, input_value='mailto:info@trueblue-exhibits.com', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error",
+        "finished_at": "2026-11-06T03:29:08.089606+00:00"
+      }
+    ],
+    "last_run_at": "2026-11-06T03:29:08.089606+00:00",
+    "extraction_count": 31,
+    "failure_reason": "ValidationError: 1 validation error for JobInput\napplication_url\n  Value error, Expected an HTTPS link without credentials [type=value_error, input_value='mailto:info@trueblue-exhibits.com', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error",
     "limitations": [
-      "Connector not implemented"
+      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
+      "Hosted jobboardly.com HTML listings only; custom-domain registration and redirecting hosted aliases are unsupported",
+      "Explicit sequential Next controls, range counters, unique links and successful JobPosting/apply details are required",
+      "Maximum 400 details/100 pages; empty pages fail closed rather than proving closures",
+      "JSON-LD preserves salary, employment type, locations and datePosted; source workplace metadata beyond jobLocationType remains raw/unmapped",
+      "Completeness follows the public pagination contract plus first-page reconfirmation, not a transactional upstream snapshot"
     ]
   },
   {

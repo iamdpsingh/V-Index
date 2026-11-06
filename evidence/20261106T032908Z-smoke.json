@@ -1,0 +1,30 @@
+[
+  {
+    "provider": "Jobboardly",
+    "url": "https://recruiter-jobs.jobboardly.com/jobs",
+    "at": "2026-11-06T03:28:02.957066+00:00",
+    "revision": "7e26683dd6471da2c664706c1b8452cce9c7f045",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "b92840e4cc23aca2fa8b9033d2cc8e561b1f8d8cb56652b0d469ec9d82a93cad",
+    "count": 31,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "58839ff2d42d24d8f076785ec2b46df058c0e67085c4fc6532a3cf41ca665a0a",
+    "finished_at": "2026-11-06T03:28:59.459289+00:00"
+  },
+  {
+    "provider": "Jobboardly",
+    "url": "https://pennsylvania-communications.jobboardly.com/jobs",
+    "at": "2026-11-06T03:28:59.960594+00:00",
+    "revision": "7e26683dd6471da2c664706c1b8452cce9c7f045",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "b92840e4cc23aca2fa8b9033d2cc8e561b1f8d8cb56652b0d469ec9d82a93cad",
+    "count": 0,
+    "status": "FAILED",
+    "complete": false,
+    "error": "ValidationError: 1 validation error for JobInput\napplication_url\n  Value error, Expected an HTTPS link without credentials [type=value_error, input_value='mailto:info@trueblue-exhibits.com', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error",
+    "finished_at": "2026-11-06T03:29:08.089606+00:00"
+  }
+]
