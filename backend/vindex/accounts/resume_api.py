@@ -102,7 +102,17 @@ async def upload_resume(request: Request, x_filename: str = Header()):
         return metadata(saved)
 
 
-@router.get("/resume/download")
+@router.get(
+    "/resume/download",
+    response_class=Response,
+    responses={
+        200: {
+            "content": {
+                "application/octet-stream": {"schema": {"type": "string", "format": "binary"}}
+            }
+        }
+    },
+)
 def download_resume(request: Request):
     with Session() as session:
         account = principal(request, session)

@@ -187,6 +187,8 @@ def test_openapi_declares_raw_upload_and_filename_contract():
         == "binary"
     )
     assert any(p["name"] == "x-filename" and p["required"] for p in operation["parameters"])
+    download = api.app.openapi()["paths"]["/api/v1/me/resume/download"]["get"]
+    assert "application/octet-stream" in download["responses"]["200"]["content"]
 
 
 def test_chunked_private_upload_and_json_limits(private_client):
