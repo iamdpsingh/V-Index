@@ -8,6 +8,7 @@ from alembic.config import Config
 from sqlalchemy import create_engine, event, text
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import StaticPool
+from vindex.accounts import models  # noqa: F401
 from vindex.db import Base, Source
 
 

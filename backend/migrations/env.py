@@ -2,6 +2,7 @@ import os
 
 from alembic import context
 from sqlalchemy import create_engine
+from vindex.accounts import models  # noqa: F401
 from vindex.db import Base
 
 url = os.getenv("DATABASE_URL", context.config.get_main_option("sqlalchemy.url"))
