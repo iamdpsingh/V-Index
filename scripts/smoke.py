@@ -15,6 +15,20 @@ from vindex.connectors.registry import create_connector
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
     (
+        "Manatal",
+        "manatal",
+        "quantilehealth",
+        "Quantile Health",
+        "https://www.careers-page.com/quantilehealth",
+    ),
+    (
+        "Manatal",
+        "manatal",
+        "munich-ventures-2",
+        "Munich Ventures",
+        "https://www.careers-page.com/munich-ventures-2",
+    ),
+    (
         "Polymer",
         "polymer",
         "chemfinitytech",
@@ -234,6 +248,14 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "Manatal": [
+                                "Legacy www.careers-page.com boards only; new tenant subdomains, custom domains and other themes unsupported",
+                                "Public unfiltered collection count must match named career-page total and visible titles; sequential fixed-host pagination validated before any detail requests",
+                                "Maximum 400 details/100 pages; empty, malformed, partial, changed or failed snapshots abort without reconciliation",
+                                "Every HTML detail must match title, employer, Manatal identity, full description and native application link; full collection and board reconfirmed",
+                                "Source descriptions, locations and visible salary currency/range preserved; employment/workplace/publication metadata not independently supplied by supported template remains null",
+                                "Raw observations preserve source collection and job-bearing detail HTML; no candidate application is submitted or fetched",
+                            ],
                             "Polymer": [
                                 "Documented unauthenticated public organizations/jobs API; no customer/candidate API or account token is used",
                                 "Only complete single-page named collections with matching count/is_first/is_last/page/total metadata are supported; paginated/empty collections fail closed",

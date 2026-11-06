@@ -748,7 +748,7 @@
   {
     "name": "Manatal",
     "kind": "ats",
-    "implementation_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
     "evidence_status": "NOT_STARTED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
@@ -757,7 +757,8 @@
     "extraction_count": null,
     "failure_reason": null,
     "limitations": [
-      "Connector not implemented"
+      "Legacy www.careers-page.com public hosted template; maximum 400 details",
+      "New tenant subdomains/custom domains/empty snapshots unsupported; live multi-employer evidence pending"
     ]
   },
   {

@@ -37,7 +37,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | JOIN.com | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Kula.ai | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Lever.co | ats | IMPLEMENTED | LIVE_VERIFIED | LOW | 394 | 2026-11-05T16:42:17.172545+00:00 | https://jobs.lever.co/spotify (87; LIVE_VERIFIED); https://jobs.lever.co/palantir (307; LIVE_VERIFIED)  |
-| Manatal | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
+| Manatal | ats | IMPLEMENTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Oracle Recruiting | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | PageUp | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Paradox | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |

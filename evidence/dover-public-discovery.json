@@ -1,0 +1,12 @@
+{
+  "recorded_at": "2026-11-06T07:52:10.007313+00:00",
+  "status": "BLOCKED_RESEARCH_ONLY",
+  "observations": [
+    "app.dover.com/jobs/salsa returns HTTP 302 to jobs.dover.com/salsa?src=app; redirect not followed",
+    "Direct jobs.dover.com/salsa and /engineears return 200 JavaScript shells",
+    "Public jobs-host assets reference careers-page-slug and careers-page/{client_id}/jobs routes"
+  ],
+  "request_not_made": "https://jobs.dover.com/api/v1/careers-page-slug/salsa",
+  "reason": "Career page robots policy disallows this request",
+  "limitations": "No API collection/detail request was made after robots denial. No Dover connector or coverage claimed."
+}

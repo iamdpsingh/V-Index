@@ -11,6 +11,7 @@ from vindex.connectors.gohire import GoHireConnector
 from vindex.connectors.hirehive import HireHiveConnector
 from vindex.connectors.jazzhr import JazzHRConnector
 from vindex.connectors.jobboardly import JobboardlyConnector
+from vindex.connectors.manatal import ManatalConnector
 from vindex.connectors.personio import PersonioConnector
 from vindex.connectors.pinpoint import PinpointConnector
 from vindex.connectors.polymer import SLUG as POLYMER_SLUG
@@ -42,6 +43,11 @@ def detect(url: str) -> tuple[str, str]:
         match = re.fullmatch(rf"({TENANT})\.{re.escape(suffix)}", p.hostname or "")
         if match:
             return provider, match[1]
+    if p.hostname == "www.careers-page.com":
+        slug = p.path.strip("/").split("/")[0]
+        if not re.fullmatch(TENANT, slug):
+            raise ValueError("Expected a Manatal hosted career-board URL")
+        return "manatal", slug
     if p.hostname == "jobs.polymer.co":
         slug = p.path.strip("/").split("/")[0]
         if not re.fullmatch(POLYMER_SLUG, slug):
@@ -85,13 +91,15 @@ def detect(url: str) -> tuple[str, str]:
         return detect_original(url)
     except ValueError as error:
         raise ValueError(
-            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire and Polymer"
+            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer and Manatal"
         ) from error
 
 
 def create_connector(
     provider: str, slug: str, company: str, client: httpx.AsyncClient
 ) -> Connector:
+    if provider == "manatal":
+        return ManatalConnector(provider, slug, company, client)
     if provider == "polymer":
         return PolymerConnector(provider, slug, company, client)
     if provider == "gohire":
