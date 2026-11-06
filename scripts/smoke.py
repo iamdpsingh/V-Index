@@ -14,6 +14,8 @@ from vindex.connectors.registry import create_connector
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
+    ("Pinpoint", "pinpoint", "intermedia", "Intermedia", "https://intermedia.pinpointhq.com"),
+    ("Pinpoint", "pinpoint", "workwithus", "Pinpoint", "https://workwithus.pinpointhq.com"),
     ("BambooHR", "bamboohr", "anaergia", "Anaergia", "https://anaergia.bamboohr.com/careers"),
     ("BambooHR", "bamboohr", "concept2", "Concept2", "https://concept2.bamboohr.com/careers"),
     ("Workable", "workable", "careers", "Workable", "https://apply.workable.com/careers/"),
@@ -174,6 +176,13 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "Pinpoint": [
+                                "Documented public postings.json full collection; legacy jobs.json is intentionally not used because it omits secondary postings",
+                                "Each posting ID is preserved separately from its parent job ID; custom application/source links remain intact",
+                                "Hosted tenant registration only; custom-domain entry detection and locale-specific feed selection remain unsupported",
+                                "No original publication timestamp is promised by this feed; hidden compensation is not promoted to normalized salary",
+                                "Robots policy can prevent a tenant fetch; no access controls are bypassed",
+                            ],
                             "BambooHR": [
                                 "Hosted bamboohr.com career list/detail only; maximum 400 details and no custom-domain detection",
                                 "Reported total must equal unique listed identifiers, every detail must match the open listing, and IDs are reconfirmed",

@@ -488,3 +488,109 @@ def test_bamboo_url_detection():
     ):
         with pytest.raises(ValueError):
             detect(url)
+
+
+def pinpoint_payload():
+    return {
+        "data": [
+            {
+                "id": "123",
+                "title": "Engineer",
+                "description": "<p>Build</p>",
+                "url": "https://careers.example.org/en/postings/uuid",
+                "application_form_url": "https://careers.example.org/en/postings/uuid/applications/new",
+                "location": {"name": "London", "city": "London", "province": "England"},
+                "employment_type_text": "Full Time",
+                "workplace_type_text": "Fully remote",
+                "compensation_visible": True,
+                "compensation": "£50,000/year",
+                "compensation_currency": "GBP",
+                "compensation_minimum": 50000,
+                "key_responsibilities": "<p>Operate</p>",
+                "key_responsibilities_header": "Responsibilities",
+                "benefits": "<p>Leave</p>",
+                "job": {"id": "parent-456"},
+            }
+        ]
+    }
+
+
+def pinpoint_handler(payload=None, confirmation=None, robots="User-agent: *\nAllow: /"):
+    calls = 0
+
+    def handle(request):
+        nonlocal calls
+        assert request.url.host == "example.pinpointhq.com"
+        if request.url.path == "/robots.txt":
+            return httpx.Response(200, text=robots)
+        assert request.url.path == "/postings.json"
+        calls += 1
+        data = confirmation if calls > 1 and confirmation is not None else payload
+        return httpx.Response(200, json=data if data is not None else pinpoint_payload())
+
+    return handle
+
+
+def test_pinpoint_preserves_posting_metadata_and_custom_links_without_fetching_them():
+    batch = run("pinpoint", pinpoint_handler())
+    job = batch.jobs[0]
+    assert batch.complete and job.external_id == "123"
+    assert job.description == "Build\n\nResponsibilities Operate\n\nLeave"
+    assert job.location == "London, England" and job.remote_status == "Fully remote"
+    assert job.salary["compensation_currency"] == "GBP" and job.published_at is None
+    assert job.application_url == "https://careers.example.org/en/postings/uuid/applications/new"
+    assert job.raw["job"]["id"] == "parent-456"
+
+
+def test_pinpoint_distinct_postings_on_one_job_are_preserved():
+    payload = pinpoint_payload()
+    other = copy.deepcopy(payload["data"][0])
+    other.update(id="124", url="https://careers.example.org/en/postings/other-uuid")
+    payload["data"].append(other)
+    assert len(run("pinpoint", pinpoint_handler(payload)).jobs) == 2
+
+
+def test_pinpoint_hidden_compensation_not_promoted_to_normalized_salary():
+    payload = pinpoint_payload()
+    payload["data"][0]["compensation_visible"] = False
+    job = run("pinpoint", pinpoint_handler(payload)).jobs[0]
+    assert job.salary is None and job.raw["compensation_minimum"] == 50000
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        lambda p: p.update(data={}),
+        lambda p: p.pop("data"),
+        lambda p: p.update(next_url="https://evil.com"),
+        lambda p: p.update(links={"next": "https://evil.com"}),
+        lambda p: p["data"].append(copy.deepcopy(p["data"][0])),
+        lambda p: p["data"][0].update(id="../123"),
+        lambda p: p["data"][0].pop("description"),
+        lambda p: p["data"][0].update(url="javascript:alert(1)"),
+    ],
+)
+def test_pinpoint_invalid_or_partial_feed_fails(mutation):
+    payload = pinpoint_payload()
+    mutation(payload)
+    with pytest.raises((ValueError, KeyError, TypeError)):
+        run("pinpoint", pinpoint_handler(payload))
+
+
+def test_pinpoint_robots_denial_or_changed_feed_fails():
+    for handler in (
+        pinpoint_handler(robots="User-agent: *\nDisallow: /postings.json"),
+        pinpoint_handler(confirmation={"data": []}),
+    ):
+        with pytest.raises(ValueError):
+            run("pinpoint", handler)
+
+
+def test_pinpoint_url_detection():
+    assert detect("https://workwithus.pinpointhq.com/en/postings/uuid") == (
+        "pinpoint",
+        "workwithus",
+    )
+    for url in ("https://a.b.pinpointhq.com", "https://workwithus.pinpointhq.com.evil.com"):
+        with pytest.raises(ValueError):
+            detect(url)

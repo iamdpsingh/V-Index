@@ -7,6 +7,7 @@ import httpx
 from vindex.connectors.bamboohr import BambooHRConnector
 from vindex.connectors.breezy import BreezyConnector
 from vindex.connectors.personio import PersonioConnector
+from vindex.connectors.pinpoint import PinpointConnector
 from vindex.connectors.public import Connector, PublicConnector
 from vindex.connectors.public import detect as detect_original
 from vindex.connectors.recruitee import RecruiteeConnector
@@ -26,6 +27,7 @@ def detect(url: str) -> tuple[str, str]:
         ("teamtailor.com", "teamtailor"),
         ("breezy.hr", "breezy"),
         ("bamboohr.com", "bamboohr"),
+        ("pinpointhq.com", "pinpoint"),
     ):
         match = re.fullmatch(rf"({TENANT})\.{re.escape(suffix)}", p.hostname or "")
         if match:
@@ -63,13 +65,15 @@ def detect(url: str) -> tuple[str, str]:
         return detect_original(url)
     except ValueError as error:
         raise ValueError(
-            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable and BambooHR"
+            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR and Pinpoint"
         ) from error
 
 
 def create_connector(
     provider: str, slug: str, company: str, client: httpx.AsyncClient
 ) -> Connector:
+    if provider == "pinpoint":
+        return PinpointConnector(provider, slug, company, client)
     if provider == "bamboohr":
         return BambooHRConnector(provider, slug, company, client)
     if provider == "workable":
