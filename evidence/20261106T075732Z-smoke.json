@@ -1,0 +1,28 @@
+[
+  {
+    "provider": "Manatal",
+    "url": "https://www.careers-page.com/quantilehealth",
+    "at": "2026-11-06T07:57:28.165647+00:00",
+    "revision": "4b1971d6ed23372f5089616cc6bfa1fdded8777f",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "e7cd17f25150b27b2c074be5b6b9cd7be2844aa57f006d9d4d58e99de6003c23",
+    "count": 0,
+    "status": "FAILED",
+    "complete": false,
+    "error": "ValueError: Missing Manatal visible listings",
+    "finished_at": "2026-11-06T07:57:30.444948+00:00"
+  },
+  {
+    "provider": "Manatal",
+    "url": "https://www.careers-page.com/munich-ventures-2",
+    "at": "2026-11-06T07:57:30.946121+00:00",
+    "revision": "4b1971d6ed23372f5089616cc6bfa1fdded8777f",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "e7cd17f25150b27b2c074be5b6b9cd7be2844aa57f006d9d4d58e99de6003c23",
+    "count": 0,
+    "status": "FAILED",
+    "complete": false,
+    "error": "ValueError: Missing Manatal visible listings",
+    "finished_at": "2026-11-06T07:57:32.194052+00:00"
+  }
+]

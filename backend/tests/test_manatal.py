@@ -225,3 +225,15 @@ def test_manatal_detection_requires_canonical_host_and_slug():
     ):
         with pytest.raises(ValueError):
             detect(url)
+
+
+def test_real_vue_fallback_template_list_is_parsed_without_rendering():
+    html = (
+        board()
+        .replace(
+            '<a href="/example/job/AAAA1111">',
+            '<template v-else-if="jobs &amp;&amp; jobs.length == 0"><!-- before_js --><a href="/example/job/AAAA1111">',
+        )
+        .replace("</a></body>", "</a></template></body>")
+    )
+    assert run(html=html).jobs[0].title == "Engineer"

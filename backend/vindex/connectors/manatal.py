@@ -62,8 +62,15 @@ class ManatalConnector:
         scripts = "\n".join(s.get_text() for s in soup.select("script:not([src])"))
         if f'const clientSlug = "{self.slug}";' not in scripts:
             raise ValueError("Manatal board slug mismatch")
+        # SoupSieve skips inert template descendants; parse the actual pre-JS list.
+        fallbacks = soup.select("template[v-else-if]")
+        rendered = soup
+        if fallbacks:
+            if len(fallbacks) != 1 or fallbacks[0].get("v-else-if") != "jobs && jobs.length == 0":
+                raise ValueError("Unsupported Manatal fallback listing template")
+            rendered = BeautifulSoup(fallbacks[0].decode_contents(), "html.parser")
         links = {}
-        for anchor in soup.select("a[href]"):
+        for anchor in rendered.select("a[href]"):
             path = str(anchor["href"])
             m = re.fullmatch(rf"/{re.escape(self.slug)}/job/([A-Z0-9]{{8}})", path)
             heading = anchor.select_one("h5")
