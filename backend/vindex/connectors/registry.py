@@ -26,6 +26,7 @@ from vindex.connectors.recooty import RecootyConnector
 from vindex.connectors.recruitee import RecruiteeConnector
 from vindex.connectors.smartrecruiters import SmartRecruitersConnector
 from vindex.connectors.teamtailor import TENANT, TeamtailorConnector
+from vindex.connectors.trakstar import TrakstarConnector
 from vindex.connectors.workable import WorkableConnector
 from vindex.connectors.workday import HOST_PATTERN, SITE_PATTERN, WorkdayConnector
 
@@ -37,6 +38,7 @@ def detect(url: str) -> tuple[str, str]:
     if p.scheme != "https" or p.username or p.password or p.port not in (None, 443):
         raise ValueError("Use an HTTPS hosted career board URL without credentials or custom ports")
     for suffix, provider in (
+        ("hire.trakstar.com", "trakstar"),
         ("freshteam.com", "freshteam"),
         ("hiringthing.com", "hiringthing"),
         ("applicantpro.com", "applicantpro"),
@@ -110,13 +112,15 @@ def detect(url: str) -> tuple[str, str]:
         return detect_original(url)
     except ValueError as error:
         raise ValueError(
-            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire, HiringThing and Freshteam"
+            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire, HiringThing, Freshteam and Trakstar"
         ) from error
 
 
 def create_connector(
     provider: str, slug: str, company: str, client: httpx.AsyncClient
 ) -> Connector:
+    if provider == "trakstar":
+        return TrakstarConnector(provider, slug, company, client)
     if provider == "freshteam":
         return FreshteamConnector(provider, slug, company, client)
     if provider == "hiringthing":

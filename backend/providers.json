@@ -378,33 +378,35 @@
       {
         "provider": "Freshteam",
         "url": "https://sequoiaat.freshteam.com/jobs",
-        "at": "2026-11-06T12:03:58.022329+00:00",
-        "revision": "1740a9844dd8c3eb08e4d6f037717d6a2cdc733a",
+        "at": "2026-11-06T12:06:40.392747+00:00",
+        "revision": "c17ed8eebb58755ae8aa75829a71efda5a7d2587",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "da8cac32a68750a046c94af5473410f8c18ed8e451951e3215438e45453f6bfb",
-        "count": 0,
-        "status": "FAILED",
-        "complete": false,
-        "error": "ValueError: Freshteam title/ID/remote/native application mismatch",
-        "finished_at": "2026-11-06T12:04:02.580178+00:00"
+        "code_sha256": "6dcd330f0de539ff306269c31db583b80cc4128093b6033136ef139126380e94",
+        "count": 26,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "c3b1fb659840df6f20cd3b0a043a62ec29fa4f10e2cfaff532cf0c905f1e05b3",
+        "finished_at": "2026-11-06T12:07:03.246856+00:00"
       },
       {
         "provider": "Freshteam",
         "url": "https://talent360.freshteam.com/jobs",
-        "at": "2026-11-06T12:04:03.081539+00:00",
-        "revision": "1740a9844dd8c3eb08e4d6f037717d6a2cdc733a",
+        "at": "2026-11-06T12:07:03.748042+00:00",
+        "revision": "c17ed8eebb58755ae8aa75829a71efda5a7d2587",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "da8cac32a68750a046c94af5473410f8c18ed8e451951e3215438e45453f6bfb",
+        "code_sha256": "6dcd330f0de539ff306269c31db583b80cc4128093b6033136ef139126380e94",
         "count": 0,
         "status": "FAILED",
         "complete": false,
         "error": "ValueError: Freshteam title/ID/remote/native application mismatch",
-        "finished_at": "2026-11-06T12:04:11.541732+00:00"
+        "finished_at": "2026-11-06T12:07:13.195750+00:00"
       }
     ],
-    "last_run_at": "2026-11-06T12:04:11.541732+00:00",
-    "extraction_count": 0,
-    "failure_reason": "ValueError: Freshteam title/ID/remote/native application mismatch; ValueError: Freshteam title/ID/remote/native application mismatch",
+    "last_run_at": "2026-11-06T12:07:13.195750+00:00",
+    "extraction_count": 26,
+    "failure_reason": "ValueError: Freshteam title/ID/remote/native application mismatch",
     "limitations": [
       "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
       "Native freshteam.com full job-role-list HTML plus mandatory JobPosting/native application-form details; custom domains/alternate/paginated templates unsupported",
@@ -1526,7 +1528,7 @@
   {
     "name": "Trakstar",
     "kind": "ats",
-    "implementation_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
     "evidence_status": "NOT_STARTED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
@@ -1535,7 +1537,8 @@
     "extraction_count": null,
     "failure_reason": null,
     "limitations": [
-      "Connector not implemented"
+      "Native hire.trakstar.com complete single-page View-N-Openings template only; max 400 matching details",
+      "Empty/paginated/alternate/custom-domain templates unsupported; independent multi-employer live evidence pending"
     ]
   },
   {

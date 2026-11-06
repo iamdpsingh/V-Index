@@ -15,6 +15,20 @@ from vindex.connectors.registry import create_connector
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
     (
+        "Trakstar",
+        "trakstar",
+        "bsglaw",
+        "Berman Sobin Gross LLP",
+        "https://bsglaw.hire.trakstar.com/",
+    ),
+    (
+        "Trakstar",
+        "trakstar",
+        "worksuites",
+        "Lucid Private Offices",
+        "https://worksuites.hire.trakstar.com/",
+    ),
+    (
         "Freshteam",
         "freshteam",
         "sequoiaat",
@@ -302,6 +316,13 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "Trakstar": [
+                                "Native tenant.hire.trakstar.com complete View-N-Openings template only; pagination beyond first page/custom domains/alternate templates unsupported",
+                                "Explicit total must exactly match unique named job paths; at most 400 details; no partial/empty snapshots reconciled",
+                                "Each JobPosting native identifier/title/employer/Open Graph URL must match; actual native application form/action and Apply link required",
+                                "Source HTML entities/whitespace normalized for comparison and plain text, original schema retained; employment/location/date/salary and explicit workplace label preserved",
+                                "Full opening title/metadata map and employer reconfirmed after all details; no candidate form/configuration retained",
+                            ],
                             "Freshteam": [
                                 "Native freshteam.com full job-role-list HTML plus mandatory JobPosting/native application-form details; custom domains/alternate/paginated templates unsupported",
                                 "Maximum 400 details; unique native IDs, list/detail titles, schema host/ID, explicit remote string and native form action must match; full roster reconfirmed",

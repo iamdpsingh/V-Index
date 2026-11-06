@@ -21,7 +21,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | Dover | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Eightfold AI | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | FirstStage | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
-| Freshteam | ats | IMPLEMENTED | FAILED | MEDIUM | 0 | 2026-11-06T12:04:11.541732+00:00 | https://sequoiaat.freshteam.com/jobs (0; FAILED); https://talent360.freshteam.com/jobs (0; FAILED) ValueError: Freshteam title/ID/remote/native application mismatch; ValueError: Freshteam title/ID/remote/native application mismatch |
+| Freshteam | ats | IMPLEMENTED | FAILED | MEDIUM | 26 | 2026-11-06T12:07:13.195750+00:00 | https://sequoiaat.freshteam.com/jobs (26; LIVE_VERIFIED); https://talent360.freshteam.com/jobs (0; FAILED) ValueError: Freshteam title/ID/remote/native application mismatch |
 | Gem.com | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | GoHire | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 45 | 2026-11-06T07:43:13.012881+00:00 | https://jobs.gohire.io/dineamic-hospitality-fniota1h/ (22; LIVE_VERIFIED); https://jobs.gohire.io/digital-shift-o0hrqw5o/ (23; LIVE_VERIFIED)  |
 | Greenhouse | ats | IMPLEMENTED | LIVE_VERIFIED | LOW | 1226 | 2026-11-05T16:41:54.721525+00:00 | https://job-boards.greenhouse.io/stripe (762; LIVE_VERIFIED); https://job-boards.greenhouse.io/cloudflare (464; LIVE_VERIFIED)  |
@@ -57,7 +57,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | talentReef | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Taleo | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | Teamtailor | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 26 | 2026-11-06T03:09:11.551818+00:00 | https://clearroute.teamtailor.com (22; LIVE_VERIFIED); https://omny.teamtailor.com (4; LIVE_VERIFIED)  |
-| Trakstar | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
+| Trakstar | ats | IMPLEMENTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | TriNet | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | UltiPro | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | WeRecruit | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
