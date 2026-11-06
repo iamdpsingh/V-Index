@@ -13,6 +13,8 @@ from vindex.connectors.jazzhr import JazzHRConnector
 from vindex.connectors.jobboardly import JobboardlyConnector
 from vindex.connectors.personio import PersonioConnector
 from vindex.connectors.pinpoint import PinpointConnector
+from vindex.connectors.polymer import SLUG as POLYMER_SLUG
+from vindex.connectors.polymer import PolymerConnector
 from vindex.connectors.public import Connector, PublicConnector
 from vindex.connectors.public import detect as detect_original
 from vindex.connectors.recruitee import RecruiteeConnector
@@ -40,6 +42,11 @@ def detect(url: str) -> tuple[str, str]:
         match = re.fullmatch(rf"({TENANT})\.{re.escape(suffix)}", p.hostname or "")
         if match:
             return provider, match[1]
+    if p.hostname == "jobs.polymer.co":
+        slug = p.path.strip("/").split("/")[0]
+        if not re.fullmatch(POLYMER_SLUG, slug):
+            raise ValueError("Expected a Polymer organization career URL")
+        return "polymer", slug
     if p.hostname == "jobs.gohire.io":
         slug = p.path.strip("/").split("/")[0]
         if not re.fullmatch(GOHIRE_SLUG, slug) or len(slug) > 100:
@@ -78,13 +85,15 @@ def detect(url: str) -> tuple[str, str]:
         return detect_original(url)
     except ValueError as error:
         raise ValueError(
-            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive and GoHire"
+            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire and Polymer"
         ) from error
 
 
 def create_connector(
     provider: str, slug: str, company: str, client: httpx.AsyncClient
 ) -> Connector:
+    if provider == "polymer":
+        return PolymerConnector(provider, slug, company, client)
     if provider == "gohire":
         return GoHireConnector(provider, slug, company, client)
     if provider == "hirehive":

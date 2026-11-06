@@ -15,6 +15,20 @@ from vindex.connectors.registry import create_connector
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
     (
+        "Polymer",
+        "polymer",
+        "chemfinitytech",
+        "ChemFinity Technologies",
+        "https://jobs.polymer.co/chemfinitytech",
+    ),
+    (
+        "Polymer",
+        "polymer",
+        "gencores-inc",
+        "Gencores, Inc.",
+        "https://jobs.polymer.co/gencores-inc",
+    ),
+    (
         "GoHire",
         "gohire",
         "dineamic-hospitality-fniota1h",
@@ -220,6 +234,15 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "Polymer": [
+                                "Documented unauthenticated public organizations/jobs API; no customer/candidate API or account token is used",
+                                "Only complete single-page named collections with matching count/is_first/is_last/page/total metadata are supported; paginated/empty collections fail closed",
+                                "Maximum 400 details; unique IDs, listed/detail employer/title/hash/lifecycle and source links must match",
+                                "Complete collection reconfirmed after all details, excluding only changing relative-age text from comparison; original age text remains raw",
+                                "Hosted jobs.polymer.co registration and posting links only; custom domains remain unsupported",
+                                "Native application description URL retained as application entry; salary is source text, remoteness labels and published_at retained without substituting created_at",
+                                "Public job fields retained; form questions/settings excluded; point-in-time evidence is not production freshness acceptance",
+                            ],
                             "GoHire": [
                                 "English jobs.gohire.io hosted boards only; custom domains and jobs.talentium.io links are unsupported",
                                 "Public widget collection must match the explicit career-page total and visible first-page titles; every detail must match listing and employer identity",

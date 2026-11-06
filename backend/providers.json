@@ -973,7 +973,7 @@
   {
     "name": "Polymer",
     "kind": "ats",
-    "implementation_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
     "evidence_status": "NOT_STARTED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
@@ -982,7 +982,8 @@
     "extraction_count": null,
     "failure_reason": null,
     "limitations": [
-      "Connector not implemented"
+      "Documented unauthenticated API; complete named single-page collections only, maximum 400 details",
+      "Live multi-employer evidence pending; empty/paginated collections and custom domains unsupported"
     ]
   },
   {

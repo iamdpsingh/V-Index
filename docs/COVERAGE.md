@@ -47,7 +47,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | Personio | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 51 | 2026-11-05T16:49:55.782699+00:00 | https://matrix42.jobs.personio.de (34; LIVE_VERIFIED); https://planqc-gmbh.jobs.personio.de (17; LIVE_VERIFIED)  |
 | Phenom People | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | Pinpoint | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 49 | 2026-11-06T03:20:57.181056+00:00 | https://intermedia.pinpointhq.com (43; LIVE_VERIFIED); https://workwithus.pinpointhq.com (6; LIVE_VERIFIED)  |
-| Polymer | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
+| Polymer | ats | IMPLEMENTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Recooty | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Recruitee | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 29 | 2026-11-06T01:42:58.731786+00:00 | https://natilik.recruitee.com (6; LIVE_VERIFIED); https://bunq.recruitee.com (23; LIVE_VERIFIED)  |
 | Rippling | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
