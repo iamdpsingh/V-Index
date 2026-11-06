@@ -20,7 +20,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | Deel | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Dover | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Eightfold AI | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
-| FirstStage | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
+| FirstStage | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 4 | 2026-11-06T17:28:28.660502+00:00 | https://firststage.firststage.co/jobs (1; LIVE_VERIFIED); https://quantumbase.firststage.co/jobs (3; LIVE_VERIFIED)  |
 | Freshteam | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 49 | 2026-11-06T12:12:34.049462+00:00 | https://sequoiaat.freshteam.com/jobs (26; LIVE_VERIFIED); https://talent360.freshteam.com/jobs (23; LIVE_VERIFIED)  |
 | Gem.com | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | GoHire | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 45 | 2026-11-06T07:43:13.012881+00:00 | https://jobs.gohire.io/dineamic-hospitality-fniota1h/ (22; LIVE_VERIFIED); https://jobs.gohire.io/digital-shift-o0hrqw5o/ (23; LIVE_VERIFIED)  |

@@ -1,0 +1,217 @@
+{
+  "started_at": "2026-11-06T17:34:20.861124+00:00",
+  "revision": "017f31a84855a0b90fddb644effc480b356fbfee",
+  "scope": "Actual local API registration, scheduled worker, database and public search/provenance checks; no direct connector invocation; source runs occurred after initial registration, before the evidence readback",
+  "sources": [
+    {
+      "platform": "JOIN.com",
+      "source": {
+        "id": 31,
+        "provider": "join",
+        "slug": "2open",
+        "company": "2 OPEN CHINA ECOMMERCE",
+        "url": "https://join.com/companies/2open",
+        "refresh_minutes": 360,
+        "next_check": "2026-11-06T23:30:13.991637Z",
+        "failures": 0
+      },
+      "run": {
+        "id": 78,
+        "source_id": 31,
+        "started_at": "2026-11-06T17:30:04.768225Z",
+        "finished_at": "2026-11-06T17:30:13.991633Z",
+        "status": "success",
+        "count": 3,
+        "error": null
+      },
+      "stored_observations": 3,
+      "public_search_unique_jobs": 3,
+      "public_search_provenance_entries": 3,
+      "complete": true
+    },
+    {
+      "platform": "Hireology",
+      "source": {
+        "id": 32,
+        "provider": "hireology",
+        "slug": "beachchevrolet",
+        "company": "Beach Chevrolet",
+        "url": "https://careers.hireology.com/beachchevrolet",
+        "refresh_minutes": 360,
+        "next_check": "2026-11-06T23:30:25.214130Z",
+        "failures": 0
+      },
+      "run": {
+        "id": 79,
+        "source_id": 32,
+        "started_at": "2026-11-06T17:30:13.994900Z",
+        "finished_at": "2026-11-06T17:30:25.214115Z",
+        "status": "success",
+        "count": 4,
+        "error": null
+      },
+      "stored_observations": 4,
+      "public_search_unique_jobs": 4,
+      "public_search_provenance_entries": 4,
+      "complete": true
+    },
+    {
+      "platform": "Paylocity",
+      "source": {
+        "id": 33,
+        "provider": "paylocity",
+        "slug": "a387d706-ac6f-4e58-b47b-be05001923ea",
+        "company": "SOLUTIONS FOR INFORMATION DESIGN",
+        "url": "https://recruiting.paylocity.com/Recruiting/Jobs/All/a387d706-ac6f-4e58-b47b-be05001923ea",
+        "refresh_minutes": 360,
+        "next_check": "2026-11-06T23:30:31.378774Z",
+        "failures": 0
+      },
+      "run": {
+        "id": 80,
+        "source_id": 33,
+        "started_at": "2026-11-06T17:30:25.219921Z",
+        "finished_at": "2026-11-06T17:30:31.378766Z",
+        "status": "success",
+        "count": 1,
+        "error": null
+      },
+      "stored_observations": 1,
+      "public_search_unique_jobs": 1,
+      "public_search_provenance_entries": 1,
+      "complete": true
+    },
+    {
+      "platform": "Zoho Recruit",
+      "source": {
+        "id": 34,
+        "provider": "zoho-eu",
+        "slug": "mywork",
+        "company": "MyWork",
+        "url": "https://mywork.zohorecruit.eu/jobs/Careers",
+        "refresh_minutes": 360,
+        "next_check": "2026-11-06T23:31:22.613494Z",
+        "failures": 0
+      },
+      "run": {
+        "id": 81,
+        "source_id": 34,
+        "started_at": "2026-11-06T17:30:31.383870Z",
+        "finished_at": "2026-11-06T17:31:22.613487Z",
+        "status": "success",
+        "count": 11,
+        "error": null
+      },
+      "stored_observations": 11,
+      "public_search_unique_jobs": 11,
+      "public_search_provenance_entries": 11,
+      "complete": true
+    },
+    {
+      "platform": "HireBridge",
+      "source": {
+        "id": 35,
+        "provider": "hirebridge",
+        "slug": "8484",
+        "company": "Confirm",
+        "url": "https://recruit.hirebridge.com/v3/Jobs/list.aspx?cid=8484",
+        "refresh_minutes": 360,
+        "next_check": "2026-11-06T23:33:19.640788Z",
+        "failures": 0
+      },
+      "run": {
+        "id": 82,
+        "source_id": 35,
+        "started_at": "2026-11-06T17:31:22.617315Z",
+        "finished_at": "2026-11-06T17:33:19.640775Z",
+        "status": "success",
+        "count": 14,
+        "error": null
+      },
+      "stored_observations": 14,
+      "public_search_unique_jobs": 14,
+      "public_search_provenance_entries": 14,
+      "complete": true
+    },
+    {
+      "platform": "Comeet",
+      "source": {
+        "id": 36,
+        "provider": "comeet",
+        "slug": "oriient~EA.005",
+        "company": "Oriient",
+        "url": "https://www.comeet.com/jobs/oriient/EA.005",
+        "refresh_minutes": 360,
+        "next_check": "2026-11-06T23:33:45.989055Z",
+        "failures": 0
+      },
+      "run": {
+        "id": 83,
+        "source_id": 36,
+        "started_at": "2026-11-06T17:33:19.645178Z",
+        "finished_at": "2026-11-06T17:33:45.989049Z",
+        "status": "success",
+        "count": 7,
+        "error": null
+      },
+      "stored_observations": 7,
+      "public_search_unique_jobs": 7,
+      "public_search_provenance_entries": 7,
+      "complete": true
+    },
+    {
+      "platform": "WeRecruit",
+      "source": {
+        "id": 37,
+        "provider": "werecruit",
+        "slug": "epec",
+        "company": "EPEC",
+        "url": "https://careers.werecruit.io/fr/epec",
+        "refresh_minutes": 360,
+        "next_check": "2026-11-06T23:33:48.828506Z",
+        "failures": 0
+      },
+      "run": {
+        "id": 84,
+        "source_id": 37,
+        "started_at": "2026-11-06T17:33:45.992773Z",
+        "finished_at": "2026-11-06T17:33:48.828496Z",
+        "status": "success",
+        "count": 1,
+        "error": null
+      },
+      "stored_observations": 1,
+      "public_search_unique_jobs": 1,
+      "public_search_provenance_entries": 1,
+      "complete": true
+    },
+    {
+      "platform": "FirstStage",
+      "source": {
+        "id": 38,
+        "provider": "firststage",
+        "slug": "quantumbase",
+        "company": "Quantum Base",
+        "url": "https://quantumbase.firststage.co/jobs",
+        "refresh_minutes": 360,
+        "next_check": "2026-11-06T23:33:54.783439Z",
+        "failures": 0
+      },
+      "run": {
+        "id": 85,
+        "source_id": 38,
+        "started_at": "2026-11-06T17:33:48.833414Z",
+        "finished_at": "2026-11-06T17:33:54.783431Z",
+        "status": "success",
+        "count": 3,
+        "error": null
+      },
+      "stored_observations": 3,
+      "public_search_unique_jobs": 3,
+      "public_search_provenance_entries": 3,
+      "complete": true
+    }
+  ],
+  "finished_at": "2026-11-06T17:34:21.722800+00:00",
+  "all_complete": true
+}

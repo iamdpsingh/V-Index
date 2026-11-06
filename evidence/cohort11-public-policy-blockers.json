@@ -1,0 +1,32 @@
+{
+  "scope": "Public source discovery only, no live coverage; no disallowed job request made",
+  "checks": [
+    {
+      "platform": "UltiPro",
+      "url": "https://recruiting2.ultipro.com/FET1003FETZ/JobBoard/c6d65af3-319c-4d5a-8905-6818e98b821b/JobBoardView/LoadSearchResults",
+      "robots_url": "https://recruiting2.ultipro.com/robots.txt",
+      "policy": "disallowed",
+      "at": "2026-11-06T17:32:35.451770+00:00",
+      "job_request_made": false,
+      "coverage_granted": false
+    },
+    {
+      "platform": "Rival",
+      "url": "https://skyllaeng-openhire.silkroad.com/epostings/index.cfm?version=1&company_id=16817",
+      "robots_url": "https://skyllaeng-openhire.silkroad.com/robots.txt",
+      "policy": "disallowed",
+      "at": "2026-11-06T17:32:36.676184+00:00",
+      "job_request_made": false,
+      "coverage_granted": false
+    },
+    {
+      "platform": "Paycor",
+      "url": "https://recruitingbypaycor.com/career/CareerHome.action?clientId=8a7883d09efb86cc019f01c0db3f022f",
+      "robots_url": "https://recruitingbypaycor.com/robots.txt",
+      "policy": "disallowed",
+      "at": "2026-11-06T17:32:37.509758+00:00",
+      "job_request_made": false,
+      "coverage_granted": false
+    }
+  ]
+}
