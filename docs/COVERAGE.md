@@ -12,7 +12,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | Avature | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | BambooHR | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | BrassRing | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
-| Breezy HR | ats | IMPLEMENTED | FAILED | MEDIUM | 6 | 2026-11-06T03:10:32.638508+00:00 | https://vald.breezy.hr (0; FAILED); https://subscribe.breezy.hr (6; LIVE_VERIFIED) ValueError: Expected exactly one Breezy JobPosting detail |
+| Breezy HR | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 81 | 2026-11-06T03:16:14.203649+00:00 | https://vald.breezy.hr (75; LIVE_VERIFIED); https://subscribe.breezy.hr (6; LIVE_VERIFIED)  |
 | CareerPlug | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Comeet | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | CSOD | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
@@ -61,7 +61,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | TriNet | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | UltiPro | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | WeRecruit | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
-| Workable | ats | IMPLEMENTED | FAILED | MEDIUM | 1 | 2026-11-06T03:12:55.874733+00:00 | https://apply.workable.com/careers/ (1; LIVE_VERIFIED); https://apply.workable.com/learnworlds/ (0; FAILED) ValueError: Invalid or duplicate Workable shortcode |
+| Workable | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 4 | 2026-11-06T03:14:41.352483+00:00 | https://apply.workable.com/careers/ (1; LIVE_VERIFIED); https://apply.workable.com/learnworlds/ (3; LIVE_VERIFIED)  |
 | Workday | ats | IMPLEMENTED | LIVE_VERIFIED | HIGH | 43 | 2026-11-06T01:43:52.166289+00:00 | https://imf.wd5.myworkdayjobs.com/IMF (14; LIVE_VERIFIED); https://gatesfoundation.wd1.myworkdayjobs.com/Gates (29; LIVE_VERIFIED)  |
 | Zoho Recruit | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Niceboard | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
