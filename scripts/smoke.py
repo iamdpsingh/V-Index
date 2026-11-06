@@ -14,6 +14,20 @@ from vindex.connectors.registry import create_connector
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
+    (
+        "GoHire",
+        "gohire",
+        "dineamic-hospitality-fniota1h",
+        "DineAmic Hospitality",
+        "https://jobs.gohire.io/dineamic-hospitality-fniota1h/",
+    ),
+    (
+        "GoHire",
+        "gohire",
+        "digital-shift-o0hrqw5o",
+        "Digital Shift",
+        "https://jobs.gohire.io/digital-shift-o0hrqw5o/",
+    ),
     ("HireHive", "hirehive", "amcsgroup", "AMCS Group", "https://amcsgroup.hirehive.com"),
     ("HireHive", "hirehive", "echelon-dc", "Echelon DC", "https://echelon-dc.hirehive.com"),
     (
@@ -206,6 +220,14 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "GoHire": [
+                                "English jobs.gohire.io hosted boards only; custom domains and jobs.talentium.io links are unsupported",
+                                "Public widget collection must match the explicit career-page total and visible first-page titles; every detail must match listing and employer identity",
+                                "Maximum 400 details; empty, malformed, changed and failed enumerations abort without reconciliation",
+                                "Complete board identity, visible list and full API collection are reconfirmed after extraction; this is not a transactional upstream snapshot",
+                                "General application pools are excluded; form/questions/upload configuration is not retained",
+                                "Native posting is the application entry point; salary remains source text and publication precision is date only",
+                            ],
                             "HireHive": [
                                 "Hosted hirehive.com public ItemList/JobPosting templates only; custom domains and legacy Embed URL registration remain unsupported",
                                 "Explicit total, contiguous list positions, unique validated links and successful matching details are required; singleton JSON-LD items are supported",

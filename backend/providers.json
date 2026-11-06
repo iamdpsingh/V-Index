@@ -364,7 +364,7 @@
   {
     "name": "GoHire",
     "kind": "ats",
-    "implementation_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
     "evidence_status": "NOT_STARTED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
@@ -373,7 +373,8 @@
     "extraction_count": null,
     "failure_reason": null,
     "limitations": [
-      "Connector not implemented"
+      "English jobs.gohire.io hosted boards with explicit totals only; maximum 400 details",
+      "Live multi-employer verification pending; custom domains and jobs.talentium.io links unsupported"
     ]
   },
   {

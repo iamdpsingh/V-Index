@@ -6,6 +6,8 @@ from urllib.parse import urlsplit
 import httpx
 from vindex.connectors.bamboohr import BambooHRConnector
 from vindex.connectors.breezy import BreezyConnector
+from vindex.connectors.gohire import SLUG as GOHIRE_SLUG
+from vindex.connectors.gohire import GoHireConnector
 from vindex.connectors.hirehive import HireHiveConnector
 from vindex.connectors.jazzhr import JazzHRConnector
 from vindex.connectors.jobboardly import JobboardlyConnector
@@ -38,6 +40,11 @@ def detect(url: str) -> tuple[str, str]:
         match = re.fullmatch(rf"({TENANT})\.{re.escape(suffix)}", p.hostname or "")
         if match:
             return provider, match[1]
+    if p.hostname == "jobs.gohire.io":
+        slug = p.path.strip("/").split("/")[0]
+        if not re.fullmatch(GOHIRE_SLUG, slug) or len(slug) > 100:
+            raise ValueError("Expected a GoHire hosted career-board URL")
+        return "gohire", slug
     if p.hostname == "apply.workable.com":
         slug = p.path.strip("/").split("/")[0]
         if not re.fullmatch(TENANT, slug) or slug in {"j", "api"}:
@@ -71,13 +78,15 @@ def detect(url: str) -> tuple[str, str]:
         return detect_original(url)
     except ValueError as error:
         raise ValueError(
-            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR and HireHive"
+            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive and GoHire"
         ) from error
 
 
 def create_connector(
     provider: str, slug: str, company: str, client: httpx.AsyncClient
 ) -> Connector:
+    if provider == "gohire":
+        return GoHireConnector(provider, slug, company, client)
     if provider == "hirehive":
         return HireHiveConnector(provider, slug, company, client)
     if provider == "jazzhr":
