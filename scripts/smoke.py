@@ -14,6 +14,20 @@ from vindex.connectors.registry import create_connector
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
+    (
+        "Jobboardly",
+        "jobboardly",
+        "recruiter-jobs",
+        "Recruiter jobs",
+        "https://recruiter-jobs.jobboardly.com/jobs",
+    ),
+    (
+        "Jobboardly",
+        "jobboardly",
+        "pennsylvania-communications",
+        "Pennsylvania Communications",
+        "https://pennsylvania-communications.jobboardly.com/jobs",
+    ),
     ("Pinpoint", "pinpoint", "intermedia", "Intermedia", "https://intermedia.pinpointhq.com"),
     ("Pinpoint", "pinpoint", "workwithus", "Pinpoint", "https://workwithus.pinpointhq.com"),
     ("BambooHR", "bamboohr", "anaergia", "Anaergia", "https://anaergia.bamboohr.com/careers"),
@@ -176,6 +190,13 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "Jobboardly": [
+                                "Hosted jobboardly.com HTML listings only; custom-domain registration and redirecting hosted aliases are unsupported",
+                                "Explicit sequential Next controls, range counters, unique links and successful JobPosting/apply details are required",
+                                "Maximum 400 details/100 pages; empty pages fail closed rather than proving closures",
+                                "JSON-LD preserves salary, employment type, locations and datePosted; source workplace metadata beyond jobLocationType remains raw/unmapped",
+                                "Completeness follows the public pagination contract plus first-page reconfirmation, not a transactional upstream snapshot",
+                            ],
                             "Pinpoint": [
                                 "Documented public postings.json full collection; legacy jobs.json is intentionally not used because it omits secondary postings",
                                 "Each posting ID is preserved separately from its parent job ID; custom application/source links remain intact",
