@@ -14,6 +14,14 @@ from vindex.connectors.registry import create_connector
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
+    ("Zoho Recruit", "zoho-eu", "mywork", "MyWork", "https://mywork.zohorecruit.eu/jobs/Careers"),
+    (
+        "Zoho Recruit",
+        "zoho-com",
+        "global",
+        "Premier Inn Hotels LLC.",
+        "https://global.zohorecruit.com/jobs/Careers",
+    ),
     (
         "Paylocity",
         "paylocity",
@@ -398,6 +406,15 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "Zoho Recruit": [
+                                "Native tenant.zohorecruit.com/eu/in /jobs/Careers embedded-record template only; legacy/custom/employee portals and renamed-brand title mismatches unsupported",
+                                "Complete public embedded collection up to 400 records; unique IDs and boolean publication/lock/retention flags required; full active and retained-inactive metadata reconfirmed",
+                                "Zoho explicitly permits closed/unpublished jobs to remain on career sites: unpublished retained records stay out of active jobs; Keep_on_Career_Site is a retention preference, not an active-job requirement",
+                                "Every active job requires matching native detail ID/title/employer/org ID/canonical URL, Publish=true and Is_Locked=false; no failed or partial snapshot reconciled",
+                                "Decode only public JSON constants and ESAPI quoted literals without executing JavaScript; no CDN scripts, forms, employee APIs, CSRF values or candidate configuration used/retained",
+                                "Full actual description, supplied salary text/currency, employment, locations and Date_Opened preserved; native detail is the application entry; empty/ambiguous states fail closed",
+                                "No independent source total/transactional snapshot; completeness follows the full public initial record collection and final reconfirmation, not a production freshness claim",
+                            ],
                             "Paylocity": [
                                 "Native recruiting.paylocity.com All/{board UUID} full public window.pageData template only; generic unnamed board brands, internal/custom/alternate templates unsupported",
                                 "Public ShowInternal=false and per-job IsInternal=false, unique positive IDs, module/location/brand identity and full source collection required; maximum 400 mandatory HTML details",

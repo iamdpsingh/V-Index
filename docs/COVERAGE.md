@@ -43,7 +43,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | Paradox | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | Paycom | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | Paycor | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
-| Paylocity | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
+| Paylocity | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 3 | 2026-11-06T13:16:41.489756+00:00 | https://recruiting.paylocity.com/Recruiting/Jobs/All/a387d706-ac6f-4e58-b47b-be05001923ea (1; LIVE_VERIFIED); https://recruiting.paylocity.com/Recruiting/Jobs/All/be178b00-f3fb-452e-9aef-dce1ef7fcdba (2; LIVE_VERIFIED)  |
 | Personio | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 51 | 2026-11-05T16:49:55.782699+00:00 | https://matrix42.jobs.personio.de (34; LIVE_VERIFIED); https://planqc-gmbh.jobs.personio.de (17; LIVE_VERIFIED)  |
 | Phenom People | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | Pinpoint | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 49 | 2026-11-06T03:20:57.181056+00:00 | https://intermedia.pinpointhq.com (43; LIVE_VERIFIED); https://workwithus.pinpointhq.com (6; LIVE_VERIFIED)  |

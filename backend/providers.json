@@ -1241,16 +1241,53 @@
   {
     "name": "Paylocity",
     "kind": "ats",
-    "implementation_status": "NOT_STARTED",
-    "evidence_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
+    "evidence_status": "LIVE_VERIFIED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
+    "examples": [
+      {
+        "provider": "Paylocity",
+        "url": "https://recruiting.paylocity.com/Recruiting/Jobs/All/a387d706-ac6f-4e58-b47b-be05001923ea",
+        "at": "2026-11-06T13:16:31.928311+00:00",
+        "revision": "8a7a29875d7f3a682afa558d7bb385d68742c76c",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "6faa8dc39e248e84484a6a0dc9a07b041e4d66548e26fef8b90613a7166af9d5",
+        "count": 1,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "c1894027700843ffd265b2eec262620ca2c474e72bdc671cd19a6654e5e4f923",
+        "finished_at": "2026-11-06T13:16:36.514882+00:00"
+      },
+      {
+        "provider": "Paylocity",
+        "url": "https://recruiting.paylocity.com/Recruiting/Jobs/All/be178b00-f3fb-452e-9aef-dce1ef7fcdba",
+        "at": "2026-11-06T13:16:37.015362+00:00",
+        "revision": "8a7a29875d7f3a682afa558d7bb385d68742c76c",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "6faa8dc39e248e84484a6a0dc9a07b041e4d66548e26fef8b90613a7166af9d5",
+        "count": 2,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "863805e93d8cb2edacd8b930107d803ac89178fe2124a1735676f133460dd097",
+        "finished_at": "2026-11-06T13:16:41.489756+00:00"
+      }
+    ],
+    "last_run_at": "2026-11-06T13:16:41.489756+00:00",
+    "extraction_count": 3,
     "failure_reason": null,
     "limitations": [
-      "Connector not implemented"
+      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
+      "Native recruiting.paylocity.com All/{board UUID} full public window.pageData template only; generic unnamed board brands, internal/custom/alternate templates unsupported",
+      "Public ShowInternal=false and per-job IsInternal=false, unique positive IDs, module/location/brand identity and full source collection required; maximum 400 mandatory HTML details",
+      "No independent total is supplied: the observed native client uses the entire Jobs array as OriginalJobs and computes its displayed total locally; full array/metadata reconfirmed after details",
+      "Each detail must match native title, module name, logo reference, Open Graph URL and exact Apply link; no application/form submitted or fetched",
+      "Full Description and Requirements sections preserved separately from preview text; source job type, salary description and PublishedDate retained",
+      "All original location/display flags retained, explicit rendered Fully Remote or Hybrid Remote labels preserved; third-party tracking and form configuration excluded"
     ]
   },
   {

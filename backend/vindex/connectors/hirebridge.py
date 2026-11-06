@@ -172,7 +172,7 @@ class HireBridgeConnector:
 
         async def read(url: str) -> bytes:
             policy.check(url)
-            await asyncio.sleep(policy.delay(baseline=3.0))
+            await asyncio.sleep(policy.delay(baseline=6.0))
             try:
                 return await self.http.read(url)
             except ValueError as error:

@@ -38,6 +38,7 @@ from vindex.connectors.trinet import SLUG as TRINET_SLUG
 from vindex.connectors.trinet import TriNetConnector
 from vindex.connectors.workable import WorkableConnector
 from vindex.connectors.workday import HOST_PATTERN, SITE_PATTERN, WorkdayConnector
+from vindex.connectors.zoho import ZohoConnector
 
 PERSONIO_HOST = re.compile(r"([a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)\.jobs\.personio\.(de|com)")
 
@@ -63,6 +64,11 @@ def detect(url: str) -> tuple[str, str]:
         match = re.fullmatch(rf"({TENANT})\.{re.escape(suffix)}", p.hostname or "")
         if match:
             return provider, match[1]
+    zoho = re.fullmatch(rf"({TENANT})\.zohorecruit\.(com|eu|in)", p.hostname or "")
+    if zoho:
+        if p.path.rstrip("/") != "/jobs/Careers" or p.query or p.fragment:
+            raise ValueError("Expected an unfiltered native Zoho /jobs/Careers board URL")
+        return "zoho-" + zoho[2], zoho[1]
     if p.hostname == "recruiting.paylocity.com":
         matched = re.fullmatch(
             r"/recruiting/jobs/all/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})(?:/[A-Za-z0-9_-]+)?/?",
@@ -171,13 +177,15 @@ def detect(url: str) -> tuple[str, str]:
         return detect_original(url)
     except ValueError as error:
         raise ValueError(
-            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire, HiringThing, Freshteam, Trakstar, Rippling, Kula.ai, CareerPlug, TriNet, HireBridge, JOIN.com, Hireology and Paylocity"
+            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire, HiringThing, Freshteam, Trakstar, Rippling, Kula.ai, CareerPlug, TriNet, HireBridge, JOIN.com, Hireology, Paylocity and Zoho Recruit"
         ) from error
 
 
 def create_connector(
     provider: str, slug: str, company: str, client: httpx.AsyncClient
 ) -> Connector:
+    if provider in {"zoho-com", "zoho-eu", "zoho-in"}:
+        return ZohoConnector(provider, slug, company, client)
     if provider == "paylocity":
         return PaylocityConnector(provider, slug, company, client)
     if provider == "hireology":
