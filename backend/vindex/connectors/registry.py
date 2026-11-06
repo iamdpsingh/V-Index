@@ -7,6 +7,7 @@ import httpx
 from vindex.connectors.applicantpro import ApplicantProConnector
 from vindex.connectors.bamboohr import BambooHRConnector
 from vindex.connectors.breezy import BreezyConnector
+from vindex.connectors.careerplug import CareerPlugConnector
 from vindex.connectors.freshteam import FreshteamConnector
 from vindex.connectors.gohire import SLUG as GOHIRE_SLUG
 from vindex.connectors.gohire import GoHireConnector
@@ -56,6 +57,11 @@ def detect(url: str) -> tuple[str, str]:
         match = re.fullmatch(rf"({TENANT})\.{re.escape(suffix)}", p.hostname or "")
         if match:
             return provider, match[1]
+    if p.hostname == "app.careerplug.com":
+        matched = re.fullmatch(r"/accounts/([1-9][0-9]{0,14})/?", p.path)
+        if not matched or p.query or p.fragment:
+            raise ValueError("Expected an unfiltered native CareerPlug account URL")
+        return "careerplug", matched[1]
     if p.hostname == "careers.kula.ai":
         slug = p.path.strip("/").split("/")[0]
         if not re.fullmatch(TENANT, slug):
@@ -124,13 +130,15 @@ def detect(url: str) -> tuple[str, str]:
         return detect_original(url)
     except ValueError as error:
         raise ValueError(
-            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire, HiringThing, Freshteam, Trakstar, Rippling and Kula.ai"
+            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire, HiringThing, Freshteam, Trakstar, Rippling, Kula.ai and CareerPlug"
         ) from error
 
 
 def create_connector(
     provider: str, slug: str, company: str, client: httpx.AsyncClient
 ) -> Connector:
+    if provider == "careerplug":
+        return CareerPlugConnector(provider, slug, company, client)
     if provider == "kula":
         return KulaConnector(provider, slug, company, client)
     if provider == "rippling":

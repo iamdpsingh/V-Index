@@ -14,6 +14,20 @@ from vindex.connectors.registry import create_connector
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
+    (
+        "CareerPlug",
+        "careerplug",
+        "576036",
+        "Rubber & Accessories",
+        "https://app.careerplug.com/accounts/576036",
+    ),
+    (
+        "CareerPlug",
+        "careerplug",
+        "579908",
+        "Freedom Motors USA",
+        "https://app.careerplug.com/accounts/579908",
+    ),
     ("Kula.ai", "kula", "fwg-internal", "Frontwise Group", "https://careers.kula.ai/fwg-internal"),
     ("Kula.ai", "kula", "massive-bio", "Massive Bio", "https://careers.kula.ai/massive-bio"),
     ("Rippling", "rippling", "realwork", "RealWork", "https://ats.rippling.com/realwork/jobs"),
@@ -326,6 +340,13 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "CareerPlug": [
+                                "Native app.careerplug.com/accounts/{numeric ID} English public ItemList template only; custom domains, brands, locale and paginated registration unsupported",
+                                "Contiguous positions, explicit numberOfItems and full named position selector must agree; empty collections and counts at or above the observed 30-record ceiling abort",
+                                "Maximum 29 mandatory native application-page details; ID/title/employer and actual public native form action must match; no form submitted",
+                                "Full original ItemList records and each detail JobPosting retained; list/detail descriptions differ in markup and both observations remain available",
+                                "Full account metadata reconfirmed after details; salary/publication/employment/location retained when supplied, missing workplace status stays unknown",
+                            ],
                             "Kula.ai": [
                                 "Native careers.kula.ai public rendered template only; no browser script execution, private API or application submission",
                                 "Complete embedded public jobs array must match every unique visible native link; named employer, one account and public visibility flags required",
