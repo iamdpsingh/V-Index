@@ -1,4 +1,4 @@
-# Validation record — 2026-11-05
+# Validation record
 
 ## Initial slice checks (historical)
 
@@ -23,3 +23,12 @@
 ## Not verified / incomplete
 
 The first full-stack CI run built and started the Compose services but its readiness check failed on an early TCP connection reset. API health gating and bounded retry-all-errors startup checks fixed it. The corrected stack job passed on f4cf0ef: fresh images, PostgreSQL migration/API health, Redis PING, worker running, web root, empty-index search through the web proxy and OpenAPI proxy. This validates stack startup, not production load or live external ingestion inside CI. Deployment restart recovery and wider distributed concurrency remain unverified. No hosted demo, acquisition submission or all-platform coverage claim. Enterprise API documentation/research is not platform coverage. Browser checks above are historical; a reusable browser suite remains to be written. Structured location/salary normalization, original posting-date enrichment, custom domains and broader dedupe remain backlog.
+
+## Cohort 3 — 2026-11-06
+
+- Full suite with TEST_DATABASE_URL and TEST_REDIS_URL enabled: 119 passed, one existing TestClient/httpx deprecation warning. Ruff, formatting and mypy (14 modules) passed.
+- Formal live smoke on clean implementation commit 2ed2fe7: Workday IMF 14 and Gates Foundation 29; Recruitee Natilik 6 and bunq 23. Both providers completed two independent tenant runs. Evidence: evidence/20261106T014352Z-smoke.json. Workday coverage is bounded by the documented host/size limits; it is not proof of large-board enumeration.
+- Real default-worker headers caused IMF robots.txt to return HTTP 406; an explicit text Accept header returned 200. Per-request media negotiation fixed this. The failed scheduled fetch is in evidence/cohort3-live-pipeline.json; the successful retry on 97c0c2b is in evidence/cohort3-live-pipeline-retry.json. No failure was treated as an empty successful snapshot.
+- Actual add-source/schedule/worker/store/search integration completed IMF 14 and Natilik 6 with local SQLite and Redis. The measured index total was 1,193 searchable records. Source histories also show repeated Stripe refreshes (760 then 767 jobs); trigger type is not retained, so this evidence does not assert which actor initiated a run.
+- Boundary regression tests cover first-page reset versus unexpected extra jobs, duplicate/malformed/partial pages, final reconfirmation, wrong/closed details, unsafe paths, robots denial/pacing/errors, explicit XML DTD rejection, duplicate XML IDs and custom-domain application link preservation.
+- CI for first cohort 3 implementation 2ed2fe7 passed backend, frontend and stack checks. The final content-negotiation and total-validation revision 97c0c2b passed all three jobs, including 119 tests: https://github.com/iamdpsingh/V-Index/actions/runs/42146200210. Compact actual run metadata is preserved in evidence/cohort3-green-ci.json.

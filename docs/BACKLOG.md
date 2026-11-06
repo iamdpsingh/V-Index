@@ -5,6 +5,7 @@
 - [x] Contracts, exact 78-provider inventory and isolated frontend handoff.
 - [x] Initial three public API connectors, persisted observations, lifecycle, conservative dedupe, API and worker baseline.
 - [x] SmartRecruiters and Personio implemented with two live tenants each (5/78 platform evidence).
+- [x] Recruitee and bounded hosted Workday implemented; two live employers each (7/78 point-in-time evidence).
 - [x] First enterprise risk investigation recorded in docs/ENTERPRISE_RESEARCH.md.
 - [x] Verify full Compose/PostgreSQL/Redis/web startup and proxies in GitHub Actions.
 - [ ] Deploy a hosted reviewer demo and verify live ingestion there.
@@ -26,7 +27,7 @@
 - PostgreSQL full-text search and measured indexes when benchmark warrants.
 
 ## Remaining cohorts
-- Public structured ATS candidates: Recruitee, Personio, SmartRecruiters, BambooHR, Breezy HR, Workable, Teamtailor. Candidate priority only; access and endpoint support unverified.
+- Next structured ATS candidates: BambooHR, Breezy HR, Workable, Teamtailor. Candidate priority only; access and endpoint support unverified.
 - Other medium/high risk ATS: work through every NOT_STARTED row in coverage matrix; no stubs.
 - All 20 job-board platforms: multiple custom-domain installations each, complete pagination, detail extraction and tenant-independent detection.
 
@@ -36,3 +37,8 @@
 - Complete founder profile/submission only with user-provided account/profile details and authorization.
 - Sanitize fixtures, run multi-tenant smoke checks, reconcile all 78 evidence entries, document genuine blockers.
 - Reviewer walkthrough, deployment cost measurements, final technical handoff.
+
+## Workday follow-up
+- Extend enumeration beyond the current 400-detail budget and investigate safe completeness above the observed reported-total ceiling. No partial enumeration may close jobs.
+- Support myworkdaysite.com and verified custom-domain entry points after strict URL/egress controls.
+- Continue testing independent tenants/locales and source schema variations; current evidence is IMF and Gates only.
