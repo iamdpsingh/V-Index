@@ -77,6 +77,87 @@ class JobboardlyConnector:
             node = json.loads(script.get_text())
             if isinstance(node, dict) and node.get("@type") == "JobPosting":
                 rows.append(node)
+        flags = []
+        html_metadata = []
+        source_schema = rows[0] if len(rows) == 1 else None
+        html_observation = None
+        if not rows:
+            heading = soup.select_one("main h1")
+            description_node = soup.select_one("main .rich-text")
+            canonical = soup.select_one('link[rel="canonical"]')
+            og_url = soup.select_one('meta[property="og:url"]')
+            og_title = soup.select_one('meta[property="og:title"]')
+            og_image = soup.select_one('meta[property="og:image"]')
+            company_link = (
+                heading.parent.select_one("a[href]") if heading and heading.parent else None
+            )
+            image_url = str(og_image.get("content", "")) if og_image else ""
+            image_id = re.fullmatch(r"/og/jobs/([0-9]{1,30})/[0-9]+\.jpg", urlsplit(image_url).path)
+            if (
+                heading is None
+                or description_node is None
+                or canonical is None
+                or og_url is None
+                or og_title is None
+                or company_link is None
+                or not image_id
+                or og_url.get("content") != canonical.get("href")
+                or og_title.get("content") != heading.get_text(" ", strip=True)
+                or urlsplit(image_url).netloc != urlsplit(str(canonical.get("href"))).netloc
+            ):
+                raise ValueError("JobBoardly public HTML posting identity is incomplete")
+            html_metadata = [
+                node.get_text(" ", strip=True)
+                for node in soup.select("div.flex.items-center.text-sm")
+            ]
+            employment_labels = {
+                "Full-time",
+                "Part-time",
+                "Contract",
+                "Temporary",
+                "Internship",
+                "Volunteer",
+            }
+            employment = next(
+                (label for label in html_metadata if label in employment_labels), None
+            )
+            salary = next(
+                (label for label in html_metadata if re.match(r"^[£$€][0-9]", label)), None
+            )
+            posted = soup.select_one("#job-posted-at")
+            posted_text = posted.get_text(" ", strip=True) if posted else None
+            locations = [
+                label
+                for label in html_metadata
+                if label not in employment_labels
+                and label not in {"Remote", "On-site", "Hybrid", salary, posted_text}
+            ]
+            if len(locations) > 1:
+                raise ValueError("Ambiguous JobBoardly HTML location metadata")
+            rows = [
+                {
+                    "@type": "JobPosting",
+                    "url": str(canonical["href"]),
+                    "identifier": {"value": image_id[1]},
+                    "title": heading.get_text(" ", strip=True),
+                    "hiringOrganization": {"name": company_link.get_text(" ", strip=True)},
+                    "description": str(description_node),
+                    "employmentType": employment,
+                    "baseSalary": {"source_text": salary} if salary else None,
+                    "jobLocation": {"address": {"addressLocality": locations[0]}}
+                    if locations
+                    else [],
+                }
+            ]
+            html_observation = {
+                "title_html": str(heading),
+                "company_html": str(company_link),
+                "description_html": str(description_node),
+                "canonical_url": str(canonical["href"]),
+                "og_image_url": image_url,
+                "og_url": str(og_url.get("content")),
+            }
+            flags.append("jobposting_schema_missing")
         if len(rows) != 1:
             raise ValueError("JobBoardly full public JobPosting detail missing")
         row = rows[0]
@@ -126,7 +207,8 @@ class JobboardlyConnector:
         if len(workplace_labels) > 1:
             raise ValueError("Ambiguous JobBoardly workplace labels")
         workplace = workplace_labels[0] if workplace_labels else row.get("jobLocationType")
-        flags = [] if description else ["description_missing"]
+        if not description:
+            flags.append("description_missing")
         application = targets[0]
         if urlsplit(application).scheme == "mailto":
             # The public posting is the application entry point for email-only roles.
@@ -148,9 +230,12 @@ class JobboardlyConnector:
                 salary=row.get("baseSalary"),
                 published_at=row.get("datePosted"),
                 raw={
-                    "jobposting": row,
+                    "jobposting": source_schema,
                     "application_url": targets[0],
                     "workplace_labels": workplace_labels,
+                    "metadata_origin": "public_html" if html_metadata else "source_jsonld",
+                    "html_metadata": html_metadata,
+                    "html_observation": html_observation,
                 },
             )
         ]

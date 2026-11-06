@@ -109,6 +109,36 @@ def test_email_only_application_keeps_original_destination_and_https_entry():
     assert job.quality_flags == ["application_by_email"]
 
 
+def test_html_only_posting_requires_independent_identity_and_preserves_missing_fields():
+    body = (
+        '<main><div><h1>Engineer</h1><a href="https://employer.example.org">Example</a></div>'
+        '<div class="rich-text">Build systems</div>'
+        '<div class="flex items-center text-sm" id="job-posted-at">14 days ago</div>'
+        '<div class="flex items-center text-sm">Remote</div>'
+        '<div class="flex items-center text-sm">Full-time</div>'
+        '<div class="flex items-center text-sm">£50,000 yearly</div></main>'
+        f'<link rel="canonical" href="{ORIGIN}{ONE}">'
+        f'<meta property="og:url" content="{ORIGIN}{ONE}">'
+        '<meta property="og:title" content="Engineer">'
+        f'<meta property="og:image" content="{ORIGIN}/og/jobs/1/123.jpg">'
+        '<a href="https://employer.example.org/apply">Apply now</a>'
+    )
+    batch, _ = run(bodies={ONE: body})
+    job = batch.jobs[0]
+    assert job.external_id == "1" and job.remote_status == "Remote" and job.location == ""
+    assert job.salary == {"source_text": "£50,000 yearly"} and job.published_at is None
+    assert job.raw["jobposting"] is None and job.raw["html_observation"]["description_html"]
+    assert job.quality_flags == ["jobposting_schema_missing"]
+    for bad in (
+        body.replace('property="og:title"', 'property="unrelated"'),
+        body.replace('property="og:url"', 'property="unrelated"'),
+        body.replace("/og/jobs/1/123.jpg", "/other/image.jpg"),
+        body.replace('class="rich-text"', 'class="other"'),
+    ):
+        with pytest.raises(ValueError):
+            run(bodies={ONE: bad})
+
+
 def test_multiple_pages_require_correct_ranges_and_terminal_control():
     batch, requests = run(
         pages={1: page([ONE], next_page=2), 2: page([TWO], start=2)},
