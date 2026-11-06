@@ -9,3 +9,7 @@ Before internet exposure add HTTPS, gateway request limits, secrets storage, net
 The web container uses root-context Dockerfile.web so the repository .dockerignore excludes host node_modules and .next files. Compose uses this recipe; apps/web/Dockerfile is the original frontend scaffold recipe and is not selected by Compose. CI also builds and boots the full Compose stack, checks API/database health, Redis, migrations, the web page and API proxy. Read its actual run result before claiming deployment verification.
 
 Full-stack baseline passed in CI on f4cf0ef: https://github.com/iamdpsingh/V-Index/actions/runs/42069063452. The web waits for API health; startup checks tolerate bounded TCP readiness resets. Live provider ingestion and hosted production operation are separate acceptance checks.
+
+## Account feature configuration
+
+Run migrations before the new API. PUBLIC_WEB_ORIGIN is opt-in and must match the exact browser origin; HTTP is allowed only for loopback development. ACCOUNT_REGISTRATION_ENABLED defaults false. Generate RESUME_ENCRYPTION_KEY privately using the command in .env.example; do not commit or expose it as NEXT_PUBLIC configuration. Compose forwards private settings only to the API. See ACCOUNTS_API.md for the supported flow, backup/key implications and remaining production gates. CI creates its own ephemeral key and test account and exercises the private flow through the web proxy; it does not configure a real user account or resume in the local demo.

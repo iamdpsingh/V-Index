@@ -51,6 +51,10 @@ The method is literal, explainable keyword matching; it does not validate qualif
 
 Ranking considers at most the newest 1,000 SQL candidate jobs, then applies token checks and deterministic rank/ID sorting. total_candidates, candidates_ranked, candidate_limit and truncated disclose that scope. They are not a global match-count promise. Preserve these facts in the UI when truncated. Pagination applies to the ranked candidate set.
 
+## Verified backend milestone
+
+155 automated tests passed locally with PostgreSQL and Redis enabled. Executable revision 2d54f7f passed backend, frontend build and the real Docker/private web-proxy flow in GitHub Actions: https://github.com/iamdpsingh/V-Index/actions/runs/42151836186. The test account and document were ephemeral synthetic fixtures; no personal data or credentials are in the evidence artifact.
+
 ## Remaining release work
 
 Antigravity screens and browser tests; email verification and identity recovery; trusted edge client-IP/rate policy (the current app uses the direct peer, so a shared proxy shares IP budgets); parser isolation/abuse testing; HTTPS deployment; encrypted-key/backup recovery drills; independent security review and production load validation. These are actual implementation gaps, not completed capabilities.
