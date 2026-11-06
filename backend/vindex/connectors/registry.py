@@ -24,6 +24,7 @@ from vindex.connectors.public import Connector, PublicConnector
 from vindex.connectors.public import detect as detect_original
 from vindex.connectors.recooty import RecootyConnector
 from vindex.connectors.recruitee import RecruiteeConnector
+from vindex.connectors.rippling import RipplingConnector
 from vindex.connectors.smartrecruiters import SmartRecruitersConnector
 from vindex.connectors.teamtailor import TENANT, TeamtailorConnector
 from vindex.connectors.trakstar import TrakstarConnector
@@ -54,6 +55,11 @@ def detect(url: str) -> tuple[str, str]:
         match = re.fullmatch(rf"({TENANT})\.{re.escape(suffix)}", p.hostname or "")
         if match:
             return provider, match[1]
+    if p.hostname == "ats.rippling.com":
+        slug = p.path.strip("/").split("/")[0]
+        if not re.fullmatch(TENANT, slug):
+            raise ValueError("Expected a Rippling hosted employer career URL")
+        return "rippling", slug
     if p.hostname == "jobs.jobvite.com":
         slug = p.path.strip("/").split("/")[0]
         if not re.fullmatch(TENANT, slug):
@@ -112,13 +118,15 @@ def detect(url: str) -> tuple[str, str]:
         return detect_original(url)
     except ValueError as error:
         raise ValueError(
-            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire, HiringThing, Freshteam and Trakstar"
+            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire, HiringThing, Freshteam, Trakstar and Rippling"
         ) from error
 
 
 def create_connector(
     provider: str, slug: str, company: str, client: httpx.AsyncClient
 ) -> Connector:
+    if provider == "rippling":
+        return RipplingConnector(provider, slug, company, client)
     if provider == "trakstar":
         return TrakstarConnector(provider, slug, company, client)
     if provider == "freshteam":

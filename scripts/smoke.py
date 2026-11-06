@@ -14,6 +14,14 @@ from vindex.connectors.registry import create_connector
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
+    ("Rippling", "rippling", "realwork", "RealWork", "https://ats.rippling.com/realwork/jobs"),
+    (
+        "Rippling",
+        "rippling",
+        "sas",
+        "Strategic Association Solutions",
+        "https://ats.rippling.com/sas/jobs",
+    ),
     (
         "Trakstar",
         "trakstar",
@@ -316,6 +324,13 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "Rippling": [
+                                "Native ats.rippling.com public Next SSR template only; regional/custom domains and alternate templates unsupported",
+                                "Complete unfiltered single-page collection only: explicit page/size/totalItems/totalPages must match all unique UUIDs and visible links; multi-page/empty boards fail closed",
+                                "Non-test board identity and every detail UUID/title/company/listed-state/locations/native Apply button must match; full public collection reconfirmed",
+                                "All full description sections, structured source workplace/employment labels and supplied pay ranges retained; createdOn remains raw, never substituted for absent datePosted",
+                                "Signed asset URLs, candidate/form/EEO configuration and unrelated public state excluded; no browser/challenge execution or private platform API requested",
+                            ],
                             "Trakstar": [
                                 "Native tenant.hire.trakstar.com complete View-N-Openings template only; pagination beyond first page/custom domains/alternate templates unsupported",
                                 "Explicit total must exactly match unique named job paths; at most 400 details; no partial/empty snapshots reconciled",

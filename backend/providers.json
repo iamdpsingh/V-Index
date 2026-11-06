@@ -371,42 +371,44 @@
     "name": "Freshteam",
     "kind": "ats",
     "implementation_status": "IMPLEMENTED",
-    "evidence_status": "FAILED",
+    "evidence_status": "LIVE_VERIFIED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
     "examples": [
       {
         "provider": "Freshteam",
         "url": "https://sequoiaat.freshteam.com/jobs",
-        "at": "2026-11-06T12:06:40.392747+00:00",
-        "revision": "c17ed8eebb58755ae8aa75829a71efda5a7d2587",
+        "at": "2026-11-06T12:11:44.585948+00:00",
+        "revision": "268dffd870270eab6cbc7c9fe4abae6f23bf5145",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "6dcd330f0de539ff306269c31db583b80cc4128093b6033136ef139126380e94",
+        "code_sha256": "c2fb8f69ec4de107424834240e67720dba9dcac2dc6d056688d27975d265f1c4",
         "count": 26,
         "status": "LIVE_VERIFIED",
         "complete": true,
         "error": null,
         "quality_flag_counts": {},
         "payload_sha256": "c3b1fb659840df6f20cd3b0a043a62ec29fa4f10e2cfaff532cf0c905f1e05b3",
-        "finished_at": "2026-11-06T12:07:03.246856+00:00"
+        "finished_at": "2026-11-06T12:12:06.589590+00:00"
       },
       {
         "provider": "Freshteam",
         "url": "https://talent360.freshteam.com/jobs",
-        "at": "2026-11-06T12:07:03.748042+00:00",
-        "revision": "c17ed8eebb58755ae8aa75829a71efda5a7d2587",
+        "at": "2026-11-06T12:12:07.090846+00:00",
+        "revision": "268dffd870270eab6cbc7c9fe4abae6f23bf5145",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "6dcd330f0de539ff306269c31db583b80cc4128093b6033136ef139126380e94",
-        "count": 0,
-        "status": "FAILED",
-        "complete": false,
-        "error": "ValueError: Freshteam title/ID/remote/native application mismatch",
-        "finished_at": "2026-11-06T12:07:13.195750+00:00"
+        "code_sha256": "c2fb8f69ec4de107424834240e67720dba9dcac2dc6d056688d27975d265f1c4",
+        "count": 23,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "c88c672e8f4fde218651a9bcf81df1ab173e2744af9d657695ddfae5f240e70e",
+        "finished_at": "2026-11-06T12:12:34.049462+00:00"
       }
     ],
-    "last_run_at": "2026-11-06T12:07:13.195750+00:00",
-    "extraction_count": 26,
-    "failure_reason": "ValueError: Freshteam title/ID/remote/native application mismatch",
+    "last_run_at": "2026-11-06T12:12:34.049462+00:00",
+    "extraction_count": 49,
+    "failure_reason": null,
     "limitations": [
       "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
       "Native freshteam.com full job-role-list HTML plus mandatory JobPosting/native application-form details; custom domains/alternate/paginated templates unsupported",
@@ -1341,7 +1343,7 @@
   {
     "name": "Rippling",
     "kind": "ats",
-    "implementation_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
     "evidence_status": "NOT_STARTED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
@@ -1350,7 +1352,8 @@
     "extraction_count": null,
     "failure_reason": null,
     "limitations": [
-      "Connector not implemented"
+      "Native ats.rippling.com complete single-page public SSR template only; explicit totals and mandatory matching details",
+      "Regional/custom domains, alternate/multi-page/empty boards unsupported; independent multi-employer live verification pending"
     ]
   },
   {
@@ -1529,16 +1532,47 @@
     "name": "Trakstar",
     "kind": "ats",
     "implementation_status": "IMPLEMENTED",
-    "evidence_status": "NOT_STARTED",
+    "evidence_status": "FAILED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
-    "failure_reason": null,
+    "examples": [
+      {
+        "provider": "Trakstar",
+        "url": "https://bsglaw.hire.trakstar.com/",
+        "at": "2026-11-06T12:11:36.518116+00:00",
+        "revision": "268dffd870270eab6cbc7c9fe4abae6f23bf5145",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "c2fb8f69ec4de107424834240e67720dba9dcac2dc6d056688d27975d265f1c4",
+        "count": 0,
+        "status": "FAILED",
+        "complete": false,
+        "error": "JSONDecodeError: Invalid control character at: line 5 column 33 (char 167)",
+        "finished_at": "2026-11-06T12:11:40.107239+00:00"
+      },
+      {
+        "provider": "Trakstar",
+        "url": "https://worksuites.hire.trakstar.com/",
+        "at": "2026-11-06T12:11:40.607799+00:00",
+        "revision": "268dffd870270eab6cbc7c9fe4abae6f23bf5145",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "c2fb8f69ec4de107424834240e67720dba9dcac2dc6d056688d27975d265f1c4",
+        "count": 0,
+        "status": "FAILED",
+        "complete": false,
+        "error": "JSONDecodeError: Invalid control character at: line 5 column 92 (char 218)",
+        "finished_at": "2026-11-06T12:11:44.084766+00:00"
+      }
+    ],
+    "last_run_at": "2026-11-06T12:11:44.084766+00:00",
+    "extraction_count": 0,
+    "failure_reason": "JSONDecodeError: Invalid control character at: line 5 column 33 (char 167); JSONDecodeError: Invalid control character at: line 5 column 92 (char 218)",
     "limitations": [
-      "Native hire.trakstar.com complete single-page View-N-Openings template only; max 400 matching details",
-      "Empty/paginated/alternate/custom-domain templates unsupported; independent multi-employer live evidence pending"
+      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
+      "Native tenant.hire.trakstar.com complete View-N-Openings template only; pagination beyond first page/custom domains/alternate templates unsupported",
+      "Explicit total must exactly match unique named job paths; at most 400 details; no partial/empty snapshots reconciled",
+      "Each JobPosting native identifier/title/employer/Open Graph URL must match; actual native application form/action and Apply link required",
+      "Source HTML entities/whitespace normalized for comparison and plain text, original schema retained; employment/location/date/salary and explicit workplace label preserved",
+      "Full opening title/metadata map and employer reconfirmed after all details; no candidate form/configuration retained"
     ]
   },
   {
