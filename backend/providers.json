@@ -1693,16 +1693,53 @@
   {
     "name": "TriNet",
     "kind": "ats",
-    "implementation_status": "NOT_STARTED",
-    "evidence_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
+    "evidence_status": "LIVE_VERIFIED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
+    "examples": [
+      {
+        "provider": "TriNet",
+        "url": "https://app.trinethire.com/companies/69740-ark-investment-management/jobs",
+        "at": "2026-11-06T12:45:28.202176+00:00",
+        "revision": "3ea82ade66a3f50b168fddd2a15ec08c0384f8f2",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "92cdf040c68c11b86e06bd7deecf7e29e4a509b4d8b84b53051fbd638a928de6",
+        "count": 6,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "d1a20730d921244520d6e3085d5eec07d34e733fd602a907e32da497b1901ccc",
+        "finished_at": "2026-11-06T12:45:35.454880+00:00"
+      },
+      {
+        "provider": "TriNet",
+        "url": "https://app.trinethire.com/companies/665804-stridepath-consulting/jobs",
+        "at": "2026-11-06T12:45:35.956187+00:00",
+        "revision": "3ea82ade66a3f50b168fddd2a15ec08c0384f8f2",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "92cdf040c68c11b86e06bd7deecf7e29e4a509b4d8b84b53051fbd638a928de6",
+        "count": 12,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "1593a7c95ad59b67ed12c47cbb350fd37d890e4dee1d8e24f02fce118a0be000",
+        "finished_at": "2026-11-06T12:45:46.787947+00:00"
+      }
+    ],
+    "last_run_at": "2026-11-06T12:45:46.787947+00:00",
+    "extraction_count": 18,
     "failure_reason": null,
     "limitations": [
-      "Connector not implemented"
+      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
+      "Native app.trinethire.com/companies/{ID-slug}/jobs complete public table template only; custom, confidential and paginated variants unsupported",
+      "All named Role/Type/Location table rows and unique native links must agree; maximum 400 mandatory details; empty, changed, malformed or failed collections abort",
+      "Detail native form/job ID/title/company/Open Graph URL and employment type must match; no application submitted or form tokens/configuration retained",
+      "Both board location label and detail physical location retained; Remote normalized only from an explicit Remote board label",
+      "No independent total or transactional upstream snapshot; full roster reconfirmed; original publication date absent in this template remains unknown",
+      "Full description HTML/text and header metadata retained; supplied salary labels preserved as source text, without inferring pay values from prose"
     ]
   },
   {

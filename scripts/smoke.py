@@ -15,6 +15,20 @@ from vindex.connectors.registry import create_connector
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
     (
+        "HireBridge",
+        "hirebridge",
+        "8484",
+        "Confirm",
+        "https://recruit.hirebridge.com/v3/Jobs/list.aspx?cid=8484",
+    ),
+    (
+        "HireBridge",
+        "hirebridge",
+        "8427",
+        "LCG, Inc.",
+        "https://recruit.hirebridge.com/v3/Jobs/list.aspx?cid=8427",
+    ),
+    (
         "TriNet",
         "trinet",
         "69740-ark-investment-management",
@@ -354,6 +368,14 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "HireBridge": [
+                                "Native recruit.hirebridge.com/v3/Jobs/list.aspx?cid={numeric customer} location-counted public template only; alternate/custom/filtered variants unsupported",
+                                "Every unique job ID/native link and location group must exactly match all explicit location counters; maximum 400 mandatory details, no empty or partial reconciliation",
+                                "Board/detail customer-scoped public brand asset references, title/location, native ASP.NET form action and explicit Apply URL must match",
+                                "Fixed native HTTPS Apply target extracted from a narrowly matched popUp literal without executing JavaScript or fetching/submitting an application",
+                                "Full job description and skills sections retained; source does not independently supply original publication/employment/salary fields in supported template, so these remain unknown",
+                                "Native hosted brand references only; inline data-image branding currently unsupported; full roster/counters reconfirmed after details",
+                            ],
                             "TriNet": [
                                 "Native app.trinethire.com/companies/{ID-slug}/jobs complete public table template only; custom, confidential and paginated variants unsupported",
                                 "All named Role/Type/Location table rows and unique native links must agree; maximum 400 mandatory details; empty, changed, malformed or failed collections abort",

@@ -1,0 +1,244 @@
+{
+  "started_at": "2026-11-06T12:47:46.135189+00:00",
+  "revision": "3ea82ade66a3f50b168fddd2a15ec08c0384f8f2",
+  "scope": "Actual local API registration, scheduled worker, database and public search/provenance checks; no direct connector invocation",
+  "sources": [
+    {
+      "platform": "TriNet",
+      "source": {
+        "id": 22,
+        "provider": "trinet",
+        "slug": "69740-ark-investment-management",
+        "company": "ARK Investment Management",
+        "url": "https://app.trinethire.com/companies/69740-ark-investment-management/jobs",
+        "refresh_minutes": 360,
+        "next_check": "2026-11-06T12:47:46.180098Z",
+        "failures": 0
+      },
+      "run": {
+        "id": 48,
+        "source_id": 22,
+        "started_at": "2026-11-06T12:48:07.576662Z",
+        "finished_at": "2026-11-06T12:48:14.261639Z",
+        "status": "success",
+        "count": 6,
+        "error": null
+      },
+      "stored_observations": 6,
+      "public_search_unique_jobs": 6,
+      "public_search_provenance_entries": 6,
+      "complete": true
+    },
+    {
+      "platform": "CareerPlug",
+      "source": {
+        "id": 23,
+        "provider": "careerplug",
+        "slug": "576036",
+        "company": "Rubber & Accessories",
+        "url": "https://app.careerplug.com/accounts/576036",
+        "refresh_minutes": 360,
+        "next_check": "2026-11-06T12:47:46.182711Z",
+        "failures": 0
+      },
+      "run": {
+        "id": 49,
+        "source_id": 23,
+        "started_at": "2026-11-06T12:48:14.267326Z",
+        "finished_at": "2026-11-06T12:48:18.857119Z",
+        "status": "success",
+        "count": 2,
+        "error": null
+      },
+      "stored_observations": 2,
+      "public_search_unique_jobs": 2,
+      "public_search_provenance_entries": 2,
+      "complete": true
+    },
+    {
+      "platform": "Kula.ai",
+      "source": {
+        "id": 24,
+        "provider": "kula",
+        "slug": "fwg-internal",
+        "company": "Frontwise Group",
+        "url": "https://careers.kula.ai/fwg-internal",
+        "refresh_minutes": 360,
+        "next_check": "2026-11-06T12:47:46.186511Z",
+        "failures": 0
+      },
+      "run": {
+        "id": 50,
+        "source_id": 24,
+        "started_at": "2026-11-06T12:48:18.860868Z",
+        "finished_at": "2026-11-06T12:48:27.673058Z",
+        "status": "success",
+        "count": 2,
+        "error": null
+      },
+      "stored_observations": 2,
+      "public_search_unique_jobs": 2,
+      "public_search_provenance_entries": 2,
+      "complete": true
+    },
+    {
+      "platform": "Rippling",
+      "source": {
+        "id": 25,
+        "provider": "rippling",
+        "slug": "realwork",
+        "company": "RealWork",
+        "url": "https://ats.rippling.com/realwork/jobs",
+        "refresh_minutes": 360,
+        "next_check": "2026-11-06T12:47:46.188408Z",
+        "failures": 0
+      },
+      "run": {
+        "id": 51,
+        "source_id": 25,
+        "started_at": "2026-11-06T12:48:27.678161Z",
+        "finished_at": "2026-11-06T12:48:35.087219Z",
+        "status": "success",
+        "count": 5,
+        "error": null
+      },
+      "stored_observations": 5,
+      "public_search_unique_jobs": 5,
+      "public_search_provenance_entries": 5,
+      "complete": true
+    },
+    {
+      "platform": "Trakstar",
+      "source": {
+        "id": 26,
+        "provider": "trakstar",
+        "slug": "bsglaw",
+        "company": "Berman Sobin Gross LLP",
+        "url": "https://bsglaw.hire.trakstar.com/",
+        "refresh_minutes": 360,
+        "next_check": "2026-11-06T12:47:46.190204Z",
+        "failures": 0
+      },
+      "run": {
+        "id": 52,
+        "source_id": 26,
+        "started_at": "2026-11-06T12:48:35.093702Z",
+        "finished_at": "2026-11-06T12:48:41.415493Z",
+        "status": "success",
+        "count": 3,
+        "error": null
+      },
+      "stored_observations": 3,
+      "public_search_unique_jobs": 3,
+      "public_search_provenance_entries": 3,
+      "complete": true
+    },
+    {
+      "platform": "Freshteam",
+      "source": {
+        "id": 27,
+        "provider": "freshteam",
+        "slug": "sequoiaat",
+        "company": "Sequoia Applied Technologies",
+        "url": "https://sequoiaat.freshteam.com/jobs",
+        "refresh_minutes": 360,
+        "next_check": "2026-11-06T12:47:46.192174Z",
+        "failures": 0
+      },
+      "run": {
+        "id": 53,
+        "source_id": 27,
+        "started_at": "2026-11-06T12:48:41.421412Z",
+        "finished_at": "2026-11-06T12:49:03.709525Z",
+        "status": "success",
+        "count": 26,
+        "error": null
+      },
+      "stored_observations": 26,
+      "public_search_unique_jobs": 26,
+      "public_search_provenance_entries": 26,
+      "complete": true
+    },
+    {
+      "platform": "HiringThing",
+      "source": {
+        "id": 28,
+        "provider": "hiringthing",
+        "slug": "math-learning-center",
+        "company": "The Math Learning Center",
+        "url": "https://math-learning-center.hiringthing.com/",
+        "refresh_minutes": 360,
+        "next_check": "2026-11-06T12:47:46.194165Z",
+        "failures": 0
+      },
+      "run": {
+        "id": 54,
+        "source_id": 28,
+        "started_at": "2026-11-06T12:49:03.713275Z",
+        "finished_at": "2026-11-06T12:49:09.646520Z",
+        "status": "success",
+        "count": 2,
+        "error": null
+      },
+      "stored_observations": 2,
+      "public_search_unique_jobs": 2,
+      "public_search_provenance_entries": 2,
+      "complete": true
+    },
+    {
+      "platform": "ApplicantPro",
+      "source": {
+        "id": 29,
+        "provider": "applicantpro",
+        "slug": "farbank",
+        "company": "Far Bank Enterprises",
+        "url": "https://farbank.applicantpro.com/jobs/",
+        "refresh_minutes": 360,
+        "next_check": "2026-11-06T12:47:46.196024Z",
+        "failures": 0
+      },
+      "run": {
+        "id": 55,
+        "source_id": 29,
+        "started_at": "2026-11-06T12:49:09.652129Z",
+        "finished_at": "2026-11-06T12:49:19.423651Z",
+        "status": "success",
+        "count": 2,
+        "error": null
+      },
+      "stored_observations": 2,
+      "public_search_unique_jobs": 2,
+      "public_search_provenance_entries": 2,
+      "complete": true
+    },
+    {
+      "platform": "iSolvedHire",
+      "source": {
+        "id": 30,
+        "provider": "isolvedhire",
+        "slug": "uasystem",
+        "company": "University of Alabama System Office",
+        "url": "https://uasystem.isolvedhire.com/jobs/",
+        "refresh_minutes": 360,
+        "next_check": "2026-11-06T12:47:46.197785Z",
+        "failures": 0
+      },
+      "run": {
+        "id": 56,
+        "source_id": 30,
+        "started_at": "2026-11-06T12:49:19.429981Z",
+        "finished_at": "2026-11-06T12:49:26.689781Z",
+        "status": "success",
+        "count": 2,
+        "error": null
+      },
+      "stored_observations": 2,
+      "public_search_unique_jobs": 2,
+      "public_search_provenance_entries": 2,
+      "complete": true
+    }
+  ],
+  "unfinished_source_ids": [],
+  "finished_at": "2026-11-06T12:49:29.572572+00:00",
+  "all_passed": true
+}

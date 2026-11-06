@@ -1,7 +1,7 @@
 """Detection and factories for implemented providers only."""
 
 import re
-from urllib.parse import urlsplit
+from urllib.parse import parse_qs, urlsplit
 
 import httpx
 from vindex.connectors.applicantpro import ApplicantProConnector
@@ -11,6 +11,7 @@ from vindex.connectors.careerplug import CareerPlugConnector
 from vindex.connectors.freshteam import FreshteamConnector
 from vindex.connectors.gohire import SLUG as GOHIRE_SLUG
 from vindex.connectors.gohire import GoHireConnector
+from vindex.connectors.hirebridge import HireBridgeConnector
 from vindex.connectors.hirehive import HireHiveConnector
 from vindex.connectors.hiringthing import HiringThingConnector
 from vindex.connectors.jazzhr import JazzHRConnector
@@ -59,6 +60,17 @@ def detect(url: str) -> tuple[str, str]:
         match = re.fullmatch(rf"({TENANT})\.{re.escape(suffix)}", p.hostname or "")
         if match:
             return provider, match[1]
+    if p.hostname == "recruit.hirebridge.com":
+        query = parse_qs(p.query, keep_blank_values=True)
+        if (
+            p.path.lower() != "/v3/jobs/list.aspx"
+            or set(query) != {"cid"}
+            or len(query["cid"]) != 1
+            or not re.fullmatch(r"[1-9][0-9]{0,14}", query["cid"][0])
+            or p.fragment
+        ):
+            raise ValueError("Expected an unfiltered native HireBridge list URL with customer ID")
+        return "hirebridge", query["cid"][0]
     if p.hostname == "app.trinethire.com":
         matched = re.fullmatch(rf"/companies/({TRINET_SLUG})/jobs/?", p.path)
         if not matched or len(matched[1]) > 100 or p.query or p.fragment:
@@ -137,13 +149,15 @@ def detect(url: str) -> tuple[str, str]:
         return detect_original(url)
     except ValueError as error:
         raise ValueError(
-            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire, HiringThing, Freshteam, Trakstar, Rippling, Kula.ai, CareerPlug and TriNet"
+            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire, HiringThing, Freshteam, Trakstar, Rippling, Kula.ai, CareerPlug, TriNet and HireBridge"
         ) from error
 
 
 def create_connector(
     provider: str, slug: str, company: str, client: httpx.AsyncClient
 ) -> Connector:
+    if provider == "hirebridge":
+        return HireBridgeConnector(provider, slug, company, client)
     if provider == "trinet":
         return TriNetConnector(provider, slug, company, client)
     if provider == "careerplug":
