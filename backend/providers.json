@@ -1385,16 +1385,58 @@
   {
     "name": "PageUp",
     "kind": "ats",
-    "implementation_status": "NOT_STARTED",
-    "evidence_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
+    "evidence_status": "LIVE_VERIFIED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
+    "examples": [
+      {
+        "provider": "PageUp",
+        "url": "https://careers.pageuppeople.com/1220/cw/en/listing/",
+        "at": "2026-11-06T18:09:31.438089+00:00",
+        "revision": "eb960738a5fb9d4a9f0c22431ac1519a7b575087",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "3962c510a1b56aa66618bf70f17ad6401c9fc8fc3256be9272b7ff402bf86606",
+        "count": 35,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {
+          "company_from_source_configuration": 35
+        },
+        "payload_sha256": "48b09e5be18dc6c761ed054f860f8141ebe89a93f0e6aa702f60e5e1a0ad7ea3",
+        "finished_at": "2026-11-06T18:10:06.222325+00:00"
+      },
+      {
+        "provider": "PageUp",
+        "url": "https://careers.pageuppeople.com/1132/cw/en-us/listing/",
+        "at": "2026-11-06T18:10:06.723633+00:00",
+        "revision": "eb960738a5fb9d4a9f0c22431ac1519a7b575087",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "3962c510a1b56aa66618bf70f17ad6401c9fc8fc3256be9272b7ff402bf86606",
+        "count": 128,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {
+          "company_from_source_configuration": 128
+        },
+        "payload_sha256": "3e41fe53ac40fca9254e1a6835906d3335ea8853bbaa5f0c1382e5b221cc31fe",
+        "finished_at": "2026-11-06T18:12:03.850825+00:00"
+      }
+    ],
+    "last_run_at": "2026-11-06T18:12:03.850825+00:00",
+    "extraction_count": 163,
     "failure_reason": null,
     "limitations": [
-      "Connector not implemented"
+      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
+      "Native careers.pageuppeople.com numeric tenant/cw/en or en-us listing template only; custom/mobile/other-site templates unsupported",
+      "Both native current and unfiltered-search widgets must agree exactly; 20-item pages plus explicit More Jobs remaining counter, up to 200 mandatory details, complete final roster reconfirmed",
+      "Every detail must bind canonical URL, title, locations and closing metadata to listed job and native secure.dcN.pageuppeople.com apply URL for identical tenant/job; no apply page requested or submitted",
+      "Human external requisition number may differ from numeric URL ID (e.g. H498332); preserve both without coercion or loss of source identity",
+      "Full native job-details HTML/text, source salary/remuneration labels, work type, location, Advertised datetime and closing observations preserved; missing structured workplace remains unknown",
+      "Employer explicitly supplied by source configuration and flagged; source pay text is preserved without guessing currency or units; empty/failed/partial/changed snapshots abort without closures",
+      "Bounded point-in-time coverage does not establish all PageUp templates or hosted production freshness"
     ]
   },
   {

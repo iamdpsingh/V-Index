@@ -8,12 +8,27 @@ import subprocess
 from collections import Counter
 from datetime import UTC, datetime
 from pathlib import Path
+from urllib.parse import quote
 
 import httpx
 from vindex.connectors.registry import create_connector
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
+    (
+        "Avature",
+        "avature",
+        "careers~en_US/main",
+        "Avature",
+        "https://careers.avature.net/en_US/main/SearchJobs",
+    ),
+    (
+        "Avature",
+        "avature",
+        "metrobank~amazingcareers",
+        "Metrobank",
+        "https://metrobank.avature.net/amazingcareers/SearchJobs",
+    ),
     (
         "PageUp",
         "pageup",
@@ -445,7 +460,7 @@ async def main():
                 # Minimal sanitized regression example, no full multi-tenant dumps.
                 if batch.jobs:
                     sample = batch.jobs[0].model_dump(mode="json")
-                    (ROOT / f"evidence/{provider}-{slug}-sample.json").write_text(
+                    (ROOT / f"evidence/{provider}-{quote(slug, safe='')}-sample.json").write_text(
                         json.dumps(sample, indent=2) + "\n"
                     )
             except Exception as e:
@@ -474,6 +489,16 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "Avature": [
+                                "Native tenant.avature.net public SearchJobs portals, modern article--jobs and classic results layouts only; no internal/employee/referral portals, private APIs or application requests",
+                                "Explicit six-item result ranges and total up to 200 jobs, unique scoped IDs and every page/detail required; entire board brand/roster reconfirmed after extraction",
+                                "Modern canonical/title/native employer/location/category and every full description article required; absent structured publication/pay/employment/workplace remain unknown",
+                                "Classic native visible title/ref/team/closing metadata and same-ID RegisterMethod must agree; full native body equals JobPosting text except whitespace; original structured metadata retained",
+                                "Classic SEO title can differ from public display title: preserve the matching list/full visible title, original SEO title and structured_title_differs flag; never silently rewrite titles",
+                                "Source list may omit location; use only provided full metadata/structured addresses and flag omission; no title/prose geolocation guesses; list-only Starting Salary From text retained without guessed currency or units",
+                                "Full original benefits/requirements/footer description sections retained; no preview substitution, scripts executed, login, application or candidate state requested; failed/empty/partial/changed sources never reconcile",
+                                "Point-in-time coverage of observed layouts; custom or alternate portals unsupported, continuous hosted freshness not established",
+                            ],
                             "PageUp": [
                                 "Native careers.pageuppeople.com numeric tenant/cw/en or en-us listing template only; custom/mobile/other-site templates unsupported",
                                 "Both native current and unfiltered-search widgets must agree exactly; 20-item pages plus explicit More Jobs remaining counter, up to 200 mandatory details, complete final roster reconfirmed",

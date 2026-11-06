@@ -1,0 +1,36 @@
+[
+  {
+    "provider": "PageUp",
+    "url": "https://careers.pageuppeople.com/1220/cw/en/listing/",
+    "at": "2026-11-06T18:09:31.438089+00:00",
+    "revision": "eb960738a5fb9d4a9f0c22431ac1519a7b575087",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "3962c510a1b56aa66618bf70f17ad6401c9fc8fc3256be9272b7ff402bf86606",
+    "count": 35,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {
+      "company_from_source_configuration": 35
+    },
+    "payload_sha256": "48b09e5be18dc6c761ed054f860f8141ebe89a93f0e6aa702f60e5e1a0ad7ea3",
+    "finished_at": "2026-11-06T18:10:06.222325+00:00"
+  },
+  {
+    "provider": "PageUp",
+    "url": "https://careers.pageuppeople.com/1132/cw/en-us/listing/",
+    "at": "2026-11-06T18:10:06.723633+00:00",
+    "revision": "eb960738a5fb9d4a9f0c22431ac1519a7b575087",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "3962c510a1b56aa66618bf70f17ad6401c9fc8fc3256be9272b7ff402bf86606",
+    "count": 128,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {
+      "company_from_source_configuration": 128
+    },
+    "payload_sha256": "3e41fe53ac40fca9254e1a6835906d3335ea8853bbaa5f0c1382e5b221cc31fe",
+    "finished_at": "2026-11-06T18:12:03.850825+00:00"
+  }
+]
