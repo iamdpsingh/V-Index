@@ -34,7 +34,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | iSolvedHire | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 5 | 2026-11-06T08:53:54.959321+00:00 | https://uasystem.isolvedhire.com/jobs/ (2; LIVE_VERIFIED); https://verifiedcredentials.isolvedhire.com/jobs/ (3; LIVE_VERIFIED)  |
 | JazzHR | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 119 | 2026-11-06T03:41:01.947707+00:00 | https://lapmasterwolters.applytojob.com/apply (6; LIVE_VERIFIED); https://belaytechnologies.applytojob.com/apply (113; LIVE_VERIFIED)  |
 | Jobvite | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 58 | 2026-11-06T08:36:44.397712+00:00 | https://jobs.jobvite.com/iboss/jobs (35; LIVE_VERIFIED); https://jobs.jobvite.com/optimas/jobs (23; LIVE_VERIFIED)  |
-| JOIN.com | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
+| JOIN.com | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 5 | 2026-11-06T12:57:06.795590+00:00 | https://join.com/companies/2open (3; LIVE_VERIFIED); https://join.com/companies/joinit (2; LIVE_VERIFIED)  |
 | Kula.ai | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 59 | 2026-11-06T12:29:47.538605+00:00 | https://careers.kula.ai/fwg-internal (2; LIVE_VERIFIED); https://careers.kula.ai/massive-bio (57; LIVE_VERIFIED)  |
 | Lever.co | ats | IMPLEMENTED | LIVE_VERIFIED | LOW | 394 | 2026-11-05T16:42:17.172545+00:00 | https://jobs.lever.co/spotify (87; LIVE_VERIFIED); https://jobs.lever.co/palantir (307; LIVE_VERIFIED)  |
 | Manatal | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 12 | 2026-11-06T08:00:22.119713+00:00 | https://www.careers-page.com/quantilehealth (2; LIVE_VERIFIED); https://www.careers-page.com/munich-ventures-2 (10; LIVE_VERIFIED)  |

@@ -924,16 +924,53 @@
   {
     "name": "JOIN.com",
     "kind": "ats",
-    "implementation_status": "NOT_STARTED",
-    "evidence_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
+    "evidence_status": "LIVE_VERIFIED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
+    "examples": [
+      {
+        "provider": "JOIN.com",
+        "url": "https://join.com/companies/2open",
+        "at": "2026-11-06T12:56:58.285309+00:00",
+        "revision": "252ebd633a9fd7af8f3b798ada94c1defe1f1b1a",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "a91c827a7fe369799dd3a34a090ca2d0710cae8e1bb842fe619d3ed64697b8bc",
+        "count": 3,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "7d45f3fb416ef78bbe1952266fb5e0fde08089fb557bf51f94110cd6c5d3d60b",
+        "finished_at": "2026-11-06T12:57:04.004990+00:00"
+      },
+      {
+        "provider": "JOIN.com",
+        "url": "https://join.com/companies/joinit",
+        "at": "2026-11-06T12:57:04.506351+00:00",
+        "revision": "252ebd633a9fd7af8f3b798ada94c1defe1f1b1a",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "a91c827a7fe369799dd3a34a090ca2d0710cae8e1bb842fe619d3ed64697b8bc",
+        "count": 2,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "c255d311ea01f282539cfda8ccce34b43b2bcc90057b3ea480e4c40b698da263",
+        "finished_at": "2026-11-06T12:57:06.795590+00:00"
+      }
+    ],
+    "last_run_at": "2026-11-06T12:57:06.795590+00:00",
+    "extraction_count": 5,
     "failure_reason": null,
     "limitations": [
-      "Connector not implemented"
+      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
+      "Native join.com/companies/{domain} current pageData SSR template; explicit public page=1 collection only, legacy initialState/custom/locale variants unsupported",
+      "Single complete page only: page=1, pageCount=1, perPage=5 and total equals all unique visible job links and stable job IDs; empty/filtered/multipage or extra spontaneous-application counts abort",
+      "Each native detail must match stable job ID, current advertised idParam, public named company, ONLINE/null-closed lifecycle, canonical URL, full JobPosting and native ApplyButton",
+      "Native job page retained as application entry; rotating advert ID is not used as the stable external job ID; redirects never followed",
+      "All source locations/workplace/employment/publication fields retained; salary amounts without independently established units remain original fields with salary_units_unmapped",
+      "Full public roster reconfirmed; contact names, user state, form configuration and unrelated company state excluded; bounded snapshot is not production acceptance"
     ]
   },
   {
