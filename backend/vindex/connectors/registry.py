@@ -11,6 +11,7 @@ from vindex.connectors.gohire import GoHireConnector
 from vindex.connectors.hirehive import HireHiveConnector
 from vindex.connectors.jazzhr import JazzHRConnector
 from vindex.connectors.jobboardly import JobboardlyConnector
+from vindex.connectors.jobvite import JobviteConnector
 from vindex.connectors.manatal import ManatalConnector
 from vindex.connectors.personio import PersonioConnector
 from vindex.connectors.pinpoint import PinpointConnector
@@ -44,6 +45,11 @@ def detect(url: str) -> tuple[str, str]:
         match = re.fullmatch(rf"({TENANT})\.{re.escape(suffix)}", p.hostname or "")
         if match:
             return provider, match[1]
+    if p.hostname == "jobs.jobvite.com":
+        slug = p.path.strip("/").split("/")[0]
+        if not re.fullmatch(TENANT, slug):
+            raise ValueError("Expected a Jobvite hosted employer career URL")
+        return "jobvite", slug
     if p.hostname == "careerspage.io":
         slug = p.path.strip("/").split("/")[0]
         if not re.fullmatch(TENANT, slug):
@@ -97,13 +103,15 @@ def detect(url: str) -> tuple[str, str]:
         return detect_original(url)
     except ValueError as error:
         raise ValueError(
-            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal and Recooty"
+            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty and Jobvite"
         ) from error
 
 
 def create_connector(
     provider: str, slug: str, company: str, client: httpx.AsyncClient
 ) -> Connector:
+    if provider == "jobvite":
+        return JobviteConnector(provider, slug, company, client)
     if provider == "recooty":
         return RecootyConnector(provider, slug, company, client)
     if provider == "manatal":

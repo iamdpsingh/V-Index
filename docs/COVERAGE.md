@@ -33,7 +33,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | iCIMS | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | iSolvedHire | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | JazzHR | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 119 | 2026-11-06T03:41:01.947707+00:00 | https://lapmasterwolters.applytojob.com/apply (6; LIVE_VERIFIED); https://belaytechnologies.applytojob.com/apply (113; LIVE_VERIFIED)  |
-| Jobvite | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
+| Jobvite | ats | IMPLEMENTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | JOIN.com | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Kula.ai | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Lever.co | ats | IMPLEMENTED | LIVE_VERIFIED | LOW | 394 | 2026-11-05T16:42:17.172545+00:00 | https://jobs.lever.co/spotify (87; LIVE_VERIFIED); https://jobs.lever.co/palantir (307; LIVE_VERIFIED)  |
@@ -48,7 +48,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | Phenom People | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | Pinpoint | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 49 | 2026-11-06T03:20:57.181056+00:00 | https://intermedia.pinpointhq.com (43; LIVE_VERIFIED); https://workwithus.pinpointhq.com (6; LIVE_VERIFIED)  |
 | Polymer | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 6 | 2026-11-06T07:47:46.726853+00:00 | https://jobs.polymer.co/chemfinitytech (4; LIVE_VERIFIED); https://jobs.polymer.co/gencores-inc (2; LIVE_VERIFIED)  |
-| Recooty | ats | IMPLEMENTED | FAILED | MEDIUM | 2 | 2026-11-06T08:28:59.782183+00:00 | https://careerspage.io/augusto-digital (2; LIVE_VERIFIED); https://careerspage.io/recooty-inc (0; FAILED) ValueError: Recooty job detail identity, open status or application mismatch |
+| Recooty | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 28 | 2026-11-06T08:33:21.660966+00:00 | https://careerspage.io/augusto-digital (2; LIVE_VERIFIED); https://careerspage.io/recooty-inc (26; LIVE_VERIFIED)  |
 | Recruitee | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 29 | 2026-11-06T01:42:58.731786+00:00 | https://natilik.recruitee.com (6; LIVE_VERIFIED); https://bunq.recruitee.com (23; LIVE_VERIFIED)  |
 | Rippling | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Rival | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |

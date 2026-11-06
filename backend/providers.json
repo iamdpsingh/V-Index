@@ -659,7 +659,7 @@
   {
     "name": "Jobvite",
     "kind": "ats",
-    "implementation_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
     "evidence_status": "NOT_STARTED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
@@ -668,7 +668,8 @@
     "extraction_count": null,
     "failure_reason": null,
     "limitations": [
-      "Connector not implemented"
+      "Hosted unfiltered jobs.jobvite.com tables only; maximum 400 mandatory matching details",
+      "Empty/paginated/alternate templates and custom domains unsupported; live multi-employer verification pending"
     ]
   },
   {
@@ -1064,47 +1065,49 @@
     "name": "Recooty",
     "kind": "ats",
     "implementation_status": "IMPLEMENTED",
-    "evidence_status": "FAILED",
+    "evidence_status": "LIVE_VERIFIED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
     "examples": [
       {
         "provider": "Recooty",
         "url": "https://careerspage.io/augusto-digital",
-        "at": "2026-11-06T08:28:50.347247+00:00",
-        "revision": "714ce3af39944115b5925454e74e10697da5d31b",
+        "at": "2026-11-06T08:32:51.264619+00:00",
+        "revision": "8afe94f250f2dcdf37e78d959ea8e86f8ed28a3c",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "c09f8c0b9dd7d9d6a6420178f6344c39e446266bc5aeb7e7c924f4cbc2d9ccb7",
+        "code_sha256": "fd36de99d12192f0e3e5118a62619cf1ddb5fe68e9b7798c2184c8abeccba1e6",
         "count": 2,
         "status": "LIVE_VERIFIED",
         "complete": true,
         "error": null,
         "quality_flag_counts": {},
         "payload_sha256": "7091ac0904ce7fc123e2f0287394e74560a72f844cff6d558534a323cf4c1c4e",
-        "finished_at": "2026-11-06T08:28:55.123620+00:00"
+        "finished_at": "2026-11-06T08:32:55.275603+00:00"
       },
       {
         "provider": "Recooty",
         "url": "https://careerspage.io/recooty-inc",
-        "at": "2026-11-06T08:28:55.624900+00:00",
-        "revision": "714ce3af39944115b5925454e74e10697da5d31b",
+        "at": "2026-11-06T08:32:55.776993+00:00",
+        "revision": "8afe94f250f2dcdf37e78d959ea8e86f8ed28a3c",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "c09f8c0b9dd7d9d6a6420178f6344c39e446266bc5aeb7e7c924f4cbc2d9ccb7",
-        "count": 0,
-        "status": "FAILED",
-        "complete": false,
-        "error": "ValueError: Recooty job detail identity, open status or application mismatch",
-        "finished_at": "2026-11-06T08:28:59.782183+00:00"
+        "code_sha256": "fd36de99d12192f0e3e5118a62619cf1ddb5fe68e9b7798c2184c8abeccba1e6",
+        "count": 26,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "2a3a964eb4474fedd2cf3c5838b48957dd231ab553ed9005a46654cb79129cbf",
+        "finished_at": "2026-11-06T08:33:21.660966+00:00"
       }
     ],
-    "last_run_at": "2026-11-06T08:28:59.782183+00:00",
-    "extraction_count": 2,
-    "failure_reason": "ValueError: Recooty job detail identity, open status or application mismatch",
+    "last_run_at": "2026-11-06T08:33:21.660966+00:00",
+    "extraction_count": 28,
+    "failure_reason": null,
     "limitations": [
       "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
       "Current careerspage.io public server-rendered Inertia templates only; legacy jobs.recooty.com, www redirects and custom domains unsupported",
       "Maximum 400 details; embedded job collection must match visible total, unique IDs and actual listing titles/links",
-      "Every detail must match employer, numeric ID, slug, title, source JobPosting ULID/canonical URL, OPEN/APPROVED status and native application link",
+      "Every detail must match employer, numeric ID, slug, title, source JobPosting ULID/canonical URL, OPEN career status, observed APPROVED/NOT_APPLIED board flag and native application link",
       "Full roster reconfirmed after details; empty/partial/paginated/changed collections fail without closures",
       "Original publication timestamp, source location/workplace/employment labels and provided salary fields preserved; unrelated auth/form/config state excluded"
     ]

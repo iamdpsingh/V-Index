@@ -14,6 +14,8 @@ from vindex.connectors.registry import create_connector
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
+    ("Jobvite", "jobvite", "iboss", "iboss", "https://jobs.jobvite.com/iboss/jobs"),
+    ("Jobvite", "jobvite", "optimas", "Optimas Solutions", "https://jobs.jobvite.com/optimas/jobs"),
     (
         "Recooty",
         "recooty",
@@ -256,6 +258,13 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "Jobvite": [
+                                "Hosted jobs.jobvite.com unfiltered server-rendered Open Positions tables only; custom domains and alternate/paginated templates unsupported",
+                                "No authoritative total is supplied; complete bounded table membership/title reconfirmation establishes the observed template snapshot",
+                                "Maximum 400 details; every page must match listed title, employer title, native job ID, category/location metadata and native apply link",
+                                "All explicit detail locations retained; salary/employment/original-publication fields absent as independent metadata remain unknown, source description retained intact",
+                                "Empty, malformed, failed or changed enumerations abort without closures; no application form is fetched or submitted",
+                            ],
                             "Recooty": [
                                 "Current careerspage.io public server-rendered Inertia templates only; legacy jobs.recooty.com, www redirects and custom domains unsupported",
                                 "Maximum 400 details; embedded job collection must match visible total, unique IDs and actual listing titles/links",
