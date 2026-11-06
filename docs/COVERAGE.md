@@ -9,7 +9,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | ADP | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | ApplicantPro | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 5 | 2026-11-06T08:53:36.755511+00:00 | https://farbank.applicantpro.com/jobs/ (2; LIVE_VERIFIED); https://clarke.applicantpro.com/jobs/ (3; LIVE_VERIFIED)  |
 | Ashby | ats | IMPLEMENTED | LIVE_VERIFIED | LOW | 243 | 2026-11-05T16:42:19.453089+00:00 | https://jobs.ashbyhq.com/Ashby (72; LIVE_VERIFIED); https://jobs.ashbyhq.com/ramp (171; LIVE_VERIFIED)  |
-| Avature | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
+| Avature | ats | IMPLEMENTED | FAILED | HIGH | 19 | 2026-11-06T18:22:33.011115+00:00 | https://careers.avature.net/en_US/main/SearchJobs (19; LIVE_VERIFIED); https://metrobank.avature.net/amazingcareers/SearchJobs (0; FAILED) ValueError: Avature classic list/detail metadata mismatch |
 | BambooHR | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 25 | 2026-11-06T03:18:07.998376+00:00 | https://anaergia.bamboohr.com/careers (20; LIVE_VERIFIED); https://concept2.bamboohr.com/careers (5; LIVE_VERIFIED)  |
 | BrassRing | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | Breezy HR | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 81 | 2026-11-06T03:16:14.203649+00:00 | https://vald.breezy.hr (75; LIVE_VERIFIED); https://subscribe.breezy.hr (6; LIVE_VERIFIED)  |

@@ -273,3 +273,9 @@ def test_classic_salary_present_only_in_list_is_preserved_without_guessing_units
     )
     page = detail(modern=False).replace(', "baseSalary": {"currency": "GBP", "value": 40000}', "")
     assert run(modern=False, listing=listing, content=page).jobs[0].salary == {"text": "£26,230"}
+
+
+def test_optional_native_team_omission_matches_explicit_empty_detail_field():
+    listing = board(modern=False).replace("<span><strong>Team: </strong>Engineering</span>", "")
+    page = detail(modern=False).replace(">Engineering<", "><")
+    assert run(modern=False, listing=listing, content=page).complete

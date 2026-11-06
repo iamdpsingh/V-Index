@@ -1,0 +1,30 @@
+[
+  {
+    "provider": "Avature",
+    "url": "https://careers.avature.net/en_US/main/SearchJobs",
+    "at": "2026-11-06T18:20:49.864379+00:00",
+    "revision": "fc8921b3c9caa9ee3bef541b5e8a0d5932711c72",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "fbc6d7880ff3a9f8a987442922f3fc15af1fdf5a18fcc4ee9d49457cf1d779de",
+    "count": 19,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "876744970bd8a3ad519ef951073790c28483328531d2b087c9c16ccc9f426e68",
+    "finished_at": "2026-11-06T18:21:47.494587+00:00"
+  },
+  {
+    "provider": "Avature",
+    "url": "https://metrobank.avature.net/amazingcareers/SearchJobs",
+    "at": "2026-11-06T18:21:47.995970+00:00",
+    "revision": "fc8921b3c9caa9ee3bef541b5e8a0d5932711c72",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "fbc6d7880ff3a9f8a987442922f3fc15af1fdf5a18fcc4ee9d49457cf1d779de",
+    "count": 0,
+    "status": "FAILED",
+    "complete": false,
+    "error": "ValueError: Avature classic list/detail metadata mismatch",
+    "finished_at": "2026-11-06T18:22:33.011115+00:00"
+  }
+]

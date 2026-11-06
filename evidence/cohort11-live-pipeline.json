@@ -1,0 +1,113 @@
+{
+  "started_at": "2026-11-06T18:22:08.626315+00:00",
+  "revision": "fc8921b3c9caa9ee3bef541b5e8a0d5932711c72",
+  "scope": "Actual local API registration, scheduled worker, database and public search/provenance checks; no direct connector invocation",
+  "sources": [
+    {
+      "platform": "Oracle Recruiting",
+      "source": {
+        "id": 39,
+        "provider": "oracle",
+        "slug": "eoja.fa.ap1.oraclecloud.com~CX",
+        "company": "Hansen Technologies",
+        "url": "https://eoja.fa.ap1.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX/jobs",
+        "refresh_minutes": 360,
+        "next_check": "2026-11-06T18:22:08.674697Z",
+        "failures": 0
+      },
+      "run": {
+        "id": 86,
+        "source_id": 39,
+        "started_at": "2026-11-06T18:22:37.391892Z",
+        "finished_at": "2026-11-06T18:23:10.751570Z",
+        "status": "success",
+        "count": 28,
+        "error": null
+      },
+      "stored_observations": 28,
+      "public_search_unique_jobs": 28,
+      "public_search_provenance_entries": 28,
+      "complete": true
+    },
+    {
+      "platform": "CSOD",
+      "source": {
+        "id": 40,
+        "provider": "csod",
+        "slug": "portstephens~1",
+        "company": "Port Stephens Council",
+        "url": "https://portstephens.csod.com/ux/ats/careersite/1/home?c=portstephens",
+        "refresh_minutes": 360,
+        "next_check": "2026-11-06T18:22:08.677385Z",
+        "failures": 0
+      },
+      "run": {
+        "id": 87,
+        "source_id": 40,
+        "started_at": "2026-11-06T18:23:10.757882Z",
+        "finished_at": "2026-11-06T18:23:27.100062Z",
+        "status": "success",
+        "count": 8,
+        "error": null
+      },
+      "stored_observations": 8,
+      "public_search_unique_jobs": 8,
+      "public_search_provenance_entries": 8,
+      "complete": true
+    },
+    {
+      "platform": "iCIMS",
+      "source": {
+        "id": 41,
+        "provider": "icims",
+        "slug": "careers-iomart",
+        "company": "iomart",
+        "url": "https://careers-iomart.icims.com/jobs/search",
+        "refresh_minutes": 360,
+        "next_check": "2026-11-06T18:22:08.679273Z",
+        "failures": 0
+      },
+      "run": {
+        "id": 88,
+        "source_id": 41,
+        "started_at": "2026-11-06T18:23:27.106010Z",
+        "finished_at": "2026-11-06T18:23:43.830036Z",
+        "status": "success",
+        "count": 10,
+        "error": null
+      },
+      "stored_observations": 10,
+      "public_search_unique_jobs": 10,
+      "public_search_provenance_entries": 10,
+      "complete": true
+    },
+    {
+      "platform": "PageUp",
+      "source": {
+        "id": 42,
+        "provider": "pageup",
+        "slug": "1220~en",
+        "company": "Adelaide University",
+        "url": "https://careers.pageuppeople.com/1220/cw/en/listing/",
+        "refresh_minutes": 360,
+        "next_check": "2026-11-06T18:22:08.681014Z",
+        "failures": 0
+      },
+      "run": {
+        "id": 89,
+        "source_id": 42,
+        "started_at": "2026-11-06T18:23:43.835847Z",
+        "finished_at": "2026-11-06T18:24:16.893182Z",
+        "status": "success",
+        "count": 35,
+        "error": null
+      },
+      "stored_observations": 35,
+      "public_search_unique_jobs": 35,
+      "public_search_provenance_entries": 35,
+      "complete": true
+    }
+  ],
+  "finished_at": "2026-11-06T18:24:19.801793+00:00",
+  "all_complete": true
+}

@@ -112,16 +112,53 @@
   {
     "name": "Avature",
     "kind": "ats",
-    "implementation_status": "NOT_STARTED",
-    "evidence_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
+    "evidence_status": "FAILED",
     "risk": "HIGH",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
-    "failure_reason": null,
+    "examples": [
+      {
+        "provider": "Avature",
+        "url": "https://careers.avature.net/en_US/main/SearchJobs",
+        "at": "2026-11-06T18:20:49.864379+00:00",
+        "revision": "fc8921b3c9caa9ee3bef541b5e8a0d5932711c72",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "fbc6d7880ff3a9f8a987442922f3fc15af1fdf5a18fcc4ee9d49457cf1d779de",
+        "count": 19,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "876744970bd8a3ad519ef951073790c28483328531d2b087c9c16ccc9f426e68",
+        "finished_at": "2026-11-06T18:21:47.494587+00:00"
+      },
+      {
+        "provider": "Avature",
+        "url": "https://metrobank.avature.net/amazingcareers/SearchJobs",
+        "at": "2026-11-06T18:21:47.995970+00:00",
+        "revision": "fc8921b3c9caa9ee3bef541b5e8a0d5932711c72",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "fbc6d7880ff3a9f8a987442922f3fc15af1fdf5a18fcc4ee9d49457cf1d779de",
+        "count": 0,
+        "status": "FAILED",
+        "complete": false,
+        "error": "ValueError: Avature classic list/detail metadata mismatch",
+        "finished_at": "2026-11-06T18:22:33.011115+00:00"
+      }
+    ],
+    "last_run_at": "2026-11-06T18:22:33.011115+00:00",
+    "extraction_count": 19,
+    "failure_reason": "ValueError: Avature classic list/detail metadata mismatch",
     "limitations": [
-      "Connector not implemented"
+      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
+      "Native tenant.avature.net public SearchJobs portals, modern article--jobs and classic results layouts only; no internal/employee/referral portals, private APIs or application requests",
+      "Explicit six-item result ranges and total up to 200 jobs, unique scoped IDs and every page/detail required; entire board brand/roster reconfirmed after extraction",
+      "Modern canonical/title/native employer/location/category and every full description article required; absent structured publication/pay/employment/workplace remain unknown",
+      "Classic native visible title/ref/team/closing metadata and same-ID RegisterMethod must agree; full native body equals JobPosting text except whitespace; original structured metadata retained",
+      "Classic SEO title can differ from public display title: preserve the matching list/full visible title, original SEO title and structured_title_differs flag; never silently rewrite titles",
+      "Source list may omit location; use only provided full metadata/structured addresses and flag omission; no title/prose geolocation guesses; list-only Starting Salary From text retained without guessed currency or units",
+      "Full original benefits/requirements/footer description sections retained; no preview substitution, scripts executed, login, application or candidate state requested; failed/empty/partial/changed sources never reconcile",
+      "Point-in-time coverage of observed layouts; custom or alternate portals unsupported, continuous hosted freshness not established"
     ]
   },
   {

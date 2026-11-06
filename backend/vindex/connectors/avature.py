@@ -256,8 +256,12 @@ class AvatureConnector:
             ]:
                 if list_key == "Location" and not listing["fields"].get(list_key):
                     continue
-                if listing["fields"].get(list_key) != raw_fields.get(detail_key):
-                    raise ValueError("Avature classic list/detail metadata mismatch")
+                if (listing["fields"].get(list_key) or None) != (
+                    raw_fields.get(detail_key) or None
+                ):
+                    raise ValueError(
+                        f"Avature classic {list_key} mismatch job {identifier}: listed={listing['fields'].get(list_key)!r}, detail={raw_fields.get(detail_key)!r}"
+                    )
             if not isinstance(row.get("description"), str) or compact(
                 " ".join(original_values)
             ) != compact(text(row["description"])):
