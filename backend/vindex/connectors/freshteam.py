@@ -74,9 +74,9 @@ class FreshteamConnector:
         if len(rows) != 1:
             raise ValueError("Missing unique Freshteam JobPosting")
         row = rows[0]
-        source = urlsplit(row["url"])
+        source = urlsplit(html.unescape(row["url"]))
         if (
-            row["title"].strip() != listing["title"]
+            html.unescape(row["title"]).strip() != listing["title"]
             or source.scheme != "https"
             or source.netloc != urlsplit(self.origin).netloc
             or source.query
@@ -95,7 +95,7 @@ class FreshteamConnector:
         return [
             JobInput(
                 external_id=matched[1],
-                title=row["title"].strip(),
+                title=html.unescape(row["title"]).strip(),
                 company=row["hiringOrganization"]["name"],
                 description=description,
                 quality_flags=[] if description else ["description_missing"],

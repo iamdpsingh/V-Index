@@ -148,3 +148,12 @@ def test_source_title_padding_is_normalized_but_preserved_raw():
     payload["title"] = " Engineer "
     job = run(job=payload).jobs[0]
     assert job.title == "Engineer" and job.raw["jobposting"]["title"] == " Engineer "
+
+
+def test_source_title_and_metadata_url_entities_are_decoded_before_comparison():
+    payload = schema()
+    payload["title"] = "Engineer&#39;"
+    payload["url"] = f"{ORIGIN}/jobs/{KEY}/Engineer&#39;"
+    job = run(job=payload, html=board().replace(">Engineer<", ">Engineer&#39;<")).jobs[0]
+    assert job.title == "Engineer'"
+    assert job.raw["jobposting"]["url"].endswith("&#39;")
