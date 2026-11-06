@@ -14,6 +14,8 @@ from vindex.connectors.registry import create_connector
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
+    ("BambooHR", "bamboohr", "anaergia", "Anaergia", "https://anaergia.bamboohr.com/careers"),
+    ("BambooHR", "bamboohr", "concept2", "Concept2", "https://concept2.bamboohr.com/careers"),
     ("Workable", "workable", "careers", "Workable", "https://apply.workable.com/careers/"),
     (
         "Workable",
@@ -172,6 +174,13 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "BambooHR": [
+                                "Hosted bamboohr.com career list/detail only; maximum 400 details and no custom-domain detection",
+                                "Reported total must equal unique listed identifiers, every detail must match the open listing, and IDs are reconfirmed",
+                                "Empty lists fail closed pending independent tenant identity verification; no closures are inferred from those runs",
+                                "Source numeric locationType is preserved raw and flagged workplace_type_unmapped; no workplace meaning is guessed",
+                                "Application URL is the source career posting containing its native application entry; public website interfaces have no integration stability guarantee",
+                            ],
                             "Workable": [
                                 "Uses the public jobs collection with details=true on the fixed apply.workable.com widget host",
                                 "Bare /j/shortcode URLs lack an account identifier; register an account career page instead",

@@ -376,3 +376,115 @@ def test_breezy_talent_pool_html_identity_without_jobposting_schema():
     ):
         with pytest.raises(ValueError, match="identity"):
             run("breezy", br_handler(body=invalid))
+
+
+def bamboo_row():
+    return {"id": "12", "jobOpeningName": "Engineer", "isRemote": None}
+
+
+def bamboo_detail():
+    return {
+        "result": {
+            "jobOpening": {
+                "jobOpeningShareUrl": "https://example.bamboohr.com/careers/12",
+                "jobOpeningName": "Engineer",
+                "jobOpeningStatus": "Open",
+                "description": "<p>Build</p>",
+                "location": {"city": "London", "state": "England", "addressCountry": "UK"},
+                "locationType": "2",
+                "employmentStatusLabel": "Full-Time",
+                "datePosted": "2026-11-01",
+                "compensation": "£50,000 per year",
+            },
+            "formFields": {"not_saved": "application form configuration"},
+        }
+    }
+
+
+def bamboo_handler(payload=None, detail_payload=None, confirmation=None, detail_status=200):
+    calls = 0
+
+    def handle(request):
+        nonlocal calls
+        assert request.url.host == "example.bamboohr.com"
+        if request.url.path == "/robots.txt":
+            return httpx.Response(200, text="User-agent: *\nAllow: /")
+        if request.url.path == "/careers/list":
+            calls += 1
+            data = confirmation if calls > 1 and confirmation is not None else payload
+            return httpx.Response(
+                200,
+                json=data
+                if data is not None
+                else {"meta": {"totalCount": 1}, "result": [bamboo_row()]},
+            )
+        assert request.url.path == "/careers/12/detail"
+        return httpx.Response(
+            detail_status, json=detail_payload if detail_payload is not None else bamboo_detail()
+        )
+
+    return handle
+
+
+def test_bamboo_preserves_details_without_guessing_workplace_enums():
+    batch = run("bamboohr", bamboo_handler())
+    job = batch.jobs[0]
+    assert batch.complete and job.description == "Build"
+    assert job.location == "London, England, UK" and job.employment_type == "Full-Time"
+    assert job.salary["source_text"] == "£50,000 per year" and job.published_at.year == 2026
+    assert job.remote_status is None and job.quality_flags == ["workplace_type_unmapped"]
+    assert job.raw["jobOpening"]["locationType"] == "2" and "formFields" not in job.raw
+    assert job.source_url == job.application_url == "https://example.bamboohr.com/careers/12"
+
+
+@pytest.mark.parametrize(
+    "payload",
+    [
+        {"meta": {"totalCount": True}, "result": [bamboo_row()]},
+        {"meta": {"totalCount": 2}, "result": [bamboo_row()]},
+        {"meta": {"totalCount": 2}, "result": [bamboo_row(), bamboo_row()]},
+        {"meta": {"totalCount": 0}, "result": []},
+        {"meta": {"totalCount": 401}, "result": [bamboo_row()] * 401},
+        {"meta": {}, "result": []},
+        {"meta": {"totalCount": 1}, "result": {}},
+        {"meta": {"totalCount": 1}, "result": [{**bamboo_row(), "id": "../12"}]},
+    ],
+)
+def test_bamboo_partial_or_invalid_lists_rejected(payload):
+    with pytest.raises((ValueError, KeyError, TypeError)):
+        run("bamboohr", bamboo_handler(payload=payload))
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        lambda j: j.update(jobOpeningStatus="Closed"),
+        lambda j: j.update(jobOpeningShareUrl="https://evil.com/careers/12"),
+        lambda j: j.update(jobOpeningName="Other"),
+        lambda j: j.pop("description"),
+    ],
+)
+def test_bamboo_invalid_or_closed_detail_fails(mutation):
+    d = bamboo_detail()
+    mutation(d["result"]["jobOpening"])
+    with pytest.raises((ValueError, KeyError)):
+        run("bamboohr", bamboo_handler(detail_payload=d))
+
+
+def test_bamboo_failed_detail_and_changed_listing_fail():
+    for handler in (
+        bamboo_handler(detail_status=404),
+        bamboo_handler(confirmation={"meta": {"totalCount": 0}, "result": []}),
+    ):
+        with pytest.raises(ValueError):
+            run("bamboohr", handler)
+
+
+def test_bamboo_url_detection():
+    assert detect("https://anaergia.bamboohr.com/careers/367") == ("bamboohr", "anaergia")
+    for url in (
+        "https://anaergia.bamboohr.com.evil.com/careers",
+        "https://a.b.bamboohr.com/careers",
+    ):
+        with pytest.raises(ValueError):
+            detect(url)

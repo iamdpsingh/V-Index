@@ -4,6 +4,7 @@ import re
 from urllib.parse import urlsplit
 
 import httpx
+from vindex.connectors.bamboohr import BambooHRConnector
 from vindex.connectors.breezy import BreezyConnector
 from vindex.connectors.personio import PersonioConnector
 from vindex.connectors.public import Connector, PublicConnector
@@ -21,7 +22,11 @@ def detect(url: str) -> tuple[str, str]:
     p = urlsplit(url)
     if p.scheme != "https" or p.username or p.password or p.port not in (None, 443):
         raise ValueError("Use an HTTPS hosted career board URL without credentials or custom ports")
-    for suffix, provider in (("teamtailor.com", "teamtailor"), ("breezy.hr", "breezy")):
+    for suffix, provider in (
+        ("teamtailor.com", "teamtailor"),
+        ("breezy.hr", "breezy"),
+        ("bamboohr.com", "bamboohr"),
+    ):
         match = re.fullmatch(rf"({TENANT})\.{re.escape(suffix)}", p.hostname or "")
         if match:
             return provider, match[1]
@@ -58,13 +63,15 @@ def detect(url: str) -> tuple[str, str]:
         return detect_original(url)
     except ValueError as error:
         raise ValueError(
-            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR and Workable"
+            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable and BambooHR"
         ) from error
 
 
 def create_connector(
     provider: str, slug: str, company: str, client: httpx.AsyncClient
 ) -> Connector:
+    if provider == "bamboohr":
+        return BambooHRConnector(provider, slug, company, client)
     if provider == "workable":
         return WorkableConnector(provider, slug, company, client)
     if provider == "teamtailor":
