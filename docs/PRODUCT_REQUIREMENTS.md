@@ -11,3 +11,7 @@ No fake demo data or counts, no superficial connector stubs, no placeholder clai
 ## Initial pitch clarification
 
 The founder reports that the original pitch described a competitive selection: Vaya will acquire the company that executes the job-board indexer challenge best for $10,000, with no users or revenue required. Meeting the technical checklist should not be represented as guaranteeing acquisition. Prioritize reliable complete coverage, current data, reviewer evidence and a maintainable handoff. Python and Airflow were mentioned as relevant experience in the invitation; this does not establish Airflow as a required implementation technology. The current Redis-backed scheduling architecture remains the baseline pending demonstrated need for a different orchestrator.
+
+## Owner scope expansion — 2026-11-06
+
+The owner requests accounts and saved profiles, private saved resumes, and job recommendations derived from professional resume/profile details. The internal completion target is November 7, 2026 IST. The original indexer challenge and 78-platform requirement remain in force. This supersedes the earlier appearance-only restriction for these explicitly requested features; it does not transfer frontend file ownership. Small substantive commits are preferred; commit-count inflation is prohibited. See DELIVERY_PLAN.md.
