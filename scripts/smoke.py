@@ -15,6 +15,14 @@ from vindex.connectors.registry import create_connector
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
     (
+        "Recooty",
+        "recooty",
+        "augusto-digital",
+        "Augusto Digital",
+        "https://careerspage.io/augusto-digital",
+    ),
+    ("Recooty", "recooty", "recooty-inc", "Recooty Inc.", "https://careerspage.io/recooty-inc"),
+    (
         "Manatal",
         "manatal",
         "quantilehealth",
@@ -248,6 +256,13 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "Recooty": [
+                                "Current careerspage.io public server-rendered Inertia templates only; legacy jobs.recooty.com, www redirects and custom domains unsupported",
+                                "Maximum 400 details; embedded job collection must match visible total, unique IDs and actual listing titles/links",
+                                "Every detail must match employer, numeric ID, slug, title, source JobPosting ULID/canonical URL, OPEN/APPROVED status and native application link",
+                                "Full roster reconfirmed after details; empty/partial/paginated/changed collections fail without closures",
+                                "Original publication timestamp, source location/workplace/employment labels and provided salary fields preserved; unrelated auth/form/config state excluded",
+                            ],
                             "Manatal": [
                                 "Legacy www.careers-page.com boards only; new tenant subdomains, custom domains and other themes unsupported",
                                 "Public unfiltered collection count must match named career-page total and visible titles; sequential fixed-host pagination validated before any detail requests",
