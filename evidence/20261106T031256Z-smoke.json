@@ -1,0 +1,30 @@
+[
+  {
+    "provider": "Workable",
+    "url": "https://apply.workable.com/careers/",
+    "at": "2026-11-06T03:12:52.305703+00:00",
+    "revision": "6786dda5c89e7d082739b076084e109bcd097967",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "2affa29857aa1bf23bc1c3e62de0e3c30b2d0a890c389b415fe207cad3c6d612",
+    "count": 1,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "0670fdcec97e560a2fbcbbb1454365c12a9debdecb1ba42e4684b99c184975e4",
+    "finished_at": "2026-11-06T03:12:54.456118+00:00"
+  },
+  {
+    "provider": "Workable",
+    "url": "https://apply.workable.com/learnworlds/",
+    "at": "2026-11-06T03:12:54.957378+00:00",
+    "revision": "6786dda5c89e7d082739b076084e109bcd097967",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "2affa29857aa1bf23bc1c3e62de0e3c30b2d0a890c389b415fe207cad3c6d612",
+    "count": 0,
+    "status": "FAILED",
+    "complete": false,
+    "error": "ValueError: Invalid or duplicate Workable shortcode",
+    "finished_at": "2026-11-06T03:12:55.874733+00:00"
+  }
+]

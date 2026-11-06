@@ -61,7 +61,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | TriNet | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | UltiPro | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | WeRecruit | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
-| Workable | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
+| Workable | ats | IMPLEMENTED | FAILED | MEDIUM | 1 | 2026-11-06T03:12:55.874733+00:00 | https://apply.workable.com/careers/ (1; LIVE_VERIFIED); https://apply.workable.com/learnworlds/ (0; FAILED) ValueError: Invalid or duplicate Workable shortcode |
 | Workday | ats | IMPLEMENTED | LIVE_VERIFIED | HIGH | 43 | 2026-11-06T01:43:52.166289+00:00 | https://imf.wd5.myworkdayjobs.com/IMF (14; LIVE_VERIFIED); https://gatesfoundation.wd1.myworkdayjobs.com/Gates (29; LIVE_VERIFIED)  |
 | Zoho Recruit | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Niceboard | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
