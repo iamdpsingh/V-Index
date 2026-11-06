@@ -1,0 +1,13 @@
+# Remaining platform identity research — November 6, 2026
+
+These notes identify products and potential discovery routes. They are not connector implementations, successful indexing runs or additions to live coverage. Keep the required inventory names unchanged.
+
+| Required name | Primary source checked | Finding / next verification |
+|---|---|---|
+| Artha | https://arthajobboard.com/ and https://docs.arthajobboard.com/getting-started | The vendor identifies a hosted job-board product and links customer boards. Investigate those actual installations, source identity, robots and complete pagination. Do not confuse it with unrelated Artha consulting companies or career-advice products. |
+| Nodex | https://www.nodex.co.uk/services/job-board-software | UK vendor offers custom job-board deployments; the public product page provides screenshots, not an enumerated live data feed. Find independently verifiable customer installations and allowed public extraction. Other businesses using the Nodex name are not coverage examples. |
+| JobKit | https://www.jobkit.io/ and https://docs.jobkit.io/ | Vendor links https://jobs.rubyonrails.org/ as a real example, offers hosted jobkit.io subdomains/custom domains and an RSS feed, and illustrates an authenticated REST API. Investigate permitted public HTML/RSS completeness; do not assume the authenticated API is anonymously available or that an RSS feed includes all current jobs. No JobKit account was created. |
+| FirstStage | https://firststage.co/ redirects to https://first.cx/ | Current primary site uses First.cx branding and still links account entry points on firststage.co. Preserve FirstStage as the required matrix row and verify public employer portals, not the vendor's marketing roles or login pages. Redirect observation is research; production connectors still disable automatic redirects. |
+| eJobBoard | No accessible primary product/installation verified yet | Remains unresolved. https://ejobboard.com/ was inaccessible through the web research tool; that alone proves neither discontinuation nor absence of legacy deployments. Obtain a verifiable vendor/installation reference and keep this distinct from ejobsitesoftware.com. Do not implement against a guessed domain or count third-party comparison pages as live evidence. |
+
+For these platforms, a product homepage, screenshot, sandbox, test posting or third-party directory is not a successful indexing example. Vendor demo data cannot substitute for real independent boards/employers. No paid service, new account, external message or access-control bypass was used during this research.

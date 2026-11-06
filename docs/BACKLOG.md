@@ -1,11 +1,17 @@
 # Execution backlog
 
+## Current coverage-first status — November 6
+
+13/78 platforms have point-in-time non-empty complete connector runs across two independent employers. Fourteen connectors are implemented; Jobboardly remains FAILED/partial because its second configured board did not complete. There are 64 unimplemented platforms plus that partial platform and the documented bounds on existing connectors. Accounts, frontend polish and deployment are paused by the owner's latest instruction. No acquisition-complete claim is justified.
+
 ## First slice
 - [x] Inspect empty folder/remote; initialize canonical main without replacing history.
 - [x] Contracts, exact 78-provider inventory and isolated frontend handoff.
 - [x] Initial three public API connectors, persisted observations, lifecycle, conservative dedupe, API and worker baseline.
 - [x] SmartRecruiters and Personio implemented with two live tenants each (5/78 platform evidence).
 - [x] Recruitee and bounded hosted Workday implemented; two live employers each (7/78 point-in-time evidence).
+- [x] Add Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint and JazzHR with two independent live employers each (13/78 point-in-time evidence).
+- [ ] Finish Jobboardly multi-board verification: Recruiter jobs indexed; Pennsylvania Communications exceeds the current detail budget and its full run timed out. Preserve failure evidence and resolve capacity/completeness before marking this platform verified.
 - [x] First enterprise risk investigation recorded in docs/ENTERPRISE_RESEARCH.md.
 - [x] Verify full Compose/PostgreSQL/Redis/web startup and proxies in GitHub Actions.
 - [ ] Deploy a hosted reviewer demo and verify live ingestion there.
@@ -27,9 +33,9 @@
 - PostgreSQL full-text search and measured indexes when benchmark warrants.
 
 ## Remaining cohorts
-- Next structured ATS candidates: BambooHR, Breezy HR, Workable, Teamtailor. Candidate priority only; access and endpoint support unverified.
+- Next ATS candidates: HireHive, GoHire and HiringThing, alongside the enterprise investigation. Candidate priority only; access and endpoint support unverified.
 - Other medium/high risk ATS: work through every NOT_STARTED row in coverage matrix; no stubs.
-- All 20 job-board platforms: multiple custom-domain installations each, complete pagination, detail extraction and tenant-independent detection.
+- All 20 job-board platforms still lack accepted multi-board live evidence: Jobboardly has a partial implementation, and the other 19 are unimplemented. Need multiple installations, complete pagination, detail extraction and tenant-independent detection. Preserve distinct JBoard.io and JobBoard.io entries. Niceboard findings and platform identity research are documented separately.
 
 ## Delivery
 - [x] Verify page deadline: November 30, 2026 at 23:59 UTC (December 1 at 05:29 IST).
@@ -50,4 +56,4 @@
 - [x] Exercise private flows through the real Docker web proxy in CI.
 - [ ] Antigravity signup/login/profile/resume/recommendation screens and browser tests (owner explicitly retained frontend ownership there).
 - [ ] Email ownership verification, identity recovery, parser isolation/abuse testing and hosted HTTPS release checks.
-- [ ] Remaining 71 provider implementations/live verification; bounded Workday expansion. These remain acquisition acceptance gates despite the new feature work.
+- [ ] Remaining 64 provider implementations, Jobboardly multi-board verification and bounded connector expansion. These remain acquisition acceptance gates; extra feature work is paused until coverage is complete.
