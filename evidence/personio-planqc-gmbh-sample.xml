@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<workzag-jobs><position>
+    <id>1327268</id>
+    <subcompany>PlanQC GmbH</subcompany>
+    <office>Garching b. München (DE)</office>
+    <additionalOffices>
+        <office>Ulm (DE)</office>
+    </additionalOffices>
+    <department>Software</department>
+    <recruitingCategory>Software NEW</recruitingCategory>
+    <name>(Senior) Quantum Software Engineer - Control System</name>
+    <jobDescriptions />
+    <employmentType>permanent</employmentType>
+    <seniority>experienced</seniority>
+    <schedule>full-time</schedule>
+    <yearsOfExperience>2-5</yearsOfExperience>
+    <keywords>control system,hardware,software,software development,Python</keywords>
+    <occupation>software_and_system_architecture</occupation>
+    <occupationCategory>it_software</occupationCategory>
+    <createdAt>2023-11-15T11:34:49+00:00</createdAt>
+</position>
+
+</workzag-jobs>

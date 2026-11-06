@@ -1,6 +1,6 @@
 # Costs and dependencies
 
-No paid extraction service is required by the initial connectors. Dependencies: public Greenhouse/Lever/Ashby APIs; Python/PyPI, Node/npm, PostgreSQL and Redis. No API keys needed for these public listing endpoints. Availability and terms can change. No authenticated extraction or anti-bot service is used.
+No paid extraction service is required by the initial connectors. Dependencies: public Greenhouse/Lever/Ashby/SmartRecruiters APIs and opted-in Personio XML career feeds; Python/PyPI, Node/npm, PostgreSQL and Redis. No API keys are used for these public listing/feed endpoints. SmartRecruiters requires a detail request per listing; Personio may require translated feed requests when default descriptions are empty. Availability and terms can change. No authenticated extraction or anti-bot service is used.
 
 Planning assumptions, not vendor quotes: one small host for API/worker/web plus PostgreSQL/Redis; 20-50 USD/month host budget, 5-15 USD/month backups/storage, domain extra. Validate current vendor prices before purchase. Browser-rendered enterprise connectors could change compute costs substantially and are not included. No production benchmark or measured monthly cost exists yet.
 

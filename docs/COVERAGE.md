@@ -8,7 +8,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 |---|---|---|---|---|---|---|---|
 | ADP | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | ApplicantPro | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
-| Ashby | ats | IMPLEMENTED | LIVE_VERIFIED | LOW | 243 | 2026-11-05T16:15:22.787393+00:00 | https://jobs.ashbyhq.com/Ashby (72; LIVE_VERIFIED); https://jobs.ashbyhq.com/ramp (171; LIVE_VERIFIED)  |
+| Ashby | ats | IMPLEMENTED | LIVE_VERIFIED | LOW | 243 | 2026-11-05T16:42:19.453089+00:00 | https://jobs.ashbyhq.com/Ashby (72; LIVE_VERIFIED); https://jobs.ashbyhq.com/ramp (171; LIVE_VERIFIED)  |
 | Avature | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | BambooHR | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | BrassRing | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
@@ -24,7 +24,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | Freshteam | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Gem.com | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | GoHire | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
-| Greenhouse | ats | IMPLEMENTED | LIVE_VERIFIED | LOW | 1223 | 2026-11-05T16:15:02.652639+00:00 | https://job-boards.greenhouse.io/stripe (760; LIVE_VERIFIED); https://job-boards.greenhouse.io/cloudflare (463; LIVE_VERIFIED)  |
+| Greenhouse | ats | IMPLEMENTED | LIVE_VERIFIED | LOW | 1226 | 2026-11-05T16:41:54.721525+00:00 | https://job-boards.greenhouse.io/stripe (762; LIVE_VERIFIED); https://job-boards.greenhouse.io/cloudflare (464; LIVE_VERIFIED)  |
 | HiBob | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | HireBridge | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | HireHive | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
@@ -36,7 +36,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | Jobvite | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | JOIN.com | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Kula.ai | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
-| Lever.co | ats | IMPLEMENTED | LIVE_VERIFIED | LOW | 394 | 2026-11-05T16:15:08.968734+00:00 | https://jobs.lever.co/spotify (87; LIVE_VERIFIED); https://jobs.lever.co/palantir (307; LIVE_VERIFIED)  |
+| Lever.co | ats | IMPLEMENTED | LIVE_VERIFIED | LOW | 394 | 2026-11-05T16:42:17.172545+00:00 | https://jobs.lever.co/spotify (87; LIVE_VERIFIED); https://jobs.lever.co/palantir (307; LIVE_VERIFIED)  |
 | Manatal | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Oracle Recruiting | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | PageUp | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
@@ -44,7 +44,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | Paycom | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | Paycor | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Paylocity | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
-| Personio | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
+| Personio | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 51 | 2026-11-05T16:49:55.782699+00:00 | https://matrix42.jobs.personio.de (34; LIVE_VERIFIED); https://planqc-gmbh.jobs.personio.de (17; LIVE_VERIFIED)  |
 | Phenom People | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | Pinpoint | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Polymer | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
@@ -53,7 +53,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | Rippling | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Rival | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | SAP SuccessFactors | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
-| SmartRecruiters | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
+| SmartRecruiters | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 90 | 2026-11-05T16:49:50.960317+00:00 | https://careers.smartrecruiters.com/SmartRecruiters (2; LIVE_VERIFIED); https://careers.smartrecruiters.com/Colliers (88; LIVE_VERIFIED)  |
 | talentReef | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Taleo | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | Teamtailor | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |

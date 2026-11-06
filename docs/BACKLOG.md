@@ -3,8 +3,11 @@
 ## First slice
 - [x] Inspect empty folder/remote; initialize canonical main without replacing history.
 - [x] Contracts, exact 78-provider inventory and isolated frontend handoff.
-- [x] Three public API connectors, persisted observations, lifecycle, conservative dedupe, API and worker baseline.
-- [ ] Verify full Compose/PostgreSQL/Redis path and deploy a reviewer demo.
+- [x] Initial three public API connectors, persisted observations, lifecycle, conservative dedupe, API and worker baseline.
+- [x] SmartRecruiters and Personio implemented with two live tenants each (5/78 platform evidence).
+- [x] First enterprise risk investigation recorded in docs/ENTERPRISE_RESEARCH.md.
+- [x] Verify full Compose/PostgreSQL/Redis/web startup and proxies in GitHub Actions.
+- [ ] Deploy a hosted reviewer demo and verify live ingestion there.
 - [ ] Frontend redesign against docs/PRODUCT_DESIGN.md; browser tests for existing source/run management, preserved search state and responsive job details.
 
 ## Immediate acquisition risks (planning order, not verified access claims)
@@ -13,10 +16,12 @@
 - Prototype an auditable HTML/JSON-LD connector base only after access/robots/SSRF controls are designed; no generic parser counts as platform coverage.
 
 ## Hardening and correctness
-- PostgreSQL-backed integration tests, transaction race/recovery tests, automated stale-run finalization.
+- [x] PostgreSQL migrations/API/lifecycle and real Redis serialization/transaction rollback integration tests; CI provisions both services.
+- [ ] Wider transaction races, process termination/restart recovery and automated stale-run finalization.
 - Immutable run snapshots, before/after event data, conflict-aware canonical field enrichment and richer conservative dedupe.
 - Provider publication timestamps/detail enrichment; structured locations and salary unit normalization, without inferring missing facts.
-- Honor Retry-After; distributed per-host request budgets, structured logs, heartbeat and stale-source alerts.
+- [x] Honor bounded Retry-After delays and fail into source cooldown for longer delays.
+- [ ] Distributed per-host request budgets, structured logs, heartbeat and stale-source alerts.
 - Gateway auth/rate limits, egress DNS/IP controls, non-root web image, deployment security review, backup restore drill.
 - PostgreSQL full-text search and measured indexes when benchmark warrants.
 

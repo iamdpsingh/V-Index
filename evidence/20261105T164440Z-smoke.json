@@ -1,0 +1,57 @@
+[
+  {
+    "provider": "SmartRecruiters",
+    "url": "https://careers.smartrecruiters.com/SmartRecruiters",
+    "at": "2026-11-05T16:43:50.893157+00:00",
+    "revision": "5882bc6537c8a9fdcaa0c8cccdd29481dcfa03c7",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "788dd3a8e291df65a503d18b3590d460bb7cb629712aa6c63da24b2b0192426b",
+    "count": 2,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "payload_sha256": "67bbbd9e9e54dce2669ba93556c49a72e5b7b8e5a7755aa021185b2a7faf53d4",
+    "finished_at": "2026-11-05T16:43:53.493933+00:00"
+  },
+  {
+    "provider": "SmartRecruiters",
+    "url": "https://careers.smartrecruiters.com/Colliers",
+    "at": "2026-11-05T16:43:53.995244+00:00",
+    "revision": "5882bc6537c8a9fdcaa0c8cccdd29481dcfa03c7",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "788dd3a8e291df65a503d18b3590d460bb7cb629712aa6c63da24b2b0192426b",
+    "count": 0,
+    "status": "FAILED",
+    "complete": false,
+    "error": "ValueError: Posting detail has no job description",
+    "finished_at": "2026-11-05T16:44:34.345767+00:00"
+  },
+  {
+    "provider": "Personio",
+    "url": "https://matrix42.jobs.personio.de",
+    "at": "2026-11-05T16:44:34.847095+00:00",
+    "revision": "5882bc6537c8a9fdcaa0c8cccdd29481dcfa03c7",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "788dd3a8e291df65a503d18b3590d460bb7cb629712aa6c63da24b2b0192426b",
+    "count": 34,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "payload_sha256": "644044b042d9de34bb5d2158d3e4a51088a8fd581e68840614b5f11ddd5f4079",
+    "finished_at": "2026-11-05T16:44:37.171680+00:00"
+  },
+  {
+    "provider": "Personio",
+    "url": "https://planqc-gmbh.jobs.personio.de",
+    "at": "2026-11-05T16:44:37.673051+00:00",
+    "revision": "5882bc6537c8a9fdcaa0c8cccdd29481dcfa03c7",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "788dd3a8e291df65a503d18b3590d460bb7cb629712aa6c63da24b2b0192426b",
+    "count": 17,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "payload_sha256": "c3f724e1edaa224ddc7b205586106a1d265b7bd8f161638906b5ab6526d1d544",
+    "finished_at": "2026-11-05T16:44:39.531738+00:00"
+  }
+]

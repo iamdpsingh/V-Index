@@ -125,7 +125,7 @@ def test_retry_budget(monkeypatch):
     async def no_wait(_):
         pass
 
-    monkeypatch.setattr("vindex.connectors.public.asyncio.sleep", no_wait)
+    monkeypatch.setattr("vindex.connectors.http.asyncio.sleep", no_wait)
     calls = []
 
     def handler(request):

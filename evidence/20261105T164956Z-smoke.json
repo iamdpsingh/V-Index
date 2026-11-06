@@ -1,0 +1,64 @@
+[
+  {
+    "provider": "SmartRecruiters",
+    "url": "https://careers.smartrecruiters.com/SmartRecruiters",
+    "at": "2026-11-05T16:48:24.563951+00:00",
+    "revision": "1e9d1f043747fa1e329977090e932dd7bd5d2add",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "c3feb8137523f3e5b244933009b5611e701869c164ddd811ea78c918f20a4945",
+    "count": 2,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "b627ade163837a9223e9132e5d6ae634c535a2a231b7a79e6e64eb4c256e28ea",
+    "finished_at": "2026-11-05T16:48:27.793571+00:00"
+  },
+  {
+    "provider": "SmartRecruiters",
+    "url": "https://careers.smartrecruiters.com/Colliers",
+    "at": "2026-11-05T16:48:28.294856+00:00",
+    "revision": "1e9d1f043747fa1e329977090e932dd7bd5d2add",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "c3feb8137523f3e5b244933009b5611e701869c164ddd811ea78c918f20a4945",
+    "count": 88,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {
+      "role_description_missing": 1
+    },
+    "payload_sha256": "1d6068e63920121266724fbf54c8ddcf243055462158e53807f550270965b38e",
+    "finished_at": "2026-11-05T16:49:50.960317+00:00"
+  },
+  {
+    "provider": "Personio",
+    "url": "https://matrix42.jobs.personio.de",
+    "at": "2026-11-05T16:49:51.461632+00:00",
+    "revision": "1e9d1f043747fa1e329977090e932dd7bd5d2add",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "c3feb8137523f3e5b244933009b5611e701869c164ddd811ea78c918f20a4945",
+    "count": 34,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "c3070ea0938be8a8c4eada19e9d11b68cbc5745e801a2794ca3f6af61a2e663e",
+    "finished_at": "2026-11-05T16:49:53.551613+00:00"
+  },
+  {
+    "provider": "Personio",
+    "url": "https://planqc-gmbh.jobs.personio.de",
+    "at": "2026-11-05T16:49:54.052799+00:00",
+    "revision": "1e9d1f043747fa1e329977090e932dd7bd5d2add",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "c3feb8137523f3e5b244933009b5611e701869c164ddd811ea78c918f20a4945",
+    "count": 17,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "4977364b1f8e225be7862b14d55b1ff32784b09b517cce2209e6fc93e0f1e048",
+    "finished_at": "2026-11-05T16:49:55.782699+00:00"
+  }
+]

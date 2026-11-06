@@ -9,14 +9,14 @@ import httpx
 from redis import Redis
 from sqlalchemy import select
 
-from vindex.connectors.public import PublicConnector
+from vindex.connectors.registry import create_connector
 from vindex.db import Run, Session, Source, now
-from vindex.ingest import ingest
+from vindex.ingest import aware, ingest
 
 log = logging.getLogger("vindex.worker")
 
 
-async def refresh(source_id: int) -> int:
+async def refresh(source_id: int, *, only_if_due: bool = False) -> int | None:
     redis = Redis.from_url(os.getenv("REDIS_URL", "redis://localhost:6379/0"))
     # 15-minute lease exceeds the bounded 10-minute refresh timeout.
     with redis.lock(f"vindex:source:{source_id}", timeout=900, blocking_timeout=1):
@@ -24,6 +24,8 @@ async def refresh(source_id: int) -> int:
             source = session.get(Source, source_id)
             if source is None:
                 raise ValueError("Source not found")
+            if only_if_due and aware(source.next_check) > now():
+                return None
             run = Run(source_id=source_id)
             session.add(run)
             session.commit()
@@ -38,7 +40,7 @@ async def refresh(source_id: int) -> int:
                             "Accept": "application/json",
                         },
                     ) as client:
-                        batch = await PublicConnector(
+                        batch = await create_connector(
                             source.provider, source.slug, source.company, client
                         ).discover()
                 # Lock source during reconciliation, preventing concurrent DB writers.
@@ -85,7 +87,7 @@ async def serve() -> None:
             )
         for source_id in ids:
             try:
-                await refresh(source_id)
+                await refresh(source_id, only_if_due=True)
             except Exception:
                 log.exception("Worker infrastructure failure source=%s", source_id)
         await asyncio.sleep(30)

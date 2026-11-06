@@ -40,27 +40,33 @@
       {
         "provider": "Ashby",
         "url": "https://jobs.ashbyhq.com/Ashby",
-        "at": "2026-11-05T16:15:21.466472+00:00",
-        "revision": "df3899c2560bd3fcf195a77760053182cf4a5267",
+        "at": "2026-11-05T16:42:17.673682+00:00",
+        "revision": "4ca9ea02ed1fc3f24bcb58f28719bf9dc256b8c5",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "0434fd2569028920f341babd8ee1223eb0356822a8083789f9c9e41a13c9b0aa",
         "count": 72,
         "status": "LIVE_VERIFIED",
         "complete": true,
         "error": null,
-        "payload_sha256": "9fdcab7c089ce328ef84acfb198fcb503dad1d0ce5d135924c1b0cd11662d417"
+        "payload_sha256": "9fdcab7c089ce328ef84acfb198fcb503dad1d0ce5d135924c1b0cd11662d417",
+        "finished_at": "2026-11-05T16:42:18.458960+00:00"
       },
       {
         "provider": "Ashby",
         "url": "https://jobs.ashbyhq.com/ramp",
-        "at": "2026-11-05T16:15:22.787393+00:00",
-        "revision": "df3899c2560bd3fcf195a77760053182cf4a5267",
+        "at": "2026-11-05T16:42:18.960219+00:00",
+        "revision": "4ca9ea02ed1fc3f24bcb58f28719bf9dc256b8c5",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "0434fd2569028920f341babd8ee1223eb0356822a8083789f9c9e41a13c9b0aa",
         "count": 171,
         "status": "LIVE_VERIFIED",
         "complete": true,
         "error": null,
-        "payload_sha256": "0abcbb456eca6d34d76b004f2659bcb5ae73b402247ec8ac6016c49f8544df88"
+        "payload_sha256": "45458c09c4ee0d19bd018202c0b638a18e443395dbd217b283f55cde2addb864",
+        "finished_at": "2026-11-05T16:42:19.453089+00:00"
       }
     ],
-    "last_run_at": "2026-11-05T16:15:22.787393+00:00",
+    "last_run_at": "2026-11-05T16:42:19.453089+00:00",
     "extraction_count": 243,
     "failure_reason": null,
     "limitations": [
@@ -303,28 +309,34 @@
       {
         "provider": "Greenhouse",
         "url": "https://job-boards.greenhouse.io/stripe",
-        "at": "2026-11-05T16:14:59.243674+00:00",
-        "revision": "df3899c2560bd3fcf195a77760053182cf4a5267",
-        "count": 760,
+        "at": "2026-11-05T16:41:51.675554+00:00",
+        "revision": "4ca9ea02ed1fc3f24bcb58f28719bf9dc256b8c5",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "0434fd2569028920f341babd8ee1223eb0356822a8083789f9c9e41a13c9b0aa",
+        "count": 762,
         "status": "LIVE_VERIFIED",
         "complete": true,
         "error": null,
-        "payload_sha256": "63244ee0798ed7610a00b2bac03af1e6a682c132babcc8ffbd9eae79ce1259b5"
+        "payload_sha256": "89c82bb54faec438fd15727797c7ecf942fa480ead3e37663b32259a3708885f",
+        "finished_at": "2026-11-05T16:41:53.148288+00:00"
       },
       {
         "provider": "Greenhouse",
         "url": "https://job-boards.greenhouse.io/cloudflare",
-        "at": "2026-11-05T16:15:02.652639+00:00",
-        "revision": "df3899c2560bd3fcf195a77760053182cf4a5267",
-        "count": 463,
+        "at": "2026-11-05T16:41:53.649516+00:00",
+        "revision": "4ca9ea02ed1fc3f24bcb58f28719bf9dc256b8c5",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "0434fd2569028920f341babd8ee1223eb0356822a8083789f9c9e41a13c9b0aa",
+        "count": 464,
         "status": "LIVE_VERIFIED",
         "complete": true,
         "error": null,
-        "payload_sha256": "a95e082e0cfdf600de20e67448c6ec4cde17046b7e0f7a13a296dc50929a3c2b"
+        "payload_sha256": "baf6e63c64203b74282dc114c4c9f0d21647ec561fcad3137a16c6659a6651e4",
+        "finished_at": "2026-11-05T16:41:54.721525+00:00"
       }
     ],
-    "last_run_at": "2026-11-05T16:15:02.652639+00:00",
-    "extraction_count": 1223,
+    "last_run_at": "2026-11-05T16:41:54.721525+00:00",
+    "extraction_count": 1226,
     "failure_reason": null,
     "limitations": [
       "Point-in-time public API enumeration; deployment and continuous operation unverified"
@@ -418,7 +430,13 @@
     "failure_reason": null,
     "limitations": [
       "Connector not implemented"
-    ]
+    ],
+    "research": {
+      "status": "INVESTIGATED",
+      "date": "2026-11-05",
+      "reference": "docs/ENTERPRISE_RESEARCH.md",
+      "coverage_claim": false
+    }
   },
   {
     "name": "iSolvedHire",
@@ -506,27 +524,33 @@
       {
         "provider": "Lever.co",
         "url": "https://jobs.lever.co/spotify",
-        "at": "2026-11-05T16:15:04.978130+00:00",
-        "revision": "df3899c2560bd3fcf195a77760053182cf4a5267",
+        "at": "2026-11-05T16:41:55.222748+00:00",
+        "revision": "4ca9ea02ed1fc3f24bcb58f28719bf9dc256b8c5",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "0434fd2569028920f341babd8ee1223eb0356822a8083789f9c9e41a13c9b0aa",
         "count": 87,
         "status": "LIVE_VERIFIED",
         "complete": true,
         "error": null,
-        "payload_sha256": "fd9296dd08072e89761b5f557c53142e5119db5415d5ec0dd7b808b1cb607572"
+        "payload_sha256": "fd9296dd08072e89761b5f557c53142e5119db5415d5ec0dd7b808b1cb607572",
+        "finished_at": "2026-11-05T16:42:06.151410+00:00"
       },
       {
         "provider": "Lever.co",
         "url": "https://jobs.lever.co/palantir",
-        "at": "2026-11-05T16:15:08.968734+00:00",
-        "revision": "df3899c2560bd3fcf195a77760053182cf4a5267",
+        "at": "2026-11-05T16:42:06.652630+00:00",
+        "revision": "4ca9ea02ed1fc3f24bcb58f28719bf9dc256b8c5",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "0434fd2569028920f341babd8ee1223eb0356822a8083789f9c9e41a13c9b0aa",
         "count": 307,
         "status": "LIVE_VERIFIED",
         "complete": true,
         "error": null,
-        "payload_sha256": "49f9d04760471da2a427e70278ac55b7390e68ba908dc355cfccb5f50a1620cc"
+        "payload_sha256": "49f9d04760471da2a427e70278ac55b7390e68ba908dc355cfccb5f50a1620cc",
+        "finished_at": "2026-11-05T16:42:17.172545+00:00"
       }
     ],
-    "last_run_at": "2026-11-05T16:15:08.968734+00:00",
+    "last_run_at": "2026-11-05T16:42:17.172545+00:00",
     "extraction_count": 394,
     "failure_reason": null,
     "limitations": [
@@ -561,7 +585,13 @@
     "failure_reason": null,
     "limitations": [
       "Connector not implemented"
-    ]
+    ],
+    "research": {
+      "status": "INVESTIGATED",
+      "date": "2026-11-05",
+      "reference": "docs/ENTERPRISE_RESEARCH.md",
+      "coverage_claim": false
+    }
   },
   {
     "name": "PageUp",
@@ -641,16 +671,49 @@
   {
     "name": "Personio",
     "kind": "ats",
-    "implementation_status": "NOT_STARTED",
-    "evidence_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
+    "evidence_status": "LIVE_VERIFIED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
+    "examples": [
+      {
+        "provider": "Personio",
+        "url": "https://matrix42.jobs.personio.de",
+        "at": "2026-11-05T16:49:51.461632+00:00",
+        "revision": "1e9d1f043747fa1e329977090e932dd7bd5d2add",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "c3feb8137523f3e5b244933009b5611e701869c164ddd811ea78c918f20a4945",
+        "count": 34,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "c3070ea0938be8a8c4eada19e9d11b68cbc5745e801a2794ca3f6af61a2e663e",
+        "finished_at": "2026-11-05T16:49:53.551613+00:00"
+      },
+      {
+        "provider": "Personio",
+        "url": "https://planqc-gmbh.jobs.personio.de",
+        "at": "2026-11-05T16:49:54.052799+00:00",
+        "revision": "1e9d1f043747fa1e329977090e932dd7bd5d2add",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "c3feb8137523f3e5b244933009b5611e701869c164ddd811ea78c918f20a4945",
+        "count": 17,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "4977364b1f8e225be7862b14d55b1ff32784b09b517cce2209e6fc93e0f1e048",
+        "finished_at": "2026-11-05T16:49:55.782699+00:00"
+      }
+    ],
+    "last_run_at": "2026-11-05T16:49:55.782699+00:00",
+    "extraction_count": 51,
     "failure_reason": null,
     "limitations": [
-      "Connector not implemented"
+      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
+      "Live tenants use .de; .com route is implemented but not live-tested",
+      "XML feed must be enabled; incomplete translated descriptions fail the run"
     ]
   },
   {
@@ -771,21 +834,62 @@
     "failure_reason": null,
     "limitations": [
       "Connector not implemented"
-    ]
+    ],
+    "research": {
+      "status": "INVESTIGATED",
+      "date": "2026-11-05",
+      "reference": "docs/ENTERPRISE_RESEARCH.md",
+      "coverage_claim": false
+    }
   },
   {
     "name": "SmartRecruiters",
     "kind": "ats",
-    "implementation_status": "NOT_STARTED",
-    "evidence_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
+    "evidence_status": "LIVE_VERIFIED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
+    "examples": [
+      {
+        "provider": "SmartRecruiters",
+        "url": "https://careers.smartrecruiters.com/SmartRecruiters",
+        "at": "2026-11-05T16:48:24.563951+00:00",
+        "revision": "1e9d1f043747fa1e329977090e932dd7bd5d2add",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "c3feb8137523f3e5b244933009b5611e701869c164ddd811ea78c918f20a4945",
+        "count": 2,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "b627ade163837a9223e9132e5d6ae634c535a2a231b7a79e6e64eb4c256e28ea",
+        "finished_at": "2026-11-05T16:48:27.793571+00:00"
+      },
+      {
+        "provider": "SmartRecruiters",
+        "url": "https://careers.smartrecruiters.com/Colliers",
+        "at": "2026-11-05T16:48:28.294856+00:00",
+        "revision": "1e9d1f043747fa1e329977090e932dd7bd5d2add",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "c3feb8137523f3e5b244933009b5611e701869c164ddd811ea78c918f20a4945",
+        "count": 88,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {
+          "role_description_missing": 1
+        },
+        "payload_sha256": "1d6068e63920121266724fbf54c8ddcf243055462158e53807f550270965b38e",
+        "finished_at": "2026-11-05T16:49:50.960317+00:00"
+      }
+    ],
+    "last_run_at": "2026-11-05T16:49:50.960317+00:00",
+    "extraction_count": 90,
     "failure_reason": null,
     "limitations": [
-      "Connector not implemented"
+      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
+      "Every posting requires a detail request; very large boards may exceed the ten-minute budget",
+      "Explicitly blank role descriptions are preserved and flagged role_description_missing; source text is not invented"
     ]
   },
   {
@@ -816,7 +920,13 @@
     "failure_reason": null,
     "limitations": [
       "Connector not implemented"
-    ]
+    ],
+    "research": {
+      "status": "INVESTIGATED",
+      "date": "2026-11-05",
+      "reference": "docs/ENTERPRISE_RESEARCH.md",
+      "coverage_claim": false
+    }
   },
   {
     "name": "Teamtailor",
@@ -921,7 +1031,13 @@
     "failure_reason": null,
     "limitations": [
       "Connector not implemented"
-    ]
+    ],
+    "research": {
+      "status": "INVESTIGATED",
+      "date": "2026-11-05",
+      "reference": "docs/ENTERPRISE_RESEARCH.md",
+      "coverage_claim": false
+    }
   },
   {
     "name": "Zoho Recruit",

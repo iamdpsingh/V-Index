@@ -1,0 +1,11 @@
+# Build from the repository root so its .dockerignore excludes host dependencies.
+FROM node:24-alpine
+WORKDIR /app
+COPY apps/web/package*.json ./
+RUN npm ci
+COPY apps/web/ ./
+ENV API_INTERNAL_URL=http://api:8000
+RUN npm run build
+RUN chown -R node:node /app/.next
+USER node
+CMD ["npm", "start"]
