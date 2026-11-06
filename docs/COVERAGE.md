@@ -26,7 +26,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | GoHire | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 45 | 2026-11-06T07:43:13.012881+00:00 | https://jobs.gohire.io/dineamic-hospitality-fniota1h/ (22; LIVE_VERIFIED); https://jobs.gohire.io/digital-shift-o0hrqw5o/ (23; LIVE_VERIFIED)  |
 | Greenhouse | ats | IMPLEMENTED | LIVE_VERIFIED | LOW | 1226 | 2026-11-05T16:41:54.721525+00:00 | https://job-boards.greenhouse.io/stripe (762; LIVE_VERIFIED); https://job-boards.greenhouse.io/cloudflare (464; LIVE_VERIFIED)  |
 | HiBob | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
-| HireBridge | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
+| HireBridge | ats | IMPLEMENTED | FAILED | MEDIUM | 0 | 2026-11-06T12:51:15.772550+00:00 | https://recruit.hirebridge.com/v3/Jobs/list.aspx?cid=8484 (0; FAILED); https://recruit.hirebridge.com/v3/Jobs/list.aspx?cid=8427 (0; FAILED) ValueError: Retry-After exceeds inline retry budget; ValueError: Retry-After exceeds inline retry budget |
 | HireHive | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 65 | 2026-11-06T06:55:14.734024+00:00 | https://amcsgroup.hirehive.com (59; LIVE_VERIFIED); https://echelon-dc.hirehive.com (6; LIVE_VERIFIED)  |
 | Hireology | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | HiringThing | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 5 | 2026-11-06T12:04:24.524963+00:00 | https://math-learning-center.hiringthing.com/ (2; LIVE_VERIFIED); https://rtrjobs.hiringthing.com/ (3; LIVE_VERIFIED)  |

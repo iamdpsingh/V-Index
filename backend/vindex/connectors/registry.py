@@ -17,6 +17,7 @@ from vindex.connectors.hiringthing import HiringThingConnector
 from vindex.connectors.jazzhr import JazzHRConnector
 from vindex.connectors.jobboardly import JobboardlyConnector
 from vindex.connectors.jobvite import JobviteConnector
+from vindex.connectors.join import JoinConnector
 from vindex.connectors.kula import KulaConnector
 from vindex.connectors.manatal import ManatalConnector
 from vindex.connectors.personio import PersonioConnector
@@ -60,6 +61,11 @@ def detect(url: str) -> tuple[str, str]:
         match = re.fullmatch(rf"({TENANT})\.{re.escape(suffix)}", p.hostname or "")
         if match:
             return provider, match[1]
+    if p.hostname == "join.com":
+        matched = re.fullmatch(rf"/companies/({TENANT})/?", p.path)
+        if not matched or p.query or p.fragment:
+            raise ValueError("Expected an unfiltered native JOIN company URL")
+        return "join", matched[1]
     if p.hostname == "recruit.hirebridge.com":
         query = parse_qs(p.query, keep_blank_values=True)
         if (
@@ -149,13 +155,15 @@ def detect(url: str) -> tuple[str, str]:
         return detect_original(url)
     except ValueError as error:
         raise ValueError(
-            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire, HiringThing, Freshteam, Trakstar, Rippling, Kula.ai, CareerPlug, TriNet and HireBridge"
+            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire, HiringThing, Freshteam, Trakstar, Rippling, Kula.ai, CareerPlug, TriNet, HireBridge and JOIN.com"
         ) from error
 
 
 def create_connector(
     provider: str, slug: str, company: str, client: httpx.AsyncClient
 ) -> Connector:
+    if provider == "join":
+        return JoinConnector(provider, slug, company, client)
     if provider == "hirebridge":
         return HireBridgeConnector(provider, slug, company, client)
     if provider == "trinet":

@@ -130,3 +130,23 @@ def test_robots_denial_aborts():
 def test_registration_rejects_filters_duplicates_and_job_urls(url):
     with pytest.raises(ValueError):
         detect(url)
+
+
+def test_upstream_long_cooldown_is_recorded_without_retrying_early(monkeypatch):
+    from vindex.connectors.hirebridge import HireBridgeConnector
+
+    calls = []
+
+    async def discover():
+        def handle(request):
+            calls.append(request.url.path)
+            if request.url.path == "/robots.txt":
+                return httpx.Response(200, text="User-agent: *\nAllow: /")
+            return httpx.Response(429, headers={"Retry-After": "900"})
+
+        async with httpx.AsyncClient(transport=httpx.MockTransport(handle)) as client:
+            return await HireBridgeConnector("hirebridge", "7", "Example", client).discover()
+
+    with pytest.raises(ValueError, match="Retry-After=900"):
+        asyncio.run(discover())
+    assert calls == ["/robots.txt", "/v3/Jobs/list.aspx"]

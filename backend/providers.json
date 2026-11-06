@@ -583,16 +583,49 @@
   {
     "name": "HireBridge",
     "kind": "ats",
-    "implementation_status": "NOT_STARTED",
-    "evidence_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
+    "evidence_status": "FAILED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
-    "failure_reason": null,
+    "examples": [
+      {
+        "provider": "HireBridge",
+        "url": "https://recruit.hirebridge.com/v3/Jobs/list.aspx?cid=8484",
+        "at": "2026-11-06T12:50:59.669071+00:00",
+        "revision": "d135cc66b9cde057f79bbcbaf21bdb47aeb6336e",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "a62c6f0afc5c598fddb179ce0fd3d7ce4544410000061db78fb6b74a59cdd322",
+        "count": 0,
+        "status": "FAILED",
+        "complete": false,
+        "error": "ValueError: Retry-After exceeds inline retry budget",
+        "finished_at": "2026-11-06T12:51:13.843299+00:00"
+      },
+      {
+        "provider": "HireBridge",
+        "url": "https://recruit.hirebridge.com/v3/Jobs/list.aspx?cid=8427",
+        "at": "2026-11-06T12:51:14.344664+00:00",
+        "revision": "d135cc66b9cde057f79bbcbaf21bdb47aeb6336e",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "a62c6f0afc5c598fddb179ce0fd3d7ce4544410000061db78fb6b74a59cdd322",
+        "count": 0,
+        "status": "FAILED",
+        "complete": false,
+        "error": "ValueError: Retry-After exceeds inline retry budget",
+        "finished_at": "2026-11-06T12:51:15.772550+00:00"
+      }
+    ],
+    "last_run_at": "2026-11-06T12:51:15.772550+00:00",
+    "extraction_count": 0,
+    "failure_reason": "ValueError: Retry-After exceeds inline retry budget; ValueError: Retry-After exceeds inline retry budget",
     "limitations": [
-      "Connector not implemented"
+      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
+      "Native recruit.hirebridge.com/v3/Jobs/list.aspx?cid={numeric customer} location-counted public template only; alternate/custom/filtered variants unsupported",
+      "Every unique job ID/native link and location group must exactly match all explicit location counters; maximum 400 mandatory details, no empty or partial reconciliation",
+      "Board/detail customer-scoped public brand asset references, title/location, native ASP.NET form action and explicit Apply URL must match",
+      "Fixed native HTTPS Apply target extracted from a narrowly matched popUp literal without executing JavaScript or fetching/submitting an application",
+      "Full job description and skills sections retained; source does not independently supply original publication/employment/salary fields in supported template, so these remain unknown",
+      "Native hosted brand references only; inline data-image branding currently unsupported; full roster/counters reconfirmed after details"
     ]
   },
   {

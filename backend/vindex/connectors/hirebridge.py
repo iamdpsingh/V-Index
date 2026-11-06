@@ -172,8 +172,19 @@ class HireBridgeConnector:
 
         async def read(url: str) -> bytes:
             policy.check(url)
-            await asyncio.sleep(policy.delay())
-            return await self.http.read(url)
+            await asyncio.sleep(policy.delay(baseline=3.0))
+            try:
+                return await self.http.read(url)
+            except ValueError as error:
+                cause = error.__cause__
+                if isinstance(cause, httpx.HTTPStatusError) and cause.response.headers.get(
+                    "Retry-After"
+                ):
+                    wait = cause.response.headers["Retry-After"][:100]
+                    raise ValueError(
+                        f"HireBridge upstream cooldown Retry-After={wait}; run aborted"
+                    ) from error
+                raise
 
         board, rows = self.listings(await read(self.url))
         jobs = []

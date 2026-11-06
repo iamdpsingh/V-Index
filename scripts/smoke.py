@@ -14,6 +14,8 @@ from vindex.connectors.registry import create_connector
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
+    ("JOIN.com", "join", "2open", "2 OPEN CHINA ECOMMERCE", "https://join.com/companies/2open"),
+    ("JOIN.com", "join", "joinit", "Join GmbH", "https://join.com/companies/joinit"),
     (
         "HireBridge",
         "hirebridge",
@@ -368,6 +370,14 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "JOIN.com": [
+                                "Native join.com/companies/{domain} current pageData SSR template; explicit public page=1 collection only, legacy initialState/custom/locale variants unsupported",
+                                "Single complete page only: page=1, pageCount=1, perPage=5 and total equals all unique visible job links and stable job IDs; empty/filtered/multipage or extra spontaneous-application counts abort",
+                                "Each native detail must match stable job ID, current advertised idParam, public named company, ONLINE/null-closed lifecycle, canonical URL, full JobPosting and native ApplyButton",
+                                "Native job page retained as application entry; rotating advert ID is not used as the stable external job ID; redirects never followed",
+                                "All source locations/workplace/employment/publication fields retained; salary amounts without independently established units remain original fields with salary_units_unmapped",
+                                "Full public roster reconfirmed; contact names, user state, form configuration and unrelated company state excluded; bounded snapshot is not production acceptance",
+                            ],
                             "HireBridge": [
                                 "Native recruit.hirebridge.com/v3/Jobs/list.aspx?cid={numeric customer} location-counted public template only; alternate/custom/filtered variants unsupported",
                                 "Every unique job ID/native link and location group must exactly match all explicit location counters; maximum 400 mandatory details, no empty or partial reconciliation",
