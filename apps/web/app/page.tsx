@@ -25,7 +25,7 @@ export default function Home() {
   const [tab, setTab] = useState<Tab>('jobs');
   const [providers, setProviders] = useState<Provider[]>([]);
   const [token, setToken] = useState('');
-  const [error, setError] = useState('');
+  const [providerError, setProviderError] = useState('');
 
   // Sync tab with URL search params on mount and on popstate
   useEffect(() => {
@@ -50,12 +50,11 @@ export default function Home() {
   useEffect(() => {
     apiFetch<Provider[]>('providers')
       .then(setProviders)
-      .catch((e: Error) => setError(e.message));
+      .catch((e: Error) => setProviderError(e.message));
   }, []);
 
   function switchTab(next: Tab) {
     setTab(next);
-    setError('');
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
       if (next === 'jobs') {
@@ -70,7 +69,7 @@ export default function Home() {
 
   // Counts for the index-note — LIVE_VERIFIED is evidence, not same as implemented
   const verifiedCount = providers.filter(
-    (p) => p.evidence_status === 'LIVE_VERIFIED'
+    (p) => (p.evidence_status || '').toUpperCase() === 'LIVE_VERIFIED'
   ).length;
   const totalCount = providers.length || 0;
 
@@ -110,16 +109,14 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Global error banner (providers fetch or other top-level errors) */}
-        {error && (
+        {/* Global error banner (providers fetch only) */}
+        {providerError && (
           <div className="notice error" role="alert">
-            {error}
+            {providerError}
           </div>
         )}
 
-        {tab === 'jobs' && (
-          <JobSearch token={token} error={error} onError={setError} />
-        )}
+        {tab === 'jobs' && <JobSearch token={token} />}
 
         {tab === 'coverage' && <CoveragePage providers={providers} />}
 

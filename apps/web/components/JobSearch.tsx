@@ -6,13 +6,13 @@ import { formatDate, formatSalary } from '../lib/format';
 
 interface JobSearchProps {
   token: string;
-  error: string;
-  onError: (msg: string) => void;
+  error?: string;
+  onError?: (msg: string) => void;
 }
 
 const PAGE_SIZE = 25;
 
-export default function JobSearch({ error, onError }: JobSearchProps) {
+export default function JobSearch({ error: externalError, onError }: JobSearchProps) {
   const [filters, setFilters] = useState({ keyword: '', company: '', location: '' });
   const [applied, setApplied] = useState({ keyword: '', company: '', location: '' });
   const [offset, setOffset] = useState(0);
@@ -20,6 +20,16 @@ export default function JobSearch({ error, onError }: JobSearchProps) {
   const [busy, setBusy] = useState(true);
   const [selected, setSelected] = useState<JobOut | null>(null);
   const [initialHydrated, setInitialHydrated] = useState(false);
+  const [internalError, setInternalError] = useState('');
+
+  const searchError = externalError || internalError;
+  const setErrorMessage = useCallback(
+    (msg: string) => {
+      setInternalError(msg);
+      if (onError) onError(msg);
+    },
+    [onError]
+  );
 
   // Sync state from URL query parameters on initial mount and browser back/forward
   const readUrlState = useCallback(() => {
@@ -29,11 +39,15 @@ export default function JobSearch({ error, onError }: JobSearchProps) {
     const comp = params.get('company') || '';
     const loc = params.get('location') || '';
     const off = Math.max(0, parseInt(params.get('offset') || '0', 10) || 0);
+    const selId = params.get('selected');
 
     const newFilters = { keyword: q, company: comp, location: loc };
     setFilters(newFilters);
     setApplied(newFilters);
     setOffset(off);
+    if (!selId) {
+      setSelected(null);
+    }
     setInitialHydrated(true);
   }, []);
 
@@ -64,7 +78,7 @@ export default function JobSearch({ error, onError }: JobSearchProps) {
     if (!initialHydrated) return;
     let active = true;
     setBusy(true);
-    onError('');
+    setErrorMessage('');
 
     const searchParams = new URLSearchParams({
       ...applied,
@@ -84,11 +98,13 @@ export default function JobSearch({ error, onError }: JobSearchProps) {
           if (selId) {
             const found = data.items.find((item) => String(item.id) === selId);
             if (found) setSelected(found);
+          } else {
+            setSelected(null);
           }
         }
       })
       .catch((e: Error) => {
-        if (active) onError(e.message);
+        if (active) setErrorMessage(e.message);
       })
       .finally(() => {
         if (active) setBusy(false);
@@ -176,8 +192,15 @@ export default function JobSearch({ error, onError }: JobSearchProps) {
       <div className={`job-layout ${selected ? 'has-selection' : ''}`}>
         {/* Results list */}
         <section aria-label="Search results" aria-busy={busy} className="job-list-section">
+          {/* Inline search error */}
+          {searchError && (
+            <div className="notice error search-error" role="alert">
+              {searchError}
+            </div>
+          )}
+
           {/* Empty state */}
-          {!busy && !error && results.items.length === 0 && (
+          {!busy && !searchError && results.items.length === 0 && (
             <div className="empty">
               <h2>No openings here yet.</h2>
               <p>Add a source and let its first refresh finish, or try broader filters.</p>
@@ -321,7 +344,11 @@ export default function JobSearch({ error, onError }: JobSearchProps) {
                   {selected.sources.map((s) => (
                     <div key={s.source_id} className="provenance-item">
                       <div className="prov-header">
-                        <span className={`status-badge ${s.status === 'ACTIVE' ? 'good' : ''}`}>
+                        <span
+                          className={`status-badge ${
+                            (s.status || '').toUpperCase() === 'ACTIVE' ? 'good' : ''
+                          }`}
+                        >
                           {s.status}
                         </span>
                         <span className="prov-time">checked {formatDate(s.last_checked_at)}</span>
