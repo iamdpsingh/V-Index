@@ -1,0 +1,30 @@
+[
+  {
+    "provider": "Jobboardly",
+    "url": "https://recruiter-jobs.jobboardly.com/jobs",
+    "at": "2026-11-06T03:30:15.912894+00:00",
+    "revision": "e31dcaa505296023c66f9c2344756654e5546f84",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "ebf343e9b2e42d07514b770919dffbfb34cf34b3817a92e4873b42977cccc4bb",
+    "count": 31,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "58839ff2d42d24d8f076785ec2b46df058c0e67085c4fc6532a3cf41ca665a0a",
+    "finished_at": "2026-11-06T03:31:05.853733+00:00"
+  },
+  {
+    "provider": "Jobboardly",
+    "url": "https://pennsylvania-communications.jobboardly.com/jobs",
+    "at": "2026-11-06T03:31:06.354988+00:00",
+    "revision": "e31dcaa505296023c66f9c2344756654e5546f84",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "ebf343e9b2e42d07514b770919dffbfb34cf34b3817a92e4873b42977cccc4bb",
+    "count": 0,
+    "status": "FAILED",
+    "complete": false,
+    "error": "ValueError: JobBoardly full public JobPosting detail missing",
+    "finished_at": "2026-11-06T03:31:49.022793+00:00"
+  }
+]
