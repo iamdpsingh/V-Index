@@ -1,5 +1,7 @@
 # Costs and dependencies
 
+Owner budget constraint (November 6): $0 additional spending; existing $5 v0 generation credit only. No domain purchase or paid upgrade is authorized. The estimates below are planning context, not an approved budget. See [V0_RELEASE_PLAN.md](V0_RELEASE_PLAN.md) for the preferred publishing target and unresolved free-hosting constraints.
+
 No paid extraction service is required by the initial connectors. Dependencies: public Greenhouse/Lever/Ashby/SmartRecruiters APIs, Personio/Recruitee XML career feeds, and accessible hosted Workday career search/detail responses; Python/PyPI, Node/npm, PostgreSQL and Redis. No API keys are used for these public listing/feed endpoints. SmartRecruiters requires a detail request per listing; Personio may require translated feed requests when default descriptions are empty. Availability and terms can change. No authenticated extraction or anti-bot service is used.
 
 Planning assumptions, not vendor quotes: one small host for API/worker/web plus PostgreSQL/Redis; 20-50 USD/month host budget, 5-15 USD/month backups/storage, domain extra. Validate current vendor prices before purchase. Browser-rendered enterprise connectors could change compute costs substantially and are not included. No production benchmark or measured monthly cost exists yet.
