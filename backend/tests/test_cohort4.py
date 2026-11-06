@@ -335,3 +335,44 @@ def test_workable_url_detection():
     ):
         with pytest.raises(ValueError):
             detect(url)
+
+
+def test_workable_multilocation_variants_merge_without_losing_observations():
+    payload = workable_payload()
+    second = copy.deepcopy(payload["jobs"][0])
+    payload["jobs"][0]["locations"] = [{"city": "London", "country": "UK"}]
+    second["locations"] = [{"city": "Paris", "country": "France"}]
+    payload["jobs"].append(second)
+    batch = run("workable", workable_handler(payload))
+    assert len(batch.jobs) == 1
+    assert batch.jobs[0].location == "London, UK; Paris, France"
+    assert len(batch.jobs[0].raw["location_variants"]) == 2
+    second["title"] = "Different opening"
+    with pytest.raises(ValueError, match="conflicting"):
+        run("workable", workable_handler(payload))
+
+
+def test_workable_location_loss_during_confirmation_fails():
+    confirmation = workable_payload()
+    confirmation["jobs"][0]["locations"] = [{"city": "London", "country": "UK"}]
+    with pytest.raises(ValueError, match="changed"):
+        run("workable", workable_handler(confirmation=confirmation))
+
+
+def test_breezy_talent_pool_html_identity_without_jobposting_schema():
+    body = (
+        f'<link rel="canonical" href="{BJOB}"><meta property="og:url" content="{BJOB}">'
+        f'<h1>Engineer</h1><div class="description">Build systems</div>'
+        f'<a href="{BJOB}/apply">Apply</a>'
+    )
+    job = run("breezy", br_handler(body=body)).jobs[0]
+    assert job.description == "Build systems" and job.application_url == BJOB + "/apply"
+    assert job.quality_flags == ["jobposting_schema_missing"]
+    assert "description_html" in job.raw
+    for invalid in (
+        body.replace("<h1>Engineer</h1>", "<h1>Different job</h1>"),
+        body.replace('property="og:url"', 'property="unrelated"'),
+        body.replace('rel="canonical"', 'rel="unrelated"'),
+    ):
+        with pytest.raises(ValueError, match="identity"):
+            run("breezy", br_handler(body=invalid))

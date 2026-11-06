@@ -55,14 +55,30 @@ class BreezyConnector:
             schema = json.loads(script.get_text())
             if isinstance(schema, dict) and schema.get("@type") == "JobPosting":
                 schemas.append(schema)
-        if len(schemas) != 1:
-            raise ValueError("Expected exactly one Breezy JobPosting detail")
-        schema = schemas[0]
+        if len(schemas) > 1:
+            raise ValueError("Multiple Breezy JobPosting details")
+        schema = schemas[0] if schemas else {}
+        flags = []
+        if not schemas:
+            # Public talent-pool listings may deliberately omit Google JobPosting metadata.
+            canonical = soup.select_one('link[rel="canonical"]')
+            og_url = soup.select_one('meta[property="og:url"]')
+            heading = soup.select_one("h1")
+            if (
+                canonical is None
+                or canonical.get("href") != row["url"]
+                or og_url is None
+                or og_url.get("content") != row["url"]
+                or heading is None
+                or heading.get_text(" ", strip=True) != row["name"]
+            ):
+                raise ValueError("Breezy HTML detail identity is not established")
+            flags.append("jobposting_schema_missing")
         # The source adds a GoogleJobs attribution query to its structured URL.
-        if schema["url"].split("?", 1)[0] != row["url"]:
+        if schemas and schema["url"].split("?", 1)[0] != row["url"]:
             raise ValueError("Breezy detail belongs to a different job")
         description_node = soup.select_one(".description")
-        if description_node is None or "description" not in schema:
+        if description_node is None or (schemas and "description" not in schema):
             raise ValueError("Breezy description schema missing")
         description = description_node.get_text(" ", strip=True)
         apply_url = row["url"] + "/apply"
@@ -89,7 +105,7 @@ class BreezyConnector:
                 title=row["name"],
                 company=row.get("company", {}).get("name") or self.company,
                 description=description,
-                quality_flags=[] if description else ["description_missing"],
+                quality_flags=flags + ([] if description else ["description_missing"]),
                 location=location_text,
                 source_url=row["url"],
                 application_url=apply_url,
@@ -97,7 +113,11 @@ class BreezyConnector:
                 remote_status="; ".join(dict.fromkeys(workplace)) or None,
                 salary=salary,
                 published_at=row.get("published_date") or schema.get("datePosted"),
-                raw={"listing": row, "jobposting": schema},
+                raw={
+                    "listing": row,
+                    "jobposting": schema,
+                    "description_html": str(description_node),
+                },
             )
         ]
 

@@ -177,6 +177,7 @@ async def main():
                                 "Bare /j/shortcode URLs lack an account identifier; register an account career page instead",
                                 "Custom-domain registration remains unsupported; all locations and source publication fields are preserved",
                                 "No authoritative total is supplied; completeness follows the documented full-collection contract and an ID-set reconfirmation",
+                                "Repeated shortcodes are merged only for non-conflicting location variants; all original rows are retained",
                             ],
                             "Teamtailor": [
                                 "Hosted teamtailor.com tenants only; custom domains remain unsupported",
@@ -189,6 +190,7 @@ async def main():
                                 "Maximum 400 details; empty feeds fail closed because an authoritative empty-board marker is not established",
                                 "Feed IDs must match public board links; every description and application link requires a successful detail fetch",
                                 "Hosted JSON/HTML interfaces are observed public interfaces without a vendor stability guarantee",
+                                "Talent-pool postings without Google JobPosting schema require matching canonical/Open Graph URLs, title, description and apply link; the omission is flagged",
                             ],
                             "Workday": [
                                 "Hosted myworkdayjobs.com sites only; myworkdaysite.com/custom domains are unsupported",

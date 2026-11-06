@@ -36,24 +36,35 @@ class WorkableConnector:
         ):
             raise ValueError("Invalid Workable collection or unexpected pagination")
         jobs = []
-        seen = set()
+        groups: dict[str, list[dict[str, Any]]] = {}
         for row in payload["jobs"]:
             identifier = row["shortcode"]
-            if (
-                not isinstance(identifier, str)
-                or not re.fullmatch(r"[A-Za-z0-9]{1,100}", identifier)
-                or identifier in seen
+            if not isinstance(identifier, str) or not re.fullmatch(
+                r"[A-Za-z0-9]{1,100}", identifier
             ):
-                raise ValueError("Invalid or duplicate Workable shortcode")
-            seen.add(identifier)
+                raise ValueError("Invalid Workable shortcode")
+            variants = groups.setdefault(identifier, [])
+            if variants:
+                # This collection emits one row per location for multi-location openings.
+                location_keys = {"locations", "city", "state", "country"}
+                core = {k: v for k, v in row.items() if k not in location_keys}
+                first_core = {k: v for k, v in variants[0].items() if k not in location_keys}
+                if core != first_core or row in variants:
+                    raise ValueError("Duplicate or conflicting Workable posting variants")
+            variants.append(row)
+        for identifier, variants in groups.items():
+            row = variants[0]
             # Description must be present even when explicitly empty upstream.
             description = text(row["description"])
             for key in ("requirements", "benefits"):
                 if row.get(key):
                     description += "\n\n" + text(row[key])
-            locations = row.get("locations") or [row]
-            if not isinstance(locations, list):
-                raise ValueError("Invalid Workable locations")
+            locations = []
+            for variant in variants:
+                variant_locations = variant.get("locations") or [variant]
+                if not isinstance(variant_locations, list):
+                    raise ValueError("Invalid Workable locations")
+                locations.extend(variant_locations)
             places = [
                 ", ".join(
                     dict.fromkeys(
@@ -79,7 +90,7 @@ class WorkableConnector:
                     remote_status=remote,
                     salary=row.get("salary"),
                     published_at=row.get("published_on"),
-                    raw=row,
+                    raw={**row, "location_variants": variants},
                 )
             )
         return jobs
@@ -93,8 +104,8 @@ class WorkableConnector:
         await asyncio.sleep(policy.delay())
         confirmation = await self.fetch()
         confirmed = self.parse(confirmation)
-        if first["name"] != confirmation["name"] or {j.external_id for j in jobs} != {
-            j.external_id for j in confirmed
+        if first["name"] != confirmation["name"] or {(j.external_id, j.location) for j in jobs} != {
+            (j.external_id, j.location) for j in confirmed
         }:
             raise ValueError("Workable collection changed during enumeration")
         return Enumeration(jobs=jobs, complete=True)
