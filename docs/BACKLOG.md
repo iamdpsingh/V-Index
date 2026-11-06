@@ -2,7 +2,7 @@
 
 ## Current coverage-first status — November 6
 
-15/78 platforms have point-in-time non-empty complete connector runs across two independent employers. Sixteen connectors are implemented; Jobboardly remains FAILED/partial because its second configured board did not complete. There are 62 unimplemented platforms plus that partial platform and the documented bounds on existing connectors. Latest owner instruction: Codex prioritizes coverage while Antigravity resumes premium frontend/branding, documented account screens and browser tests in its separate worktree. Target November 6 IST: 35 total verified platforms, requiring 20 additional verified platforms from this baseline; do not mark the target achieved without evidence. See ANTIGRAVITY_START_HERE.md and LIVE_INDEX_REQUIREMENTS.md. Production readiness and acquisition completion remain unproven.
+16/78 platforms have point-in-time non-empty complete connector runs across two independent employers. Seventeen connectors are implemented; Jobboardly remains FAILED/partial because its second configured board did not complete. There are 61 unimplemented platforms plus that partial platform and the documented bounds on existing connectors. Latest owner instruction: Codex prioritizes coverage while Antigravity resumes premium frontend/branding, documented account screens and browser tests in its separate worktree. Target November 6 IST: 35 total verified platforms, requiring 19 additional verified platforms from this baseline; do not mark the target achieved without evidence. See ANTIGRAVITY_START_HERE.md and LIVE_INDEX_REQUIREMENTS.md. Production readiness and acquisition completion remain unproven.
 
 ## First slice
 - [x] Inspect empty folder/remote; initialize canonical main without replacing history.
@@ -57,6 +57,8 @@
 - [x] Exercise private flows through the real Docker web proxy in CI.
 - [ ] Antigravity signup/login/profile/resume/recommendation screens and browser tests (owner explicitly retained frontend ownership there).
 - [ ] Email ownership verification, identity recovery, parser isolation/abuse testing and hosted HTTPS release checks.
-- [ ] Remaining 62 provider implementations, Jobboardly multi-board verification and bounded connector expansion. These remain Codex's priority and acquisition acceptance gates while Antigravity executes frontend work in parallel.
+- [ ] Remaining 61 provider implementations, Jobboardly multi-board verification and bounded connector expansion. These remain Codex's priority and acquisition acceptance gates while Antigravity executes frontend work in parallel.
 
 - [x] GoHire: DineAmic Hospitality 22 and Digital Shift 23 full live jobs; scheduled Digital Shift ingestion/search verified. Count now 15/78.
+
+- [x] Polymer: ChemFinity Technologies 4 and Gencores 2 complete live jobs; scheduled ChemFinity ingestion/search verified. Count now 16/78.

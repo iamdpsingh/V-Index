@@ -1,0 +1,32 @@
+[
+  {
+    "provider": "Polymer",
+    "url": "https://jobs.polymer.co/chemfinitytech",
+    "at": "2026-11-06T07:47:37.651102+00:00",
+    "revision": "978d12148a276d45ac3320b7ef51322328aa7606",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "70dda409739901bfe75a74f7bc120e1901af0439a4219733d2f2390fe10cadf1",
+    "count": 4,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "fd556fe03c751ac2ad1ebb2246b49732a7ada1b2879ac3f8d76b07b0f6dded6c",
+    "finished_at": "2026-11-06T07:47:43.156219+00:00"
+  },
+  {
+    "provider": "Polymer",
+    "url": "https://jobs.polymer.co/gencores-inc",
+    "at": "2026-11-06T07:47:43.657499+00:00",
+    "revision": "978d12148a276d45ac3320b7ef51322328aa7606",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "70dda409739901bfe75a74f7bc120e1901af0439a4219733d2f2390fe10cadf1",
+    "count": 2,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "bc4f49365c614e8d4b43a3d45f3673f472e66b4f6f7e0271fa05ca637cb3f6ff",
+    "finished_at": "2026-11-06T07:47:46.726853+00:00"
+  }
+]

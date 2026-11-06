@@ -76,3 +76,13 @@ Clean implementation a3498a4 completed DineAmic Hospitality 22 and Digital Shift
 Actual source registration triggered the scheduled local worker, which stored 23 Digital Shift observations; public company search returned all 23 with source provenance. evidence/gohire-live-pipeline.json records the source/run and measured 1,304-record active index. Local checks passed 312 tests with PostgreSQL and Redis, Ruff/formatting and mypy across 34 modules. CI for a3498a4 passed all three jobs: https://github.com/iamdpsingh/V-Index/actions/runs/42182668983; compact metadata is in evidence/gohire-green-ci.json. Two shell checks initially omitted the project environment/PYTHONPATH and raised import errors; the report generation and API query were rerun in the proper environment. Those command failures are not provider failures.
 
 Current point-in-time status: 15/78 live verified, 16 implemented, 62 unimplemented and Jobboardly still partial/FAILED. Today's 35-total target and all production/acquisition gates remain open.
+
+## Polymer documented public API cohort — November 6
+
+Clean implementation 978d121 completed ChemFinity Technologies 4 and Gencores 2 jobs through Polymer's documented unauthenticated API. Evidence: evidence/20261106T074747Z-smoke.json. Each named collection's explicit single-page metadata/count matched unique jobs, all details matched identity and lifecycle, and the full collection was reconfirmed. Relative-age text is excluded only from comparison and preserved raw. Empty/paginated boards, custom domains and more than 400 details remain unsupported; no large-board or empty-board closure claim is made.
+
+Source registration triggered the actual scheduled local worker, storing all 4 ChemFinity observations visible through public search with provenance. evidence/polymer-live-pipeline.json records source/run IDs and the measured 1,308-record index. Full local checks passed 337 tests with PostgreSQL and Redis, Ruff/formatting and mypy across 35 modules; the existing TestClient/httpx warning remains.
+
+Current status: 16/78 live verified, 17 implemented, 61 unimplemented and Jobboardly still partial/FAILED. No production or acquisition-complete claim.
+
+CI for Polymer executable revision 978d121 passed backend, frontend build and actual Docker/private-proxy stack checks: https://github.com/iamdpsingh/V-Index/actions/runs/42183198077. Compact metadata is in evidence/polymer-green-ci.json.
