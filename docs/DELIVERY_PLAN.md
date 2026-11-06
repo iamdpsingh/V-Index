@@ -1,5 +1,9 @@
 # Delivery target — November 7, 2026 (IST)
 
+## Latest ownership and sequencing — November 6 IST
+
+The owner now assigns frontend responsibility to Codex, superseding Antigravity's assignment below. Complete today's 35-total-platform coverage target first; current verified baseline is 17/78, leaving 18. Then take over the premium Rolewisp frontend and existing documented account screens/browser tests. Preserve and inspect the existing frontend worktree/commits before integration; never run two tools in the same checkout. The briefs remain requirements, not evidence that a frontend agent is running.
+
 ## Current parallel execution plan — November 6 IST
 
 The owner explicitly resumes Antigravity's premium Rolewisp frontend in its existing separate branch/worktree while Codex prioritizes coverage and necessary backend/API support. Antigravity owns brand/logo execution, search/detail/coverage/operator views, existing account/profile/resume/recommendation screens and browser verification. Read ANTIGRAVITY_START_HERE.md. This supersedes the earlier frontend pause, including old notes elsewhere in historical validation records. No external agent is assumed notified or launched by a document update.

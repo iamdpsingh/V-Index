@@ -2,7 +2,7 @@
 
 ## Current coverage-first status — November 6
 
-17/78 platforms have point-in-time non-empty complete connector runs across two independent employers. Eighteen connectors are implemented; Jobboardly remains FAILED/partial because its second configured board did not complete. There are 60 unimplemented platforms plus that partial platform and the documented bounds on existing connectors. Latest owner instruction: Codex prioritizes coverage while Antigravity resumes premium frontend/branding, documented account screens and browser tests in its separate worktree. Target November 6 IST: 35 total verified platforms, requiring 18 additional verified platforms from this baseline; do not mark the target achieved without evidence. See ANTIGRAVITY_START_HERE.md and LIVE_INDEX_REQUIREMENTS.md. Production readiness and acquisition completion remain unproven.
+17/78 platforms have point-in-time non-empty complete connector runs across two independent employers. Eighteen connectors are implemented; Jobboardly remains FAILED/partial because its second configured board did not complete. There are 60 unimplemented platforms plus that partial platform and the documented bounds on existing connectors. Latest owner instruction: Codex prioritizes reaching today's coverage target and then takes over premium frontend/branding, documented account screens and browser tests, preserving existing Antigravity work. Target November 6 IST: 35 total verified platforms, requiring 18 additional verified platforms from this baseline; do not mark the target achieved without evidence. See ANTIGRAVITY_START_HERE.md and LIVE_INDEX_REQUIREMENTS.md. Production readiness and acquisition completion remain unproven.
 
 ## First slice
 - [x] Inspect empty folder/remote; initialize canonical main without replacing history.
@@ -60,4 +60,4 @@
 - [x] Exercise private flows through the real Docker web proxy in CI.
 - [ ] Antigravity signup/login/profile/resume/recommendation screens and browser tests (owner explicitly retained frontend ownership there).
 - [ ] Email ownership verification, identity recovery, parser isolation/abuse testing and hosted HTTPS release checks.
-- [ ] Remaining 60 provider implementations, Jobboardly multi-board verification and bounded connector expansion. These remain Codex's priority and acquisition acceptance gates while Antigravity executes frontend work in parallel.
+- [ ] Remaining 60 provider implementations, Jobboardly multi-board verification and bounded connector expansion. These remain Codex's priority and acquisition acceptance gates before Codex begins frontend implementation.

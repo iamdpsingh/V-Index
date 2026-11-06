@@ -1,5 +1,8 @@
 # Antigravity frontend handoff
 
+**Superseding owner update, November 6:** Codex takes over frontend ownership after today's 35-total-platform coverage target. Preserve existing Antigravity commits/worktree; the design, API and test requirements below remain applicable reference material. Earlier assignment/resume instructions below are historical and no longer assign work to Antigravity.
+
+
 Owner-selected brand: **Rolewisp**, tagline **Find your next opening.** The repository/folder remain V-Index. **Frontend work is explicitly resumed in parallel with Codex coverage work. Start with [ANTIGRAVITY_START_HERE.md](ANTIGRAVITY_START_HERE.md)**, then [BRANDING.md](BRANDING.md) and [LIVE_INDEX_REQUIREMENTS.md](LIVE_INDEX_REQUIREMENTS.md). The latest owner instruction supersedes earlier frontend-pause notes.
 
 Publishing update: use the existing repository and reviewed `main` as the single release source; v0 is the owner's preferred publishing workflow, with no additional spending or purchased domain. See [V0_RELEASE_PLAN.md](V0_RELEASE_PLAN.md). The frontend worktree is temporary editing isolation, not a separate product. Preserve its work until reviewed integration and editor shutdown; do not create another repository for v0.

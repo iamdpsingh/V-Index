@@ -1,5 +1,8 @@
 # Antigravity: Rolewisp frontend execution brief
 
+**Superseding owner update, November 6:** Codex takes over frontend ownership after today's 35-total-platform coverage target. Preserve existing Antigravity commits/worktree; the design, API and test requirements below remain applicable reference material. Earlier assignment/resume instructions below are historical and no longer assign work to Antigravity.
+
+
 Latest owner instruction, November 6, 2026 IST. Frontend work is explicitly resumed in parallel with Codex's coverage work. This supersedes earlier frontend-pause instructions.
 
 ## Ownership and checkout
