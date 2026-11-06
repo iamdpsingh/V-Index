@@ -1,0 +1,29 @@
+{
+  "started_at": "2026-11-06T06:56:50.988792+00:00",
+  "revision": "85f22052b3d68a46c2ea0e2541864df12eb6777d",
+  "database": "local SQLite",
+  "lease_backend": "local Redis",
+  "source": {
+    "id": 15,
+    "provider": "hirehive",
+    "slug": "echelon-dc",
+    "company": "Echelon DC",
+    "url": "https://echelon-dc.hirehive.com",
+    "refresh_minutes": 360,
+    "next_check": "2026-11-06T06:56:50.986963Z",
+    "failures": 0
+  },
+  "run": {
+    "id": 27,
+    "source_id": 15,
+    "started_at": "2026-11-06T06:56:51.247967",
+    "finished_at": "2026-11-06T06:57:05.204121",
+    "status": "success",
+    "count": 6,
+    "error": null
+  },
+  "searchable_records_with_source_provenance": 6,
+  "active_index_total": 1281,
+  "finished_at": "2026-11-06T06:57:06.425750+00:00",
+  "complete": true
+}
