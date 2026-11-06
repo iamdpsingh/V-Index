@@ -14,6 +14,7 @@ export type JobOut = {
   title: string;
   company: string;
   description: string;
+  quality_flags?: string[];
   location: string;
   source_url: string;
   application_url: string;

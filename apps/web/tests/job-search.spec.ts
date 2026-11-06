@@ -175,3 +175,27 @@ test('searching while busy shows Searching…', async ({ page }) => {
   await expect(page.locator('[aria-live="polite"]')).toContainText('Searching…');
   if (ctrl.resolve) ctrl.resolve();
 });
+
+test('quality_flags: description_missing shows honest source omission notice', async ({ page }) => {
+  const job = {
+    ...SAMPLE_JOB,
+    description: '',
+    quality_flags: ['description_missing', 'role_description_missing'],
+  };
+  await mockJobs(page, { total: 1, limit: 25, offset: 0, items: [job] });
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Senior Engineer' }).click();
+  await expect(page.locator('.quality-notice')).toContainText('Original source omitted description text');
+});
+
+test('quality_flags: role_description_missing explains partial omission', async ({ page }) => {
+  const job = {
+    ...SAMPLE_JOB,
+    description: 'Benefits and company overview only.',
+    quality_flags: ['role_description_missing'],
+  };
+  await mockJobs(page, { total: 1, limit: 25, offset: 0, items: [job] });
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Senior Engineer' }).click();
+  await expect(page.locator('.quality-notice')).toContainText('Role description omitted by source');
+});

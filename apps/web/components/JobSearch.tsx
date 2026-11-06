@@ -296,6 +296,19 @@ export default function JobSearch({ error, onError }: JobSearchProps) {
                 )}
               </div>
 
+              {/* Quality flags notice when description is omitted by source */}
+              {selected.quality_flags && selected.quality_flags.length > 0 && (
+                <div className="quality-notice" role="note">
+                  {selected.quality_flags.includes('description_missing') ? (
+                    <span>Original source omitted description text.</span>
+                  ) : selected.quality_flags.includes('role_description_missing') ? (
+                    <span>Role description omitted by source; other extracted sections shown below.</span>
+                  ) : (
+                    <span>Data quality note: {selected.quality_flags.join(', ')}</span>
+                  )}
+                </div>
+              )}
+
               <h3>About the role</h3>
               <p className="description">
                 {selected.description || 'The source did not provide a description.'}

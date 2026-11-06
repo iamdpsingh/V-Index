@@ -1,12 +1,13 @@
 'use client';
 
 import { FormEvent, useState } from 'react';
-import { apiFetch, type RunOut, type SourceOut } from '../lib/api';
+import { apiFetch, type Provider, type RunOut, type SourceOut } from '../lib/api';
 import { formatDate } from '../lib/format';
 
 interface SourcesAdminProps {
   token: string;
   onTokenChange: (t: string) => void;
+  providers?: Provider[];
 }
 
 function classifyError(e: Error): string {
@@ -33,7 +34,11 @@ function classifyError(e: Error): string {
   return msg;
 }
 
-export default function SourcesAdmin({ token, onTokenChange }: SourcesAdminProps) {
+export default function SourcesAdmin({
+  token,
+  onTokenChange,
+  providers = [],
+}: SourcesAdminProps) {
   const [sources, setSources] = useState<SourceOut[]>([]);
   const [runs, setRuns] = useState<RunOut[]>([]);
   const [sourceForm, setSourceForm] = useState({
@@ -44,6 +49,15 @@ export default function SourcesAdmin({ token, onTokenChange }: SourcesAdminProps
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
+
+  const implementedNames = providers
+    .filter((p) => p.implementation_status === 'IMPLEMENTED')
+    .map((p) => p.name);
+
+  const supportedText =
+    implementedNames.length > 0
+      ? `${implementedNames.join(', ')} hosted boards are supported in this release.`
+      : 'Greenhouse, Lever, Ashby, SmartRecruiters, and Personio hosted boards are supported in this release.';
 
   async function loadSources() {
     setError('');
@@ -113,7 +127,7 @@ export default function SourcesAdmin({ token, onTokenChange }: SourcesAdminProps
         {/* Add source panel */}
         <section className="panel">
           <h2>Connect a career board</h2>
-          <p>Greenhouse, Lever and Ashby hosted boards are supported in this release.</p>
+          <p>{supportedText}</p>
 
           {/* Admin token — in-memory only, never persisted */}
           <label>

@@ -23,4 +23,5 @@
 .search-filter input{background:#fff;border:1px solid var(--line);padding:8px 12px;font-size:12px;width:240px;border-radius:2px}
 .pill-fail{background:#f7ded6;color:#872e18}
 .cell-error{color:#872e18;font-size:11px}
+.quality-notice{padding:10px 14px;background:#faecd8;color:#784510;font-size:12px;margin:16px 0;border-left:3px solid #b8731c}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}

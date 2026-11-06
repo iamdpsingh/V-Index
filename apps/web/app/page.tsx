@@ -124,7 +124,7 @@ export default function Home() {
         {tab === 'coverage' && <CoveragePage providers={providers} />}
 
         {tab === 'sources' && (
-          <SourcesAdmin token={token} onTokenChange={setToken} />
+          <SourcesAdmin token={token} onTokenChange={setToken} providers={providers} />
         )}
       </main>
 

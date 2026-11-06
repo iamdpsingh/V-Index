@@ -3,7 +3,7 @@ import { Page } from '@playwright/test';
 export type MockJobs = { total: number; limit: number; offset: number; items: MockJob[] };
 export type MockJob = {
   id: number; external_id: string; title: string; company: string;
-  description: string; location: string; source_url: string; application_url: string;
+  description: string; quality_flags?: string[]; location: string; source_url: string; application_url: string;
   employment_type: string | null; remote_status: string | null;
   salary: null; published_at: string | null;
   first_seen_at: string; last_changed_at: string;
@@ -31,6 +31,7 @@ export const SAMPLE_JOB: MockJob = {
   id: 1, external_id: 'ext-1',
   title: 'Senior Engineer', company: 'Acme Corp',
   description: 'A great role with interesting problems.',
+  quality_flags: [],
   location: 'Remote — Global',
   source_url: 'https://boards.greenhouse.io/acme/jobs/1',
   application_url: 'https://boards.greenhouse.io/acme/jobs/1',
