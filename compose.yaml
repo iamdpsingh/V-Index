@@ -1,9 +1,8 @@
 x-backend: &backend
   build: .
-  environment:
+  environment: &backend-environment
     DATABASE_URL: postgresql+psycopg://vindex:vindex@db:5432/vindex
     REDIS_URL: redis://redis:6379/0
-    ADMIN_TOKEN: ${ADMIN_TOKEN:?Set ADMIN_TOKEN in .env}
 services:
   db:
     image: postgres:17-alpine
@@ -33,6 +32,12 @@ services:
         condition: service_healthy
   api:
     <<: *backend
+    environment:
+      <<: *backend-environment
+      ADMIN_TOKEN: ${ADMIN_TOKEN:?Set ADMIN_TOKEN in .env}
+      PUBLIC_WEB_ORIGIN: ${PUBLIC_WEB_ORIGIN:-}
+      ACCOUNT_REGISTRATION_ENABLED: ${ACCOUNT_REGISTRATION_ENABLED:-false}
+      RESUME_ENCRYPTION_KEY: ${RESUME_ENCRYPTION_KEY:-}
     ports: ["127.0.0.1:8000:8000"]
     healthcheck:
       test: ["CMD", "/app/.venv/bin/python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=3)"]

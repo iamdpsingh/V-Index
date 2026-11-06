@@ -54,8 +54,19 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ADMIN_TOKEN: ci-stack-only-token
+      PUBLIC_WEB_ORIGIN: http://localhost:3000
+      ACCOUNT_REGISTRATION_ENABLED: 'true' 
     steps:
       - uses: actions/checkout@v4
+      - name: Generate an ephemeral private-resume key
+        run: |
+          python3 - <<'PYTHON'
+          import base64, os
+          from pathlib import Path
+          target = Path('.env')
+          target.write_text('RESUME_ENCRYPTION_KEY=' + base64.urlsafe_b64encode(os.urandom(32)).decode() + '\n')
+          target.chmod(0o600)
+          PYTHON
       - name: Build and launch the actual stack
         run: docker compose up --build -d
       - name: Check API, database, Redis and web proxy
@@ -67,6 +78,8 @@ jobs:
           docker compose exec -T redis redis-cli ping
           docker compose exec -T api /app/.venv/bin/alembic current
           test "$(docker compose ps --status running -q worker | wc -l | tr -d ' ')" = 1
+      - name: Check private account/profile/resume APIs through the web proxy
+        run: python3 scripts/check_private_stack.py
       - name: Capture service logs on failure
         if: failure()
         run: docker compose logs --no-color
