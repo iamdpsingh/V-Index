@@ -27,7 +27,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | Greenhouse | ats | IMPLEMENTED | LIVE_VERIFIED | LOW | 1226 | 2026-11-05T16:41:54.721525+00:00 | https://job-boards.greenhouse.io/stripe (762; LIVE_VERIFIED); https://job-boards.greenhouse.io/cloudflare (464; LIVE_VERIFIED)  |
 | HiBob | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | HireBridge | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
-| HireHive | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
+| HireHive | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 65 | 2026-11-06T06:55:14.734024+00:00 | https://amcsgroup.hirehive.com (59; LIVE_VERIFIED); https://echelon-dc.hirehive.com (6; LIVE_VERIFIED)  |
 | Hireology | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | HiringThing | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | iCIMS | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |

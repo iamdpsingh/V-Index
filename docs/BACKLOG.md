@@ -2,7 +2,7 @@
 
 ## Current coverage-first status — November 6
 
-13/78 platforms have point-in-time non-empty complete connector runs across two independent employers. Fourteen connectors are implemented; Jobboardly remains FAILED/partial because its second configured board did not complete. There are 64 unimplemented platforms plus that partial platform and the documented bounds on existing connectors. Accounts, frontend polish and deployment are paused by the owner's latest instruction. No acquisition-complete claim is justified.
+14/78 platforms have point-in-time non-empty complete connector runs across two independent employers. Fifteen connectors are implemented; Jobboardly remains FAILED/partial because its second configured board did not complete. There are 63 unimplemented platforms plus that partial platform and the documented bounds on existing connectors. Accounts, frontend polish and deployment are paused by the owner's latest instruction. No acquisition-complete claim is justified.
 
 ## First slice
 - [x] Inspect empty folder/remote; initialize canonical main without replacing history.
@@ -11,6 +11,7 @@
 - [x] SmartRecruiters and Personio implemented with two live tenants each (5/78 platform evidence).
 - [x] Recruitee and bounded hosted Workday implemented; two live employers each (7/78 point-in-time evidence).
 - [x] Add Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint and JazzHR with two independent live employers each (13/78 point-in-time evidence).
+- [x] Add HireHive public structured templates; AMCS Group 59 and Echelon DC 6 complete live jobs (14/78 point-in-time evidence).
 - [ ] Finish Jobboardly multi-board verification: Recruiter jobs indexed; Pennsylvania Communications exceeds the current detail budget and its full run timed out. Preserve failure evidence and resolve capacity/completeness before marking this platform verified.
 - [x] First enterprise risk investigation recorded in docs/ENTERPRISE_RESEARCH.md.
 - [x] Verify full Compose/PostgreSQL/Redis/web startup and proxies in GitHub Actions.
@@ -33,7 +34,7 @@
 - PostgreSQL full-text search and measured indexes when benchmark warrants.
 
 ## Remaining cohorts
-- Next ATS candidates: HireHive, GoHire and HiringThing, alongside the enterprise investigation. Candidate priority only; access and endpoint support unverified.
+- Next ATS candidates: GoHire and HiringThing, alongside the enterprise investigation. Candidate priority only; access and endpoint support unverified.
 - Other medium/high risk ATS: work through every NOT_STARTED row in coverage matrix; no stubs.
 - All 20 job-board platforms still lack accepted multi-board live evidence: Jobboardly has a partial implementation, and the other 19 are unimplemented. Need multiple installations, complete pagination, detail extraction and tenant-independent detection. Preserve distinct JBoard.io and JobBoard.io entries. Niceboard findings and platform identity research are documented separately.
 
@@ -56,4 +57,4 @@
 - [x] Exercise private flows through the real Docker web proxy in CI.
 - [ ] Antigravity signup/login/profile/resume/recommendation screens and browser tests (owner explicitly retained frontend ownership there).
 - [ ] Email ownership verification, identity recovery, parser isolation/abuse testing and hosted HTTPS release checks.
-- [ ] Remaining 64 provider implementations, Jobboardly multi-board verification and bounded connector expansion. These remain acquisition acceptance gates; extra feature work is paused until coverage is complete.
+- [ ] Remaining 63 provider implementations, Jobboardly multi-board verification and bounded connector expansion. These remain acquisition acceptance gates; extra feature work is paused until coverage is complete.
