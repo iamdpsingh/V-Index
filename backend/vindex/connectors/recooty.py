@@ -117,7 +117,7 @@ class RecootyConnector:
             or job["title"] != listing["title"]
             or job["type"] != "JOB_POST"
             or job["status"] != "OPEN"
-            or job["job_board_status"] != "APPROVED"
+            or job["job_board_status"] not in {"APPROVED", "NOT_APPLIED"}
             or schema["@type"] != "JobPosting"
             or schema["title"] != job["title"]
             or schema["url"] != url

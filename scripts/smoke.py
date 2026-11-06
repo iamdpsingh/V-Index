@@ -259,7 +259,7 @@ async def main():
                             "Recooty": [
                                 "Current careerspage.io public server-rendered Inertia templates only; legacy jobs.recooty.com, www redirects and custom domains unsupported",
                                 "Maximum 400 details; embedded job collection must match visible total, unique IDs and actual listing titles/links",
-                                "Every detail must match employer, numeric ID, slug, title, source JobPosting ULID/canonical URL, OPEN/APPROVED status and native application link",
+                                "Every detail must match employer, numeric ID, slug, title, source JobPosting ULID/canonical URL, OPEN career status, observed APPROVED/NOT_APPLIED board flag and native application link",
                                 "Full roster reconfirmed after details; empty/partial/paginated/changed collections fail without closures",
                                 "Original publication timestamp, source location/workplace/employment labels and provided salary fields preserved; unrelated auth/form/config state excluded",
                             ],

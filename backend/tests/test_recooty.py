@@ -179,3 +179,11 @@ def test_recooty_host_detection():
     ):
         with pytest.raises(ValueError):
             detect(url)
+
+
+def test_open_published_career_job_can_have_not_applied_board_flag():
+    job = copy.deepcopy(detail())
+    job["job"]["job_board_status"] = "NOT_APPLIED"
+    observed = run(job=job).jobs[0]
+    assert observed.raw["job"]["status"] == "OPEN"
+    assert observed.raw["job"]["job_board_status"] == "NOT_APPLIED"

@@ -1064,16 +1064,49 @@
     "name": "Recooty",
     "kind": "ats",
     "implementation_status": "IMPLEMENTED",
-    "evidence_status": "NOT_STARTED",
+    "evidence_status": "FAILED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
-    "failure_reason": null,
+    "examples": [
+      {
+        "provider": "Recooty",
+        "url": "https://careerspage.io/augusto-digital",
+        "at": "2026-11-06T08:28:50.347247+00:00",
+        "revision": "714ce3af39944115b5925454e74e10697da5d31b",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "c09f8c0b9dd7d9d6a6420178f6344c39e446266bc5aeb7e7c924f4cbc2d9ccb7",
+        "count": 2,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "7091ac0904ce7fc123e2f0287394e74560a72f844cff6d558534a323cf4c1c4e",
+        "finished_at": "2026-11-06T08:28:55.123620+00:00"
+      },
+      {
+        "provider": "Recooty",
+        "url": "https://careerspage.io/recooty-inc",
+        "at": "2026-11-06T08:28:55.624900+00:00",
+        "revision": "714ce3af39944115b5925454e74e10697da5d31b",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "c09f8c0b9dd7d9d6a6420178f6344c39e446266bc5aeb7e7c924f4cbc2d9ccb7",
+        "count": 0,
+        "status": "FAILED",
+        "complete": false,
+        "error": "ValueError: Recooty job detail identity, open status or application mismatch",
+        "finished_at": "2026-11-06T08:28:59.782183+00:00"
+      }
+    ],
+    "last_run_at": "2026-11-06T08:28:59.782183+00:00",
+    "extraction_count": 2,
+    "failure_reason": "ValueError: Recooty job detail identity, open status or application mismatch",
     "limitations": [
-      "Current careerspage.io hosted public template only; maximum 400 matching details",
-      "Legacy domains, custom domains and empty/paginated templates unsupported; multi-employer live verification pending"
+      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
+      "Current careerspage.io public server-rendered Inertia templates only; legacy jobs.recooty.com, www redirects and custom domains unsupported",
+      "Maximum 400 details; embedded job collection must match visible total, unique IDs and actual listing titles/links",
+      "Every detail must match employer, numeric ID, slug, title, source JobPosting ULID/canonical URL, OPEN/APPROVED status and native application link",
+      "Full roster reconfirmed after details; empty/partial/paginated/changed collections fail without closures",
+      "Original publication timestamp, source location/workplace/employment labels and provided salary fields preserved; unrelated auth/form/config state excluded"
     ]
   },
   {
@@ -1542,42 +1575,47 @@
     "name": "Jobboardly",
     "kind": "job_board",
     "implementation_status": "IMPLEMENTED",
-    "evidence_status": "FAILED",
+    "evidence_status": "LIVE_VERIFIED",
     "risk": "HIGH",
     "risk_basis": "Planning estimate; not validated provider behavior",
     "examples": [
       {
         "provider": "Jobboardly",
         "url": "https://recruiter-jobs.jobboardly.com/jobs",
-        "at": "2026-11-06T08:23:15.312456+00:00",
-        "revision": "52d2da4c5d453be669c14f526967e5e9d47f961b",
+        "at": "2026-11-06T08:29:00.283514+00:00",
+        "revision": "714ce3af39944115b5925454e74e10697da5d31b",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "6028e7701bc8bbf997f89335db1b378ef987aadb886543d6e0899c3bd238d200",
+        "code_sha256": "c09f8c0b9dd7d9d6a6420178f6344c39e446266bc5aeb7e7c924f4cbc2d9ccb7",
         "count": 31,
         "status": "LIVE_VERIFIED",
         "complete": true,
         "error": null,
         "quality_flag_counts": {},
         "payload_sha256": "93b3138003cba72a9fd21ce9bf04e9244a7dde97e5ebcb4263bd6041eea79b7c",
-        "finished_at": "2026-11-06T08:23:22.902442+00:00"
+        "finished_at": "2026-11-06T08:29:07.631435+00:00"
       },
       {
         "provider": "Jobboardly",
         "url": "https://pennsylvania-communications.jobboardly.com/jobs",
-        "at": "2026-11-06T08:23:23.403691+00:00",
-        "revision": "52d2da4c5d453be669c14f526967e5e9d47f961b",
+        "at": "2026-11-06T08:29:08.132696+00:00",
+        "revision": "714ce3af39944115b5925454e74e10697da5d31b",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "6028e7701bc8bbf997f89335db1b378ef987aadb886543d6e0899c3bd238d200",
-        "count": 0,
-        "status": "FAILED",
-        "complete": false,
-        "error": "ValueError: Invalid JobBoardly XML application destination",
-        "finished_at": "2026-11-06T08:23:45.156981+00:00"
+        "code_sha256": "c09f8c0b9dd7d9d6a6420178f6344c39e446266bc5aeb7e7c924f4cbc2d9ccb7",
+        "count": 1324,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {
+          "application_by_email": 3,
+          "description_missing": 70
+        },
+        "payload_sha256": "eaea160bcc6d0bd75352ea4a9d39293686b34c6ae514742c326605ae9b6d22b1",
+        "finished_at": "2026-11-06T08:31:19.986009+00:00"
       }
     ],
-    "last_run_at": "2026-11-06T08:23:45.156981+00:00",
-    "extraction_count": 31,
-    "failure_reason": "ValueError: Invalid JobBoardly XML application destination",
+    "last_run_at": "2026-11-06T08:31:19.986009+00:00",
+    "extraction_count": 1355,
+    "failure_reason": null,
     "limitations": [
       "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
       "Hosted jobboardly.com public XML feed plus full HTML pagination; custom-domain registration and redirecting aliases unsupported",
