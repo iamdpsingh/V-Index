@@ -6,6 +6,7 @@ from urllib.parse import urlsplit
 import httpx
 from vindex.connectors.bamboohr import BambooHRConnector
 from vindex.connectors.breezy import BreezyConnector
+from vindex.connectors.hirehive import HireHiveConnector
 from vindex.connectors.jazzhr import JazzHRConnector
 from vindex.connectors.jobboardly import JobboardlyConnector
 from vindex.connectors.personio import PersonioConnector
@@ -32,6 +33,7 @@ def detect(url: str) -> tuple[str, str]:
         ("pinpointhq.com", "pinpoint"),
         ("jobboardly.com", "jobboardly"),
         ("applytojob.com", "jazzhr"),
+        ("hirehive.com", "hirehive"),
     ):
         match = re.fullmatch(rf"({TENANT})\.{re.escape(suffix)}", p.hostname or "")
         if match:
@@ -69,13 +71,15 @@ def detect(url: str) -> tuple[str, str]:
         return detect_original(url)
     except ValueError as error:
         raise ValueError(
-            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly and JazzHR"
+            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR and HireHive"
         ) from error
 
 
 def create_connector(
     provider: str, slug: str, company: str, client: httpx.AsyncClient
 ) -> Connector:
+    if provider == "hirehive":
+        return HireHiveConnector(provider, slug, company, client)
     if provider == "jazzhr":
         return JazzHRConnector(provider, slug, company, client)
     if provider == "jobboardly":

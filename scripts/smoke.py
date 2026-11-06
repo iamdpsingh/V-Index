@@ -14,6 +14,8 @@ from vindex.connectors.registry import create_connector
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
+    ("HireHive", "hirehive", "amcsgroup", "AMCS Group", "https://amcsgroup.hirehive.com"),
+    ("HireHive", "hirehive", "echelon-dc", "Echelon DC", "https://echelon-dc.hirehive.com"),
     (
         "JazzHR",
         "jazzhr",
@@ -204,6 +206,14 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "HireHive": [
+                                "Hosted hirehive.com public ItemList/JobPosting templates only; custom domains and legacy Embed URL registration remain unsupported",
+                                "Explicit total, contiguous list positions, unique validated links and successful matching details are required; singleton JSON-LD items are supported",
+                                "Maximum 400 details; unnamed/partial lists and any failed/changed detail abort without reconciliation",
+                                "A zero-job snapshot requires an explicit named ItemList with total=0, no items and successful full reconfirmation; it does not count as live extraction evidence",
+                                "Native career posting is the application entry point; original attributed JSON-LD links are retained raw",
+                                "Completeness follows the public ItemList total and a final complete link/title reconfirmation, not a transactional upstream snapshot",
+                            ],
                             "JazzHR": [
                                 "Hosted applytojob.com Current Openings templates only; custom domains and alternative templates remain unsupported",
                                 "No source total is supplied; completeness follows the full server-rendered Current Openings list and a final link/title reconfirmation",
