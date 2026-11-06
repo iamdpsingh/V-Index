@@ -1,5 +1,7 @@
 # Antigravity frontend handoff
 
+Owner-selected brand: **Rolewisp**, tagline **Find your next opening.** The repository/folder remain V-Index. Read [BRANDING.md](BRANDING.md) for the wordmark/logo direction and later interface naming; this does not resume paused frontend work or change coverage claims.
+
 Publishing update: use the existing repository and reviewed `main` as the single release source; v0 is the owner's preferred publishing workflow, with no additional spending or purchased domain. See [V0_RELEASE_PLAN.md](V0_RELEASE_PLAN.md). The frontend worktree is temporary editing isolation, not a separate product. Preserve its work until reviewed integration and editor shutdown; do not create another repository for v0.
 
 Latest priority: frontend expansion/polish is paused until full live coverage. A real indexed duplicate now retains two observations from the same source: see evidence/cohort5-live-deduplication.json. When frontend work resumes, provenance rows need a key including their source URL, rather than source_id alone; the current key can collide for this valid data. Retain both original links. Previously reviewed badge/history/error-state follow-ups are recorded in DELIVERY_PLAN.md.
