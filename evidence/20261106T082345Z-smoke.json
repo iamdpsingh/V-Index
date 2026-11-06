@@ -1,0 +1,30 @@
+[
+  {
+    "provider": "Jobboardly",
+    "url": "https://recruiter-jobs.jobboardly.com/jobs",
+    "at": "2026-11-06T08:23:15.312456+00:00",
+    "revision": "52d2da4c5d453be669c14f526967e5e9d47f961b",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "6028e7701bc8bbf997f89335db1b378ef987aadb886543d6e0899c3bd238d200",
+    "count": 31,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "93b3138003cba72a9fd21ce9bf04e9244a7dde97e5ebcb4263bd6041eea79b7c",
+    "finished_at": "2026-11-06T08:23:22.902442+00:00"
+  },
+  {
+    "provider": "Jobboardly",
+    "url": "https://pennsylvania-communications.jobboardly.com/jobs",
+    "at": "2026-11-06T08:23:23.403691+00:00",
+    "revision": "52d2da4c5d453be669c14f526967e5e9d47f961b",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "6028e7701bc8bbf997f89335db1b378ef987aadb886543d6e0899c3bd238d200",
+    "count": 0,
+    "status": "FAILED",
+    "complete": false,
+    "error": "ValueError: Invalid JobBoardly XML application destination",
+    "finished_at": "2026-11-06T08:23:45.156981+00:00"
+  }
+]

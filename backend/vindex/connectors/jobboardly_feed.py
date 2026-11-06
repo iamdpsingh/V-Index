@@ -5,6 +5,7 @@ from datetime import datetime
 from urllib.parse import urlsplit
 
 from defusedxml import ElementTree as ET
+from email_validator import validate_email
 from vindex.connectors.public import text
 from vindex.schemas import JobInput
 
@@ -48,6 +49,12 @@ def parse_feed(body: bytes, origin: str) -> list[JobInput]:
         destination = urlsplit(application)
         flags = []
         if destination.scheme == "mailto" and destination.path:
+            application = url
+            flags.append("application_by_email")
+        elif not destination.scheme and not destination.netloc:
+            # Some published feed entries use a bare email rather than a mailto URL.
+            # Validate syntax only; do not contact mail servers or invent an HTTPS target.
+            validate_email(application, check_deliverability=False)
             application = url
             flags.append("application_by_email")
         elif (

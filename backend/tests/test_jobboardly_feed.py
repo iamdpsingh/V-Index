@@ -141,3 +141,16 @@ def test_email_application_preserves_mailto_and_original_https_entry():
     assert (
         "application_by_email" in job.quality_flags and "mailto:jobs@example.org" in job.raw["xml"]
     )
+
+
+@pytest.mark.parametrize("destination", ["jobs@example.org", "mailto:jobs@example.org"])
+def test_explicit_email_variants_use_source_entry_and_preserve_destination(destination):
+    job = run(body=feed(application_link=destination)).jobs[0]
+    assert job.application_url == job.source_url and "application_by_email" in job.quality_flags
+    assert destination in job.raw["xml"]
+
+
+@pytest.mark.parametrize("destination", ["", "/relative/apply", "not an email"])
+def test_malformed_bare_destinations_fail(destination):
+    with pytest.raises(ValueError):
+        run(body=feed(application_link=destination))
