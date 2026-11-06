@@ -15,6 +15,14 @@ from vindex.connectors.registry import create_connector
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
     (
+        "Freshteam",
+        "freshteam",
+        "sequoiaat",
+        "Sequoia Applied Technologies",
+        "https://sequoiaat.freshteam.com/jobs",
+    ),
+    ("Freshteam", "freshteam", "talent360", "Talent 360", "https://talent360.freshteam.com/jobs"),
+    (
         "HiringThing",
         "hiringthing",
         "math-learning-center",
@@ -294,8 +302,15 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "Freshteam": [
+                                "Native freshteam.com full job-role-list HTML plus mandatory JobPosting/native application-form details; custom domains/alternate/paginated templates unsupported",
+                                "Maximum 400 details; unique native IDs, list/detail titles, schema host/ID, explicit remote string and native form action must match; full roster reconfirmed",
+                                "Source entity-encoded description is decoded once before plain-text extraction; source UTC timestamps parsed explicitly rather than assuming local time",
+                                "List location labels retained; potentially inconsistent schema address fields remain raw without inferred geocoding; no original truncated list summary substitutes for full description",
+                                "Empty, failed, malformed and changed snapshots abort without closures; no candidate form is submitted or retained",
+                            ],
                             "HiringThing": [
-                                "Native hiringthing.com public Career Opportunities templates only; alternate white-label/custom-domain registration unsupported",
+                                "Native hiringthing.com public Career Opportunities templates only; same-tenant oasisrecruit.com metadata aliases validated without fetching them; alternate/custom-domain registration unsupported",
                                 "Maximum 400 details; complete HTML and RSS path/title sets must agree, and both are reconfirmed after extraction; pagination/empty snapshots unsupported",
                                 "Every native detail requires canonical/Open Graph/title agreement and consistent public ApplyButtonGroup job IDs/company/URL/hidden=false",
                                 "RSS full media description must match current public job HTML; native career page is the application entry, candidate questions/form/config excluded from raw",
