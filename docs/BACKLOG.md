@@ -2,7 +2,7 @@
 
 ## Current coverage-first status — November 6
 
-20/78 platforms have point-in-time non-empty complete connector runs across two independent supported sites. Twenty connectors are implemented and 58 remain unimplemented. Jobboardly's earlier large-board blocker is resolved for feed-enabled hosted boards: 31 Recruiter Jobs and 1,324 Pennsylvania Communications records matched full HTML rosters; HTML-only fallback remains capped at 400 details. Codex owns coverage and will take over the premium frontend after today's 35-total target; 15 additional verifications are still required. Preserve existing Antigravity work. Production readiness and full acquisition completion remain unproven.
+27/78 platforms have point-in-time non-empty complete connector runs across two independent supported sites. Twenty-seven connectors are implemented and 51 remain unimplemented. Jobboardly's earlier large-board blocker is resolved for feed-enabled hosted boards. Codex prioritizes today's 35-total target; 8 additional verifications remain. Preserve existing Antigravity work before frontend takeover. Production readiness and full acquisition completion remain unproven.
 
 ## First slice
 - [x] Inspect empty folder/remote; initialize canonical main without replacing history.
@@ -41,7 +41,7 @@
 ## Remaining cohorts
 - Next ATS candidates: GoHire and HiringThing, alongside the enterprise investigation. Candidate priority only; access and endpoint support unverified.
 - Other medium/high risk ATS: work through every NOT_STARTED row in coverage matrix; no stubs.
-- All 20 job-board platforms still lack accepted multi-board live evidence: Jobboardly has a partial implementation, and the other 19 are unimplemented. Need multiple installations, complete pagination, detail extraction and tenant-independent detection. Preserve distinct JBoard.io and JobBoard.io entries. Niceboard findings and platform identity research are documented separately.
+- Jobboardly has accepted bounded multi-board live evidence; the other 19 job-board platforms are unimplemented. Need multiple installations, complete pagination, detail extraction and tenant-independent detection. Preserve distinct JBoard.io and JobBoard.io entries. Niceboard findings and platform identity research are documented separately.
 
 ## Delivery
 - [x] Verify page deadline: November 30, 2026 at 23:59 UTC (December 1 at 05:29 IST).
