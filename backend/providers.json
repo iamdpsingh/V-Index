@@ -17,7 +17,7 @@
   {
     "name": "ApplicantPro",
     "kind": "ats",
-    "implementation_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
     "evidence_status": "NOT_STARTED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
@@ -26,7 +26,8 @@
     "extraction_count": null,
     "failure_reason": null,
     "limitations": [
-      "Connector not implemented"
+      "Current hosted public core/jobs template and mandatory matching JobPosting details only; maximum 400 jobs",
+      "Custom domains, alternate templates and empty snapshots unsupported; independent multi-employer live verification pending"
     ]
   },
   {
@@ -593,7 +594,7 @@
   {
     "name": "iSolvedHire",
     "kind": "ats",
-    "implementation_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
     "evidence_status": "NOT_STARTED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
@@ -602,7 +603,8 @@
     "extraction_count": null,
     "failure_reason": null,
     "limitations": [
-      "Connector not implemented"
+      "Current hosted public core/jobs template and mandatory matching JobPosting details only; maximum 400 jobs",
+      "Custom domains, alternate templates and empty snapshots unsupported; independent multi-employer live verification pending"
     ]
   },
   {

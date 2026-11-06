@@ -14,6 +14,28 @@ from vindex.connectors.registry import create_connector
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
+    (
+        "ApplicantPro",
+        "applicantpro",
+        "farbank",
+        "Far Bank Enterprises",
+        "https://farbank.applicantpro.com/jobs/",
+    ),
+    ("ApplicantPro", "applicantpro", "clarke", "Clarke", "https://clarke.applicantpro.com/jobs/"),
+    (
+        "iSolvedHire",
+        "isolvedhire",
+        "uasystem",
+        "University of Alabama System Office",
+        "https://uasystem.isolvedhire.com/jobs/",
+    ),
+    (
+        "iSolvedHire",
+        "isolvedhire",
+        "verifiedcredentials",
+        "Verified Credentials",
+        "https://verifiedcredentials.isolvedhire.com/jobs/",
+    ),
     ("Jobvite", "jobvite", "iboss", "iboss", "https://jobs.jobvite.com/iboss/jobs"),
     ("Jobvite", "jobvite", "optimas", "Optimas Solutions", "https://jobs.jobvite.com/optimas/jobs"),
     (
@@ -258,6 +280,19 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "ApplicantPro": [
+                                "Hosted applicantpro.com current public core/jobs component plus mandatory JobPosting detail only; custom domains/alternate templates unsupported",
+                                "Board-discovered organization/domain identity, explicit external-only isInternal=0 collection, exact count/unique IDs and fixed tenant job links required",
+                                "Maximum 400 details; empty, partial, changed and failed enumerations abort without reconciliation; board and full collection reconfirmed",
+                                "Native and fixed shared-vendor canonical aliases are validated as metadata; redirects are never followed; native inline application page is the application entry",
+                                "Source datePosted retains missing timezone precision; invalid validThrough strings remain raw and are not used for closure; empty salary amounts remain unknown",
+                            ],
+                            "iSolvedHire": [
+                                "Separate required platform/host/evidence from ApplicantPro, sharing the observed current public core/jobs template only",
+                                "Hosted isolvedhire.com boards only; exact discovered site IDs, external-only isInternal=0 collection and count/unique IDs are mandatory",
+                                "Maximum 400 matching JobPosting details; board, native application component and complete collection reconfirmed; custom domains/alternate templates unsupported",
+                                "Empty/failed/partial snapshots never close jobs; source labels/publication precision and actual supplied salaries retained without invention",
+                            ],
                             "Jobvite": [
                                 "Hosted jobs.jobvite.com unfiltered server-rendered Open Positions tables only; custom domains and alternate/paginated templates unsupported",
                                 "No authoritative total is supplied; complete bounded table membership/title reconfirmation establishes the observed template snapshot",
