@@ -4,15 +4,37 @@ import os
 from pathlib import Path
 from typing import Annotated
 
-from fastapi import Depends, FastAPI, Header, HTTPException, Query
+from fastapi import Depends, FastAPI, Header, HTTPException, Query, Request
+from fastapi.exception_handlers import request_validation_exception_handler
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
 from sqlalchemy import func, select, text
 from sqlalchemy.exc import IntegrityError
 
+from vindex.accounts.api import router as account_router
+from vindex.accounts.middleware import PRIVATE_PREFIXES, PrivateRequestMiddleware
 from vindex.connectors.registry import detect
 from vindex.db import Job, Observation, Run, Session, Source, now
 from vindex.schemas import RunOut, SearchOut, SourceCreate, SourceOut
 
 app = FastAPI(title="V-Index", version="0.1.0")
+app.add_middleware(PrivateRequestMiddleware)
+app.include_router(account_router)
+
+
+@app.exception_handler(RequestValidationError)
+async def redact_private_validation(request: Request, error: RequestValidationError):
+    if request.url.path.startswith(PRIVATE_PREFIXES):
+        return JSONResponse(
+            status_code=422,
+            content={
+                "detail": [
+                    {"loc": list(item["loc"]), "msg": item["msg"], "type": item["type"]}
+                    for item in error.errors()
+                ]
+            },
+        )
+    return await request_validation_exception_handler(request, error)
 
 
 def admin(authorization: Annotated[str | None, Header()] = None):
