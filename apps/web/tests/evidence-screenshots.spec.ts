@@ -1,12 +1,19 @@
 import { test } from '@playwright/test';
 import {
-  mockProviders,
+  mockAuth,
   mockJobs,
+  mockProfile,
+  mockProviders,
+  mockRecommendations,
+  mockResume,
   mockSources,
   SAMPLE_JOB,
+  SAMPLE_PROFILE,
   SAMPLE_PROVIDERS,
-  SAMPLE_SOURCE_OUT,
+  SAMPLE_RECOMMENDATIONS,
+  SAMPLE_RESUME,
   SAMPLE_RUN_OUT,
+  SAMPLE_SOURCE_OUT,
 } from './fixtures/mock-server';
 import fs from 'fs';
 import path from 'path';
@@ -56,6 +63,23 @@ test('capture desktop search and detail screenshots', async ({ page, isMobile })
   await page.getByRole('button', { name: 'Senior Engineer' }).click();
   await page.screenshot({ path: path.join(SCREENSHOT_DIR, 'desktop-job-inspectable-record.png') });
 
+  // Auth dialog preview
+  await page.getByRole('button', { name: 'Sign In' }).click();
+  await page.screenshot({ path: path.join(SCREENSHOT_DIR, 'desktop-auth-dialog.png') });
+  await page.keyboard.press('Escape');
+
+  // Authenticated Profile preview
+  await mockAuth(page);
+  await mockProfile(page, SAMPLE_PROFILE);
+  await mockResume(page, SAMPLE_RESUME);
+  await page.getByRole('navigation').getByRole('button', { name: 'profile' }).click();
+  await page.screenshot({ path: path.join(SCREENSHOT_DIR, 'desktop-profile-workspace.png') });
+
+  // Recommendations preview
+  await mockRecommendations(page, SAMPLE_RECOMMENDATIONS);
+  await page.getByRole('navigation').getByRole('button', { name: 'for you' }).click();
+  await page.screenshot({ path: path.join(SCREENSHOT_DIR, 'desktop-for-you-recommendations.png') });
+
   // Coverage page
   await page.getByRole('navigation').getByRole('button', { name: 'coverage' }).click();
   await page.screenshot({ path: path.join(SCREENSHOT_DIR, 'desktop-coverage-matrix.png') });
@@ -84,4 +108,11 @@ test('capture mobile screenshots', async ({ page, isMobile }) => {
   // Select job for mobile focused view
   await page.getByRole('button', { name: 'Senior Engineer' }).click();
   await page.screenshot({ path: path.join(SCREENSHOT_DIR, 'mobile-job-detail-focused.png') });
+
+  // Mobile profile preview
+  await mockAuth(page);
+  await mockProfile(page, SAMPLE_PROFILE);
+  await mockResume(page, SAMPLE_RESUME);
+  await page.getByRole('navigation').getByRole('button', { name: 'profile' }).click();
+  await page.screenshot({ path: path.join(SCREENSHOT_DIR, 'mobile-profile-workspace.png') });
 });
