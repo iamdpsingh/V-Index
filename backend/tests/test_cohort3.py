@@ -272,3 +272,66 @@ def test_workday_observed_out_of_range_reset_is_terminal():
 
     result = run_workday(handler)
     assert result.complete and len(result.jobs) == 1
+
+
+@pytest.mark.parametrize("stage", ["later", "final"])
+def test_workday_boolean_page_totals_are_malformed(stage):
+    raw = sample()
+    row = list_row(raw)
+    second = copy.deepcopy(raw)
+    second["jobPostingInfo"].update(
+        id="second", externalUrl="https://imf.wd5.myworkdayjobs.com/IMF/job/US/Other_2"
+    )
+    starts = 0
+
+    def handler(request):
+        nonlocal starts
+        if request.url.path == "/robots.txt":
+            return httpx.Response(200, text="User-agent: *\nAllow: /")
+        if request.method == "POST":
+            offset = json.loads(request.content)["offset"]
+            if offset == 0:
+                starts += 1
+                return httpx.Response(
+                    200,
+                    json={
+                        "total": True if stage == "final" and starts > 1 else 2,
+                        "jobPostings": [row],
+                    },
+                )
+            return httpx.Response(
+                200,
+                json={
+                    "total": False if stage == "later" and offset == 1 else 0,
+                    "jobPostings": [list_row(second)] if offset == 1 else [],
+                },
+            )
+        return httpx.Response(200, json=second if request.url.path.endswith("Other_2") else raw)
+
+    with pytest.raises(ValueError, match="total type"):
+        run_workday(handler)
+
+
+def test_worker_json_default_does_not_break_robots_or_xml_negotiation():
+    async def run():
+        def handler(request):
+            if request.url.path == "/robots.txt":
+                assert request.headers["Accept"].startswith("text/plain")
+                return httpx.Response(200, text="User-agent: *\nAllow: /")
+            if request.url.path.endswith("offers.xml"):
+                assert request.headers["Accept"] == "*/*"
+                return httpx.Response(200, content=b"<offers/>")
+            assert request.headers["Accept"] == "application/json"
+            return httpx.Response(200, json={"total": 0, "jobPostings": []})
+
+        async with httpx.AsyncClient(
+            headers={"Accept": "application/json"}, transport=httpx.MockTransport(handler)
+        ) as client:
+            assert (
+                await create_connector("workday", "imf~wd5~IMF", "IMF", client).discover()
+            ).complete
+            assert (
+                await create_connector("recruitee", "example", "Example", client).discover()
+            ).complete
+
+    asyncio.run(run())

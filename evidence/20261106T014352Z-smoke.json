@@ -1,0 +1,62 @@
+[
+  {
+    "provider": "Recruitee",
+    "url": "https://natilik.recruitee.com",
+    "at": "2026-11-06T01:42:56.369713+00:00",
+    "revision": "2ed2fe7dc4e11c946b38063074189bb3df73a80d",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "533e20b7ac0f983724fbfec7b014a34d909d7340321ac78c72f747857298d012",
+    "count": 6,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "0f534f91557ff1178474557a9e87e5d2fa8c8e6350efe81832054d3e5dff428d",
+    "finished_at": "2026-11-06T01:42:57.026380+00:00"
+  },
+  {
+    "provider": "Recruitee",
+    "url": "https://bunq.recruitee.com",
+    "at": "2026-11-06T01:42:57.527697+00:00",
+    "revision": "2ed2fe7dc4e11c946b38063074189bb3df73a80d",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "533e20b7ac0f983724fbfec7b014a34d909d7340321ac78c72f747857298d012",
+    "count": 23,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "3f41fb71d8888737ad7aed4ad2bb0a78125d1c54c0e22052cc30f908ffa7858a",
+    "finished_at": "2026-11-06T01:42:58.731786+00:00"
+  },
+  {
+    "provider": "Workday",
+    "url": "https://imf.wd5.myworkdayjobs.com/IMF",
+    "at": "2026-11-06T01:42:59.232974+00:00",
+    "revision": "2ed2fe7dc4e11c946b38063074189bb3df73a80d",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "533e20b7ac0f983724fbfec7b014a34d909d7340321ac78c72f747857298d012",
+    "count": 14,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "6b14b181b96579303899c0fb62ff6a87eef3180227bad32e12772ed1130c6598",
+    "finished_at": "2026-11-06T01:43:17.021139+00:00"
+  },
+  {
+    "provider": "Workday",
+    "url": "https://gatesfoundation.wd1.myworkdayjobs.com/Gates",
+    "at": "2026-11-06T01:43:17.522455+00:00",
+    "revision": "2ed2fe7dc4e11c946b38063074189bb3df73a80d",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "533e20b7ac0f983724fbfec7b014a34d909d7340321ac78c72f747857298d012",
+    "count": 29,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "476dbfe9975482b5a33c51113652d51f8ec9b4df20f3942a9584b093ea4834d1",
+    "finished_at": "2026-11-06T01:43:52.166289+00:00"
+  }
+]

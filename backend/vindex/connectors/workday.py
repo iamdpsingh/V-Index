@@ -93,14 +93,21 @@ class WorkdayConnector:
             raise ValueError("Invalid Workday page shape")
         return rows
 
+    @staticmethod
+    def total(payload: Any) -> int:
+        total = payload["total"]
+        if type(total) is not int or total < 0:
+            raise ValueError("Invalid Workday total type or value")
+        return total
+
     async def discover(self) -> Enumeration:
         self.policy = await RobotsPolicy.load(self.http, self.origin)
         self.policy.check(f"{self.origin}/{self.site}/")
         delay = self.policy.delay()
         await asyncio.sleep(delay)
         first = await self.fetch()
-        total = first["total"]
-        if type(total) is not int or total < 0 or total >= UNSAFE_TOTAL:
+        total = self.total(first)
+        if total >= UNSAFE_TOTAL:
             raise ValueError(
                 "Workday reported total is invalid or at its unsafe enumeration ceiling"
             )
@@ -140,7 +147,7 @@ class WorkdayConnector:
                 await asyncio.sleep(delay)
                 final = await self.fetch()
                 if (
-                    final["total"] != total
+                    self.total(final) != total
                     or [self.path(r["externalPath"]) for r in self.rows(final)] != first_paths
                 ):
                     raise ValueError("Workday first-page snapshot changed during enumeration")
@@ -148,7 +155,7 @@ class WorkdayConnector:
             await asyncio.sleep(delay)
             page = await self.fetch(len(jobs))
             # Observed subsequent pages can return total=0; only nonzero changes are conflicts.
-            if page.get("total") not in (0, total):
+            if self.total(page) not in (0, total):
                 raise ValueError("Workday total changed during enumeration")
             rows = self.rows(page)
         raise ValueError("Workday page budget exceeded")

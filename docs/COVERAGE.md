@@ -49,7 +49,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | Pinpoint | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Polymer | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Recooty | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
-| Recruitee | ats | IMPLEMENTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
+| Recruitee | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 29 | 2026-11-06T01:42:58.731786+00:00 | https://natilik.recruitee.com (6; LIVE_VERIFIED); https://bunq.recruitee.com (23; LIVE_VERIFIED)  |
 | Rippling | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Rival | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | SAP SuccessFactors | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
@@ -62,7 +62,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | UltiPro | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | WeRecruit | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Workable | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
-| Workday | ats | IMPLEMENTED | NOT_STARTED | HIGH | None | None | Not tested  |
+| Workday | ats | IMPLEMENTED | LIVE_VERIFIED | HIGH | 43 | 2026-11-06T01:43:52.166289+00:00 | https://imf.wd5.myworkdayjobs.com/IMF (14; LIVE_VERIFIED); https://gatesfoundation.wd1.myworkdayjobs.com/Gates (29; LIVE_VERIFIED)  |
 | Zoho Recruit | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Niceboard | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | WP Job Manager | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |

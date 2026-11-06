@@ -1,0 +1,31 @@
+{
+  "at": "2026-11-06T01:45:57.812501+00:00",
+  "database": "local SQLite",
+  "lease_backend": "local Redis",
+  "source_ids": [
+    6,
+    7
+  ],
+  "runs": [
+    {
+      "id": 12,
+      "source_id": 7,
+      "started_at": "2026-11-06T01:45:55.654830",
+      "finished_at": "2026-11-06T01:45:56.344141",
+      "status": "success",
+      "count": 6,
+      "error": null
+    },
+    {
+      "id": 11,
+      "source_id": 6,
+      "started_at": "2026-11-06T01:45:54.511022",
+      "finished_at": "2026-11-06T01:45:55.651251",
+      "status": "failed",
+      "count": 0,
+      "error": "UpstreamStatusError: Upstream HTTP 406"
+    }
+  ],
+  "active_index_total": 1179,
+  "complete": false
+}

@@ -15,7 +15,7 @@ class RobotsPolicy:
     async def load(cls, http: PublicHTTP, origin: str) -> "RobotsPolicy":
         parser = RobotFileParser()
         try:
-            content = await http.read(f"{origin}/robots.txt")
+            content = await http.read(f"{origin}/robots.txt", accept="text/plain,*/*;q=0.5")
         except UpstreamStatusError as error:
             if error.status_code != 404:
                 raise

@@ -28,6 +28,7 @@ class PublicHTTP:
         url: str,
         *,
         method: Literal["GET", "POST"] = "GET",
+        accept: str = "*/*",
         json_body: dict[str, Any] | None = None,
     ) -> bytes:
         parsed = urlsplit(url)
@@ -42,7 +43,7 @@ class PublicHTTP:
         for attempt in range(3):
             try:
                 async with self.client.stream(
-                    method, url, json=json_body, follow_redirects=False
+                    method, url, json=json_body, headers={"Accept": accept}, follow_redirects=False
                 ) as response:
                     if response.status_code == 429 or response.status_code >= 500:
                         response.raise_for_status()
@@ -83,4 +84,6 @@ class PublicHTTP:
         method: Literal["GET", "POST"] = "GET",
         json_body: dict[str, Any] | None = None,
     ) -> Any:
-        return json.loads(await self.read(url, method=method, json_body=json_body))
+        return json.loads(
+            await self.read(url, method=method, json_body=json_body, accept="application/json")
+        )
