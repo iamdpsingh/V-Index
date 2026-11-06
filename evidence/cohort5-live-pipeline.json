@@ -1,0 +1,55 @@
+{
+  "at": "2026-11-06T03:42:43.170639+00:00",
+  "revision": "ecaac678cf672f93d0932493fcf7d1a36b795558",
+  "database": "local SQLite",
+  "lease_backend": "local Redis",
+  "sources": [
+    {
+      "platform": "JazzHR",
+      "source_id": 13,
+      "url": "https://lapmasterwolters.applytojob.com/apply",
+      "company": "Lapmaster Wolters"
+    },
+    {
+      "platform": "Jobboardly",
+      "source_id": 14,
+      "url": "https://recruiter-jobs.jobboardly.com/jobs",
+      "company": "Recruiter jobs"
+    }
+  ],
+  "runs": [
+    {
+      "id": 20,
+      "source_id": 13,
+      "started_at": "2026-11-06T03:42:43.474087",
+      "finished_at": "2026-11-06T03:42:59.722380",
+      "status": "success",
+      "count": 6,
+      "error": null
+    },
+    {
+      "id": 21,
+      "source_id": 14,
+      "started_at": "2026-11-06T03:42:59.726531",
+      "finished_at": "2026-11-06T03:43:56.504882",
+      "status": "success",
+      "count": 31,
+      "error": null
+    }
+  ],
+  "api_record_checks": [
+    {
+      "source_id": 13,
+      "persisted_open_observations": 6,
+      "public_records_with_verified_provenance": 6
+    },
+    {
+      "source_id": 14,
+      "persisted_open_observations": 31,
+      "public_records_with_verified_provenance": 30
+    }
+  ],
+  "active_index_total": 1271,
+  "finished_at": "2026-11-06T03:43:58.567093+00:00",
+  "complete": true
+}

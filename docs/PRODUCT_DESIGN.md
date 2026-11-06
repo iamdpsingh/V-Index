@@ -1,5 +1,7 @@
 # V-Index product design standard
 
+Latest owner instruction: Antigravity resumes the premium **Rolewisp** frontend in parallel with Codex's coverage work. Read ANTIGRAVITY_START_HERE.md for execution scope and LIVE_INDEX_REQUIREMENTS.md for freshness behavior. The repository remains V-Index. The owner explicitly rejects a regular template or a cheap/AI-generic appearance; the visual and interaction review gates below are required.
+
 ## Owner direction
 
 Scope clarification: the requested change is visual presentation only. The challenge objective, required functionality and backend requirements remain unchanged. Candidate interaction ideas below do not expand implementation scope; preserve the existing workflows while designing their appearance.
@@ -12,7 +14,7 @@ Build an identifiable job-search instrument whose distinguishing interaction is 
 
 The defining composition is a searchable index on the left and an inspectable job record on the right. Each record has a quiet provenance rail: original listing, application destination and last successful observation. These are useful controls, not decoration. On mobile, selection opens a focused detail view with a clear return to the preserved results and scroll position.
 
-Design candidate: reference numbers, fine rules, carefully aligned metadata and an editorial type hierarchy suggest a maintained reference index. Develop a custom V-Index wordmark and a small, consistent notation system around index entries and source relationships. Prove the composition with real jobs before adding ornamental assets. This is a proposed direction for execution and critique, not a claim of a finalized unique design.
+Design candidate: reference numbers, fine rules, carefully aligned metadata and an editorial type hierarchy suggest a maintained reference index. Develop a custom Rolewisp wordmark and a small, consistent notation system around index entries and source relationships. Prove the composition with real jobs before adding ornamental assets. This is a proposed direction for execution and critique, not a claim of a finalized unique design.
 
 ## Screen requirements
 

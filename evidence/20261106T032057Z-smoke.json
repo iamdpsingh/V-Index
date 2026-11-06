@@ -1,0 +1,32 @@
+[
+  {
+    "provider": "Pinpoint",
+    "url": "https://intermedia.pinpointhq.com",
+    "at": "2026-11-06T03:20:49.812995+00:00",
+    "revision": "5e18b996f988cc75448dc00d63ce650764d25ad5",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "d940452abbb213f5e28b5acca762824418c45d3aef58c846880e262d822fb816",
+    "count": 43,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "894bc30fa955732ced49746f1799ff4f6f49058ea4bf71f822ee62f9b9038c30",
+    "finished_at": "2026-11-06T03:20:53.811667+00:00"
+  },
+  {
+    "provider": "Pinpoint",
+    "url": "https://workwithus.pinpointhq.com",
+    "at": "2026-11-06T03:20:54.312908+00:00",
+    "revision": "5e18b996f988cc75448dc00d63ce650764d25ad5",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "d940452abbb213f5e28b5acca762824418c45d3aef58c846880e262d822fb816",
+    "count": 6,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "a663b08015d1681a9b4172d4d5b0006ef2c24e6ea9a22d57ced8bddfb273a8f9",
+    "finished_at": "2026-11-06T03:20:57.181056+00:00"
+  }
+]

@@ -1,0 +1,23 @@
+{
+  "at": "2026-11-06T03:45:57.272215+00:00",
+  "scope": "Observed duplicate postings on a real indexed board, not synthetic fixtures",
+  "proofs": [
+    {
+      "canonical_job_id": 1262,
+      "source_id": 14,
+      "company": "Micro1 Partner",
+      "title": "Recruiter - Remote (Contract)",
+      "original_observations": [
+        {
+          "external_id": "18129260",
+          "source_url": "https://recruiter-jobs.jobboardly.com/jobs/recruiter-remote-contract-08c860eb"
+        },
+        {
+          "external_id": "18129253",
+          "source_url": "https://recruiter-jobs.jobboardly.com/jobs/recruiter-remote-contract-53f4adbd"
+        }
+      ],
+      "application_target_matches_after_removing_only_utm": true
+    }
+  ]
+}

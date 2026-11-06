@@ -1,6 +1,14 @@
 # Delivery target — November 7, 2026 (IST)
 
-## Superseding owner priority — November 6
+## Current parallel execution plan — November 6 IST
+
+The owner explicitly resumes Antigravity's premium Rolewisp frontend in its existing separate branch/worktree while Codex prioritizes coverage and necessary backend/API support. Antigravity owns brand/logo execution, search/detail/coverage/operator views, existing account/profile/resume/recommendation screens and browser verification. Read ANTIGRAVITY_START_HERE.md. This supersedes the earlier frontend pause, including old notes elsewhere in historical validation records. No external agent is assumed notified or launched by a document update.
+
+Today's target, November 6 IST, is approximately **35 total fully verified platforms**, starting from 14 point-in-time multi-employer verifications: 21 additional platforms. This is an execution target, not a guarantee, implementation count or permission to count fixtures, partial pagination, blocked access or failed runs. Every increment requires a reusable connector, complete non-empty real runs across at least two independent supported sites, normalized records, failure/completeness safeguards and committed evidence with explicit remaining limits. Broad production acceptance remains separate; existing bounded implementations are not claimed to support every variant.
+
+Production must keep discovering and updating jobs using persistent source schedules and running ingestion workers, not a frozen export of development data. Follow LIVE_INDEX_REQUIREMENTS.md. Source interval defaults to six hours, with a current one-hour API minimum; browser polling must not be marketed as instant provider detection. Hosting, operational/security gates and zero-additional-spend constraints still apply.
+
+## Earlier coverage-only instruction — superseded for frontend work
 
 Complete and evidence live coverage across all 78 required platforms before resuming accounts, frontend polish or hosting work. The owner explicitly moved coverage ahead of the other features after discussing Sunday, November 8. Sunday is a target, not a guaranteed completion date. Preserve existing account and frontend work; do not expand it during the coverage push. Count only real successful multi-tenant indexing runs, disclose bounded implementations and genuine access blockers, and keep every platform distinct. The earlier execution priorities below record the previous plan and are suspended where they conflict with this instruction.
 

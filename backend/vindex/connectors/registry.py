@@ -4,11 +4,19 @@ import re
 from urllib.parse import urlsplit
 
 import httpx
+from vindex.connectors.bamboohr import BambooHRConnector
+from vindex.connectors.breezy import BreezyConnector
+from vindex.connectors.hirehive import HireHiveConnector
+from vindex.connectors.jazzhr import JazzHRConnector
+from vindex.connectors.jobboardly import JobboardlyConnector
 from vindex.connectors.personio import PersonioConnector
+from vindex.connectors.pinpoint import PinpointConnector
 from vindex.connectors.public import Connector, PublicConnector
 from vindex.connectors.public import detect as detect_original
 from vindex.connectors.recruitee import RecruiteeConnector
 from vindex.connectors.smartrecruiters import SmartRecruitersConnector
+from vindex.connectors.teamtailor import TENANT, TeamtailorConnector
+from vindex.connectors.workable import WorkableConnector
 from vindex.connectors.workday import HOST_PATTERN, SITE_PATTERN, WorkdayConnector
 
 PERSONIO_HOST = re.compile(r"([a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)\.jobs\.personio\.(de|com)")
@@ -18,6 +26,23 @@ def detect(url: str) -> tuple[str, str]:
     p = urlsplit(url)
     if p.scheme != "https" or p.username or p.password or p.port not in (None, 443):
         raise ValueError("Use an HTTPS hosted career board URL without credentials or custom ports")
+    for suffix, provider in (
+        ("teamtailor.com", "teamtailor"),
+        ("breezy.hr", "breezy"),
+        ("bamboohr.com", "bamboohr"),
+        ("pinpointhq.com", "pinpoint"),
+        ("jobboardly.com", "jobboardly"),
+        ("applytojob.com", "jazzhr"),
+        ("hirehive.com", "hirehive"),
+    ):
+        match = re.fullmatch(rf"({TENANT})\.{re.escape(suffix)}", p.hostname or "")
+        if match:
+            return provider, match[1]
+    if p.hostname == "apply.workable.com":
+        slug = p.path.strip("/").split("/")[0]
+        if not re.fullmatch(TENANT, slug) or slug in {"j", "api"}:
+            raise ValueError("Expected a Workable account career URL, not a bare job URL")
+        return "workable", slug
     workday = HOST_PATTERN.fullmatch(p.hostname or "")
     if workday:
         parts = p.path.strip("/").split("/")
@@ -46,13 +71,29 @@ def detect(url: str) -> tuple[str, str]:
         return detect_original(url)
     except ValueError as error:
         raise ValueError(
-            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters Personio, Recruitee and hosted Workday"
+            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR and HireHive"
         ) from error
 
 
 def create_connector(
     provider: str, slug: str, company: str, client: httpx.AsyncClient
 ) -> Connector:
+    if provider == "hirehive":
+        return HireHiveConnector(provider, slug, company, client)
+    if provider == "jazzhr":
+        return JazzHRConnector(provider, slug, company, client)
+    if provider == "jobboardly":
+        return JobboardlyConnector(provider, slug, company, client)
+    if provider == "pinpoint":
+        return PinpointConnector(provider, slug, company, client)
+    if provider == "bamboohr":
+        return BambooHRConnector(provider, slug, company, client)
+    if provider == "workable":
+        return WorkableConnector(provider, slug, company, client)
+    if provider == "teamtailor":
+        return TeamtailorConnector(provider, slug, company, client)
+    if provider == "breezy":
+        return BreezyConnector(provider, slug, company, client)
     if provider == "workday":
         return WorkdayConnector(provider, slug, company, client)
     if provider == "recruitee":

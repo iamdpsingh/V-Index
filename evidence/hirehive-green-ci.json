@@ -1,0 +1,24 @@
+{
+  "conclusion": "success",
+  "headSha": "09d293396a9ba02bb17373ca69c659a939ea1863",
+  "jobs": [
+    {
+      "conclusion": "success",
+      "name": "frontend",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "stack",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "backend",
+      "status": "completed"
+    }
+  ],
+  "status": "completed",
+  "url": "https://github.com/iamdpsingh/V-Index/actions/runs/42177361817",
+  "scope": "Backend, frontend build and Docker/private proxy CI; live provider runs are separate"
+}

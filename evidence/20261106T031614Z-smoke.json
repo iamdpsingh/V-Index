@@ -1,0 +1,64 @@
+[
+  {
+    "provider": "Workable",
+    "url": "https://apply.workable.com/careers/",
+    "at": "2026-11-06T03:14:37.416302+00:00",
+    "revision": "f15e858faca1d98ab9200de1a51f0b427e8c4f2a",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "397689f7711ca0ebc2fc019716f1d999b6f0f534ea31fedd5c6c7f3450bbd16f",
+    "count": 1,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "fcba61b1bb4ca2ac0d1148c8d550024a4724478bed7f77986d5cfabb95e68602",
+    "finished_at": "2026-11-06T03:14:39.263923+00:00"
+  },
+  {
+    "provider": "Workable",
+    "url": "https://apply.workable.com/learnworlds/",
+    "at": "2026-11-06T03:14:39.764855+00:00",
+    "revision": "f15e858faca1d98ab9200de1a51f0b427e8c4f2a",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "397689f7711ca0ebc2fc019716f1d999b6f0f534ea31fedd5c6c7f3450bbd16f",
+    "count": 3,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "2fbdd8a8b137472015eecbc0bb691c79af21566d83c08649656b7a5ed02e6bd6",
+    "finished_at": "2026-11-06T03:14:41.352483+00:00"
+  },
+  {
+    "provider": "Breezy HR",
+    "url": "https://vald.breezy.hr",
+    "at": "2026-11-06T03:14:41.853748+00:00",
+    "revision": "f15e858faca1d98ab9200de1a51f0b427e8c4f2a",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "397689f7711ca0ebc2fc019716f1d999b6f0f534ea31fedd5c6c7f3450bbd16f",
+    "count": 75,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {
+      "jobposting_schema_missing": 3
+    },
+    "payload_sha256": "2592dccab1304d6128deb1f307a74bd960ba8240a2533d177f6ec64d4bcce9ff",
+    "finished_at": "2026-11-06T03:16:05.721883+00:00"
+  },
+  {
+    "provider": "Breezy HR",
+    "url": "https://subscribe.breezy.hr",
+    "at": "2026-11-06T03:16:06.223288+00:00",
+    "revision": "f15e858faca1d98ab9200de1a51f0b427e8c4f2a",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "397689f7711ca0ebc2fc019716f1d999b6f0f534ea31fedd5c6c7f3450bbd16f",
+    "count": 6,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "45ea5294c86f3a4bcf72bf7a8ec19b43b2261089247e91026b7f50b5bfdbbc64",
+    "finished_at": "2026-11-06T03:16:14.203649+00:00"
+  }
+]

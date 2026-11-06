@@ -1,0 +1,24 @@
+{
+  "headSha": "5e18b996f988cc75448dc00d63ce650764d25ad5",
+  "url": "https://github.com/iamdpsingh/V-Index/actions/runs/42156031405",
+  "status": "completed",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "name": "stack",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "frontend",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "backend",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "scope": "Backend, frontend build and actual Docker stack/private proxy checks; not live provider enumeration"
+}

@@ -1,6 +1,7 @@
 import hmac
 import json
 import os
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Annotated
 
@@ -17,6 +18,7 @@ from vindex.accounts.recommendations import router as recommendations_router
 from vindex.accounts.resume_api import router as resume_router
 from vindex.connectors.registry import detect
 from vindex.db import Job, Observation, Run, Session, Source, now
+from vindex.ingest import aware
 from vindex.schemas import RunOut, SearchOut, SourceCreate, SourceOut
 
 app = FastAPI(title="V-Index", version="0.1.0")
@@ -24,6 +26,16 @@ app.add_middleware(PrivateRequestMiddleware)
 app.include_router(account_router)
 app.include_router(recommendations_router)
 app.include_router(resume_router)
+
+
+@app.middleware("http")
+async def fresh_api_responses(request: Request, call_next):
+    response = await call_next(request)
+    if request.url.path.startswith("/api/v1/") or request.url.path == "/health":
+        # Polling must read the current index, not a browser/CDN snapshot.
+        # Private middleware retains its additional cookie/security headers.
+        response.headers["Cache-Control"] = "no-store"
+    return response
 
 
 @app.exception_handler(RequestValidationError)
@@ -50,7 +62,13 @@ def admin(authorization: Annotated[str | None, Header()] = None):
 
 
 def row(value):
-    return {c.name: getattr(value, c.name) for c in value.__table__.columns}
+    values = {c.name: getattr(value, c.name) for c in value.__table__.columns}
+    # Bookkeeping timestamps are written in UTC; SQLite does not retain tzinfo.
+    # Original source dates stored inside JSON observations remain unchanged.
+    return {
+        key: aware(item).astimezone(UTC) if isinstance(item, datetime) else item
+        for key, item in values.items()
+    }
 
 
 @app.get("/health")
@@ -151,15 +169,15 @@ def jobs(
                     "id": j.id,
                     **j.data,
                     "raw": None,
-                    "first_seen_at": j.first_seen,
-                    "last_changed_at": j.last_changed,
+                    "first_seen_at": aware(j.first_seen).astimezone(UTC),
+                    "last_changed_at": aware(j.last_changed).astimezone(UTC),
                     "sources": [
                         {
                             "source_id": o.source_id,
                             "source_url": o.data["source_url"],
                             "application_url": o.data["application_url"],
                             "status": o.status,
-                            "last_checked_at": o.last_checked,
+                            "last_checked_at": aware(o.last_checked).astimezone(UTC),
                         }
                         for o in observations
                         if o.job_id == j.id
@@ -182,7 +200,7 @@ def job_detail(job_id: int):
         return {
             "id": job.id,
             **job.data,
-            "first_seen_at": job.first_seen,
-            "last_changed_at": job.last_changed,
+            "first_seen_at": aware(job.first_seen).astimezone(UTC),
+            "last_changed_at": aware(job.last_changed).astimezone(UTC),
             "sources": [row(o) for o in observations],
         }

@@ -1,5 +1,7 @@
 # V-Index
 
+**Rolewisp — Find your next opening.** Rolewisp is the owner-selected public product brand; V-Index remains this project's repository and folder name. See [branding](docs/BRANDING.md) for the identity direction and naming convention.
+
 A job index with source provenance, scheduled refreshes and conservative closure detection. This repository is an initial working vertical slice, not a complete 78-platform submission.
 
 ## Local backend
@@ -40,7 +42,9 @@ Smoke requests public provider APIs and writes timestamped evidence. Inspect fai
 
 ## Status and limits
 
-Greenhouse, Lever (including EU endpoint support), Ashby, SmartRecruiters, Personio, Recruitee and bounded hosted Workday connectors are implemented. Actual evidence is separate from implementation status. Other 71 entries are planning records, not connectors. PostgreSQL/Redis integration tests run when TEST_DATABASE_URL and TEST_REDIS_URL are configured; The full container stack also passes the documented CI startup/proxy checks; hosted operation is not yet verified. Current source/evidence is pushed to the canonical GitHub repository. No hosted reviewer demo has been deployed. Acquisition readiness requires all acceptance criteria in docs/ACCEPTANCE_TESTS.md.
+14 of the 78 required platforms have point-in-time live evidence across two independent employers: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, JazzHR and HireHive. Fifteen connectors are implemented; Jobboardly remains partial/FAILED because its second configured board exceeds the supported detail budget. The remaining 63 entries are unimplemented. Implementation, evidence and production readiness are separate. The authoritative matrix and limitations are in [coverage](docs/COVERAGE.md).
+
+Codex prioritizes full live coverage while Antigravity builds the premium Rolewisp frontend and documented account screens in parallel. See [the frontend execution brief](docs/ANTIGRAVITY_START_HERE.md) and [continuous-index requirements](docs/LIVE_INDEX_REQUIREMENTS.md). The November 6 IST target is 35 total verified platforms; it is not achieved coverage. PostgreSQL/Redis integration tests run when TEST_DATABASE_URL and TEST_REDIS_URL are configured. The full container stack passes the documented CI startup/proxy checks; hosted operation is not yet verified. Current source/evidence is pushed to the canonical GitHub repository. No hosted reviewer demo has been deployed. Acquisition readiness requires all acceptance criteria in docs/ACCEPTANCE_TESTS.md.
 
 ### Service-backed tests
 

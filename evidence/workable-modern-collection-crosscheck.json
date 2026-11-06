@@ -1,0 +1,27 @@
+{
+  "at": "2026-11-06T03:41:27.027024+00:00",
+  "revision": "ecaac678cf672f93d0932493fcf7d1a36b795558",
+  "scope": "Observed modern public career search cross-check against the documented widget full collection; not a supported v3 API guarantee",
+  "examples": [
+    {
+      "tenant": "careers",
+      "observed_search_total": 1,
+      "widget_unique_jobs": 1,
+      "shortcodes": [
+        "DFE5C996FC"
+      ],
+      "complete_identifier_match": true
+    },
+    {
+      "tenant": "learnworlds",
+      "observed_search_total": 3,
+      "widget_unique_jobs": 3,
+      "shortcodes": [
+        "034627EE5D",
+        "18DF59AA89",
+        "F36A3D8DAB"
+      ],
+      "complete_identifier_match": true
+    }
+  ]
+}

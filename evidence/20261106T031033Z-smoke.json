@@ -1,0 +1,60 @@
+[
+  {
+    "provider": "Teamtailor",
+    "url": "https://clearroute.teamtailor.com",
+    "at": "2026-11-06T03:09:04.520255+00:00",
+    "revision": "593a5bdda78d692b4096418167f882f84bc87012",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "e693aebbc0acf5b6a2b6bd75c409f6b04f45fbfe3ed051d27a7850e7b6255329",
+    "count": 22,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "f8c019d593d209e30466e78b4d5e0b996d2a11b2b186717aed062eb25d5b1563",
+    "finished_at": "2026-11-06T03:09:07.776647+00:00"
+  },
+  {
+    "provider": "Teamtailor",
+    "url": "https://omny.teamtailor.com",
+    "at": "2026-11-06T03:09:08.277591+00:00",
+    "revision": "593a5bdda78d692b4096418167f882f84bc87012",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "e693aebbc0acf5b6a2b6bd75c409f6b04f45fbfe3ed051d27a7850e7b6255329",
+    "count": 4,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "cc842a31c752729816d8820d9a4514e89e7e6f206b3b4aa7c137d52c983353ad",
+    "finished_at": "2026-11-06T03:09:11.551818+00:00"
+  },
+  {
+    "provider": "Breezy HR",
+    "url": "https://vald.breezy.hr",
+    "at": "2026-11-06T03:09:12.053098+00:00",
+    "revision": "593a5bdda78d692b4096418167f882f84bc87012",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "e693aebbc0acf5b6a2b6bd75c409f6b04f45fbfe3ed051d27a7850e7b6255329",
+    "count": 0,
+    "status": "FAILED",
+    "complete": false,
+    "error": "ValueError: Expected exactly one Breezy JobPosting detail",
+    "finished_at": "2026-11-06T03:10:24.176111+00:00"
+  },
+  {
+    "provider": "Breezy HR",
+    "url": "https://subscribe.breezy.hr",
+    "at": "2026-11-06T03:10:24.677522+00:00",
+    "revision": "593a5bdda78d692b4096418167f882f84bc87012",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "e693aebbc0acf5b6a2b6bd75c409f6b04f45fbfe3ed051d27a7850e7b6255329",
+    "count": 6,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "678170d905e9e65024fa278a1026377261740f006850e9a2c39ce641792fda5e",
+    "finished_at": "2026-11-06T03:10:32.638508+00:00"
+  }
+]

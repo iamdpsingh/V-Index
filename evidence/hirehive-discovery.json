@@ -1,0 +1,22 @@
+{
+  "recorded_at": "2026-11-06T06:53:58.057623+00:00",
+  "scope": "Summary of observed HireHive hosted-site discovery in this session; not live coverage",
+  "observations": [
+    {
+      "url": "https://zazzle.hirehive.com/",
+      "result": "Upstream HTTP 404"
+    },
+    {
+      "url": "https://mecip.hirehive.com/",
+      "result": "Required public ItemList missing"
+    },
+    {
+      "url": "https://nomm-recruitment.hirehive.com/",
+      "result": "Required public ItemList missing"
+    },
+    {
+      "url": "https://hirehive.hirehive.com/",
+      "result": "Named collection contained one Speculative Application; not chosen as a specific-vacancy coverage example"
+    }
+  ]
+}

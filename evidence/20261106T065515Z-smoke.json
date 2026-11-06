@@ -1,0 +1,32 @@
+[
+  {
+    "provider": "HireHive",
+    "url": "https://amcsgroup.hirehive.com",
+    "at": "2026-11-06T06:54:00.664878+00:00",
+    "revision": "09d293396a9ba02bb17373ca69c659a939ea1863",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "4e62a687f46c6024e5b648ffa956bbe93cda09f0f3b50426fbe1b975ec2f26cc",
+    "count": 59,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "3062801d83c791b2c80f69d0c5448b3a65dc8f514533620c66468866a46d634f",
+    "finished_at": "2026-11-06T06:55:04.744780+00:00"
+  },
+  {
+    "provider": "HireHive",
+    "url": "https://echelon-dc.hirehive.com",
+    "at": "2026-11-06T06:55:05.246080+00:00",
+    "revision": "09d293396a9ba02bb17373ca69c659a939ea1863",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "4e62a687f46c6024e5b648ffa956bbe93cda09f0f3b50426fbe1b975ec2f26cc",
+    "count": 6,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "e4147243750e389bdfbb37caed485e71ebfaaad5d3cf1010ae5a05d6fea1cd57",
+    "finished_at": "2026-11-06T06:55:14.734024+00:00"
+  }
+]

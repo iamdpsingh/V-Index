@@ -1,5 +1,6 @@
 import asyncio
 from contextlib import nullcontext
+from datetime import datetime, timedelta
 from unittest.mock import Mock
 
 import pytest
@@ -70,6 +71,54 @@ def test_exact_provider_inventory(client):
     assert len(rows) == 78
     assert len({r["name"] for r in rows}) == 78
     assert sum(r["kind"] == "ats" for r in rows) == 58
+
+
+def test_api_reads_updated_index_without_cached_snapshot(client, database, source):
+    with database() as session:
+        ingest(session, source, Enumeration(jobs=[posting()], complete=True))
+        session.commit()
+    first = client.get("/api/v1/jobs")
+    assert first.headers["cache-control"] == "no-store"
+    assert first.json()["total"] == 1
+    item = first.json()["items"][0]
+    for value in (
+        item["first_seen_at"],
+        item["last_changed_at"],
+        item["sources"][0]["last_checked_at"],
+    ):
+        assert datetime.fromisoformat(value).utcoffset() == timedelta(0)
+    job_id = first.json()["items"][0]["id"]
+    with database() as session:
+        ingest(
+            session,
+            source,
+            Enumeration(
+                jobs=[
+                    posting(description="Newly revised pipeline responsibilities"),
+                    posting(
+                        external_id="new-role",
+                        title="Data Analyst",
+                        application_url="https://example.com/jobs/new-role",
+                    ),
+                ],
+                complete=True,
+            ),
+        )
+        session.commit()
+    updated = client.get("/api/v1/jobs")
+    assert updated.json()["total"] == 2
+    original = next(item for item in updated.json()["items"] if item["id"] == job_id)
+    assert original["description"] == "Newly revised pipeline responsibilities"
+    assert client.get("/api/v1/jobs?keyword=analyst").json()["total"] == 1
+    for url in (f"/api/v1/jobs/{job_id}", "/api/v1/providers", "/health", "/api/v1/jobs/999999"):
+        assert client.get(url).headers["cache-control"] == "no-store"
+    detail = client.get(f"/api/v1/jobs/{job_id}").json()
+    for value in (
+        detail["first_seen_at"],
+        detail["last_changed_at"],
+        detail["sources"][0]["last_checked"],
+    ):
+        assert datetime.fromisoformat(value).utcoffset() == timedelta(0)
 
 
 def test_fetch_failure_recorded_without_closing(database, source, monkeypatch):

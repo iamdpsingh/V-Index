@@ -91,16 +91,56 @@
   {
     "name": "BambooHR",
     "kind": "ats",
-    "implementation_status": "NOT_STARTED",
-    "evidence_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
+    "evidence_status": "LIVE_VERIFIED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
+    "examples": [
+      {
+        "provider": "BambooHR",
+        "url": "https://anaergia.bamboohr.com/careers",
+        "at": "2026-11-06T03:17:41.836880+00:00",
+        "revision": "3a9592ec39601091d14421a0e89aee4b8bed16aa",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "867cde745b34fe69e9dfceaa0dd41758113dde9744f81e4f7ff1e08682856ae6",
+        "count": 20,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {
+          "workplace_type_unmapped": 20
+        },
+        "payload_sha256": "20ae9996313573c129c0262cf92fdb56809e8ebfb1db7ffe5a48a68e698898e4",
+        "finished_at": "2026-11-06T03:17:58.918773+00:00"
+      },
+      {
+        "provider": "BambooHR",
+        "url": "https://concept2.bamboohr.com/careers",
+        "at": "2026-11-06T03:17:59.419965+00:00",
+        "revision": "3a9592ec39601091d14421a0e89aee4b8bed16aa",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "867cde745b34fe69e9dfceaa0dd41758113dde9744f81e4f7ff1e08682856ae6",
+        "count": 5,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {
+          "workplace_type_unmapped": 5
+        },
+        "payload_sha256": "2a22e73c976bd2f14c21c783b879c4edb46732c1ab9e06c60cf50516622da10a",
+        "finished_at": "2026-11-06T03:18:07.998376+00:00"
+      }
+    ],
+    "last_run_at": "2026-11-06T03:18:07.998376+00:00",
+    "extraction_count": 25,
     "failure_reason": null,
     "limitations": [
-      "Connector not implemented"
+      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
+      "Hosted bamboohr.com career list/detail only; maximum 400 details and no custom-domain detection",
+      "Reported total must equal unique listed identifiers, every detail must match the open listing, and IDs are reconfirmed",
+      "Empty lists fail closed pending independent tenant identity verification; no closures are inferred from those runs",
+      "Source numeric locationType is preserved raw and flagged workplace_type_unmapped; no workplace meaning is guessed",
+      "Application URL is the source career posting containing its native application entry; public website interfaces have no integration stability guarantee"
     ]
   },
   {
@@ -121,16 +161,54 @@
   {
     "name": "Breezy HR",
     "kind": "ats",
-    "implementation_status": "NOT_STARTED",
-    "evidence_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
+    "evidence_status": "LIVE_VERIFIED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
+    "examples": [
+      {
+        "provider": "Breezy HR",
+        "url": "https://vald.breezy.hr",
+        "at": "2026-11-06T03:14:41.853748+00:00",
+        "revision": "f15e858faca1d98ab9200de1a51f0b427e8c4f2a",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "397689f7711ca0ebc2fc019716f1d999b6f0f534ea31fedd5c6c7f3450bbd16f",
+        "count": 75,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {
+          "jobposting_schema_missing": 3
+        },
+        "payload_sha256": "2592dccab1304d6128deb1f307a74bd960ba8240a2533d177f6ec64d4bcce9ff",
+        "finished_at": "2026-11-06T03:16:05.721883+00:00"
+      },
+      {
+        "provider": "Breezy HR",
+        "url": "https://subscribe.breezy.hr",
+        "at": "2026-11-06T03:16:06.223288+00:00",
+        "revision": "f15e858faca1d98ab9200de1a51f0b427e8c4f2a",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "397689f7711ca0ebc2fc019716f1d999b6f0f534ea31fedd5c6c7f3450bbd16f",
+        "count": 6,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "45ea5294c86f3a4bcf72bf7a8ec19b43b2261089247e91026b7f50b5bfdbbc64",
+        "finished_at": "2026-11-06T03:16:14.203649+00:00"
+      }
+    ],
+    "last_run_at": "2026-11-06T03:16:14.203649+00:00",
+    "extraction_count": 81,
     "failure_reason": null,
     "limitations": [
-      "Connector not implemented"
+      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
+      "Hosted breezy.hr tenants only; custom domains remain unsupported",
+      "Maximum 400 details; empty feeds fail closed because an authoritative empty-board marker is not established",
+      "Feed IDs must match public board links; every description and application link requires a successful detail fetch",
+      "Hosted JSON/HTML interfaces are observed public interfaces without a vendor stability guarantee",
+      "Talent-pool postings without Google JobPosting schema require matching canonical/Open Graph URLs, title, description and apply link; the omission is flagged"
     ]
   },
   {
@@ -375,16 +453,53 @@
   {
     "name": "HireHive",
     "kind": "ats",
-    "implementation_status": "NOT_STARTED",
-    "evidence_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
+    "evidence_status": "LIVE_VERIFIED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
+    "examples": [
+      {
+        "provider": "HireHive",
+        "url": "https://amcsgroup.hirehive.com",
+        "at": "2026-11-06T06:54:00.664878+00:00",
+        "revision": "09d293396a9ba02bb17373ca69c659a939ea1863",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "4e62a687f46c6024e5b648ffa956bbe93cda09f0f3b50426fbe1b975ec2f26cc",
+        "count": 59,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "3062801d83c791b2c80f69d0c5448b3a65dc8f514533620c66468866a46d634f",
+        "finished_at": "2026-11-06T06:55:04.744780+00:00"
+      },
+      {
+        "provider": "HireHive",
+        "url": "https://echelon-dc.hirehive.com",
+        "at": "2026-11-06T06:55:05.246080+00:00",
+        "revision": "09d293396a9ba02bb17373ca69c659a939ea1863",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "4e62a687f46c6024e5b648ffa956bbe93cda09f0f3b50426fbe1b975ec2f26cc",
+        "count": 6,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "e4147243750e389bdfbb37caed485e71ebfaaad5d3cf1010ae5a05d6fea1cd57",
+        "finished_at": "2026-11-06T06:55:14.734024+00:00"
+      }
+    ],
+    "last_run_at": "2026-11-06T06:55:14.734024+00:00",
+    "extraction_count": 65,
     "failure_reason": null,
     "limitations": [
-      "Connector not implemented"
+      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
+      "Hosted hirehive.com public ItemList/JobPosting templates only; custom domains and legacy Embed URL registration remain unsupported",
+      "Explicit total, contiguous list positions, unique validated links and successful matching details are required; singleton JSON-LD items are supported",
+      "Maximum 400 details; unnamed/partial lists and any failed/changed detail abort without reconciliation",
+      "A zero-job snapshot requires an explicit named ItemList with total=0, no items and successful full reconfirmation; it does not count as live extraction evidence",
+      "Native career posting is the application entry point; original attributed JSON-LD links are retained raw",
+      "Completeness follows the public ItemList total and a final complete link/title reconfirmation, not a transactional upstream snapshot"
     ]
   },
   {
@@ -456,16 +571,52 @@
   {
     "name": "JazzHR",
     "kind": "ats",
-    "implementation_status": "NOT_STARTED",
-    "evidence_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
+    "evidence_status": "LIVE_VERIFIED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
+    "examples": [
+      {
+        "provider": "JazzHR",
+        "url": "https://lapmasterwolters.applytojob.com/apply",
+        "at": "2026-11-06T03:36:54.694427+00:00",
+        "revision": "ecaac678cf672f93d0932493fcf7d1a36b795558",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "b03679629b1a06ca1c33befa438d20a22038e26c017d741a7d66a8e3f2a39bfd",
+        "count": 6,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "b9dcc1deae4f62d483422cebf5aa69474f9aefbc861f3e2a5e9f1ab88c9d2898",
+        "finished_at": "2026-11-06T03:37:10.990530+00:00"
+      },
+      {
+        "provider": "JazzHR",
+        "url": "https://belaytechnologies.applytojob.com/apply",
+        "at": "2026-11-06T03:37:11.491813+00:00",
+        "revision": "ecaac678cf672f93d0932493fcf7d1a36b795558",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "b03679629b1a06ca1c33befa438d20a22038e26c017d741a7d66a8e3f2a39bfd",
+        "count": 113,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "ad12bbecebaf34c6bf6d14cec9addcf867be1dbf66ca72f199cedfad59d3a87e",
+        "finished_at": "2026-11-06T03:41:01.947707+00:00"
+      }
+    ],
+    "last_run_at": "2026-11-06T03:41:01.947707+00:00",
+    "extraction_count": 119,
     "failure_reason": null,
     "limitations": [
-      "Connector not implemented"
+      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
+      "Hosted applytojob.com Current Openings templates only; custom domains and alternative templates remain unsupported",
+      "No source total is supplied; completeness follows the full server-rendered Current Openings list and a final link/title reconfirmation",
+      "Maximum 400 details; empty, truncated, unexpectedly paginated or malformed lists fail closed",
+      "Every detail requires matching canonical URL/title, employer identity, description and native application form; no form is submitted",
+      "Original publication dates and structured salaries are not established by this template; provided source text remains in original description/header observations"
     ]
   },
   {
@@ -734,16 +885,52 @@
   {
     "name": "Pinpoint",
     "kind": "ats",
-    "implementation_status": "NOT_STARTED",
-    "evidence_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
+    "evidence_status": "LIVE_VERIFIED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
+    "examples": [
+      {
+        "provider": "Pinpoint",
+        "url": "https://intermedia.pinpointhq.com",
+        "at": "2026-11-06T03:20:49.812995+00:00",
+        "revision": "5e18b996f988cc75448dc00d63ce650764d25ad5",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "d940452abbb213f5e28b5acca762824418c45d3aef58c846880e262d822fb816",
+        "count": 43,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "894bc30fa955732ced49746f1799ff4f6f49058ea4bf71f822ee62f9b9038c30",
+        "finished_at": "2026-11-06T03:20:53.811667+00:00"
+      },
+      {
+        "provider": "Pinpoint",
+        "url": "https://workwithus.pinpointhq.com",
+        "at": "2026-11-06T03:20:54.312908+00:00",
+        "revision": "5e18b996f988cc75448dc00d63ce650764d25ad5",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "d940452abbb213f5e28b5acca762824418c45d3aef58c846880e262d822fb816",
+        "count": 6,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "a663b08015d1681a9b4172d4d5b0006ef2c24e6ea9a22d57ced8bddfb273a8f9",
+        "finished_at": "2026-11-06T03:20:57.181056+00:00"
+      }
+    ],
+    "last_run_at": "2026-11-06T03:20:57.181056+00:00",
+    "extraction_count": 49,
     "failure_reason": null,
     "limitations": [
-      "Connector not implemented"
+      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
+      "Documented public postings.json full collection; legacy jobs.json is intentionally not used because it omits secondary postings",
+      "Each posting ID is preserved separately from its parent job ID; custom application/source links remain intact",
+      "Hosted tenant registration only; custom-domain entry detection and locale-specific feed selection remain unsupported",
+      "No original publication timestamp is promised by this feed; hidden compensation is not promoted to normalized salary",
+      "Robots policy can prevent a tenant fetch; no access controls are bypassed"
     ]
   },
   {
@@ -964,16 +1151,51 @@
   {
     "name": "Teamtailor",
     "kind": "ats",
-    "implementation_status": "NOT_STARTED",
-    "evidence_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
+    "evidence_status": "LIVE_VERIFIED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
+    "examples": [
+      {
+        "provider": "Teamtailor",
+        "url": "https://clearroute.teamtailor.com",
+        "at": "2026-11-06T03:09:04.520255+00:00",
+        "revision": "593a5bdda78d692b4096418167f882f84bc87012",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "e693aebbc0acf5b6a2b6bd75c409f6b04f45fbfe3ed051d27a7850e7b6255329",
+        "count": 22,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "f8c019d593d209e30466e78b4d5e0b996d2a11b2b186717aed062eb25d5b1563",
+        "finished_at": "2026-11-06T03:09:07.776647+00:00"
+      },
+      {
+        "provider": "Teamtailor",
+        "url": "https://omny.teamtailor.com",
+        "at": "2026-11-06T03:09:08.277591+00:00",
+        "revision": "593a5bdda78d692b4096418167f882f84bc87012",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "e693aebbc0acf5b6a2b6bd75c409f6b04f45fbfe3ed051d27a7850e7b6255329",
+        "count": 4,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "cc842a31c752729816d8820d9a4514e89e7e6f206b3b4aa7c137d52c983353ad",
+        "finished_at": "2026-11-06T03:09:11.551818+00:00"
+      }
+    ],
+    "last_run_at": "2026-11-06T03:09:11.551818+00:00",
+    "extraction_count": 26,
     "failure_reason": null,
     "limitations": [
-      "Connector not implemented"
+      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
+      "Hosted teamtailor.com tenants only; custom domains remain unsupported",
+      "Feeds with next_url or at least 100 items fail closed until pagination is supported",
+      "JSON Feed and RSS identifiers must match; workplace/location metadata is joined by UUID",
+      "Application URL is the original career posting entry point, not a separately fetched application form"
     ]
   },
   {
@@ -1039,16 +1261,52 @@
   {
     "name": "Workable",
     "kind": "ats",
-    "implementation_status": "NOT_STARTED",
-    "evidence_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
+    "evidence_status": "LIVE_VERIFIED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
+    "examples": [
+      {
+        "provider": "Workable",
+        "url": "https://apply.workable.com/careers/",
+        "at": "2026-11-06T03:14:37.416302+00:00",
+        "revision": "f15e858faca1d98ab9200de1a51f0b427e8c4f2a",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "397689f7711ca0ebc2fc019716f1d999b6f0f534ea31fedd5c6c7f3450bbd16f",
+        "count": 1,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "fcba61b1bb4ca2ac0d1148c8d550024a4724478bed7f77986d5cfabb95e68602",
+        "finished_at": "2026-11-06T03:14:39.263923+00:00"
+      },
+      {
+        "provider": "Workable",
+        "url": "https://apply.workable.com/learnworlds/",
+        "at": "2026-11-06T03:14:39.764855+00:00",
+        "revision": "f15e858faca1d98ab9200de1a51f0b427e8c4f2a",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "397689f7711ca0ebc2fc019716f1d999b6f0f534ea31fedd5c6c7f3450bbd16f",
+        "count": 3,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "2fbdd8a8b137472015eecbc0bb691c79af21566d83c08649656b7a5ed02e6bd6",
+        "finished_at": "2026-11-06T03:14:41.352483+00:00"
+      }
+    ],
+    "last_run_at": "2026-11-06T03:14:41.352483+00:00",
+    "extraction_count": 4,
     "failure_reason": null,
     "limitations": [
-      "Connector not implemented"
+      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
+      "Uses the public jobs collection with details=true on the fixed apply.workable.com widget host",
+      "Bare /j/shortcode URLs lack an account identifier; register an account career page instead",
+      "Custom-domain registration remains unsupported; all locations and source publication fields are preserved",
+      "No authoritative total is supplied; completeness follows the documented full-collection contract and an ID-set reconfirmation",
+      "Repeated shortcodes are merged only for non-conflicting location variants; all original rows are retained"
     ]
   },
   {
@@ -1170,16 +1428,51 @@
   {
     "name": "Jobboardly",
     "kind": "job_board",
-    "implementation_status": "NOT_STARTED",
-    "evidence_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
+    "evidence_status": "FAILED",
     "risk": "HIGH",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
-    "failure_reason": null,
+    "examples": [
+      {
+        "provider": "Jobboardly",
+        "url": "https://recruiter-jobs.jobboardly.com/jobs",
+        "at": "2026-11-06T03:55:02.478603+00:00",
+        "revision": "4f17e286b5e80c0e7f7c18179e6555d3f4fb0a59",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "ad64435c21c47329720b951eaa7a81949bb26bf5fc2ea27566a0666c121aee11",
+        "count": 31,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "20af7f498e16f6d178f7134f427cd2fcadcb2a8569dd9dd348fb4b93fba2d169",
+        "finished_at": "2026-11-06T03:56:00.440888+00:00"
+      },
+      {
+        "provider": "Jobboardly",
+        "url": "https://pennsylvania-communications.jobboardly.com/jobs",
+        "at": "2026-11-06T03:56:00.942162+00:00",
+        "revision": "4f17e286b5e80c0e7f7c18179e6555d3f4fb0a59",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "ad64435c21c47329720b951eaa7a81949bb26bf5fc2ea27566a0666c121aee11",
+        "count": 0,
+        "status": "FAILED",
+        "complete": false,
+        "error": "ValueError: JobBoardly exceeds 400-detail budget; snapshot incomplete",
+        "finished_at": "2026-11-06T03:56:21.828213+00:00"
+      }
+    ],
+    "last_run_at": "2026-11-06T03:56:21.828213+00:00",
+    "extraction_count": 31,
+    "failure_reason": "ValueError: JobBoardly exceeds 400-detail budget; snapshot incomplete",
     "limitations": [
-      "Connector not implemented"
+      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
+      "Hosted jobboardly.com HTML listings only; custom-domain registration and redirecting hosted aliases are unsupported",
+      "Explicit sequential Next controls, range counters, unique links and successful JobPosting/apply details are required",
+      "Maximum 400 details/100 pages; empty pages fail closed rather than proving closures",
+      "JSON-LD preserves salary, employment type, locations and datePosted; explicit visible workplace labels are preserved",
+      "Email-only applications retain the mailto destination in raw, use the original HTTPS posting as the application entry point, and carry application_by_email",
+      "Completeness follows the public pagination contract plus first-page reconfirmation, not a transactional upstream snapshot"
     ]
   },
   {

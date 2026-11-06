@@ -1,0 +1,64 @@
+[
+  {
+    "platform": "Niceboard",
+    "url": "https://avajobboard.niceboard.co",
+    "checked_at": "2026-11-06T03:22:11.519138+00:00",
+    "connector_implemented": false,
+    "live_coverage": false,
+    "checks": [
+      {
+        "url": "https://avajobboard.niceboard.co/",
+        "status": "READ_PUBLIC_RESPONSE",
+        "bytes": 135253,
+        "sha256": "abb14e9a9b96b60d16af3c578bb1f6da96f34a2c309275e10ff50f66dafd9904"
+      },
+      {
+        "url": "https://avajobboard.niceboard.co/api/jobs",
+        "status": "REJECTED_OR_FAILED",
+        "error": "ValueError: Career page robots policy disallows this request"
+      }
+    ]
+  },
+  {
+    "platform": "Niceboard",
+    "url": "https://jobsincarbon.niceboard.co",
+    "checked_at": "2026-11-06T03:22:14.407845+00:00",
+    "connector_implemented": false,
+    "live_coverage": false,
+    "checks": [
+      {
+        "url": "https://jobsincarbon.niceboard.co/",
+        "status": "READ_PUBLIC_RESPONSE",
+        "bytes": 2379,
+        "sha256": "945191d4747c27a1a0c0c18ba52bb888e476c020426ed71164994e190d2c6300"
+      },
+      {
+        "url": "https://jobsincarbon.niceboard.co/api/jobs",
+        "status": "READ_PUBLIC_RESPONSE",
+        "bytes": 38,
+        "sha256": "eafa0aad127639fb7670de55cd0270333c3ea0305060c15aca95b010276fec74",
+        "response_summary": "{\"success\":false,\"error\":\"validation\"}"
+      }
+    ]
+  },
+  {
+    "platform": "Niceboard",
+    "url": "https://probonoaustralia.niceboard.co",
+    "checked_at": "2026-11-06T03:22:16.886699+00:00",
+    "connector_implemented": false,
+    "live_coverage": false,
+    "checks": [
+      {
+        "url": "https://probonoaustralia.niceboard.co/",
+        "status": "READ_PUBLIC_RESPONSE",
+        "bytes": 136700,
+        "sha256": "7b24f937547058696b2e2c1a2afb18b73666f1bb2d90092e86da0ab98a90b452"
+      },
+      {
+        "url": "https://probonoaustralia.niceboard.co/api/jobs",
+        "status": "REJECTED_OR_FAILED",
+        "error": "ValueError: Career page robots policy disallows this request"
+      }
+    ]
+  }
+]
