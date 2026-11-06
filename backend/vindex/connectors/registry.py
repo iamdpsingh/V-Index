@@ -8,6 +8,9 @@ from vindex.connectors.applicantpro import ApplicantProConnector
 from vindex.connectors.bamboohr import BambooHRConnector
 from vindex.connectors.breezy import BreezyConnector
 from vindex.connectors.careerplug import CareerPlugConnector
+from vindex.connectors.comeet import TENANT as COMEET_TENANT
+from vindex.connectors.comeet import UID as COMEET_UID
+from vindex.connectors.comeet import ComeetConnector
 from vindex.connectors.freshteam import FreshteamConnector
 from vindex.connectors.gohire import SLUG as GOHIRE_SLUG
 from vindex.connectors.gohire import GoHireConnector
@@ -64,6 +67,11 @@ def detect(url: str) -> tuple[str, str]:
         match = re.fullmatch(rf"({TENANT})\.{re.escape(suffix)}", p.hostname or "")
         if match:
             return provider, match[1]
+    if p.hostname in {"www.comeet.com", "comeet.com"}:
+        matched = re.fullmatch(rf"/jobs/({COMEET_TENANT})/({COMEET_UID})/?", p.path)
+        if not matched or p.query or p.fragment:
+            raise ValueError("Expected an unfiltered native Comeet company career URL")
+        return "comeet", matched[1] + "~" + matched[2].upper()
     zoho = re.fullmatch(rf"({TENANT})\.zohorecruit\.(com|eu|in)", p.hostname or "")
     if zoho:
         if p.path.rstrip("/") != "/jobs/Careers" or p.query or p.fragment:
@@ -177,13 +185,15 @@ def detect(url: str) -> tuple[str, str]:
         return detect_original(url)
     except ValueError as error:
         raise ValueError(
-            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire, HiringThing, Freshteam, Trakstar, Rippling, Kula.ai, CareerPlug, TriNet, HireBridge, JOIN.com, Hireology, Paylocity and Zoho Recruit"
+            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire, HiringThing, Freshteam, Trakstar, Rippling, Kula.ai, CareerPlug, TriNet, HireBridge, JOIN.com, Hireology, Paylocity, Zoho Recruit and Comeet"
         ) from error
 
 
 def create_connector(
     provider: str, slug: str, company: str, client: httpx.AsyncClient
 ) -> Connector:
+    if provider == "comeet":
+        return ComeetConnector(provider, slug, company, client)
     if provider in {"zoho-com", "zoho-eu", "zoho-in"}:
         return ZohoConnector(provider, slug, company, client)
     if provider == "paylocity":

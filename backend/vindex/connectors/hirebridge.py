@@ -106,8 +106,9 @@ class HireBridgeConnector:
     def parse(self, payload: Any) -> list[JobInput]:
         identifier, listing, board, body = payload
         soup = document(body)
-        titles = soup.select("h1")
-        locations = soup.select("h2")
+        description_ids = re.compile(r"_(?:html_)?(?:jobdesc|skilldesc)$")
+        titles = [h for h in soup.select("h1") if h.find_parent(id=description_ids) is None]
+        locations = [h for h in soup.select("h2") if h.find_parent(id=description_ids) is None]
         form = soup.select_one("form#aspnetForm")
         applies = []
         for anchor in soup.select("a[href]"):
@@ -131,7 +132,9 @@ class HireBridgeConnector:
             or not applies
             or len(set(applies)) != 1
         ):
-            raise ValueError("HireBridge detail/customer/location/application identity mismatch")
+            raise ValueError(
+                f"HireBridge job {identifier} detail/customer/location/application identity mismatch"
+            )
         sections = {}
         for suffix in ("jobdesc", "skilldesc"):
             elements = soup.select(f'span[id$="_{suffix}"]')

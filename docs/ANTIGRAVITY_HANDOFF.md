@@ -1,5 +1,7 @@
 # Antigravity frontend handoff
 
+**Latest owner update, November 6: frontend is ON HOLD.** Continue backend/coverage to 45 total live-verified platforms; keep commits local and do not push until that target is complete. This supersedes earlier 35-target/resume notes below. Preserve the frontend worktree. Future design resource: https://github.com/nutlope/hallmark; also AnimasterLib, Skiper UI, Vengence UI, Scrolltide, Navbar/CTA galleries, Footer Design, Refero Styles, Superhero, 3D icons and getlayers.ai. These are research references for later, not approved assets already incorporated.
+
 **Superseding owner update, November 6:** Codex takes over frontend ownership after today's 35-total-platform coverage target. Preserve existing Antigravity commits/worktree; the design, API and test requirements below remain applicable reference material. Earlier assignment/resume instructions below are historical and no longer assign work to Antigravity.
 
 

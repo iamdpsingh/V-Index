@@ -14,6 +14,8 @@ from vindex.connectors.registry import create_connector
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
+    ("Comeet", "comeet", "oriient~EA.005", "Oriient", "https://www.comeet.com/jobs/oriient/EA.005"),
+    ("Comeet", "comeet", "webbing~46.00E", "Webbing", "https://www.comeet.com/jobs/webbing/46.00E"),
     ("Zoho Recruit", "zoho-eu", "mywork", "MyWork", "https://mywork.zohorecruit.eu/jobs/Careers"),
     (
         "Zoho Recruit",
@@ -406,6 +408,14 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "Comeet": [
+                                "Native www.comeet.com company public COMPANY_DATA/COMPANY_POSITIONS_DATA plus documented Careers API 2.0 details only; no employee/candidate/account APIs",
+                                "Only listed is_internal=false positions with matching company UID/name/slug and scoped native URLs; at most 200 unique mandatory details, no empty/partial reconciliation",
+                                "Browser-published Careers read token used only in memory for listed-position requests; never persisted in evidence or exception URLs; no application/questionnaires requested or retained",
+                                "Every mandatory detail must match advertised UID/title/company/lifecycle/location/workplace/source links; optional requisition ID enrichment retained separately; final full roster reconfirmed",
+                                "All ordered full description/requirements sections retained; explicit employment/workplace labels and salary sections preserved; time_updated is not substituted for absent publication date",
+                                "No independent total or transactional upstream snapshot; source full public array defines supported completeness; known documented vendor sandbox rejected",
+                            ],
                             "Zoho Recruit": [
                                 "Native tenant.zohorecruit.com/eu/in /jobs/Careers embedded-record template only; legacy/custom/employee portals and renamed-brand title mismatches unsupported",
                                 "Complete public embedded collection up to 400 records; unique IDs and boolean publication/lock/retention flags required; full active and retained-inactive metadata reconfirmed",

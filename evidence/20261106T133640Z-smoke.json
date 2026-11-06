@@ -1,0 +1,60 @@
+[
+  {
+    "provider": "Zoho Recruit",
+    "url": "https://mywork.zohorecruit.eu/jobs/Careers",
+    "at": "2026-11-06T13:27:13.936378+00:00",
+    "revision": "90ef6a6c56c8f7c335afc21976ea87806ed36801",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "d8f53760349ffb08fcb5b5827a4fa74029e79079ff985c32ebbcbbe67d5ab108",
+    "count": 11,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "4ddbe3c975e8640fa66d8196f89cf363f7205c300a1eb2d4b941c15be9afb7d0",
+    "finished_at": "2026-11-06T13:28:19.992524+00:00"
+  },
+  {
+    "provider": "Zoho Recruit",
+    "url": "https://global.zohorecruit.com/jobs/Careers",
+    "at": "2026-11-06T13:28:20.493869+00:00",
+    "revision": "90ef6a6c56c8f7c335afc21976ea87806ed36801",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "d8f53760349ffb08fcb5b5827a4fa74029e79079ff985c32ebbcbbe67d5ab108",
+    "count": 36,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "a6f216679c7e4a6e0bba4a370f7189620fe04a88197e811cb22a276536fcc382",
+    "finished_at": "2026-11-06T13:33:08.086608+00:00"
+  },
+  {
+    "provider": "HireBridge",
+    "url": "https://recruit.hirebridge.com/v3/Jobs/list.aspx?cid=8484",
+    "at": "2026-11-06T13:33:08.588006+00:00",
+    "revision": "90ef6a6c56c8f7c335afc21976ea87806ed36801",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "d8f53760349ffb08fcb5b5827a4fa74029e79079ff985c32ebbcbbe67d5ab108",
+    "count": 14,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "37762b078b21da2a1a454f25b4cf8d4d6367d0caf8cc2c77b34d1a5f65c23a2b",
+    "finished_at": "2026-11-06T13:35:11.947140+00:00"
+  },
+  {
+    "provider": "HireBridge",
+    "url": "https://recruit.hirebridge.com/v3/Jobs/list.aspx?cid=8427",
+    "at": "2026-11-06T13:35:12.448333+00:00",
+    "revision": "90ef6a6c56c8f7c335afc21976ea87806ed36801",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "d8f53760349ffb08fcb5b5827a4fa74029e79079ff985c32ebbcbbe67d5ab108",
+    "count": 0,
+    "status": "FAILED",
+    "complete": false,
+    "error": "ValueError: HireBridge detail/customer/location/application identity mismatch",
+    "finished_at": "2026-11-06T13:36:40.452312+00:00"
+  }
+]

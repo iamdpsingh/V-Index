@@ -591,33 +591,35 @@
       {
         "provider": "HireBridge",
         "url": "https://recruit.hirebridge.com/v3/Jobs/list.aspx?cid=8484",
-        "at": "2026-11-06T12:50:59.669071+00:00",
-        "revision": "d135cc66b9cde057f79bbcbaf21bdb47aeb6336e",
+        "at": "2026-11-06T13:33:08.588006+00:00",
+        "revision": "90ef6a6c56c8f7c335afc21976ea87806ed36801",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "a62c6f0afc5c598fddb179ce0fd3d7ce4544410000061db78fb6b74a59cdd322",
-        "count": 0,
-        "status": "FAILED",
-        "complete": false,
-        "error": "ValueError: Retry-After exceeds inline retry budget",
-        "finished_at": "2026-11-06T12:51:13.843299+00:00"
+        "code_sha256": "d8f53760349ffb08fcb5b5827a4fa74029e79079ff985c32ebbcbbe67d5ab108",
+        "count": 14,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "37762b078b21da2a1a454f25b4cf8d4d6367d0caf8cc2c77b34d1a5f65c23a2b",
+        "finished_at": "2026-11-06T13:35:11.947140+00:00"
       },
       {
         "provider": "HireBridge",
         "url": "https://recruit.hirebridge.com/v3/Jobs/list.aspx?cid=8427",
-        "at": "2026-11-06T12:51:14.344664+00:00",
-        "revision": "d135cc66b9cde057f79bbcbaf21bdb47aeb6336e",
+        "at": "2026-11-06T13:35:12.448333+00:00",
+        "revision": "90ef6a6c56c8f7c335afc21976ea87806ed36801",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "a62c6f0afc5c598fddb179ce0fd3d7ce4544410000061db78fb6b74a59cdd322",
+        "code_sha256": "d8f53760349ffb08fcb5b5827a4fa74029e79079ff985c32ebbcbbe67d5ab108",
         "count": 0,
         "status": "FAILED",
         "complete": false,
-        "error": "ValueError: Retry-After exceeds inline retry budget",
-        "finished_at": "2026-11-06T12:51:15.772550+00:00"
+        "error": "ValueError: HireBridge detail/customer/location/application identity mismatch",
+        "finished_at": "2026-11-06T13:36:40.452312+00:00"
       }
     ],
-    "last_run_at": "2026-11-06T12:51:15.772550+00:00",
-    "extraction_count": 0,
-    "failure_reason": "ValueError: Retry-After exceeds inline retry budget; ValueError: Retry-After exceeds inline retry budget",
+    "last_run_at": "2026-11-06T13:36:40.452312+00:00",
+    "extraction_count": 14,
+    "failure_reason": "ValueError: HireBridge detail/customer/location/application identity mismatch",
     "limitations": [
       "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
       "Native recruit.hirebridge.com/v3/Jobs/list.aspx?cid={numeric customer} location-counted public template only; alternate/custom/filtered variants unsupported",
@@ -2026,16 +2028,54 @@
   {
     "name": "Zoho Recruit",
     "kind": "ats",
-    "implementation_status": "NOT_STARTED",
-    "evidence_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
+    "evidence_status": "LIVE_VERIFIED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
+    "examples": [
+      {
+        "provider": "Zoho Recruit",
+        "url": "https://mywork.zohorecruit.eu/jobs/Careers",
+        "at": "2026-11-06T13:27:13.936378+00:00",
+        "revision": "90ef6a6c56c8f7c335afc21976ea87806ed36801",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "d8f53760349ffb08fcb5b5827a4fa74029e79079ff985c32ebbcbbe67d5ab108",
+        "count": 11,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "4ddbe3c975e8640fa66d8196f89cf363f7205c300a1eb2d4b941c15be9afb7d0",
+        "finished_at": "2026-11-06T13:28:19.992524+00:00"
+      },
+      {
+        "provider": "Zoho Recruit",
+        "url": "https://global.zohorecruit.com/jobs/Careers",
+        "at": "2026-11-06T13:28:20.493869+00:00",
+        "revision": "90ef6a6c56c8f7c335afc21976ea87806ed36801",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "d8f53760349ffb08fcb5b5827a4fa74029e79079ff985c32ebbcbbe67d5ab108",
+        "count": 36,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "a6f216679c7e4a6e0bba4a370f7189620fe04a88197e811cb22a276536fcc382",
+        "finished_at": "2026-11-06T13:33:08.086608+00:00"
+      }
+    ],
+    "last_run_at": "2026-11-06T13:33:08.086608+00:00",
+    "extraction_count": 47,
     "failure_reason": null,
     "limitations": [
-      "Connector not implemented"
+      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
+      "Native tenant.zohorecruit.com/eu/in /jobs/Careers embedded-record template only; legacy/custom/employee portals and renamed-brand title mismatches unsupported",
+      "Complete public embedded collection up to 400 records; unique IDs and boolean publication/lock/retention flags required; full active and retained-inactive metadata reconfirmed",
+      "Zoho explicitly permits closed/unpublished jobs to remain on career sites: unpublished retained records stay out of active jobs; Keep_on_Career_Site is a retention preference, not an active-job requirement",
+      "Every active job requires matching native detail ID/title/employer/org ID/canonical URL, Publish=true and Is_Locked=false; no failed or partial snapshot reconciled",
+      "Decode only public JSON constants and ESAPI quoted literals without executing JavaScript; no CDN scripts, forms, employee APIs, CSRF values or candidate configuration used/retained",
+      "Full actual description, supplied salary text/currency, employment, locations and Date_Opened preserved; native detail is the application entry; empty/ambiguous states fail closed",
+      "No independent source total/transactional snapshot; completeness follows the full public initial record collection and final reconfirmation, not a production freshness claim"
     ]
   },
   {

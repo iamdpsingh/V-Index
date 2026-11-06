@@ -2,7 +2,7 @@
 
 ## Current coverage-first status — November 6
 
-27/78 platforms have point-in-time non-empty complete connector runs across two independent supported sites. Twenty-seven connectors are implemented and 51 remain unimplemented. Jobboardly's earlier large-board blocker is resolved for feed-enabled hosted boards. Codex prioritizes today's 35-total target; 8 additional verifications remain. Preserve existing Antigravity work before frontend takeover. Production readiness and full acquisition completion remain unproven.
+33/78 platforms have complete non-empty point-in-time runs across two independent supported sites. Today's target is now 45; 12 more are required at this update. Frontend is ON HOLD; keep new commits local and do not push until 45 is verified. HireBridge remains partial pending corrected full employer runs. All production/acquisition gates remain open.
 
 ## First slice
 - [x] Inspect empty folder/remote; initialize canonical main without replacing history.

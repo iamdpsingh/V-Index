@@ -150,3 +150,13 @@ def test_upstream_long_cooldown_is_recorded_without_retrying_early(monkeypatch):
     with pytest.raises(ValueError, match="Retry-After=900"):
         asyncio.run(discover())
     assert calls == ["/robots.txt", "/v3/Jobs/list.aspx"]
+
+
+def test_employer_description_headings_are_not_native_location_headers():
+    body = detail().replace(
+        "<p>Build systems</p>",
+        "<h1>Our team</h1><h2>Job Overview</h2><p>Build systems</p><h2>Qualifications</h2>",
+    )
+    batch = run(body=body)
+    assert batch.complete and batch.jobs[0].location == "Remote - UK"
+    assert "Qualifications" in batch.jobs[0].description
