@@ -14,7 +14,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | BrassRing | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | Breezy HR | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 81 | 2026-11-06T03:16:14.203649+00:00 | https://vald.breezy.hr (75; LIVE_VERIFIED); https://subscribe.breezy.hr (6; LIVE_VERIFIED)  |
 | CareerPlug | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 10 | 2026-11-06T12:34:45.510649+00:00 | https://app.careerplug.com/accounts/576036 (2; LIVE_VERIFIED); https://app.careerplug.com/accounts/579908 (8; LIVE_VERIFIED)  |
-| Comeet | ats | IMPLEMENTED | FAILED | MEDIUM | 7 | 2026-11-06T17:07:12.585020+00:00 | https://www.comeet.com/jobs/oriient/EA.005 (7; LIVE_VERIFIED); https://www.comeet.com/jobs/webbing/46.00E (0; FAILED) ValueError: Malformed or duplicate Comeet detail section |
+| Comeet | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 33 | 2026-11-06T17:26:30.311458+00:00 | https://www.comeet.com/jobs/oriient/EA.005 (7; LIVE_VERIFIED); https://www.comeet.com/jobs/webbing/46.00E (26; LIVE_VERIFIED)  |
 | CSOD | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | Dayforce | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | Deel | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
@@ -60,7 +60,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | Trakstar | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 14 | 2026-11-06T12:16:37.653365+00:00 | https://bsglaw.hire.trakstar.com/ (3; LIVE_VERIFIED); https://worksuites.hire.trakstar.com/ (11; LIVE_VERIFIED)  |
 | TriNet | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 18 | 2026-11-06T12:45:46.787947+00:00 | https://app.trinethire.com/companies/69740-ark-investment-management/jobs (6; LIVE_VERIFIED); https://app.trinethire.com/companies/665804-stridepath-consulting/jobs (12; LIVE_VERIFIED)  |
 | UltiPro | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
-| WeRecruit | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
+| WeRecruit | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 19 | 2026-11-06T17:24:52.410926+00:00 | https://careers.werecruit.io/fr/epec (1; LIVE_VERIFIED); https://careers.werecruit.io/fr/ctlog-international (18; LIVE_VERIFIED)  |
 | Workable | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 4 | 2026-11-06T03:14:41.352483+00:00 | https://apply.workable.com/careers/ (1; LIVE_VERIFIED); https://apply.workable.com/learnworlds/ (3; LIVE_VERIFIED)  |
 | Workday | ats | IMPLEMENTED | LIVE_VERIFIED | HIGH | 43 | 2026-11-06T01:43:52.166289+00:00 | https://imf.wd5.myworkdayjobs.com/IMF (14; LIVE_VERIFIED); https://gatesfoundation.wd1.myworkdayjobs.com/Gates (29; LIVE_VERIFIED)  |
 | Zoho Recruit | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 47 | 2026-11-06T13:33:08.086608+00:00 | https://mywork.zohorecruit.eu/jobs/Careers (11; LIVE_VERIFIED); https://global.zohorecruit.com/jobs/Careers (36; LIVE_VERIFIED)  |

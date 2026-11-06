@@ -14,6 +14,14 @@ from vindex.connectors.registry import create_connector
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
+    ("FirstStage", "firststage", "firststage", "First", "https://firststage.firststage.co/jobs"),
+    (
+        "FirstStage",
+        "firststage",
+        "quantumbase",
+        "Quantum Base",
+        "https://quantumbase.firststage.co/jobs",
+    ),
     ("WeRecruit", "werecruit", "epec", "EPEC", "https://careers.werecruit.io/fr/epec"),
     (
         "WeRecruit",
@@ -416,6 +424,14 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "FirstStage": [
+                                "First/FirstStage native tenant.firststage.co/jobs SSR unfiltered list template only; custom/alternate templates unsupported",
+                                "Require explicit unique-job total equal native IDs; identical multi-location group copies deduplicated only within this source; conflicting copies rejected; maximum 400 mandatory details",
+                                "Every detail must match native title, company, location and advertised labels, JobPosting directApply URL, native metadata and public application upload controls",
+                                "Complete HTML description must agree with structured JobPosting; salary display text, original structured pay/incentives, datePosted and each native location preserved",
+                                "No application uploaded/submitted, scripts executed, or account/candidate data retained; final full board reconfirmed; failed/partial snapshots never reconcile",
+                                "Bounded point-in-time coverage; no transactional upstream snapshot or production freshness guarantee",
+                            ],
                             "WeRecruit": [
                                 "Native careers.werecruit.io French tenant full public site-map template only; empty/alternate/custom templates unsupported",
                                 "All unique native offer IDs, full description/profile/benefits and mandatory matching public JobPosting/application controls required; maximum 400 jobs",

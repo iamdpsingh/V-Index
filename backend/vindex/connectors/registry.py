@@ -11,6 +11,7 @@ from vindex.connectors.careerplug import CareerPlugConnector
 from vindex.connectors.comeet import TENANT as COMEET_TENANT
 from vindex.connectors.comeet import UID as COMEET_UID
 from vindex.connectors.comeet import ComeetConnector
+from vindex.connectors.firststage import FirstStageConnector
 from vindex.connectors.freshteam import FreshteamConnector
 from vindex.connectors.gohire import SLUG as GOHIRE_SLUG
 from vindex.connectors.gohire import GoHireConnector
@@ -68,6 +69,11 @@ def detect(url: str) -> tuple[str, str]:
         match = re.fullmatch(rf"({TENANT})\.{re.escape(suffix)}", p.hostname or "")
         if match:
             return provider, match[1]
+    firststage = re.fullmatch(rf"({TENANT})\.firststage\.co", p.hostname or "")
+    if firststage:
+        if p.path.rstrip("/") != "/jobs" or p.query or p.fragment:
+            raise ValueError("Expected an unfiltered native FirstStage /jobs URL")
+        return "firststage", firststage[1]
     if p.hostname == "careers.werecruit.io":
         matched = re.fullmatch(rf"/fr/({TENANT})(?:/(?:offers|offres|site-map))?/?", p.path)
         if not matched or p.query or p.fragment:
@@ -191,13 +197,15 @@ def detect(url: str) -> tuple[str, str]:
         return detect_original(url)
     except ValueError as error:
         raise ValueError(
-            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire, HiringThing, Freshteam, Trakstar, Rippling, Kula.ai, CareerPlug, TriNet, HireBridge, JOIN.com, Hireology, Paylocity, Zoho Recruit, Comeet and WeRecruit"
+            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire, HiringThing, Freshteam, Trakstar, Rippling, Kula.ai, CareerPlug, TriNet, HireBridge, JOIN.com, Hireology, Paylocity, Zoho Recruit, Comeet, WeRecruit and FirstStage"
         ) from error
 
 
 def create_connector(
     provider: str, slug: str, company: str, client: httpx.AsyncClient
 ) -> Connector:
+    if provider == "firststage":
+        return FirstStageConnector(provider, slug, company, client)
     if provider == "werecruit":
         return WeRecruitConnector(provider, slug, company, client)
     if provider == "comeet":

@@ -302,42 +302,46 @@
     "name": "Comeet",
     "kind": "ats",
     "implementation_status": "IMPLEMENTED",
-    "evidence_status": "FAILED",
+    "evidence_status": "LIVE_VERIFIED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
     "examples": [
       {
         "provider": "Comeet",
         "url": "https://www.comeet.com/jobs/oriient/EA.005",
-        "at": "2026-11-06T17:06:31.364668+00:00",
-        "revision": "42162014fa904291aa49e60d10a10629cdf6712e",
+        "at": "2026-11-06T17:24:52.912265+00:00",
+        "revision": "e23ec98b06a745c191b82d67696a5e80d5ed32f9",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "b0329102f555fdb3c77032d25c49594abdc50aa2ac0b6f0e04ab6b7d97a987d6",
+        "code_sha256": "ac485aefefb2bdd4996d916f94b8dc209379bfad6eb29051f8181333942e80b2",
         "count": 7,
         "status": "LIVE_VERIFIED",
         "complete": true,
         "error": null,
         "quality_flag_counts": {},
         "payload_sha256": "711d3cc064061de2f03e8e0e6fc64ab427ce50d295ea6b92d35167b807271f79",
-        "finished_at": "2026-11-06T17:06:57.003915+00:00"
+        "finished_at": "2026-11-06T17:25:18.679178+00:00"
       },
       {
         "provider": "Comeet",
         "url": "https://www.comeet.com/jobs/webbing/46.00E",
-        "at": "2026-11-06T17:06:57.505208+00:00",
-        "revision": "42162014fa904291aa49e60d10a10629cdf6712e",
+        "at": "2026-11-06T17:25:19.180188+00:00",
+        "revision": "e23ec98b06a745c191b82d67696a5e80d5ed32f9",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "b0329102f555fdb3c77032d25c49594abdc50aa2ac0b6f0e04ab6b7d97a987d6",
-        "count": 0,
-        "status": "FAILED",
-        "complete": false,
-        "error": "ValueError: Malformed or duplicate Comeet detail section",
-        "finished_at": "2026-11-06T17:07:12.585020+00:00"
+        "code_sha256": "ac485aefefb2bdd4996d916f94b8dc209379bfad6eb29051f8181333942e80b2",
+        "count": 26,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {
+          "description_section_missing": 3
+        },
+        "payload_sha256": "d59715ceee8e4a8f234544c9b6800a9ff42adca5c932ae47b287063da63637f5",
+        "finished_at": "2026-11-06T17:26:30.311458+00:00"
       }
     ],
-    "last_run_at": "2026-11-06T17:07:12.585020+00:00",
-    "extraction_count": 7,
-    "failure_reason": "ValueError: Malformed or duplicate Comeet detail section",
+    "last_run_at": "2026-11-06T17:26:30.311458+00:00",
+    "extraction_count": 33,
+    "failure_reason": null,
     "limitations": [
       "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
       "Native www.comeet.com company public COMPANY_DATA/COMPANY_POSITIONS_DATA plus documented Careers API 2.0 details only; no employee/candidate/account APIs",
@@ -1943,16 +1947,53 @@
   {
     "name": "WeRecruit",
     "kind": "ats",
-    "implementation_status": "NOT_STARTED",
-    "evidence_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
+    "evidence_status": "LIVE_VERIFIED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
+    "examples": [
+      {
+        "provider": "WeRecruit",
+        "url": "https://careers.werecruit.io/fr/epec",
+        "at": "2026-11-06T17:24:33.188068+00:00",
+        "revision": "e23ec98b06a745c191b82d67696a5e80d5ed32f9",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "ac485aefefb2bdd4996d916f94b8dc209379bfad6eb29051f8181333942e80b2",
+        "count": 1,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "963fdd2ea69c09f5e3e5649beadc3151447ea565551803c075d8edeac65f41bc",
+        "finished_at": "2026-11-06T17:24:36.942997+00:00"
+      },
+      {
+        "provider": "WeRecruit",
+        "url": "https://careers.werecruit.io/fr/ctlog-international",
+        "at": "2026-11-06T17:24:37.444164+00:00",
+        "revision": "e23ec98b06a745c191b82d67696a5e80d5ed32f9",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "ac485aefefb2bdd4996d916f94b8dc209379bfad6eb29051f8181333942e80b2",
+        "count": 18,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "9949d7e90caa091c17ecb6c16836a6622faed65d653ce0e7888bb17b96064bf9",
+        "finished_at": "2026-11-06T17:24:52.410926+00:00"
+      }
+    ],
+    "last_run_at": "2026-11-06T17:24:52.410926+00:00",
+    "extraction_count": 19,
     "failure_reason": null,
     "limitations": [
-      "Connector not implemented"
+      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
+      "Native careers.werecruit.io French tenant full public site-map template only; empty/alternate/custom templates unsupported",
+      "All unique native offer IDs, full description/profile/benefits and mandatory matching public JobPosting/application controls required; maximum 400 jobs",
+      "Explicit spontaneous-application pools retained as excluded source metadata; navigation redirects never followed; no application submitted",
+      "Full sitemap and tenant identity reconfirmed after every mandatory detail; failed/changed/partial requests abort without closures",
+      "Preserve supplied salary, employment, original publication, location and explicit workplace metadata; unknown values remain unknown",
+      "No independent total or atomic source snapshot; bounded point-in-time evidence does not establish production freshness"
     ]
   },
   {
