@@ -36,8 +36,21 @@ def get_resume(request: Request):
         return metadata(saved)
 
 
-@router.put("/resume", response_model=ResumeOut, dependencies=[Depends(require_origin)])
-async def upload_resume(request: Request, x_filename: str | None = Header(default=None)):
+@router.put(
+    "/resume",
+    response_model=ResumeOut,
+    dependencies=[Depends(require_origin)],
+    openapi_extra={
+        "requestBody": {
+            "required": True,
+            "description": "Raw readable PDF, DOCX or UTF-8 TXT bytes; maximum 5 MiB. X-Filename is percent-encoded UTF-8.",
+            "content": {
+                "application/octet-stream": {"schema": {"type": "string", "format": "binary"}}
+            },
+        }
+    },
+)
+async def upload_resume(request: Request, x_filename: str = Header()):
     if x_filename and len(x_filename) > 1500:
         raise HTTPException(422, "Filename too long")
     try:

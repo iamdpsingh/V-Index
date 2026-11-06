@@ -42,3 +42,12 @@
 - Extend enumeration beyond the current 400-detail budget and investigate safe completeness above the observed reported-total ceiling. No partial enumeration may close jobs.
 - Support myworkdaysite.com and verified custom-domain entry points after strict URL/egress controls.
 - Continue testing independent tenants/locales and source schema variations; current evidence is IMF and Gates only.
+
+## Owner expansion — November 7 internal target
+- [x] Add accounts, hashed/expiring sessions, private saved profiles and lifecycle tests.
+- [x] Add owner-only encrypted resume storage, bounded document extraction, replacement, download and deletion.
+- [x] Add open-job recommendations from explicit professional role/skill signals and optional resume keywords, with reasons and candidate-scope disclosure.
+- [x] Exercise private flows through the real Docker web proxy in CI.
+- [ ] Antigravity signup/login/profile/resume/recommendation screens and browser tests (owner explicitly retained frontend ownership there).
+- [ ] Email ownership verification, identity recovery, parser isolation/abuse testing and hosted HTTPS release checks.
+- [ ] Remaining 71 provider implementations/live verification; bounded Workday expansion. These remain acquisition acceptance gates despite the new feature work.

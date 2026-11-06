@@ -178,3 +178,28 @@ def test_real_redis_rate_budget_and_resume_parser_lease(private_client, monkeypa
     with pytest.raises(HTTPException) as error:
         security.rate_limit(bucket, 2)
     assert error.value.status_code == 429
+
+
+def test_openapi_declares_raw_upload_and_filename_contract():
+    operation = api.app.openapi()["paths"]["/api/v1/me/resume"]["put"]
+    assert (
+        operation["requestBody"]["content"]["application/octet-stream"]["schema"]["format"]
+        == "binary"
+    )
+    assert any(p["name"] == "x-filename" and p["required"] for p in operation["parameters"])
+
+
+def test_chunked_private_upload_and_json_limits(private_client):
+    register(private_client)
+    too_large = private_client.put(
+        "/api/v1/me/resume",
+        content=iter([b"x" * (5 * 1024 * 1024), b"x"]),
+        headers={"X-Filename": "resume.txt"},
+    )
+    assert too_large.status_code == 413
+    json_too_large = private_client.post(
+        "/api/v1/auth/login",
+        content=iter([b"x" * 65536, b"x"]),
+        headers={"Content-Type": "application/json"},
+    )
+    assert json_too_large.status_code == 413

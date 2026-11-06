@@ -47,3 +47,9 @@ Greenhouse, Lever (including EU endpoint support), Ashby, SmartRecruiters, Perso
 Set `TEST_DATABASE_URL` to a PostgreSQL database where the test user may create schemas, and `TEST_REDIS_URL` to a dedicated test Redis database (for example database 15). Run `uv run pytest`. Each SQL test creates, migrates and removes only its own randomly named schema; existing tables are not modified. Without these variables, service-dependent cases are explicitly skipped. CI provisions PostgreSQL and Redis. Tests do not fetch live jobs; use the separate smoke harness for actual provider evidence.
 
 Workday currently rejects boards above 400 jobs and reported totals at/above its observed 2,000 ceiling. It supports hosted myworkdayjobs.com URLs, not every Workday URL variant. These restrictions are visible failures rather than partial successful snapshots. Recruitee uses its XML feed to avoid relying on unauthenticated JSON calls that are scheduled to require tokens in February 2027. See docs/CONNECTOR_CONTRACT.md for exact scope.
+
+## Optional private job-seeker features
+
+The backend now includes signup/login, saved profiles, encrypted saved PDF/DOCX/TXT resumes and explainable job recommendations. These APIs are separate from operator ADMIN_TOKEN access. Account routes require an explicit PUBLIC_WEB_ORIGIN; registration is disabled by default and resume operations require a privately generated RESUME_ENCRYPTION_KEY. Apply migrations before startup. Read [the private API contract](docs/ACCOUNTS_API.md) for configuration, limits and remaining production gates.
+
+The owner retained the frontend with Antigravity. Its account/profile/upload/recommendation screens and browser tests are pending; [the concrete frontend handoff](docs/ANTIGRAVITY_ACCOUNTS_HANDOFF.md) lists every route, payload and required flow. Do not treat working backend APIs as a completed public account release.

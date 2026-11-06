@@ -5,6 +5,409 @@
     "version": "0.1.0"
   },
   "paths": {
+    "/api/v1/auth/register": {
+      "post": {
+        "tags": [
+          "Private accounts"
+        ],
+        "summary": "Register",
+        "operationId": "register_api_v1_auth_register_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Credentials"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/login": {
+      "post": {
+        "tags": [
+          "Private accounts"
+        ],
+        "summary": "Login",
+        "operationId": "login_api_v1_auth_login_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Credentials"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/logout": {
+      "post": {
+        "tags": [
+          "Private accounts"
+        ],
+        "summary": "Logout",
+        "operationId": "logout_api_v1_auth_logout_post",
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          }
+        }
+      }
+    },
+    "/api/v1/me": {
+      "get": {
+        "tags": [
+          "Private accounts"
+        ],
+        "summary": "Me",
+        "operationId": "me_api_v1_me_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountOut"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Private accounts"
+        ],
+        "summary": "Delete Account",
+        "operationId": "delete_account_api_v1_me_delete",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PasswordConfirmation"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/me/profile": {
+      "get": {
+        "tags": [
+          "Private accounts"
+        ],
+        "summary": "Profile",
+        "operationId": "profile_api_v1_me_profile_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileOut"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Private accounts"
+        ],
+        "summary": "Save Profile",
+        "operationId": "save_profile_api_v1_me_profile_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProfileInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/me/password": {
+      "post": {
+        "tags": [
+          "Private accounts"
+        ],
+        "summary": "Change Password",
+        "operationId": "change_password_api_v1_me_password_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PasswordChange"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/me/recommendations": {
+      "get": {
+        "tags": [
+          "Private recommendations"
+        ],
+        "summary": "Recommendations",
+        "operationId": "recommendations_api_v1_me_recommendations_get",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 20,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "Offset"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecommendationsOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/me/resume": {
+      "get": {
+        "tags": [
+          "Private resumes"
+        ],
+        "summary": "Get Resume",
+        "operationId": "get_resume_api_v1_me_resume_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResumeOut"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Private resumes"
+        ],
+        "summary": "Upload Resume",
+        "operationId": "upload_resume_api_v1_me_resume_put",
+        "parameters": [
+          {
+            "name": "x-filename",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "X-Filename"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResumeOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "description": "Raw readable PDF, DOCX or UTF-8 TXT bytes; maximum 5 MiB. X-Filename is percent-encoded UTF-8.",
+          "content": {
+            "application/octet-stream": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Private resumes"
+        ],
+        "summary": "Delete Resume",
+        "operationId": "delete_resume_api_v1_me_resume_delete",
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          }
+        }
+      }
+    },
+    "/api/v1/me/resume/download": {
+      "get": {
+        "tags": [
+          "Private resumes"
+        ],
+        "summary": "Download Resume",
+        "operationId": "download_resume_api_v1_me_resume_download_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
     "/health": {
       "get": {
         "summary": "Health",
@@ -393,6 +796,60 @@
   },
   "components": {
     "schemas": {
+      "AccountOut": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "email": {
+            "type": "string",
+            "title": "Email"
+          },
+          "email_verified": {
+            "type": "boolean",
+            "title": "Email Verified",
+            "default": false
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "email",
+          "created_at"
+        ],
+        "title": "AccountOut"
+      },
+      "Credentials": {
+        "properties": {
+          "email": {
+            "type": "string",
+            "maxLength": 254,
+            "format": "email",
+            "title": "Email"
+          },
+          "password": {
+            "type": "string",
+            "maxLength": 128,
+            "minLength": 12,
+            "format": "password",
+            "title": "Password",
+            "writeOnly": true
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "email",
+          "password"
+        ],
+        "title": "Credentials"
+      },
       "HTTPValidationError": {
         "properties": {
           "detail": {
@@ -531,6 +988,231 @@
         ],
         "title": "JobOut"
       },
+      "PasswordChange": {
+        "properties": {
+          "password": {
+            "type": "string",
+            "maxLength": 128,
+            "minLength": 1,
+            "format": "password",
+            "title": "Password",
+            "writeOnly": true
+          },
+          "new_password": {
+            "type": "string",
+            "maxLength": 128,
+            "minLength": 12,
+            "format": "password",
+            "title": "New Password",
+            "writeOnly": true
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "password",
+          "new_password"
+        ],
+        "title": "PasswordChange"
+      },
+      "PasswordConfirmation": {
+        "properties": {
+          "password": {
+            "type": "string",
+            "maxLength": 128,
+            "minLength": 1,
+            "format": "password",
+            "title": "Password",
+            "writeOnly": true
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "password"
+        ],
+        "title": "PasswordConfirmation"
+      },
+      "ProfileInput": {
+        "properties": {
+          "full_name": {
+            "type": "string",
+            "maxLength": 100,
+            "title": "Full Name",
+            "default": ""
+          },
+          "headline": {
+            "type": "string",
+            "maxLength": 160,
+            "title": "Headline",
+            "default": ""
+          },
+          "location": {
+            "type": "string",
+            "maxLength": 100,
+            "title": "Location",
+            "default": ""
+          },
+          "bio": {
+            "type": "string",
+            "maxLength": 2000,
+            "title": "Bio",
+            "default": ""
+          },
+          "desired_titles": {
+            "items": {
+              "type": "string",
+              "maxLength": 100,
+              "minLength": 1
+            },
+            "type": "array",
+            "maxItems": 20,
+            "title": "Desired Titles"
+          },
+          "skills": {
+            "items": {
+              "type": "string",
+              "maxLength": 100,
+              "minLength": 1
+            },
+            "type": "array",
+            "maxItems": 50,
+            "title": "Skills"
+          },
+          "preferred_locations": {
+            "items": {
+              "type": "string",
+              "maxLength": 100,
+              "minLength": 1
+            },
+            "type": "array",
+            "maxItems": 10,
+            "title": "Preferred Locations"
+          },
+          "remote_only": {
+            "type": "boolean",
+            "title": "Remote Only",
+            "default": false
+          },
+          "use_resume_skills": {
+            "type": "boolean",
+            "title": "Use Resume Skills",
+            "default": true
+          },
+          "experience_years": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 60.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Experience Years"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "ProfileInput"
+      },
+      "ProfileOut": {
+        "properties": {
+          "full_name": {
+            "type": "string",
+            "maxLength": 100,
+            "title": "Full Name",
+            "default": ""
+          },
+          "headline": {
+            "type": "string",
+            "maxLength": 160,
+            "title": "Headline",
+            "default": ""
+          },
+          "location": {
+            "type": "string",
+            "maxLength": 100,
+            "title": "Location",
+            "default": ""
+          },
+          "bio": {
+            "type": "string",
+            "maxLength": 2000,
+            "title": "Bio",
+            "default": ""
+          },
+          "desired_titles": {
+            "items": {
+              "type": "string",
+              "maxLength": 100,
+              "minLength": 1
+            },
+            "type": "array",
+            "maxItems": 20,
+            "title": "Desired Titles"
+          },
+          "skills": {
+            "items": {
+              "type": "string",
+              "maxLength": 100,
+              "minLength": 1
+            },
+            "type": "array",
+            "maxItems": 50,
+            "title": "Skills"
+          },
+          "preferred_locations": {
+            "items": {
+              "type": "string",
+              "maxLength": 100,
+              "minLength": 1
+            },
+            "type": "array",
+            "maxItems": 10,
+            "title": "Preferred Locations"
+          },
+          "remote_only": {
+            "type": "boolean",
+            "title": "Remote Only",
+            "default": false
+          },
+          "use_resume_skills": {
+            "type": "boolean",
+            "title": "Use Resume Skills",
+            "default": true
+          },
+          "experience_years": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 60.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Experience Years"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "ProfileOut"
+      },
       "ProvenanceOut": {
         "properties": {
           "source_id": {
@@ -564,6 +1246,129 @@
           "last_checked_at"
         ],
         "title": "ProvenanceOut"
+      },
+      "RecommendationItem": {
+        "properties": {
+          "job": {
+            "$ref": "#/components/schemas/JobOut"
+          },
+          "rank_score": {
+            "type": "integer",
+            "title": "Rank Score"
+          },
+          "reasons": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Reasons"
+          }
+        },
+        "type": "object",
+        "required": [
+          "job",
+          "rank_score",
+          "reasons"
+        ],
+        "title": "RecommendationItem"
+      },
+      "RecommendationsOut": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/RecommendationItem"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total_candidates": {
+            "type": "integer",
+            "title": "Total Candidates"
+          },
+          "candidates_ranked": {
+            "type": "integer",
+            "title": "Candidates Ranked"
+          },
+          "candidate_limit": {
+            "type": "integer",
+            "title": "Candidate Limit",
+            "default": 1000
+          },
+          "truncated": {
+            "type": "boolean",
+            "title": "Truncated"
+          },
+          "limit": {
+            "type": "integer",
+            "title": "Limit"
+          },
+          "offset": {
+            "type": "integer",
+            "title": "Offset"
+          },
+          "needs_preferences": {
+            "type": "boolean",
+            "title": "Needs Preferences",
+            "default": false
+          },
+          "method": {
+            "type": "string",
+            "title": "Method",
+            "default": "Explicit role/skill matches; rank scores are ordering signals, not fit percentages"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "total_candidates",
+          "candidates_ranked",
+          "truncated",
+          "limit",
+          "offset"
+        ],
+        "title": "RecommendationsOut"
+      },
+      "ResumeOut": {
+        "properties": {
+          "filename": {
+            "type": "string",
+            "title": "Filename"
+          },
+          "media_type": {
+            "type": "string",
+            "title": "Media Type"
+          },
+          "size_bytes": {
+            "type": "integer",
+            "title": "Size Bytes"
+          },
+          "text_characters": {
+            "type": "integer",
+            "title": "Text Characters"
+          },
+          "detected_skills": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Detected Skills"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "filename",
+          "media_type",
+          "size_bytes",
+          "text_characters",
+          "detected_skills",
+          "updated_at"
+        ],
+        "title": "ResumeOut"
       },
       "RunOut": {
         "properties": {

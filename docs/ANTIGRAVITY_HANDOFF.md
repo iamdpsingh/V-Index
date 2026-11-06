@@ -25,3 +25,7 @@ Job list items now include additive `quality_flags: string[]` (default empty). A
 ## Backend cohort 3 integration note — 2026-11-06
 
 Two more source types are available through the existing source form/API: Recruitee hosted tenant URLs and bounded Workday myworkdayjobs.com URLs (including locale-prefixed career-site links). Source configuration is derived server-side; do not ask users to enter the internal tenant~data-center~site key. Surface the existing run failure/error when Workday exceeds its 400-detail budget, reports the unsafe 2,000 ceiling, disallows robots access or returns inconsistent pages. The seven implemented providers and their live evidence/limitations remain authoritative in /api/v1/providers. No frontend files changed. Appearance changes remain separate from the unchanged product objective and required functionality.
+
+## Explicit new feature handoff — 2026-11-06
+
+The owner retained frontend ownership with Antigravity and requested account/profile/resume/recommendation screens. Read [ANTIGRAVITY_ACCOUNTS_HANDOFF.md](ANTIGRAVITY_ACCOUNTS_HANDOFF.md) and [ACCOUNTS_API.md](ACCOUNTS_API.md). This is an explicit feature expansion; the original indexing objective and coverage requirements remain unchanged.

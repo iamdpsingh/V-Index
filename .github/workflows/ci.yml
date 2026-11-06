@@ -55,7 +55,7 @@ jobs:
     env:
       ADMIN_TOKEN: ci-stack-only-token
       PUBLIC_WEB_ORIGIN: http://localhost:3000
-      ACCOUNT_REGISTRATION_ENABLED: 'true' 
+      ACCOUNT_REGISTRATION_ENABLED: 'true'
     steps:
       - uses: actions/checkout@v4
       - name: Generate an ephemeral private-resume key

@@ -44,3 +44,7 @@ Antigravity owns frontend implementation in its separate branch/worktree; Codex 
 Before frontend acceptance, review one representative search/detail composition with real jobs, then implement responsive states and test them in a browser. Required evidence: desktop/mobile screenshots; keyboard traversal; URL/back-state behavior; long/missing content; source failure/retry behavior; reduced motion; original apply destinations. A screenshot or successful build alone does not satisfy interaction acceptance.
 
 A distinctive design must stay recognizable across search, details, source operations and coverage. The product is only ready when that design quality and the backend/78-provider acceptance requirements both pass. This document records requirements; it does not assert that the redesign or hardening has been completed.
+
+## November 6 scope clarification
+
+The visual redesign remains a presentation change. Separately, the owner explicitly requested new account/profile/resume/recommendation functionality and set a November 7 internal target. The owner retained those screens with Antigravity. This new feature authorization supersedes the earlier appearance-only scope for these specific flows; it does not change the acquisition objective or waive the coverage/reliability criteria. Follow ANTIGRAVITY_ACCOUNTS_HANDOFF.md.

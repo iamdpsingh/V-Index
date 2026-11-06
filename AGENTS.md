@@ -11,3 +11,5 @@ Never infer closures from failures, malformed payloads or partial pagination. Re
 All 78 platform names must remain distinct (JBoard.io and JobBoard.io are different). Coverage evidence belongs in evidence/ and backend/providers.json. Do not mark the acquisition criteria complete while blockers remain.
 
 Product quality: read docs/PRODUCT_DESIGN.md for the owner’s frontend identity and backend quality requirements. The current UI is a scaffold, not the final design. Require real-data visual and interaction review; never replace engineering correctness or coverage evidence with visual polish.
+
+Owner update (2026-11-06): target November 7 IST; add private accounts, saved profiles/resumes and professional-term job recommendations without replacing the indexer challenge. The owner explicitly retained frontend work with Antigravity. See docs/ANTIGRAVITY_ACCOUNTS_HANDOFF.md. Make small substantive commits; do not inflate counts with empty commits. Never commit credentials, personal resumes or account data.
