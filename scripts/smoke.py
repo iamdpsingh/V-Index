@@ -15,6 +15,20 @@ from vindex.connectors.registry import create_connector
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
     (
+        "Paylocity",
+        "paylocity",
+        "a387d706-ac6f-4e58-b47b-be05001923ea",
+        "SOLUTIONS FOR INFORMATION DESIGN",
+        "https://recruiting.paylocity.com/Recruiting/Jobs/All/a387d706-ac6f-4e58-b47b-be05001923ea",
+    ),
+    (
+        "Paylocity",
+        "paylocity",
+        "be178b00-f3fb-452e-9aef-dce1ef7fcdba",
+        "Office Practicum",
+        "https://recruiting.paylocity.com/Recruiting/Jobs/All/be178b00-f3fb-452e-9aef-dce1ef7fcdba",
+    ),
+    (
         "Hireology",
         "hireology",
         "beachchevrolet",
@@ -384,6 +398,14 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "Paylocity": [
+                                "Native recruiting.paylocity.com All/{board UUID} full public window.pageData template only; generic unnamed board brands, internal/custom/alternate templates unsupported",
+                                "Public ShowInternal=false and per-job IsInternal=false, unique positive IDs, module/location/brand identity and full source collection required; maximum 400 mandatory HTML details",
+                                "No independent total is supplied: the observed native client uses the entire Jobs array as OriginalJobs and computes its displayed total locally; full array/metadata reconfirmed after details",
+                                "Each detail must match native title, module name, logo reference, Open Graph URL and exact Apply link; no application/form submitted or fetched",
+                                "Full Description and Requirements sections preserved separately from preview text; source job type, salary description and PublishedDate retained",
+                                "All original location/display flags retained, explicit rendered Fully Remote or Hybrid Remote labels preserved; third-party tracking and form configuration excluded",
+                            ],
                             "Hireology": [
                                 "Native careers.hireology.com/{careersPath} shell and explicitly public api.hireology.com/v2/public/careers routes only; no frontend token, authorization header or private API used",
                                 "Complete first public API page only: count must equal all unique rows, page=1, page_size=10; larger, empty, duplicate, blind or mismatched employer collections abort",

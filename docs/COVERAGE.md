@@ -28,7 +28,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | HiBob | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | HireBridge | ats | IMPLEMENTED | FAILED | MEDIUM | 0 | 2026-11-06T12:51:15.772550+00:00 | https://recruit.hirebridge.com/v3/Jobs/list.aspx?cid=8484 (0; FAILED); https://recruit.hirebridge.com/v3/Jobs/list.aspx?cid=8427 (0; FAILED) ValueError: Retry-After exceeds inline retry budget; ValueError: Retry-After exceeds inline retry budget |
 | HireHive | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 65 | 2026-11-06T06:55:14.734024+00:00 | https://amcsgroup.hirehive.com (59; LIVE_VERIFIED); https://echelon-dc.hirehive.com (6; LIVE_VERIFIED)  |
-| Hireology | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
+| Hireology | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 7 | 2026-11-06T13:05:16.366235+00:00 | https://careers.hireology.com/beachchevrolet (4; LIVE_VERIFIED); https://careers.hireology.com/pipprinting01151 (3; LIVE_VERIFIED)  |
 | HiringThing | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 5 | 2026-11-06T12:04:24.524963+00:00 | https://math-learning-center.hiringthing.com/ (2; LIVE_VERIFIED); https://rtrjobs.hiringthing.com/ (3; LIVE_VERIFIED)  |
 | iCIMS | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | iSolvedHire | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 5 | 2026-11-06T08:53:54.959321+00:00 | https://uasystem.isolvedhire.com/jobs/ (2; LIVE_VERIFIED); https://verifiedcredentials.isolvedhire.com/jobs/ (3; LIVE_VERIFIED)  |

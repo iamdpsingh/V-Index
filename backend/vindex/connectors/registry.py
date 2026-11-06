@@ -21,6 +21,7 @@ from vindex.connectors.jobvite import JobviteConnector
 from vindex.connectors.join import JoinConnector
 from vindex.connectors.kula import KulaConnector
 from vindex.connectors.manatal import ManatalConnector
+from vindex.connectors.paylocity import PaylocityConnector
 from vindex.connectors.personio import PersonioConnector
 from vindex.connectors.pinpoint import PinpointConnector
 from vindex.connectors.polymer import SLUG as POLYMER_SLUG
@@ -62,6 +63,15 @@ def detect(url: str) -> tuple[str, str]:
         match = re.fullmatch(rf"({TENANT})\.{re.escape(suffix)}", p.hostname or "")
         if match:
             return provider, match[1]
+    if p.hostname == "recruiting.paylocity.com":
+        matched = re.fullmatch(
+            r"/recruiting/jobs/all/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})(?:/[A-Za-z0-9_-]+)?/?",
+            p.path,
+            re.IGNORECASE,
+        )
+        if not matched or p.query or p.fragment:
+            raise ValueError("Expected an unfiltered native Paylocity All-jobs board URL")
+        return "paylocity", matched[1].lower()
     if p.hostname == "careers.hireology.com":
         matched = re.fullmatch(rf"/({TENANT})/?", p.path)
         if not matched or p.query or p.fragment:
@@ -161,13 +171,15 @@ def detect(url: str) -> tuple[str, str]:
         return detect_original(url)
     except ValueError as error:
         raise ValueError(
-            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire, HiringThing, Freshteam, Trakstar, Rippling, Kula.ai, CareerPlug, TriNet, HireBridge, JOIN.com and Hireology"
+            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire, HiringThing, Freshteam, Trakstar, Rippling, Kula.ai, CareerPlug, TriNet, HireBridge, JOIN.com, Hireology and Paylocity"
         ) from error
 
 
 def create_connector(
     provider: str, slug: str, company: str, client: httpx.AsyncClient
 ) -> Connector:
+    if provider == "paylocity":
+        return PaylocityConnector(provider, slug, company, client)
     if provider == "hireology":
         return HireologyConnector(provider, slug, company, client)
     if provider == "join":
