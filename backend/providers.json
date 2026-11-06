@@ -25,40 +25,40 @@
       {
         "provider": "ApplicantPro",
         "url": "https://farbank.applicantpro.com/jobs/",
-        "at": "2026-11-06T08:47:19.361022+00:00",
-        "revision": "e8d3b69c87b75e80c779e5ea422baab157af0a17",
+        "at": "2026-11-06T08:53:20.009935+00:00",
+        "revision": "10beaea70de45c8e388c40ee97174c924c859148",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "2e841fdde89825355dacb0916aaa9e9ffde7ab99def3fa4c6544dcc423fadd20",
+        "code_sha256": "a74afd1bfb609d60c06fcef9cd47c425495b5d839b9d44903fd4fafa3717ccea",
         "count": 2,
         "status": "LIVE_VERIFIED",
         "complete": true,
         "error": null,
         "quality_flag_counts": {},
-        "payload_sha256": "b0aef0fb6459c61bd4cf917d01d6edd58c99dd01ee4fc1870385c7aa90dbdbf2",
-        "finished_at": "2026-11-06T08:47:25.141058+00:00"
+        "payload_sha256": "15e8bff10fe174f74c70e406c2d699f844d2c7800427bf53e059ffad011e8b1a",
+        "finished_at": "2026-11-06T08:53:26.885511+00:00"
       },
       {
         "provider": "ApplicantPro",
         "url": "https://clarke.applicantpro.com/jobs/",
-        "at": "2026-11-06T08:47:25.642430+00:00",
-        "revision": "e8d3b69c87b75e80c779e5ea422baab157af0a17",
+        "at": "2026-11-06T08:53:27.386763+00:00",
+        "revision": "10beaea70de45c8e388c40ee97174c924c859148",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "2e841fdde89825355dacb0916aaa9e9ffde7ab99def3fa4c6544dcc423fadd20",
+        "code_sha256": "a74afd1bfb609d60c06fcef9cd47c425495b5d839b9d44903fd4fafa3717ccea",
         "count": 3,
         "status": "LIVE_VERIFIED",
         "complete": true,
         "error": null,
         "quality_flag_counts": {},
-        "payload_sha256": "2c275d179c736a25ff99e0057db2713803b11bee15129b45ca886bfc11dcb3f9",
-        "finished_at": "2026-11-06T08:47:31.593926+00:00"
+        "payload_sha256": "a5c5b7461580752da1060d440f3deff5e97456a898f90c51c5b70b7ea37a1eee",
+        "finished_at": "2026-11-06T08:53:36.755511+00:00"
       }
     ],
-    "last_run_at": "2026-11-06T08:47:31.593926+00:00",
+    "last_run_at": "2026-11-06T08:53:36.755511+00:00",
     "extraction_count": 5,
     "failure_reason": null,
     "limitations": [
       "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
-      "Hosted applicantpro.com current public core/jobs component plus mandatory JobPosting detail only; custom domains/alternate templates unsupported",
+      "Hosted applicantpro.com current public core/jobs component plus mandatory current public job detail and native page checks; custom domains/alternate templates unsupported",
       "Board-discovered organization/domain identity, explicit external-only isInternal=0 collection, exact count/unique IDs and fixed tenant job links required",
       "Maximum 400 details; empty, partial, changed and failed enumerations abort without reconciliation; board and full collection reconfirmed",
       "Native and fixed shared-vendor canonical aliases are validated as metadata; redirects are never followed; native inline application page is the application entry",
@@ -593,7 +593,7 @@
   {
     "name": "HiringThing",
     "kind": "ats",
-    "implementation_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
     "evidence_status": "NOT_STARTED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
@@ -602,7 +602,8 @@
     "extraction_count": null,
     "failure_reason": null,
     "limitations": [
-      "Connector not implemented"
+      "Current native hiringthing.com public HTML/RSS/detail template only; maximum 400 jobs",
+      "Empty/paginated/alternate/custom-domain templates unsupported; multi-employer live evidence pending"
     ]
   },
   {
@@ -630,47 +631,51 @@
     "name": "iSolvedHire",
     "kind": "ats",
     "implementation_status": "IMPLEMENTED",
-    "evidence_status": "FAILED",
+    "evidence_status": "LIVE_VERIFIED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
     "examples": [
       {
         "provider": "iSolvedHire",
         "url": "https://uasystem.isolvedhire.com/jobs/",
-        "at": "2026-11-06T08:47:32.095227+00:00",
-        "revision": "e8d3b69c87b75e80c779e5ea422baab157af0a17",
+        "at": "2026-11-06T08:53:37.256802+00:00",
+        "revision": "10beaea70de45c8e388c40ee97174c924c859148",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "2e841fdde89825355dacb0916aaa9e9ffde7ab99def3fa4c6544dcc423fadd20",
-        "count": 0,
-        "status": "FAILED",
-        "complete": false,
-        "error": "ValueError: Missing unique career JobPosting document",
-        "finished_at": "2026-11-06T08:47:35.955550+00:00"
+        "code_sha256": "a74afd1bfb609d60c06fcef9cd47c425495b5d839b9d44903fd4fafa3717ccea",
+        "count": 2,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {
+          "jobposting_schema_missing": 1
+        },
+        "payload_sha256": "a7302493e08cb00f1d364ffb11113fa25ba1c530c8eeed168f40de6ebde2fcfe",
+        "finished_at": "2026-11-06T08:53:44.783837+00:00"
       },
       {
         "provider": "iSolvedHire",
         "url": "https://verifiedcredentials.isolvedhire.com/jobs/",
-        "at": "2026-11-06T08:47:36.456777+00:00",
-        "revision": "e8d3b69c87b75e80c779e5ea422baab157af0a17",
+        "at": "2026-11-06T08:53:45.285071+00:00",
+        "revision": "10beaea70de45c8e388c40ee97174c924c859148",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "2e841fdde89825355dacb0916aaa9e9ffde7ab99def3fa4c6544dcc423fadd20",
+        "code_sha256": "a74afd1bfb609d60c06fcef9cd47c425495b5d839b9d44903fd4fafa3717ccea",
         "count": 3,
         "status": "LIVE_VERIFIED",
         "complete": true,
         "error": null,
         "quality_flag_counts": {},
-        "payload_sha256": "47239e4aa37b8d6eff9e3a058160add5974f45ca00f977fc19399b65aa1462e4",
-        "finished_at": "2026-11-06T08:47:42.596289+00:00"
+        "payload_sha256": "bcc385a64fa8acebbb07178ccba0cc142ae9b1db2a2382ca87fdded63a02ba88",
+        "finished_at": "2026-11-06T08:53:54.959321+00:00"
       }
     ],
-    "last_run_at": "2026-11-06T08:47:42.596289+00:00",
-    "extraction_count": 3,
-    "failure_reason": "ValueError: Missing unique career JobPosting document",
+    "last_run_at": "2026-11-06T08:53:54.959321+00:00",
+    "extraction_count": 5,
+    "failure_reason": null,
     "limitations": [
       "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
       "Separate required platform/host/evidence from ApplicantPro, sharing the observed current public core/jobs template only",
       "Hosted isolvedhire.com boards only; exact discovered site IDs, external-only isInternal=0 collection and count/unique IDs are mandatory",
-      "Maximum 400 matching JobPosting details; board, native application component and complete collection reconfirmed; custom domains/alternate templates unsupported",
+      "Maximum 400 matching public job details; optional source JobPosting retained or omission flagged; board/native application/full collection reconfirmed; custom domains/alternate templates unsupported",
       "Empty/failed/partial snapshots never close jobs; source labels/publication precision and actual supplied salaries retained without invention"
     ]
   },

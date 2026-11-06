@@ -10,6 +10,7 @@ from vindex.connectors.breezy import BreezyConnector
 from vindex.connectors.gohire import SLUG as GOHIRE_SLUG
 from vindex.connectors.gohire import GoHireConnector
 from vindex.connectors.hirehive import HireHiveConnector
+from vindex.connectors.hiringthing import HiringThingConnector
 from vindex.connectors.jazzhr import JazzHRConnector
 from vindex.connectors.jobboardly import JobboardlyConnector
 from vindex.connectors.jobvite import JobviteConnector
@@ -35,6 +36,7 @@ def detect(url: str) -> tuple[str, str]:
     if p.scheme != "https" or p.username or p.password or p.port not in (None, 443):
         raise ValueError("Use an HTTPS hosted career board URL without credentials or custom ports")
     for suffix, provider in (
+        ("hiringthing.com", "hiringthing"),
         ("applicantpro.com", "applicantpro"),
         ("isolvedhire.com", "isolvedhire"),
         ("teamtailor.com", "teamtailor"),
@@ -106,13 +108,15 @@ def detect(url: str) -> tuple[str, str]:
         return detect_original(url)
     except ValueError as error:
         raise ValueError(
-            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro and iSolvedHire"
+            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire and HiringThing"
         ) from error
 
 
 def create_connector(
     provider: str, slug: str, company: str, client: httpx.AsyncClient
 ) -> Connector:
+    if provider == "hiringthing":
+        return HiringThingConnector(provider, slug, company, client)
     if provider in {"applicantpro", "isolvedhire"}:
         return ApplicantProConnector(provider, slug, company, client)
     if provider == "jobvite":

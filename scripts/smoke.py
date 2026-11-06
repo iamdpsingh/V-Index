@@ -15,6 +15,20 @@ from vindex.connectors.registry import create_connector
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
     (
+        "HiringThing",
+        "hiringthing",
+        "math-learning-center",
+        "The Math Learning Center",
+        "https://math-learning-center.hiringthing.com/",
+    ),
+    (
+        "HiringThing",
+        "hiringthing",
+        "rtrjobs",
+        "Real Time Resolutions Inc",
+        "https://rtrjobs.hiringthing.com/",
+    ),
+    (
         "ApplicantPro",
         "applicantpro",
         "farbank",
@@ -280,6 +294,13 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "HiringThing": [
+                                "Native hiringthing.com public Career Opportunities templates only; alternate white-label/custom-domain registration unsupported",
+                                "Maximum 400 details; complete HTML and RSS path/title sets must agree, and both are reconfirmed after extraction; pagination/empty snapshots unsupported",
+                                "Every native detail requires canonical/Open Graph/title agreement and consistent public ApplyButtonGroup job IDs/company/URL/hidden=false",
+                                "RSS full media description must match current public job HTML; native career page is the application entry, candidate questions/form/config excluded from raw",
+                                "Original posted_at, structured salary fields and explicit remote flag retained; source JobPosting employment metadata retained when supplied",
+                            ],
                             "ApplicantPro": [
                                 "Hosted applicantpro.com current public core/jobs component plus mandatory current public job detail and native page checks; custom domains/alternate templates unsupported",
                                 "Board-discovered organization/domain identity, explicit external-only isInternal=0 collection, exact count/unique IDs and fixed tenant job links required",
