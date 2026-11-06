@@ -1,0 +1,89 @@
+{
+  "external_id": "7E.663",
+  "title": "Algorithm Engineer",
+  "company": "Oriient",
+  "description": "About Oriient At Oriient, we are building the world\u2019s most advanced and scalable Indoor GPS technology. We are a VC-backed company in a phase of hyper-growth with substantial market traction. Our platform powers indoor location experiences across retail, smart buildings, hospitals and healthcare centers, campuses, and emerging verticals. Oriient\u2019s hardware-free, plug & play solution enables fast and cost-effective deployments at scale, unlocking new capabilities based on high-accuracy positioning, AI, and large-scale data processing. Job Summary As an algorithm engineer you will be part of Oriient\u2019s algorithm team and be responsible for the core localization and navigation components. You will report to the Algorithm team leader and work with other team members and the entire RnD group. You will play a key role in a small team of top notch algorithm engineers, maturing the world's most advanced IndoorGPS platform with highly advanced algorithms. Key Responsibilities Develop classical and ML algorithms modules Gain deep understanding of existing core algorithmic modules, including their theoretical foundations, assumptions, and limitations, and adapt or extend them as needed. Design, develop, and implement new algorithms to address product and research challenges. Own the full algorithm development cycle from research and prototyping through implementation, validation, and production delivery. Investigate customers issues and anomalies Develop needed pipeline and infrastructure for evaluation and development of new and current features\n\nB.Sc in Electrical Engineering - Must GPA > 85 from a prominent university At least 3 years of hands-on, real-world experience with algorithm design and development in one or more of the following fields: Machine learning/Deep learning Kalman/particle filters and similar methods Digital signal processing Strong analytical and mathematical skills, including being able to: Understand and Implement algorithms from academic papers Come up with and Implement simulations and analysis tools for complex algorithms Handle large amounts of data Passion to use algorithms and science to build a system that solves difficult problems Hands-on experience designing, validating, testing and implementing complex algorithms Excellent MATLAB & Python proficiency. Not Required, but a Big Advantage: M.Sc. A rich software background Cloud platform experience What We Offer A high-impact role at the core of a rapidly growing technology company. Dynamic, collaborative team environment with strong ownership culture. Competitive salary and benefits. Flexible working hours and remote-work options.",
+  "quality_flags": [],
+  "location": "Tel Aviv; Tel Aviv-Yafo; Tel Aviv District; 6701718; IL",
+  "source_url": "https://www.comeet.com/jobs/oriient/EA.005/algorithm-engineer/7E.663",
+  "application_url": "https://www.comeet.com/jobs/oriient/EA.005/algorithm-engineer/7E.663",
+  "employment_type": null,
+  "remote_status": "Hybrid",
+  "salary": null,
+  "published_at": null,
+  "raw": {
+    "listing": {
+      "name": "Algorithm Engineer",
+      "department": "Engineering",
+      "employment_type": null,
+      "experience_level": "Senior",
+      "uid": "7E.663",
+      "internal_use_custom_id": "",
+      "time_updated": "2026-09-14T08:54:54Z",
+      "company_name": "Oriient",
+      "is_internal": false,
+      "workplace_type": "Hybrid",
+      "url_comeet_hosted_page": "https://www.comeet.com/jobs/oriient/EA.005/algorithm-engineer/7E.663",
+      "url_recruit_hosted_page": "https://www.comeet.com/jobs/oriient/EA.005/algorithm-engineer/7E.663",
+      "url_active_page": "https://www.comeet.com/jobs/oriient/EA.005/algorithm-engineer/7E.663",
+      "url_detected_page": null,
+      "location": {
+        "name": "Tel Aviv",
+        "country": "IL",
+        "city": "Tel Aviv-Yafo",
+        "state": "Tel Aviv District",
+        "postal_code": "6701718",
+        "street_name": "18 Beit Hilel Street",
+        "street_number": "18",
+        "location_uid": "93.607",
+        "is_remote": true
+      }
+    },
+    "job": {
+      "name": "Algorithm Engineer",
+      "department": "Engineering",
+      "employment_type": null,
+      "experience_level": "Senior",
+      "uid": "7E.663",
+      "internal_use_custom_id": null,
+      "time_updated": "2026-09-14T08:54:54Z",
+      "company_name": "Oriient",
+      "is_internal": false,
+      "workplace_type": "Hybrid",
+      "url_comeet_hosted_page": "https://www.comeet.com/jobs/oriient/EA.005/algorithm-engineer/7E.663",
+      "url_recruit_hosted_page": "https://www.comeet.com/jobs/oriient/EA.005/algorithm-engineer/7E.663",
+      "url_active_page": "https://www.comeet.com/jobs/oriient/EA.005/algorithm-engineer/7E.663",
+      "url_detected_page": null,
+      "location": {
+        "name": "Tel Aviv",
+        "country": "IL",
+        "city": "Tel Aviv-Yafo",
+        "state": "Tel Aviv District",
+        "postal_code": "6701718",
+        "street_name": "18 Beit Hilel Street",
+        "street_number": "18",
+        "location_uid": "93.607",
+        "is_remote": true
+      }
+    },
+    "board": {
+      "name": "Oriient",
+      "company_uid": "EA.005",
+      "slug": "oriient",
+      "url_comeet_hosted_page": "https://www.comeet.com/jobs/oriient/EA.005"
+    },
+    "time_published_original": null,
+    "detail_sections": [
+      {
+        "name": "Description",
+        "value": "<p><strong>About Oriient</strong></p><p>At Oriient, we are building the world\u2019s most advanced and scalable Indoor GPS technology. We are a VC-backed company in a phase of hyper-growth with substantial market traction. Our platform powers indoor location experiences across retail, smart buildings, hospitals and healthcare centers, campuses, and emerging verticals. Oriient\u2019s hardware-free, plug &amp; play solution enables fast and cost-effective deployments at scale, unlocking new capabilities based on high-accuracy positioning, AI, and large-scale data processing.</p><p><br></p><p><strong>Job Summary</strong></p><p>As an algorithm engineer you will be part of Oriient\u2019s algorithm team and be responsible for the core localization and navigation components.&nbsp;</p><p><br></p><p>You will report to the Algorithm team leader and work with other team members and the entire RnD group.</p><p><br></p><p>You will play a key role in a small team of top notch algorithm engineers, maturing the world's most advanced IndoorGPS platform with highly advanced algorithms.</p><p><br></p><p><strong>Key Responsibilities</strong></p><ul><li><strong>Develop classical and ML algorithms modules</strong></li></ul><p><br></p><p>Gain deep understanding of existing core algorithmic modules, including their theoretical foundations, assumptions, and limitations, and adapt or extend them as needed. Design, develop, and implement new algorithms to address product and research challenges.</p><ul><li><strong>Own the full algorithm development cycle</strong></li></ul><p><br></p><p>&nbsp;from research and prototyping through implementation, validation, and production delivery.</p><ul><li><strong>Investigate customers issues and anomalies</strong></li><li><strong>Develop needed pipeline and infrastructure</strong> for evaluation and development of new and current features</li><li><br></li></ul><p><br></p>",
+        "order": 1
+      },
+      {
+        "name": "Requirements",
+        "value": "<ul><li>B.Sc in Electrical Engineering - Must</li><li>GPA &gt; 85 from a prominent university</li><li>At least 3 years of hands-on, real-world experience with algorithm design and development in one or more of the following fields:</li><li>Machine learning/Deep learning</li><li>Kalman/particle filters and similar methods</li><li>Digital signal processing</li><li>Strong analytical and mathematical skills, including being able to:</li><li>Understand and Implement algorithms from academic papers</li><li>Come up with and Implement simulations and analysis tools for complex algorithms&nbsp;</li><li>Handle large amounts of data</li><li>Passion to use algorithms and science to build a system that solves difficult problems</li><li>Hands-on experience designing, validating, testing and implementing complex algorithms</li><li>Excellent MATLAB &amp; Python proficiency.</li></ul><p><strong>Not Required, but a Big Advantage:</strong></p><ul><li>M.Sc.&nbsp;</li><li>A rich software background</li><li>Cloud platform experience</li></ul><p><br></p><p><strong>What We Offer</strong></p><ul><li>A high-impact role at the core of a rapidly growing technology company.</li><li>Dynamic, collaborative team environment with strong ownership culture.</li><li>Competitive salary and benefits.</li><li>Flexible working hours and remote-work options.</li></ul>",
+        "order": 2
+      }
+    ]
+  }
+}

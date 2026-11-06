@@ -1,0 +1,60 @@
+[
+  {
+    "provider": "Comeet",
+    "url": "https://www.comeet.com/jobs/oriient/EA.005",
+    "at": "2026-11-06T16:59:43.592703+00:00",
+    "revision": "722399da4c0d11c3b5bf87da42500e98ada1974f",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "7d374002050e39fc335fe8d8016203d17767b4c0a87c2d5ea4973077eaab1283",
+    "count": 7,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "711d3cc064061de2f03e8e0e6fc64ab427ce50d295ea6b92d35167b807271f79",
+    "finished_at": "2026-11-06T17:00:04.347932+00:00"
+  },
+  {
+    "provider": "Comeet",
+    "url": "https://www.comeet.com/jobs/webbing/46.00E",
+    "at": "2026-11-06T17:00:04.849308+00:00",
+    "revision": "722399da4c0d11c3b5bf87da42500e98ada1974f",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "7d374002050e39fc335fe8d8016203d17767b4c0a87c2d5ea4973077eaab1283",
+    "count": 0,
+    "status": "FAILED",
+    "complete": false,
+    "error": "ValueError: Comeet public row employer/UID/internal-state/native link mismatch",
+    "finished_at": "2026-11-06T17:00:07.914392+00:00"
+  },
+  {
+    "provider": "HireBridge",
+    "url": "https://recruit.hirebridge.com/v3/Jobs/list.aspx?cid=8484",
+    "at": "2026-11-06T17:00:08.415700+00:00",
+    "revision": "722399da4c0d11c3b5bf87da42500e98ada1974f",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "7d374002050e39fc335fe8d8016203d17767b4c0a87c2d5ea4973077eaab1283",
+    "count": 14,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "37762b078b21da2a1a454f25b4cf8d4d6367d0caf8cc2c77b34d1a5f65c23a2b",
+    "finished_at": "2026-11-06T17:02:06.193080+00:00"
+  },
+  {
+    "provider": "HireBridge",
+    "url": "https://recruit.hirebridge.com/v3/Jobs/list.aspx?cid=8427",
+    "at": "2026-11-06T17:02:06.694374+00:00",
+    "revision": "722399da4c0d11c3b5bf87da42500e98ada1974f",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "7d374002050e39fc335fe8d8016203d17767b4c0a87c2d5ea4973077eaab1283",
+    "count": 15,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "d2b8fd4fdb81c3183e0273af39089431c3b923bc811a41dc1ac5305c863f1cff",
+    "finished_at": "2026-11-06T17:04:11.749891+00:00"
+  }
+]

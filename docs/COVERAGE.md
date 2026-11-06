@@ -14,7 +14,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | BrassRing | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | Breezy HR | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 81 | 2026-11-06T03:16:14.203649+00:00 | https://vald.breezy.hr (75; LIVE_VERIFIED); https://subscribe.breezy.hr (6; LIVE_VERIFIED)  |
 | CareerPlug | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 10 | 2026-11-06T12:34:45.510649+00:00 | https://app.careerplug.com/accounts/576036 (2; LIVE_VERIFIED); https://app.careerplug.com/accounts/579908 (8; LIVE_VERIFIED)  |
-| Comeet | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
+| Comeet | ats | IMPLEMENTED | FAILED | MEDIUM | 7 | 2026-11-06T17:00:07.914392+00:00 | https://www.comeet.com/jobs/oriient/EA.005 (7; LIVE_VERIFIED); https://www.comeet.com/jobs/webbing/46.00E (0; FAILED) ValueError: Comeet public row employer/UID/internal-state/native link mismatch |
 | CSOD | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | Dayforce | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | Deel | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
@@ -26,7 +26,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | GoHire | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 45 | 2026-11-06T07:43:13.012881+00:00 | https://jobs.gohire.io/dineamic-hospitality-fniota1h/ (22; LIVE_VERIFIED); https://jobs.gohire.io/digital-shift-o0hrqw5o/ (23; LIVE_VERIFIED)  |
 | Greenhouse | ats | IMPLEMENTED | LIVE_VERIFIED | LOW | 1226 | 2026-11-05T16:41:54.721525+00:00 | https://job-boards.greenhouse.io/stripe (762; LIVE_VERIFIED); https://job-boards.greenhouse.io/cloudflare (464; LIVE_VERIFIED)  |
 | HiBob | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
-| HireBridge | ats | IMPLEMENTED | FAILED | MEDIUM | 14 | 2026-11-06T13:36:40.452312+00:00 | https://recruit.hirebridge.com/v3/Jobs/list.aspx?cid=8484 (14; LIVE_VERIFIED); https://recruit.hirebridge.com/v3/Jobs/list.aspx?cid=8427 (0; FAILED) ValueError: HireBridge detail/customer/location/application identity mismatch |
+| HireBridge | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 29 | 2026-11-06T17:04:11.749891+00:00 | https://recruit.hirebridge.com/v3/Jobs/list.aspx?cid=8484 (14; LIVE_VERIFIED); https://recruit.hirebridge.com/v3/Jobs/list.aspx?cid=8427 (15; LIVE_VERIFIED)  |
 | HireHive | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 65 | 2026-11-06T06:55:14.734024+00:00 | https://amcsgroup.hirehive.com (59; LIVE_VERIFIED); https://echelon-dc.hirehive.com (6; LIVE_VERIFIED)  |
 | Hireology | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 7 | 2026-11-06T13:05:16.366235+00:00 | https://careers.hireology.com/beachchevrolet (4; LIVE_VERIFIED); https://careers.hireology.com/pipprinting01151 (3; LIVE_VERIFIED)  |
 | HiringThing | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 5 | 2026-11-06T12:04:24.524963+00:00 | https://math-learning-center.hiringthing.com/ (2; LIVE_VERIFIED); https://rtrjobs.hiringthing.com/ (3; LIVE_VERIFIED)  |

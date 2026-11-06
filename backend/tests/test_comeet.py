@@ -69,7 +69,14 @@ def no_delays(monkeypatch):
     monkeypatch.setattr("vindex.connectors.comeet.asyncio.sleep", no_wait)
 
 
-def run(html=None, data=None, confirm=None, status=200, robots="User-agent: *\nAllow: /"):
+def run(
+    html=None,
+    data=None,
+    confirm=None,
+    status=200,
+    robots="User-agent: *\nAllow: /",
+    position_uid="BB.002",
+):
     calls = 0
 
     async def discover():
@@ -85,7 +92,7 @@ def run(html=None, data=None, confirm=None, status=200, robots="User-agent: *\nA
                 return httpx.Response(
                     200, text=confirm if calls > 1 and confirm is not None else html or board()
                 )
-            assert request.url.path == "/careers-api/2.0/company/AA.001/positions/BB.002"
+            assert request.url.path == "/careers-api/2.0/company/AA.001/positions/" + position_uid
             assert dict(request.url.params) == {"token": TOKEN, "details": "true"}
             return httpx.Response(status, json=data or detail())
 
@@ -189,3 +196,17 @@ def test_optional_requisition_id_enrichment_preserves_both_observations():
     j = run(data=d).jobs[0]
     assert j.raw["job"]["internal_use_custom_id"] == "REQ42"
     assert j.raw["listing"]["internal_use_custom_id"] is None
+
+
+def test_location_specific_postings_keep_their_own_uid_and_original_link():
+    value = row()
+    value["uid"] = "BB.002-CC.003"
+    for key in ("url_comeet_hosted_page", "url_active_page"):
+        value[key] = value[key].replace("/BB.002", "/BB.002-CC.003")
+    value["location"]["location_uid"] = "CC.003"
+    data = {**detail(), **value}
+    j = run(html=board([value]), data=data, position_uid=value["uid"]).jobs[0]
+    assert j.external_id == "BB.002-CC.003" and j.source_url.endswith("/BB.002-CC.003")
+    value["location"]["location_uid"] = "DD.004"
+    with pytest.raises(ValueError):
+        run(html=board([value]), data=data, position_uid=value["uid"])

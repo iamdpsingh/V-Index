@@ -15,6 +15,7 @@ from vindex.schemas import Enumeration, JobInput
 
 TENANT = r"[a-z0-9][a-z0-9_-]{0,84}"
 UID = r"[0-9A-Fa-f]{2}\.[0-9A-Fa-f]{3}"
+POSITION_UID = rf"{UID}(?:-{UID})?"
 FIELDS = (
     "name",
     "department",
@@ -72,7 +73,7 @@ class ComeetConnector:
         url = row["url_comeet_hosted_page"]
         if (
             not isinstance(identifier, str)
-            or not re.fullmatch(UID, identifier)
+            or not re.fullmatch(POSITION_UID, identifier)
             or row["is_internal"] is not False
             or row["company_name"] != board["name"]
             or not isinstance(row["name"], str)
@@ -82,6 +83,8 @@ class ComeetConnector:
             or not isinstance(row["location"], dict)
         ):
             raise ValueError("Comeet public row employer/UID/internal-state/native link mismatch")
+        if "-" in identifier and row["location"].get("location_uid") != identifier.split("-", 1)[1]:
+            raise ValueError("Comeet location-specific posting UID/location mismatch")
         result = {k: row.get(k) for k in FIELDS}
         for key in ("url_recruit_hosted_page", "url_active_page", "url_detected_page"):
             value = result[key]
