@@ -1,0 +1,120 @@
+{
+  "started_at": "2026-11-06T03:21:51.381795+00:00",
+  "revision": "508521fe6b0ef4ebc1eb8c876fcf8d277e55696b",
+  "database": "local SQLite",
+  "lease_backend": "local Redis",
+  "sources": [
+    {
+      "platform": "Teamtailor",
+      "source_id": 8,
+      "url": "https://clearroute.teamtailor.com",
+      "company": "ClearRoute"
+    },
+    {
+      "platform": "Breezy HR",
+      "source_id": 9,
+      "url": "https://subscribe.breezy.hr",
+      "company": "SUBSCRIBE"
+    },
+    {
+      "platform": "Workable",
+      "source_id": 10,
+      "url": "https://apply.workable.com/learnworlds/",
+      "company": "LearnWorlds"
+    },
+    {
+      "platform": "BambooHR",
+      "source_id": 11,
+      "url": "https://concept2.bamboohr.com/careers",
+      "company": "Concept2"
+    },
+    {
+      "platform": "Pinpoint",
+      "source_id": 12,
+      "url": "https://workwithus.pinpointhq.com",
+      "company": "Pinpoint"
+    }
+  ],
+  "runs": [
+    {
+      "id": 15,
+      "source_id": 8,
+      "started_at": "2026-11-06T03:22:20.417285",
+      "finished_at": "2026-11-06T03:22:23.780036",
+      "status": "success",
+      "count": 22,
+      "error": null
+    },
+    {
+      "id": 16,
+      "source_id": 9,
+      "started_at": "2026-11-06T03:22:23.786036",
+      "finished_at": "2026-11-06T03:22:31.786467",
+      "status": "success",
+      "count": 6,
+      "error": null
+    },
+    {
+      "id": 17,
+      "source_id": 10,
+      "started_at": "2026-11-06T03:22:31.791783",
+      "finished_at": "2026-11-06T03:22:33.622271",
+      "status": "success",
+      "count": 3,
+      "error": null
+    },
+    {
+      "id": 18,
+      "source_id": 11,
+      "started_at": "2026-11-06T03:22:33.626883",
+      "finished_at": "2026-11-06T03:22:43.100834",
+      "status": "success",
+      "count": 5,
+      "error": null
+    },
+    {
+      "id": 19,
+      "source_id": 12,
+      "started_at": "2026-11-06T03:22:43.105340",
+      "finished_at": "2026-11-06T03:22:45.823632",
+      "status": "success",
+      "count": 6,
+      "error": null
+    }
+  ],
+  "search_checks": [
+    {
+      "source_id": 8,
+      "company_filter": "ClearRoute",
+      "searchable_records_with_matching_provenance": 22,
+      "expected_run_count": 22
+    },
+    {
+      "source_id": 9,
+      "company_filter": "SUBSCRIBE",
+      "searchable_records_with_matching_provenance": 6,
+      "expected_run_count": 6
+    },
+    {
+      "source_id": 10,
+      "company_filter": "LearnWorlds",
+      "searchable_records_with_matching_provenance": 3,
+      "expected_run_count": 3
+    },
+    {
+      "source_id": 11,
+      "company_filter": "Concept2",
+      "searchable_records_with_matching_provenance": 5,
+      "expected_run_count": 5
+    },
+    {
+      "source_id": 12,
+      "company_filter": "Pinpoint",
+      "searchable_records_with_matching_provenance": 6,
+      "expected_run_count": 6
+    }
+  ],
+  "active_index_total": 1235,
+  "finished_at": "2026-11-06T03:23:19.525274+00:00",
+  "complete": true
+}
