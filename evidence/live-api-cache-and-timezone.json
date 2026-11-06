@@ -1,0 +1,9 @@
+{
+  "checked_at": "2026-11-06T07:19:41.800161+00:00",
+  "revision": "1d4a3f98697849a07c21b875cfe939e8698723dc",
+  "scope": "Actual local SQLite API response; no browser or production freshness claim",
+  "cache_control": "no-store",
+  "first_seen_at": "2026-11-06T06:57:05.190329Z",
+  "last_checked_at": "2026-11-06T06:57:05.190329Z",
+  "active_index_total_at_check": 1281
+}
