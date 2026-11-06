@@ -1,0 +1,60 @@
+[
+  {
+    "provider": "ApplicantPro",
+    "url": "https://farbank.applicantpro.com/jobs/",
+    "at": "2026-11-06T08:47:19.361022+00:00",
+    "revision": "e8d3b69c87b75e80c779e5ea422baab157af0a17",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "2e841fdde89825355dacb0916aaa9e9ffde7ab99def3fa4c6544dcc423fadd20",
+    "count": 2,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "b0aef0fb6459c61bd4cf917d01d6edd58c99dd01ee4fc1870385c7aa90dbdbf2",
+    "finished_at": "2026-11-06T08:47:25.141058+00:00"
+  },
+  {
+    "provider": "ApplicantPro",
+    "url": "https://clarke.applicantpro.com/jobs/",
+    "at": "2026-11-06T08:47:25.642430+00:00",
+    "revision": "e8d3b69c87b75e80c779e5ea422baab157af0a17",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "2e841fdde89825355dacb0916aaa9e9ffde7ab99def3fa4c6544dcc423fadd20",
+    "count": 3,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "2c275d179c736a25ff99e0057db2713803b11bee15129b45ca886bfc11dcb3f9",
+    "finished_at": "2026-11-06T08:47:31.593926+00:00"
+  },
+  {
+    "provider": "iSolvedHire",
+    "url": "https://uasystem.isolvedhire.com/jobs/",
+    "at": "2026-11-06T08:47:32.095227+00:00",
+    "revision": "e8d3b69c87b75e80c779e5ea422baab157af0a17",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "2e841fdde89825355dacb0916aaa9e9ffde7ab99def3fa4c6544dcc423fadd20",
+    "count": 0,
+    "status": "FAILED",
+    "complete": false,
+    "error": "ValueError: Missing unique career JobPosting document",
+    "finished_at": "2026-11-06T08:47:35.955550+00:00"
+  },
+  {
+    "provider": "iSolvedHire",
+    "url": "https://verifiedcredentials.isolvedhire.com/jobs/",
+    "at": "2026-11-06T08:47:36.456777+00:00",
+    "revision": "e8d3b69c87b75e80c779e5ea422baab157af0a17",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "2e841fdde89825355dacb0916aaa9e9ffde7ab99def3fa4c6544dcc423fadd20",
+    "count": 3,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "47239e4aa37b8d6eff9e3a058160add5974f45ca00f977fc19399b65aa1462e4",
+    "finished_at": "2026-11-06T08:47:42.596289+00:00"
+  }
+]

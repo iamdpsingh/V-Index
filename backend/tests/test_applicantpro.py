@@ -54,7 +54,7 @@ def schema(suffix):
 
 def detail(suffix, data=None, canonical=None):
     return f'''<html><head><link rel="canonical" href="{canonical or f"https://example.{suffix}/jobs/123.html"}">
-    <script type="application/ld+json">{json.dumps(data or schema(suffix))}</script></head><body><script>
+    <title>Engineer - London - Example Jobs</title><script type="application/ld+json">{json.dumps(data or schema(suffix))}</script></head><body><script>
     ['JobDetail']; ['InlineAuth']; organizationId: 1, domainId: 10, jobListingId: 123;
     </script></body></html>'''
 
@@ -67,6 +67,8 @@ def run(
     canonical=None,
     status=200,
     html=None,
+    core=None,
+    omit_schema=False,
 ):
     suffix = {"applicantpro": "applicantpro.com", "isolvedhire": "isolvedhire.com"}[provider]
     calls = 0
@@ -89,8 +91,30 @@ def run(
                     if value is not None
                     else {"success": True, "data": {"jobs": [listing(suffix)], "jobCount": 1}},
                 )
+            if request.url.path == "/core/jobs/10/123/job-details":
+                return httpx.Response(
+                    200,
+                    json=core
+                    if core is not None
+                    else {
+                        "success": True,
+                        "data": {
+                            "id": 123,
+                            "siteId": 10,
+                            "title": "Engineer",
+                            "description": "<p>Build</p>",
+                            "benefits": "",
+                            "jobDescriptionFile": "",
+                        },
+                    },
+                )
             assert request.url.path == "/jobs/123"
-            return httpx.Response(status, text=detail(suffix, job, canonical))
+            body = detail(suffix, job, canonical)
+            if omit_schema:
+                import re
+
+                body = re.sub(r'<script type="application/ld\+json">.*?</script>', "", body)
+            return httpx.Response(status, text=body)
 
         async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
             return await create_connector(provider, "example", "Configured", client).discover()
@@ -193,3 +217,38 @@ def test_platform_names_and_hosts_remain_distinct():
     ):
         with pytest.raises(ValueError):
             detect(url)
+
+
+def test_public_detail_fills_real_jsonld_omission_without_inventing_schema():
+    job = run(provider="isolvedhire", omit_schema=True).jobs[0]
+    assert job.description == "Build" and job.raw["jobposting"] is None
+    assert "jobposting_schema_missing" in job.quality_flags and job.published_at is None
+    assert job.raw["public_job_detail"]["id"] == 123
+
+
+@pytest.mark.parametrize(
+    "changes",
+    [
+        {"id": True},
+        {"siteId": 20},
+        {"title": "Other"},
+        {"description": None},
+        {"jobDescriptionFile": "attachment.pdf"},
+    ],
+)
+def test_public_detail_malformed_identity_and_unhandled_attachment_abort(changes):
+    data = {
+        "id": 123,
+        "siteId": 10,
+        "title": "Engineer",
+        "description": "<p>Build</p>",
+        "jobDescriptionFile": "",
+    }
+    data.update(changes)
+    with pytest.raises(ValueError):
+        run(core={"success": True, "data": data})
+
+
+def test_public_detail_failure_is_not_empty_snapshot():
+    with pytest.raises(ValueError):
+        run(core={"success": False})

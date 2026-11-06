@@ -87,19 +87,34 @@ class ApplicantProConnector:
         return result
 
     def parse(self, payload: Any) -> list[JobInput]:
-        listing, info, body = payload
+        listing, info, body, detail = payload
         identifier = listing["id"]
         url = listing["jobUrl"]
         if b"</html>" not in body.lower():
             raise ValueError("Truncated career job detail")
+        if detail["success"] is not True:
+            raise ValueError("Public career detail request reported failure")
+        data = detail["data"]
+        if (
+            type(data["id"]) is not int
+            or data["id"] != identifier
+            or type(data["siteId"]) is not int
+            or data["siteId"] != info[1]
+            or data["title"] != listing["title"]
+            or not isinstance(data["description"], str)
+            or data.get("jobDescriptionFile")
+        ):
+            raise ValueError(
+                "Public career detail ID/site/title mismatch or unsupported attachment"
+            )
         soup = BeautifulSoup(body, "html.parser")
         schemas = [
             json.loads(s.get_text()) for s in soup.select('script[type="application/ld+json"]')
         ]
         schemas = [s for s in schemas if isinstance(s, dict) and s.get("@type") == "JobPosting"]
-        if len(schemas) != 1:
-            raise ValueError("Missing unique career JobPosting document")
-        row = schemas[0]
+        if len(schemas) > 1:
+            raise ValueError("Ambiguous career JobPosting documents")
+        row = schemas[0] if schemas else None
         canonical = soup.select_one('link[rel="canonical"]')
         scripts = "\n".join(s.get_text() for s in soup.select("script:not([src])"))
         jobs = set(re.findall(r"jobListingId\s*:\s*([1-9][0-9]*)", scripts))
@@ -110,28 +125,40 @@ class ApplicantProConnector:
             )
         }
         if (
-            row["title"] != listing["title"]
-            or row["identifier"]["sameAs"] != str(identifier)
-            or row["url"] not in (url, url + ".html")
-            or canonical is None
+            canonical is None
             or jobs != {str(identifier)}
             or ids != {(info[0], info[1])}
             or "'JobDetail'" not in scripts
             or "'InlineAuth'" not in scripts
         ):
             raise ValueError("Career detail job/board/application identity mismatch")
+        if row is not None:
+            if (
+                row["title"] != listing["title"]
+                or row["identifier"]["sameAs"] != str(identifier)
+                or row["url"] not in (url, url + ".html")
+            ):
+                raise ValueError("Career JobPosting identity mismatch")
+            # A present but malformed description must not silently become a missing schema.
+            text(row["description"])
+        else:
+            page_title = soup.title.get_text(strip=True) if soup.title else ""
+            if not page_title.startswith(listing["title"] + " - ") or not page_title.endswith(
+                info[2] + " Jobs"
+            ):
+                raise ValueError("Career HTML fallback title/employer identity mismatch")
         p = urlsplit(str(canonical.get("href", "")))
-        canonical_prefix = f"/openings/{self.slug}/jobs/{identifier}"
+        prefix = f"/openings/{self.slug}/jobs/{identifier}"
         native = p.netloc == self.host and p.path in (
             f"/jobs/{identifier}",
             f"/jobs/{identifier}.html",
         )
         shared = p.netloc == "www." + self.suffix and (
-            p.path == canonical_prefix or p.path.startswith(canonical_prefix + "/")
+            p.path == prefix or p.path.startswith(prefix + "/")
         )
         if p.scheme != "https" or p.query or p.fragment or not (native or shared):
             raise ValueError("Career canonical URL does not match fixed provider/tenant/job")
-        salary = row.get("baseSalary")
+        salary = row.get("baseSalary") if row else None
         if salary:
             amount = salary.get("value")
             if isinstance(amount, dict):
@@ -141,24 +168,60 @@ class ApplicantProConnector:
                     salary = None
             elif amount in (None, ""):
                 salary = None
-        description = text(row["description"])
+        if row is None:
+            supplied = {
+                k: listing.get(k)
+                for k in ("minSalary", "maxSalary", "payRate", "payTypeFrame", "payDetails")
+            }
+            if any(
+                supplied.get(k) not in (None, "")
+                for k in ("minSalary", "maxSalary", "payRate", "payDetails")
+            ):
+                salary = supplied
+        description = text(data["description"])
+        if data.get("benefits"):
+            description += "\n\nBenefits\n" + text(data["benefits"])
+        flags = [] if row else ["jobposting_schema_missing"]
+        if not description:
+            flags.append("description_missing")
         return [
             JobInput(
                 external_id=str(identifier),
-                title=row["title"],
-                company=row["hiringOrganization"]["name"],
+                title=listing["title"],
+                company=row["hiringOrganization"]["name"] if row else info[2],
                 description=description,
-                quality_flags=[] if description else ["description_missing"],
+                quality_flags=flags,
                 location=listing["jobLocation"] or "",
                 source_url=url,
                 application_url=url,
                 salary=salary,
-                employment_type=listing["employmentType"] or row.get("employmentType"),
-                remote_status=listing["workplaceType"] or row.get("jobLocationType"),
-                published_at=row.get("datePosted"),
+                employment_type=listing["employmentType"]
+                or (row.get("employmentType") if row else None),
+                remote_status=listing["workplaceType"]
+                or (row.get("jobLocationType") if row else None),
+                published_at=row.get("datePosted") if row else None,
                 raw={
                     "listing": listing,
                     "jobposting": row,
+                    "public_job_detail": {
+                        k: v
+                        for k, v in data.items()
+                        if k
+                        in {
+                            "id",
+                            "siteId",
+                            "title",
+                            "description",
+                            "benefits",
+                            "advertisingDescription",
+                            "advertisingDescriptionHtml",
+                            "startDateRef",
+                            "endDateRef",
+                            "hideFromIndeed",
+                            "untilFilled",
+                            "payDetails",
+                        }
+                    },
                     "canonical_url": str(canonical["href"]),
                     "board": {"organization_id": info[0], "domain_id": info[1], "title": info[2]},
                     "application_entry": "native_inline_auth",
@@ -185,7 +248,9 @@ class ApplicantProConnector:
         rows = self.listings(await read(collection, True), info[1])
         jobs = []
         for row in rows.values():
-            jobs.extend(self.parse((row, info, await read(row["jobUrl"]))))
+            body = await read(row["jobUrl"])
+            detail = await read(f"{self.origin}/core/jobs/{info[1]}/{row['id']}/job-details", True)
+            jobs.extend(self.parse((row, info, body, detail)))
         if (
             self.board_info(await read(board_url)) != info
             or self.listings(await read(collection, True), info[1]) != rows

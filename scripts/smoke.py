@@ -281,7 +281,7 @@ async def main():
                     *(
                         {
                             "ApplicantPro": [
-                                "Hosted applicantpro.com current public core/jobs component plus mandatory JobPosting detail only; custom domains/alternate templates unsupported",
+                                "Hosted applicantpro.com current public core/jobs component plus mandatory current public job detail and native page checks; custom domains/alternate templates unsupported",
                                 "Board-discovered organization/domain identity, explicit external-only isInternal=0 collection, exact count/unique IDs and fixed tenant job links required",
                                 "Maximum 400 details; empty, partial, changed and failed enumerations abort without reconciliation; board and full collection reconfirmed",
                                 "Native and fixed shared-vendor canonical aliases are validated as metadata; redirects are never followed; native inline application page is the application entry",
@@ -290,7 +290,7 @@ async def main():
                             "iSolvedHire": [
                                 "Separate required platform/host/evidence from ApplicantPro, sharing the observed current public core/jobs template only",
                                 "Hosted isolvedhire.com boards only; exact discovered site IDs, external-only isInternal=0 collection and count/unique IDs are mandatory",
-                                "Maximum 400 matching JobPosting details; board, native application component and complete collection reconfirmed; custom domains/alternate templates unsupported",
+                                "Maximum 400 matching public job details; optional source JobPosting retained or omission flagged; board/native application/full collection reconfirmed; custom domains/alternate templates unsupported",
                                 "Empty/failed/partial snapshots never close jobs; source labels/publication precision and actual supplied salaries retained without invention",
                             ],
                             "Jobvite": [

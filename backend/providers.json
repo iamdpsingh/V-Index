@@ -18,16 +18,51 @@
     "name": "ApplicantPro",
     "kind": "ats",
     "implementation_status": "IMPLEMENTED",
-    "evidence_status": "NOT_STARTED",
+    "evidence_status": "LIVE_VERIFIED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
+    "examples": [
+      {
+        "provider": "ApplicantPro",
+        "url": "https://farbank.applicantpro.com/jobs/",
+        "at": "2026-11-06T08:47:19.361022+00:00",
+        "revision": "e8d3b69c87b75e80c779e5ea422baab157af0a17",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "2e841fdde89825355dacb0916aaa9e9ffde7ab99def3fa4c6544dcc423fadd20",
+        "count": 2,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "b0aef0fb6459c61bd4cf917d01d6edd58c99dd01ee4fc1870385c7aa90dbdbf2",
+        "finished_at": "2026-11-06T08:47:25.141058+00:00"
+      },
+      {
+        "provider": "ApplicantPro",
+        "url": "https://clarke.applicantpro.com/jobs/",
+        "at": "2026-11-06T08:47:25.642430+00:00",
+        "revision": "e8d3b69c87b75e80c779e5ea422baab157af0a17",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "2e841fdde89825355dacb0916aaa9e9ffde7ab99def3fa4c6544dcc423fadd20",
+        "count": 3,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "2c275d179c736a25ff99e0057db2713803b11bee15129b45ca886bfc11dcb3f9",
+        "finished_at": "2026-11-06T08:47:31.593926+00:00"
+      }
+    ],
+    "last_run_at": "2026-11-06T08:47:31.593926+00:00",
+    "extraction_count": 5,
     "failure_reason": null,
     "limitations": [
-      "Current hosted public core/jobs template and mandatory matching JobPosting details only; maximum 400 jobs",
-      "Custom domains, alternate templates and empty snapshots unsupported; independent multi-employer live verification pending"
+      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
+      "Hosted applicantpro.com current public core/jobs component plus mandatory JobPosting detail only; custom domains/alternate templates unsupported",
+      "Board-discovered organization/domain identity, explicit external-only isInternal=0 collection, exact count/unique IDs and fixed tenant job links required",
+      "Maximum 400 details; empty, partial, changed and failed enumerations abort without reconciliation; board and full collection reconfirmed",
+      "Native and fixed shared-vendor canonical aliases are validated as metadata; redirects are never followed; native inline application page is the application entry",
+      "Source datePosted retains missing timezone precision; invalid validThrough strings remain raw and are not used for closure; empty salary amounts remain unknown"
     ]
   },
   {
@@ -595,16 +630,48 @@
     "name": "iSolvedHire",
     "kind": "ats",
     "implementation_status": "IMPLEMENTED",
-    "evidence_status": "NOT_STARTED",
+    "evidence_status": "FAILED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
-    "failure_reason": null,
+    "examples": [
+      {
+        "provider": "iSolvedHire",
+        "url": "https://uasystem.isolvedhire.com/jobs/",
+        "at": "2026-11-06T08:47:32.095227+00:00",
+        "revision": "e8d3b69c87b75e80c779e5ea422baab157af0a17",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "2e841fdde89825355dacb0916aaa9e9ffde7ab99def3fa4c6544dcc423fadd20",
+        "count": 0,
+        "status": "FAILED",
+        "complete": false,
+        "error": "ValueError: Missing unique career JobPosting document",
+        "finished_at": "2026-11-06T08:47:35.955550+00:00"
+      },
+      {
+        "provider": "iSolvedHire",
+        "url": "https://verifiedcredentials.isolvedhire.com/jobs/",
+        "at": "2026-11-06T08:47:36.456777+00:00",
+        "revision": "e8d3b69c87b75e80c779e5ea422baab157af0a17",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "2e841fdde89825355dacb0916aaa9e9ffde7ab99def3fa4c6544dcc423fadd20",
+        "count": 3,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "47239e4aa37b8d6eff9e3a058160add5974f45ca00f977fc19399b65aa1462e4",
+        "finished_at": "2026-11-06T08:47:42.596289+00:00"
+      }
+    ],
+    "last_run_at": "2026-11-06T08:47:42.596289+00:00",
+    "extraction_count": 3,
+    "failure_reason": "ValueError: Missing unique career JobPosting document",
     "limitations": [
-      "Current hosted public core/jobs template and mandatory matching JobPosting details only; maximum 400 jobs",
-      "Custom domains, alternate templates and empty snapshots unsupported; independent multi-employer live verification pending"
+      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
+      "Separate required platform/host/evidence from ApplicantPro, sharing the observed current public core/jobs template only",
+      "Hosted isolvedhire.com boards only; exact discovered site IDs, external-only isInternal=0 collection and count/unique IDs are mandatory",
+      "Maximum 400 matching JobPosting details; board, native application component and complete collection reconfirmed; custom domains/alternate templates unsupported",
+      "Empty/failed/partial snapshots never close jobs; source labels/publication precision and actual supplied salaries retained without invention"
     ]
   },
   {
