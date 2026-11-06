@@ -7,7 +7,9 @@ import httpx
 from vindex.connectors.personio import PersonioConnector
 from vindex.connectors.public import Connector, PublicConnector
 from vindex.connectors.public import detect as detect_original
+from vindex.connectors.recruitee import RecruiteeConnector
 from vindex.connectors.smartrecruiters import SmartRecruitersConnector
+from vindex.connectors.workday import HOST_PATTERN, SITE_PATTERN, WorkdayConnector
 
 PERSONIO_HOST = re.compile(r"([a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)\.jobs\.personio\.(de|com)")
 
@@ -16,6 +18,22 @@ def detect(url: str) -> tuple[str, str]:
     p = urlsplit(url)
     if p.scheme != "https" or p.username or p.password or p.port not in (None, 443):
         raise ValueError("Use an HTTPS hosted career board URL without credentials or custom ports")
+    workday = HOST_PATTERN.fullmatch(p.hostname or "")
+    if workday:
+        parts = p.path.strip("/").split("/")
+        if re.fullmatch(r"[a-z]{2,3}-[A-Z]{2}", parts[0]):
+            parts = parts[1:]
+        if not parts or not SITE_PATTERN.fullmatch(parts[0]):
+            raise ValueError("Expected a Workday external career-site identifier")
+        slug = f"{workday[1]}~{workday[2]}~{parts[0]}"
+        if len(slug) > 100:
+            raise ValueError("Workday configuration exceeds storage limit")
+        return "workday", slug
+    recruitee = re.fullmatch(
+        r"([a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)\.recruitee\.com", p.hostname or ""
+    )
+    if recruitee:
+        return "recruitee", recruitee[1]
     personio = PERSONIO_HOST.fullmatch(p.hostname or "")
     if personio:
         return f"personio-{personio[2]}", personio[1]
@@ -28,13 +46,17 @@ def detect(url: str) -> tuple[str, str]:
         return detect_original(url)
     except ValueError as error:
         raise ValueError(
-            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters and Personio"
+            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters Personio, Recruitee and hosted Workday"
         ) from error
 
 
 def create_connector(
     provider: str, slug: str, company: str, client: httpx.AsyncClient
 ) -> Connector:
+    if provider == "workday":
+        return WorkdayConnector(provider, slug, company, client)
+    if provider == "recruitee":
+        return RecruiteeConnector(provider, slug, company, client)
     if provider == "smartrecruiters":
         return SmartRecruitersConnector(provider, slug, company, client)
     if provider in {"personio-de", "personio-com"}:

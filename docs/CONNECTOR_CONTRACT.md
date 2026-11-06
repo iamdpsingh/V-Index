@@ -22,3 +22,17 @@ SmartRecruiters rejects changed totals/offsets, repeated IDs, non-public listing
 Personio reads the full default XML feed using defusedxml with DTD/entities disabled. If descriptions are empty, it tries documented en/de/fr/es/nl/it/pt feed translations; enrichment retains original XML and the chosen translation language. Translation IDs cannot expand the original snapshot. If descriptions remain missing, the run fails. createdAt is retained as source metadata without relabelling it publication date. Salary source text and multiple offices are preserved; no salary currency/unit or remote inference is invented.
 
 All implemented connectors use bounded PublicHTTP reads with provider-controlled hosts, HTTPS, no redirects, 20 MB decompressed response limits and three-attempt retry budgets. Retry-After up to 30 seconds is honored inline; longer waits fail into durable source cooldown.
+
+## Cohort 3: Workday and Recruitee
+
+Workday supports one validated tenant label and wd data-center label under myworkdayjobs.com. Configuration encodes tenant~data-center~career-site within the existing 100-character source key. Optional language prefixes in submitted hosted URLs are recognized; myworkdaysite.com and custom domains are not supported yet. The source externalUrl is preserved for both listing and application entry; no unobserved application route is invented. Source startDate is retained in raw, without asserting original publication semantics.
+
+Only the public, read-only career-search POST is used. Robots rules are loaded before search/detail requests and crawl pacing is enforced. A genuine robots 404 is treated as absent; redirects, authorization errors and other fetch failures abort. First-page total, unique listing paths, stable posting IDs, site/posted state and listing/detail agreement are required. Later pages may report total=0. A terminal empty page or exact first-page reset is accepted at the advertised boundary, followed by first-page/total reconfirmation. Changed or extra terminal paths are rejected. Reported totals at/above 2000 and boards above the 400-detail budget fail closed. This is a bounded implementation; large-board completeness is not claimed. Every failure still preserves indexed jobs.
+
+Recruitee uses its documented /api/feeds/offers.xml endpoint, not the careers JSON API that is moving to mandatory tokens on February 10, 2027. Feed/root/IDs, HTTPS output links and date syntax are checked; DTD/entities and duplicate IDs fail. Descriptions/requirements, publication time, source salary fields, work model and employment type are preserved. Original custom-domain application links are retained even though source registration currently needs the hosted tenant URL.
+
+Primary Recruitee references, checked 2026-11-06:
+- https://support.recruitee.com/en/articles/8213076-faq-api
+- https://docs.recruitee.com/reference/authentication-1
+
+Workday behavior was observed directly on public employer-hosted boards; no documented integration API guarantee is claimed. Regression evidence includes IMF boundary-offset responses and both IMF/Gates detail samples.

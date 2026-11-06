@@ -1,0 +1,9 @@
+Sitemap: https://imf.wd5.myworkdayjobs.com/world_bank/siteMap.xml
+Sitemap: https://imf.wd5.myworkdayjobs.com/IMF/siteMap.xml
+
+User-agent: *
+Allow: /world_bank/
+Allow: /IMF/
+Disallow: /midcareer/
+Disallow: /HidExternal/
+Disallow: /refreshFacet/

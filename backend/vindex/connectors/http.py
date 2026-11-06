@@ -5,7 +5,7 @@ import json
 import random
 from datetime import UTC, datetime
 from email.utils import parsedate_to_datetime
-from typing import Any
+from typing import Any, Literal
 from urllib.parse import urlsplit
 
 import httpx
@@ -13,11 +13,23 @@ import httpx
 MAX_RESPONSE_BYTES = 20_000_000
 
 
+class UpstreamStatusError(ValueError):
+    def __init__(self, status_code: int):
+        self.status_code = status_code
+        super().__init__(f"Upstream HTTP {status_code}")
+
+
 class PublicHTTP:
     def __init__(self, client: httpx.AsyncClient, hosts: set[str]):
         self.client, self.hosts = client, hosts
 
-    async def read(self, url: str) -> bytes:
+    async def read(
+        self,
+        url: str,
+        *,
+        method: Literal["GET", "POST"] = "GET",
+        json_body: dict[str, Any] | None = None,
+    ) -> bytes:
         parsed = urlsplit(url)
         if (
             parsed.scheme != "https"
@@ -29,11 +41,13 @@ class PublicHTTP:
             raise ValueError("Outbound URL rejected")
         for attempt in range(3):
             try:
-                async with self.client.stream("GET", url, follow_redirects=False) as response:
+                async with self.client.stream(
+                    method, url, json=json_body, follow_redirects=False
+                ) as response:
                     if response.status_code == 429 or response.status_code >= 500:
                         response.raise_for_status()
                     if response.status_code != 200:
-                        raise ValueError(f"Upstream HTTP {response.status_code}")
+                        raise UpstreamStatusError(response.status_code)
                     body = bytearray()
                     async for chunk in response.aiter_bytes():
                         body.extend(chunk)
@@ -62,5 +76,11 @@ class PublicHTTP:
                 await asyncio.sleep(min(30, delay))
         raise RuntimeError("Retry budget exhausted")
 
-    async def json(self, url: str) -> Any:
-        return json.loads(await self.read(url))
+    async def json(
+        self,
+        url: str,
+        *,
+        method: Literal["GET", "POST"] = "GET",
+        json_body: dict[str, Any] | None = None,
+    ) -> Any:
+        return json.loads(await self.read(url, method=method, json_body=json_body))

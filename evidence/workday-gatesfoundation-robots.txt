@@ -1,0 +1,9 @@
+Sitemap: https://gatesfoundation.wd1.myworkdayjobs.com/Gates/siteMap.xml
+Sitemap: https://gatesfoundation.wd1.myworkdayjobs.com/GatesMRI/siteMap.xml
+Sitemap: https://gatesfoundation.wd1.myworkdayjobs.com/GatesAgOne/siteMap.xml
+
+User-agent: *
+Allow: /Gates/
+Allow: /GatesMRI/
+Allow: /GatesAgOne/
+Disallow: /refreshFacet/

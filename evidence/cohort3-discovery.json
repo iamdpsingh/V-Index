@@ -1,0 +1,26 @@
+[
+  {
+    "url": "https://recruitee.recruitee.com/api/feeds/offers.xml",
+    "status": 404,
+    "at": "2026-11-06T01:34:41.334833+00:00",
+    "bytes": 21,
+    "total": null,
+    "page_count": null
+  },
+  {
+    "url": "https://nvidia.wd5.myworkdayjobs.com/wday/cxs/nvidia/NVIDIAExternalCareerSite/jobs",
+    "status": 200,
+    "at": "2026-11-06T01:34:43.183775+00:00",
+    "bytes": 4947,
+    "total": 0,
+    "page_count": 20
+  },
+  {
+    "url": "https://natilik.recruitee.com/api/feeds/offers.xml",
+    "status": 200,
+    "at": "2026-11-06T01:34:43.928664+00:00",
+    "bytes": 76540,
+    "total": null,
+    "page_count": null
+  }
+]

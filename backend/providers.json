@@ -779,7 +779,7 @@
   {
     "name": "Recruitee",
     "kind": "ats",
-    "implementation_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
     "evidence_status": "NOT_STARTED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
@@ -788,7 +788,7 @@
     "extraction_count": null,
     "failure_reason": null,
     "limitations": [
-      "Connector not implemented"
+      "Cohort 3 implemented; formal multi-tenant live verification pending"
     ]
   },
   {
@@ -1021,7 +1021,7 @@
   {
     "name": "Workday",
     "kind": "ats",
-    "implementation_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
     "evidence_status": "NOT_STARTED",
     "risk": "HIGH",
     "risk_basis": "Planning estimate; not validated provider behavior",
@@ -1030,7 +1030,7 @@
     "extraction_count": null,
     "failure_reason": null,
     "limitations": [
-      "Connector not implemented"
+      "Cohort 3 implemented; formal multi-tenant live verification pending"
     ],
     "research": {
       "status": "INVESTIGATED",

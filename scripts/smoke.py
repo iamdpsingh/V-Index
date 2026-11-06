@@ -42,6 +42,16 @@ EXAMPLES = [
     ),
     ("Personio", "personio-de", "matrix42", "Matrix42", "https://matrix42.jobs.personio.de"),
     ("Personio", "personio-de", "planqc-gmbh", "planqc", "https://planqc-gmbh.jobs.personio.de"),
+    ("Recruitee", "recruitee", "natilik", "Natilik", "https://natilik.recruitee.com"),
+    ("Recruitee", "recruitee", "bunq", "bunq", "https://bunq.recruitee.com"),
+    ("Workday", "workday", "imf~wd5~IMF", "IMF", "https://imf.wd5.myworkdayjobs.com/IMF"),
+    (
+        "Workday",
+        "workday",
+        "gatesfoundation~wd1~Gates",
+        "Gates Foundation",
+        "https://gatesfoundation.wd1.myworkdayjobs.com/Gates",
+    ),
 ]
 
 
@@ -150,6 +160,16 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "Workday": [
+                                "Hosted myworkdayjobs.com sites only; myworkdaysite.com/custom domains are unsupported",
+                                "Boards above 400 jobs or reported totals at/above 2000 fail closed; large-board completeness is not claimed",
+                                "Robots policy and pacing are enforced; a missing robots file (404) is allowed, other robots failures abort",
+                                "Verified counts depend on source totals plus ID/detail checks and first-page reconfirmation, not a transactional upstream snapshot",
+                            ],
+                            "Recruitee": [
+                                "Uses documented XML feed; the careers JSON API token deadline (2027-02-10) is an external dependency to monitor",
+                                "Custom application links are preserved; custom-domain source URL detection remains unsupported",
+                            ],
                             "Personio": [
                                 "Live tenants use .de; .com route is implemented but not live-tested",
                                 "XML feed must be enabled; incomplete translated descriptions fail the run",
