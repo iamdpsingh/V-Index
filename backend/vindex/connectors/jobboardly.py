@@ -126,16 +126,23 @@ class JobboardlyConnector:
         if len(workplace_labels) > 1:
             raise ValueError("Ambiguous JobBoardly workplace labels")
         workplace = workplace_labels[0] if workplace_labels else row.get("jobLocationType")
+        flags = [] if description else ["description_missing"]
+        application = targets[0]
+        if urlsplit(application).scheme == "mailto":
+            # The public posting is the application entry point for email-only roles.
+            # Preserve the actual destination in raw; public API links remain HTTPS.
+            application = row["url"]
+            flags.append("application_by_email")
         return [
             JobInput(
                 external_id=str(key),
                 title=row["title"],
                 company=row["hiringOrganization"]["name"],
                 description=description,
-                quality_flags=[] if description else ["description_missing"],
+                quality_flags=flags,
                 location="; ".join(locations),
                 source_url=row["url"],
-                application_url=targets[0],
+                application_url=application,
                 employment_type=employment,
                 remote_status=workplace,
                 salary=row.get("baseSalary"),

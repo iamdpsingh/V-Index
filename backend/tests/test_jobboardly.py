@@ -98,6 +98,17 @@ def test_public_board_preserves_real_employer_application_and_workplace():
     assert all("employer.example.org" not in request for request in requests)
 
 
+def test_email_only_application_keeps_original_destination_and_https_entry():
+    body = detail().replace(
+        "https://employer.example.org/jobs/engineer/apply", "mailto:jobs@example.org"
+    )
+    batch, _ = run(bodies={ONE: body})
+    job = batch.jobs[0]
+    assert job.application_url == job.source_url == ORIGIN + ONE
+    assert job.raw["application_url"] == "mailto:jobs@example.org"
+    assert job.quality_flags == ["application_by_email"]
+
+
 def test_multiple_pages_require_correct_ranges_and_terminal_control():
     batch, requests = run(
         pages={1: page([ONE], next_page=2), 2: page([TWO], start=2)},

@@ -194,7 +194,8 @@ async def main():
                                 "Hosted jobboardly.com HTML listings only; custom-domain registration and redirecting hosted aliases are unsupported",
                                 "Explicit sequential Next controls, range counters, unique links and successful JobPosting/apply details are required",
                                 "Maximum 400 details/100 pages; empty pages fail closed rather than proving closures",
-                                "JSON-LD preserves salary, employment type, locations and datePosted; source workplace metadata beyond jobLocationType remains raw/unmapped",
+                                "JSON-LD preserves salary, employment type, locations and datePosted; explicit visible workplace labels are preserved",
+                                "Email-only applications retain the mailto destination in raw, use the original HTTPS posting as the application entry point, and carry application_by_email",
                                 "Completeness follows the public pagination contract plus first-page reconfirmation, not a transactional upstream snapshot",
                             ],
                             "Pinpoint": [
