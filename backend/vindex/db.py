@@ -2,7 +2,16 @@ import os
 from datetime import UTC, datetime
 from typing import Any
 
-from sqlalchemy import JSON, DateTime, ForeignKey, Integer, String, UniqueConstraint, create_engine
+from sqlalchemy import (
+    JSON,
+    DateTime,
+    ForeignKey,
+    Integer,
+    String,
+    UniqueConstraint,
+    create_engine,
+    event,
+)
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, sessionmaker
 
 
@@ -73,4 +82,11 @@ class Event(Base):
 
 
 engine = create_engine(os.getenv("DATABASE_URL", "sqlite:///vindex.db"))
+if engine.dialect.name == "sqlite":
+
+    @event.listens_for(engine, "connect")
+    def enforce_sqlite_foreign_keys(connection, _):
+        connection.execute("PRAGMA foreign_keys=ON")
+
+
 Session = sessionmaker(engine, expire_on_commit=False)

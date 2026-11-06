@@ -115,7 +115,13 @@ def save_profile(body: ProfileInput, request: Request):
             session.add(saved)
         saved.data = body.model_dump()
         saved.updated_at = now()
-        session.commit()
+        try:
+            session.commit()
+        except IntegrityError as error:
+            session.rollback()
+            raise HTTPException(
+                409, "Account changed while saving profile; sign in again"
+            ) from error
         return {**saved.data, "updated_at": saved.updated_at}
 
 

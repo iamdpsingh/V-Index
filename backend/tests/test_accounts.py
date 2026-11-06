@@ -175,3 +175,22 @@ def test_registration_origin_and_rate_fail_closed(account_client, monkeypatch):
         ).status_code
         == 503
     )
+
+
+def test_private_rows_cannot_outlive_a_missing_owner(database):
+    from sqlalchemy.exc import IntegrityError
+
+    with database() as session:
+        session.add(Profile(account_id="missing-owner", data={"bio": "A private test value"}))
+        with pytest.raises(IntegrityError):
+            session.commit()
+        session.rollback()
+
+
+def test_application_sqlite_connections_enable_foreign_keys():
+    from sqlalchemy import text
+    from vindex.db import engine
+
+    if engine.dialect.name == "sqlite":
+        with engine.connect() as connection:
+            assert connection.scalar(text("PRAGMA foreign_keys")) == 1

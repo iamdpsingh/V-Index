@@ -2,6 +2,7 @@ from urllib.parse import quote, unquote
 
 from fastapi import APIRouter, Depends, Header, HTTPException, Request, Response
 from sqlalchemy import select
+from sqlalchemy.exc import IntegrityError
 from starlette.concurrency import run_in_threadpool
 
 from vindex.accounts.matching import detected_skills
@@ -91,7 +92,13 @@ async def upload_resume(request: Request, x_filename: str = Header()):
         saved.size_bytes = len(data)
         saved.text_characters = len(text)
         saved.updated_at = now()
-        session.commit()
+        try:
+            session.commit()
+        except IntegrityError as error:
+            session.rollback()
+            raise HTTPException(
+                409, "Account changed while saving resume; sign in again"
+            ) from error
         return metadata(saved)
 
 
