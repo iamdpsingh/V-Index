@@ -1,5 +1,9 @@
 # Antigravity frontend handoff
 
+**Frontend delivery review:** 66baef8 independently passes dependency install, build and typecheck. Preserve that implementation. Before release, fix swallowed logout errors and the hardcoded India default, and actually test logout rather than only opening Profile. See [FRONTEND_REVIEW_66baef8.md](FRONTEND_REVIEW_66baef8.md). This is a documented handoff, not an assumption that an agent has been notified.
+
+**Latest owner update — November 7:** coverage first, then remaining backend work. Batch pushes every 12 hours; maintain the frontend handoff alongside connector/API additions. Antigravity's implementation is present at `66baef8` and remains in its separate worktree pending reviewed integration. See [COVERAGE_WORKFLOW.md](COVERAGE_WORKFLOW.md).
+
 **Latest product revision — November 7:** public UI is a finished product experience: no test/CI totals, smoke labels, acquisition progress or raw configuration errors. Codex supplied an original ribbon R logo and Free/Plus pricing design/API. Read PLANS_AND_PRICING.md and SECURITY_REVIEW_2026-11-07.md along with the current design specification. Preserve every coverage, API, privacy and backend requirement.
 
 **Latest owner instruction — November 7:** Codex supplies the frontend design; **Antigravity implements it** in its existing separate frontend worktree. This supersedes the frontend hold and earlier Codex-frontend takeover notes. Read [ROLEWISP_FRONTEND_DESIGN.md](ROLEWISP_FRONTEND_DESIGN.md) and [ANTIGRAVITY_DESIGN_TASK.md](ANTIGRAVITY_DESIGN_TASK.md) first. Preserve frontend commit `3bc0a54` and existing API wiring; no external agent is assumed launched or notified. Codex continues backend and coverage. The original 78-platform objective is unchanged.
@@ -49,3 +53,9 @@ The owner retained frontend ownership with Antigravity and requested account/pro
 ## GoHire, Polymer and Manatal integration — November 6
 
 The existing source form now accepts GoHire jobs.gohire.io/{board}, Polymer jobs.polymer.co/{organization}, and Manatal www.careers-page.com/{tenant} URLs. No new frontend configuration fields are needed. Use the live provider matrix for counts/limits: GoHire is English/hosted/bounded, Polymer requires explicit complete single-page metadata, and Manatal supports its legacy hosted template and validated pagination. A failed/unsupported source must show its actual run error, never an empty-success or closed-all state. Salary objects retain source text or source currency/range fields; do not invent a unit or period. Optional metadata remains unknown when absent. No frontend files changed in this cohort.
+
+## JBoard.io coverage work — November 7 (under live validation)
+
+Source registration accepts the reviewed JBoard origins jobs.aame.org and jobs.cisontario.ca, root or /jobs, through the existing API. No new source fields. The source company field is a company/board label; a multi-employer board's jobs preserve their actual employers, so do not use the board label as each job's employer or an automatic company filter. Additional arbitrary custom domains are not supported.
+
+The additive source_expiry_elapsed_while_listed quality flag means the complete public roster includes a job whose source closing timestamp has passed. Render a human-readable note such as “The source lists this role, but its closing date has passed. Check the original listing.” Do not turn it into an automatic closed status or show the raw identifier as consumer copy. Use a concise human explanation for unknown quality flags too. Coverage remains matrix-driven; this handoff does not itself grant live coverage.

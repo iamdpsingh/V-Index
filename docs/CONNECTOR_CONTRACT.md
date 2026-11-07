@@ -295,3 +295,11 @@ Supported source: `https://jobs.deel.com/{organization}`. Parse rendered public 
 ## November 7 public projection hardening
 
 GET /api/v1/jobs/{id} now returns JobOut, matching list-item projection. Each sources[] entry is only source_id, source_url, application_url, status, last_checked_at. No raw payload, observation.data, fingerprint or reconciliation bookkeeping is returned. Original observations remain in database storage for audit. Existing public fields and original links are retained. Regenerate frontend types from docs/openapi.json; never use a private/raw structure as a browser response.
+
+## JBoard.io public boards
+
+Provider code jboard is distinct from JobBoard.io. Fixed origins jobs.aame.org and jobs.cisontario.ca are operator-reviewed examples published in https://jboard.io/showcase. Accept their root or unfiltered /jobs. No arbitrary user-supplied custom hostname or credentialed API access is enabled; additional origins need reviewed platform/policy validation. The parser is shared across these independent boards and their multiple employers, not hardcoded job IDs.
+
+Require a unique robots-advertised native sitemap index; read all consecutive numbered job maps, not profile, company, category or blog maps. Every explicit next page of the native 30-item listing must agree exactly with the full job-map roster. Require complete native HTML and JobPosting for each listed job, matching ID, canonical URL, title, employer, full description and same-ID native application control. Reconfirm all list/map pages after mandatory details. Bounds: 200 jobs, seven listing pages/maps; errors, truncation, schema mismatch, unsafe/redirected URLs or changes never reconcile closures.
+
+Preserve actual hiring organizations rather than the operator's board label, full source description, source salary/employment/workplace and original publication/expiry metadata. Use human-visible native location labels; retain original structured geocoding, even where the source geocoder appears questionable, without inventing corrected geography. Source expiry elapsed while still listed is an explicit quality flag; do not silently close or discard the role. Applications, candidate profiles, resumes, alerts and tracking scripts are never requested/submitted. Ordinary public posting/apply links remain the original source/application entry points.

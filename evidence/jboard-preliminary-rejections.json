@@ -1,0 +1,18 @@
+{
+  "at": "2026-11-07T04:12:52.326791+00:00",
+  "scope": "Preliminary discovery failures, not platform verification",
+  "initial_rejections": [
+    {
+      "reason": "Non-job category sitemap filenames include numeric category identifiers; initial overly narrow index validator rejected them",
+      "fix": "Validate same-origin bounded sitemap filenames, fetch only strict consecutive job-map names; never fetch profile or candidate maps"
+    },
+    {
+      "url": "https://jobs.cisontario.ca/jobs/783720350-manager-privacy-and-ai-governance",
+      "reason": "Native header and full source description both contain h1; initial selector counted two headers",
+      "observed_header_count": 2,
+      "jobposting_count": 1,
+      "fix": "Exclude description descendants from native title/employer identity selection; preserve and compare complete source text"
+    }
+  ],
+  "live_coverage_granted": false
+}

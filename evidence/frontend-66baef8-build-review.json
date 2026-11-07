@@ -1,0 +1,13 @@
+{
+  "at": "2026-11-07T04:07:38.200580+00:00",
+  "revision": "66baef8",
+  "scope": "Independent build/typecheck of an exported frontend snapshot; no modification of the frontend worktree",
+  "checks": {
+    "npm ci": "passed",
+    "npm run build": "passed",
+    "npm run typecheck": "passed"
+  },
+  "browser_tests": "Author reports 166 passed; not independently rerun in this pass",
+  "integration_status": "Not merged; production acceptance pending documented logout and country-default fixes",
+  "review": "docs/FRONTEND_REVIEW_66baef8.md"
+}

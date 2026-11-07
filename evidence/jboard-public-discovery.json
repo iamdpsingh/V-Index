@@ -1,0 +1,21 @@
+{
+  "at": "2026-11-07T04:07:38.251664+00:00",
+  "platform": "JBoard.io",
+  "scope": "Public discovery only; no platform coverage claimed here",
+  "vendor_reference": "https://jboard.io/showcase",
+  "candidate_origins": [
+    "https://jobs.aame.org",
+    "https://jobs.cisontario.ca"
+  ],
+  "native_job_map_counts": {
+    "jobs.aame.org": 30,
+    "jobs.cisontario.ca": 48
+  },
+  "privacy": "Only robots, sitemap index/job maps, unfiltered job listing and full job documents; no profile sitemaps, account, alerts, application forms, resumes, tracking scripts or private APIs requested",
+  "bounds": "Fixed reviewed origins only; no arbitrary custom-domain registration enabled",
+  "unsupported_large_example": {
+    "origin": "https://nuclearjobscanada.ca",
+    "observed_job_map_count": 932,
+    "reason": "Exceeds planned 200 mandatory detail budget; discovery is not successful indexing"
+  }
+}

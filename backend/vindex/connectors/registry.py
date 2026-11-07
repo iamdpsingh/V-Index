@@ -26,6 +26,8 @@ from vindex.connectors.hireology import HireologyConnector
 from vindex.connectors.hiringthing import HiringThingConnector
 from vindex.connectors.icims import ICIMSConnector
 from vindex.connectors.jazzhr import JazzHRConnector
+from vindex.connectors.jboard import HOSTS as JBOARD_HOSTS
+from vindex.connectors.jboard import JBoardConnector
 from vindex.connectors.jobboardly import JobboardlyConnector
 from vindex.connectors.jobvite import JobviteConnector
 from vindex.connectors.join import JoinConnector
@@ -82,6 +84,10 @@ def detect(url: str) -> tuple[str, str]:
         match = re.fullmatch(rf"({TENANT})\.{re.escape(suffix)}", p.hostname or "")
         if match:
             return provider, match[1]
+    if p.hostname in JBOARD_HOSTS:
+        if p.path.rstrip("/") not in {"", "/jobs"} or p.query or p.fragment:
+            raise ValueError("Expected an unfiltered reviewed JBoard root or /jobs URL")
+        return "jboard", p.hostname
     if p.hostname == "jobs.deel.com":
         if p.query or p.fragment or not re.fullmatch(rf"/{TENANT}/?", p.path):
             raise ValueError("Expected an unfiltered native Deel careers root")
@@ -270,13 +276,15 @@ def detect(url: str) -> tuple[str, str]:
         return detect_original(url)
     except ValueError as error:
         raise ValueError(
-            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire, HiringThing, Freshteam, Trakstar, Rippling, Kula.ai, CareerPlug, TriNet, HireBridge, JOIN.com, Hireology, Paylocity, Zoho Recruit, Comeet, WeRecruit, FirstStage, Oracle Recruiting, CSOD, iCIMS, PageUp, Avature, Taleo, Eightfold AI and Deel"
+            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire, HiringThing, Freshteam, Trakstar, Rippling, Kula.ai, CareerPlug, TriNet, HireBridge, JOIN.com, Hireology, Paylocity, Zoho Recruit, Comeet, WeRecruit, FirstStage, Oracle Recruiting, CSOD, iCIMS, PageUp, Avature, Taleo, Eightfold AI, Deel and reviewed JBoard.io boards"
         ) from error
 
 
 def create_connector(
     provider: str, slug: str, company: str, client: httpx.AsyncClient
 ) -> Connector:
+    if provider == "jboard":
+        return JBoardConnector(provider, slug, company, client)
     if provider == "deel":
         return DeelConnector(provider, slug, company, client)
     if provider == "eightfold":

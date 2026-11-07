@@ -15,6 +15,14 @@ from vindex.connectors.registry import create_connector
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
+    (
+        "JBoard.io",
+        "jboard",
+        "jobs.aame.org",
+        "American Association of Municipal Executives",
+        "https://jobs.aame.org/jobs",
+    ),
+    ("JBoard.io", "jboard", "jobs.cisontario.ca", "CIS Ontario", "https://jobs.cisontario.ca/jobs"),
     ("Deel", "deel", "dott", "dott", "https://jobs.deel.com/dott"),
     ("Deel", "deel", "offsec", "Offsec Services", "https://jobs.deel.com/offsec"),
     ("Eightfold AI", "eightfold", "app", "Eightfold", "https://app.eightfold.ai/careers"),
@@ -507,6 +515,15 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "JBoard.io": [
+                                "Distinct from JobBoard.io; supports the public JBoard HTML/JobPosting template on fixed vendor-showcased reviewed origins jobs.aame.org and jobs.cisontario.ca; arbitrary custom domains remain unsupported",
+                                "Read robots-advertised sitemap index/job maps only, enumerate every native 30-job list page and require exact ID/URL agreement; no profiles, resumes, account APIs, tracking scripts or application submissions",
+                                "Up to 200 mandatory full details, sequential native pages and numbered job maps; all complete maps/list pages are reconfirmed after details; malformed, duplicate, mismatched, failed, redirected or changed data aborts reconciliation",
+                                "Every detail binds canonical URL, numeric native ID, title, real employer, full description and same-ID application control; board configuration label never replaces individual hiring organizations",
+                                "Native visible location labels are normalized as supplied; potentially inaccurate upstream structured geocoding remains original metadata without guessed correction; salary, employment, remote and original source date/expiry retained when present",
+                                "A source expiry already elapsed while the complete roster still lists the role is flagged, not silently dropped or used as immediate closure proof; native posting/apply destinations retained without following application forms",
+                                "Bounded supported-site point-in-time evidence does not prove every JBoard installation, arbitrary-domain support or hosted continuous operation",
+                            ],
                             "Deel": [
                                 "Native jobs.deel.com public rendered boards and mandatory overview JobPosting HTML; no JavaScript execution, candidate/account APIs or application submission",
                                 "Full server-rendered jobPostings and SEO ItemList must agree on every UUID; matching employer/settings and published_basic state on the actual board required; full board reconfirmed after up to 200 mandatory details",
