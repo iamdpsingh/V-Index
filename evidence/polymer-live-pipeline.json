@@ -1,0 +1,30 @@
+{
+  "started_at": "2026-11-06T07:48:11.479031+00:00",
+  "revision": "978d12148a276d45ac3320b7ef51322328aa7606",
+  "database": "local SQLite",
+  "lease_backend": "local Redis",
+  "scope": "Actual source registration and scheduled worker, not direct connector invocation",
+  "source": {
+    "id": 17,
+    "provider": "polymer",
+    "slug": "chemfinitytech",
+    "company": "ChemFinity Technologies",
+    "url": "https://jobs.polymer.co/chemfinitytech",
+    "refresh_minutes": 360,
+    "next_check": "2026-11-06T07:48:11.507706Z",
+    "failures": 0
+  },
+  "run": {
+    "id": 29,
+    "source_id": 17,
+    "started_at": "2026-11-06T07:48:24.611879Z",
+    "finished_at": "2026-11-06T07:48:29.437491Z",
+    "status": "success",
+    "count": 4,
+    "error": null
+  },
+  "searchable_records_with_source_provenance": 4,
+  "active_index_total": 1308,
+  "finished_at": "2026-11-06T07:48:29.803296+00:00",
+  "complete": true
+}

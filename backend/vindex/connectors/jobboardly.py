@@ -8,13 +8,13 @@ from urllib.parse import urljoin, urlsplit
 
 import httpx
 from bs4 import BeautifulSoup
-from vindex.connectors.http import PublicHTTP
+from vindex.connectors.http import PublicHTTP, UpstreamStatusError
+from vindex.connectors.jobboardly_feed import JOB_PATH, MAX_FEED_JOBS, parse_feed
 from vindex.connectors.public import text
 from vindex.connectors.robots import RobotsPolicy
 from vindex.connectors.teamtailor import TENANT
 from vindex.schemas import Enumeration, JobInput
 
-JOB_PATH = re.compile(r"/jobs/[a-z0-9-]+-[a-f0-9]{8}")
 MAX_DETAILS = 400
 
 
@@ -241,7 +241,9 @@ class JobboardlyConnector:
             )
         ]
 
-    async def listings(self, policy: RobotsPolicy) -> list[str]:
+    async def listings(self, policy: RobotsPolicy, limit: int | None = None) -> list[str]:
+        if limit is None:
+            limit = MAX_DETAILS
         seen_paths: set[str] = set()
         all_paths: list[str] = []
         for page in range(1, 101):
@@ -252,9 +254,9 @@ class JobboardlyConnector:
             for path in paths:
                 if path in seen_paths:
                     raise ValueError("Repeated JobBoardly page or listing")
-                if len(all_paths) >= MAX_DETAILS:
+                if len(all_paths) >= limit:
                     raise ValueError(
-                        f"JobBoardly exceeds {MAX_DETAILS}-detail budget; snapshot incomplete"
+                        f"JobBoardly exceeds {limit}-detail budget; snapshot incomplete"
                     )
                 all_paths.append(path)
                 seen_paths.add(path)
@@ -264,6 +266,31 @@ class JobboardlyConnector:
 
     async def discover(self) -> Enumeration:
         policy = await RobotsPolicy.load(self.http, self.origin)
+        feed_url = self.origin + "/jobs.xml"
+        policy.check(feed_url)
+        await asyncio.sleep(policy.delay())
+        try:
+            feed = await self.http.read(feed_url, accept="application/xml")
+        except UpstreamStatusError as error:
+            if error.status_code != 404:
+                raise
+            # Vendor documents 404 as a disabled feed; HTML still needs full verification.
+        else:
+            jobs = parse_feed(feed, self.origin)
+            paths = await self.listings(policy, MAX_FEED_JOBS)
+            if {self.origin + path for path in paths} != {job.source_url for job in jobs}:
+                raise ValueError("JobBoardly XML feed and complete HTML roster disagree")
+            if await self.listings(policy, MAX_FEED_JOBS) != paths:
+                raise ValueError("JobBoardly complete HTML roster changed during feed extraction")
+            await asyncio.sleep(policy.delay())
+            confirmed = parse_feed(
+                await self.http.read(feed_url, accept="application/xml"), self.origin
+            )
+            if {j.external_id: j.model_dump() for j in confirmed} != {
+                j.external_id: j.model_dump() for j in jobs
+            }:
+                raise ValueError("JobBoardly complete XML feed changed during enumeration")
+            return Enumeration(jobs=jobs, complete=True)
         paths = await self.listings(policy)
         jobs = []
         seen_ids = set()

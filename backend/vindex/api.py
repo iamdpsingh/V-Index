@@ -19,13 +19,15 @@ from vindex.accounts.resume_api import router as resume_router
 from vindex.connectors.registry import detect
 from vindex.db import Job, Observation, Run, Session, Source, now
 from vindex.ingest import aware
-from vindex.schemas import RunOut, SearchOut, SourceCreate, SourceOut
+from vindex.plans import router as plans_router
+from vindex.schemas import JobOut, RunOut, SearchOut, SourceCreate, SourceOut
 
-app = FastAPI(title="V-Index", version="0.1.0")
+app = FastAPI(title="Rolewisp API", version="0.1.0")
 app.add_middleware(PrivateRequestMiddleware)
 app.include_router(account_router)
 app.include_router(recommendations_router)
 app.include_router(resume_router)
+app.include_router(plans_router)
 
 
 @app.middleware("http")
@@ -35,6 +37,8 @@ async def fresh_api_responses(request: Request, call_next):
         # Polling must read the current index, not a browser/CDN snapshot.
         # Private middleware retains its additional cookie/security headers.
         response.headers["Cache-Control"] = "no-store"
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["Referrer-Policy"] = "no-referrer"
     return response
 
 
@@ -56,7 +60,7 @@ async def redact_private_validation(request: Request, error: RequestValidationEr
 def admin(authorization: Annotated[str | None, Header()] = None):
     token = os.getenv("ADMIN_TOKEN")
     if not token:
-        raise HTTPException(503, "Source management disabled: configure ADMIN_TOKEN")
+        raise HTTPException(503, "Source management is temporarily unavailable")
     if not hmac.compare_digest(authorization or "", f"Bearer {token}"):
         raise HTTPException(401, "Invalid admin token")
 
@@ -188,7 +192,7 @@ def jobs(
         }
 
 
-@app.get("/api/v1/jobs/{job_id}")
+@app.get("/api/v1/jobs/{job_id}", response_model=JobOut)
 def job_detail(job_id: int):
     with Session() as session:
         job = session.get(Job, job_id)
@@ -202,5 +206,14 @@ def job_detail(job_id: int):
             **job.data,
             "first_seen_at": aware(job.first_seen).astimezone(UTC),
             "last_changed_at": aware(job.last_changed).astimezone(UTC),
-            "sources": [row(o) for o in observations],
+            "sources": [
+                {
+                    "source_id": o.source_id,
+                    "source_url": o.data["source_url"],
+                    "application_url": o.data["application_url"],
+                    "status": o.status,
+                    "last_checked_at": aware(o.last_checked).astimezone(UTC),
+                }
+                for o in observations
+            ],
         }

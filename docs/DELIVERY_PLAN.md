@@ -1,10 +1,18 @@
+**Latest owner update — November 7:** Codex designs the new Rolewisp frontend and Antigravity implements it. The design package and copy-ready task are in ROLEWISP_FRONTEND_DESIGN.md and ANTIGRAVITY_DESIGN_TASK.md. Preserve existing frontend work at 3bc0a54; backend coverage remains Codex-owned. This supersedes the hold below.
+
+**Latest milestone — November 7:** 45/78 total platforms now have complete non-empty live evidence across two independent supported sites. The owner's 45-platform condition for pushing accumulated commits is satisfied. Frontend remains ON HOLD; continue toward the other 33 platforms and production/acquisition acceptance. Preserve frontend resources in ANTIGRAVITY_HANDOFF.md. Earlier milestones below are historical.
+
 # Delivery target — November 7, 2026 (IST)
+
+## Latest ownership and sequencing — November 6 IST
+
+The owner now assigns frontend responsibility to Codex, superseding Antigravity's assignment below. Complete today's 35-total-platform coverage target first; current verified count is 27/78, leaving 8. Then take over the premium Rolewisp frontend and existing documented account screens/browser tests. Preserve and inspect the existing frontend worktree/commits before integration; never run two tools in the same checkout. The briefs remain requirements, not evidence that a frontend agent is running.
 
 ## Current parallel execution plan — November 6 IST
 
 The owner explicitly resumes Antigravity's premium Rolewisp frontend in its existing separate branch/worktree while Codex prioritizes coverage and necessary backend/API support. Antigravity owns brand/logo execution, search/detail/coverage/operator views, existing account/profile/resume/recommendation screens and browser verification. Read ANTIGRAVITY_START_HERE.md. This supersedes the earlier frontend pause, including old notes elsewhere in historical validation records. No external agent is assumed notified or launched by a document update.
 
-Today's target, November 6 IST, is approximately **35 total fully verified platforms**, starting from 14 point-in-time multi-employer verifications: 21 additional platforms. This is an execution target, not a guarantee, implementation count or permission to count fixtures, partial pagination, blocked access or failed runs. Every increment requires a reusable connector, complete non-empty real runs across at least two independent supported sites, normalized records, failure/completeness safeguards and committed evidence with explicit remaining limits. Broad production acceptance remains separate; existing bounded implementations are not claimed to support every variant.
+Today's target, November 6 IST, is approximately **35 total fully verified platforms**, starting from 14 point-in-time multi-employer verifications: 21 additional platforms at that starting point. Current progress is 27/78, including the latest ApplicantPro, iSolvedHire, HiringThing, Freshteam, Trakstar, Rippling and Kula.ai evidence, leaving 8 additional verifications to reach 35. This is an execution target, not a guarantee, implementation count or permission to count fixtures, partial pagination, blocked access or failed runs. Every increment requires a reusable connector, complete non-empty real runs across at least two independent supported sites, normalized records, failure/completeness safeguards and committed evidence with explicit remaining limits. Broad production acceptance remains separate; existing bounded implementations are not claimed to support every variant.
 
 Production must keep discovering and updating jobs using persistent source schedules and running ingestion workers, not a frozen export of development data. Follow LIVE_INDEX_REQUIREMENTS.md. Source interval defaults to six hours, with a current one-hour API minimum; browser polling must not be marketed as instant provider detection. Hosting, operational/security gates and zero-additional-spend constraints still apply.
 

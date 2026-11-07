@@ -1,0 +1,14 @@
+{
+  "recorded_at": "2026-11-07T02:12:21.891682+00:00",
+  "scope": "Discovery only; not coverage",
+  "career_pages": [
+    "https://jobs.gem.com/nabla-bio",
+    "https://jobs.gem.com/nclusion"
+  ],
+  "observation": "Public careers pages return JavaScript-only shells without complete job collections",
+  "static_bundle": "https://static.gem.com/scripts/jobBoards.Y50ngnrX.v2.min.js",
+  "static_host_status": 403,
+  "retries_after_denial": 0,
+  "jobs_indexed": 0,
+  "result": "No connector or live coverage granted; no private or alternate protected route attempted"
+}

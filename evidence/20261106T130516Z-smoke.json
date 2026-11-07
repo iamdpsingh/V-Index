@@ -1,0 +1,32 @@
+[
+  {
+    "provider": "Hireology",
+    "url": "https://careers.hireology.com/beachchevrolet",
+    "at": "2026-11-06T13:04:54.523417+00:00",
+    "revision": "dd7c85780f79420a7d2ef3bf1a30aa8bb2168cdf",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "d29adcc273bd960692f99512336924f312b2cc454bcee15f645c7eebfcce68d0",
+    "count": 4,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "879ae37294b1fb7fc99b787d2bf4b2400b0cb5b19b0c2bf54ac4042975a3e9c9",
+    "finished_at": "2026-11-06T13:05:06.534032+00:00"
+  },
+  {
+    "provider": "Hireology",
+    "url": "https://careers.hireology.com/pipprinting01151",
+    "at": "2026-11-06T13:05:07.035309+00:00",
+    "revision": "dd7c85780f79420a7d2ef3bf1a30aa8bb2168cdf",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "d29adcc273bd960692f99512336924f312b2cc454bcee15f645c7eebfcce68d0",
+    "count": 3,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "43926b6dc7bf4fa87002e331d8e6175800c9f39e01159b48e162a9f449055806",
+    "finished_at": "2026-11-06T13:05:16.366235+00:00"
+  }
+]

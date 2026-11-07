@@ -1,7 +1,7 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "V-Index",
+    "title": "Rolewisp API",
     "version": "0.1.0"
   },
   "paths": {
@@ -411,6 +411,56 @@
         }
       }
     },
+    "/api/v1/plans": {
+      "get": {
+        "tags": [
+          "Plans"
+        ],
+        "summary": "Plans",
+        "operationId": "plans_api_v1_plans_get",
+        "parameters": [
+          {
+            "name": "country",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[A-Za-z]{2}$"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Country"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlansOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/health": {
       "get": {
         "summary": "Health",
@@ -779,7 +829,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/JobOut"
+                }
               }
             }
           },
@@ -1035,6 +1087,150 @@
           "password"
         ],
         "title": "PasswordConfirmation"
+      },
+      "PlanOut": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "enum": [
+              "free",
+              "plus"
+            ],
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "amount_minor": {
+            "type": "integer",
+            "title": "Amount Minor"
+          },
+          "currency": {
+            "type": "string",
+            "title": "Currency"
+          },
+          "currency_exponent": {
+            "type": "integer",
+            "title": "Currency Exponent"
+          },
+          "interval": {
+            "type": "string",
+            "const": "month",
+            "title": "Interval"
+          },
+          "availability": {
+            "type": "string",
+            "enum": [
+              "available",
+              "coming_soon"
+            ],
+            "title": "Availability"
+          },
+          "features": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Features"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "amount_minor",
+          "currency",
+          "currency_exponent",
+          "interval",
+          "availability",
+          "features"
+        ],
+        "title": "PlanOut"
+      },
+      "PlansOut": {
+        "properties": {
+          "country": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Country"
+          },
+          "local_currencies": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Local Currencies"
+          },
+          "local_currency_available": {
+            "type": "boolean",
+            "title": "Local Currency Available"
+          },
+          "currency": {
+            "type": "string",
+            "title": "Currency"
+          },
+          "currency_selection_required": {
+            "type": "boolean",
+            "title": "Currency Selection Required"
+          },
+          "price_version": {
+            "type": "string",
+            "title": "Price Version"
+          },
+          "pricing_basis": {
+            "type": "string",
+            "const": "fixed_regional",
+            "title": "Pricing Basis"
+          },
+          "taxes_included": {
+            "type": "boolean",
+            "title": "Taxes Included"
+          },
+          "notice": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notice"
+          },
+          "paid_checkout_available": {
+            "type": "boolean",
+            "title": "Paid Checkout Available"
+          },
+          "plans": {
+            "items": {
+              "$ref": "#/components/schemas/PlanOut"
+            },
+            "type": "array",
+            "title": "Plans"
+          }
+        },
+        "type": "object",
+        "required": [
+          "country",
+          "local_currencies",
+          "local_currency_available",
+          "currency",
+          "currency_selection_required",
+          "price_version",
+          "pricing_basis",
+          "taxes_included",
+          "notice",
+          "paid_checkout_available",
+          "plans"
+        ],
+        "title": "PlansOut"
       },
       "ProfileInput": {
         "properties": {

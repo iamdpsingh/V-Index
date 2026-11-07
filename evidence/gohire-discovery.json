@@ -1,0 +1,26 @@
+{
+  "recorded_at": "2026-11-06T07:42:31.773693+00:00",
+  "scope": "Public discovery observations in this session; not formal complete enumeration evidence",
+  "observations": [
+    {
+      "url": "https://jobs.gohire.io/dineamic-hospitality-fniota1h/",
+      "board_total": 22,
+      "public_api_collection_count": 22
+    },
+    {
+      "url": "https://jobs.gohire.io/digital-shift-o0hrqw5o/",
+      "board_total": 23,
+      "public_api_collection_count": 23
+    },
+    {
+      "url": "https://jobs.gohire.io/kanel-6kdypgie/",
+      "public_api_collection_count": 3,
+      "limitation": "Posting links use jobs.talentium.io; unsupported host variant, not selected for coverage"
+    },
+    {
+      "url": "https://widget.gohire.io/robots.txt",
+      "status": 403,
+      "limitation": "Script-host request aborted; no bypass. Connector reads embedded script URL only and independently checks robots on each of its three request hosts."
+    }
+  ]
+}

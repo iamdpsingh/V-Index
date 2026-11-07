@@ -1,14 +1,14 @@
 x-backend: &backend
   build: .
   environment: &backend-environment
-    DATABASE_URL: postgresql+psycopg://vindex:vindex@db:5432/vindex
+    DATABASE_URL: postgresql+psycopg://vindex:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@db:5432/vindex
     REDIS_URL: redis://redis:6379/0
 services:
   db:
     image: postgres:17-alpine
     environment:
       POSTGRES_USER: vindex
-      POSTGRES_PASSWORD: vindex
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
       POSTGRES_DB: vindex
     volumes:
       - postgres-data:/var/lib/postgresql/data

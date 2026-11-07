@@ -1,5 +1,15 @@
 # Antigravity frontend handoff
 
+**Latest product revision — November 7:** public UI is a finished product experience: no test/CI totals, smoke labels, acquisition progress or raw configuration errors. Codex supplied an original ribbon R logo and Free/Plus pricing design/API. Read PLANS_AND_PRICING.md and SECURITY_REVIEW_2026-11-07.md along with the current design specification. Preserve every coverage, API, privacy and backend requirement.
+
+**Latest owner instruction — November 7:** Codex supplies the frontend design; **Antigravity implements it** in its existing separate frontend worktree. This supersedes the frontend hold and earlier Codex-frontend takeover notes. Read [ROLEWISP_FRONTEND_DESIGN.md](ROLEWISP_FRONTEND_DESIGN.md) and [ANTIGRAVITY_DESIGN_TASK.md](ANTIGRAVITY_DESIGN_TASK.md) first. Preserve frontend commit `3bc0a54` and existing API wiring; no external agent is assumed launched or notified. Codex continues backend and coverage. The original 78-platform objective is unchanged.
+
+
+**Latest milestone, November 7: frontend remains ON HOLD.** The 45/78 live-verified coverage milestone passed, satisfying the owner’s condition for pushing accumulated commits. Continue coverage/backend and preserve the frontend worktree. This supersedes earlier 35-target/resume notes below. Future design resource: https://github.com/nutlope/hallmark; also AnimasterLib, Skiper UI, Vengence UI, Scrolltide, Navbar/CTA galleries, Footer Design, Refero Styles, Superhero, 3D icons and getlayers.ai. These are research references for later, not approved assets already incorporated.
+
+**Superseding owner update, November 6:** Codex takes over frontend ownership after today's 35-total-platform coverage target. Preserve existing Antigravity commits/worktree; the design, API and test requirements below remain applicable reference material. Earlier assignment/resume instructions below are historical and no longer assign work to Antigravity.
+
+
 Owner-selected brand: **Rolewisp**, tagline **Find your next opening.** The repository/folder remain V-Index. **Frontend work is explicitly resumed in parallel with Codex coverage work. Start with [ANTIGRAVITY_START_HERE.md](ANTIGRAVITY_START_HERE.md)**, then [BRANDING.md](BRANDING.md) and [LIVE_INDEX_REQUIREMENTS.md](LIVE_INDEX_REQUIREMENTS.md). The latest owner instruction supersedes earlier frontend-pause notes.
 
 Publishing update: use the existing repository and reviewed `main` as the single release source; v0 is the owner's preferred publishing workflow, with no additional spending or purchased domain. See [V0_RELEASE_PLAN.md](V0_RELEASE_PLAN.md). The frontend worktree is temporary editing isolation, not a separate product. Preserve its work until reviewed integration and editor shutdown; do not create another repository for v0.
@@ -35,3 +45,7 @@ Two more source types are available through the existing source form/API: Recrui
 ## Explicit new feature handoff — 2026-11-06
 
 The owner retained frontend ownership with Antigravity and requested account/profile/resume/recommendation screens. Read [ANTIGRAVITY_ACCOUNTS_HANDOFF.md](ANTIGRAVITY_ACCOUNTS_HANDOFF.md) and [ACCOUNTS_API.md](ACCOUNTS_API.md). This is an explicit feature expansion; the original indexing objective and coverage requirements remain unchanged.
+
+## GoHire, Polymer and Manatal integration — November 6
+
+The existing source form now accepts GoHire jobs.gohire.io/{board}, Polymer jobs.polymer.co/{organization}, and Manatal www.careers-page.com/{tenant} URLs. No new frontend configuration fields are needed. Use the live provider matrix for counts/limits: GoHire is English/hosted/bounded, Polymer requires explicit complete single-page metadata, and Manatal supports its legacy hosted template and validated pagination. A failed/unsupported source must show its actual run error, never an empty-success or closed-all state. Salary objects retain source text or source currency/range fields; do not invent a unit or period. Optional metadata remains unknown when absent. No frontend files changed in this cohort.

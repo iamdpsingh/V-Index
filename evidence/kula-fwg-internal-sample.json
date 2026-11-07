@@ -1,0 +1,77 @@
+{
+  "external_id": "25294",
+  "title": "Recruitment Consultant",
+  "company": "Frontwise Group",
+  "description": "Frontwise is an international company with a unique company culture. We deliver full-cycle recruitment services with a sourcing heartbeat. As a strategic growth partner, we serve multiple international clients from our modern office in the center of Skopje. To find the best candidates for our clients, we have a distinctive tech-savvy way of working. Characteristics of our culture are \u2018continuous learning\u2019, having impact and \u2018work hard play hard\u2019. We are looking for a proactive, communicative person who is looking for an international, inspiring environment, in which continuous learning is the standard. At Frontwise, people grow as a person as well as a professional. Do you want to accelerate your development? Then you are more than welcome at Frontwise! Why choose us? \u2022 Over 11+ years of international recruitment experience \u2022 Tech-driven, high-quality sourcing approach \u2022 Agile, project-based teams with real ownership \u2022 Fast learning curve and visible impact \u2022 One of the coolest offices in North Macedonia \u2022 Great colleagues What do we offer? \u2022 Modern recruitment beyond CV-driven processes \u2022 Supportive, ambitious, down-to-earth team culture \u2022 Strong onboarding and continuous learning \u2022 International clients and complex projects \u2022 A balanced hybrid setup, half remote, half office, fully connected What do we expect from you? \u2022 Fluent English (spoken and written) \u2022 Bachelor\u2019s or master\u2019s degree \u2022 2+ years of relevant experience \u2022 A can-do mentality \u2022 Curious, proactive, and eager to grow Curious to experience what makes Frontwise different? Apply and find out.",
+  "quality_flags": [],
+  "location": "Skopje, Greater Skopje, North Macedonia",
+  "source_url": "https://careers.kula.ai/fwg-internal/25294-recruitment-consultant",
+  "application_url": "https://careers.kula.ai/fwg-internal/25294-recruitment-consultant",
+  "employment_type": "FULL_TIME",
+  "remote_status": "hybrid",
+  "salary": null,
+  "published_at": "2026-02-06T09:43:41Z",
+  "raw": {
+    "listing": {
+      "id": 25294,
+      "account_id": 1438,
+      "title": "Recruitment Consultant",
+      "listed": true,
+      "kind": "external",
+      "is_confidential": false,
+      "on_career_page": true,
+      "launch_at": "2026-02-06T09:43:41.000Z",
+      "end_at": null,
+      "ats_job": {
+        "workplace": "hybrid",
+        "employment_type": "full_time",
+        "work_type_name": "Full time",
+        "offices": [
+          {
+            "id": 3075,
+            "name": "Frontwise Group",
+            "location": "Skopje, Greater Skopje, North Macedonia",
+            "location_key": "skopje, greater skopje, north macedonia",
+            "country": "North Macedonia",
+            "country_code": "MK",
+            "state": "Greater Skopje",
+            "city": "Skopje",
+            "remote": false,
+            "workplace": "hybrid"
+          }
+        ]
+      }
+    },
+    "jobposting": {
+      "@context": "https://schema.org/",
+      "@type": "JobPosting",
+      "title": "Recruitment Consultant",
+      "description": "<h4 dir=\"auto\">Frontwise is an international company with a unique company culture. We deliver full-cycle recruitment services with a sourcing heartbeat. As a strategic growth partner, we serve multiple international clients from our modern office in the center of Skopje. To find the best candidates for our clients, we have a distinctive tech-savvy way of working. Characteristics of our culture are \u2018continuous learning\u2019, having impact and \u2018work hard play hard\u2019.</h4><p dir=\"auto\"></p><p dir=\"auto\">We are looking for a proactive, communicative person who is looking for an international, inspiring environment, in which continuous learning is the standard. At Frontwise, people grow as a person as well as a professional. Do you want to accelerate your development? Then you are more than welcome at Frontwise!</p><p dir=\"auto\"></p><p dir=\"auto\">Why choose us?</p><p dir=\"auto\"></p><p dir=\"auto\">\u2022 Over 11+ years of international recruitment experience</p><p dir=\"auto\">\u2022 Tech-driven, high-quality sourcing approach</p><p dir=\"auto\">\u2022 Agile, project-based teams with real ownership</p><p dir=\"auto\">\u2022 Fast learning curve and visible impact</p><p dir=\"auto\">\u2022 One of the coolest offices in North Macedonia</p><p dir=\"auto\">\u2022 Great colleagues</p><p dir=\"auto\"></p><p dir=\"auto\">What do we offer?</p><p dir=\"auto\"></p><p dir=\"auto\">\u2022 Modern recruitment beyond CV-driven processes</p><p dir=\"auto\">\u2022 Supportive, ambitious, down-to-earth team culture</p><p dir=\"auto\">\u2022 Strong onboarding and continuous learning</p><p dir=\"auto\">\u2022 International clients and complex projects</p><p dir=\"auto\">\u2022 A balanced hybrid setup, half remote, half office, fully connected</p><p dir=\"auto\"></p><p dir=\"auto\">What do we expect from you?</p><p dir=\"auto\"></p><p dir=\"auto\">\u2022 Fluent English (spoken and written)</p><p dir=\"auto\">\u2022 Bachelor\u2019s or master\u2019s degree</p><p dir=\"auto\">\u2022 2+ years of relevant experience</p><p dir=\"auto\">\u2022 A can-do mentality</p><p dir=\"auto\">\u2022 Curious, proactive, and eager to grow</p><p dir=\"auto\"></p><p dir=\"auto\">Curious to experience what makes Frontwise different? Apply and find out.</p><p dir=\"auto\"></p>",
+      "datePosted": "2026-02-06T09:43:41.000Z",
+      "employmentType": "FULL_TIME",
+      "identifier": {
+        "@type": "PropertyValue",
+        "name": "Frontwise Group",
+        "value": "25294"
+      },
+      "hiringOrganization": {
+        "@type": "Organization",
+        "name": "Frontwise Group",
+        "logo": "https://assets.kula.ai/images/career/290seqikmqp79rwga610kdq6287q",
+        "sameAs": "https://www.frontwisegroup.com"
+      },
+      "jobLocation": [
+        {
+          "@type": "Place",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Skopje",
+            "addressRegion": "Greater Skopje",
+            "addressCountry": "MK"
+          }
+        }
+      ],
+      "directApply": true
+    }
+  }
+}

@@ -1,0 +1,64 @@
+[
+  {
+    "provider": "ApplicantPro",
+    "url": "https://farbank.applicantpro.com/jobs/",
+    "at": "2026-11-06T08:53:20.009935+00:00",
+    "revision": "10beaea70de45c8e388c40ee97174c924c859148",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "a74afd1bfb609d60c06fcef9cd47c425495b5d839b9d44903fd4fafa3717ccea",
+    "count": 2,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "15e8bff10fe174f74c70e406c2d699f844d2c7800427bf53e059ffad011e8b1a",
+    "finished_at": "2026-11-06T08:53:26.885511+00:00"
+  },
+  {
+    "provider": "ApplicantPro",
+    "url": "https://clarke.applicantpro.com/jobs/",
+    "at": "2026-11-06T08:53:27.386763+00:00",
+    "revision": "10beaea70de45c8e388c40ee97174c924c859148",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "a74afd1bfb609d60c06fcef9cd47c425495b5d839b9d44903fd4fafa3717ccea",
+    "count": 3,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "a5c5b7461580752da1060d440f3deff5e97456a898f90c51c5b70b7ea37a1eee",
+    "finished_at": "2026-11-06T08:53:36.755511+00:00"
+  },
+  {
+    "provider": "iSolvedHire",
+    "url": "https://uasystem.isolvedhire.com/jobs/",
+    "at": "2026-11-06T08:53:37.256802+00:00",
+    "revision": "10beaea70de45c8e388c40ee97174c924c859148",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "a74afd1bfb609d60c06fcef9cd47c425495b5d839b9d44903fd4fafa3717ccea",
+    "count": 2,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {
+      "jobposting_schema_missing": 1
+    },
+    "payload_sha256": "a7302493e08cb00f1d364ffb11113fa25ba1c530c8eeed168f40de6ebde2fcfe",
+    "finished_at": "2026-11-06T08:53:44.783837+00:00"
+  },
+  {
+    "provider": "iSolvedHire",
+    "url": "https://verifiedcredentials.isolvedhire.com/jobs/",
+    "at": "2026-11-06T08:53:45.285071+00:00",
+    "revision": "10beaea70de45c8e388c40ee97174c924c859148",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "a74afd1bfb609d60c06fcef9cd47c425495b5d839b9d44903fd4fafa3717ccea",
+    "count": 3,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "bcc385a64fa8acebbb07178ccba0cc142ae9b1db2a2382ca87fdded63a02ba88",
+    "finished_at": "2026-11-06T08:53:54.959321+00:00"
+  }
+]

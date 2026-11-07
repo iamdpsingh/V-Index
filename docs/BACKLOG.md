@@ -1,8 +1,8 @@
 # Execution backlog
 
-## Current coverage-first status — November 6
+## Current coverage-first status — November 7
 
-14/78 platforms have point-in-time non-empty complete connector runs across two independent employers. Fifteen connectors are implemented; Jobboardly remains FAILED/partial because its second configured board did not complete. There are 63 unimplemented platforms plus that partial platform and the documented bounds on existing connectors. Latest owner instruction: Codex prioritizes coverage while Antigravity resumes premium frontend/branding, documented account screens and browser tests in its separate worktree. Target November 6 IST: 35 total verified platforms, requiring 21 additional verified platforms from this baseline; do not mark the target achieved without evidence. See ANTIGRAVITY_START_HERE.md and LIVE_INDEX_REQUIREMENTS.md. Production readiness and acquisition completion remain unproven.
+45/78 platforms have complete non-empty point-in-time runs across two independent supported sites. The 45-platform milestone passed on November 7 IST with Taleo, Eightfold AI and Deel verified. The owner's condition for pushing accumulated commits is satisfied. Frontend design is now assigned to Codex and implementation to Antigravity; see ROLEWISP_FRONTEND_DESIGN.md. The other 33 platforms and all remaining production/acquisition gates remain open.
 
 ## First slice
 - [x] Inspect empty folder/remote; initialize canonical main without replacing history.
@@ -12,7 +12,12 @@
 - [x] Recruitee and bounded hosted Workday implemented; two live employers each (7/78 point-in-time evidence).
 - [x] Add Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint and JazzHR with two independent live employers each (13/78 point-in-time evidence).
 - [x] Add HireHive public structured templates; AMCS Group 59 and Echelon DC 6 complete live jobs (14/78 point-in-time evidence).
-- [ ] Finish Jobboardly multi-board verification: Recruiter jobs indexed; Pennsylvania Communications exceeds the current detail budget and its full run timed out. Preserve failure evidence and resolve capacity/completeness before marking this platform verified.
+- [x] GoHire: DineAmic Hospitality 22 and Digital Shift 23 full live jobs; scheduled Digital Shift ingestion/search verified. Count now 15/78.
+- [x] Polymer: ChemFinity Technologies 4 and Gencores 2 complete live jobs; scheduled ChemFinity ingestion/search verified. Count now 16/78.
+- [x] Recooty: Augusto Digital 2 and Recooty Inc. 26 complete live jobs.
+- [x] Jobvite: iboss 35 and Optimas Solutions 23 complete live jobs; current point-in-time total 20/78.
+- [x] Manatal: Quantile Health 2 and Munich Ventures 10 complete live jobs; point-in-time total now 17/78.
+- [x] Jobboardly multi-board verification via documented full XML feeds plus twice-enumerated HTML rosters; 31 Recruiter Jobs and 1,324 Pennsylvania Communications jobs. Earlier HTML failures remain recorded.
 - [x] First enterprise risk investigation recorded in docs/ENTERPRISE_RESEARCH.md.
 - [x] Verify full Compose/PostgreSQL/Redis/web startup and proxies in GitHub Actions.
 - [ ] Deploy a hosted reviewer demo and verify live ingestion there.
@@ -36,7 +41,7 @@
 ## Remaining cohorts
 - Next ATS candidates: GoHire and HiringThing, alongside the enterprise investigation. Candidate priority only; access and endpoint support unverified.
 - Other medium/high risk ATS: work through every NOT_STARTED row in coverage matrix; no stubs.
-- All 20 job-board platforms still lack accepted multi-board live evidence: Jobboardly has a partial implementation, and the other 19 are unimplemented. Need multiple installations, complete pagination, detail extraction and tenant-independent detection. Preserve distinct JBoard.io and JobBoard.io entries. Niceboard findings and platform identity research are documented separately.
+- Jobboardly has accepted bounded multi-board live evidence; the other 19 job-board platforms are unimplemented. Need multiple installations, complete pagination, detail extraction and tenant-independent detection. Preserve distinct JBoard.io and JobBoard.io entries. Niceboard findings and platform identity research are documented separately.
 
 ## Delivery
 - [x] Verify page deadline: November 30, 2026 at 23:59 UTC (December 1 at 05:29 IST).
@@ -57,4 +62,4 @@
 - [x] Exercise private flows through the real Docker web proxy in CI.
 - [ ] Antigravity signup/login/profile/resume/recommendation screens and browser tests (owner explicitly retained frontend ownership there).
 - [ ] Email ownership verification, identity recovery, parser isolation/abuse testing and hosted HTTPS release checks.
-- [ ] Remaining 63 provider implementations, Jobboardly multi-board verification and bounded connector expansion. These remain Codex's priority and acquisition acceptance gates while Antigravity executes frontend work in parallel.
+- [ ] Remaining 58 provider implementations and bounded connector expansion. These remain Codex's priority and acquisition acceptance gates before Codex begins frontend implementation.

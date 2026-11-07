@@ -1,0 +1,99 @@
+{
+  "external_id": "C9.D60",
+  "title": "DBA & Bulk Data Management Engineer",
+  "company": "Webbing",
+  "description": "About the Role We are building a multi-site platform that orchestrates telecoms services for mobile operators across different regions, with additional network nodes in other regions. As our DBA & Bulk Data Management Engineer you will own every database that underpins this platform from the core BSS/OSS/NOC modules\u00a0through to the PostgreSQL stores that sit behind our different applications. You will also extend your ownership into the network control layer, maintaining interfaces to vendor-managed databases inside HSS, OCS, PCRF, and SMSC nodes, and ensuring the mediation pipelines that bring network data into the other required system are reliable, complete, and governed by clear data-handling policies. This role spans three disciplines: hands-on database engineering (installation, tuning, backup/restore, high availability), bulk data management (large-scale loads, migrations, exports, purges), and data governance (designing and enforcing retention, archival, and compliance policies). You will be a senior individual contributor and the go-to expert for all database topics across the entire BSS and NOC stack. What You Will Build End-to-end backup, restoration, and disaster-recovery framework for all BSS and network-layer PostgreSQL clusters. Performance optimization roadmap covering index strategies, query tuning, table partitioning, and vacuuming schedules for high-throughput subscription and charging data. Bulk data pipelines for large-scale imports, exports, migrations, and timed purges of subscriber CDRs and event records. Data handling, retention, and archival policies aligned with GDPR, operator SLAs, and internal compliance requirements. Database monitoring dashboards (Prometheus + Grafana exporters) with alerting for replication lag, lock contention, query performance, and disk saturation. Installation and upgrade playbooks for new PostgreSQL instances as the platform scales into additional markets or modules. Cross-platform data integration layer between BSS mediation and network-element databases (HSS, OCS, PCRF, SMSC, PGW). Schema review and data-architecture advisory process for BSS and Workflow engineering teams. Data access control framework: roles, privileges, row-level security, and audit logging across all database tiers. Runbooks and knowledge base covering all database operational procedures, DR playbooks, and incident response steps.\n\nMust Have Strong hands-on PostgreSQL administration: installation, configuration, replication (logical/streaming), upgrade, and vacuum tuning Proven backup and restore experience: pg_dump, pg_basebackup, WAL archiving, point-in-time recovery, and DR testing Query performance analysis: EXPLAIN/ANALYZE, index design (B-Tree, partial, composite), and schema-level optimisation Bulk data operations: large COPY/INSERT loads, logical replication for live migrations, and automated purge/archival pipelines Data governance: designing and documenting retention, archival, masking, and access-control policies Scripting in Python or Bash for automation of backup jobs, health-check scripts, and bulk-load utilities Experience with containerized database deployments (Docker / Kubernetes) Monitoring: setting up Prometheus postgres_exporter, building Grafana dashboards for database KPIs High-availability patterns: replication failover, connection pooling (PgBouncer / Pgpool), read-replica routing Ability to work independently across multiple concurrent projects in a distributed, async-first team. Multi-datacenter replication and active-passive failover between geographically distributed clusters Strong Advantage Experience with telecoms BSS/OSS platforms (billing, subscription management, or mediation systems) Familiarity with network-element databases: HSS (HLR), OCS, PCRF, SMSC, or PGW data models Data compliance experience (GDPR subscriber data, CDR retention regulations in EU jurisdictions) Nice to Have Exposure to mediation layer data formats (ASN.1, IPDR, Diameter AVPs) Experience with BI or reporting extracts from operational BSS databases\n\nFounded in early 2010, Webbing is a global data MVNO that delivers enterprise grade, global connectivity and IoT services across more than 200 countries and 600+ mobile carriers' networks. Webbing's secured network delivers network protection and web content intelligence. Enterprise customers can manage, monitor, and optimize data usage in real-time with Webbing's powerful software platform. Gain visibility by application type and have the power to white list applications and limit non-business applications with the click of a button, saving money and improving compliance.\n\nFully remote An exciting and challenging greenfield platform with great skill and knowledge development opportunities. The opportunity to join a team of highly professional specialists in an international environment. The opportunity for professional development within a reputable international innovative and growing company.",
+  "quality_flags": [],
+  "location": "Bucharest, Romania; Bucharest; Romania; 060013; RO",
+  "source_url": "https://www.comeet.com/jobs/webbing/46.00E/dba--bulk-data-management-engineer/C9.D60",
+  "application_url": "https://www.comeet.com/jobs/webbing/46.00E/dba--bulk-data-management-engineer/C9.D60",
+  "employment_type": null,
+  "remote_status": "Remote",
+  "salary": null,
+  "published_at": null,
+  "raw": {
+    "listing": {
+      "name": "DBA & Bulk Data Management Engineer",
+      "department": "OwnCore",
+      "employment_type": null,
+      "experience_level": null,
+      "uid": "C9.D60",
+      "internal_use_custom_id": "",
+      "time_updated": "2026-10-23T03:12:11Z",
+      "company_name": "Webbing",
+      "is_internal": false,
+      "workplace_type": "Remote",
+      "url_comeet_hosted_page": "https://www.comeet.com/jobs/webbing/46.00E/dba--bulk-data-management-engineer/C9.D60",
+      "url_recruit_hosted_page": "https://www.comeet.com/jobs/webbing/46.00E/dba--bulk-data-management-engineer/C9.D60",
+      "url_active_page": "https://webbingsolutions.com/careers/QzkuRDYw/",
+      "url_detected_page": "https://webbingsolutions.com/careers/QzkuRDYw/",
+      "location": {
+        "name": "Bucharest, Romania",
+        "country": "RO",
+        "city": "Bucharest",
+        "state": "Romania",
+        "postal_code": "060013",
+        "street_name": "Calea Plevnei 159",
+        "street_number": null,
+        "location_uid": "9D.50E",
+        "is_remote": true
+      }
+    },
+    "job": {
+      "name": "DBA & Bulk Data Management Engineer",
+      "department": "OwnCore",
+      "employment_type": null,
+      "experience_level": null,
+      "uid": "C9.D60",
+      "internal_use_custom_id": null,
+      "time_updated": "2026-10-23T03:12:11Z",
+      "company_name": "Webbing",
+      "is_internal": false,
+      "workplace_type": "Remote",
+      "url_comeet_hosted_page": "https://www.comeet.com/jobs/webbing/46.00E/dba--bulk-data-management-engineer/C9.D60",
+      "url_recruit_hosted_page": "https://www.comeet.com/jobs/webbing/46.00E/dba--bulk-data-management-engineer/C9.D60",
+      "url_active_page": "https://webbingsolutions.com/careers/QzkuRDYw/",
+      "url_detected_page": "https://webbingsolutions.com/careers/QzkuRDYw/",
+      "location": {
+        "name": "Bucharest, Romania",
+        "country": "RO",
+        "city": "Bucharest",
+        "state": "Romania",
+        "postal_code": "060013",
+        "street_name": "Calea Plevnei 159",
+        "street_number": null,
+        "location_uid": "9D.50E",
+        "is_remote": true
+      }
+    },
+    "board": {
+      "name": "Webbing",
+      "company_uid": "46.00E",
+      "slug": "webbing",
+      "url_comeet_hosted_page": "https://www.comeet.com/jobs/webbing/46.00E"
+    },
+    "time_published_original": null,
+    "detail_sections": [
+      {
+        "name": "Description",
+        "value": "<p><strong>About the Role</strong></p><p>We are building a multi-site platform that orchestrates telecoms services for mobile operators across different regions, with additional network nodes in other regions. As our DBA &amp; Bulk Data Management Engineer you will own every database that underpins this platform from the core BSS/OSS/NOC modules&nbsp;through to the PostgreSQL stores that sit behind our different applications.</p><p>You will also extend your ownership into the network control layer, maintaining interfaces to vendor-managed databases inside HSS, OCS, PCRF, and SMSC nodes, and ensuring the mediation pipelines that bring network data into the other required system are reliable, complete, and governed by clear data-handling policies.</p><p>This role spans three disciplines: hands-on database engineering (installation, tuning, backup/restore, high availability), bulk data management (large-scale loads, migrations, exports, purges), and data governance (designing and enforcing retention, archival, and compliance policies). You will be a senior individual contributor and the go-to expert for all database topics across the entire BSS and NOC stack.</p><p><strong>What You Will Build</strong></p><ul><li>End-to-end backup, restoration, and disaster-recovery framework for all BSS and network-layer PostgreSQL clusters.</li><li>Performance optimization roadmap covering index strategies, query tuning, table partitioning, and vacuuming schedules for high-throughput subscription and charging data.</li><li>Bulk data pipelines for large-scale imports, exports, migrations, and timed purges of subscriber CDRs and event records.</li><li>Data handling, retention, and archival policies aligned with GDPR, operator SLAs, and internal compliance requirements.</li><li>Database monitoring dashboards (Prometheus + Grafana exporters) with alerting for replication lag, lock contention, query performance, and disk saturation.</li><li>Installation and upgrade playbooks for new PostgreSQL instances as the platform scales into additional markets or modules.</li><li>Cross-platform data integration layer between BSS mediation and network-element databases (HSS, OCS, PCRF, SMSC, PGW).</li><li>Schema review and data-architecture advisory process for BSS and Workflow engineering teams.</li><li>Data access control framework: roles, privileges, row-level security, and audit logging across all database tiers.</li><li>Runbooks and knowledge base covering all database operational procedures, DR playbooks, and incident response steps.</li></ul>",
+        "order": 1
+      },
+      {
+        "name": "Requirements",
+        "value": "<p><strong>Must Have</strong></p><ul><li>Strong hands-on PostgreSQL administration: installation, configuration, replication (logical/streaming), upgrade, and vacuum tuning</li><li>Proven backup and restore experience: pg_dump, pg_basebackup, WAL archiving, point-in-time recovery, and DR testing</li><li>Query performance analysis: EXPLAIN/ANALYZE, index design (B-Tree, partial, composite), and schema-level optimisation</li><li>Bulk data operations: large COPY/INSERT loads, logical replication for live migrations, and automated purge/archival pipelines</li><li>Data governance: designing and documenting retention, archival, masking, and access-control policies</li><li>Scripting in Python or Bash for automation of backup jobs, health-check scripts, and bulk-load utilities</li><li>Experience with containerized database deployments (Docker / Kubernetes)</li><li>Monitoring: setting up Prometheus postgres_exporter, building Grafana dashboards for database KPIs</li><li>High-availability patterns: replication failover, connection pooling (PgBouncer / Pgpool), read-replica routing</li><li>Ability to work independently across multiple concurrent projects in a distributed, async-first team.</li><li>Multi-datacenter replication and active-passive failover between geographically distributed clusters</li></ul><p><strong>Strong Advantage</strong></p><ul><li>Experience with telecoms BSS/OSS platforms (billing, subscription management, or mediation systems)</li><li>Familiarity with network-element databases: HSS (HLR), OCS, PCRF, SMSC, or PGW data models</li><li>Data compliance experience (GDPR subscriber data, CDR retention regulations in EU jurisdictions)</li></ul><p><strong>Nice to Have</strong></p><ul><li>Exposure to mediation layer data formats (ASN.1, IPDR, Diameter AVPs)</li><li>Experience with BI or reporting extracts from operational BSS databases</li></ul>",
+        "order": 2
+      },
+      {
+        "name": "About Webbing",
+        "value": "<p>Founded in early 2010, Webbing is a global data MVNO that delivers enterprise grade, global connectivity and IoT services across more than 200 countries and 600+ mobile carriers' networks. Webbing's secured network delivers network protection and web content intelligence.</p><p>Enterprise customers can manage, monitor, and optimize data usage in real-time with Webbing's powerful software platform. Gain visibility by application type and have the power to white list applications and limit non-business applications with the click of a button, saving money and improving compliance.</p>",
+        "order": 3
+      },
+      {
+        "name": "What we offer",
+        "value": "<ul><li>Fully remote</li><li>An exciting and challenging greenfield platform with great skill and knowledge development opportunities.</li><li>The opportunity to join a team of highly professional specialists in an international environment.</li><li>The opportunity for professional development within a reputable international innovative and growing company.</li></ul>",
+        "order": 4
+      }
+    ]
+  }
+}

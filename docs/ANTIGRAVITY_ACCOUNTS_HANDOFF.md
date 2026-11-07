@@ -1,5 +1,11 @@
 # Antigravity account/profile/recommendation handoff — November 6
 
+**Latest owner instruction — November 7:** Codex supplies the frontend design; **Antigravity implements it** in its existing separate frontend worktree. This supersedes the frontend hold and earlier Codex-frontend takeover notes. Read [ROLEWISP_FRONTEND_DESIGN.md](ROLEWISP_FRONTEND_DESIGN.md) and [ANTIGRAVITY_DESIGN_TASK.md](ANTIGRAVITY_DESIGN_TASK.md) first. Preserve frontend commit `3bc0a54` and existing API wiring; no external agent is assumed launched or notified. Codex continues backend and coverage. The original 78-platform objective is unchanged.
+
+
+**Superseding owner update, November 6:** Codex takes over frontend ownership after today's 35-total-platform coverage target. Preserve existing Antigravity commits/worktree; the design, API and test requirements below remain applicable reference material. Earlier assignment/resume instructions below are historical and no longer assign work to Antigravity.
+
+
 Latest owner instruction explicitly resumes these frontend screens alongside the premium Rolewisp design work while Codex focuses on coverage. Start with ANTIGRAVITY_START_HERE.md; backend release gates below still apply. Frontend implementation authorization does not enable public registration or eliminate missing identity/recovery work.
 
 The owner explicitly retained frontend ownership with Antigravity on November 6. Internal delivery target: November 7, 2026 IST. The objective is still the acquisition challenge and its 78-platform coverage. The owner has now added accounts, saved profiles, saved resumes and personalized recommendations; this explicitly extends the earlier appearance-only scope for these features.

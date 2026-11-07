@@ -1,0 +1,113 @@
+{
+  "started_at": "2026-11-07T02:13:46.044759+00:00",
+  "revision": "ae43a0cc0a36d9a6fab828eef6abfa6948d2f72a",
+  "scope": "Actual local API registration, due-only worker refresh, database and public search/provenance checks; no direct connector invocation",
+  "sources": [
+    {
+      "platform": "Avature",
+      "source": {
+        "id": 43,
+        "provider": "avature",
+        "slug": "careers~en_US/main",
+        "company": "Avature",
+        "url": "https://careers.avature.net/en_US/main/SearchJobs",
+        "refresh_minutes": 360,
+        "next_check": "2026-11-07T02:13:46.100212Z",
+        "failures": 0
+      },
+      "run": {
+        "id": 100,
+        "source_id": 43,
+        "started_at": "2026-11-07T02:13:46.329834Z",
+        "finished_at": "2026-11-07T02:14:36.342531Z",
+        "status": "success",
+        "count": 19,
+        "error": null
+      },
+      "stored_observations": 19,
+      "public_search_unique_jobs": 19,
+      "public_search_provenance_entries": 19,
+      "complete": true
+    },
+    {
+      "platform": "Taleo",
+      "source": {
+        "id": 44,
+        "provider": "taleo-tbe",
+        "slug": "phf.tbe.taleo.net~phf03~GRAYBARCANADA~42",
+        "company": "GRAYBAR CANADA",
+        "url": "https://phf.tbe.taleo.net/phf03/ats/careers/v2/jobSearch?org=GRAYBARCANADA&cws=42",
+        "refresh_minutes": 360,
+        "next_check": "2026-11-07T02:13:46.102231Z",
+        "failures": 0
+      },
+      "run": {
+        "id": 101,
+        "source_id": 44,
+        "started_at": "2026-11-07T02:14:36.347716Z",
+        "finished_at": "2026-11-07T02:15:16.751959Z",
+        "status": "success",
+        "count": 32,
+        "error": null
+      },
+      "stored_observations": 32,
+      "public_search_unique_jobs": 32,
+      "public_search_provenance_entries": 32,
+      "complete": true
+    },
+    {
+      "platform": "Eightfold AI",
+      "source": {
+        "id": 45,
+        "provider": "eightfold",
+        "slug": "app",
+        "company": "Eightfold",
+        "url": "https://app.eightfold.ai/careers",
+        "refresh_minutes": 360,
+        "next_check": "2026-11-07T02:13:46.103641Z",
+        "failures": 0
+      },
+      "run": {
+        "id": 102,
+        "source_id": 45,
+        "started_at": "2026-11-07T02:15:16.757499Z",
+        "finished_at": "2026-11-07T02:16:12.631206Z",
+        "status": "success",
+        "count": 46,
+        "error": null
+      },
+      "stored_observations": 46,
+      "public_search_unique_jobs": 46,
+      "public_search_provenance_entries": 46,
+      "complete": true
+    },
+    {
+      "platform": "Deel",
+      "source": {
+        "id": 46,
+        "provider": "deel",
+        "slug": "dott",
+        "company": "dott",
+        "url": "https://jobs.deel.com/dott",
+        "refresh_minutes": 360,
+        "next_check": "2026-11-07T02:13:46.105014Z",
+        "failures": 0
+      },
+      "run": {
+        "id": 104,
+        "source_id": 46,
+        "started_at": "2026-11-07T02:16:12.635346Z",
+        "finished_at": "2026-11-07T02:16:26.737759Z",
+        "status": "success",
+        "count": 16,
+        "error": null
+      },
+      "stored_observations": 16,
+      "public_search_unique_jobs": 16,
+      "public_search_provenance_entries": 16,
+      "complete": true
+    }
+  ],
+  "finished_at": "2026-11-07T02:16:27.411476+00:00",
+  "all_complete": true
+}

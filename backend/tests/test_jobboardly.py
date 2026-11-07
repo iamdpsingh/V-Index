@@ -73,6 +73,8 @@ def run(
             assert request.url.host == "example.jobboardly.com"
             if request.url.path == "/robots.txt":
                 return httpx.Response(200, text=robots)
+            if request.url.path == "/jobs.xml":
+                return httpx.Response(404)
             if request.url.path == "/jobs":
                 calls += 1
                 number = int(request.url.params.get("page", "1"))
@@ -207,7 +209,12 @@ def test_over_budget_roster_fails_before_any_detail_fetch(monkeypatch):
     requests = []
     with pytest.raises(ValueError, match="detail budget"):
         run(pages={1: page([ONE], next_page=2), 2: page([TWO], start=2)}, requests_out=requests)
-    assert requests == [ORIGIN + "/robots.txt", ORIGIN + "/jobs", ORIGIN + "/jobs?page=2"]
+    assert requests == [
+        ORIGIN + "/robots.txt",
+        ORIGIN + "/jobs.xml",
+        ORIGIN + "/jobs",
+        ORIGIN + "/jobs?page=2",
+    ]
 
 
 def test_changes_on_later_page_are_reconfirmed_even_when_first_page_stays_same():
@@ -217,6 +224,8 @@ def test_changes_on_later_page_are_reconfirmed_even_when_first_page_stays_same()
         def handler(request):
             if request.url.path == "/robots.txt":
                 return httpx.Response(200, text="User-agent: *\nAllow: /")
+            if request.url.path == "/jobs.xml":
+                return httpx.Response(404)
             if request.url.path == "/jobs":
                 number = int(request.url.params.get("page", "1"))
                 counts[number] += 1

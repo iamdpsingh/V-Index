@@ -1,0 +1,12 @@
+{
+  "recorded_at": "2026-11-07T02:04:42.124608+00:00",
+  "scope": "Public route/template discovery only; not platform live coverage",
+  "unsupported_route": {
+    "url": "https://insight.eightfold.ai/api/pcsx/search?domain=insight.com&query=&location=&start=0",
+    "status": 403,
+    "jobs_indexed": 0,
+    "retries_after_denial": 0
+  },
+  "supported_path_under_validation": "Native careers shell, robots-advertised sitemap_index.xml, job sitemap.xml and published same-origin job URLs; no application/account/candidate APIs",
+  "privacy": "Anonymous legacy shell and all seed positions must explicitly exclude private jobs; no candidate or account state retained"
+}

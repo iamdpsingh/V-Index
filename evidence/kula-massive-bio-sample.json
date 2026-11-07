@@ -1,0 +1,187 @@
+{
+  "external_id": "33733",
+  "title": "Key Account Manager - Poland (Hematology/Oncology)",
+  "company": "Massive Bio",
+  "description": "About Massive Bio Every cancer patient deserves access to treatment options. Massive Bio is an AI-powered precision medicine platform transforming how cancer patients discover and access clinical trials by eliminating the barriers of geography, financial constraints, and information asymmetry that have historically limited enrollment. Founded in 2015 and headquartered in US, Massive Bio is scaling its impact globally by powering operations across multiple countries and bringing innovative cancer treatment options to a rapidly growing and diverse population of patients. Through our proprietary AI platform, we connect individuals to clinical trials worldwide and partner with leading pharmaceutical companies, contract research organizations (CROs), and healthcare systems to accelerate drug development and expand equitable access to cutting-edge therapies. About the Role We are hiring a Key Account Manager in Poland to build and grow Massive Bio's referral physician network across the country. You will be the face of Massive Bio to Polish Oncologists; building trust, educating physician offices on our clinical trial enrollment services, and turning relationships into a sustained pipeline of patient referrals. This role is for a healthcare sales professional who already knows the Polish Hem/Onc landscape, has a real network to activate, and is energized by getting more cancer patients into the right clinical trials. What You'll Do Build the network: Develop and grow a referral network of Hematologists and Oncologists across Poland; prioritize high-potential offices, treatment centers, and oncology networks. Engage in the field: Conduct outbound outreach and regular in-person visits; educate physicians and their teams on Massive Bio's platform and referral process; represent Massive Bio at relevant medical congresses and oncology events. Manage accounts: Maintain accurate CRM records; contacts, visit notes, referral activity, follow-ups; and provide structured territory reports to leadership. Close the loop internally: Share physician feedback with Sales, Marketing, Product, and  Operations to continuously improve the physician and patient experience. Read the market: Analyze market potential, competitive activity, and adoption patterns across Polish oncology centers; surface trends and opportunities that inform commercial strategy. Who You Are BS/BA degree, or equivalent professional experience. 4+ years of Hematology/Oncology sales or medical affairs experience, ideally with reputable pharmaceutical companies operating in Poland. An established network of Polish Hematologists and Oncologists you can activate from day one. Willing and able to travel regularly to physician offices across Poland. Strong familiarity with medical terminology, the Polish healthcare system, and oncology referral pathways. Polish (native or fluent) and English (professional working proficiency). Self-directed, relationship-driven, and motivated by the mission of expanding patient access to clinical trials. Currently residing in Poland.",
+  "quality_flags": [],
+  "location": "Poland; Warsaw, Masovian Voivodeship, Poland; Pozna\u0144, Greater Poland Voivodeship, Poland; \u0141\u00f3d\u017a, \u0141\u00f3d\u017a Voivodeship, Poland; Krak\u00f3w, Lesser Poland Voivodeship, Poland; Wroc\u0142aw, Lower Silesian Voivodeship, Poland",
+  "source_url": "https://careers.kula.ai/massive-bio/33733-key-account-manager-poland-hematology-oncology",
+  "application_url": "https://careers.kula.ai/massive-bio/33733-key-account-manager-poland-hematology-oncology",
+  "employment_type": "FULL_TIME",
+  "remote_status": "remote",
+  "salary": null,
+  "published_at": "2026-04-27T17:59:37Z",
+  "raw": {
+    "listing": {
+      "id": 33733,
+      "account_id": 1467,
+      "title": "Key Account Manager - Poland (Hematology/Oncology)",
+      "listed": true,
+      "kind": "internal_and_external",
+      "is_confidential": false,
+      "on_career_page": true,
+      "launch_at": "2026-04-27T17:59:37.000Z",
+      "end_at": null,
+      "ats_job": {
+        "workplace": "remote",
+        "employment_type": "full_time",
+        "work_type_name": "Full time",
+        "offices": [
+          {
+            "id": 3264,
+            "name": "Poland",
+            "location": "Poland",
+            "location_key": "poland",
+            "country": "Poland",
+            "country_code": "PL",
+            "state": null,
+            "city": null,
+            "remote": true,
+            "workplace": "remote"
+          },
+          {
+            "id": 3320,
+            "name": "Warsaw",
+            "location": "Warsaw, Masovian Voivodeship, Poland",
+            "location_key": "warsaw, masovian voivodeship, poland",
+            "country": "Poland",
+            "country_code": "PL",
+            "state": "Masovian Voivodeship",
+            "city": "Warsaw",
+            "remote": true,
+            "workplace": "remote"
+          },
+          {
+            "id": 3324,
+            "name": "Pozna\u0144",
+            "location": "Pozna\u0144, Greater Poland Voivodeship, Poland",
+            "location_key": "poznan, greater poland voivodeship, poland",
+            "country": "Poland",
+            "country_code": "PL",
+            "state": "Greater Poland Voivodeship",
+            "city": "Pozna\u0144",
+            "remote": true,
+            "workplace": "remote"
+          },
+          {
+            "id": 3322,
+            "name": "\u0141\u00f3d\u017a",
+            "location": "\u0141\u00f3d\u017a, \u0141\u00f3d\u017a Voivodeship, Poland",
+            "location_key": "\u0142odz, \u0142odz voivodeship, poland",
+            "country": "Poland",
+            "country_code": "PL",
+            "state": "\u0141\u00f3d\u017a Voivodeship",
+            "city": "\u0141\u00f3d\u017a",
+            "remote": true,
+            "workplace": "remote"
+          },
+          {
+            "id": 3321,
+            "name": "Krak\u00f3w",
+            "location": "Krak\u00f3w, Lesser Poland Voivodeship, Poland",
+            "location_key": "krakow, lesser poland voivodeship, poland",
+            "country": "Poland",
+            "country_code": "PL",
+            "state": "Lesser Poland Voivodeship",
+            "city": "Krak\u00f3w",
+            "remote": true,
+            "workplace": "remote"
+          },
+          {
+            "id": 3323,
+            "name": "Wroc\u0142aw",
+            "location": "Wroc\u0142aw, Lower Silesian Voivodeship, Poland",
+            "location_key": "wroc\u0142aw, lower silesian voivodeship, poland",
+            "country": "Poland",
+            "country_code": "PL",
+            "state": "Lower Silesian Voivodeship",
+            "city": "Wroc\u0142aw",
+            "remote": true,
+            "workplace": "remote"
+          }
+        ]
+      }
+    },
+    "jobposting": {
+      "@context": "https://schema.org/",
+      "@type": "JobPosting",
+      "title": "Key Account Manager - Poland (Hematology/Oncology)",
+      "description": "<p dir=\"auto\"><strong>About Massive Bio</strong></p><p dir=\"auto\">Every cancer patient deserves access to treatment options. Massive Bio is an AI-powered precision medicine platform transforming how cancer patients discover and access clinical trials by eliminating the barriers of geography, financial constraints, and information asymmetry that have historically limited enrollment.</p><p dir=\"auto\"></p><p dir=\"auto\">Founded in 2015 and headquartered in US, Massive Bio is scaling its impact globally by powering operations across multiple countries and bringing innovative cancer treatment options to a rapidly growing and diverse population of patients. Through our proprietary AI platform, we connect individuals to clinical trials worldwide and partner with leading pharmaceutical companies, contract research organizations (CROs), and healthcare systems to accelerate drug development and expand equitable access to cutting-edge therapies.</p><p dir=\"auto\"></p><h4 dir=\"auto\">About the Role</h4><p dir=\"auto\">We are hiring a <strong>Key Account Manager</strong> in Poland to build and grow Massive Bio's referral physician network across the country. You will be the face of Massive Bio to Polish Oncologists; building trust, educating physician offices on our clinical trial enrollment services, and turning relationships into a sustained pipeline of patient referrals.</p><p dir=\"auto\"></p><p dir=\"auto\">This role is for a healthcare sales professional who already knows the Polish Hem/Onc landscape, has a real network to activate, and is energized by getting more cancer patients into the right clinical trials.</p><h4 dir=\"auto\">What You'll Do</h4><ul dir=\"auto\"><li dir=\"auto\"><p dir=\"auto\"><strong>Build the network:</strong> Develop and grow a referral network of Hematologists and Oncologists across Poland; prioritize high-potential offices, treatment centers, and oncology networks.</p></li><li dir=\"auto\"><p dir=\"auto\"><strong>Engage in the field:</strong> Conduct outbound outreach and regular in-person visits; educate physicians and their teams on Massive Bio's platform and referral process; represent Massive Bio at relevant medical congresses and oncology events.</p></li><li dir=\"auto\"><p dir=\"auto\"><strong>Manage accounts:</strong> Maintain accurate CRM records; contacts, visit notes, referral activity, follow-ups; and provide structured territory reports to leadership.</p></li><li dir=\"auto\"><p dir=\"auto\"><strong>Close the loop internally:</strong> Share physician feedback with Sales, Marketing, Product, and  Operations to continuously improve the physician and patient experience.</p></li><li dir=\"auto\"><p dir=\"auto\"><strong>Read the market:</strong> Analyze market potential, competitive activity, and adoption patterns across Polish oncology centers; surface trends and opportunities that inform commercial strategy.</p></li></ul><h4 dir=\"auto\">Who You Are</h4><ul dir=\"auto\"><li dir=\"auto\"><p dir=\"auto\">BS/BA degree, or equivalent professional experience.</p></li><li dir=\"auto\"><p dir=\"auto\">4+ years of Hematology/Oncology sales or medical affairs experience, ideally with reputable pharmaceutical companies operating in Poland.</p></li><li dir=\"auto\"><p dir=\"auto\">An established network of Polish Hematologists and Oncologists you can activate from day one.</p></li><li dir=\"auto\"><p dir=\"auto\">Willing and able to travel regularly to physician offices across Poland.</p></li><li dir=\"auto\"><p dir=\"auto\">Strong familiarity with medical terminology, the Polish healthcare system, and oncology referral pathways.</p></li><li dir=\"auto\"><p dir=\"auto\">Polish (native or fluent) and English (professional working proficiency).</p></li><li dir=\"auto\"><p dir=\"auto\">Self-directed, relationship-driven, and motivated by the mission of expanding patient access to clinical trials.</p></li><li dir=\"auto\"><p dir=\"auto\">Currently residing in Poland.</p></li></ul>",
+      "datePosted": "2026-04-27T17:59:37.000Z",
+      "employmentType": "FULL_TIME",
+      "identifier": {
+        "@type": "PropertyValue",
+        "name": "Massive Bio",
+        "value": "33733"
+      },
+      "hiringOrganization": {
+        "@type": "Organization",
+        "name": "Massive Bio",
+        "logo": "https://assets.kula.ai/images/career/45ky48nys7ka9fq8ah42lsi0ox5a",
+        "sameAs": "https://massivebio.com"
+      },
+      "jobLocation": [
+        {
+          "@type": "Place",
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "PL"
+          }
+        },
+        {
+          "@type": "Place",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Warsaw",
+            "addressRegion": "Masovian Voivodeship",
+            "addressCountry": "PL"
+          }
+        },
+        {
+          "@type": "Place",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Pozna\u0144",
+            "addressRegion": "Greater Poland Voivodeship",
+            "addressCountry": "PL"
+          }
+        },
+        {
+          "@type": "Place",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "\u0141\u00f3d\u017a",
+            "addressRegion": "\u0141\u00f3d\u017a Voivodeship",
+            "addressCountry": "PL"
+          }
+        },
+        {
+          "@type": "Place",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Krak\u00f3w",
+            "addressRegion": "Lesser Poland Voivodeship",
+            "addressCountry": "PL"
+          }
+        },
+        {
+          "@type": "Place",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Wroc\u0142aw",
+            "addressRegion": "Lower Silesian Voivodeship",
+            "addressCountry": "PL"
+          }
+        }
+      ],
+      "jobLocationType": "TELECOMMUTE",
+      "applicantLocationRequirements": [
+        {
+          "@type": "Country",
+          "name": "Poland"
+        }
+      ],
+      "directApply": true
+    }
+  }
+}

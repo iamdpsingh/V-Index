@@ -19,18 +19,14 @@ def cipher() -> Fernet:
         key = os.environ["RESUME_ENCRYPTION_KEY"]
         return Fernet(key.encode("ascii"))
     except (KeyError, ValueError, UnicodeError) as error:
-        raise HTTPException(
-            503, "Private resume storage requires a valid encryption key"
-        ) from error
+        raise HTTPException(503, "Resume storage is temporarily unavailable") from error
 
 
 def decrypt(value: bytes) -> bytes:
     try:
         return cipher().decrypt(value)
     except InvalidToken as error:
-        raise HTTPException(
-            503, "Resume data cannot be read with the configured encryption key"
-        ) from error
+        raise HTTPException(503, "Resume storage is temporarily unavailable") from error
 
 
 def filename(value: str | None) -> tuple[str, str]:

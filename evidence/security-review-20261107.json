@@ -1,0 +1,33 @@
+{
+  "reviewed_at": "2026-11-07T02:49:12.523106+00:00",
+  "baseline_revision": "a6b2308",
+  "scope": {
+    "reachable_text_blobs": 926,
+    "binary_skipped": 29,
+    "over_5mb_skipped": 0,
+    "scope": "all reachable refs including feat/frontend"
+  },
+  "scanner": "detect-secrets 1.5.0",
+  "historical_verification": "offline --no-verify",
+  "historical_candidate_findings": 5472,
+  "historical_candidate_types": {
+    "Hex High Entropy String": 5128,
+    "Base64 High Entropy String": 313,
+    "Basic Auth Credentials": 19,
+    "Secret Keyword": 6,
+    "AWS Access Key": 6
+  },
+  "outcome": "No confirmed live deployment credential identified within scoped repository review; not a guarantee of absence",
+  "fixes": [
+    "Public job detail allowlist; original observations retained privately",
+    "Environment/database/key ignore rules and Docker cache exclusion",
+    "Required private PostgreSQL password; ephemeral CI value",
+    "API no-store/nosniff/no-referrer; frontend HTML hardening assigned separately"
+  ],
+  "regression_tests": "996 passed with PostgreSQL/Redis",
+  "remaining_scope_limits": [
+    "No hosted deployment or production JS bundle audit",
+    "Unreachable objects and external systems not audited",
+    "Production/parser/identity/backup and billing gates remain open"
+  ]
+}

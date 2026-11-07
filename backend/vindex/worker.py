@@ -75,6 +75,9 @@ async def refresh(source_id: int, *, only_if_due: bool = False) -> int | None:
 
 async def serve() -> None:
     logging.basicConfig(level=logging.INFO)
+    # Public source URLs can include browser read tokens. Keep transport URLs out of logs.
+    logging.getLogger("httpx").setLevel(logging.WARNING)
+    logging.getLogger("httpcore").setLevel(logging.WARNING)
     while True:
         with Session() as session:
             ids = list(

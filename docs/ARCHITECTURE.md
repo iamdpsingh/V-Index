@@ -16,7 +16,7 @@ Descriptions become plain text. Original payloads remain in observations. Search
 
 User URLs are parsed as identifiers only; exact hosted-domain allowlist and restricted slug characters map to fixed HTTPS API hosts or validated hosted tenant labels under Personio, Recruitee and Workday vendor domains. User input cannot select outbound hosts, ports, headers, paths outside a tenant segment, or redirects. Proxy environment is disabled; HTTPS certificate verification remains enabled. Response decompressed bytes, page counts, timeouts and refresh execution are bounded. A network egress allowlist remains necessary for defense against DNS compromise; do not enable arbitrary custom-domain fetching until DNS pinning and private-IP checks are implemented.
 
-Source mutation/status requires a configured bearer admin token. Public job queries remain read-only. Use TLS and rate limits at a gateway before exposure. No authentication, CAPTCHA or anti-bot bypass. Only documented public APIs are requested; custom HTML scraping and robots handling are not yet implemented. Raw payload access via job details should be reviewed before public production exposure.
+Source mutation/status requires a configured bearer admin token. Public job queries remain read-only. Use TLS and rate limits at a gateway before exposure. No authentication, CAPTCHA or anti-bot bypass. Only documented public APIs are requested; custom HTML scraping and robots handling are not yet implemented. Public job details now use the same typed allowlist as search; raw ingestion payloads and full observation rows remain private in storage.
 
 ## Reliability limits
 

@@ -1,0 +1,28 @@
+[
+  {
+    "provider": "HireBridge",
+    "url": "https://recruit.hirebridge.com/v3/Jobs/list.aspx?cid=8484",
+    "at": "2026-11-06T12:50:59.669071+00:00",
+    "revision": "d135cc66b9cde057f79bbcbaf21bdb47aeb6336e",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "a62c6f0afc5c598fddb179ce0fd3d7ce4544410000061db78fb6b74a59cdd322",
+    "count": 0,
+    "status": "FAILED",
+    "complete": false,
+    "error": "ValueError: Retry-After exceeds inline retry budget",
+    "finished_at": "2026-11-06T12:51:13.843299+00:00"
+  },
+  {
+    "provider": "HireBridge",
+    "url": "https://recruit.hirebridge.com/v3/Jobs/list.aspx?cid=8427",
+    "at": "2026-11-06T12:51:14.344664+00:00",
+    "revision": "d135cc66b9cde057f79bbcbaf21bdb47aeb6336e",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "a62c6f0afc5c598fddb179ce0fd3d7ce4544410000061db78fb6b74a59cdd322",
+    "count": 0,
+    "status": "FAILED",
+    "complete": false,
+    "error": "ValueError: Retry-After exceeds inline retry budget",
+    "finished_at": "2026-11-06T12:51:15.772550+00:00"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "provider": "Freshteam",
+    "url": "https://sequoiaat.freshteam.com/jobs",
+    "at": "2026-11-06T12:03:58.022329+00:00",
+    "revision": "1740a9844dd8c3eb08e4d6f037717d6a2cdc733a",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "da8cac32a68750a046c94af5473410f8c18ed8e451951e3215438e45453f6bfb",
+    "count": 0,
+    "status": "FAILED",
+    "complete": false,
+    "error": "ValueError: Freshteam title/ID/remote/native application mismatch",
+    "finished_at": "2026-11-06T12:04:02.580178+00:00"
+  },
+  {
+    "provider": "Freshteam",
+    "url": "https://talent360.freshteam.com/jobs",
+    "at": "2026-11-06T12:04:03.081539+00:00",
+    "revision": "1740a9844dd8c3eb08e4d6f037717d6a2cdc733a",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "da8cac32a68750a046c94af5473410f8c18ed8e451951e3215438e45453f6bfb",
+    "count": 0,
+    "status": "FAILED",
+    "complete": false,
+    "error": "ValueError: Freshteam title/ID/remote/native application mismatch",
+    "finished_at": "2026-11-06T12:04:11.541732+00:00"
+  },
+  {
+    "provider": "HiringThing",
+    "url": "https://math-learning-center.hiringthing.com/",
+    "at": "2026-11-06T12:04:12.042971+00:00",
+    "revision": "1740a9844dd8c3eb08e4d6f037717d6a2cdc733a",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "da8cac32a68750a046c94af5473410f8c18ed8e451951e3215438e45453f6bfb",
+    "count": 2,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "56717bf66253fe82212f8a531464624609b8d4aba44bcf4103cd195b710fb5ae",
+    "finished_at": "2026-11-06T12:04:17.672153+00:00"
+  },
+  {
+    "provider": "HiringThing",
+    "url": "https://rtrjobs.hiringthing.com/",
+    "at": "2026-11-06T12:04:18.173299+00:00",
+    "revision": "1740a9844dd8c3eb08e4d6f037717d6a2cdc733a",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "da8cac32a68750a046c94af5473410f8c18ed8e451951e3215438e45453f6bfb",
+    "count": 3,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "94d269fbb757abd8caf13618ad06adba79fabab6a3e18a4c86ca0f68f35596cf",
+    "finished_at": "2026-11-06T12:04:24.524963+00:00"
+  }
+]

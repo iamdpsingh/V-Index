@@ -1,0 +1,99 @@
+{
+  "external_id": "13835023",
+  "title": "Initiativbewerbung",
+  "company": "Join GmbH",
+  "description": "Was wir bieten Die Join GmbH bietet Dir anspruchsvolle und abwechslungsreiche Aufgaben in einem innovativen Unternehmen. Du arbeitest in einem aufgeschlossenen, agilen Team und in Zusammenarbeit mit international agierenden Partnern. Zu unseren Kunden z\u00e4hlen zahlreiche international renommierte Konzerne sowie gro\u00dfe deutsche und europ\u00e4ische Unternehmen. Dadurch profitierst Du von kurzen Wegen und schnellen Entscheidungen kleiner Unternehmen und anspruchsvollen Projekten und Aufgaben im Gro\u00dfkundenbereich. Wir bieten ein kreatives Arbeitsklima, offene Kommunikationsstrukturen und partnerschaftliches Miteinander.",
+  "quality_flags": [],
+  "location": "Magdeburg, Germany; Magdeburg, de",
+  "source_url": "https://join.com/companies/joinit/16910304-initiativbewerbung",
+  "application_url": "https://join.com/companies/joinit/16910304-initiativbewerbung",
+  "employment_type": "FULL_TIME",
+  "remote_status": "ONSITE",
+  "salary": null,
+  "published_at": "2025-03-20T20:09:32.228000Z",
+  "raw": {
+    "listing": {
+      "id": 13835023,
+      "idParam": "16910304-initiativbewerbung",
+      "title": "Initiativbewerbung",
+      "createdAt": "2025-03-20T20:09:32.228Z",
+      "workplaceType": "ONSITE",
+      "city": {
+        "cityName": "Magdeburg",
+        "countryName": "Germany"
+      },
+      "employmentType": {
+        "name": "Employee"
+      },
+      "country": {
+        "iso3166": "DE"
+      }
+    },
+    "job": {
+      "id": 13835023,
+      "idParam": "16910304-initiativbewerbung",
+      "title": "Initiativbewerbung",
+      "status": "ONLINE",
+      "closedAt": null,
+      "createdAt": "2025-03-20T20:09:32.228Z",
+      "updatedAt": "2026-11-04T08:30:44.203Z",
+      "companyId": 30956,
+      "description": "<h2>Was wir bieten</h2>\n<p>Die Join GmbH bietet Dir anspruchsvolle und abwechslungsreiche Aufgaben in einem innovativen Unternehmen. Du arbeitest in einem aufgeschlossenen, agilen Team und in Zusammenarbeit mit international agierenden Partnern. Zu unseren Kunden z\u00e4hlen zahlreiche international renommierte Konzerne sowie gro\u00dfe deutsche und europ\u00e4ische Unternehmen. Dadurch profitierst Du von kurzen Wegen und schnellen Entscheidungen kleiner Unternehmen und anspruchsvollen Projekten und Aufgaben im Gro\u00dfkundenbereich. Wir bieten ein kreatives Arbeitsklima, offene Kommunikationsstrukturen und partnerschaftliches Miteinander.</p>",
+      "workplaceType": "ONSITE",
+      "remoteType": null,
+      "remoteRegion": null,
+      "office": {
+        "city": {
+          "cityName": "Magdeburg",
+          "countryName": "Deutschland"
+        },
+        "postalCode": null,
+        "streetName": "Klausenerstra\u00dfe",
+        "streetNumber": null
+      },
+      "hybrid": null,
+      "employmentType": {
+        "googleType": "FULL_TIME",
+        "name": "Angestellte/r"
+      },
+      "employmentTerms": null,
+      "salaryAmountFrom": null,
+      "salaryAmountTo": null,
+      "salaryFrequency": "PER_YEAR"
+    },
+    "jobposting": {
+      "@context": "https://schema.org",
+      "@type": "JobPosting",
+      "datePosted": "2025-03-20T20:09:32.228Z",
+      "description": "<h2>Was wir bieten</h2>\n<p>Die Join GmbH bietet Dir anspruchsvolle und abwechslungsreiche Aufgaben in einem innovativen Unternehmen. Du arbeitest in einem aufgeschlossenen, agilen Team und in Zusammenarbeit mit international agierenden Partnern. Zu unseren Kunden z\u00e4hlen zahlreiche international renommierte Konzerne sowie gro\u00dfe deutsche und europ\u00e4ische Unternehmen. Dadurch profitierst Du von kurzen Wegen und schnellen Entscheidungen kleiner Unternehmen und anspruchsvollen Projekten und Aufgaben im Gro\u00dfkundenbereich. Wir bieten ein kreatives Arbeitsklima, offene Kommunikationsstrukturen und partnerschaftliches Miteinander.</p>",
+      "employmentType": "FULL_TIME",
+      "hiringOrganization": {
+        "@type": "Organization",
+        "name": "Join GmbH",
+        "url": "https://join.com/companies/joinit",
+        "logo": "https://cdn.join.com/60f01f7c622ef70008856361/join-gmb-h-logo-m.png",
+        "description": "Wir digitalisieren, was zu digitalisieren ist.\nWir automatisieren, was zu automatisieren ist.\nWir integrieren, was zu integrieren ist.",
+        "sameAs": "https://www.join.de/"
+      },
+      "jobLocation": {
+        "@type": "Place",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "de",
+          "addressLocality": "Magdeburg",
+          "streetAddress": "Klausenerstra\u00dfe"
+        }
+      },
+      "title": "Initiativbewerbung",
+      "url": "https://join.com/companies/joinit/16910304-initiativbewerbung",
+      "directApply": true
+    },
+    "company": {
+      "id": 30956,
+      "domain": "joinit",
+      "name": "Join GmbH",
+      "isPublic": true,
+      "inReview": false
+    }
+  }
+}

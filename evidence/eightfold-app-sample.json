@@ -1,0 +1,63 @@
+{
+  "external_id": "68759590644",
+  "title": "Strategic Account Executive",
+  "company": "Eightfold",
+  "description": "Meet or exceed assigned sales objectives and quotas, and build new revenue streams. Expand and grow the business with new clients, existing clients and solution or implementation partners Execute plans to increase product exposure and identify key market opportunities and growth areas within assigned region Target competitor clients through dedicated sales campaigns with the sales development team Create the need for an RFP and or respond to, or assist partners with RFP's, bids and other tenders to grow net new sales Convert Sales qualified leads into direct deals and assist partners in developing and managing sales pipeline to achieve revenue goals Lead business planning and quarterly review process as well as regular pipeline review and forecasting activities Work with our clients and partners based on mutual trust and respect. Transparency and clear communications skills are vital for this role Influence client decisions and advocates for client needs to negotiate win-win solutions Singapore citizen or permanent resident is essential 10+ Years of enterprise-level sales experience Experience selling into large, complex organisations at the CHRO, CIO or CFO levels. Experience with SaaS solution selling, preferably with understanding and/or experience of native AI Ability to be fully autonomous as the first seller resource in the region Experience with Talent Acquisition, Talent Management and HR application selling Experience selling new, innovative platform solutions Demonstrated ability to take initiative and be innovative and resourceful in evolving sales methods to optimise new product success Demonstrated success at territory management and ability to prioritise among a high volume of opportunities to optimise quarterly bookings Comfortable with the challenger sales model Experience driving complex RFP's and RFI's Quick understanding of prospect's needs and wishes is essential, opportunity qualification is essential to build credible pipeline Team player who takes the lead in driving initiatives, working across teams (Product Management, SDR, Sales Engineering, Marketing) and structuring approaches to new opportunities Excellent commercial communication skills (written, oral and presentation) and a disciplined approach and strong relationship building skills Ability to thrive in a fast paced, results-oriented environment, solve problems creatively, think on his/her feet and be comfortable in new situations working with multiple stakeholders.",
+  "quality_flags": [
+    "publication_timezone_unspecified"
+  ],
+  "location": "SG",
+  "source_url": "https://app.eightfold.ai/careers/job/68759590644-strategic-account-executive-1240--singapore?domain=eightfold.ai",
+  "application_url": "https://app.eightfold.ai/careers/job/68759590644-strategic-account-executive-1240--singapore?domain=eightfold.ai",
+  "employment_type": "FULL_TIME",
+  "remote_status": "TELECOMMUTE",
+  "salary": null,
+  "published_at": "2026-09-11T10:41:10",
+  "raw": {
+    "board": {
+      "company": "Eightfold",
+      "domain": "volkscience.com",
+      "expected_count": null,
+      "seed_ids": []
+    },
+    "jobposting": {
+      "@context": "http://schema.org",
+      "@type": "JobPosting",
+      "applicantLocationRequirements": [
+        {
+          "@type": "Country",
+          "name": "SG"
+        }
+      ],
+      "datePosted": "2026-09-11T10:41:10",
+      "description": "Meet or exceed assigned sales objectives and quotas, and build new revenue streams. Expand and grow the business with new clients, existing clients and solution or implementation partners Execute plans to increase product exposure and identify key market opportunities and growth areas within assigned region Target competitor clients through dedicated sales campaigns with the sales development team Create the need for an RFP and or respond to, or assist partners with RFP's, bids and other tenders to grow net new sales Convert Sales qualified leads into direct deals and assist partners in developing and managing sales pipeline to achieve revenue goals Lead business planning and quarterly review process as well as regular pipeline review and forecasting activities Work with our clients and partners based on mutual trust and respect. Transparency and clear communications skills are vital for this role Influence client decisions and advocates for client needs to negotiate win-win solutions Singapore citizen or permanent resident is essential 10+ Years of enterprise-level sales experience Experience selling into large, complex organisations at the CHRO, CIO or CFO levels. Experience with SaaS solution selling, preferably with understanding and/or experience of native AI Ability to be fully autonomous as the first seller resource in the region Experience with Talent Acquisition, Talent Management and HR application selling Experience selling new, innovative platform solutions Demonstrated ability to take initiative and be innovative and resourceful in evolving sales methods to optimise new product success Demonstrated success at territory management and ability to prioritise among a high volume of opportunities to optimise quarterly bookings Comfortable with the challenger sales model Experience driving complex RFP's and RFI's Quick understanding of prospect's needs and wishes is essential, opportunity qualification is essential to build credible pipeline Team player who takes the lead in driving initiatives, working across teams (Product Management, SDR, Sales Engineering, Marketing) and structuring approaches to new opportunities Excellent commercial communication skills (written, oral and presentation) and a disciplined approach and strong relationship building skills Ability to thrive in a fast paced, results-oriented environment, solve problems creatively, think on his/her feet and be comfortable in new situations working with multiple stakeholders.",
+      "employmentType": "FULL_TIME",
+      "hiringOrganization": {
+        "@type": "Organization",
+        "logo": "",
+        "name": "Eightfold",
+        "sameAs": "volkscience.com"
+      },
+      "inLanguage": "en",
+      "jobLocation": {
+        "@type": "Place",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": {
+            "@type": "Country",
+            "name": "SG"
+          },
+          "addressLocality": "",
+          "addressRegion": ""
+        }
+      },
+      "jobLocationType": "TELECOMMUTE",
+      "title": "Strategic Account Executive",
+      "url": "https://app.eightfold.ai/careers/job/68759590644-strategic-account-executive-1240--singapore?domain=eightfold.ai",
+      "validThrough": "2027-03-10T10:41:10"
+    },
+    "public_legacy_position": {},
+    "published_at_original": "2026-09-11T10:41:10",
+    "application_entry": "native public posting"
+  }
+}

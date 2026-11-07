@@ -1,0 +1,30 @@
+[
+  {
+    "provider": "HiringThing",
+    "url": "https://math-learning-center.hiringthing.com/",
+    "at": "2026-11-06T11:49:48.424390+00:00",
+    "revision": "3108258598b80218bd0ec4c519e91d836f7788a6",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "9463849fdf901a042bb6f125fd4e9cfe9b3ffae64ec023bc0ab408010f100a30",
+    "count": 2,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "6d42022cd35a90c5c09162d68fb6521b112327edf80f76428980934b9afb4286",
+    "finished_at": "2026-11-06T11:49:54.029744+00:00"
+  },
+  {
+    "provider": "HiringThing",
+    "url": "https://rtrjobs.hiringthing.com/",
+    "at": "2026-11-06T11:49:54.531104+00:00",
+    "revision": "3108258598b80218bd0ec4c519e91d836f7788a6",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "9463849fdf901a042bb6f125fd4e9cfe9b3ffae64ec023bc0ab408010f100a30",
+    "count": 0,
+    "status": "FAILED",
+    "complete": false,
+    "error": "ValueError: Invalid HiringThing native job link",
+    "finished_at": "2026-11-06T11:49:57.606360+00:00"
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "provider": "CareerPlug",
+    "url": "https://app.careerplug.com/accounts/576036",
+    "at": "2026-11-06T12:34:31.245561+00:00",
+    "revision": "d3ebdf0060dcc1cfe8f0139127cf1c3b5175d27d",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "9bf0d6e428fdc7dfe91de08b2e55106155dfcbc6808440a6f9535bc8fb697b24",
+    "count": 2,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "18a3b328da5cdec3418747d5e7a82e973d0fde67784991855e951ae14f52cf20",
+    "finished_at": "2026-11-06T12:34:36.198685+00:00"
+  },
+  {
+    "provider": "CareerPlug",
+    "url": "https://app.careerplug.com/accounts/579908",
+    "at": "2026-11-06T12:34:36.699969+00:00",
+    "revision": "d3ebdf0060dcc1cfe8f0139127cf1c3b5175d27d",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "9bf0d6e428fdc7dfe91de08b2e55106155dfcbc6808440a6f9535bc8fb697b24",
+    "count": 8,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "97db3695c9ffb420d9548134766e41ba969648c5eadaeb9dd4c0f9112441cbd9",
+    "finished_at": "2026-11-06T12:34:45.510649+00:00"
+  }
+]

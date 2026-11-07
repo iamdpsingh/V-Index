@@ -9,3 +9,16 @@ node_modules/
 .next/
 .DS_Store
 *.tsbuildinfo
+.cache/
+
+# Private configuration, local data and keys
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+*.db-*
+*.sqlite
+*.sqlite3
+*.pem
+*.key

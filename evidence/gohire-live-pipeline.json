@@ -1,0 +1,30 @@
+{
+  "started_at": "2026-11-06T07:43:39.473321+00:00",
+  "revision": "a3498a4826b973479d120cc57911524761465d8e",
+  "database": "local SQLite",
+  "lease_backend": "local Redis",
+  "scope": "Actual source registration and scheduled worker, not direct connector invocation",
+  "source": {
+    "id": 16,
+    "provider": "gohire",
+    "slug": "digital-shift-o0hrqw5o",
+    "company": "Digital Shift",
+    "url": "https://jobs.gohire.io/digital-shift-o0hrqw5o/",
+    "refresh_minutes": 360,
+    "next_check": "2026-11-06T07:43:39.517422Z",
+    "failures": 0
+  },
+  "run": {
+    "id": 28,
+    "source_id": 16,
+    "started_at": "2026-11-06T07:43:51.744192Z",
+    "finished_at": "2026-11-06T07:44:13.728001Z",
+    "status": "success",
+    "count": 23,
+    "error": null
+  },
+  "searchable_records_with_source_provenance": 23,
+  "active_index_total": 1304,
+  "finished_at": "2026-11-06T07:44:14.530007+00:00",
+  "complete": true
+}

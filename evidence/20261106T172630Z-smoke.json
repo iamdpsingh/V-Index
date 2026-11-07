@@ -1,0 +1,64 @@
+[
+  {
+    "provider": "WeRecruit",
+    "url": "https://careers.werecruit.io/fr/epec",
+    "at": "2026-11-06T17:24:33.188068+00:00",
+    "revision": "e23ec98b06a745c191b82d67696a5e80d5ed32f9",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "ac485aefefb2bdd4996d916f94b8dc209379bfad6eb29051f8181333942e80b2",
+    "count": 1,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "963fdd2ea69c09f5e3e5649beadc3151447ea565551803c075d8edeac65f41bc",
+    "finished_at": "2026-11-06T17:24:36.942997+00:00"
+  },
+  {
+    "provider": "WeRecruit",
+    "url": "https://careers.werecruit.io/fr/ctlog-international",
+    "at": "2026-11-06T17:24:37.444164+00:00",
+    "revision": "e23ec98b06a745c191b82d67696a5e80d5ed32f9",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "ac485aefefb2bdd4996d916f94b8dc209379bfad6eb29051f8181333942e80b2",
+    "count": 18,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "9949d7e90caa091c17ecb6c16836a6622faed65d653ce0e7888bb17b96064bf9",
+    "finished_at": "2026-11-06T17:24:52.410926+00:00"
+  },
+  {
+    "provider": "Comeet",
+    "url": "https://www.comeet.com/jobs/oriient/EA.005",
+    "at": "2026-11-06T17:24:52.912265+00:00",
+    "revision": "e23ec98b06a745c191b82d67696a5e80d5ed32f9",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "ac485aefefb2bdd4996d916f94b8dc209379bfad6eb29051f8181333942e80b2",
+    "count": 7,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "711d3cc064061de2f03e8e0e6fc64ab427ce50d295ea6b92d35167b807271f79",
+    "finished_at": "2026-11-06T17:25:18.679178+00:00"
+  },
+  {
+    "provider": "Comeet",
+    "url": "https://www.comeet.com/jobs/webbing/46.00E",
+    "at": "2026-11-06T17:25:19.180188+00:00",
+    "revision": "e23ec98b06a745c191b82d67696a5e80d5ed32f9",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "ac485aefefb2bdd4996d916f94b8dc209379bfad6eb29051f8181333942e80b2",
+    "count": 26,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {
+      "description_section_missing": 3
+    },
+    "payload_sha256": "d59715ceee8e4a8f234544c9b6800a9ff42adca5c932ae47b287063da63637f5",
+    "finished_at": "2026-11-06T17:26:30.311458+00:00"
+  }
+]

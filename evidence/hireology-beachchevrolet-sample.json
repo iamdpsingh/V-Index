@@ -1,0 +1,62 @@
+{
+  "external_id": "2483905",
+  "title": "Automotive Sales Associate",
+  "company": "Beach Chevrolet",
+  "description": "At Beach Automotive, we strive to conduct our business as a well-respected organization; with integrity, hard work, and with the highest care for our employees and customers. Every employee at Beach Automotive is absolutely critical to our success. Our promise is to keep delivering the same phenomenal service and value that our community has come to expect from our dealership throughout the years. Benefits Medical, Dental & Vision Insurance 401K Plan + Match Paid time off and vacation Short/Long Term Disability Growth opportunities Paid Training Employee vehicle purchase plans Health and wellness Discounts on products and services Responsibilities Nurture enriching relationships to build clientele for life. Exhibit consultative selling skills. Assist customers in selecting a vehicle by asking questions and listening carefully to their responses. Continuously develop product and sales acumen to become the vehicle authority. Know the in\u2019s and the out\u2019s of product offerings, optional packages, and the latest technologies. Perform high-quality, professional demonstrations of new/used vehicles. Follow-up with buyers to ensure successful referral business. Learn to overcome objections and thrive within sales situations. Report directly to the Sales Manager regarding objectives, planned activities, reviews, and analyses. Bring your \u2018A game\u2019 along with a positive attitude to work with you every single day. Qualifications Available to work flexible hours and weekends Self-starter mentality and ambitious spirit preferred Ready to waste no time on learning new product in\u2019s and out\u2019s, eager to improve Phenomenal communication skills with customers and team members Professional, well-groomed personal appearance Clean driving record and valid driver\u2019s license We are an equal opportunity employer and prohibit discrimination/harassment without regard to race, color, religion, age, sex, national origin, disability status, genetics, protected veteran status, sexual orientation, gender identity or expression, or any other characteristic protected by federal, state or local laws.",
+  "quality_flags": [],
+  "location": "3740 Hwy 9 E, Little River, SC, 29566",
+  "source_url": "https://careers.hireology.com/beachchevrolet/2483905/description",
+  "application_url": "https://careers.hireology.com/beachchevrolet/2483905/description",
+  "employment_type": "Full Time - salary",
+  "remote_status": null,
+  "salary": null,
+  "published_at": null,
+  "raw": {
+    "job": {
+      "id": 2483905,
+      "name": "Automotive Sales Associate",
+      "created_at": "2024-02-28T16:50:39.323Z",
+      "status": "Open",
+      "employment_status": "Full Time - salary",
+      "job_description": "<div><p>At Beach Automotive, we strive to conduct our business as a well-respected organization; with integrity, hard work, and with the highest care for our employees and customers. Every employee at Beach Automotive is absolutely critical to our success. Our promise is to keep delivering the same phenomenal service and value that our community has come to expect from our dealership throughout the years.</p><p><strong>Benefits&nbsp;</strong></p><ul><li>Medical, Dental &amp; Vision Insurance&nbsp;</li><li>401K Plan + Match</li><li>Paid time off and vacation</li><li>Short/Long Term Disability</li><li>Growth opportunities&nbsp;</li><li>Paid Training</li><li>Employee vehicle purchase plans</li><li>Health and wellness&nbsp;</li><li>Discounts on products and services</li></ul></div><div><div><strong>Responsibilities</strong></div><ul><li><div>Nurture enriching relationships to build clientele for life.</div></li><li><div>Exhibit consultative selling skills. Assist customers in selecting a vehicle by asking questions and listening carefully to their responses.</div></li><li><div>Continuously develop product and sales acumen to become the vehicle authority. Know the in&rsquo;s and the out&rsquo;s of product offerings, optional packages, and the latest technologies.</div></li><li><div>Perform high-quality, professional demonstrations of new/used vehicles.</div></li><li><div>Follow-up with buyers to ensure successful referral business.</div></li><li><div>Learn to overcome objections and thrive within sales situations.</div></li><li><div>Report directly to the Sales Manager regarding objectives, planned activities, reviews, and analyses.</div></li><li><div>Bring your &lsquo;A game&rsquo; along with a positive attitude to work with you every single day.</div></li></ul><div><strong>Qualifications</strong></div><ul><li><div>Available to work flexible hours and weekends</div></li><li><div>Self-starter mentality and ambitious spirit preferred</div></li><li><div>Ready to waste no time on learning new product in&rsquo;s and out&rsquo;s, eager to improve</div></li><li><div>Phenomenal communication skills with customers and team members</div></li><li><div>Professional, well-groomed personal appearance</div></li><li><div>Clean driving record and valid driver&rsquo;s license</div></li></ul></div><div><em>We are an equal opportunity employer and prohibit discrimination/harassment without regard to race, color, religion, age, sex, national origin, disability status, genetics, protected veteran status, sexual orientation, gender identity or expression, or any other characteristic protected by federal, state or local laws.</em></div>",
+      "locations": [
+        {
+          "city": "Little River",
+          "state": "SC",
+          "zip_code": "29566",
+          "address": "3740 Hwy 9 E"
+        }
+      ],
+      "remote": false,
+      "blind_posted": false,
+      "job_family": {
+        "id": 1,
+        "name": "Sales",
+        "shorten": true,
+        "arrange": 13,
+        "global_id": "b625721f-e341-4847-859a-fe3359ca60fd"
+      },
+      "career_site_url": "https://careers.hireology.com/beachchevrolet/2483905/description",
+      "application_path": "/careers/2483905/application",
+      "career_site_path": "/beachchevrolet/2483905/description",
+      "organization": {
+        "id": 34292,
+        "name": "Beach Chevrolet",
+        "type": "Location"
+      },
+      "compensation": {
+        "is_comp_range": false,
+        "comp_single_amount": "0.0",
+        "comp_range_min": "0.0",
+        "comp_range_max": "0.0",
+        "comp_period": null,
+        "comp_frequency": null
+      }
+    },
+    "board": {
+      "company": "Beach Chevrolet",
+      "careersPath": "beachchevrolet",
+      "pageSize": 10
+    }
+  }
+}

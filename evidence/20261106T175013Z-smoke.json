@@ -1,0 +1,36 @@
+[
+  {
+    "provider": "CSOD",
+    "url": "https://portstephens.csod.com/ux/ats/careersite/1/home?c=portstephens",
+    "at": "2026-11-06T17:48:47.316704+00:00",
+    "revision": "d87cd5853fb7b0e88f693dd97c693fb192cb4b39",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "043f170dc8b89251cd415e45bc3ae60e20c96bf5063f23cbaaae24736b77533b",
+    "count": 8,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {
+      "company_from_source_configuration": 8
+    },
+    "payload_sha256": "e0873b6c29b9c8b79f29cbfb94927282c6e3be23ff01c9fdae62165e0660dbf4",
+    "finished_at": "2026-11-06T17:49:04.491173+00:00"
+  },
+  {
+    "provider": "CSOD",
+    "url": "https://nswconnect.csod.com/ux/ats/careersite/1/home?c=nswconnect",
+    "at": "2026-11-06T17:49:04.992668+00:00",
+    "revision": "d87cd5853fb7b0e88f693dd97c693fb192cb4b39",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "043f170dc8b89251cd415e45bc3ae60e20c96bf5063f23cbaaae24736b77533b",
+    "count": 41,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {
+      "company_from_source_configuration": 41
+    },
+    "payload_sha256": "b595469885b2464bcfd6ddc1a8904d17c646d6682a55f3c376f6cff74ee17a9a",
+    "finished_at": "2026-11-06T17:50:13.376323+00:00"
+  }
+]

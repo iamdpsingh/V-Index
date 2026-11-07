@@ -1,0 +1,32 @@
+[
+  {
+    "provider": "Kula.ai",
+    "url": "https://careers.kula.ai/fwg-internal",
+    "at": "2026-11-06T12:28:47.292697+00:00",
+    "revision": "79f8840d3c95aa6d887238af8959f14077a39492",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "336b57e7a31271db3b031268992d0ab9279ddb29878ad97169202db0f3e4e5dc",
+    "count": 2,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "8c0ac76d843e4985a86af7b6a3eb7e61b4d97cf8e84441d20701542ae0e720b4",
+    "finished_at": "2026-11-06T12:28:53.257445+00:00"
+  },
+  {
+    "provider": "Kula.ai",
+    "url": "https://careers.kula.ai/massive-bio",
+    "at": "2026-11-06T12:28:53.758682+00:00",
+    "revision": "79f8840d3c95aa6d887238af8959f14077a39492",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "336b57e7a31271db3b031268992d0ab9279ddb29878ad97169202db0f3e4e5dc",
+    "count": 57,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "6cd95def93b6d9d27ae0fc0df8e910419232ca3cedddfa4731db8251578ec37c",
+    "finished_at": "2026-11-06T12:29:47.538605+00:00"
+  }
+]

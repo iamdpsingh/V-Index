@@ -1,0 +1,32 @@
+[
+  {
+    "provider": "GoHire",
+    "url": "https://jobs.gohire.io/dineamic-hospitality-fniota1h/",
+    "at": "2026-11-06T07:42:32.345651+00:00",
+    "revision": "a3498a4826b973479d120cc57911524761465d8e",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "48a727ce20d79883285d4b23abe6780ef53ae2a9605c5533dd629bc6e5f2d7a5",
+    "count": 22,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "fa5a403b47bc11ba4dcd83fe64014689699c64e364a46549b2812675c6ecfd48",
+    "finished_at": "2026-11-06T07:42:53.450791+00:00"
+  },
+  {
+    "provider": "GoHire",
+    "url": "https://jobs.gohire.io/digital-shift-o0hrqw5o/",
+    "at": "2026-11-06T07:42:53.952117+00:00",
+    "revision": "a3498a4826b973479d120cc57911524761465d8e",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "48a727ce20d79883285d4b23abe6780ef53ae2a9605c5533dd629bc6e5f2d7a5",
+    "count": 23,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "a4efbf7ab974fb84981cb1526cb90e2f63e01f4db562a87c4c8a3a7990512d55",
+    "finished_at": "2026-11-06T07:43:13.012881+00:00"
+  }
+]
