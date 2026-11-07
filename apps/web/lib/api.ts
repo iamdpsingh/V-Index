@@ -338,3 +338,34 @@ export async function getRecommendations(
   const qs = query.toString();
   return apiFetch<RecommendationsOut>(`me/recommendations${qs ? `?${qs}` : ''}`);
 }
+
+// Plans & Pricing Types and API
+export type PlanOut = {
+  id: 'free' | 'plus';
+  name: string;
+  amount_minor: number;
+  currency: string;
+  currency_exponent: number;
+  interval: 'month';
+  availability: 'available' | 'coming_soon';
+  features: string[];
+};
+
+export type PlansOut = {
+  country: string | null;
+  local_currencies: string[];
+  local_currency_available: boolean;
+  currency: string;
+  currency_selection_required: boolean;
+  price_version: string;
+  pricing_basis: 'fixed_regional';
+  taxes_included: boolean;
+  notice: string | null;
+  paid_checkout_available: boolean;
+  plans: PlanOut[];
+};
+
+export async function getPlans(country?: string): Promise<PlansOut> {
+  const query = country ? `?country=${encodeURIComponent(country)}` : '';
+  return apiFetch<PlansOut>(`plans${query}`);
+}

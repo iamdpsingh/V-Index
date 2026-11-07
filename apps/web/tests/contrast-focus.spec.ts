@@ -27,13 +27,13 @@ test('nav buttons are keyboard reachable in order', async ({ page }) => {
     await page.keyboard.press('Tab');
     const tag = await page.evaluate(() => document.activeElement?.tagName);
     const text = await page.evaluate(() => document.activeElement?.textContent?.trim());
-    if (tag === 'BUTTON' && ['jobs', 'sources', 'coverage'].includes(text || '')) {
+    if (tag === 'BUTTON' && ['Find jobs', 'For you', 'Pricing'].includes(text || '')) {
       reached.push(text || '');
     }
   }
-  expect(reached).toContain('jobs');
-  expect(reached).toContain('sources');
-  expect(reached).toContain('coverage');
+  expect(reached).toContain('Find jobs');
+  expect(reached).toContain('For you');
+  expect(reached).toContain('Pricing');
 });
 
 test('wordmark link is keyboard reachable', async ({ page }) => {

@@ -5,16 +5,18 @@ import { apiFetch, authLogout, getMe, type AccountOut, type Provider } from '../
 import AuthDialog from '../components/AuthDialog';
 import CoveragePage from '../components/CoveragePage';
 import JobSearch from '../components/JobSearch';
+import PricingPage from '../components/PricingPage';
 import RecommendationsView from '../components/RecommendationsView';
-import { RolewispMark } from '../components/RolewispLogo';
+import { RolewispSymbol } from '../components/RolewispLogo';
 import SourcesAdmin from '../components/SourcesAdmin';
 import UserProfile from '../components/UserProfile';
 
-export type Tab = 'jobs' | 'for-you' | 'profile' | 'sources' | 'coverage';
+export type Tab = 'jobs' | 'for-you' | 'pricing' | 'profile' | 'sources' | 'coverage';
 
 const TAB_HEADINGS: Record<Tab, string> = {
   jobs: 'Find your next opening.',
   'for-you': 'Tailored to your signals.',
+  pricing: 'Find your next opening.',
   profile: 'Your private workspace.',
   sources: 'Keep the index current.',
   coverage: 'Coverage, with evidence.',
@@ -23,6 +25,7 @@ const TAB_HEADINGS: Record<Tab, string> = {
 const TAB_SUBHEADINGS: Record<Tab, string> = {
   jobs: 'Real openings. Original sources. A clearer place to search.',
   'for-you': 'Explainable recommendations scored against your desired roles, skills, and resume.',
+  pricing: 'Start free. Choose more when you need it.',
   profile: 'Manage your professional background, encrypted resume, and account security.',
   sources: 'Add a supported hosted career board and inspect its refresh history.',
   coverage:
@@ -43,13 +46,13 @@ export default function Home() {
     if (typeof window === 'undefined') return;
     const params = new URLSearchParams(window.location.search);
     const t = params.get('tab') as Tab | null;
-    if (t && ['jobs', 'for-you', 'profile', 'sources', 'coverage'].includes(t)) {
+    if (t && ['jobs', 'for-you', 'pricing', 'profile', 'sources', 'coverage'].includes(t)) {
       setTab(t);
     }
     const handlePopState = () => {
       const p = new URLSearchParams(window.location.search);
       const curTab = p.get('tab') as Tab | null;
-      if (curTab && ['jobs', 'for-you', 'profile', 'sources', 'coverage'].includes(curTab)) {
+      if (curTab && ['jobs', 'for-you', 'pricing', 'profile', 'sources', 'coverage'].includes(curTab)) {
         setTab(curTab);
       }
     };
@@ -64,7 +67,7 @@ export default function Home() {
       .catch(() => setAccount(null));
   }, []);
 
-  // Providers are fetched once at mount — used by both page intro and CoveragePage
+  // Providers are fetched once at mount — used by reviewer CoveragePage & SourcesAdmin
   useEffect(() => {
     apiFetch<Provider[]>('providers')
       .then(setProviders)
@@ -100,7 +103,7 @@ export default function Home() {
     switchTab('jobs');
   }
 
-  // Counts for the index-note — LIVE_VERIFIED is evidence, not same as implemented
+  // Counts for the reviewer index-note — LIVE_VERIFIED is evidence, not same as implemented
   const verifiedCount = providers.filter(
     (p) => (p.evidence_status || '').toUpperCase() === 'LIVE_VERIFIED'
   ).length;
@@ -109,72 +112,94 @@ export default function Home() {
   return (
     <>
       <header>
-        <a className="wordmark" href="/" aria-label="Rolewisp — V-Index">
-          <RolewispMark size={28} />
-          <span className="brand-name">Rolewisp</span>
-          <span className="brand-sub">V—Index</span>
-        </a>
-        <span className="header-note">Find your next opening.</span>
+        <div className="header-inner">
+          <a className="wordmark" href="/" aria-label="Rolewisp — Find your next opening">
+            <RolewispSymbol size={32} />
+            <span className="brand-name">Rolewisp</span>
+          </a>
+          <span className="header-note">Find your next opening.</span>
 
-        <nav aria-label="Main navigation">
-          {(['jobs', 'for-you', 'profile', 'sources', 'coverage'] as Tab[]).map((name) => (
-            <button
-              key={name}
-              aria-current={tab === name ? 'page' : undefined}
-              onClick={() => switchTab(name)}
-            >
-              {name === 'for-you' ? 'for you' : name}
-            </button>
-          ))}
-        </nav>
-
-        {/* Account indicator in header */}
-        <div className="header-account">
-          {account ? (
+          {/* Consumer navigation: Find jobs, For you, Pricing */}
+          <nav className="header-nav" aria-label="Main navigation">
             <button
               type="button"
-              className="account-pill-btn"
-              onClick={() => switchTab('profile')}
-              title={`Signed in as ${account.email}`}
+              className="nav-btn"
+              aria-current={tab === 'jobs' ? 'page' : undefined}
+              onClick={() => switchTab('jobs')}
             >
-              <span className="account-dot" />
-              <span className="account-email-label">{account.email}</span>
+              Find jobs
             </button>
-          ) : (
             <button
               type="button"
-              className="header-signin-btn"
-              onClick={() => {
-                setAuthMode('login');
-                setAuthOpen(true);
-              }}
+              className="nav-btn"
+              aria-current={tab === 'for-you' ? 'page' : undefined}
+              onClick={() => switchTab('for-you')}
             >
-              Sign In
+              For you
             </button>
-          )}
+            <button
+              type="button"
+              className="nav-btn"
+              aria-current={tab === 'pricing' ? 'page' : undefined}
+              onClick={() => switchTab('pricing')}
+            >
+              Pricing
+            </button>
+          </nav>
+
+          {/* Account indicator in header */}
+          <div className="header-account">
+            {account ? (
+              <button
+                type="button"
+                className="account-pill-btn"
+                onClick={() => switchTab('profile')}
+                title={`Signed in as ${account.email}`}
+                aria-label={`Account profile: ${account.email}`}
+              >
+                <span className="account-dot" />
+                <span className="account-email-label">{account.email}</span>
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="header-signin-btn"
+                onClick={() => {
+                  setAuthMode('login');
+                  setAuthOpen(true);
+                }}
+              >
+                Sign In
+              </button>
+            )}
+          </div>
         </div>
       </header>
 
       <main>
-        <div className="eyebrow">
-          THE INDEX / {tab === 'for-you' ? 'FOR YOU' : tab.toUpperCase()}
-        </div>
+        {/* Render standard intro header for non-pricing views */}
+        {tab !== 'pricing' && (
+          <section className={`intro ${['jobs', 'for-you'].includes(tab) ? 'intro-consumer' : ''}`}>
+            <div>
+              {tab === 'coverage' && <div className="eyebrow">REVIEWER DIAGNOSTICS / COVERAGE</div>}
+              {tab === 'sources' && <div className="eyebrow">OPERATOR CONTROLS / SOURCES</div>}
+              <h1>{TAB_HEADINGS[tab]}</h1>
+              <p>{TAB_SUBHEADINGS[tab]}</p>
+            </div>
 
-        <section className="intro">
-          <div>
-            <h1>{TAB_HEADINGS[tab]}</h1>
-            <p>{TAB_SUBHEADINGS[tab]}</p>
-          </div>
-          {/* index-note: verified = live-checked evidence, not implemented count */}
-          <div className="index-note">
-            <span className="dot" />
-            {verifiedCount} / {totalCount || '—'} platforms live-checked
-            <small>Point-in-time evidence · initial release</small>
-          </div>
-        </section>
+            {/* Diagnostic index-note shown only on reviewer / operator screens */}
+            {(tab === 'coverage' || tab === 'sources') && (
+              <div className="index-note">
+                <span className="dot" />
+                {verifiedCount} / {totalCount || '—'} platforms live-checked
+                <small>Point-in-time evidence · initial release</small>
+              </div>
+            )}
+          </section>
+        )}
 
         {/* Global error banner (providers fetch only) */}
-        {providerError && (
+        {providerError && (tab === 'coverage' || tab === 'sources') && (
           <div className="notice error" role="alert">
             {providerError}
           </div>
@@ -193,6 +218,10 @@ export default function Home() {
           />
         )}
 
+        {tab === 'pricing' && (
+          <PricingPage onStartSearching={() => switchTab('jobs')} />
+        )}
+
         {tab === 'profile' &&
           (account ? (
             <UserProfile
@@ -206,7 +235,7 @@ export default function Home() {
               <p>
                 Manage your desired job titles, professional skills, and encrypted resume.
               </p>
-              <div className="empty-action-row">
+              <div className="empty-action-row" style={{ justifyContent: 'center' }}>
                 <button
                   type="button"
                   className="primary"
@@ -253,11 +282,34 @@ export default function Home() {
       />
 
       <footer>
-        <span>Rolewisp — built in the V—Index repository</span>
-        <span>Original sources. Visible evidence.</span>
-        <a href="/docs" target="_blank" rel="noopener noreferrer">
-          API documentation ↗
-        </a>
+        <div className="footer-inner">
+          <div className="footer-brand">
+            <span className="footer-brand-title">Rolewisp — built in the V—Index repository</span>
+            <span>Original sources. Visible evidence.</span>
+          </div>
+
+          <div className="footer-nav">
+            <button
+              type="button"
+              className="footer-link-btn"
+              aria-current={tab === 'coverage' ? 'page' : undefined}
+              onClick={() => switchTab('coverage')}
+            >
+              coverage
+            </button>
+            <button
+              type="button"
+              className="footer-link-btn"
+              aria-current={tab === 'sources' ? 'page' : undefined}
+              onClick={() => switchTab('sources')}
+            >
+              sources
+            </button>
+            <a href="/docs" target="_blank" rel="noopener noreferrer" className="footer-doc-link">
+              API documentation ↗
+            </a>
+          </div>
+        </div>
       </footer>
     </>
   );

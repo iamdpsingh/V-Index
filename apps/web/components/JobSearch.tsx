@@ -448,13 +448,14 @@ export default function JobSearch({ error: externalError, onError }: JobSearchPr
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Apply at original source ↗
+                    Open application · Apply at original source ↗
                   </a>
                 ) : (
                   <span className="apply non-link" title="Apply destination is not a direct HTTPS link">
-                    Apply at original source ↗
+                    Open application · Apply at original source ↗
                   </span>
                 )}
+                <span className="apply-subtext">On the employer’s site</span>
               </div>
 
               {/* Quality flags notice when description is omitted by source */}
