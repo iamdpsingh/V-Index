@@ -16,6 +16,20 @@ from vindex.connectors.registry import create_connector
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
     (
+        "Taleo",
+        "taleo-tbe",
+        "phf.tbe.taleo.net~phf03~GRAYBARCANADA~42",
+        "GRAYBAR CANADA",
+        "https://phf.tbe.taleo.net/phf03/ats/careers/v2/jobSearch?org=GRAYBARCANADA&cws=42",
+    ),
+    (
+        "Taleo",
+        "taleo-tbe",
+        "phg.tbe.taleo.net~phg01~GATEWAYVENT~72",
+        "OLH Technical Services",
+        "https://phg.tbe.taleo.net/phg01/ats/careers/v2/jobSearch?org=GATEWAYVENT&cws=72",
+    ),
+    (
         "Avature",
         "avature",
         "careers~en_US/main",
@@ -489,6 +503,15 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "Taleo": [
+                                "Oracle Taleo Business Edition native TBE v2 public org/CWS boards only; distinct from Oracle Recruiting Cloud; Enterprise Taleo and other/custom templates unsupported",
+                                "Fixed validated TBE pod/host/org/site scope; unfiltered ten-job public pages with native next offsets, unique IDs up to 200 and complete final enumeration; optional Positions Matched total enforced when provided",
+                                "Every native full detail requires listed title, scoped same-ID Apply control, complete full HTML body and location; JobPosting identifier/url/full text required to agree when structured metadata is supplied",
+                                "Some public TBE templates omit JobPosting entirely; preserve full native body/brief, explicit metadata and configured employer with source flags; do not fabricate absent publication/pay/employment/workplace",
+                                "Public Job Code may differ from stable RID; preserve both; preserve original ISO and explicit GMT Java date formats, flag timezone when source timestamp omits it instead of inventing UTC",
+                                "Closed or moved roles can return HTTP200 with no job/apply body; reject mandatory unavailable details and never reconcile a failed/partial snapshot; no login/application/employee API requests or submissions",
+                                "Known TIMESTAMP_DEMO2 org rejected; fixtures/vendor demos never count; bounded point-in-time evidence does not establish all Taleo editions or hosted production freshness",
+                            ],
                             "Avature": [
                                 "Native tenant.avature.net public SearchJobs portals, modern article--jobs and classic results layouts only; no internal/employee/referral portals, private APIs or application requests",
                                 "Explicit six-item result ranges and total up to 200 jobs, unique scoped IDs and every page/detail required; entire board brand/roster reconfirmed after extraction",
