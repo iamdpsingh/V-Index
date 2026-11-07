@@ -15,6 +15,8 @@ from vindex.connectors.registry import create_connector
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
+    ("Eightfold AI", "eightfold", "app", "Eightfold", "https://app.eightfold.ai/careers"),
+    ("Eightfold AI", "eightfold", "insight", "Insight", "https://insight.eightfold.ai/careers"),
     (
         "Taleo",
         "taleo-tbe",
@@ -503,6 +505,16 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "Eightfold AI": [
+                                "Native tenant.eightfold.ai public careers shells, job sitemap indices/maps and complete JobPosting HTML only; no account/candidate/application API requests or submissions",
+                                "Explicit excludePrivatePositions=true required; legacy anonymous seeds must be isPrivate=false and complete sitemap count must equal public board count; up to 200 mandatory full details",
+                                "Use robots-advertised job sitemap index when provided; modern native hosts without sitemap declaration use fixed standard public index scoped by shell namespace; robots still enforced on every URL",
+                                "Enumerate all native job maps, excluding only explicitly non-job category map/home; reject duplicate IDs, unsafe URLs, malformed XML and wrong employer/namespace; final full maps and shell reconfirmed",
+                                "Preserve canonical namespace aliases published in sitemap (Eightfold uses both volkscience.com and eightfold.ai), full source descriptions, all locations, structured salary/employment/workplace and original date strings",
+                                "Naive source publication timestamps stay naive with a quality flag; no guessed timezone, location or pay; native posting is the public application entry",
+                                "Legacy Insight rejects newer search API with HTTP403; no retries/bypass; connector uses its normal public advertised sitemap and native pages only",
+                                "Only observed public HTML/sitemap templates supported; failed/partial/changed collections never reconcile; bounded evidence does not establish hosted production freshness",
+                            ],
                             "Taleo": [
                                 "Oracle Taleo Business Edition native TBE v2 public org/CWS boards only; distinct from Oracle Recruiting Cloud; Enterprise Taleo and other/custom templates unsupported",
                                 "Fixed validated TBE pod/host/org/site scope; unfiltered ten-job public pages with native next offsets, unique IDs up to 200 and complete final enumeration; optional Positions Matched total enforced when provided",

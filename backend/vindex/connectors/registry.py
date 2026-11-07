@@ -14,6 +14,7 @@ from vindex.connectors.comeet import TENANT as COMEET_TENANT
 from vindex.connectors.comeet import UID as COMEET_UID
 from vindex.connectors.comeet import ComeetConnector
 from vindex.connectors.csod import CSODConnector
+from vindex.connectors.eightfold import EightfoldConnector
 from vindex.connectors.firststage import FirstStageConnector
 from vindex.connectors.freshteam import FreshteamConnector
 from vindex.connectors.gohire import SLUG as GOHIRE_SLUG
@@ -80,6 +81,11 @@ def detect(url: str) -> tuple[str, str]:
         match = re.fullmatch(rf"({TENANT})\.{re.escape(suffix)}", p.hostname or "")
         if match:
             return provider, match[1]
+    eightfold = re.fullmatch(rf"({TENANT})\.eightfold\.ai", p.hostname or "")
+    if eightfold:
+        if p.path.rstrip("/") != "/careers" or p.query or p.fragment:
+            raise ValueError("Expected an unfiltered native Eightfold public careers root")
+        return "eightfold", eightfold[1]
     if re.fullmatch(TALEO_HOST, p.hostname or ""):
         match = re.fullmatch(
             r"/([a-z]{2,4}[0-9]{2})/ats/careers/v2/(?:jobSearch|searchResults)", p.path
@@ -259,13 +265,15 @@ def detect(url: str) -> tuple[str, str]:
         return detect_original(url)
     except ValueError as error:
         raise ValueError(
-            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire, HiringThing, Freshteam, Trakstar, Rippling, Kula.ai, CareerPlug, TriNet, HireBridge, JOIN.com, Hireology, Paylocity, Zoho Recruit, Comeet, WeRecruit, FirstStage, Oracle Recruiting, CSOD, iCIMS, PageUp, Avature and Taleo"
+            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire, HiringThing, Freshteam, Trakstar, Rippling, Kula.ai, CareerPlug, TriNet, HireBridge, JOIN.com, Hireology, Paylocity, Zoho Recruit, Comeet, WeRecruit, FirstStage, Oracle Recruiting, CSOD, iCIMS, PageUp, Avature, Taleo and Eightfold AI"
         ) from error
 
 
 def create_connector(
     provider: str, slug: str, company: str, client: httpx.AsyncClient
 ) -> Connector:
+    if provider == "eightfold":
+        return EightfoldConnector(provider, slug, company, client)
     if provider == "taleo-tbe":
         return TaleoConnector(provider, slug, company, client)
     if provider == "avature":

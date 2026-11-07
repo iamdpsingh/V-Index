@@ -55,7 +55,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | SAP SuccessFactors | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | SmartRecruiters | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 90 | 2026-11-05T16:49:50.960317+00:00 | https://careers.smartrecruiters.com/SmartRecruiters (2; LIVE_VERIFIED); https://careers.smartrecruiters.com/Colliers (88; LIVE_VERIFIED)  |
 | talentReef | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
-| Taleo | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
+| Taleo | ats | IMPLEMENTED | LIVE_VERIFIED | HIGH | 135 | 2026-11-07T01:53:19.592777+00:00 | https://phf.tbe.taleo.net/phf03/ats/careers/v2/jobSearch?org=GRAYBARCANADA&cws=42 (32; LIVE_VERIFIED); https://phg.tbe.taleo.net/phg01/ats/careers/v2/jobSearch?org=GATEWAYVENT&cws=72 (103; LIVE_VERIFIED)  |
 | Teamtailor | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 26 | 2026-11-06T03:09:11.551818+00:00 | https://clearroute.teamtailor.com (22; LIVE_VERIFIED); https://omny.teamtailor.com (4; LIVE_VERIFIED)  |
 | Trakstar | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 14 | 2026-11-06T12:16:37.653365+00:00 | https://bsglaw.hire.trakstar.com/ (3; LIVE_VERIFIED); https://worksuites.hire.trakstar.com/ (11; LIVE_VERIFIED)  |
 | TriNet | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 18 | 2026-11-06T12:45:46.787947+00:00 | https://app.trinethire.com/companies/69740-ark-investment-management/jobs (6; LIVE_VERIFIED); https://app.trinethire.com/companies/665804-stridepath-consulting/jobs (12; LIVE_VERIFIED)  |

@@ -1,0 +1,37 @@
+[
+  {
+    "provider": "Taleo",
+    "url": "https://phf.tbe.taleo.net/phf03/ats/careers/v2/jobSearch?org=GRAYBARCANADA&cws=42",
+    "at": "2026-11-07T01:51:00.556964+00:00",
+    "revision": "f840dec935297d0cb409396d772bc1e8aaf5fcdc",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "1b68958011362b90011d0bab73442eec904acb5eba88a65720d4e07f9334190c",
+    "count": 32,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {
+      "publication_timezone_unspecified": 29
+    },
+    "payload_sha256": "44ec0a9e1f5dd4a5a94a7c080eba5a026b01ddbd3eb8e5f15f60837a009541e0",
+    "finished_at": "2026-11-07T01:51:39.884400+00:00"
+  },
+  {
+    "provider": "Taleo",
+    "url": "https://phg.tbe.taleo.net/phg01/ats/careers/v2/jobSearch?org=GATEWAYVENT&cws=72",
+    "at": "2026-11-07T01:51:40.385687+00:00",
+    "revision": "f840dec935297d0cb409396d772bc1e8aaf5fcdc",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "1b68958011362b90011d0bab73442eec904acb5eba88a65720d4e07f9334190c",
+    "count": 103,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {
+      "structured_job_metadata_missing": 103,
+      "company_from_source_configuration": 103
+    },
+    "payload_sha256": "9afd59e09996e451c1b33d547af7bf69f5a77166275552e23a7a1ce231fc938d",
+    "finished_at": "2026-11-07T01:53:19.592777+00:00"
+  }
+]
