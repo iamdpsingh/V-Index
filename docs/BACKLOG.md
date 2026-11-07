@@ -2,7 +2,7 @@
 
 ## Current coverage-first status — November 7
 
-45/78 platforms have complete non-empty point-in-time runs across two independent supported sites. The 45-platform milestone passed on November 7 IST with Taleo, Eightfold AI and Deel verified. The owner's condition for pushing accumulated commits is satisfied. Frontend remains ON HOLD. The other 33 platforms and all remaining production/acquisition gates remain open.
+45/78 platforms have complete non-empty point-in-time runs across two independent supported sites. The 45-platform milestone passed on November 7 IST with Taleo, Eightfold AI and Deel verified. The owner's condition for pushing accumulated commits is satisfied. Frontend design is now assigned to Codex and implementation to Antigravity; see ROLEWISP_FRONTEND_DESIGN.md. The other 33 platforms and all remaining production/acquisition gates remain open.
 
 ## First slice
 - [x] Inspect empty folder/remote; initialize canonical main without replacing history.

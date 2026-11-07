@@ -1,0 +1,176 @@
+{
+  "scope": "Design concept data captured from the local API; not a static frontend data source or live screenshot",
+  "captured_on": "2026-11-07",
+  "total": 19,
+  "rows": [
+    {
+      "id": 2911,
+      "title": "Digital Designer, Web and Mobile",
+      "company": "Avature",
+      "location": "Argentina",
+      "employment_type": null,
+      "remote_status": null,
+      "salary": null,
+      "published_at": null,
+      "source_url": "https://careers.avature.net/en_US/main/JobDetail/Argentina-UX-Designer-Website-Argentina/8463",
+      "application_url": "https://careers.avature.net/en_US/main/ApplicationMethods?jobId=8463",
+      "first_seen_at": "2026-11-07T02:14:36.326772Z",
+      "last_changed_at": "2026-11-07T02:14:36.326772Z",
+      "quality_flags": [],
+      "sources": [
+        {
+          "source_id": 43,
+          "source_url": "https://careers.avature.net/en_US/main/JobDetail/Argentina-UX-Designer-Website-Argentina/8463",
+          "application_url": "https://careers.avature.net/en_US/main/ApplicationMethods?jobId=8463",
+          "status": "open",
+          "last_checked_at": "2026-11-07T02:14:36.326772Z"
+        }
+      ]
+    },
+    {
+      "id": 2910,
+      "title": "UX Designer - Platform",
+      "company": "Avature",
+      "location": "Argentina",
+      "employment_type": null,
+      "remote_status": null,
+      "salary": null,
+      "published_at": null,
+      "source_url": "https://careers.avature.net/en_US/main/JobDetail/Argentina-UX-Designer-Platform-Argentina/72",
+      "application_url": "https://careers.avature.net/en_US/main/ApplicationMethods?jobId=72",
+      "first_seen_at": "2026-11-07T02:14:36.326772Z",
+      "last_changed_at": "2026-11-07T02:14:36.326772Z",
+      "quality_flags": [],
+      "sources": [
+        {
+          "source_id": 43,
+          "source_url": "https://careers.avature.net/en_US/main/JobDetail/Argentina-UX-Designer-Platform-Argentina/72",
+          "application_url": "https://careers.avature.net/en_US/main/ApplicationMethods?jobId=72",
+          "status": "open",
+          "last_checked_at": "2026-11-07T02:14:36.326772Z"
+        }
+      ]
+    },
+    {
+      "id": 2909,
+      "title": "Technical Leader",
+      "company": "Avature",
+      "location": "Argentina",
+      "employment_type": null,
+      "remote_status": null,
+      "salary": null,
+      "published_at": null,
+      "source_url": "https://careers.avature.net/en_US/main/JobDetail/Argentina-Technical-Leader-Argentina/5172",
+      "application_url": "https://careers.avature.net/en_US/main/ApplicationMethods?jobId=5172",
+      "first_seen_at": "2026-11-07T02:14:36.326772Z",
+      "last_changed_at": "2026-11-07T02:14:36.326772Z",
+      "quality_flags": [],
+      "sources": [
+        {
+          "source_id": 43,
+          "source_url": "https://careers.avature.net/en_US/main/JobDetail/Argentina-Technical-Leader-Argentina/5172",
+          "application_url": "https://careers.avature.net/en_US/main/ApplicationMethods?jobId=5172",
+          "status": "open",
+          "last_checked_at": "2026-11-07T02:14:36.326772Z"
+        }
+      ]
+    },
+    {
+      "id": 2908,
+      "title": "Talent Management Specialist (Proficient in English)",
+      "company": "Avature",
+      "location": "Bulgaria",
+      "employment_type": null,
+      "remote_status": null,
+      "salary": null,
+      "published_at": null,
+      "source_url": "https://careers.avature.net/en_US/main/JobDetail/Bulgaria-Talent-Management-Specialist-Bulgaria/8879",
+      "application_url": "https://careers.avature.net/en_US/main/ApplicationMethods?jobId=8879",
+      "first_seen_at": "2026-11-07T02:14:36.326772Z",
+      "last_changed_at": "2026-11-07T02:14:36.326772Z",
+      "quality_flags": [],
+      "sources": [
+        {
+          "source_id": 43,
+          "source_url": "https://careers.avature.net/en_US/main/JobDetail/Bulgaria-Talent-Management-Specialist-Bulgaria/8879",
+          "application_url": "https://careers.avature.net/en_US/main/ApplicationMethods?jobId=8879",
+          "status": "open",
+          "last_checked_at": "2026-11-07T02:14:36.326772Z"
+        }
+      ]
+    },
+    {
+      "id": 2907,
+      "title": "Software Implementation Consultant, Proficient in English and French",
+      "company": "Avature",
+      "location": "Spain",
+      "employment_type": null,
+      "remote_status": null,
+      "salary": null,
+      "published_at": null,
+      "source_url": "https://careers.avature.net/en_US/main/JobDetail/Spain-Software-Implementation-Consultant-Proficient-in-English-and-French-Spain/5256",
+      "application_url": "https://careers.avature.net/en_US/main/ApplicationMethods?jobId=5256",
+      "first_seen_at": "2026-11-07T02:14:36.326772Z",
+      "last_changed_at": "2026-11-07T02:14:36.326772Z",
+      "quality_flags": [],
+      "sources": [
+        {
+          "source_id": 43,
+          "source_url": "https://careers.avature.net/en_US/main/JobDetail/Spain-Software-Implementation-Consultant-Proficient-in-English-and-French-Spain/5256",
+          "application_url": "https://careers.avature.net/en_US/main/ApplicationMethods?jobId=5256",
+          "status": "open",
+          "last_checked_at": "2026-11-07T02:14:36.326772Z"
+        }
+      ]
+    },
+    {
+      "id": 2906,
+      "title": "Software Implementation Consultant, Proficient in English and French",
+      "company": "Avature",
+      "location": "Bulgaria",
+      "employment_type": null,
+      "remote_status": null,
+      "salary": null,
+      "published_at": null,
+      "source_url": "https://careers.avature.net/en_US/main/JobDetail/Bulgaria-Software-Implementation-Consultant-Proficient-in-English-and-French-Bulgaria/7678",
+      "application_url": "https://careers.avature.net/en_US/main/ApplicationMethods?jobId=7678",
+      "first_seen_at": "2026-11-07T02:14:36.326772Z",
+      "last_changed_at": "2026-11-07T02:14:36.326772Z",
+      "quality_flags": [],
+      "sources": [
+        {
+          "source_id": 43,
+          "source_url": "https://careers.avature.net/en_US/main/JobDetail/Bulgaria-Software-Implementation-Consultant-Proficient-in-English-and-French-Bulgaria/7678",
+          "application_url": "https://careers.avature.net/en_US/main/ApplicationMethods?jobId=7678",
+          "status": "open",
+          "last_checked_at": "2026-11-07T02:14:36.326772Z"
+        }
+      ]
+    }
+  ],
+  "selected": {
+    "id": 2911,
+    "title": "Digital Designer, Web and Mobile",
+    "company": "Avature",
+    "location": "Argentina",
+    "employment_type": null,
+    "remote_status": null,
+    "salary": null,
+    "published_at": null,
+    "source_url": "https://careers.avature.net/en_US/main/JobDetail/Argentina-UX-Designer-Website-Argentina/8463",
+    "application_url": "https://careers.avature.net/en_US/main/ApplicationMethods?jobId=8463",
+    "first_seen_at": "2026-11-07T02:14:36.326772+00:00",
+    "last_changed_at": "2026-11-07T02:14:36.326772+00:00",
+    "quality_flags": [],
+    "description": "Remote position available for candidates based in La Plata, Bah\u00eda Blanca, CABA, C\u00f3rdoba, Rosario, or Mendoza. As our Digital Designer (Web & Mobile), you\u2019ll be the creative force behind our web presence. You\u2019ll translate our brand vision into elegant, user-centric designs, partnering with cross-functional teams to bring every concept to life. Your challenges and objectives: Play a key role in the evolution and rebranding of our primary website, updating existing content and rolling out new sites and landing pages. Co-create and evolve a web design system that reflects our corporate style and enables consistent, efficient execution across digital experiences. Deliver top-quality web designs and complementary marketing materials through efficient, fast-paced workflows. Engage closely with marketing, design, and executive stakeholders incorporating their strategic feedback to ensure brand alignment. Your day-to-day activities: Design and conceptualize high-impact website layouts, landing pages, event pages, and related digital experiences that support marketing objectives. Partner with Design, Marketing, Communications, and Engineering to bring concepts to life across web and mobile experiences. Maintain and evolve the web design system, including components, templates, assets, and style guidelines, feeding improvements back into the broader design practice. Use Figma and other tools to deliver pixel-perfect mockups, production-ready files, interactive prototypes, and complementary visual materials Ensure quality, accessibility, responsive behavior, web performance, and consistency across breakpoints and content types. Share best practices, contribute to a strong design culture, and help teammates produce intentional, high-craft work. Translate briefs, brand guidelines, user needs, and business goals into clear information structures, flows, wireframes, prototypes, and polished final designs. About you: Strong portfolio of web and mobile designs that integrate brand identity into digital products. Strong foundations in design, with an outstanding eye for hierarchy, composition, typography, color, spacing, layout, imagery, and attention to detail. Proactively identify process gaps, propose solutions, and embrace ambiguity as an opportunity to innovate. Mastery of Figma and Adobe Creative Suite (Photoshop, Illustrator), plus familiarity with generative AI tools (Adobe Firefly, Freepik, ChatGPT). Experience creating wireframes, prototypes, and high-fidelity visual designs, and iterating them based on stakeholder, user, or technical feedback. Deep understanding of responsive design principles, usability heuristics, information architecture, accessibility, and web performance best practices. Clear, structured communicator who can explain design decisions, manage feedback, and keep projects on track across multiple stakeholders. Basic knowledge of HTML5 and CSS3; JavaScript, CMS experience such as WordPress, animation, and motion-design skills are nice to have. Intermediate oral and written English (B1), mainly for internal communication. Comfortable using AI tools in day-to-day work and genuinely interested in staying up to date with emerging AI capabilities. About us: Avature is a market-leading enterprise SaaS provider for global talent acquisition and talent management. We have a strong commitment to high-quality engineering and customer service and are recognized innovators in the large enterprise market. Leading organizations around the world rely on Avature, including Fortune 500 companies, global consulting firms, some of the world's largest banks and manufacturers, and government organizations. We design, build, implement, and support our product ourselves. With a strong culture of ownership and innovation, we continuously evolve our platform to help organizations meet the changing demands of talent acquisition and talent management. As technology continues to reshape the world of work, we leverage AI and emerging technologies to help organizations innovate, adapt, and gain competitive advantage. At Avature, we value opportunities to learn and grow within a dynamic, creative, and collaborative environment. We encourage autonomy and empower our people to approach challenges innovatively while bringing their unique perspective to the table. We believe curiosity, continuous learning, and openness to emerging technologies are essential to building the future. Through our career development programs, mentorship, and leadership opportunities, we support each person's professional growth while making a meaningful impact on our product and our customers' success. What we offer: A fast-paced, energetic, and engaging environment. We combine flexible remote work with in-person collaboration, encouraging team members to spend one day a week at their nearest office. We have workplaces in Buenos Aires (Palermo, La Plata and Bah\u00eda Blanca), Rosario, Mendoza and C\u00f3rdoba. Flexible hours. Periodic salary reviews. Three weeks vacations from the first year. Four weeks paternity leave. OSDE 360 health coverage (family plan). Four days a year to attend events related to professional development. Paid internet service expenses. An organizational culture that empowers everyone to be themselves is key to thrive in business, but more importantly, it is a pathway for creating a more equitable society. Avature fosters a diverse and inclusive environment and celebrates that each unique person brings something different to our team. We are committed to considering all qualified applicants equally and to promoting equal opportunities within our organization.",
+    "sources": [
+      {
+        "source_id": 43,
+        "status": "open",
+        "last_checked": "2026-11-07T02:14:36.326772+00:00",
+        "first_seen": "2026-11-07T02:14:36.326772+00:00",
+        "last_changed": "2026-11-07T02:14:36.326772+00:00"
+      }
+    ]
+  }
+}

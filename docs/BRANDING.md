@@ -1,5 +1,8 @@
 # Rolewisp
 
+**Latest owner instruction — November 7:** Codex supplies the frontend design; **Antigravity implements it** in its existing separate frontend worktree. This supersedes the frontend hold and earlier Codex-frontend takeover notes. Read [ROLEWISP_FRONTEND_DESIGN.md](ROLEWISP_FRONTEND_DESIGN.md) and [ANTIGRAVITY_DESIGN_TASK.md](ANTIGRAVITY_DESIGN_TASK.md) first. Preserve frontend commit `3bc0a54` and existing API wiring; no external agent is assumed launched or notified. Codex continues backend and coverage. The original 78-platform objective is unchanged.
+
+
 Owner-selected public product brand, November 6, 2026.
 
 - Product name: **Rolewisp**

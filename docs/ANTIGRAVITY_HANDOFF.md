@@ -1,5 +1,8 @@
 # Antigravity frontend handoff
 
+**Latest owner instruction — November 7:** Codex supplies the frontend design; **Antigravity implements it** in its existing separate frontend worktree. This supersedes the frontend hold and earlier Codex-frontend takeover notes. Read [ROLEWISP_FRONTEND_DESIGN.md](ROLEWISP_FRONTEND_DESIGN.md) and [ANTIGRAVITY_DESIGN_TASK.md](ANTIGRAVITY_DESIGN_TASK.md) first. Preserve frontend commit `3bc0a54` and existing API wiring; no external agent is assumed launched or notified. Codex continues backend and coverage. The original 78-platform objective is unchanged.
+
+
 **Latest milestone, November 7: frontend remains ON HOLD.** The 45/78 live-verified coverage milestone passed, satisfying the owner’s condition for pushing accumulated commits. Continue coverage/backend and preserve the frontend worktree. This supersedes earlier 35-target/resume notes below. Future design resource: https://github.com/nutlope/hallmark; also AnimasterLib, Skiper UI, Vengence UI, Scrolltide, Navbar/CTA galleries, Footer Design, Refero Styles, Superhero, 3D icons and getlayers.ai. These are research references for later, not approved assets already incorporated.
 
 **Superseding owner update, November 6:** Codex takes over frontend ownership after today's 35-total-platform coverage target. Preserve existing Antigravity commits/worktree; the design, API and test requirements below remain applicable reference material. Earlier assignment/resume instructions below are historical and no longer assign work to Antigravity.

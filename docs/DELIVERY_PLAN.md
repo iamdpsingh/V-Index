@@ -1,3 +1,5 @@
+**Latest owner update — November 7:** Codex designs the new Rolewisp frontend and Antigravity implements it. The design package and copy-ready task are in ROLEWISP_FRONTEND_DESIGN.md and ANTIGRAVITY_DESIGN_TASK.md. Preserve existing frontend work at 3bc0a54; backend coverage remains Codex-owned. This supersedes the hold below.
+
 **Latest milestone — November 7:** 45/78 total platforms now have complete non-empty live evidence across two independent supported sites. The owner's 45-platform condition for pushing accumulated commits is satisfied. Frontend remains ON HOLD; continue toward the other 33 platforms and production/acquisition acceptance. Preserve frontend resources in ANTIGRAVITY_HANDOFF.md. Earlier milestones below are historical.
 
 # Delivery target — November 7, 2026 (IST)

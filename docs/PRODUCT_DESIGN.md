@@ -1,5 +1,8 @@
 # V-Index product design standard
 
+**Latest owner instruction — November 7:** Codex supplies the frontend design; **Antigravity implements it** in its existing separate frontend worktree. This supersedes the frontend hold and earlier Codex-frontend takeover notes. Read [ROLEWISP_FRONTEND_DESIGN.md](ROLEWISP_FRONTEND_DESIGN.md) and [ANTIGRAVITY_DESIGN_TASK.md](ANTIGRAVITY_DESIGN_TASK.md) first. Preserve frontend commit `3bc0a54` and existing API wiring; no external agent is assumed launched or notified. Codex continues backend and coverage. The original 78-platform objective is unchanged.
+
+
 Latest owner instruction: Antigravity resumes the premium **Rolewisp** frontend in parallel with Codex's coverage work. Read ANTIGRAVITY_START_HERE.md for execution scope and LIVE_INDEX_REQUIREMENTS.md for freshness behavior. The repository remains V-Index. The owner explicitly rejects a regular template or a cheap/AI-generic appearance; the visual and interaction review gates below are required.
 
 ## Owner direction

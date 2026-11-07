@@ -1,0 +1,34 @@
+/* Rolewisp Opening Lines: design tokens for Antigravity, not a production stylesheet. */
+:root {
+  --color-field: oklch(0.33175 0.04501 211.21); /* #153C43 */
+  --color-paper: oklch(0.95990 0.00654 208.78); /* #EDF3F4 */
+  --color-sheet: oklch(0.98610 0.00346 219.53); /* #F8FBFC */
+  --color-ink: oklch(0.30686 0.03519 216.54); /* #19343B */
+  --color-muted: oklch(0.49534 0.02694 217.04); /* #51666C */
+  --color-rule: oklch(0.85549 0.01372 214.37); /* #C6D2D5 */
+  --color-edge: oklch(0.64765 0.02816 218.11); /* #7C939A */
+  --color-accent: oklch(0.74227 0.13020 33.02); /* #F28B75 */
+  --color-select: oklch(0.92485 0.01415 207.87); /* #DCE9EB */
+  --color-ok: oklch(0.43115 0.06820 166.84); /* #245C48 */
+  --color-okbg: oklch(0.93715 0.01742 159.11); /* #E1EEE6 */
+  --color-warn: oklch(0.49181 0.09496 61.51); /* #875320 */
+  --color-warnbg: oklch(0.94495 0.02212 74.09); /* #F6EBDD */
+  --color-focus: oklch(0.45228 0.11958 32.57); /* #8C3727 */
+  --color-focus-on-dark: var(--color-accent);
+  --font-display: "Albert Sans", sans-serif;
+  --font-body: "Hanken Grotesk", sans-serif;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --content-max: 1344px;
+  --radius-field: 4px;
+  --radius-control: 5px;
+  --duration-hover: 120ms;
+  --duration-selection: 180ms;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
