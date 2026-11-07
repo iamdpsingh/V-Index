@@ -470,16 +470,53 @@
   {
     "name": "Deel",
     "kind": "ats",
-    "implementation_status": "NOT_STARTED",
-    "evidence_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
+    "evidence_status": "LIVE_VERIFIED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
+    "examples": [
+      {
+        "provider": "Deel",
+        "url": "https://jobs.deel.com/dott",
+        "at": "2026-11-07T02:12:55.496615+00:00",
+        "revision": "ae43a0cc0a36d9a6fab828eef6abfa6948d2f72a",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "4a0e86329b5c3f2634334e478359619192b3ead15c73c4da14e20c0e0f696b36",
+        "count": 16,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "619be928e2bcd9f0ed011d6665549d00a07f1ad8738b62a7dfebb645c85b816a",
+        "finished_at": "2026-11-07T02:13:16.034026+00:00"
+      },
+      {
+        "provider": "Deel",
+        "url": "https://jobs.deel.com/offsec",
+        "at": "2026-11-07T02:13:16.535349+00:00",
+        "revision": "ae43a0cc0a36d9a6fab828eef6abfa6948d2f72a",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "4a0e86329b5c3f2634334e478359619192b3ead15c73c4da14e20c0e0f696b36",
+        "count": 18,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "0299cd0741e8b3bf2803d87a3f30704ccdd2333baefb35e76b88efc568b0791a",
+        "finished_at": "2026-11-07T02:13:38.251589+00:00"
+      }
+    ],
+    "last_run_at": "2026-11-07T02:13:38.251589+00:00",
+    "extraction_count": 34,
     "failure_reason": null,
     "limitations": [
-      "Connector not implemented"
+      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
+      "Native jobs.deel.com public rendered boards and mandatory overview JobPosting HTML; no JavaScript execution, candidate/account APIs or application submission",
+      "Full server-rendered jobPostings and SEO ItemList must agree on every UUID; matching employer/settings and published_basic state on the actual board required; full board reconfirmed after up to 200 mandatory details",
+      "No independent total supplied; completeness follows full supported native collection plus SEO roster agreement, not a search-engine sample; custom, empty, changed or unsupported layouts never reconcile",
+      "Every detail must match UUID, employer, title and full native description apart from whitespace/punctuation spacing; preserve full rich text, all locations, employment, workplace and source datePosted without inventing missing metadata",
+      "Only public visible compensation is normalized; no conversion or guessed units; native public posting is application entry; application-form and publication-user identifiers omitted",
+      "Point-in-time supported-template evidence does not establish all Deel deployments or hosted production freshness"
     ]
   },
   {

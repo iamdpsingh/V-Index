@@ -1,0 +1,32 @@
+[
+  {
+    "provider": "Deel",
+    "url": "https://jobs.deel.com/dott",
+    "at": "2026-11-07T02:12:55.496615+00:00",
+    "revision": "ae43a0cc0a36d9a6fab828eef6abfa6948d2f72a",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "4a0e86329b5c3f2634334e478359619192b3ead15c73c4da14e20c0e0f696b36",
+    "count": 16,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "619be928e2bcd9f0ed011d6665549d00a07f1ad8738b62a7dfebb645c85b816a",
+    "finished_at": "2026-11-07T02:13:16.034026+00:00"
+  },
+  {
+    "provider": "Deel",
+    "url": "https://jobs.deel.com/offsec",
+    "at": "2026-11-07T02:13:16.535349+00:00",
+    "revision": "ae43a0cc0a36d9a6fab828eef6abfa6948d2f72a",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "4a0e86329b5c3f2634334e478359619192b3ead15c73c4da14e20c0e0f696b36",
+    "count": 18,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "0299cd0741e8b3bf2803d87a3f30704ccdd2333baefb35e76b88efc568b0791a",
+    "finished_at": "2026-11-07T02:13:38.251589+00:00"
+  }
+]

@@ -17,7 +17,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | Comeet | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 33 | 2026-11-06T17:26:30.311458+00:00 | https://www.comeet.com/jobs/oriient/EA.005 (7; LIVE_VERIFIED); https://www.comeet.com/jobs/webbing/46.00E (26; LIVE_VERIFIED)  |
 | CSOD | ats | IMPLEMENTED | LIVE_VERIFIED | HIGH | 49 | 2026-11-06T17:50:13.376323+00:00 | https://portstephens.csod.com/ux/ats/careersite/1/home?c=portstephens (8; LIVE_VERIFIED); https://nswconnect.csod.com/ux/ats/careersite/1/home?c=nswconnect (41; LIVE_VERIFIED)  |
 | Dayforce | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
-| Deel | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
+| Deel | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 34 | 2026-11-07T02:13:38.251589+00:00 | https://jobs.deel.com/dott (16; LIVE_VERIFIED); https://jobs.deel.com/offsec (18; LIVE_VERIFIED)  |
 | Dover | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Eightfold AI | ats | IMPLEMENTED | LIVE_VERIFIED | HIGH | 189 | 2026-11-07T02:12:28.099811+00:00 | https://app.eightfold.ai/careers (46; LIVE_VERIFIED); https://insight.eightfold.ai/careers (143; LIVE_VERIFIED)  |
 | FirstStage | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 4 | 2026-11-06T17:28:28.660502+00:00 | https://firststage.firststage.co/jobs (1; LIVE_VERIFIED); https://quantumbase.firststage.co/jobs (3; LIVE_VERIFIED)  |
