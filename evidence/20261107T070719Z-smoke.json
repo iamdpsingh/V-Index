@@ -1,0 +1,39 @@
+[
+  {
+    "provider": "JobBoard.io",
+    "url": "https://www.nifajobs.com/",
+    "at": "2026-11-07T07:06:17.362774+00:00",
+    "revision": "613e4d8a1a08190ba0956da57c7a08cedf60e0d6",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "e115a18a704250058bc2a0ab2184a71c22e278b591e93a1a91a9a469c2cea129",
+    "count": 2,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {
+      "publication_date_only": 2
+    },
+    "payload_sha256": "a0cb3dee8612ada9392acf6f8bad5184464c09d5d021e0f87e6bb9ee1685fbed",
+    "finished_at": "2026-11-07T07:06:24.257809+00:00"
+  },
+  {
+    "provider": "JobBoard.io",
+    "url": "https://www.cancercareers.org/",
+    "at": "2026-11-07T07:06:24.759153+00:00",
+    "revision": "613e4d8a1a08190ba0956da57c7a08cedf60e0d6",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "e115a18a704250058bc2a0ab2184a71c22e278b591e93a1a91a9a469c2cea129",
+    "count": 61,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {
+      "publication_date_only": 61,
+      "source_contact_protected": 27,
+      "structured_posting_missing": 1,
+      "application_http_source": 2
+    },
+    "payload_sha256": "2ee7c26a9e0b6084d0e4b38695f0f60ae40c3e03c5bca5b02ebcceedd73b6fe5",
+    "finished_at": "2026-11-07T07:07:19.433685+00:00"
+  }
+]

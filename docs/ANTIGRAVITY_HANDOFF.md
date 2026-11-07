@@ -67,3 +67,5 @@ JBoard.io now has complete formal live evidence for AAME 30 and CIS Ontario 48, 
 ## JobBoard.io source entry
 
 The source form can accept `https://www.nifajobs.com/` and `https://www.cancercareers.org/` as reviewed JobBoard.io board roots. No API schema change. Keep the original public job link and API-provided Apply link; they can be the same when the board opens an application form on the listing. Render descriptions as text, including any protected contact placeholders. Keep source quality flags and connector checks in the review surface.
+
+Both reviewed JobBoard.io sources passed formal live verification on November 7: NIFA 2 jobs and AACR CancerCareers 61. Current matrix is 47/78. This count belongs on the reviewer surface and in the evidence, not in hardcoded public product copy.

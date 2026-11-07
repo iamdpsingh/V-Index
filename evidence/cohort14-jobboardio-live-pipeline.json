@@ -1,0 +1,29 @@
+{
+  "at": "2026-11-07T07:08:24.406856+00:00",
+  "revision": "613e4d8a1a08190ba0956da57c7a08cedf60e0d6",
+  "scope": "Isolated actual local API registration, native scheduled worker, storage and public paginated search; no hosted uptime claim",
+  "platform": "JobBoard.io",
+  "source": {
+    "id": 1,
+    "provider": "jobboardio",
+    "slug": "www.nifajobs.com",
+    "company": "NIFA",
+    "url": "https://www.nifajobs.com/",
+    "refresh_minutes": 360,
+    "next_check": "2026-11-07T07:08:16.976049Z",
+    "failures": 0
+  },
+  "run": {
+    "id": 1,
+    "source_id": 1,
+    "started_at": "2026-11-07T07:08:17.209582Z",
+    "finished_at": "2026-11-07T07:08:23.732567Z",
+    "status": "success",
+    "count": 2,
+    "error": null
+  },
+  "stored_observations": 2,
+  "public_search_unique_jobs": 2,
+  "public_provenance_entries": 2,
+  "all_complete": true
+}

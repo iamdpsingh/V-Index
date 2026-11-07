@@ -1,0 +1,22 @@
+{
+  "date_utc": "2026-11-07",
+  "platform": "WP Job Manager",
+  "scope": "Public discovery only; no complete connector or verified coverage",
+  "references": [
+    "https://wpjobmanager.com/document/advanced-usage/wp-job-manager-rest-api/",
+    "https://wpjobmanager.com/document/advanced-usage/rss-feed-for-jobs/",
+    "https://www.clue.com.au/work/striking-gold-a-digital-revolution-in-mining-recruitment",
+    "https://veebiagentuur.ee/tehtud-tood/pedagoog-ee/"
+  ],
+  "observations": [
+    {
+      "url": "https://pedagoog.ee/toopakkumised/",
+      "result": "Public board loads WP Job Manager assets and lists native jobs. The documented REST collection returned one job for the per_page=1 diagnostic request. A complete, active-only roster and details are not yet verified."
+    },
+    {
+      "url": "https://globe24-7.com/jobs/",
+      "result": "Public board loads WP Job Manager assets, with 10 native listing elements on the observed page. Robots disallows its REST collection, so no REST request was made. Investigate normal, permitted public board pagination only."
+    }
+  ],
+  "limitations": "The vendor documents that the RSS feed excludes jobs without a job type. Do not count or reconcile from that feed alone. Never request restricted routes or candidate data."
+}
