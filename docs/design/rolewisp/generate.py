@@ -33,7 +33,8 @@ class Board:
         for line in lines:self.text(x,y,line,size,color,weight,display);y+=leading
         return y
     def mark(self,x,y,size=28,color='accent'):
-        self.parts.append(f'<g transform="translate({x} {y}) scale({size/32})" fill="none" stroke="{P[color]}" stroke-width="3.2" stroke-linecap="square"><path d="M4 23V5H22"/><path d="M10 27H28V9"/></g>')
+        # Original open-counter R ribbon, drawn directly on a 48-unit grid.
+        self.parts.append(f'<g transform="translate({x} {y}) scale({size/48})" fill="none" stroke="{P[color]}" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 39V16C10 9 16 5 23 5C31 5 37 10 37 17C37 24 31 29 23 29H20L36 43"/></g>')
     def logo(self,x,y,dark=False):
         self.mark(x,y-25);self.text(x+40,y,'Rolewisp',28,'sheet' if dark else 'ink',700,True)
     def arrow(self,x,y,color='ink'):
@@ -42,15 +43,16 @@ class Board:
         self.rect(x,y,w,46,'accent' if primary else 'sheet',5,None if primary else 'edge');self.text(x+18,y+29,label,16,'ink',700 if primary else 400)
     def pill(self,x,y,label,kind='select'):
         w=len(label)*7+22;self.rect(x,y,w,27,kind,4);self.text(x+11,y+18,label,13,'ok' if kind=='okbg' else 'ink');return w
-    def note(self,label='Design concept. Real index records; not a live product screenshot.'):
-        self.text(32,self.h-20,label,12,'muted')
+    def note(self,label='Design concept'):
+        # Artifact classification belongs in accompanying docs, not product chrome.
+        pass
     def save(self,name):
         self.parts.append('</svg>');(HERE/(name+'.svg')).write_text(''.join(self.parts))
 
 
 def nav(b,active='Find jobs'):
     b.rect(0,0,b.w,80,'field');b.logo(48,49,True)
-    for x,label in [(780,'Find jobs'),(895,'For you'),(990,'Coverage')]:
+    for x,label in [(780,'Find jobs'),(895,'For you'),(990,'Pricing')]:
         b.text(x,47,label,16,'sheet',700 if label==active else 400)
         if label==active:b.line(x,62,x+len(label)*7.3,62,'accent',2)
     b.button(1190,17,202,'Your profile' if active=='Profile' else 'Sign in')
@@ -60,7 +62,7 @@ b=Board(1440,1200,'Rolewisp desktop search and job reader design concept')
 nav(b);b.rect(0,80,1440,151,'field')
 b.text(48,157,'Find your next opening.',68,'sheet',700,True)
 b.text(50,198,'Company career pages, brought into one searchable index.',18,'sheet')
-b.text(1124,146,'45 of 78 platforms',18,'sheet',700);b.text(1124,175,'View coverage evidence',15,'sheet')
+
 b.rect(0,231,1440,112,'sheet');b.line(0,343,1440,343)
 for x,w,label,value in [(48,540,'Keyword','Search titles or descriptions'),(604,366,'Company','Avature'),(986,244,'Location','Any location')]:
     b.text(x,257,label,13,'muted');b.rect(x,268,w,48,'sheet',4,'edge');b.text(x+16,298,value,16,'muted' if x==48 else 'ink')
@@ -87,7 +89,7 @@ b.line(x,y+62,1392,y+62)
 b.text(x,y+99,'Source record',23,'ink',700,True)
 b.text(x,y+133,'Original listing',14,'muted');b.text(x+184,y+133,'careers.avature.net',16,'ink',700)
 b.text(x,y+164,'Last checked',14,'muted');b.text(x+184,y+164,'7 Nov 2026, 02:14 UTC',16)
-b.text(x,y+195,'Source status',14,'muted');b.pill(x+184,y+176,'Open at last check','okbg')
+b.text(x,y+195,'Index status',14,'muted');b.pill(x+184,y+176,'Open in index','okbg')
 b.text(x,y+231,'Posting date wasn’t provided by this source.',14,'muted')
 b.note();b.save('01-search-desktop')
 
@@ -101,9 +103,9 @@ y=b.wrap(24,385,intro,39,17,27,'ink')
 b.line(24,y+10,366,y+10);b.text(24,y+48,'Source record',23,'ink',700,True)
 b.text(24,y+84,'Original listing',14,'muted');b.text(24,y+111,'careers.avature.net',17,'ink',700)
 b.text(24,y+146,'Last checked',14,'muted');b.text(24,y+173,'7 Nov 2026, 02:14 UTC',17)
-b.pill(24,y+193,'Open at last check','okbg');b.text(24,949,'Read full description in the final reader',14,'muted')
+b.pill(24,y+193,'Open in index','okbg');
 b.rect(0,1008,390,112,'sheet');b.line(0,1008,390,1008);b.button(24,1023,342,'Open application on employer’s site',True)
-b.text(24,1097,'Design concept. Real job record.',12,'muted');b.save('02-reader-mobile')
+b.save('02-reader-mobile')
 
 b=Board(1440,1100,'Rolewisp platform coverage and evidence design concept')
 nav(b,'Coverage');b.text(48,153,'Coverage you can inspect.',56,'ink',700,True)
@@ -141,14 +143,14 @@ b.text(x,883,'Suggestions use your roles and skills, with reasons. They are not 
 b.button(x,919,198,'Save profile',True)
 b.note('Design concept. Empty private fields; no account, personal resume or saved preferences fabricated.');b.save('04-profile-desktop')
 
-b=Board(1200,630,'Rolewisp engineering milestone graphic: 45 of 78 platforms verified, 972 tests passed')
+b=Board(1200,630,'Rolewisp progress graphic: 45 platforms and one searchable job index')
 b.rect(0,0,1200,630,'field');b.logo(52,68,True);b.text(893,65,'7 November 2026',17,'sheet')
-b.text(52,191,'45 platforms.',88,'sheet',700,True);b.text(52,283,'Live verified.',88,'sheet',700,True)
-b.text(56,338,'Real career sites. Two independent examples per platform.',22,'sheet')
-b.line(56,388,1144,388,'edge');b.text(56,439,'972 tests passed',27,'sheet',700,True);b.text(56,474,'PostgreSQL and Redis integration enabled',16,'sheet')
-b.text(686,439,'All 3 CI jobs passed',27,'sheet',700,True);b.text(686,474,'Backend, web build and Docker stack checks',16,'sheet')
+b.text(52,191,'45 platforms.',88,'sheet',700,True);b.text(52,283,'One clearer search.',88,'sheet',700,True)
+b.text(56,338,'Original job details, source links and scheduled updates.',22,'sheet')
+b.line(56,388,1144,388,'edge');b.text(56,439,'Original source links',27,'sheet',700,True);b.text(56,474,'Apply on the employer or board that published the job',16,'sheet')
+b.text(686,439,'A searchable index',27,'sheet',700,True);b.text(686,474,'Job details, locations and source records',16,'sheet')
 b.rect(56,526,1088,7,'edge');b.rect(56,526,1088*45/78,7,'accent')
-b.text(56,565,'45 of 78 required platforms. 33 remain.',17,'sheet');b.text(56,602,'Engineering milestone. Hosted production acceptance remains in progress.',14,'sheet')
+b.text(56,565,'45 of 78 required platforms. 33 remain.',17,'sheet');b.text(56,602,'Coverage expansion continues.',14,'sheet')
 b.save('weekly-update')
 
 
@@ -167,4 +169,35 @@ for i,row in enumerate(DATA['rows'][:3]):
  b.text(40,y+91,row['company'],14,'muted');b.text(168,y+91,row['location'],14,'muted')
  if i>0:b.line(40,y+116,350,y+116)
 b.text(24,1014,'Showing 1–3 of 19',14,'muted');b.button(205,987,161,'Next page')
-b.text(24,1103,'Design concept. Real index records.',12,'muted');b.save('05-search-mobile')
+b.save('05-search-mobile')
+
+b=Board(1440,1040,'Rolewisp Free and Plus pricing design, paid membership coming soon')
+nav(b,'Pricing');b.text(48,157,'Find your next opening.',60,'ink',700,True)
+b.text(50,202,'Start free. Choose more when you need it.',20,'muted')
+b.text(1060,148,'Country and currency',14,'muted');b.rect(1060,164,332,48,'sheet',4,'edge');b.text(1076,194,'India / INR',17)
+b.line(48,248,1392,248)
+b.text(76,313,'Free',32,'ink',700,True);b.text(76,387,'₹0',64,'ink',700,True);b.text(76,425,'For everyday job discovery.',18,'muted')
+b.button(76,463,520,'Start searching',True)
+for y,label in [(573,'Search jobs and open original applications'),(623,'Keep a profile and one resume'),(673,'Get job suggestions with readable reasons')]:
+ b.text(76,y,label,18);b.line(76,y+18,596,y+18)
+b.line(700,280,700,812)
+b.text(756,313,'Plus',32,'ink',700,True);b.pill(855,291,'Coming soon','warnbg')
+b.text(756,387,'₹399',64,'ink',700,True);b.text(940,385,'/ month',18,'muted');b.text(756,425,'Planned price, before applicable taxes.',18,'muted')
+b.rect(756,463,560,46,'select',5);b.text(776,492,'Paid membership opens later',16,'muted')
+b.text(756,575,'Designed for a more focused search.',20,'ink',700)
+b.wrap(756,620,'The paid tier will launch with its confirmed benefits and secure checkout. Free search stays available.',57,18,29,'muted')
+b.line(48,848,1392,848);b.text(76,898,'Your country sets the displayed currency.',21,'ink',700)
+b.text(76,936,'Select another country at any time. Checkout is not accepting payments yet.',17,'muted')
+b.save('06-pricing-desktop')
+
+b=Board(1200,760,'Original Rolewisp open-counter ribbon R identity and scale study')
+b.rect(0,0,1200,380,'field');b.mark(64,84,184);b.text(306,211,'Rolewisp',100,'sheet',700,True)
+b.text(310,267,'Find your next opening.',28,'sheet')
+b.text(64,441,'An open R, drawn as one continuous path.',31,'ink',700,True)
+b.text(66,483,'The counter stays open. The returning stroke becomes the next step.',19,'muted')
+for x,size in [(72,16),(160,24),(260,32),(388,48),(556,80)]:
+ b.mark(x,553,size,'field');b.text(x,690,str(size)+' px',15,'muted')
+b.mark(860,548,100,'field');b.text(855,690,'Single color',15,'muted')
+b.save('07-logo-identity')
+logo='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" role="img" aria-label="Rolewisp"><title>Rolewisp</title><path d="M10 39V16C10 9 16 5 23 5C31 5 37 10 37 17C37 24 31 29 23 29H20L36 43" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+(HERE/'logo-symbol.svg').write_text(logo)

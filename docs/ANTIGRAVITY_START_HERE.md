@@ -54,3 +54,7 @@ Run `npm ci`, `npm run build`, `npm run typecheck` and the browser suite in the 
 Save real-data visual evidence separately from mocked test screenshots and label both accurately. Never use fixtures/screenshots as provider coverage. Report actual commands, outcomes, unresolved issues and the exact frontend commit. A build pass alone is not interaction or premium-design acceptance.
 
 The public hostname/deployment remains a Codex responsibility with unresolved budget/hosting gates. Use the current same-origin rewrite contract and request backend changes through reviewed commits. Do not purchase domains, upgrade plans, register paid services or publish a new independent repository.
+
+## Latest production/product additions — November 7
+
+Read PLANS_AND_PRICING.md and SECURITY_REVIEW_2026-11-07.md. Use the original ribbon R mark and updated product-only studies; remove test/acquisition diagnostics from consumer navigation and copy. Coverage stays separately inspectable for reviewers. Implement the real plans API, country selector and exact money formatting; Plus has no connected provider and must not simulate payment. Job detail now shares JobOut/provenance fields with search; raw source/observation data is private. Preserve current account/resume/recommendation/polling work and all 78 platform requirements. HTML security headers and the actual production bundle require frontend verification; no frontend agent was launched or messaged here.

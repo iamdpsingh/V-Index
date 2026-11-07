@@ -16,9 +16,9 @@ Editable SVGs sit beside the PNGs. These are **design concepts, not implemented 
 
 ## The idea
 
-Rolewisp turns a scattered job listing into an opening someone can inspect. Its visual signature is an open-corner mark, an active entry in an index, and a wide reader with its original source attached. The user moves from opening to source without losing the search.
+Rolewisp turns a scattered job listing into an opening someone can inspect. Its visual signature is a custom continuous-ribbon R mark, an active entry in an index, and a wide reader with its original source attached. The user moves from opening to source without losing the search.
 
-The public product starts with search, not a separate marketing funnel. The selected role gets more room than the results list. Brand character comes from confident type, a deep petrol masthead, cool mist surfaces and a small coral signal. Source facts remain legible and quiet. No globe, stock photography or decorative background is needed.
+The public product starts with search, not a separate marketing funnel. The selected role gets more room than the results list. Brand character comes from confident type, a deep petrol masthead, cool mist surfaces and a small coral signal. Source facts remain legible and quiet. Testing/CI and acquisition progress do not appear in job-seeker screens. No globe, stock photography or decorative background is needed.
 
 Three directions considered:
 
@@ -26,7 +26,7 @@ Three directions considered:
 2. **Personal career magazine:** large editorial typography, warm paper, aspirational stories. Rejected: introduces content we do not have and is too close to the current cream/serif treatment.
 3. **Opening Lines:** a useful search instrument with generous job reading and inspectable source records. Selected because actual data and the existing backend support its core interaction today.
 
-The opening-corner geometry already exists in the frontend branch; refine that identity rather than replacing it with unrelated iconography. The public wordmark is Rolewisp. V-Index belongs in repository/about documentation, not as a competing logo in the primary masthead.
+The latest owner request replaces the old corner-frame logo. Use the custom ribbon R in design/rolewisp/logo-symbol.svg; do not keep the old frame or source a similar-looking stock icon. The public wordmark is Rolewisp. V-Index belongs in repository/about documentation, not as a competing logo in the primary masthead.
 
 ## What the competitor review established
 
@@ -57,7 +57,7 @@ The machine-readable source is `design/rolewisp/tokens.css`. The references belo
 | Muted | #51666C | Secondary readable text |
 | Coral | #F28B75 | Primary action and wordmark mark; always dark text |
 | Selected | #DCE9EB | Current result, paired with aria-current |
-| Success | #245C48 on #E1EEE6 | Explicit successful/open-at-check labels |
+| Success | #245C48 on #E1EEE6 | Explicit explicit index-status labels |
 | Caution | #875320 on #F6EBDD | Unverified, stale or incomplete context |
 
 Primary buttons use coral with ink, never white text on coral. A dedicated high-contrast focus ring appears instantly. Use focus-on-dark on the petrol header, not the dark focus color intended for light surfaces. Field borders must stay distinguishable; pale divider rules are not field boundaries. Color alone never communicates status. Do not auto-apply dark mode by inverting the palette.
@@ -70,7 +70,7 @@ Result rows lead with title, employer and source-provided location. If structure
 
 Selecting a result updates the reader without navigating away on desktop. The entire title control is keyboard accessible. Selection does not scroll the user back to the header. The reader opens with company, title, provided location/workplace/pay and the original application action. The source record identifies each distinct source link, application destination, explicit status and available checked timestamp. Multiple observations from one source are distinct rows; source_id alone is not a React key.
 
-The screenshot's `Read the complete description` represents in-place expansion of the full fetched text, not a missing page or source-site redirect. Prefer the full description by default in production if the page remains readable. Always render as escaped text with preserved whitespace, never inject source HTML. The mobile concept shows an excerpt only to expose the source treatment; the shipped mobile reader must include the entire description and an ordinary path to the source record. A compact provenance anchor can jump to that section.
+The study's `Read the complete description` represents in-place expansion of the full fetched text, not a missing page or source-site redirect. Prefer the full description by default in production if the page remains readable. Always render as escaped text with preserved whitespace, never inject source HTML. The mobile concept shows an excerpt only to expose the source treatment; the shipped mobile reader must include the entire description and an ordinary path to the source record. A compact provenance anchor can jump to that section.
 
 Use `Open application` with a short visible destination hostname. Open only validated original HTTPS links with appropriate external-link semantics. No automated submission or application progress is implied. If the source uses the posting itself as the application entry, show that same original URL.
 
@@ -90,7 +90,7 @@ Do not label an observation's last_checked value “last successfully checked”
 - Respect safe-area insets for the mobile application bar. Add bottom content padding equal to the bar height. Do not truncate job titles, foreign place names or long file names to make the mockup fit.
 - At 1920px, gutters grow while the workspace stays capped. No horizontal overflow at 320px.
 
-## Coverage and evidence
+## Separate reviewer coverage and evidence
 
 Load all 78 exact names from /api/v1/providers. JBoard.io and JobBoard.io stay separate. Derive current verified numerator from evidence_status, independently of implementation_status; never hardcode 45. The board's seven rows are an illustrative excerpt, not the inventory.
 
@@ -137,3 +137,16 @@ Focus outline must be instantaneous; hover can change contrast over 120ms. Selec
 5. Run npm ci, npm run build, npm run typecheck and the existing browser suite, including auth/data isolation and refresh failure cases. Report real failures. Deliver exact commit plus screenshot paths and reviewed merge instructions.
 
 Design references: the owner's Hallmark link and custom-direction/font/craft guidance informed the critique. These SVG studies have not run Hallmark's production HTML/render lint or the application browser acceptance suite; do not report either as passed. Antigravity may use a library for a useful interaction after checking its license, cost and accessibility, but must not assemble unrelated visual styles from the resource list. No paid assets or plan upgrades.
+
+
+## Superseding product/identity/pricing update — November 7
+
+Consumer navigation is Find jobs, For you, Pricing and account control. Coverage diagnostics, tests/CI counts, API implementation status, acquisition progress and repository identifiers belong in reviewer/operator documentation rather than the public product header. This separation changes presentation, not the required 78-platform scope or truthful coverage evidence. Do not hide failures or mark unsupported platforms complete.
+
+The new symbol is an independently drawn open-counter ribbon R, supplied in logo-symbol.svg and 07-logo-identity.png with scale/monochrome studies. It replaces the prior bracket mark. Use the SVG geometry, not a stock icon or a traced third-party design. Independent creation is not a guarantee of worldwide trademark exclusivity. Fonts remain licensed assets with accompanying notices.
+
+See 06-pricing-desktop.png and PLANS_AND_PRICING.md for the Free/Plus screen and working country/currency API. India currently proposes INR 399/month; USD reference is 6/month. The 13-currency catalogue uses real minor-unit amounts and an explicit USD fallback. No payment provider exists; Plus is Coming soon, with no fake purchase/success interaction or invented paid benefits. A future paid release needs actual implemented benefits and payment/entitlement verification. Never show card forms or secret configuration in public UI.
+
+The new public detail response is the same JobOut schema as public search. sources[] contains normalized original/application URLs and last_checked_at, never raw ingestion or observation data. The source-level checked timestamp can include a complete missing-listing check during grace; display Index status/Open in index, not Open at last check. See SECURITY_REVIEW_2026-11-07.md.
+
+Public errors should explain the user's next action (retry, sign in, choose another file), not show stack traces, environment-variable names, parser internals, raw source payloads or request credentials. Configure HTML-layer nosniff, Referrer-Policy and a compatible tested CSP; self-host fonts, avoid third-party trackers and do not log private form data. API headers alone are not a substitute for HTML response headers. Test private-data caching and actual production bundles before release.

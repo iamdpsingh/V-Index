@@ -1,5 +1,7 @@
 # Antigravity frontend handoff
 
+**Latest product revision — November 7:** public UI is a finished product experience: no test/CI totals, smoke labels, acquisition progress or raw configuration errors. Codex supplied an original ribbon R logo and Free/Plus pricing design/API. Read PLANS_AND_PRICING.md and SECURITY_REVIEW_2026-11-07.md along with the current design specification. Preserve every coverage, API, privacy and backend requirement.
+
 **Latest owner instruction — November 7:** Codex supplies the frontend design; **Antigravity implements it** in its existing separate frontend worktree. This supersedes the frontend hold and earlier Codex-frontend takeover notes. Read [ROLEWISP_FRONTEND_DESIGN.md](ROLEWISP_FRONTEND_DESIGN.md) and [ANTIGRAVITY_DESIGN_TASK.md](ANTIGRAVITY_DESIGN_TASK.md) first. Preserve frontend commit `3bc0a54` and existing API wiring; no external agent is assumed launched or notified. Codex continues backend and coverage. The original 78-platform objective is unchanged.
 
 

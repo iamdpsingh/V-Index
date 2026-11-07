@@ -57,3 +57,7 @@ Workday currently rejects boards above 400 jobs and reported totals at/above its
 The backend now includes signup/login, saved profiles, encrypted saved PDF/DOCX/TXT resumes and explainable job recommendations. These APIs are separate from operator ADMIN_TOKEN access. Account routes require an explicit PUBLIC_WEB_ORIGIN; registration is disabled by default and resume operations require a privately generated RESUME_ENCRYPTION_KEY. Apply migrations before startup. Read [the private API contract](docs/ACCOUNTS_API.md) for configuration, limits and remaining production gates.
 
 The owner retained the frontend with Antigravity. Its account/profile/upload/recommendation screens and browser tests are pending; [the concrete frontend handoff](docs/ANTIGRAVITY_ACCOUNTS_HANDOFF.md) lists every route, payload and required flow. Do not treat working backend APIs as a completed public account release.
+
+### Product and pricing handoff
+
+Rolewisp's current product design uses an original ribbon R identity and keeps engineering/acquisition evidence outside ordinary job-seeker flows. See [the design specification](docs/ROLEWISP_FRONTEND_DESIGN.md), [Free/Plus pricing API](docs/PLANS_AND_PRICING.md) and [scoped security review](docs/SECURITY_REVIEW_2026-11-07.md). Country-aware pricing supports 13 launch currencies with an explicit USD fallback. No payment provider is connected; Plus checkout and paid entitlements are not live. Public job details now expose normalized job/provenance fields only, while retaining original observations privately.
