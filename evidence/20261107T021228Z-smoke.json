@@ -1,0 +1,37 @@
+[
+  {
+    "provider": "Eightfold AI",
+    "url": "https://app.eightfold.ai/careers",
+    "at": "2026-11-07T02:07:48.909109+00:00",
+    "revision": "b6fa4cee2dd0cc0f718ee88a8f623e1f7a3de332",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "c7b20920f81fb56445c70194043660dcd248e9f0828d44a258697dfd8c227498",
+    "count": 46,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {
+      "publication_timezone_unspecified": 46,
+      "location_missing": 8
+    },
+    "payload_sha256": "b597d570d19714444f74f01cb499a710511669502129d1e75470c94b7efd744e",
+    "finished_at": "2026-11-07T02:08:47.850731+00:00"
+  },
+  {
+    "provider": "Eightfold AI",
+    "url": "https://insight.eightfold.ai/careers",
+    "at": "2026-11-07T02:08:48.351936+00:00",
+    "revision": "b6fa4cee2dd0cc0f718ee88a8f623e1f7a3de332",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "c7b20920f81fb56445c70194043660dcd248e9f0828d44a258697dfd8c227498",
+    "count": 143,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {
+      "publication_timezone_unspecified": 143
+    },
+    "payload_sha256": "63617ad48655bd46d3cace184491e1717d8ef4eb56a582c8ce40e062ea570130",
+    "finished_at": "2026-11-07T02:12:28.099811+00:00"
+  }
+]

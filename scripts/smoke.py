@@ -15,6 +15,8 @@ from vindex.connectors.registry import create_connector
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
+    ("Deel", "deel", "dott", "dott", "https://jobs.deel.com/dott"),
+    ("Deel", "deel", "offsec", "Offsec Services", "https://jobs.deel.com/offsec"),
     ("Eightfold AI", "eightfold", "app", "Eightfold", "https://app.eightfold.ai/careers"),
     ("Eightfold AI", "eightfold", "insight", "Insight", "https://insight.eightfold.ai/careers"),
     (
@@ -505,6 +507,14 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "Deel": [
+                                "Native jobs.deel.com public rendered boards and mandatory overview JobPosting HTML; no JavaScript execution, candidate/account APIs or application submission",
+                                "Full server-rendered jobPostings and SEO ItemList must agree on every UUID; matching employer/settings and published_basic state on the actual board required; full board reconfirmed after up to 200 mandatory details",
+                                "No independent total supplied; completeness follows full supported native collection plus SEO roster agreement, not a search-engine sample; custom, empty, changed or unsupported layouts never reconcile",
+                                "Every detail must match UUID, employer, title and full native description apart from whitespace/punctuation spacing; preserve full rich text, all locations, employment, workplace and source datePosted without inventing missing metadata",
+                                "Only public visible compensation is normalized; no conversion or guessed units; native public posting is application entry; application-form and publication-user identifiers omitted",
+                                "Point-in-time supported-template evidence does not establish all Deel deployments or hosted production freshness",
+                            ],
                             "Eightfold AI": [
                                 "Native tenant.eightfold.ai public careers shells, job sitemap indices/maps and complete JobPosting HTML only; no account/candidate/application API requests or submissions",
                                 "Explicit excludePrivatePositions=true required; legacy anonymous seeds must be isPrivate=false and complete sitemap count must equal public board count; up to 200 mandatory full details",

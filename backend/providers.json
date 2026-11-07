@@ -500,16 +500,60 @@
   {
     "name": "Eightfold AI",
     "kind": "ats",
-    "implementation_status": "NOT_STARTED",
-    "evidence_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
+    "evidence_status": "LIVE_VERIFIED",
     "risk": "HIGH",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
+    "examples": [
+      {
+        "provider": "Eightfold AI",
+        "url": "https://app.eightfold.ai/careers",
+        "at": "2026-11-07T02:07:48.909109+00:00",
+        "revision": "b6fa4cee2dd0cc0f718ee88a8f623e1f7a3de332",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "c7b20920f81fb56445c70194043660dcd248e9f0828d44a258697dfd8c227498",
+        "count": 46,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {
+          "publication_timezone_unspecified": 46,
+          "location_missing": 8
+        },
+        "payload_sha256": "b597d570d19714444f74f01cb499a710511669502129d1e75470c94b7efd744e",
+        "finished_at": "2026-11-07T02:08:47.850731+00:00"
+      },
+      {
+        "provider": "Eightfold AI",
+        "url": "https://insight.eightfold.ai/careers",
+        "at": "2026-11-07T02:08:48.351936+00:00",
+        "revision": "b6fa4cee2dd0cc0f718ee88a8f623e1f7a3de332",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "c7b20920f81fb56445c70194043660dcd248e9f0828d44a258697dfd8c227498",
+        "count": 143,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {
+          "publication_timezone_unspecified": 143
+        },
+        "payload_sha256": "63617ad48655bd46d3cace184491e1717d8ef4eb56a582c8ce40e062ea570130",
+        "finished_at": "2026-11-07T02:12:28.099811+00:00"
+      }
+    ],
+    "last_run_at": "2026-11-07T02:12:28.099811+00:00",
+    "extraction_count": 189,
     "failure_reason": null,
     "limitations": [
-      "Connector not implemented"
+      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
+      "Native tenant.eightfold.ai public careers shells, job sitemap indices/maps and complete JobPosting HTML only; no account/candidate/application API requests or submissions",
+      "Explicit excludePrivatePositions=true required; legacy anonymous seeds must be isPrivate=false and complete sitemap count must equal public board count; up to 200 mandatory full details",
+      "Use robots-advertised job sitemap index when provided; modern native hosts without sitemap declaration use fixed standard public index scoped by shell namespace; robots still enforced on every URL",
+      "Enumerate all native job maps, excluding only explicitly non-job category map/home; reject duplicate IDs, unsafe URLs, malformed XML and wrong employer/namespace; final full maps and shell reconfirmed",
+      "Preserve canonical namespace aliases published in sitemap (Eightfold uses both volkscience.com and eightfold.ai), full source descriptions, all locations, structured salary/employment/workplace and original date strings",
+      "Naive source publication timestamps stay naive with a quality flag; no guessed timezone, location or pay; native posting is the public application entry",
+      "Legacy Insight rejects newer search API with HTTP403; no retries/bypass; connector uses its normal public advertised sitemap and native pages only",
+      "Only observed public HTML/sitemap templates supported; failed/partial/changed collections never reconcile; bounded evidence does not establish hosted production freshness"
     ]
   },
   {

@@ -14,6 +14,7 @@ from vindex.connectors.comeet import TENANT as COMEET_TENANT
 from vindex.connectors.comeet import UID as COMEET_UID
 from vindex.connectors.comeet import ComeetConnector
 from vindex.connectors.csod import CSODConnector
+from vindex.connectors.deel import DeelConnector
 from vindex.connectors.eightfold import EightfoldConnector
 from vindex.connectors.firststage import FirstStageConnector
 from vindex.connectors.freshteam import FreshteamConnector
@@ -81,6 +82,10 @@ def detect(url: str) -> tuple[str, str]:
         match = re.fullmatch(rf"({TENANT})\.{re.escape(suffix)}", p.hostname or "")
         if match:
             return provider, match[1]
+    if p.hostname == "jobs.deel.com":
+        if p.query or p.fragment or not re.fullmatch(rf"/{TENANT}/?", p.path):
+            raise ValueError("Expected an unfiltered native Deel careers root")
+        return "deel", p.path.strip("/")
     eightfold = re.fullmatch(rf"({TENANT})\.eightfold\.ai", p.hostname or "")
     if eightfold:
         if p.path.rstrip("/") != "/careers" or p.query or p.fragment:
@@ -265,13 +270,15 @@ def detect(url: str) -> tuple[str, str]:
         return detect_original(url)
     except ValueError as error:
         raise ValueError(
-            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire, HiringThing, Freshteam, Trakstar, Rippling, Kula.ai, CareerPlug, TriNet, HireBridge, JOIN.com, Hireology, Paylocity, Zoho Recruit, Comeet, WeRecruit, FirstStage, Oracle Recruiting, CSOD, iCIMS, PageUp, Avature, Taleo and Eightfold AI"
+            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire, HiringThing, Freshteam, Trakstar, Rippling, Kula.ai, CareerPlug, TriNet, HireBridge, JOIN.com, Hireology, Paylocity, Zoho Recruit, Comeet, WeRecruit, FirstStage, Oracle Recruiting, CSOD, iCIMS, PageUp, Avature, Taleo, Eightfold AI and Deel"
         ) from error
 
 
 def create_connector(
     provider: str, slug: str, company: str, client: httpx.AsyncClient
 ) -> Connector:
+    if provider == "deel":
+        return DeelConnector(provider, slug, company, client)
     if provider == "eightfold":
         return EightfoldConnector(provider, slug, company, client)
     if provider == "taleo-tbe":

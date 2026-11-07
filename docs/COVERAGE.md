@@ -19,7 +19,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | Dayforce | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | Deel | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Dover | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
-| Eightfold AI | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
+| Eightfold AI | ats | IMPLEMENTED | LIVE_VERIFIED | HIGH | 189 | 2026-11-07T02:12:28.099811+00:00 | https://app.eightfold.ai/careers (46; LIVE_VERIFIED); https://insight.eightfold.ai/careers (143; LIVE_VERIFIED)  |
 | FirstStage | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 4 | 2026-11-06T17:28:28.660502+00:00 | https://firststage.firststage.co/jobs (1; LIVE_VERIFIED); https://quantumbase.firststage.co/jobs (3; LIVE_VERIFIED)  |
 | Freshteam | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 49 | 2026-11-06T12:12:34.049462+00:00 | https://sequoiaat.freshteam.com/jobs (26; LIVE_VERIFIED); https://talent360.freshteam.com/jobs (23; LIVE_VERIFIED)  |
 | Gem.com | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
