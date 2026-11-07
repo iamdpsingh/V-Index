@@ -116,7 +116,7 @@ def test_api_reads_updated_index_without_cached_snapshot(client, database, sourc
     for value in (
         detail["first_seen_at"],
         detail["last_changed_at"],
-        detail["sources"][0]["last_checked"],
+        detail["sources"][0]["last_checked_at"],
     ):
         assert datetime.fromisoformat(value).utcoffset() == timedelta(0)
 
@@ -143,3 +143,38 @@ def test_fetch_failure_recorded_without_closing(database, source, monkeypatch):
         assert "Incomplete pagination" in run.error
         obs = s.scalar(select(Observation))
         assert obs.status == "open" and obs.missing_count == 0
+
+
+def test_public_detail_does_not_disclose_raw_or_internal_observations(client, database, source):
+    canary = "PRIVATE_INGESTION_CANARY_NEVER_PUBLIC"
+    with database() as session:
+        ingest(
+            session,
+            source,
+            Enumeration(
+                jobs=[posting(raw={"browser_token": canary, "candidate": canary})], complete=True
+            ),
+        )
+        session.commit()
+        observation = session.scalar(select(Observation))
+        job_id = observation.job_id
+        assert observation.data["raw"]["browser_token"] == canary
+    for path in ("/api/v1/jobs", f"/api/v1/jobs/{job_id}"):
+        response = client.get(path)
+        assert response.status_code == 200
+        assert canary not in response.text
+        assert response.headers["cache-control"] == "no-store"
+        assert response.headers["x-content-type-options"] == "nosniff"
+        item = response.json() if path.endswith(str(job_id)) else response.json()["items"][0]
+        assert "raw" not in item
+        provenance = item["sources"][0]
+        assert set(provenance) == {
+            "source_id",
+            "source_url",
+            "application_url",
+            "status",
+            "last_checked_at",
+        }
+        assert provenance["source_url"] == posting().source_url
+    with database() as session:
+        assert session.scalar(select(Observation)).data["raw"]["browser_token"] == canary

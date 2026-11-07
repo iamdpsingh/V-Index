@@ -290,3 +290,8 @@ Require a complete unique public sitemap set of at most 200 jobs, every full nat
 ### Deel native public boards
 
 Supported source: `https://jobs.deel.com/{organization}`. Parse rendered public Next Flight JSON/text records without executing scripts; require named Organization, matching organization/career settings, and exact agreement between the complete public jobPostings collection and SEO ItemList. Every posting must be explicitly published on that board. Require every native overview JobPosting to match UUID, employer, title and full description, then reconfirm the whole board. Bounds: 200 jobs; empty, changed, partial, unpublished or failed collections never reconcile. Preserve full native rich text, all provided locations, employment, workplace and source publication date; preserve compensation only when publicly visible. No candidate/account/application APIs or submissions; public posting is application entry. Omit application-form/internal publication-user identifiers from retained observations. These supported rendered templates do not prove every Deel variant or hosted production operation.
+
+
+## November 7 public projection hardening
+
+GET /api/v1/jobs/{id} now returns JobOut, matching list-item projection. Each sources[] entry is only source_id, source_url, application_url, status, last_checked_at. No raw payload, observation.data, fingerprint or reconciliation bookkeeping is returned. Original observations remain in database storage for audit. Existing public fields and original links are retained. Regenerate frontend types from docs/openapi.json; never use a private/raw structure as a browser response.

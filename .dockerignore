@@ -6,3 +6,19 @@ apps/web/node_modules
 apps/web/.next
 **/__pycache__
 evidence
+
+# Never send local credentials, caches or user data to a build context.
+.cache
+**/.cache
+.env.*
+**/.env
+**/.env.*
+**/*.db
+**/*.db-*
+**/*.sqlite
+**/*.sqlite3
+**/*.pem
+**/*.key
+**/.git
+**/node_modules
+**/.next

@@ -45,9 +45,7 @@ def account_origin() -> str:
             raise ValueError("Invalid account origin")
         _ = parsed.port
     except ValueError as error:
-        raise HTTPException(
-            503, "Accounts require a valid PUBLIC_WEB_ORIGIN (HTTPS in production)"
-        ) from error
+        raise HTTPException(503, "Account service is temporarily unavailable") from error
     return raw
 
 

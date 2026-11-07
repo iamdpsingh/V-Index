@@ -61,10 +61,10 @@ jobs:
       - name: Generate an ephemeral private-resume key
         run: |
           python3 - <<'PYTHON'
-          import base64, os
+          import base64, os, secrets
           from pathlib import Path
           target = Path('.env')
-          target.write_text('RESUME_ENCRYPTION_KEY=' + base64.urlsafe_b64encode(os.urandom(32)).decode() + '\n')
+          target.write_text('RESUME_ENCRYPTION_KEY=' + base64.urlsafe_b64encode(os.urandom(32)).decode() + '\nPOSTGRES_PASSWORD=' + secrets.token_urlsafe(32) + '\n')
           target.chmod(0o600)
           PYTHON
       - name: Build and launch the actual stack
