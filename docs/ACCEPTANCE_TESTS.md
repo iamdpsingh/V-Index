@@ -1,5 +1,7 @@
 # Acceptance checklist
 
+**Latest owner release requirements (November 7):** read [PRODUCTION_RELEASE_REQUIREMENTS.md](PRODUCTION_RELEASE_REQUIREMENTS.md). Coverage remains first. Public launch now requires a verified custom domain on the free-tier plan, favicon, permitted badge removal, reviewed legal/privacy pages, accessibility and a full security review. Older preview-only vercel.app guidance does not authorize launch. No spending or automatic deployment is authorized.
+
 - [ ] All 78 exact platforms have reusable connectors and successful live runs across multiple independent tenants (or explicitly documented blockers; blockers do not meet full coverage).
 - [ ] Live smoke evidence has URL, timestamp, count, completeness, connector revision, payload digest and failure reasons.
 - [ ] Full API/worker/PostgreSQL/Redis/Next.js stack starts from clone with migrations.

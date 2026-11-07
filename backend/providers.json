@@ -2643,16 +2643,56 @@
   {
     "name": "JBoard.io",
     "kind": "job_board",
-    "implementation_status": "NOT_STARTED",
-    "evidence_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
+    "evidence_status": "LIVE_VERIFIED",
     "risk": "HIGH",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
+    "examples": [
+      {
+        "provider": "JBoard.io",
+        "url": "https://jobs.aame.org/jobs",
+        "at": "2026-11-07T04:12:52.615426+00:00",
+        "revision": "814a8732ce94d13c46aa05c376b050e339464583",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "2a1abb34f76718c7f685d98dc312505125757f4cdecf48ab6a3fd8a49a404da8",
+        "count": 30,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {
+          "location_missing": 2
+        },
+        "payload_sha256": "b1bd53f1e8466d2657ccf48732c2547accf25ebc681782b7039e46f89941f781",
+        "finished_at": "2026-11-07T04:13:56.355078+00:00"
+      },
+      {
+        "provider": "JBoard.io",
+        "url": "https://jobs.cisontario.ca/jobs",
+        "at": "2026-11-07T04:13:56.856450+00:00",
+        "revision": "814a8732ce94d13c46aa05c376b050e339464583",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "2a1abb34f76718c7f685d98dc312505125757f4cdecf48ab6a3fd8a49a404da8",
+        "count": 48,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "5de4199b7aedf0db12df59888522b7994e2c1014e9e53c20a385d3a617e69744",
+        "finished_at": "2026-11-07T04:16:03.139570+00:00"
+      }
+    ],
+    "last_run_at": "2026-11-07T04:16:03.139570+00:00",
+    "extraction_count": 78,
     "failure_reason": null,
     "limitations": [
-      "Connector not implemented"
+      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
+      "Distinct from JobBoard.io; supports the public JBoard HTML/JobPosting template on fixed vendor-showcased reviewed origins jobs.aame.org and jobs.cisontario.ca; arbitrary custom domains remain unsupported",
+      "Read robots-advertised sitemap index/job maps only, enumerate every native 30-job list page and require exact ID/URL agreement; no profiles, resumes, account APIs, tracking scripts or application submissions",
+      "Up to 200 mandatory full details, sequential native pages and numbered job maps; all complete maps/list pages are reconfirmed after details; malformed, duplicate, mismatched, failed, redirected or changed data aborts reconciliation",
+      "Every detail binds canonical URL, numeric native ID, title, real employer, full description and same-ID application control; board configuration label never replaces individual hiring organizations",
+      "Native visible location labels are normalized as supplied; potentially inaccurate upstream structured geocoding remains original metadata without guessed correction; salary, employment, remote and original source date/expiry retained when present",
+      "A source expiry already elapsed while the complete roster still lists the role is flagged, not silently dropped or used as immediate closure proof; native posting/apply destinations retained without following application forms",
+      "Bounded supported-site point-in-time evidence does not prove every JBoard installation, arbitrary-domain support or hosted continuous operation"
     ]
   },
   {

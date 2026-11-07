@@ -1,0 +1,29 @@
+{
+  "at": "2026-11-07T04:17:54.840173+00:00",
+  "revision": "814a8732ce94d13c46aa05c376b050e339464583",
+  "scope": "Actual local API registration -> native scheduled worker -> stored observations -> public paginated search; not a direct connector call or hosted uptime claim",
+  "platform": "JBoard.io",
+  "source": {
+    "id": 47,
+    "provider": "jboard",
+    "slug": "jobs.aame.org",
+    "company": "American Association of Municipal Executives",
+    "url": "https://jobs.aame.org/jobs",
+    "refresh_minutes": 360,
+    "next_check": "2026-11-07T04:16:18.032026Z",
+    "failures": 0
+  },
+  "run": {
+    "id": 146,
+    "source_id": 47,
+    "started_at": "2026-11-07T04:16:47.772858Z",
+    "finished_at": "2026-11-07T04:17:52.148879Z",
+    "status": "success",
+    "count": 30,
+    "error": null
+  },
+  "stored_observations": 30,
+  "public_search_unique_jobs": 30,
+  "public_provenance_entries": 30,
+  "all_complete": true
+}

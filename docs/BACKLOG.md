@@ -4,7 +4,7 @@
 
 ## Current coverage-first status — November 7
 
-45/78 platforms have complete non-empty point-in-time runs across two independent supported sites. The 45-platform milestone passed on November 7 IST with Taleo, Eightfold AI and Deel verified. The owner's condition for pushing accumulated commits is satisfied. Frontend design is now assigned to Codex and implementation to Antigravity; see ROLEWISP_FRONTEND_DESIGN.md. The other 33 platforms and all remaining production/acquisition gates remain open.
+46/78 platforms have complete non-empty point-in-time runs across two independent supported sites. The 45-platform milestone passed on November 7 IST with Taleo, Eightfold AI and Deel verified. The owner's condition for pushing accumulated commits is satisfied. Frontend design is now assigned to Codex and implementation to Antigravity; see ROLEWISP_FRONTEND_DESIGN.md. The other 32 platforms and all remaining production/acquisition gates remain open.
 
 ## First slice
 - [x] Inspect empty folder/remote; initialize canonical main without replacing history.
@@ -43,7 +43,7 @@
 ## Remaining cohorts
 - Next ATS candidates: GoHire and HiringThing, alongside the enterprise investigation. Candidate priority only; access and endpoint support unverified.
 - Other medium/high risk ATS: work through every NOT_STARTED row in coverage matrix; no stubs.
-- Jobboardly has accepted bounded multi-board live evidence; the other 19 job-board platforms are unimplemented. Need multiple installations, complete pagination, detail extraction and tenant-independent detection. Preserve distinct JBoard.io and JobBoard.io entries. Niceboard findings and platform identity research are documented separately.
+- Jobboardly has accepted bounded multi-board live evidence; the other 18 job-board platforms are unimplemented. Need multiple installations, complete pagination, detail extraction and tenant-independent detection. Preserve distinct JBoard.io and JobBoard.io entries. Niceboard findings and platform identity research are documented separately.
 
 ## Delivery
 - [x] Verify page deadline: November 30, 2026 at 23:59 UTC (December 1 at 05:29 IST).

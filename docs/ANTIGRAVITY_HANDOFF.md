@@ -1,5 +1,7 @@
 # Antigravity frontend handoff
 
+**Latest owner release requirements (November 7):** read [PRODUCTION_RELEASE_REQUIREMENTS.md](PRODUCTION_RELEASE_REQUIREMENTS.md). Coverage remains first. Public launch now requires a verified custom domain on the free-tier plan, favicon, permitted badge removal, reviewed legal/privacy pages, accessibility and a full security review. Older preview-only vercel.app guidance does not authorize launch. No spending or automatic deployment is authorized.
+
 **Frontend delivery review:** 66baef8 independently passes dependency install, build and typecheck. Preserve that implementation. Before release, fix swallowed logout errors and the hardcoded India default, and actually test logout rather than only opening Profile. See [FRONTEND_REVIEW_66baef8.md](FRONTEND_REVIEW_66baef8.md). This is a documented handoff, not an assumption that an agent has been notified.
 
 **Latest owner update — November 7:** coverage first, then remaining backend work. Batch pushes every 12 hours; maintain the frontend handoff alongside connector/API additions. Antigravity's implementation is present at `66baef8` and remains in its separate worktree pending reviewed integration. See [COVERAGE_WORKFLOW.md](COVERAGE_WORKFLOW.md).
@@ -54,8 +56,10 @@ The owner retained frontend ownership with Antigravity and requested account/pro
 
 The existing source form now accepts GoHire jobs.gohire.io/{board}, Polymer jobs.polymer.co/{organization}, and Manatal www.careers-page.com/{tenant} URLs. No new frontend configuration fields are needed. Use the live provider matrix for counts/limits: GoHire is English/hosted/bounded, Polymer requires explicit complete single-page metadata, and Manatal supports its legacy hosted template and validated pagination. A failed/unsupported source must show its actual run error, never an empty-success or closed-all state. Salary objects retain source text or source currency/range fields; do not invent a unit or period. Optional metadata remains unknown when absent. No frontend files changed in this cohort.
 
-## JBoard.io coverage work — November 7 (under live validation)
+## JBoard.io coverage — November 7 (formal live runs passed)
 
 Source registration accepts the reviewed JBoard origins jobs.aame.org and jobs.cisontario.ca, root or /jobs, through the existing API. No new source fields. The source company field is a company/board label; a multi-employer board's jobs preserve their actual employers, so do not use the board label as each job's employer or an automatic company filter. Additional arbitrary custom domains are not supported.
 
 The additive source_expiry_elapsed_while_listed quality flag means the complete public roster includes a job whose source closing timestamp has passed. Render a human-readable note such as “The source lists this role, but its closing date has passed. Check the original listing.” Do not turn it into an automatic closed status or show the raw identifier as consumer copy. Use a concise human explanation for unknown quality flags too. Coverage remains matrix-driven; this handoff does not itself grant live coverage.
+
+JBoard.io now has complete formal live evidence for AAME 30 and CIS Ontario 48, at connector revision 814a873. Matrix status is 46/78 (44 ATS, two job-board platforms). JBoard.io remains distinct from JobBoard.io. The formal coverage result supersedes the earlier under-validation note; supported-origin and source-quality limitations still apply. No API schema change is required for the new source type.

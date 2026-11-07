@@ -69,7 +69,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | JobKit | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | Jobboardly | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 1355 | 2026-11-06T08:31:19.986009+00:00 | https://recruiter-jobs.jobboardly.com/jobs (31; LIVE_VERIFIED); https://pennsylvania-communications.jobboardly.com/jobs (1324; LIVE_VERIFIED)  |
 | Jobiqo | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
-| JBoard.io | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
+| JBoard.io | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 78 | 2026-11-07T04:16:03.139570+00:00 | https://jobs.aame.org/jobs (30; LIVE_VERIFIED); https://jobs.cisontario.ca/jobs (48; LIVE_VERIFIED)  |
 | JobBoardFire | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | SmartJobBoard | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | JobBoard.io | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |

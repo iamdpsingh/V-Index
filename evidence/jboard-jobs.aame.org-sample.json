@@ -1,0 +1,78 @@
+{
+  "external_id": "796579299",
+  "title": "Finance Director - City of Pekin",
+  "company": "City of Pekin",
+  "description": "The City of Pekin, Illinois, is seeking a highly qualified and analytical Finance Director to oversee the City's financial operations and provide strategic financial leadership. This position requires a detail-oriented professional with a strong background in municipal finance, governmental accounting, financial reporting, and budget administration. The successful candidate will demonstrate the ability to evaluate complex financial information, maintain accurate and reliable financial records, oversee audit processes, and develop sound financial strategies. Equally important is the ability to lead and develop the Finance Department team while establishing effective working relationships with the City Council, department heads, and other stakeholders. Key Responsibilities Direct and oversee the City's financial operations, accounting functions, and internal financial controls. Lead the development, preparation, administration, and monitoring of the annual operating and capital budgets. Coordinate annual audits and ensure accurate financial records, reporting, and compliance with applicable governmental accounting standards. Conduct detailed financial analysis, identify trends, and provide recommendations to support sound fiscal decisions. Develop and maintain long-range financial plans that address organizational priorities and community needs. Establish, review, and implement financial policies, procedures, and administrative practices. Oversee financial reporting and provide accurate, timely information to the City Council and department heads. Provide leadership, accountability, and professional development opportunities for Finance Department employees. Exercise sound independent judgment when addressing financial, operational, and policy-related matters. Minimum Qualifications Bachelor's degree in Accounting, Finance, or a related field required. CPA or CMA designation preferred. Five to seven years of progressively responsible financial experience. Ten years of a combination of professional experience and education/training. Municipal finance experience and a thorough understanding of governmental accounting principles. Experience with Springbrook financial software is a plus. Desired Personal Characteristics The ideal candidate will demonstrate: High standards of integrity and professional accountability. Strong analytical and organizational abilities. Confidence and sound professional judgment. A methodical, thorough, and detail-oriented approach. Dependability, patience, and a cooperative working style. Professional maturity and the ability to maintain composure in challenging situations. The ability to establish trust and credibility through consistency and follow-through. A forward-thinking approach to financial management and organizational improvement. Desired Professional Skills Budget development, administration, and financial forecasting. Governmental accounting and financial reporting. Audit coordination, preparation, and compliance. Financial analysis and long-range planning. Leadership and department management. Conflict resolution and professional communication. City Council relations and policy development. Collaboration and relationship management with department heads. Development and implementation of financial policies and procedures.",
+  "quality_flags": [],
+  "location": "Pekin, Illinois",
+  "source_url": "https://jobs.aame.org/jobs/796579299-finance-director-city-of-pekin",
+  "application_url": "https://jobs.aame.org/jobs/796579299/apply",
+  "employment_type": null,
+  "remote_status": null,
+  "salary": {
+    "@type": "MonetaryAmount",
+    "currency": "USD",
+    "value": {
+      "@type": "QuantitativeValue",
+      "unitText": "YEAR",
+      "minValue": "135000.00",
+      "maxValue": "160000.00"
+    }
+  },
+  "published_at": "2026-11-05T20:49:20Z",
+  "raw": {
+    "listing": {
+      "url": "https://jobs.aame.org/jobs/796579299-finance-director-city-of-pekin",
+      "title": "Finance Director - City of Pekin",
+      "company": "City of Pekin",
+      "location": "Pekin, Illinois",
+      "tags": [
+        "Director/Department Head"
+      ]
+    },
+    "jobposting": {
+      "@context": "https://schema.org/",
+      "@type": "JobPosting",
+      "title": "Finance Director - City of Pekin",
+      "description": "<p>The City of Pekin, Illinois, is seeking a highly qualified and analytical Finance Director to oversee the City's financial operations and provide strategic financial leadership. This position requires a detail-oriented professional with a strong background in municipal finance, governmental accounting, financial reporting, and budget administration.</p><p>The successful candidate will demonstrate the ability to evaluate complex financial information, maintain accurate and reliable financial records, oversee audit processes, and develop sound financial strategies. Equally important is the ability to lead and develop the Finance Department team while establishing effective working relationships with the City Council, department heads, and other stakeholders.</p><p><br /></p><p><strong>Key Responsibilities</strong></p><ul><li>Direct and oversee the City's financial operations, accounting functions, and internal financial controls.</li><li>Lead the development, preparation, administration, and monitoring of the annual operating and capital budgets.</li><li>Coordinate annual audits and ensure accurate financial records, reporting, and compliance with applicable governmental accounting standards.</li><li>Conduct detailed financial analysis, identify trends, and provide recommendations to support sound fiscal decisions.</li><li>Develop and maintain long-range financial plans that address organizational priorities and community needs.</li><li>Establish, review, and implement financial policies, procedures, and administrative practices.</li><li>Oversee financial reporting and provide accurate, timely information to the City Council and department heads.</li><li>Provide leadership, accountability, and professional development opportunities for Finance Department employees.</li><li>Exercise sound independent judgment when addressing financial, operational, and policy-related matters.</li></ul><p><strong>Minimum Qualifications</strong></p><ul><li>Bachelor's degree in Accounting, Finance, or a related field required.</li><li>CPA or CMA designation preferred.</li><li>Five to seven years of progressively responsible financial experience.</li><li>Ten years of a combination of professional experience and education/training.</li><li>Municipal finance experience and a thorough understanding of governmental accounting principles.</li><li>Experience with Springbrook financial software is a plus.</li></ul><p><strong>Desired Personal Characteristics</strong></p><p>The ideal candidate will demonstrate:</p><ul><li>High standards of integrity and professional accountability.</li><li>Strong analytical and organizational abilities.</li><li>Confidence and sound professional judgment.</li><li>A methodical, thorough, and detail-oriented approach.</li><li>Dependability, patience, and a cooperative working style.</li><li>Professional maturity and the ability to maintain composure in challenging situations.</li><li>The ability to establish trust and credibility through consistency and follow-through.</li><li>A forward-thinking approach to financial management and organizational improvement.</li></ul><p><strong>Desired Professional Skills</strong></p><ul><li>Budget development, administration, and financial forecasting.</li><li>Governmental accounting and financial reporting.</li><li>Audit coordination, preparation, and compliance.</li><li>Financial analysis and long-range planning.</li><li>Leadership and department management.</li><li>Conflict resolution and professional communication.</li><li>City Council relations and policy development.</li><li>Collaboration and relationship management with department heads.</li><li>Development and implementation of financial policies and procedures.</li></ul><p><br /></p>",
+      "datePosted": "2026-11-05T20:49:20.000000Z",
+      "validThrough": "2027-01-04T20:49:20.000000Z",
+      "hiringOrganization": {
+        "@type": "Organization",
+        "name": "City of Pekin",
+        "sameAs": "https://www.ci.pekin.il.us/",
+        "logo": "https://d3535lqr6sqxto.cloudfront.net/employers/ujx09jlY2yS9k4VeFNBnb3LfHmqoxgf3skMOpY62.jpg"
+      },
+      "identifier": {
+        "@type": "PropertyValue",
+        "name": "City of Pekin",
+        "value": "796579299"
+      },
+      "directApply": true,
+      "jobLocation": {
+        "@type": "Place",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "United States",
+          "addressRegion": "IL",
+          "addressLocality": "Pekin"
+        }
+      },
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "USD",
+        "value": {
+          "@type": "QuantitativeValue",
+          "unitText": "YEAR",
+          "minValue": "135000.00",
+          "maxValue": "160000.00"
+        }
+      }
+    },
+    "description_html": "<div class=\"html-content\" id=\"quill-container-with-job-details\">\n<div class=\"jb-color-variable-body_text jb-pt-xs jb-pb-none jb-text-size-base jb-font-default-for-texts jb-font-weight-normal jb-line-height-normal jb-letter-spacing-normal\"><p>The City of Pekin, Illinois, is seeking a highly qualified and analytical Finance Director to oversee the City's financial operations and provide strategic financial leadership. This position requires a detail-oriented professional with a strong background in municipal finance, governmental accounting, financial reporting, and budget administration.</p><p>The successful candidate will demonstrate the ability to evaluate complex financial information, maintain accurate and reliable financial records, oversee audit processes, and develop sound financial strategies. Equally important is the ability to lead and develop the Finance Department team while establishing effective working relationships with the City Council, department heads, and other stakeholders.</p><p><br/></p><p><strong>Key Responsibilities</strong></p><ul><li>Direct and oversee the City's financial operations, accounting functions, and internal financial controls.</li><li>Lead the development, preparation, administration, and monitoring of the annual operating and capital budgets.</li><li>Coordinate annual audits and ensure accurate financial records, reporting, and compliance with applicable governmental accounting standards.</li><li>Conduct detailed financial analysis, identify trends, and provide recommendations to support sound fiscal decisions.</li><li>Develop and maintain long-range financial plans that address organizational priorities and community needs.</li><li>Establish, review, and implement financial policies, procedures, and administrative practices.</li><li>Oversee financial reporting and provide accurate, timely information to the City Council and department heads.</li><li>Provide leadership, accountability, and professional development opportunities for Finance Department employees.</li><li>Exercise sound independent judgment when addressing financial, operational, and policy-related matters.</li></ul><p><strong>Minimum Qualifications</strong></p><ul><li>Bachelor's degree in Accounting, Finance, or a related field required.</li><li>CPA or CMA designation preferred.</li><li>Five to seven years of progressively responsible financial experience.</li><li>Ten years of a combination of professional experience and education/training.</li><li>Municipal finance experience and a thorough understanding of governmental accounting principles.</li><li>Experience with Springbrook financial software is a plus.</li></ul><p><strong>Desired Personal Characteristics</strong></p><p>The ideal candidate will demonstrate:</p><ul><li>High standards of integrity and professional accountability.</li><li>Strong analytical and organizational abilities.</li><li>Confidence and sound professional judgment.</li><li>A methodical, thorough, and detail-oriented approach.</li><li>Dependability, patience, and a cooperative working style.</li><li>Professional maturity and the ability to maintain composure in challenging situations.</li><li>The ability to establish trust and credibility through consistency and follow-through.</li><li>A forward-thinking approach to financial management and organizational improvement.</li></ul><p><strong>Desired Professional Skills</strong></p><ul><li>Budget development, administration, and financial forecasting.</li><li>Governmental accounting and financial reporting.</li><li>Audit coordination, preparation, and compliance.</li><li>Financial analysis and long-range planning.</li><li>Leadership and department management.</li><li>Conflict resolution and professional communication.</li><li>City Council relations and policy development.</li><li>Collaboration and relationship management with department heads.</li><li>Development and implementation of financial policies and procedures.</li></ul><p><br/></p></div>\n</div>",
+    "application_entry": "Native board application control; destination not requested",
+    "location_basis": "Native listing label; structured geocoding preserved without correction",
+    "published_at_original": "2026-11-05T20:49:20.000000Z",
+    "valid_through_original": "2027-01-04T20:49:20.000000Z"
+  }
+}

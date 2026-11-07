@@ -1,0 +1,13 @@
+{
+  "at": "2026-11-07T04:17:31.584492+00:00",
+  "platform": "JobBoard.io",
+  "scope": "Next-platform discovery only; no live coverage",
+  "native_example": "https://adventisthealthprovidercareers.jobboard.io/",
+  "observation": "Public root and robots accessible; unfiltered native provider-job search link and sitemap advertised. Complete enumeration/full details not yet verified.",
+  "references": [
+    "https://support.jobboard.io/docs/embed-jobs-feed-into-an-existing-website-via-rss",
+    "https://support.jobboard.io/reference/api-v1"
+  ],
+  "private_api": "Vendor API requires account X-Api-Key; no API request or attempt to bypass this requirement was made",
+  "next_work": "Find second independent board and validate complete public HTML/RSS collections; keep JobBoard.io distinct from JBoard.io"
+}
