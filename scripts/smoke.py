@@ -15,6 +15,14 @@ from vindex.connectors.registry import create_connector
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
+    ("JobBoard.io", "jobboardio", "www.nifajobs.com", "NIFA", "https://www.nifajobs.com/"),
+    (
+        "JobBoard.io",
+        "jobboardio",
+        "www.cancercareers.org",
+        "AACR CancerCareers",
+        "https://www.cancercareers.org/",
+    ),
     (
         "JBoard.io",
         "jboard",
@@ -485,7 +493,22 @@ async def main():
                 )
                 # Minimal sanitized regression example, no full multi-tenant dumps.
                 if batch.jobs:
-                    sample = batch.jobs[0].model_dump(mode="json")
+                    job = batch.jobs[0]
+                    if provider == "jobboardio":
+                        # Public evidence needs identity and field presence, not copies
+                        # of employer descriptions, contact details, or apply queries.
+                        sample = {
+                            "external_id": job.external_id,
+                            "source_url": job.source_url,
+                            "title_present": bool(job.title),
+                            "company_present": bool(job.company),
+                            "description_length": len(job.description),
+                            "location_present": bool(job.location),
+                            "application_entry": job.raw["application_entry"],
+                            "quality_flags": job.quality_flags,
+                        }
+                    else:
+                        sample = job.model_dump(mode="json")
                     (ROOT / f"evidence/{provider}-{quote(slug, safe='')}-sample.json").write_text(
                         json.dumps(sample, indent=2) + "\n"
                     )
@@ -515,6 +538,15 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "JobBoard.io": [
+                                "Distinct from JBoard.io; fixed reviewed public origins www.nifajobs.com and www.cancercareers.org, with no arbitrary custom-domain support",
+                                "Reads every jobs map advertised in the robots-disclosed public sitemap index and checks every detail and home preview; reconfirms the map roster after details. No independent total is provided, so coverage is scoped to the advertised public job collection",
+                                "No access to denied search, private API, candidate forms, profiles or external application destinations",
+                                "Uses the visible canonical job detail, employer, title and full description; validates JobPosting when present. Preserves visible original date and employment/remote metadata when JobPosting is absent",
+                                "Keeps masked contact placeholders; does not persist plaintext descriptions or HTML with encoded contacts for protected postings",
+                                "Same-ID application modals and upstream HTTP destinations use the original HTTPS job page as application entry; original HTTP links are preserved privately",
+                                "Point-in-time evidence does not establish all JobBoard.io deployments or hosted production freshness",
+                            ],
                             "JBoard.io": [
                                 "Distinct from JobBoard.io; supports the public JBoard HTML/JobPosting template on fixed vendor-showcased reviewed origins jobs.aame.org and jobs.cisontario.ca; arbitrary custom domains remain unsupported",
                                 "Read robots-advertised sitemap index/job maps only, enumerate every native 30-job list page and require exact ID/URL agreement; no profiles, resumes, account APIs, tracking scripts or application submissions",

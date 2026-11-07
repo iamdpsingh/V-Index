@@ -1,0 +1,37 @@
+{
+  "date_utc": "2026-11-07",
+  "platform": "JobBoard.io",
+  "scope": "Discovery and cached diagnostic checks, excluded from live coverage",
+  "references": [
+    "https://jobboard.io/case-studies/",
+    "https://www.nifajobs.com/Disclaimer",
+    "https://jobboard.io/jobboard-io-clients-ready-google-jobs/",
+    "https://support.jobboard.io/reference/api-v1"
+  ],
+  "observations": [
+    {
+      "origins": ["https://www.nifajobs.com/", "https://www.cancercareers.org/", "Vector Talent Hub"],
+      "route": "/jobs/search",
+      "status": 403,
+      "disposition": "Stopped requests to this route. No alternate filters, credentials or bypass. The connector only enumerates the separately advertised public job sitemaps."
+    },
+    {
+      "origin": "https://www.nifajobs.com/",
+      "preliminary_jobs": 2,
+      "disposition": "Not counted before a clean formal run."
+    },
+    {
+      "origin": "https://www.cancercareers.org/",
+      "observed_job_map_entries": 61,
+      "initial_failed_id": "638907351",
+      "failure": "Protected email placeholders in visible body differ from the structured description.",
+      "further_diagnostic_findings": [
+        "27 public details contain protected contacts; persisted descriptions preserve placeholders.",
+        "20 application controls open the same-ID form modal.",
+        "Two advertised apply destinations are HTTP-only; retain the HTTPS posting as the safe application entry.",
+        "One detail lacks JobPosting and has native title, employer, full body, application control and visible original publication date."
+      ],
+      "disposition": "Cached parsing checked all 61 public details after corrections; cached parsing is not live verification."
+    }
+  ]
+}

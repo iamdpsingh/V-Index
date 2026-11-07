@@ -63,3 +63,7 @@ Source registration accepts the reviewed JBoard origins jobs.aame.org and jobs.c
 The additive source_expiry_elapsed_while_listed quality flag means the complete public roster includes a job whose source closing timestamp has passed. Render a human-readable note such as “The source lists this role, but its closing date has passed. Check the original listing.” Do not turn it into an automatic closed status or show the raw identifier as consumer copy. Use a concise human explanation for unknown quality flags too. Coverage remains matrix-driven; this handoff does not itself grant live coverage.
 
 JBoard.io now has complete formal live evidence for AAME 30 and CIS Ontario 48, at connector revision 814a873. Matrix status is 46/78 (44 ATS, two job-board platforms). JBoard.io remains distinct from JobBoard.io. The formal coverage result supersedes the earlier under-validation note; supported-origin and source-quality limitations still apply. No API schema change is required for the new source type.
+
+## JobBoard.io source entry
+
+The source form can accept `https://www.nifajobs.com/` and `https://www.cancercareers.org/` as reviewed JobBoard.io board roots. No API schema change. Keep the original public job link and API-provided Apply link; they can be the same when the board opens an application form on the listing. Render descriptions as text, including any protected contact placeholders. Keep source quality flags and connector checks in the review surface.
