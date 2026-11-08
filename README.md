@@ -38,13 +38,13 @@ PYTHONPATH=backend uv run python scripts/smoke.py
 PYTHONPATH=backend uv run python scripts/smoke.py --provider SmartRecruiters --provider Personio
 ```
 
-Smoke requests public provider APIs and writes timestamped evidence. Inspect failures rather than treating all requests as successful. See [coverage](docs/COVERAGE.md), [deployment](docs/DEPLOYMENT.md), [frontend handoff](docs/ANTIGRAVITY_HANDOFF.md) and [backlog](docs/BACKLOG.md).
+Smoke checks public provider APIs, feeds and boards and writes timestamped evidence. Inspect failures rather than treating all requests as successful. See [coverage](docs/COVERAGE.md), [deployment](docs/DEPLOYMENT.md), [frontend handoff](docs/ANTIGRAVITY_HANDOFF.md) and [backlog](docs/BACKLOG.md).
 
 ## Status and limits
 
-46 of the 78 required platforms have point-in-time live evidence across two independent employers or boards. The owner’s current target is **45 live-verified platforms**, and that milestone has passed. Codex supplies the new frontend design; Antigravity implements it in the existing frontend worktree. Implementation, live evidence and production readiness remain separate. See the authoritative examples and limitations in [coverage](docs/COVERAGE.md).
+**50 of 78 required platforms** have point-in-time live evidence across two independent employers or boards. That includes 44 ATS platforms and six job-board platforms. Each provider's examples, counts and supported scope are listed in the [coverage matrix](docs/COVERAGE.md).
 
-Codex continues coverage and backend work after reaching the 45-platform milestone. The latest owner instruction assigns frontend design to Codex and implementation to Antigravity; existing frontend work is preserved. See [the frontend execution brief](docs/ANTIGRAVITY_START_HERE.md) and [continuous-index requirements](docs/LIVE_INDEX_REQUIREMENTS.md). The 45-platform target passed on November 7 IST. PostgreSQL/Redis integration tests run when TEST_DATABASE_URL and TEST_REDIS_URL are configured. The full container stack passes the documented CI startup/proxy checks; hosted operation is not yet verified. The owner authorized publishing the accumulated commits once 45 platforms were live-verified; that condition is now satisfied. No hosted reviewer demo has been deployed. Acquisition readiness requires all acceptance criteria in docs/ACCEPTANCE_TESTS.md.
+The remaining 28 platforms and production acceptance are tracked in the [coverage workflow](docs/COVERAGE_WORKFLOW.md) and [acceptance criteria](docs/ACCEPTANCE_TESTS.md). The [frontend handoff](docs/ANTIGRAVITY_HANDOFF.md) records product design and source URL guidance for the separate frontend worktree.
 
 ### Service-backed tests
 

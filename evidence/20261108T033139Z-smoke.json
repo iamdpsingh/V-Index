@@ -1,0 +1,32 @@
+[
+  {
+    "provider": "SmartJobBoard",
+    "url": "https://americanbath.mysmartjobboard.com/jobs/",
+    "at": "2026-11-08T03:30:23.347307+00:00",
+    "revision": "64f8194671c389303dbefbf7e852fd2c9f001983",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "10c56bda7c087c17c74370ad713e45b7193bda43e9d51330f402efabb6fdba87",
+    "count": 28,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "2380908bd43ca56360448972dd92449dafbdca3bf99d677a87768d60278eb50f",
+    "finished_at": "2026-11-08T03:30:43.859633+00:00"
+  },
+  {
+    "provider": "SmartJobBoard",
+    "url": "https://jobs.psychologicalscience.org/jobs/",
+    "at": "2026-11-08T03:30:44.360907+00:00",
+    "revision": "64f8194671c389303dbefbf7e852fd2c9f001983",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "10c56bda7c087c17c74370ad713e45b7193bda43e9d51330f402efabb6fdba87",
+    "count": 77,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "8ed6ba28586843e521fe6c0a1d3b4d92dccef2e0b8ff01f02accbe0f6195fd02",
+    "finished_at": "2026-11-08T03:31:39.192415+00:00"
+  }
+]
