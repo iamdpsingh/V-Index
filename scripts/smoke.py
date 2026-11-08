@@ -15,6 +15,50 @@ from vindex.connectors.registry import create_connector
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
+    ("JobBoard.com", "jobboard_com", "jobs.acevo.org.uk", "ACEVO", "https://jobs.acevo.org.uk/"),
+    (
+        "JobBoard.com",
+        "jobboard_com",
+        "www.gradsouthwest.com",
+        "Gradsouthwest",
+        "https://www.gradsouthwest.com/",
+    ),
+    ("Nodex", "nodex", "www.emotivtech.co.uk", "Emotiv", "https://www.emotivtech.co.uk/search"),
+    (
+        "Nodex",
+        "nodex",
+        "www.geckotravelrecruitment.co.uk",
+        "Gecko Travel Recruitment",
+        "https://www.geckotravelrecruitment.co.uk/search",
+    ),
+    (
+        "WP Job Manager",
+        "wp_job_manager",
+        "oliver-walters.com",
+        "Oliver Walters",
+        "https://oliver-walters.com/job-listings/",
+    ),
+    (
+        "WP Job Manager",
+        "wp_job_manager",
+        "pearlstreetsystems.com",
+        "Pearl Street Systems",
+        "https://pearlstreetsystems.com/careers/",
+    ),
+    (
+        "SAP SuccessFactors",
+        "successfactors",
+        "careers.icbc.com",
+        "ICBC",
+        "https://careers.icbc.com/search/",
+    ),
+    (
+        "SAP SuccessFactors",
+        "successfactors",
+        "careers.kaust.edu.sa",
+        "KAUST",
+        "https://careers.kaust.edu.sa/search/",
+    ),
     (
         "SmartJobBoard",
         "smartjobboard",
@@ -530,7 +574,16 @@ async def main():
                 # Minimal sanitized regression example, no full multi-tenant dumps.
                 if batch.jobs:
                     job = batch.jobs[0]
-                    if provider in {"jobboardio", "niceboard", "jobkit", "smartjobboard"}:
+                    if provider in {
+                        "jobboardio",
+                        "niceboard",
+                        "jobkit",
+                        "smartjobboard",
+                        "jobboard_com",
+                        "nodex",
+                        "wp_job_manager",
+                        "successfactors",
+                    }:
                         # Public evidence needs identity and field presence, not copies
                         # of employer descriptions, contact details, or apply queries.
                         sample = {
@@ -576,6 +629,18 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "JobBoard.com": [
+                                "Only reviewed ACEVO and Gradsouthwest origins with one complete robots-advertised sitemap; same-origin full job details and application links",
+                            ],
+                            "Nodex": [
+                                "Reviewed Emotiv and Gecko Travel search pages only; exact native total, numbered 10-item pages, duplicate detection and complete roster reconfirmation",
+                            ],
+                            "WP Job Manager": [
+                                "Reviewed Oliver Walters and Pearl Street Systems; native read-only listing query must report a complete single page, with bounded HTTP and reviewed same-origin details",
+                            ],
+                            "SAP SuccessFactors": [
+                                "Reviewed public Career Site Builder portals at ICBC and KAUST, complete single-page unfiltered public search only; canonical full details respect robots and noindex",
+                            ],
                             "SmartJobBoard": [
                                 "Reviewed American Bath Group and APS Employment Network origins only; reads native unfiltered 20-item public search pages and requires exact advertised total",
                                 "Reads every full detail and confirms the whole roster again; no backfilled provider pages, private routes or application redirect requests",

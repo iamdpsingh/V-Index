@@ -28,6 +28,8 @@ from vindex.connectors.icims import ICIMSConnector
 from vindex.connectors.jazzhr import JazzHRConnector
 from vindex.connectors.jboard import HOSTS as JBOARD_HOSTS
 from vindex.connectors.jboard import JBoardConnector
+from vindex.connectors.jobboardcom import HOSTS as JOBBOARDCOM_HOSTS
+from vindex.connectors.jobboardcom import JobBoardComConnector
 from vindex.connectors.jobboardio import HOSTS as JOBBOARDIO_HOSTS
 from vindex.connectors.jobboardio import JobBoardIOConnector
 from vindex.connectors.jobboardly import JobboardlyConnector
@@ -39,6 +41,8 @@ from vindex.connectors.kula import KulaConnector
 from vindex.connectors.manatal import ManatalConnector
 from vindex.connectors.niceboard import HOSTS as NICEBOARD_HOSTS
 from vindex.connectors.niceboard import NiceboardConnector
+from vindex.connectors.nodex import HOSTS as NODEX_HOSTS
+from vindex.connectors.nodex import NodexConnector
 from vindex.connectors.oracle import HOST as ORACLE_HOST
 from vindex.connectors.oracle import SITE as ORACLE_SITE
 from vindex.connectors.oracle import OracleConnector
@@ -56,6 +60,8 @@ from vindex.connectors.rippling import RipplingConnector
 from vindex.connectors.smartjobboard import HOSTS as SMARTJOBBOARD_HOSTS
 from vindex.connectors.smartjobboard import SmartJobBoardConnector
 from vindex.connectors.smartrecruiters import SmartRecruitersConnector
+from vindex.connectors.successfactors import HOSTS as SUCCESSFACTORS_HOSTS
+from vindex.connectors.successfactors import SuccessFactorsConnector
 from vindex.connectors.taleo import HOST as TALEO_HOST
 from vindex.connectors.taleo import ORG as TALEO_ORG
 from vindex.connectors.taleo import TaleoConnector
@@ -66,6 +72,8 @@ from vindex.connectors.trinet import TriNetConnector
 from vindex.connectors.werecruit import WeRecruitConnector
 from vindex.connectors.workable import WorkableConnector
 from vindex.connectors.workday import HOST_PATTERN, SITE_PATTERN, WorkdayConnector
+from vindex.connectors.wp_job_manager import HOSTS as WP_JOB_MANAGER_HOSTS
+from vindex.connectors.wp_job_manager import WPJobManagerConnector
 from vindex.connectors.zoho import ZohoConnector
 
 PERSONIO_HOST = re.compile(r"([a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)\.jobs\.personio\.(de|com)")
@@ -105,6 +113,28 @@ def detect(url: str) -> tuple[str, str]:
         if p.path not in {"", "/"} or p.query or p.fragment:
             raise ValueError("Expected an unfiltered reviewed JobKit or Niceboard board root")
         return ("jobkit" if p.hostname in JOBKIT_HOSTS else "niceboard"), p.hostname
+    if p.hostname in JOBBOARDCOM_HOSTS:
+        if p.path not in {"", "/", "/jobs", "/jobs/"} or p.query or p.fragment:
+            raise ValueError("Expected an unfiltered reviewed JobBoard.com board")
+        return "jobboard_com", p.hostname
+    if p.hostname in NODEX_HOSTS:
+        if p.path not in {"", "/", "/search", "/search/"} or p.query or p.fragment:
+            raise ValueError("Expected an unfiltered reviewed Nodex board")
+        return "nodex", p.hostname
+    if p.hostname in WP_JOB_MANAGER_HOSTS:
+        paths = {
+            "oliver-walters.com": {"", "/", "/job-listings", "/job-listings/"},
+            "pearlstreetsystems.com": {"", "/", "/careers", "/careers/", "/jobs", "/jobs/"},
+        }
+        if p.path not in paths[p.hostname] or p.query or p.fragment:
+            raise ValueError("Expected an unfiltered reviewed WP Job Manager board")
+        return "wp_job_manager", p.hostname
+    if p.hostname in SUCCESSFACTORS_HOSTS:
+        if p.path not in {"", "/", "/search", "/search/"} or p.query or p.fragment:
+            raise ValueError(
+                "Expected an unfiltered reviewed SuccessFactors Career Site Builder board"
+            )
+        return "successfactors", p.hostname
     if p.hostname in JOBBOARDIO_HOSTS:
         if p.path not in {"", "/"} or p.query or p.fragment:
             raise ValueError("Expected a reviewed JobBoard.io board root")
@@ -301,7 +331,7 @@ def detect(url: str) -> tuple[str, str]:
         return detect_original(url)
     except ValueError as error:
         raise ValueError(
-            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire, HiringThing, Freshteam, Trakstar, Rippling, Kula.ai, CareerPlug, TriNet, HireBridge, JOIN.com, Hireology, Paylocity, Zoho Recruit, Comeet, WeRecruit, FirstStage, Oracle Recruiting, CSOD, iCIMS, PageUp, Avature, Taleo, Eightfold AI, Deel and reviewed JBoard.io, JobBoard.io, Niceboard, JobKit and SmartJobBoard boards"
+            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire, HiringThing, Freshteam, Trakstar, Rippling, Kula.ai, CareerPlug, TriNet, HireBridge, JOIN.com, Hireology, Paylocity, Zoho Recruit, Comeet, WeRecruit, FirstStage, Oracle Recruiting, CSOD, iCIMS, PageUp, Avature, Taleo, Eightfold AI, Deel and reviewed JBoard.io, JobBoard.io, Niceboard, JobKit SmartJobBoard, JobBoard.com, Nodex, WP Job Manager and SAP SuccessFactors boards"
         ) from error
 
 
@@ -314,6 +344,14 @@ def create_connector(
         return JobKitConnector(slug, client)
     if provider == "niceboard":
         return NiceboardConnector(slug, client)
+    if provider == "jobboard_com":
+        return JobBoardComConnector(slug, client)
+    if provider == "nodex":
+        return NodexConnector(slug, client)
+    if provider == "wp_job_manager":
+        return WPJobManagerConnector(slug, client)
+    if provider == "successfactors":
+        return SuccessFactorsConnector(slug, client)
     if provider == "jobboardio":
         return JobBoardIOConnector(provider, slug, company, client)
     if provider == "jboard":

@@ -30,6 +30,7 @@ class PublicHTTP:
         method: Literal["GET", "POST"] = "GET",
         accept: str = "*/*",
         json_body: dict[str, Any] | None = None,
+        form: dict[str, str] | None = None,
         headers: dict[str, str] | None = None,
     ) -> bytes:
         parsed = urlsplit(url)
@@ -41,6 +42,8 @@ class PublicHTTP:
             or parsed.port not in (None, 443)
         ):
             raise ValueError("Outbound URL rejected")
+        if form is not None and (method != "POST" or json_body is not None):
+            raise ValueError("Form data requires a form-only POST")
         if headers and set(headers) != {"Authorization"}:
             raise ValueError("Unsupported provider request header")
         for attempt in range(3):
@@ -49,6 +52,7 @@ class PublicHTTP:
                     method,
                     url,
                     json=json_body,
+                    data=form,
                     headers={"Accept": accept, **(headers or {})},
                     follow_redirects=False,
                 ) as response:
