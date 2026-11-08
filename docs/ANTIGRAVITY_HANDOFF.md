@@ -71,3 +71,5 @@ The source form can accept `https://www.nifajobs.com/` and `https://www.cancerca
 Both reviewed JobBoard.io sources passed formal live verification on November 7: NIFA 2 jobs and AACR CancerCareers 61. Current matrix is 47/78. This count belongs on the reviewer surface and in the evidence, not in hardcoded public product copy.
 
 The owner added Anti-Slop as a frontend review reference on November 8. Use it alongside the Rolewisp design specification. [Anti-Slop repository](https://github.com/miqdadbadjuber/anti-slop)
+
+Reviewed November 8 source URLs include the Niceboard roots `https://jobs.aiacolorado.org/` and `https://jobs.medicalalley.org/`, and the JobKit roots `https://jobs.rubyonrails.org/` and `https://welpora.jobkit.io/`. SmartJobBoard accepts `https://americanbath.mysmartjobboard.com/jobs/` and `https://jobs.psychologicalscience.org/jobs/`. Continue to render the API-provided source and application links. No client schema change is required.

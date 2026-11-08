@@ -64,9 +64,9 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | Workable | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 4 | 2026-11-06T03:14:41.352483+00:00 | https://apply.workable.com/careers/ (1; LIVE_VERIFIED); https://apply.workable.com/learnworlds/ (3; LIVE_VERIFIED)  |
 | Workday | ats | IMPLEMENTED | LIVE_VERIFIED | HIGH | 43 | 2026-11-06T01:43:52.166289+00:00 | https://imf.wd5.myworkdayjobs.com/IMF (14; LIVE_VERIFIED); https://gatesfoundation.wd1.myworkdayjobs.com/Gates (29; LIVE_VERIFIED)  |
 | Zoho Recruit | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 47 | 2026-11-06T13:33:08.086608+00:00 | https://mywork.zohorecruit.eu/jobs/Careers (11; LIVE_VERIFIED); https://global.zohorecruit.com/jobs/Careers (36; LIVE_VERIFIED)  |
-| Niceboard | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
+| Niceboard | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 29 | 2026-11-08T03:25:18.002538+00:00 | https://jobs.aiacolorado.org/ (14; LIVE_VERIFIED); https://jobs.medicalalley.org/ (15; LIVE_VERIFIED)  |
 | WP Job Manager | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
-| JobKit | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
+| JobKit | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 39 | 2026-11-08T03:25:49.097273+00:00 | https://jobs.rubyonrails.org/ (13; LIVE_VERIFIED); https://welpora.jobkit.io/ (26; LIVE_VERIFIED)  |
 | Jobboardly | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 1355 | 2026-11-06T08:31:19.986009+00:00 | https://recruiter-jobs.jobboardly.com/jobs (31; LIVE_VERIFIED); https://pennsylvania-communications.jobboardly.com/jobs (1324; LIVE_VERIFIED)  |
 | Jobiqo | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | JBoard.io | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 78 | 2026-11-07T04:16:03.139570+00:00 | https://jobs.aame.org/jobs (30; LIVE_VERIFIED); https://jobs.cisontario.ca/jobs (48; LIVE_VERIFIED)  |

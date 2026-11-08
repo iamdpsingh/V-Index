@@ -1,0 +1,41 @@
+{
+  "date_utc": "2026-11-08",
+  "scope": "Preliminary discovery and exclusions, not live coverage",
+  "observations": [
+    {
+      "platform": "Niceboard",
+      "url": "https://probonoaustralia.niceboard.co/",
+      "result": "19 public sitemap postings. Two job descriptions were images without alt text, so the connector rejected those details. The board is outside the supported scope."
+    },
+    {
+      "platform": "Niceboard",
+      "url": "https://avajobboard.niceboard.co/",
+      "result": "218 job sitemap entries exceeded the 200-item verification bound. No complete run claimed."
+    },
+    {
+      "platform": "Niceboard",
+      "url": "https://jobs.aiacolorado.org/",
+      "result": "A public sitemap advertised 15 postings. One canonical job explicitly marked itself filled in native data. It was read and excluded from the active roster."
+    },
+    {
+      "platform": "Gem.com",
+      "url": "https://api.gem.com/job_board/v0/reference",
+      "result": "The documented API access probe returned HTTP 403 for both examples. Stopped that route."
+    },
+    {
+      "platform": "Dayforce",
+      "url": "https://www.dayforcehcm.com/",
+      "result": "Robots disallowed the JobFeeds request. Vendor documentation also requires authentication. No feed request made."
+    },
+    {
+      "platform": "SmartJobBoard",
+      "url": "https://careers.sais.org/jobs",
+      "result": "Public board access probe returned HTTP 403."
+    },
+    {
+      "platform": "SmartJobBoard",
+      "url": "https://jobs.thechemicalengineer.com/jobs/",
+      "result": "Both public listing pages returned all 37 jobs, but 36 native details left the employer empty in both visible and structured fields. The board is outside the supported scope."
+    }
+  ]
+}

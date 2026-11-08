@@ -53,6 +53,8 @@ from vindex.connectors.public import detect as detect_original
 from vindex.connectors.recooty import RecootyConnector
 from vindex.connectors.recruitee import RecruiteeConnector
 from vindex.connectors.rippling import RipplingConnector
+from vindex.connectors.smartjobboard import HOSTS as SMARTJOBBOARD_HOSTS
+from vindex.connectors.smartjobboard import SmartJobBoardConnector
 from vindex.connectors.smartrecruiters import SmartRecruitersConnector
 from vindex.connectors.taleo import HOST as TALEO_HOST
 from vindex.connectors.taleo import ORG as TALEO_ORG
@@ -95,6 +97,10 @@ def detect(url: str) -> tuple[str, str]:
         match = re.fullmatch(rf"({TENANT})\.{re.escape(suffix)}", p.hostname or "")
         if match:
             return provider, match[1]
+    if p.hostname in SMARTJOBBOARD_HOSTS:
+        if p.path not in {"", "/", "/jobs", "/jobs/"} or p.query or p.fragment:
+            raise ValueError("Expected an unfiltered reviewed SmartJobBoard board")
+        return "smartjobboard", p.hostname
     if p.hostname in JOBKIT_HOSTS or p.hostname in NICEBOARD_HOSTS:
         if p.path not in {"", "/"} or p.query or p.fragment:
             raise ValueError("Expected an unfiltered reviewed JobKit or Niceboard board root")
@@ -295,13 +301,15 @@ def detect(url: str) -> tuple[str, str]:
         return detect_original(url)
     except ValueError as error:
         raise ValueError(
-            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire, HiringThing, Freshteam, Trakstar, Rippling, Kula.ai, CareerPlug, TriNet, HireBridge, JOIN.com, Hireology, Paylocity, Zoho Recruit, Comeet, WeRecruit, FirstStage, Oracle Recruiting, CSOD, iCIMS, PageUp, Avature, Taleo, Eightfold AI, Deel and reviewed JBoard.io, JobBoard.io, Niceboard and JobKit boards"
+            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire, HiringThing, Freshteam, Trakstar, Rippling, Kula.ai, CareerPlug, TriNet, HireBridge, JOIN.com, Hireology, Paylocity, Zoho Recruit, Comeet, WeRecruit, FirstStage, Oracle Recruiting, CSOD, iCIMS, PageUp, Avature, Taleo, Eightfold AI, Deel and reviewed JBoard.io, JobBoard.io, Niceboard, JobKit and SmartJobBoard boards"
         ) from error
 
 
 def create_connector(
     provider: str, slug: str, company: str, client: httpx.AsyncClient
 ) -> Connector:
+    if provider == "smartjobboard":
+        return SmartJobBoardConnector(slug, client)
     if provider == "jobkit":
         return JobKitConnector(slug, client)
     if provider == "niceboard":

@@ -16,6 +16,20 @@ from vindex.connectors.registry import create_connector
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
     (
+        "SmartJobBoard",
+        "smartjobboard",
+        "americanbath.mysmartjobboard.com",
+        "American Bath Group",
+        "https://americanbath.mysmartjobboard.com/jobs/",
+    ),
+    (
+        "SmartJobBoard",
+        "smartjobboard",
+        "jobs.psychologicalscience.org",
+        "APS Employment Network",
+        "https://jobs.psychologicalscience.org/jobs/",
+    ),
+    (
         "Niceboard",
         "niceboard",
         "jobs.aiacolorado.org",
@@ -516,7 +530,7 @@ async def main():
                 # Minimal sanitized regression example, no full multi-tenant dumps.
                 if batch.jobs:
                     job = batch.jobs[0]
-                    if provider in {"jobboardio", "niceboard", "jobkit"}:
+                    if provider in {"jobboardio", "niceboard", "jobkit", "smartjobboard"}:
                         # Public evidence needs identity and field presence, not copies
                         # of employer descriptions, contact details, or apply queries.
                         sample = {
@@ -562,6 +576,11 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "SmartJobBoard": [
+                                "Reviewed American Bath Group and APS Employment Network origins only; reads native unfiltered 20-item public search pages and requires exact advertised total",
+                                "Reads every full detail and confirms the whole roster again; no backfilled provider pages, private routes or application redirect requests",
+                                "Only native same-ID application links and observed supported public apply controls are accepted",
+                            ],
                             "Niceboard": [
                                 "Public robots-advertised jobs sitemap and same-ID published posting data on the two reviewed board origins; no private API or application-form fetches",
                                 "Every job detail checked and whole sitemap roster reconfirmed; explicit filled/expired native state excluded from active jobs; unsupported image-only descriptions reject the run",

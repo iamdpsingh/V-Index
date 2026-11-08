@@ -1,0 +1,71 @@
+[
+  {
+    "provider": "Niceboard",
+    "url": "https://jobs.aiacolorado.org/",
+    "at": "2026-11-08T03:24:10.296655+00:00",
+    "revision": "6a4fa80f2e7fd1b27d59bc72b46cf534c1658770",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "6efc2a180a684118cf083686530795baaac48d3685362c9220f3174cc5399e9e",
+    "count": 14,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {
+      "application_by_email": 11
+    },
+    "payload_sha256": "e0ccfade1d0071f0952adb4bfee89650c1a924cadf61e30b7c09a37b5b3f50c4",
+    "finished_at": "2026-11-08T03:24:44.268441+00:00"
+  },
+  {
+    "provider": "Niceboard",
+    "url": "https://jobs.medicalalley.org/",
+    "at": "2026-11-08T03:24:44.769641+00:00",
+    "revision": "6a4fa80f2e7fd1b27d59bc72b46cf534c1658770",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "6efc2a180a684118cf083686530795baaac48d3685362c9220f3174cc5399e9e",
+    "count": 15,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {
+      "location_missing": 1
+    },
+    "payload_sha256": "7ea7c1e3fbd42b8787adaaa0debae1ccef3a8f0f10156329caaf47b7784b6750",
+    "finished_at": "2026-11-08T03:25:18.002538+00:00"
+  },
+  {
+    "provider": "JobKit",
+    "url": "https://jobs.rubyonrails.org/",
+    "at": "2026-11-08T03:25:18.503861+00:00",
+    "revision": "6a4fa80f2e7fd1b27d59bc72b46cf534c1658770",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "6efc2a180a684118cf083686530795baaac48d3685362c9220f3174cc5399e9e",
+    "count": 13,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {
+      "publication_date_only": 13,
+      "application_by_email": 1
+    },
+    "payload_sha256": "57a02b5001060fd4ac5775f3d16548fd17e4f844a8e6e73cb211b16c1ce8d66c",
+    "finished_at": "2026-11-08T03:25:29.181710+00:00"
+  },
+  {
+    "provider": "JobKit",
+    "url": "https://welpora.jobkit.io/",
+    "at": "2026-11-08T03:25:29.683020+00:00",
+    "revision": "6a4fa80f2e7fd1b27d59bc72b46cf534c1658770",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "6efc2a180a684118cf083686530795baaac48d3685362c9220f3174cc5399e9e",
+    "count": 26,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {
+      "publication_date_only": 26
+    },
+    "payload_sha256": "84a9536f2e8e4f1b9134739b657481d4068ef4c496e2570f2731df59992b0756",
+    "finished_at": "2026-11-08T03:25:49.097273+00:00"
+  }
+]
