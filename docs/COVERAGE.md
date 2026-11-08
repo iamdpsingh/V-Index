@@ -52,7 +52,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | Recruitee | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 29 | 2026-11-06T01:42:58.731786+00:00 | https://natilik.recruitee.com (6; LIVE_VERIFIED); https://bunq.recruitee.com (23; LIVE_VERIFIED)  |
 | Rippling | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 11 | 2026-11-06T12:24:45.518767+00:00 | https://ats.rippling.com/realwork/jobs (5; LIVE_VERIFIED); https://ats.rippling.com/sas/jobs (6; LIVE_VERIFIED)  |
 | Rival | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
-| SAP SuccessFactors | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
+| SAP SuccessFactors | ats | IMPLEMENTED | LIVE_VERIFIED | HIGH | 17 | 2026-11-08T12:17:29.883037+00:00 | https://careers.icbc.com/search/ (9; LIVE_VERIFIED); https://careers.kaust.edu.sa/search/ (8; LIVE_VERIFIED)  |
 | SmartRecruiters | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 90 | 2026-11-05T16:49:50.960317+00:00 | https://careers.smartrecruiters.com/SmartRecruiters (2; LIVE_VERIFIED); https://careers.smartrecruiters.com/Colliers (88; LIVE_VERIFIED)  |
 | talentReef | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Taleo | ats | IMPLEMENTED | LIVE_VERIFIED | HIGH | 135 | 2026-11-07T01:53:19.592777+00:00 | https://phf.tbe.taleo.net/phf03/ats/careers/v2/jobSearch?org=GRAYBARCANADA&cws=42 (32; LIVE_VERIFIED); https://phg.tbe.taleo.net/phg01/ats/careers/v2/jobSearch?org=GATEWAYVENT&cws=72 (103; LIVE_VERIFIED)  |
@@ -65,7 +65,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | Workday | ats | IMPLEMENTED | LIVE_VERIFIED | HIGH | 43 | 2026-11-06T01:43:52.166289+00:00 | https://imf.wd5.myworkdayjobs.com/IMF (14; LIVE_VERIFIED); https://gatesfoundation.wd1.myworkdayjobs.com/Gates (29; LIVE_VERIFIED)  |
 | Zoho Recruit | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 47 | 2026-11-06T13:33:08.086608+00:00 | https://mywork.zohorecruit.eu/jobs/Careers (11; LIVE_VERIFIED); https://global.zohorecruit.com/jobs/Careers (36; LIVE_VERIFIED)  |
 | Niceboard | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 29 | 2026-11-08T03:25:18.002538+00:00 | https://jobs.aiacolorado.org/ (14; LIVE_VERIFIED); https://jobs.medicalalley.org/ (15; LIVE_VERIFIED)  |
-| WP Job Manager | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
+| WP Job Manager | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 5 | 2026-11-08T12:16:58.227605+00:00 | https://oliver-walters.com/job-listings/ (3; LIVE_VERIFIED); https://pearlstreetsystems.com/careers/ (2; LIVE_VERIFIED)  |
 | JobKit | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 39 | 2026-11-08T03:25:49.097273+00:00 | https://jobs.rubyonrails.org/ (13; LIVE_VERIFIED); https://welpora.jobkit.io/ (26; LIVE_VERIFIED)  |
 | Jobboardly | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 1355 | 2026-11-06T08:31:19.986009+00:00 | https://recruiter-jobs.jobboardly.com/jobs (31; LIVE_VERIFIED); https://pennsylvania-communications.jobboardly.com/jobs (1324; LIVE_VERIFIED)  |
 | Jobiqo | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
@@ -77,10 +77,10 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | Talenetic | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | JobMount | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | CareerSiteCloud | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
-| JobBoard.com | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
+| JobBoard.com | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 22 | 2026-11-08T12:15:42.598392+00:00 | https://jobs.acevo.org.uk/ (15; LIVE_VERIFIED); https://www.gradsouthwest.com/ (7; LIVE_VERIFIED)  |
 | Artha | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | jobboardsoftware.com | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | jobBoardHQ | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
-| Nodex | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
+| Nodex | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 50 | 2026-11-08T12:16:39.627724+00:00 | https://www.emotivtech.co.uk/search (35; LIVE_VERIFIED); https://www.geckotravelrecruitment.co.uk/search (15; LIVE_VERIFIED)  |
 | eJobBoard | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | ejobsitesoftware.com | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |

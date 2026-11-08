@@ -321,3 +321,12 @@ JobKit (`jobkit`) accepts the reviewed Rails Job Board and Welpora HTTPS roots. 
 ## SmartJobBoard public boards
 
 SmartJobBoard (`smartjobboard`) supports the reviewed American Bath Group and APS Employment Network HTTPS origins. The adapter reads native unfiltered pages in batches of 20, requires each page to agree with the advertised total and validates each mandatory job detail. It reconfirms the complete roster after details. A changed, partial or blocked enumeration fails reconciliation. The native unfiltered total covers board listings, excluding third-party backfill. The connector never requests application redirects or applicant data.
+
+## November 8 reviewed connectors
+
+- **JobBoard.com** (`jobboard_com`) supports the reviewed ACEVO and Gradsouthwest roots. It reads a robots-advertised sitemap index containing one map, checks every canonical posting and matches the application destination to its native job ID. Additional maps or unsupported job URLs reject the run.
+- **Nodex** (`nodex`) supports the reviewed Emotiv and Gecko Travel Recruitment search pages. It checks exact unfiltered totals and numbered ten-item pages, requires safe native next links, and re-enumerates every page after details. A source posting with missing description is explicitly flagged.
+- **WP Job Manager** (`wp_job_manager`) supports the reviewed Oliver Walters and Pearl Street Systems boards. Its read-only public listing POST uses the shared bounded transport and requires native confirmation of one complete page. It checks all active same-origin job rows and their details, then reconfirms the roster.
+- **SAP SuccessFactors** (`successfactors`) supports the reviewed public Career Site Builder instances at ICBC and KAUST. Exact one-page totals and canonical, indexable job detail pages are required. The same-ID application link is preserved without fetching it. This scope covers the public site rather than the credentialed recruiting integration.
+
+All four apply robots policy, reject incomplete or changed enumerations and preserve existing lifecycle safeguards. [Integration review](ANTIGRAVITY_BACKEND_REVIEW_2026-11-08.md)

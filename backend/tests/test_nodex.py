@@ -199,3 +199,26 @@ def test_nodex_discover_drift_failure():
                 await connector.discover()
 
     asyncio.run(run())
+
+
+def test_nodex_rejects_first_page_without_the_advertised_next_page(monkeypatch):
+    async def no_delay(_):
+        pass
+
+    monkeypatch.setattr("vindex.connectors.nodex.asyncio.sleep", no_delay)
+    host = "www.emotivtech.co.uk"
+    links = "".join(f'<a href="/job/role-{n}/{n}">Role</a>' for n in range(1, 11))
+    body = f'<html><h1>11 jobs found</h1><p class="hz-rs-pageof">Page 1 of 2</p>{links}</html>'
+
+    def handler(request):
+        if request.url.path == "/robots.txt":
+            return httpx.Response(200, text="User-agent: *\nAllow: /\n")
+        assert request.url.path == "/search"
+        return httpx.Response(200, text=body)
+
+    async def run():
+        async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
+            with pytest.raises(ValueError, match="Missing or ambiguous Nodex next page"):
+                await NodexConnector(host, client).discover()
+
+    asyncio.run(run())

@@ -17,3 +17,5 @@ November 7: JBoard.io passed formal runs on two independent reviewed boards (AAM
 JobBoard.io then passed clean live runs on NIFA (2 jobs) and AACR CancerCareers (61), using their advertised public job sitemaps. The verified total is **47/78**: 44 ATS and three job-board platforms. **31 remain:** 14 ATS and 17 job-board platforms. Review evidence and supported scope are in [COVERAGE.md](COVERAGE.md) and [CONNECTOR_CONTRACT.md](CONNECTOR_CONTRACT.md).
 
 November 8: Niceboard, JobKit and SmartJobBoard each passed complete runs on two independent boards. The requested **50/78** milestone passed, with 44 ATS and six job-board platforms verified. **28 remain**, split evenly between ATS and job-board platforms. See the [coverage matrix](COVERAGE.md) and [connector contract](CONNECTOR_CONTRACT.md).
+
+November 8 integration review: the independently verified total is **54/78** after accepting JobBoard.com, Nodex, WP Job Manager and SAP SuccessFactors. The remaining 24 are 13 ATS and 11 job-board platforms. See the [backend review](ANTIGRAVITY_BACKEND_REVIEW_2026-11-08.md).

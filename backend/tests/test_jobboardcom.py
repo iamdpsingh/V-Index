@@ -244,7 +244,7 @@ def test_jobboardcom_parse_validations():
         connector.parse((identifier, url, valid_body.replace(b'"Charity A"', b'""')))
 
     # Missing apply button
-    with pytest.raises(ValueError, match="No application link found"):
+    with pytest.raises(ValueError, match="Missing or ambiguous same-ID"):
         connector.parse((identifier, url, valid_body.replace(b"/jobs/apply/?id=701-1", b"/home")))
 
 

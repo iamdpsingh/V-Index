@@ -2,9 +2,9 @@
 
 **Latest owner update — November 7:** coverage first, then remaining backend work. Batch pushes every 12 hours; maintain the frontend handoff alongside connector/API additions. Antigravity's implementation is present at `66baef8` and remains in its separate worktree pending reviewed integration. See [COVERAGE_WORKFLOW.md](COVERAGE_WORKFLOW.md).
 
-## Current coverage-first status — November 7
+## Current coverage-first status
 
-46/78 platforms have complete non-empty point-in-time runs across two independent supported sites. The 45-platform milestone passed on November 7 IST with Taleo, Eightfold AI and Deel verified. The owner's condition for pushing accumulated commits is satisfied. Frontend design is now assigned to Codex and implementation to Antigravity; see ROLEWISP_FRONTEND_DESIGN.md. The other 32 platforms and all remaining production/acquisition gates remain open.
+54 of 78 platforms have complete, nonempty live runs on two independent sites. 13 ATS and 11 job-board platforms remain. Antigravity's local coverage batch was reviewed and selectively integrated. Read the [backend review](ANTIGRAVITY_BACKEND_REVIEW_2026-11-08.md) for the remaining platform list, verified results and next actions. Older cohort numbers below are historical.
 
 ## First slice
 - [x] Inspect empty folder/remote; initialize canonical main without replacing history.

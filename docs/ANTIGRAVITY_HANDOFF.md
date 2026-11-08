@@ -73,3 +73,5 @@ Both reviewed JobBoard.io sources passed formal live verification on November 7:
 The owner added Anti-Slop as a frontend review reference on November 8. Use it alongside the Rolewisp design specification. [Anti-Slop repository](https://github.com/miqdadbadjuber/anti-slop)
 
 Reviewed November 8 source URLs include the Niceboard roots `https://jobs.aiacolorado.org/` and `https://jobs.medicalalley.org/`, and the JobKit roots `https://jobs.rubyonrails.org/` and `https://welpora.jobkit.io/`. SmartJobBoard accepts `https://americanbath.mysmartjobboard.com/jobs/` and `https://jobs.psychologicalscience.org/jobs/`. Continue to render the API-provided source and application links. No client schema change is required.
+
+The reviewed backend accepts the public ACEVO and Gradsouthwest JobBoard.com roots, Emotiv and Gecko Travel Nodex search pages, Oliver Walters and Pearl Street Systems WP Job Manager boards, and ICBC and KAUST SAP SuccessFactors career search pages. The existing API shape is sufficient. The verified list, site limits and remaining cases are documented for reviewers. [Backend integration review](ANTIGRAVITY_BACKEND_REVIEW_2026-11-08.md)
