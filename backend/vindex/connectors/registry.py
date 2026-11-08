@@ -31,10 +31,14 @@ from vindex.connectors.jboard import JBoardConnector
 from vindex.connectors.jobboardio import HOSTS as JOBBOARDIO_HOSTS
 from vindex.connectors.jobboardio import JobBoardIOConnector
 from vindex.connectors.jobboardly import JobboardlyConnector
+from vindex.connectors.jobkit import HOSTS as JOBKIT_HOSTS
+from vindex.connectors.jobkit import JobKitConnector
 from vindex.connectors.jobvite import JobviteConnector
 from vindex.connectors.join import JoinConnector
 from vindex.connectors.kula import KulaConnector
 from vindex.connectors.manatal import ManatalConnector
+from vindex.connectors.niceboard import HOSTS as NICEBOARD_HOSTS
+from vindex.connectors.niceboard import NiceboardConnector
 from vindex.connectors.oracle import HOST as ORACLE_HOST
 from vindex.connectors.oracle import SITE as ORACLE_SITE
 from vindex.connectors.oracle import OracleConnector
@@ -91,6 +95,10 @@ def detect(url: str) -> tuple[str, str]:
         match = re.fullmatch(rf"({TENANT})\.{re.escape(suffix)}", p.hostname or "")
         if match:
             return provider, match[1]
+    if p.hostname in JOBKIT_HOSTS or p.hostname in NICEBOARD_HOSTS:
+        if p.path not in {"", "/"} or p.query or p.fragment:
+            raise ValueError("Expected an unfiltered reviewed JobKit or Niceboard board root")
+        return ("jobkit" if p.hostname in JOBKIT_HOSTS else "niceboard"), p.hostname
     if p.hostname in JOBBOARDIO_HOSTS:
         if p.path not in {"", "/"} or p.query or p.fragment:
             raise ValueError("Expected a reviewed JobBoard.io board root")
@@ -287,13 +295,17 @@ def detect(url: str) -> tuple[str, str]:
         return detect_original(url)
     except ValueError as error:
         raise ValueError(
-            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire, HiringThing, Freshteam, Trakstar, Rippling, Kula.ai, CareerPlug, TriNet, HireBridge, JOIN.com, Hireology, Paylocity, Zoho Recruit, Comeet, WeRecruit, FirstStage, Oracle Recruiting, CSOD, iCIMS, PageUp, Avature, Taleo, Eightfold AI, Deel and reviewed JBoard.io and JobBoard.io boards"
+            "Supported hosted boards: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee, Workday, Teamtailor, Breezy HR, Workable, BambooHR, Pinpoint, Jobboardly, JazzHR, HireHive, GoHire, Polymer, Manatal, Recooty, Jobvite, ApplicantPro, iSolvedHire, HiringThing, Freshteam, Trakstar, Rippling, Kula.ai, CareerPlug, TriNet, HireBridge, JOIN.com, Hireology, Paylocity, Zoho Recruit, Comeet, WeRecruit, FirstStage, Oracle Recruiting, CSOD, iCIMS, PageUp, Avature, Taleo, Eightfold AI, Deel and reviewed JBoard.io, JobBoard.io, Niceboard and JobKit boards"
         ) from error
 
 
 def create_connector(
     provider: str, slug: str, company: str, client: httpx.AsyncClient
 ) -> Connector:
+    if provider == "jobkit":
+        return JobKitConnector(slug, client)
+    if provider == "niceboard":
+        return NiceboardConnector(slug, client)
     if provider == "jobboardio":
         return JobBoardIOConnector(provider, slug, company, client)
     if provider == "jboard":

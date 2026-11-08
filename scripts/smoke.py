@@ -15,6 +15,28 @@ from vindex.connectors.registry import create_connector
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
+    (
+        "Niceboard",
+        "niceboard",
+        "jobs.aiacolorado.org",
+        "AIA Colorado",
+        "https://jobs.aiacolorado.org/",
+    ),
+    (
+        "Niceboard",
+        "niceboard",
+        "jobs.medicalalley.org",
+        "Medical Alley",
+        "https://jobs.medicalalley.org/",
+    ),
+    (
+        "JobKit",
+        "jobkit",
+        "jobs.rubyonrails.org",
+        "Rails Job Board",
+        "https://jobs.rubyonrails.org/",
+    ),
+    ("JobKit", "jobkit", "welpora.jobkit.io", "Welpora", "https://welpora.jobkit.io/"),
     ("JobBoard.io", "jobboardio", "www.nifajobs.com", "NIFA", "https://www.nifajobs.com/"),
     (
         "JobBoard.io",
@@ -494,7 +516,7 @@ async def main():
                 # Minimal sanitized regression example, no full multi-tenant dumps.
                 if batch.jobs:
                     job = batch.jobs[0]
-                    if provider == "jobboardio":
+                    if provider in {"jobboardio", "niceboard", "jobkit"}:
                         # Public evidence needs identity and field presence, not copies
                         # of employer descriptions, contact details, or apply queries.
                         sample = {
@@ -504,7 +526,9 @@ async def main():
                             "company_present": bool(job.company),
                             "description_length": len(job.description),
                             "location_present": bool(job.location),
-                            "application_entry": job.raw["application_entry"],
+                            "application_entry": job.raw.get(
+                                "application_entry", "Public listing or advertised HTTPS link"
+                            ),
                             "quality_flags": job.quality_flags,
                         }
                     else:
@@ -538,6 +562,16 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "Niceboard": [
+                                "Public robots-advertised jobs sitemap and same-ID published posting data on the two reviewed board origins; no private API or application-form fetches",
+                                "Every job detail checked and whole sitemap roster reconfirmed; explicit filled/expired native state excluded from active jobs; unsupported image-only descriptions reject the run",
+                                "Email and hosted form applications use the original public job page; no private board metadata or contact fields retained",
+                            ],
+                            "JobKit": [
+                                "Public HTML on the reviewed Rails and Welpora origins; rendered unfiltered job total must equal unique listing links, reconfirmed after mandatory details",
+                                "Only boards whose full advertised roster fits on the first page are supported; unsupported pagination and incomplete details reject the run",
+                                "Protected email and HTTP applications use the original public job page; no encoded contact or applicant data retained",
+                            ],
                             "JobBoard.io": [
                                 "Distinct from JBoard.io; fixed reviewed public origins www.nifajobs.com and www.cancercareers.org, with no arbitrary custom-domain support",
                                 "Reads every jobs map advertised in the robots-disclosed public sitemap index and checks every detail and home preview; reconfirms the map roster after details. No independent total is provided, so coverage is scoped to the advertised public job collection",

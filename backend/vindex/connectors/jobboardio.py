@@ -33,7 +33,7 @@ def compact(value: str) -> str:
 
 def document(body: bytes) -> BeautifulSoup:
     if b"</html>" not in body.lower():
-        raise ValueError("Truncated JobBoard.io public document")
+        raise ValueError("Truncated public HTML document")
     return BeautifulSoup(body, "html.parser")
 
 
@@ -64,17 +64,17 @@ def xml_urls(body: bytes, *, index: bool) -> list[str]:
     try:
         root = ElementTree.fromstring(body)
     except (ParseError, DefusedXmlException) as error:
-        raise ValueError("Malformed or unsafe JobBoard.io sitemap") from error
+        raise ValueError("Malformed or unsafe public sitemap") from error
     if root.tag != NS + ("sitemapindex" if index else "urlset"):
-        raise ValueError("Unexpected JobBoard.io sitemap document")
+        raise ValueError("Unexpected public sitemap document")
     entries = root.findall(NS + ("sitemap" if index else "url"))
     if not 0 < len(entries) <= (50 if index else 201):
-        raise ValueError("Empty or oversized JobBoard.io sitemap")
+        raise ValueError("Empty or oversized public sitemap")
     urls = []
     for entry in entries:
         loc = entry.findall(NS + "loc")
         if len(loc) != 1 or not loc[0].text or loc[0].text in urls:
-            raise ValueError("Missing or duplicated JobBoard.io sitemap location")
+            raise ValueError("Missing or duplicated public sitemap location")
         urls.append(loc[0].text)
     return urls
 
