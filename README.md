@@ -42,9 +42,9 @@ Smoke checks public provider APIs, feeds and boards and writes timestamped evide
 
 ## Status and limits
 
-**58 of 78 required platforms** have point-in-time live evidence across two independent employers or boards. That includes 47 ATS platforms and 11 job-board platforms. Each provider's examples, counts and supported scope are listed in the [coverage matrix](docs/COVERAGE.md).
+**59 of 78 required platforms** have point-in-time live evidence across two independent employers or boards. That includes 48 ATS platforms and 11 job-board platforms. Each provider's examples, counts and supported scope are listed in the [coverage matrix](docs/COVERAGE.md).
 
-The remaining 20 platforms and production acceptance are tracked in the [coverage workflow](docs/COVERAGE_WORKFLOW.md) and [acceptance criteria](docs/ACCEPTANCE_TESTS.md). The [frontend handoff](docs/ANTIGRAVITY_HANDOFF.md) records product design and source URL guidance for the separate frontend worktree.
+The remaining 19 platforms and production acceptance are tracked in the [coverage workflow](docs/COVERAGE_WORKFLOW.md) and [acceptance criteria](docs/ACCEPTANCE_TESTS.md). The [frontend handoff](docs/ANTIGRAVITY_HANDOFF.md) records product design and source URL guidance for the separate frontend worktree.
 
 ### Service-backed tests
 

@@ -15,6 +15,20 @@ from vindex.connectors.registry import create_connector
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
+    (
+        "Phenom People",
+        "phenompeople",
+        "careers.phenom.com",
+        "Phenom",
+        "https://careers.phenom.com/global/en/search-results",
+    ),
+    (
+        "Phenom People",
+        "phenompeople",
+        "careers.bloodcancerunited.org",
+        "Blood Cancer United",
+        "https://careers.bloodcancerunited.org/us/en/search-results",
+    ),
     ("Paradox", "paradox", "flynnrgcareers.com", "Flynn Group", "https://flynnrgcareers.com/"),
     (
         "Paradox",
@@ -660,6 +674,7 @@ async def main():
                         "rival",
                         "exenzo",
                         "paradox",
+                        "phenompeople",
                         "niceboard",
                         "jobkit",
                         "smartjobboard",
@@ -724,6 +739,10 @@ async def main():
                             ],
                             "SAP SuccessFactors": [
                                 "Reviewed public Career Site Builder portals at ICBC and KAUST, complete single-page unfiltered public search only; canonical full details respect robots and noindex",
+                            ],
+                            "Phenom People": [
+                                "Reviewed locale-specific Phenom public search pages; reads every offset and requires exact ID agreement with the robots-advertised job sitemap.",
+                                "Checks every canonical public job detail and repeats the roster. Empty, oversized, changed and partial snapshots fail the refresh.",
                             ],
                             "Paradox": [
                                 "Reviewed Career Site Studio public roots; verifies every native result range and matching detail up to 200 jobs, then repeats the roster.",

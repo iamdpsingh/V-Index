@@ -83,3 +83,5 @@ The existing source API accepts the reviewed Gurus HR Consultancy eJobsiteSoftwa
 Source registration accepts the reviewed Rival employer portals and jobBoardHQ search pages listed in the connector contract and coverage matrix. Existing job card and application URL fields cover both connectors.
 
 The source API also accepts the reviewed Exenzo boards for `jobboardsoftware.com`: `https://agconnect.exenzo.nl/` and `https://vacatures.ecommerce.nl/vacatures`. Use the existing application URL field for the publisher's direct link or the native job detail.
+
+Source registration accepts the reviewed Paradox public roots `https://flynnrgcareers.com/` and `https://careers.mwg.aaa.com/` using the existing source API and job-card fields.

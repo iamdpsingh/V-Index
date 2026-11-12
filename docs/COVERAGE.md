@@ -40,7 +40,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | Manatal | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 12 | 2026-11-06T08:00:22.119713+00:00 | https://www.careers-page.com/quantilehealth (2; LIVE_VERIFIED); https://www.careers-page.com/munich-ventures-2 (10; LIVE_VERIFIED)  |
 | Oracle Recruiting | ats | IMPLEMENTED | LIVE_VERIFIED | HIGH | 53 | 2026-11-06T17:42:06.317144+00:00 | https://eoja.fa.ap1.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX/jobs (28; LIVE_VERIFIED); https://eifn.fa.us6.oraclecloud.com/hcmUI/CandidateExperience/en/sites/ExternalCareerSite/jobs (25; LIVE_VERIFIED)  |
 | PageUp | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 163 | 2026-11-06T18:12:03.850825+00:00 | https://careers.pageuppeople.com/1220/cw/en/listing/ (35; LIVE_VERIFIED); https://careers.pageuppeople.com/1132/cw/en-us/listing/ (128; LIVE_VERIFIED)  |
-| Paradox | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
+| Paradox | ats | IMPLEMENTED | LIVE_VERIFIED | HIGH | 120 | 2026-11-12T16:11:02.000277+00:00 | https://flynnrgcareers.com/ (12; LIVE_VERIFIED); https://careers.mwg.aaa.com/ (108; LIVE_VERIFIED)  |
 | Paycom | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | Paycor | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Paylocity | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 3 | 2026-11-06T13:16:41.489756+00:00 | https://recruiting.paylocity.com/Recruiting/Jobs/All/a387d706-ac6f-4e58-b47b-be05001923ea (1; LIVE_VERIFIED); https://recruiting.paylocity.com/Recruiting/Jobs/All/be178b00-f3fb-452e-9aef-dce1ef7fcdba (2; LIVE_VERIFIED)  |

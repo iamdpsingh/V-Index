@@ -1,0 +1,32 @@
+[
+  {
+    "provider": "Paradox",
+    "url": "https://flynnrgcareers.com/",
+    "at": "2026-11-12T16:09:03.891576+00:00",
+    "revision": "23254e7bca90e2ec79a3dea1ec88e387199e2901",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "2d4c63ee0458f1218f2dbb3601edaaf959e1c355cc8be5acda0a968d35a0e202",
+    "count": 12,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "82a90aa44f5056da621867efa8d26de785066ec2847b965278b1a45e2f81502d",
+    "finished_at": "2026-11-12T16:09:17.397960+00:00"
+  },
+  {
+    "provider": "Paradox",
+    "url": "https://careers.mwg.aaa.com/",
+    "at": "2026-11-12T16:09:17.899302+00:00",
+    "revision": "23254e7bca90e2ec79a3dea1ec88e387199e2901",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "2d4c63ee0458f1218f2dbb3601edaaf959e1c355cc8be5acda0a968d35a0e202",
+    "count": 108,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "edded3a8b41ec0aa38136052c4202bb35bace7696c2693d145bb624923acea53",
+    "finished_at": "2026-11-12T16:11:02.000277+00:00"
+  }
+]

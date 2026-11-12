@@ -61,6 +61,8 @@ from vindex.connectors.paradox import HOSTS as PARADOX_HOSTS
 from vindex.connectors.paradox import ParadoxConnector
 from vindex.connectors.paylocity import PaylocityConnector
 from vindex.connectors.personio import PersonioConnector
+from vindex.connectors.phenompeople import BOARDS as PHENOM_BOARDS
+from vindex.connectors.phenompeople import PhenomPeopleConnector
 from vindex.connectors.pinpoint import PinpointConnector
 from vindex.connectors.polymer import SLUG as POLYMER_SLUG
 from vindex.connectors.polymer import PolymerConnector
@@ -181,6 +183,11 @@ def detect(url: str) -> tuple[str, str]:
         if path not in RIVAL_PORTALS or p.query or p.fragment:
             raise ValueError("Expected an unfiltered reviewed Rival career portal")
         return "rival", path
+    if p.hostname in PHENOM_BOARDS:
+        locale = PHENOM_BOARDS[p.hostname]
+        if p.path.rstrip("/") not in {locale, locale + "/search-results"} or p.query or p.fragment:
+            raise ValueError("Expected an unfiltered reviewed Phenom career site")
+        return "phenompeople", p.hostname
     if p.hostname in PARADOX_HOSTS:
         if p.path not in {"", "/"} or p.query or p.fragment:
             raise ValueError("Expected an unfiltered reviewed Paradox career site")
@@ -416,6 +423,8 @@ def create_connector(
         return EJobsiteSoftwareConnector(slug, client)
     if provider == "rival":
         return RivalConnector(slug, client)
+    if provider == "phenompeople":
+        return PhenomPeopleConnector(slug, client)
     if provider == "paradox":
         return ParadoxConnector(slug, client)
     if provider == "exenzo":

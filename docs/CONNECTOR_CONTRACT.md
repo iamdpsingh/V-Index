@@ -352,3 +352,7 @@ jobBoardHQ supports the Region 17 and Arkansas Baptist State Convention search p
 ## jobboardsoftware.com
 
 The challenge domain responds with HTTP 301 to Exenzo's job-board product page. The connector supports AG Connect and Twinkle's unfiltered public boards. Both must expose their exact advertised total in one page. Each native job detail must match the listed title and URL and contain a publisher JobPosting with a unique UUID, employer and description. The connector retains the published application link or the native job detail with an application button, then confirms the full roster again. Larger boards that paginate require additional support. [Exenzo job-board product](https://exenzo.com/en/jobboard)
+
+## Paradox
+
+The connector supports the reviewed public Flynn Group and AAA Mountain West Group Career Site Studio roots. It checks the advertised result count and each ten-item result range against native pagination, requires every scoped posting detail to match, and repeats the complete roster after extraction. The publisher's HTTPS application link is retained. [Paradox Career Site Studio](https://www.paradox.ai/products/career-site-studio)

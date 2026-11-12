@@ -27,3 +27,5 @@ November 12: ejobsitesoftware.com returned all seven Gurus HR Consultancy jobs. 
 November 12: Rival passed on Restaurant Supply Chain Solutions (2 jobs) and Bland Landscaping Company (43). jobBoardHQ passed on Region 17 (47) and Arkansas Baptist State Convention (152). Both providers verified complete public rosters and matching job details. Coverage reached **57/78**, with 11 ATS and 10 job-board platforms remaining. [Live evidence](../evidence/20261112T155152Z-smoke.json)
 
 November 12: jobboardsoftware.com (Exenzo) passed on AG Connect (3 jobs) and Twinkle (1). Coverage reached **58/78**, with 11 ATS and nine job-board platforms remaining. The owner deferred ejobsitesoftware.com until the final coverage pass. [Live evidence](../evidence/20261112T155429Z-smoke.json)
+
+November 12: Paradox Career Site Studio passed on Flynn Group (12 jobs) and AAA Mountain West Group (108), bringing coverage to **59/78**. The connector verified all 2 and 11 result pages respectively, then confirmed each full roster after reading the details. [Live evidence](../evidence/20261112T161102Z-smoke.json)
