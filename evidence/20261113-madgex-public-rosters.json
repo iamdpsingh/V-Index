@@ -1,0 +1,42 @@
+{
+  "scope": "Public Madgex list discovery, no complete indexing runs",
+  "local_date": "2026-11-13",
+  "timezone": "Asia/Kolkata",
+  "runs": [
+    {
+      "source": "https://jobs.sciencecareers.org/jobs/",
+      "pages_attempted": 27,
+      "observed_ids": 523,
+      "advertised_total": 523,
+      "result": "complete list enumeration; details not checked"
+    },
+    {
+      "source": "https://www.nature.com/naturecareers/jobs/",
+      "pages_attempted": 8,
+      "observed_ids": 140,
+      "advertised_total": 1166,
+      "result": "ValueError: Malformed or repeated posting in a page"
+    },
+    {
+      "source": "https://www.nature.com/naturecareers/jobs/",
+      "pages_attempted": 46,
+      "observed_ids": 900,
+      "advertised_total": 1166,
+      "result": "ValueError: Malformed or repeated posting in a page"
+    },
+    {
+      "source": "https://www.nature.com/naturecareers/jobs/",
+      "pages_attempted": 59,
+      "observed_ids": 1166,
+      "advertised_total": 1166,
+      "result": "complete list enumeration; details not checked"
+    }
+  ],
+  "science_detail_sample": {
+    "id": "681226",
+    "canonical_matches": true,
+    "jobposting_description_present": true,
+    "hiring_organization_present": true
+  },
+  "observation": "Nature listing slugs include underscores and percent-encoded non-ASCII characters. The final probe accepted both in the scoped native job URL."
+}
