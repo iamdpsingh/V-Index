@@ -1,0 +1,32 @@
+[
+  {
+    "provider": "Jobiqo",
+    "url": "https://www.agrajo.com/job",
+    "at": "2026-11-12T21:35:25.219098+00:00",
+    "revision": "e7eb1643f975208553a013df1be764d951c2a27f",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "c5c312493e8dc46a4e73a3b31da821551a61c39c77786619ccda981be487d86e",
+    "count": 99,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {
+      "application_by_email": 5
+    },
+    "payload_sha256": "74f9aeac0c647a86a160bf5f035913030f761fd4a142f6f750e8fe37856c7664",
+    "finished_at": "2026-11-12T21:37:56.977951+00:00"
+  },
+  {
+    "provider": "Jobiqo",
+    "url": "https://careers.unitedway.org/jobs",
+    "at": "2026-11-12T21:37:57.480276+00:00",
+    "revision": "e7eb1643f975208553a013df1be764d951c2a27f",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "c5c312493e8dc46a4e73a3b31da821551a61c39c77786619ccda981be487d86e",
+    "count": 0,
+    "status": "FAILED",
+    "complete": false,
+    "error": "TimeoutError: ",
+    "finished_at": "2026-11-12T21:47:57.483634+00:00"
+  }
+]

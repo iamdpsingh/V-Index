@@ -68,7 +68,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | WP Job Manager | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 5 | 2026-11-08T12:16:58.227605+00:00 | https://oliver-walters.com/job-listings/ (3; LIVE_VERIFIED); https://pearlstreetsystems.com/careers/ (2; LIVE_VERIFIED)  |
 | JobKit | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 39 | 2026-11-08T03:25:49.097273+00:00 | https://jobs.rubyonrails.org/ (13; LIVE_VERIFIED); https://welpora.jobkit.io/ (26; LIVE_VERIFIED)  |
 | Jobboardly | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 1355 | 2026-11-06T08:31:19.986009+00:00 | https://recruiter-jobs.jobboardly.com/jobs (31; LIVE_VERIFIED); https://pennsylvania-communications.jobboardly.com/jobs (1324; LIVE_VERIFIED)  |
-| Jobiqo | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
+| Jobiqo | job_board | IMPLEMENTED | FAILED | HIGH | 99 | 2026-11-12T21:47:57.483634+00:00 | https://www.agrajo.com/job (99; LIVE_VERIFIED); https://careers.unitedway.org/jobs (0; FAILED) TimeoutError:  |
 | JBoard.io | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 78 | 2026-11-07T04:16:03.139570+00:00 | https://jobs.aame.org/jobs (30; LIVE_VERIFIED); https://jobs.cisontario.ca/jobs (48; LIVE_VERIFIED)  |
 | JobBoardFire | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 24 | 2026-11-12T20:37:39.050902+00:00 | https://jobs.trellis.net/ (18; LIVE_VERIFIED); https://lpjc.jobboardfire.com/ (6; LIVE_VERIFIED)  |
 | SmartJobBoard | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 105 | 2026-11-08T03:31:39.192415+00:00 | https://americanbath.mysmartjobboard.com/jobs/ (28; LIVE_VERIFIED); https://jobs.psychologicalscience.org/jobs/ (77; LIVE_VERIFIED)  |
