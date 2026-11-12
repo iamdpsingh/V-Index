@@ -348,3 +348,7 @@ Job records use the publisher’s employer, title, location, and description. Wh
 Rival supports the public Restaurant Supply Chain Solutions and Bland Landscaping Company SilkRoad portals. It checks page counters, next controls, unique job IDs, native detail identity, descriptions and same-ID application URLs. A single page without a pager must have fewer jobs than the reviewed page size. The connector repeats the roster before reconciliation.
 
 jobBoardHQ supports the Region 17 and Arkansas Baptist State Convention search pages. It sends only read-only pager submissions using the anonymous search form, checks every advertised page, matches each JobPosting to its canonical page and repeats the roster. The public detail page is the application entry. Source-local timestamps retain their original values and carry a missing-timezone flag.
+
+## jobboardsoftware.com
+
+The challenge domain responds with HTTP 301 to Exenzo's job-board product page. The connector supports AG Connect and Twinkle's unfiltered public boards. Both must expose their exact advertised total in one page. Each native job detail must match the listed title and URL and contain a publisher JobPosting with a unique UUID, employer and description. The connector retains the published application link or the native job detail with an application button, then confirms the full roster again. Larger boards that paginate require additional support. [Exenzo job-board product](https://exenzo.com/en/jobboard)

@@ -1,0 +1,36 @@
+[
+  {
+    "provider": "jobboardsoftware.com",
+    "url": "https://agconnect.exenzo.nl/",
+    "at": "2026-11-12T15:54:12.618909+00:00",
+    "revision": "571d5dad992c6ff69f4627145df13e72df020854",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "27fe6c50339b26214a72914ee72b6d7d8cff8474f4482bf4068f4f426c74a57c",
+    "count": 3,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {
+      "publication_timezone_unspecified": 3
+    },
+    "payload_sha256": "7826c588ab33072f600d399aad2e2d5bdfea2f8d4a161796bb8548f63b4c651f",
+    "finished_at": "2026-11-12T15:54:24.895002+00:00"
+  },
+  {
+    "provider": "jobboardsoftware.com",
+    "url": "https://vacatures.ecommerce.nl/vacatures",
+    "at": "2026-11-12T15:54:25.396270+00:00",
+    "revision": "571d5dad992c6ff69f4627145df13e72df020854",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "27fe6c50339b26214a72914ee72b6d7d8cff8474f4482bf4068f4f426c74a57c",
+    "count": 1,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {
+      "publication_timezone_unspecified": 1
+    },
+    "payload_sha256": "daa0f65b7da4ec1a516554aaedd59d5919e0093166b018c1d19231363c7b15d1",
+    "finished_at": "2026-11-12T15:54:29.204254+00:00"
+  }
+]

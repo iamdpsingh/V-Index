@@ -81,3 +81,5 @@ BrassRing source registration accepts the reviewed Halifax and Infosys unfiltere
 The existing source API accepts the reviewed Gurus HR Consultancy eJobsiteSoftware board at `https://gurushrconsultancy.com/jobboard/job-search/`. Job cards use the existing application URL. Seasonal Jobs NZ is pending a successful complete run and is not offered for source registration.
 
 Source registration accepts the reviewed Rival employer portals and jobBoardHQ search pages listed in the connector contract and coverage matrix. Existing job card and application URL fields cover both connectors.
+
+The source API also accepts the reviewed Exenzo boards for `jobboardsoftware.com`: `https://agconnect.exenzo.nl/` and `https://vacatures.ecommerce.nl/vacatures`. Use the existing application URL field for the publisher's direct link or the native job detail.
