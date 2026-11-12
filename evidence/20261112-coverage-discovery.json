@@ -1,0 +1,15 @@
+{
+  "date_utc": "2026-11-12",
+  "observations": [
+    {
+      "platform": "Gem.com",
+      "url": "https://api.gem.com/robots.txt",
+      "result": "HTTP 403. Stopped before requesting job feeds on the API host."
+    },
+    {
+      "platform": "jobboardsoftware.com",
+      "scope": "Recheck of the two candidate API routes from the local prototype. Platform identity and full details remain unverified.",
+      "result": "The native listing calls returned 973 rows on First Nations Jobs and two on JobToDate. The prototype's 10-row slice would discard 963 rows from the first source. No coverage credit."
+    }
+  ]
+}

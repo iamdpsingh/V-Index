@@ -224,16 +224,54 @@
   {
     "name": "BrassRing",
     "kind": "ats",
-    "implementation_status": "NOT_STARTED",
-    "evidence_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
+    "evidence_status": "LIVE_VERIFIED",
     "risk": "HIGH",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
+    "examples": [
+      {
+        "provider": "BrassRing",
+        "url": "https://sjobs.brassring.com/TGnewUI/Search/home/HomeWithPreLoad?partnerid=25749&siteid=5764&PageType=searchResults",
+        "at": "2026-11-12T15:12:30.250104+00:00",
+        "revision": "71c971862b0ef96585ef9309fef2fcc8dc9bd245",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "a3ff33b805083b3fce6358c4948f583e7650c25f890cbb4741589495da8d9b64",
+        "count": 33,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {
+          "publication_date_missing": 33,
+          "location_missing": 8
+        },
+        "payload_sha256": "89f0bd5a51f0ec1cc9638ca775b62ebd2ab01ab8cc5b4ceadf1cf6876a92f19a",
+        "finished_at": "2026-11-12T15:14:03.541208+00:00"
+      },
+      {
+        "provider": "BrassRing",
+        "url": "https://sjobs.brassring.com/TGnewUI/Search/home/HomeWithPreLoad?partnerid=25633&siteid=5440&PageType=searchResults",
+        "at": "2026-11-12T15:14:04.042726+00:00",
+        "revision": "71c971862b0ef96585ef9309fef2fcc8dc9bd245",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "a3ff33b805083b3fce6358c4948f583e7650c25f890cbb4741589495da8d9b64",
+        "count": 10,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {
+          "publication_date_missing": 10
+        },
+        "payload_sha256": "29c9ea7a5678c18d0bee3150ab17042a2e3dedec1a56059365e43d97f241454f",
+        "finished_at": "2026-11-12T15:14:40.886192+00:00"
+      }
+    ],
+    "last_run_at": "2026-11-12T15:14:40.886192+00:00",
+    "extraction_count": 43,
     "failure_reason": null,
     "limitations": [
-      "Connector not implemented"
+      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
+      "Reviewed Halifax and Infosys public portals only. The complete advertised roster must fit in the first response.",
+      "Checks every native detail and reconfirms the full roster. Last-updated dates are preserved separately from original publication dates."
     ]
   },
   {

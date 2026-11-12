@@ -185,3 +185,7 @@ Niceboard passed on AIA Colorado (14 active jobs) and Medical Alley (15). The AI
 SmartJobBoard passed on American Bath Group (28) and APS Employment Network (77) across two and four unfiltered public listing pages, respectively. Every required detail and application entry was checked, then both complete rosters were reconfirmed. APS uses the original job page to open its same-ID application modal. SmartJobBoard keeps the original posting organization privately when a detail names a separate employer. See [SmartJobBoard live runs](../evidence/20261108T033139Z-smoke.json).
 
 The matrix now records 50 verified platforms. Coverage applies to the reviewed public boards and their supported templates. The full PostgreSQL and Redis-backed suite passed 1,068 tests with one existing TestClient deprecation warning. Ruff and mypy passed. Preliminary exclusions and upstream failures are recorded in [public discovery](../evidence/20261108-public-discovery.json).
+
+## November 12 BrassRing validation
+
+Both independently operated public portals passed on revision `71c9718`. Halifax returned 33 jobs and Infosys returned 10. The connector checked all active posting details and reconfirmed both rosters. BrassRing supplied last-updated dates rather than original publication dates. Eight Halifax postings lacked an extractable location in the supported fields. The service-backed test suite passed 1,101 tests with the existing TestClient deprecation warning. Ruff and mypy passed. [Live runs](../evidence/20261112T151441Z-smoke.json)

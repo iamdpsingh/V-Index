@@ -330,3 +330,7 @@ SmartJobBoard (`smartjobboard`) supports the reviewed American Bath Group and AP
 - **SAP SuccessFactors** (`successfactors`) supports the reviewed public Career Site Builder instances at ICBC and KAUST. Exact one-page totals and canonical, indexable job detail pages are required. The same-ID application link is preserved without fetching it. This scope covers the public site rather than the credentialed recruiting integration.
 
 All four apply robots policy, reject incomplete or changed enumerations and preserve existing lifecycle safeguards. [Integration review](ANTIGRAVITY_BACKEND_REVIEW_2026-11-08.md)
+
+## BrassRing
+
+The BrassRing connector accepts the reviewed Halifax Regional Municipality and Infosys public portals on `sjobs.brassring.com`. It requires an exact match between the advertised job count and the unique jobs in the first response, with a maximum of 50. It checks each active posting against the portal, job ID and title, then reads the roster again before reconciliation. The public detail page provides the application entry. A source last-updated date stays in source metadata and the original publication date is flagged when absent. [Halifax's public applicant guide](https://cdn.halifax.ca/sites/default/files/documents/about-the-city/employment/Quick%20Reference%20Guide%20to%20Applying%20for%20Jobs%20at%20HRM_4.pdf)

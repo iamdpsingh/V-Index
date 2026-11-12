@@ -19,3 +19,5 @@ JobBoard.io then passed clean live runs on NIFA (2 jobs) and AACR CancerCareers 
 November 8: Niceboard, JobKit and SmartJobBoard each passed complete runs on two independent boards. The requested **50/78** milestone passed, with 44 ATS and six job-board platforms verified. **28 remain**, split evenly between ATS and job-board platforms. See the [coverage matrix](COVERAGE.md) and [connector contract](CONNECTOR_CONTRACT.md).
 
 November 8 integration review: the independently verified total is **54/78** after accepting JobBoard.com, Nodex, WP Job Manager and SAP SuccessFactors. The remaining 24 are 13 ATS and 11 job-board platforms. See the [backend review](ANTIGRAVITY_BACKEND_REVIEW_2026-11-08.md).
+
+November 12: BrassRing passed on Halifax Regional Municipality (33 jobs) and Infosys (10 jobs), bringing coverage to **55/78**. **23 remain**, including 12 ATS and 11 job-board platforms. Both reviewed portals returned their full advertised roster in one page. [Live evidence](../evidence/20261112T151441Z-smoke.json)
