@@ -12,6 +12,7 @@ from sqlalchemy import select
 from vindex.connectors.registry import create_connector
 from vindex.db import Run, Session, Source, now
 from vindex.ingest import aware, ingest
+from vindex.madgex_refresh import advance_madgex_refresh
 
 log = logging.getLogger("vindex.worker")
 
@@ -40,9 +41,17 @@ async def refresh(source_id: int, *, only_if_due: bool = False) -> int | None:
                             "Accept": "application/json",
                         },
                     ) as client:
-                        batch = await create_connector(
-                            source.provider, source.slug, source.company, client
-                        ).discover()
+                        if source.provider == "wileymadgex":
+                            batch = await advance_madgex_refresh(session, source, client)
+                        else:
+                            batch = await create_connector(
+                                source.provider, source.slug, source.company, client
+                            ).discover()
+                if batch is None:
+                    run.status, run.finished_at = "in_progress", now()
+                    source.next_check = now()
+                    session.commit()
+                    return run_id
                 # Lock source during reconciliation, preventing concurrent DB writers.
                 session.scalar(select(Source).where(Source.id == source_id).with_for_update())
                 ingest(session, source, batch)

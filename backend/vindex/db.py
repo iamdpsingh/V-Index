@@ -90,3 +90,14 @@ if engine.dialect.name == "sqlite":
 
 
 Session = sessionmaker(engine, expire_on_commit=False)
+
+
+class MadgexRefresh(Base):
+    __tablename__ = "madgex_refreshes"
+
+    source_id: Mapped[int] = mapped_column(
+        ForeignKey("sources.id", ondelete="CASCADE"), primary_key=True
+    )
+    started_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)
+    roster: Mapped[dict[str, list[str]]] = mapped_column(JSON)
+    jobs: Mapped[list[dict[str, Any]]] = mapped_column(JSON)
