@@ -120,8 +120,16 @@ class PhenomPeopleConnector:
         if not structured_title or organization.get("url") != url:
             raise ValueError(f"Phenom structured posting identity mismatch for job {identifier}")
         company = text(organization.get("name", ""))
-        description = text(native.get("description") or "")
-        if not company or not description:
+        native_description = native.get("description")
+        structured_description = posting.get("description")
+        if (
+            not company
+            or not isinstance(native_description, str)
+            or not isinstance(structured_description, str)
+        ):
+            raise ValueError(f"Missing Phenom detail fields for job {identifier}")
+        description = text(native_description)
+        if not description and text(structured_description):
             raise ValueError(f"Incomplete Phenom detail for job {identifier}")
         application = native.get("applyUrl") or url
         parsed = urlsplit(application)
@@ -154,7 +162,8 @@ class PhenomPeopleConnector:
                 remote_status="Remote" if remote else None,
                 quality_flags=([] if date else ["publication_date_missing"])
                 + ([] if location else ["location_missing"])
-                + ([] if title == structured_title else ["structured_title_differs"]),
+                + ([] if title == structured_title else ["structured_title_differs"])
+                + ([] if description else ["description_missing"]),
                 raw={
                     "job_id": identifier,
                     "date_posted_original": date,

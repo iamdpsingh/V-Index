@@ -1789,35 +1789,35 @@
       {
         "provider": "Phenom People",
         "url": "https://careers.phenom.com/global/en/search-results",
-        "at": "2026-11-12T16:12:53.846854+00:00",
-        "revision": "f3bde8a5fa47aebab4952ae774cdd19232a5ffb4",
+        "at": "2026-11-12T16:16:07.156866+00:00",
+        "revision": "65746a824485fbd28670cc1de6751dbc1fa61bee",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "ede9272828b9557dea0dfb2cbeeb002a4bad00d68a143bbe4d7307f9c6ac559e",
+        "code_sha256": "1da20352b093a8076ffa93480a10ce8dbf4d82a79cc4c1753e0f85793582db54",
         "count": 0,
         "status": "FAILED",
         "complete": false,
-        "error": "ValueError: Phenom structured posting identity mismatch for job P-104761",
-        "finished_at": "2026-11-12T16:13:39.623120+00:00"
+        "error": "ValueError: Incomplete Phenom detail for job P-104843",
+        "finished_at": "2026-11-12T16:18:19.276926+00:00"
       },
       {
         "provider": "Phenom People",
         "url": "https://careers.bloodcancerunited.org/us/en/search-results",
-        "at": "2026-11-12T16:13:40.124469+00:00",
-        "revision": "f3bde8a5fa47aebab4952ae774cdd19232a5ffb4",
+        "at": "2026-11-12T16:18:19.779501+00:00",
+        "revision": "65746a824485fbd28670cc1de6751dbc1fa61bee",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "ede9272828b9557dea0dfb2cbeeb002a4bad00d68a143bbe4d7307f9c6ac559e",
+        "code_sha256": "1da20352b093a8076ffa93480a10ce8dbf4d82a79cc4c1753e0f85793582db54",
         "count": 51,
         "status": "LIVE_VERIFIED",
         "complete": true,
         "error": null,
         "quality_flag_counts": {},
-        "payload_sha256": "c25f910321f34c66ce4bda2f6059e8254a3e6de2b9639015270e48678d8a65f1",
-        "finished_at": "2026-11-12T16:15:52.294704+00:00"
+        "payload_sha256": "6e661c72099081fe12b2b32ea0a80ed1d9efc165cd48704feabf312d500c1673",
+        "finished_at": "2026-11-12T16:20:27.866304+00:00"
       }
     ],
-    "last_run_at": "2026-11-12T16:15:52.294704+00:00",
+    "last_run_at": "2026-11-12T16:20:27.866304+00:00",
     "extraction_count": 51,
-    "failure_reason": "ValueError: Phenom structured posting identity mismatch for job P-104761",
+    "failure_reason": "ValueError: Incomplete Phenom detail for job P-104843",
     "limitations": [
       "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
       "Reviewed locale-specific Phenom public search pages; reads every offset and requires exact ID agreement with the robots-advertised job sitemap.",
