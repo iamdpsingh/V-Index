@@ -65,3 +65,11 @@
 - [ ] Antigravity signup/login/profile/resume/recommendation screens and browser tests (owner explicitly retained frontend ownership there).
 - [ ] Email ownership verification, identity recovery, parser isolation/abuse testing and hosted HTTPS release checks.
 - [ ] Remaining 58 provider implementations and bounded connector expansion. These remain Codex's priority and acquisition acceptance gates before Codex begins frontend implementation.
+
+## Signup roles and job posting after full platform coverage
+
+- [ ] After signup, ask the user to choose Candidate, Hiring Agency, Company, or Job Poster.
+- [ ] Add a posting workspace for hiring agencies, companies, and job posters. Let authorized users create and publish their own listings.
+- [ ] Enforce ownership and posting permissions in the API. Keep candidate onboarding and job recommendations available through the Candidate role.
+
+Start this work after all 78 required platforms are live-verified.
