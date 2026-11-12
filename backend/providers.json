@@ -3148,33 +3148,37 @@
       {
         "provider": "jobBoardHQ",
         "url": "https://jobboardhq.esc17.net/search",
-        "at": "2026-11-12T15:44:32.920517+00:00",
-        "revision": "5e3af719aa0ac827b9f20da755fa46436a0f3d06",
+        "at": "2026-11-12T15:45:26.192542+00:00",
+        "revision": "f80608e45f013cd10c81439d23b5a6b7451fc4f8",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "3cee34b6deb6bd364317c4baeed808fe093f8b40f0b1ee80a94ceae878396985",
-        "count": 0,
-        "status": "FAILED",
-        "complete": false,
-        "error": "ValueError: JobBoardHQ visible identity mismatch for job xayw5b",
-        "finished_at": "2026-11-12T15:44:43.862288+00:00"
+        "code_sha256": "6f76c9455ff82456fba41bc1caa11e84ab849172d5257367c5ccbad512b50393",
+        "count": 47,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {
+          "publication_timezone_unspecified": 47
+        },
+        "payload_sha256": "702e712384bb054974551010bbc09cfe1d9196aa92e7adc9305e5ac2b1c9c225",
+        "finished_at": "2026-11-12T15:46:05.561974+00:00"
       },
       {
         "provider": "jobBoardHQ",
         "url": "https://resume.absc.org/search",
-        "at": "2026-11-12T15:44:44.363789+00:00",
-        "revision": "5e3af719aa0ac827b9f20da755fa46436a0f3d06",
+        "at": "2026-11-12T15:46:06.063286+00:00",
+        "revision": "f80608e45f013cd10c81439d23b5a6b7451fc4f8",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "3cee34b6deb6bd364317c4baeed808fe093f8b40f0b1ee80a94ceae878396985",
+        "code_sha256": "6f76c9455ff82456fba41bc1caa11e84ab849172d5257367c5ccbad512b50393",
         "count": 0,
         "status": "FAILED",
         "complete": false,
-        "error": "ValueError: Malformed or repeated JobBoardHQ job",
-        "finished_at": "2026-11-12T15:44:48.498308+00:00"
+        "error": "ValueError: JobBoardHQ visible identity mismatch for job 279nz3",
+        "finished_at": "2026-11-12T15:46:35.393442+00:00"
       }
     ],
-    "last_run_at": "2026-11-12T15:44:48.498308+00:00",
-    "extraction_count": 0,
-    "failure_reason": "ValueError: JobBoardHQ visible identity mismatch for job xayw5b; ValueError: Malformed or repeated JobBoardHQ job",
+    "last_run_at": "2026-11-12T15:46:35.393442+00:00",
+    "extraction_count": 47,
+    "failure_reason": "ValueError: JobBoardHQ visible identity mismatch for job 279nz3",
     "limitations": [
       "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test"
     ]

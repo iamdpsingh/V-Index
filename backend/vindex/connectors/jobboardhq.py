@@ -5,6 +5,7 @@ import json
 import re
 from datetime import datetime
 from typing import Any
+from urllib.parse import unquote
 
 import httpx
 from vindex.connectors.http import PublicHTTP
@@ -14,7 +15,9 @@ from vindex.connectors.robots import RobotsPolicy
 from vindex.schemas import Enumeration, JobInput
 
 HOSTS = frozenset({"jobboardhq.esc17.net", "resume.absc.org"})
-JOB_PATH = re.compile(r"/job/([a-z0-9]{6})(?:/(?:[A-Za-z0-9._~()-]|%[89a-fA-F][0-9a-fA-F])+){1,4}/?")
+JOB_PATH = re.compile(
+    r"/job/([a-z0-9]{6})(?:/(?:[A-Za-z0-9._~()-]|%[89a-fA-F][0-9a-fA-F])+){1,4}/?"
+)
 PAGE_FIELD = "ctl00$MainContent$ddlPageRows"
 HIDDEN = {"__VIEWSTATE", "__VIEWSTATEGENERATOR", "ctl00$hfVerificationToken"}
 MAX_PAGES = 10
@@ -108,7 +111,7 @@ class JobBoardHQConnector:
         headers = soup.select("h1.pageTitle")
         if (
             len(canonical) != 1
-            or canonical[0]["href"] != url
+            or unquote(str(canonical[0]["href"])) != unquote(url)
             or len(headers) != 1
             or headers[0].get_text(" ", strip=True) != expected_title
         ):
@@ -124,7 +127,7 @@ class JobBoardHQConnector:
         if (
             job.get("identifier", {}).get("value") != identifier
             or text(job.get("title", "")) != expected_title
-            or job.get("url") not in (None, url)
+            or unquote(str(job.get("url") or url)) != unquote(url)
         ):
             raise ValueError(f"JobBoardHQ structured identity mismatch for job {identifier}")
         company = text(job.get("hiringOrganization", {}).get("name", ""))

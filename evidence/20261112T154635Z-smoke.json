@@ -1,0 +1,32 @@
+[
+  {
+    "provider": "jobBoardHQ",
+    "url": "https://jobboardhq.esc17.net/search",
+    "at": "2026-11-12T15:45:26.192542+00:00",
+    "revision": "f80608e45f013cd10c81439d23b5a6b7451fc4f8",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "6f76c9455ff82456fba41bc1caa11e84ab849172d5257367c5ccbad512b50393",
+    "count": 47,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {
+      "publication_timezone_unspecified": 47
+    },
+    "payload_sha256": "702e712384bb054974551010bbc09cfe1d9196aa92e7adc9305e5ac2b1c9c225",
+    "finished_at": "2026-11-12T15:46:05.561974+00:00"
+  },
+  {
+    "provider": "jobBoardHQ",
+    "url": "https://resume.absc.org/search",
+    "at": "2026-11-12T15:46:06.063286+00:00",
+    "revision": "f80608e45f013cd10c81439d23b5a6b7451fc4f8",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "6f76c9455ff82456fba41bc1caa11e84ab849172d5257367c5ccbad512b50393",
+    "count": 0,
+    "status": "FAILED",
+    "complete": false,
+    "error": "ValueError: JobBoardHQ visible identity mismatch for job 279nz3",
+    "finished_at": "2026-11-12T15:46:35.393442+00:00"
+  }
+]

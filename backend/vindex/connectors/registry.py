@@ -65,6 +65,9 @@ from vindex.connectors.public import detect as detect_original
 from vindex.connectors.recooty import RecootyConnector
 from vindex.connectors.recruitee import RecruiteeConnector
 from vindex.connectors.rippling import RipplingConnector
+from vindex.connectors.rival import HOST as RIVAL_HOST
+from vindex.connectors.rival import PORTALS as RIVAL_PORTALS
+from vindex.connectors.rival import RivalConnector
 from vindex.connectors.smartjobboard import HOSTS as SMARTJOBBOARD_HOSTS
 from vindex.connectors.smartjobboard import SmartJobBoardConnector
 from vindex.connectors.smartrecruiters import SmartRecruitersConnector
@@ -169,6 +172,11 @@ def detect(url: str) -> tuple[str, str]:
         if p.path.rstrip("/") not in {base, base + "/job-search"} or p.query or p.fragment:
             raise ValueError("Expected an unfiltered reviewed eJobsiteSoftware board")
         return "ejobsitesoftware_com", p.hostname
+    if p.hostname == RIVAL_HOST:
+        path = p.path.strip("/")
+        if path not in RIVAL_PORTALS or p.query or p.fragment:
+            raise ValueError("Expected an unfiltered reviewed Rival career portal")
+        return "rival", path
     if p.hostname in JOBBOARDHQ_HOSTS:
         if p.path.rstrip("/") not in {"", "/search"} or p.query or p.fragment:
             raise ValueError("Expected an unfiltered reviewed JobBoardHQ board")
@@ -394,6 +402,8 @@ def create_connector(
         return SuccessFactorsConnector(slug, client)
     if provider == "ejobsitesoftware_com":
         return EJobsiteSoftwareConnector(slug, client)
+    if provider == "rival":
+        return RivalConnector(slug, client)
     if provider == "jobboardhq":
         return JobBoardHQConnector(slug, client)
     if provider == "jobboardio":
