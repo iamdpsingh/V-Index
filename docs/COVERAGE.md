@@ -51,7 +51,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | Recooty | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 28 | 2026-11-06T08:33:21.660966+00:00 | https://careerspage.io/augusto-digital (2; LIVE_VERIFIED); https://careerspage.io/recooty-inc (26; LIVE_VERIFIED)  |
 | Recruitee | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 29 | 2026-11-06T01:42:58.731786+00:00 | https://natilik.recruitee.com (6; LIVE_VERIFIED); https://bunq.recruitee.com (23; LIVE_VERIFIED)  |
 | Rippling | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 11 | 2026-11-06T12:24:45.518767+00:00 | https://ats.rippling.com/realwork/jobs (5; LIVE_VERIFIED); https://ats.rippling.com/sas/jobs (6; LIVE_VERIFIED)  |
-| Rival | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
+| Rival | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 45 | 2026-11-12T15:49:08.609081+00:00 | https://jobs.silkroad.com/RSCS/Careers (2; LIVE_VERIFIED); https://jobs.silkroad.com/BlandLandscaping/Careers (43; LIVE_VERIFIED)  |
 | SAP SuccessFactors | ats | IMPLEMENTED | LIVE_VERIFIED | HIGH | 17 | 2026-11-08T12:17:29.883037+00:00 | https://careers.icbc.com/search/ (9; LIVE_VERIFIED); https://careers.kaust.edu.sa/search/ (8; LIVE_VERIFIED)  |
 | SmartRecruiters | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 90 | 2026-11-05T16:49:50.960317+00:00 | https://careers.smartrecruiters.com/SmartRecruiters (2; LIVE_VERIFIED); https://careers.smartrecruiters.com/Colliers (88; LIVE_VERIFIED)  |
 | talentReef | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
@@ -80,7 +80,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | JobBoard.com | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 22 | 2026-11-08T12:15:42.598392+00:00 | https://jobs.acevo.org.uk/ (15; LIVE_VERIFIED); https://www.gradsouthwest.com/ (7; LIVE_VERIFIED)  |
 | Artha | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | jobboardsoftware.com | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
-| jobBoardHQ | job_board | IMPLEMENTED | FAILED | HIGH | 47 | 2026-11-12T15:46:35.393442+00:00 | https://jobboardhq.esc17.net/search (47; LIVE_VERIFIED); https://resume.absc.org/search (0; FAILED) ValueError: JobBoardHQ visible identity mismatch for job 279nz3 |
+| jobBoardHQ | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 199 | 2026-11-12T15:51:51.973792+00:00 | https://jobboardhq.esc17.net/search (47; LIVE_VERIFIED); https://resume.absc.org/search (152; LIVE_VERIFIED)  |
 | Nodex | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 50 | 2026-11-08T12:16:39.627724+00:00 | https://www.emotivtech.co.uk/search (35; LIVE_VERIFIED); https://www.geckotravelrecruitment.co.uk/search (15; LIVE_VERIFIED)  |
 | eJobBoard | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | ejobsitesoftware.com | job_board | IMPLEMENTED | FAILED | HIGH | 7 | 2026-11-12T15:38:00.089174+00:00 | https://seasonaljobs.co.nz/job-search/ (0; FAILED); https://gurushrconsultancy.com/jobboard/job-search/ (7; LIVE_VERIFIED) UpstreamStatusError: Upstream HTTP 302 |

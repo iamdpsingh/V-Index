@@ -16,6 +16,20 @@ from vindex.connectors.registry import create_connector
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
     (
+        "jobboardsoftware.com",
+        "exenzo",
+        "agconnect.exenzo.nl",
+        "AG Connect",
+        "https://agconnect.exenzo.nl/",
+    ),
+    (
+        "jobboardsoftware.com",
+        "exenzo",
+        "vacatures.ecommerce.nl",
+        "Twinkle",
+        "https://vacatures.ecommerce.nl/vacatures",
+    ),
+    (
         "Rival",
         "rival",
         "RSCS/Careers",
@@ -636,6 +650,7 @@ async def main():
                         "jobboardio",
                         "jobboardhq",
                         "rival",
+                        "exenzo",
                         "niceboard",
                         "jobkit",
                         "smartjobboard",
@@ -700,6 +715,18 @@ async def main():
                             ],
                             "SAP SuccessFactors": [
                                 "Reviewed public Career Site Builder portals at ICBC and KAUST, complete single-page unfiltered public search only; canonical full details respect robots and noindex",
+                            ],
+                            "Rival": [
+                                "Reviewed public SilkRoad employer portals; reads the native page count, validates next controls and reconfirms every job ID and title.",
+                                "Mandatory matching detail, native job description and same-job application link. No application form is visited.",
+                            ],
+                            "jobBoardHQ": [
+                                "Reviewed public search forms use unfiltered native pager submissions. Every numbered page and canonical job detail must match.",
+                                "Public job detail is the application entry. No application form, saved search or profile is submitted.",
+                            ],
+                            "jobboardsoftware.com": [
+                                "The exact .com vendor domain redirects to Exenzo. The separately branded .io platform is outside scope.",
+                                "Reviewed AG Connect and Twinkle boards require an exact nonzero single-page total, every matching public JobPosting and roster reconfirmation.",
                             ],
                             "ejobsitesoftware.com": [
                                 "Public source registration is enabled for Gurus HR Consultancy. Seasonal Jobs NZ is smoke-test only while advertised postings redirect.",

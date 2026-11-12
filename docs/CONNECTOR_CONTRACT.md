@@ -342,3 +342,9 @@ The `ejobsitesoftware_com` connector supports registration for the Gurus HR Cons
 The connector submits the anonymous public search form and follows the board’s published paging controls. Seasonal’s search repeats some IDs across pages, and its sitemap omits some search results. The connector reconciles both sources to the advertised total, confirms a future expiry for sitemap-only jobs through the public preview endpoint, reads every job detail, and repeats the roster check. It accepts at most 200 jobs. An empty, incomplete, or changed snapshot fails the refresh without counting as closure evidence.
 
 Job records use the publisher’s employer, title, location, and description. When the page links directly to the original external listing, that link is retained as the application entry. Otherwise, the native detail is the application entry. The connector does not visit application links or submit forms. Original publication dates are flagged when absent. Other installations and templates require separate review.
+
+## Rival and jobBoardHQ
+
+Rival supports the public Restaurant Supply Chain Solutions and Bland Landscaping Company SilkRoad portals. It checks page counters, next controls, unique job IDs, native detail identity, descriptions and same-ID application URLs. A single page without a pager must have fewer jobs than the reviewed page size. The connector repeats the roster before reconciliation.
+
+jobBoardHQ supports the Region 17 and Arkansas Baptist State Convention search pages. It sends only read-only pager submissions using the anonymous search form, checks every advertised page, matches each JobPosting to its canonical page and repeats the roster. The public detail page is the application entry. Source-local timestamps retain their original values and carry a missing-timezone flag.

@@ -79,3 +79,5 @@ The reviewed backend accepts the public ACEVO and Gradsouthwest JobBoard.com roo
 BrassRing source registration accepts the reviewed Halifax and Infosys unfiltered search URLs. The existing API response supplies the public job detail as the application entry. This is a single-page connector, so boards with additional pages fail the refresh and keep their prior jobs.
 
 The existing source API accepts the reviewed Gurus HR Consultancy eJobsiteSoftware board at `https://gurushrconsultancy.com/jobboard/job-search/`. Job cards use the existing application URL. Seasonal Jobs NZ is pending a successful complete run and is not offered for source registration.
+
+Source registration accepts the reviewed Rival employer portals and jobBoardHQ search pages listed in the connector contract and coverage matrix. Existing job card and application URL fields cover both connectors.

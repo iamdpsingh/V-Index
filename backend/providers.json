@@ -2017,16 +2017,49 @@
   {
     "name": "Rival",
     "kind": "ats",
-    "implementation_status": "NOT_STARTED",
-    "evidence_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
+    "evidence_status": "LIVE_VERIFIED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
+    "examples": [
+      {
+        "provider": "Rival",
+        "url": "https://jobs.silkroad.com/RSCS/Careers",
+        "at": "2026-11-12T15:48:03.886607+00:00",
+        "revision": "c8e16068cf98e84136ebdddb8f63cc317e892a1f",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "f1ccd700cdbf89e8fac74db510a2c478646a31938ad3150fce17344da2ea2d51",
+        "count": 2,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {
+          "publication_date_missing": 2
+        },
+        "payload_sha256": "afdbc328b61b25120c1ad72d1784852fdffeaae0de4ab79f42b67d4aed3ed69b",
+        "finished_at": "2026-11-12T15:48:09.678647+00:00"
+      },
+      {
+        "provider": "Rival",
+        "url": "https://jobs.silkroad.com/BlandLandscaping/Careers",
+        "at": "2026-11-12T15:48:10.179976+00:00",
+        "revision": "c8e16068cf98e84136ebdddb8f63cc317e892a1f",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "f1ccd700cdbf89e8fac74db510a2c478646a31938ad3150fce17344da2ea2d51",
+        "count": 43,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "53620ba7bea1fe10c53a9ac33a91f0596dd8f7101daac9358a2d890d45ba8970",
+        "finished_at": "2026-11-12T15:49:08.609081+00:00"
+      }
+    ],
+    "last_run_at": "2026-11-12T15:49:08.609081+00:00",
+    "extraction_count": 45,
     "failure_reason": null,
     "limitations": [
-      "Connector not implemented"
+      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test"
     ]
   },
   {
@@ -3141,17 +3174,17 @@
     "name": "jobBoardHQ",
     "kind": "job_board",
     "implementation_status": "IMPLEMENTED",
-    "evidence_status": "FAILED",
+    "evidence_status": "LIVE_VERIFIED",
     "risk": "HIGH",
     "risk_basis": "Planning estimate; not validated provider behavior",
     "examples": [
       {
         "provider": "jobBoardHQ",
         "url": "https://jobboardhq.esc17.net/search",
-        "at": "2026-11-12T15:45:26.192542+00:00",
-        "revision": "f80608e45f013cd10c81439d23b5a6b7451fc4f8",
+        "at": "2026-11-12T15:49:09.110381+00:00",
+        "revision": "c8e16068cf98e84136ebdddb8f63cc317e892a1f",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "6f76c9455ff82456fba41bc1caa11e84ab849172d5257367c5ccbad512b50393",
+        "code_sha256": "f1ccd700cdbf89e8fac74db510a2c478646a31938ad3150fce17344da2ea2d51",
         "count": 47,
         "status": "LIVE_VERIFIED",
         "complete": true,
@@ -3160,25 +3193,29 @@
           "publication_timezone_unspecified": 47
         },
         "payload_sha256": "702e712384bb054974551010bbc09cfe1d9196aa92e7adc9305e5ac2b1c9c225",
-        "finished_at": "2026-11-12T15:46:05.561974+00:00"
+        "finished_at": "2026-11-12T15:49:51.396210+00:00"
       },
       {
         "provider": "jobBoardHQ",
         "url": "https://resume.absc.org/search",
-        "at": "2026-11-12T15:46:06.063286+00:00",
-        "revision": "f80608e45f013cd10c81439d23b5a6b7451fc4f8",
+        "at": "2026-11-12T15:49:51.897489+00:00",
+        "revision": "c8e16068cf98e84136ebdddb8f63cc317e892a1f",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "6f76c9455ff82456fba41bc1caa11e84ab849172d5257367c5ccbad512b50393",
-        "count": 0,
-        "status": "FAILED",
-        "complete": false,
-        "error": "ValueError: JobBoardHQ visible identity mismatch for job 279nz3",
-        "finished_at": "2026-11-12T15:46:35.393442+00:00"
+        "code_sha256": "f1ccd700cdbf89e8fac74db510a2c478646a31938ad3150fce17344da2ea2d51",
+        "count": 152,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {
+          "publication_timezone_unspecified": 152
+        },
+        "payload_sha256": "f928ec32b1d280dca4b26b5b736f4e2f47049f7c1c945e010c5f88a4543407c2",
+        "finished_at": "2026-11-12T15:51:51.973792+00:00"
       }
     ],
-    "last_run_at": "2026-11-12T15:46:35.393442+00:00",
-    "extraction_count": 47,
-    "failure_reason": "ValueError: JobBoardHQ visible identity mismatch for job 279nz3",
+    "last_run_at": "2026-11-12T15:51:51.973792+00:00",
+    "extraction_count": 199,
+    "failure_reason": null,
     "limitations": [
       "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test"
     ]

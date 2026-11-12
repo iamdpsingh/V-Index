@@ -22,6 +22,8 @@ from vindex.connectors.deel import DeelConnector
 from vindex.connectors.eightfold import EightfoldConnector
 from vindex.connectors.ejobsitesoftware import BOARDS as EJOBSITESOFTWARE_BOARDS
 from vindex.connectors.ejobsitesoftware import EJobsiteSoftwareConnector
+from vindex.connectors.exenzo import BOARDS as EXENZO_BOARDS
+from vindex.connectors.exenzo import ExenzoConnector
 from vindex.connectors.firststage import FirstStageConnector
 from vindex.connectors.freshteam import FreshteamConnector
 from vindex.connectors.gohire import SLUG as GOHIRE_SLUG
@@ -177,6 +179,10 @@ def detect(url: str) -> tuple[str, str]:
         if path not in RIVAL_PORTALS or p.query or p.fragment:
             raise ValueError("Expected an unfiltered reviewed Rival career portal")
         return "rival", path
+    if p.hostname in EXENZO_BOARDS:
+        if p.path.rstrip("/") != EXENZO_BOARDS[p.hostname].rstrip("/") or p.query or p.fragment:
+            raise ValueError("Expected an unfiltered reviewed Exenzo board")
+        return "exenzo", p.hostname
     if p.hostname in JOBBOARDHQ_HOSTS:
         if p.path.rstrip("/") not in {"", "/search"} or p.query or p.fragment:
             raise ValueError("Expected an unfiltered reviewed JobBoardHQ board")
@@ -404,6 +410,8 @@ def create_connector(
         return EJobsiteSoftwareConnector(slug, client)
     if provider == "rival":
         return RivalConnector(slug, client)
+    if provider == "exenzo":
+        return ExenzoConnector(slug, client)
     if provider == "jobboardhq":
         return JobBoardHQConnector(slug, client)
     if provider == "jobboardio":
