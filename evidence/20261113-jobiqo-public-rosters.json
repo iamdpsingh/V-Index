@@ -1,0 +1,25 @@
+{
+  "scope": "Public Jobiqo source discovery on November 13, 2026 IST. No complete indexing runs.",
+  "sites": [
+    {
+      "url": "https://www.agrajo.com/job",
+      "vendor_reference": "https://www.jobiqo.com/resources/success-stories/",
+      "advertised_total": 99,
+      "pages_reconciled": 9,
+      "unique_roster_ids": 99,
+      "identity": "Numeric job-post card ID; canonical detail slug may omit the numeric ID",
+      "details_sampled": 1,
+      "sample_result": "Canonical link and JobPosting with a description"
+    },
+    {
+      "url": "https://www.lovelocaljobs.com/jobs",
+      "vendor_reference": "https://www.jobiqo.com/blog/category/jobiqo/",
+      "advertised_total": 1551,
+      "pages_sampled": 2,
+      "unique_detail_paths_sampled": 20,
+      "next_page": "/jobs?page=2",
+      "details_sampled": 1,
+      "sample_result": "Canonical link and JobPosting with a description"
+    }
+  ]
+}

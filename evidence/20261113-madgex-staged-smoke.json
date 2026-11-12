@@ -1,0 +1,23 @@
+{
+  "revision": "626b723e0dc7fb6b07d271823a6cd3a2e832abb0",
+  "dirty": false,
+  "scope": "Staged public detail verification on November 13, 2026 IST. Neither source completed.",
+  "sites": [
+    {
+      "url": "https://jobs.sciencecareers.org/jobs/",
+      "roster_count": 523,
+      "durable_detail_count": 30,
+      "failure_status": 502,
+      "failure_job_id": "681178",
+      "complete": false
+    },
+    {
+      "url": "https://www.nature.com/naturecareers/jobs/",
+      "roster_count": 1166,
+      "durable_detail_count": 10,
+      "failure_status": 502,
+      "failure_job_id": "12854440",
+      "complete": false
+    }
+  ]
+}
