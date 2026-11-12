@@ -207,7 +207,7 @@ class JobBoardFireConnector:
 
         async def read(url: str) -> bytes:
             policy.check(url)
-            await asyncio.sleep(policy.delay())
+            await asyncio.sleep(policy.delay(baseline=3.0))
             return await self.http.read(url)
 
         async def roster() -> dict[str, tuple[str, str]]:

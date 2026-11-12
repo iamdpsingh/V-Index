@@ -1,6 +1,7 @@
 import httpx
 import pytest
 from vindex.connectors.exenzo import ExenzoConnector
+from vindex.connectors.jobboardfire import JobBoardFireConnector
 from vindex.connectors.jobboardhq import JobBoardHQConnector
 from vindex.connectors.paradox import ParadoxConnector
 from vindex.connectors.phenompeople import PhenomPeopleConnector
@@ -51,6 +52,7 @@ def test_exenzo_rejects_a_partial_advertised_roster():
     [
         ("https://jobs.silkroad.com/RSCS/Careers", "rival"),
         ("https://resume.absc.org/search", "jobboardhq"),
+        ("https://lpjc.jobboardfire.com/", "jobboardfire"),
         ("https://vacatures.ecommerce.nl/vacatures", "exenzo"),
     ],
 )
@@ -78,3 +80,10 @@ def test_phenom_rejects_a_truncated_terminal_search_page():
     """
     with pytest.raises(ValueError, match="incomplete Phenom search page"):
         connector.page(html, 10)
+
+
+def test_jobboardfire_rejects_out_of_bounds_page_state():
+    connector = JobBoardFireConnector("lpjc.jobboardfire.com", httpx.AsyncClient())
+    html = b'<html><script id="__NUXT_DATA__" type="application/json">[["ShallowReactive",2]]</script></html>'
+    with pytest.raises(ValueError, match="Invalid Job Board Fire state reference"):
+        connector.roster(html)

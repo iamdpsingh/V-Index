@@ -1,0 +1,32 @@
+[
+  {
+    "provider": "JobBoardFire",
+    "url": "https://jobs.trellis.net/",
+    "at": "2026-11-12T20:33:02.734356+00:00",
+    "revision": "def30d7cf818991d0e6e79c58c4d9dca76936a73",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "56a1cbceb683575a70827b6be4f0796d2092ff34e0b4545d738dc597968134a6",
+    "count": 0,
+    "status": "FAILED",
+    "complete": false,
+    "error": "HTTPStatusError: Client error '429 Too Many Requests' for url 'https://jobs.trellis.net/j/director-of-growth-98477dd18b6e'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+    "finished_at": "2026-11-12T20:33:38.341997+00:00"
+  },
+  {
+    "provider": "JobBoardFire",
+    "url": "https://lpjc.jobboardfire.com/",
+    "at": "2026-11-12T20:33:38.843228+00:00",
+    "revision": "def30d7cf818991d0e6e79c58c4d9dca76936a73",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "56a1cbceb683575a70827b6be4f0796d2092ff34e0b4545d738dc597968134a6",
+    "count": 6,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {
+      "location_missing": 1
+    },
+    "payload_sha256": "5ebe49c2a480aa6a23939a1386563f774abc426fed45cb30d1fdf2b4dac539b8",
+    "finished_at": "2026-11-12T20:33:54.073262+00:00"
+  }
+]
