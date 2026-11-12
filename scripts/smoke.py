@@ -15,6 +15,14 @@ from vindex.connectors.registry import create_connector
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
+    ("JobBoardFire", "jobboardfire", "jobs.trellis.net", "Trellis", "https://jobs.trellis.net/"),
+    (
+        "JobBoardFire",
+        "jobboardfire",
+        "lpjc.jobboardfire.com",
+        "Launch Pad Job Club",
+        "https://lpjc.jobboardfire.com/",
+    ),
     (
         "Phenom People",
         "phenompeople",
@@ -675,6 +683,7 @@ async def main():
                         "exenzo",
                         "paradox",
                         "phenompeople",
+                        "jobboardfire",
                         "niceboard",
                         "jobkit",
                         "smartjobboard",
@@ -739,6 +748,10 @@ async def main():
                             ],
                             "SAP SuccessFactors": [
                                 "Reviewed public Career Site Builder portals at ICBC and KAUST, complete single-page unfiltered public search only; canonical full details respect robots and noindex",
+                            ],
+                            "JobBoardFire": [
+                                "Reviewed Trellis and Launch Pad Job Club boards; native public result set must exactly match the advertised jobs sitemap.",
+                                "Requires matching live canonical details and repeats the full roster. Boards exceeding the native 20-result page size remain unsupported.",
                             ],
                             "Phenom People": [
                                 "Reviewed locale-specific Phenom public search pages; reads every offset and requires exact ID agreement with the robots-advertised job sitemap.",

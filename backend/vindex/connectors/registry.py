@@ -38,6 +38,8 @@ from vindex.connectors.jboard import HOSTS as JBOARD_HOSTS
 from vindex.connectors.jboard import JBoardConnector
 from vindex.connectors.jobboardcom import HOSTS as JOBBOARDCOM_HOSTS
 from vindex.connectors.jobboardcom import JobBoardComConnector
+from vindex.connectors.jobboardfire import BOARDS as JOBBOARDFIRE_BOARDS
+from vindex.connectors.jobboardfire import JobBoardFireConnector
 from vindex.connectors.jobboardhq import HOSTS as JOBBOARDHQ_HOSTS
 from vindex.connectors.jobboardhq import JobBoardHQConnector
 from vindex.connectors.jobboardio import HOSTS as JOBBOARDIO_HOSTS
@@ -196,6 +198,10 @@ def detect(url: str) -> tuple[str, str]:
         if p.path.rstrip("/") != EXENZO_BOARDS[p.hostname].rstrip("/") or p.query or p.fragment:
             raise ValueError("Expected an unfiltered reviewed Exenzo board")
         return "exenzo", p.hostname
+    if p.hostname in JOBBOARDFIRE_BOARDS:
+        if p.path not in {"", "/"} or p.query or p.fragment:
+            raise ValueError("Expected an unfiltered reviewed Job Board Fire root")
+        return "jobboardfire", p.hostname
     if p.hostname in JOBBOARDHQ_HOSTS:
         if p.path.rstrip("/") not in {"", "/search"} or p.query or p.fragment:
             raise ValueError("Expected an unfiltered reviewed JobBoardHQ board")
@@ -429,6 +435,8 @@ def create_connector(
         return ParadoxConnector(slug, client)
     if provider == "exenzo":
         return ExenzoConnector(slug, client)
+    if provider == "jobboardfire":
+        return JobBoardFireConnector(slug, client)
     if provider == "jobboardhq":
         return JobBoardHQConnector(slug, client)
     if provider == "jobboardio":
