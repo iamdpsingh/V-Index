@@ -45,6 +45,7 @@ class JobiqoConnector:
         self.agrajo = host == "www.agrajo.com"
         self.http = PublicHTTP(client, {host})
         self.embed_http = PublicHTTP(client, {EMBED_HOST})
+        self.embed_policy: RobotsPolicy | None = None
 
     async def read(self, url: str, policy: RobotsPolicy) -> bytes:
         policy.check(url)
@@ -254,9 +255,10 @@ class JobiqoConnector:
         if match is None:
             raise ValueError(f"Unreviewed Jobiqo embed for {identifier}")
         url = match[0]
-        policy = await RobotsPolicy.load(self.embed_http, EMBED_ORIGIN)
-        policy.check(url)
-        await asyncio.sleep(policy.delay())
+        if self.embed_policy is None:
+            self.embed_policy = await RobotsPolicy.load(self.embed_http, EMBED_ORIGIN)
+        self.embed_policy.check(url)
+        await asyncio.sleep(self.embed_policy.delay())
         postings = structured_postings(document(await self.embed_http.read(url)))
         if (
             len(postings) != 1
@@ -265,21 +267,19 @@ class JobiqoConnector:
             raise ValueError(f"Jobiqo embedded posting ID mismatch for {identifier}")
         return postings[0]
 
+    async def read_job(self, identifier: str, url: str, policy: RobotsPolicy) -> JobInput:
+        body = await self.read(url, policy)
+        try:
+            return self.detail(body, identifier, url)
+        except MissingJobPosting:
+            if self.agrajo:
+                raise
+            return self.detail(body, identifier, url, await self.embedded_detail(body, identifier))
+
     async def discover(self) -> Enumeration:
         policy = await RobotsPolicy.load(self.http, self.origin)
         roster = await self.roster(policy)
-        jobs = []
-        for identifier, url in roster.items():
-            body = await self.read(url, policy)
-            try:
-                job = self.detail(body, identifier, url)
-            except MissingJobPosting:
-                if self.agrajo:
-                    raise
-                job = self.detail(
-                    body, identifier, url, await self.embedded_detail(body, identifier)
-                )
-            jobs.append(job)
+        jobs = [await self.read_job(identifier, url, policy) for identifier, url in roster.items()]
         if await self.roster(policy) != roster:
             raise ValueError("Jobiqo roster changed during refresh")
         return Enumeration(jobs=jobs, complete=True)

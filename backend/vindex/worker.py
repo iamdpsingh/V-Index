@@ -12,6 +12,7 @@ from sqlalchemy import select
 from vindex.connectors.registry import create_connector
 from vindex.db import Run, Session, Source, now
 from vindex.ingest import aware, ingest
+from vindex.jobiqo_refresh import advance_jobiqo_refresh
 from vindex.madgex_refresh import advance_madgex_refresh
 
 log = logging.getLogger("vindex.worker")
@@ -43,6 +44,8 @@ async def refresh(source_id: int, *, only_if_due: bool = False) -> int | None:
                     ) as client:
                         if source.provider == "wileymadgex":
                             batch = await advance_madgex_refresh(session, source, client)
+                        elif source.provider == "jobiqo" and source.slug == "careers.unitedway.org":
+                            batch = await advance_jobiqo_refresh(session, source, client)
                         else:
                             batch = await create_connector(
                                 source.provider, source.slug, source.company, client
