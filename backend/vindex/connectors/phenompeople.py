@@ -116,7 +116,8 @@ class PhenomPeopleConnector:
             raise ValueError(f"Missing Phenom JobPosting for job {identifier}")
         posting = postings[0]
         organization = posting.get("hiringOrganization", {})
-        if posting.get("title") != title or organization.get("url") != url:
+        structured_title = posting.get("title")
+        if not structured_title or organization.get("url") != url:
             raise ValueError(f"Phenom structured posting identity mismatch for job {identifier}")
         company = text(organization.get("name", ""))
         description = text(native.get("description") or "")
@@ -152,11 +153,13 @@ class PhenomPeopleConnector:
                 salary=posting.get("baseSalary"),
                 remote_status="Remote" if remote else None,
                 quality_flags=([] if date else ["publication_date_missing"])
-                + ([] if location else ["location_missing"]),
+                + ([] if location else ["location_missing"])
+                + ([] if title == structured_title else ["structured_title_differs"]),
                 raw={
                     "job_id": identifier,
                     "date_posted_original": date,
                     "structured_date_posted": posting.get("datePosted"),
+                    "structured_title": structured_title,
                 },
             )
         ]
