@@ -334,3 +334,11 @@ All four apply robots policy, reject incomplete or changed enumerations and pres
 ## BrassRing
 
 The BrassRing connector accepts the reviewed Halifax Regional Municipality and Infosys public portals on `sjobs.brassring.com`. It requires an exact match between the advertised job count and the unique jobs in the first response, with a maximum of 50. It checks each active posting against the portal, job ID and title, then reads the roster again before reconciliation. The public detail page provides the application entry. A source last-updated date stays in source metadata and the original publication date is flagged when absent. [Halifax's public applicant guide](https://cdn.halifax.ca/sites/default/files/documents/about-the-city/employment/Quick%20Reference%20Guide%20to%20Applying%20for%20Jobs%20at%20HRM_4.pdf)
+
+## ejobsitesoftware.com
+
+The `ejobsitesoftware_com` connector supports registration for the Gurus HR Consultancy board root and its unfiltered public job search URL. Seasonal Jobs NZ is available for connector smoke tests while its roster and detail pages disagree. These are listed by the vendor. [eJobsiteSoftware clients](https://ejobsitesoftware.com/clients/)
+
+The connector submits the anonymous public search form and follows the board’s published paging controls. Seasonal’s search repeats some IDs across pages, and its sitemap omits some search results. The connector reconciles both sources to the advertised total, confirms a future expiry for sitemap-only jobs through the public preview endpoint, reads every job detail, and repeats the roster check. It accepts at most 200 jobs. An empty, incomplete, or changed snapshot fails the refresh without counting as closure evidence.
+
+Job records use the publisher’s employer, title, location, and description. When the page links directly to the original external listing, that link is retained as the application entry. Otherwise, the native detail is the application entry. The connector does not visit application links or submit forms. Original publication dates are flagged when absent. Other installations and templates require separate review.

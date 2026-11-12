@@ -83,4 +83,4 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | jobBoardHQ | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | Nodex | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 50 | 2026-11-08T12:16:39.627724+00:00 | https://www.emotivtech.co.uk/search (35; LIVE_VERIFIED); https://www.geckotravelrecruitment.co.uk/search (15; LIVE_VERIFIED)  |
 | eJobBoard | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
-| ejobsitesoftware.com | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
+| ejobsitesoftware.com | job_board | IMPLEMENTED | FAILED | HIGH | 7 | 2026-11-12T15:38:00.089174+00:00 | https://seasonaljobs.co.nz/job-search/ (0; FAILED); https://gurushrconsultancy.com/jobboard/job-search/ (7; LIVE_VERIFIED) UpstreamStatusError: Upstream HTTP 302 |

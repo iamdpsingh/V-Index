@@ -671,6 +671,11 @@ async def main():
                             "SAP SuccessFactors": [
                                 "Reviewed public Career Site Builder portals at ICBC and KAUST, complete single-page unfiltered public search only; canonical full details respect robots and noindex",
                             ],
+                            "ejobsitesoftware.com": [
+                                "Public source registration is enabled for Gurus HR Consultancy. Seasonal Jobs NZ is smoke-test only while advertised postings redirect.",
+                                "Uses bounded public search and mandatory full details. Seasonal search and sitemap must reconcile to the advertised total and remain stable after extraction.",
+                                "Point-in-time results do not establish coverage of other installations or hosted continuous operation.",
+                            ],
                             "BrassRing": [
                                 "Reviewed Halifax and Infosys public portals only. The complete advertised roster must fit in the first response.",
                                 "Checks every native detail and reconfirms the full roster. Last-updated dates are preserved separately from original publication dates.",

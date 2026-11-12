@@ -21,3 +21,5 @@ def test_ejobsitesoftware_detection_scopes_to_unfiltered_boards():
     )
     with pytest.raises(ValueError, match="unfiltered"):
         detect("https://gurushrconsultancy.com/jobboard/job-search/?keyword=engineer")
+    with pytest.raises(ValueError, match="pending live verification"):
+        detect("https://seasonaljobs.co.nz/job-search/")

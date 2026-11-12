@@ -3219,16 +3219,48 @@
   {
     "name": "ejobsitesoftware.com",
     "kind": "job_board",
-    "implementation_status": "NOT_STARTED",
-    "evidence_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
+    "evidence_status": "FAILED",
     "risk": "HIGH",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
-    "failure_reason": null,
+    "examples": [
+      {
+        "provider": "ejobsitesoftware.com",
+        "url": "https://seasonaljobs.co.nz/job-search/",
+        "at": "2026-11-12T15:29:44.153778+00:00",
+        "revision": "c8b52caa355153775dd75651def05b1f70ac10fb",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "37b799eecf76fa663e9275d19691e143ffbb773d401172243df45c25c1331080",
+        "count": 0,
+        "status": "FAILED",
+        "complete": false,
+        "error": "UpstreamStatusError: Upstream HTTP 302",
+        "finished_at": "2026-11-12T15:37:03.825819+00:00"
+      },
+      {
+        "provider": "ejobsitesoftware.com",
+        "url": "https://gurushrconsultancy.com/jobboard/job-search/",
+        "at": "2026-11-12T15:37:04.327330+00:00",
+        "revision": "c8b52caa355153775dd75651def05b1f70ac10fb",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "37b799eecf76fa663e9275d19691e143ffbb773d401172243df45c25c1331080",
+        "count": 7,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "0eb52a37dd24d5508e9e89a08447888d0d2f45e952f5da799f4457803e6b3605",
+        "finished_at": "2026-11-12T15:38:00.089174+00:00"
+      }
+    ],
+    "last_run_at": "2026-11-12T15:38:00.089174+00:00",
+    "extraction_count": 7,
+    "failure_reason": "UpstreamStatusError: Upstream HTTP 302",
     "limitations": [
-      "Connector not implemented"
+      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
+      "Public source registration is enabled for Gurus HR Consultancy. Seasonal Jobs NZ is smoke-test only while advertised postings redirect.",
+      "Uses bounded public search and mandatory full details. Seasonal search and sitemap must reconcile to the advertised total and remain stable after extraction.",
+      "Point-in-time results do not establish coverage of other installations or hosted continuous operation."
     ]
   }
 ]

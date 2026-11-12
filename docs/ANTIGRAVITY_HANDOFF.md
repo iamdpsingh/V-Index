@@ -77,3 +77,5 @@ Reviewed November 8 source URLs include the Niceboard roots `https://jobs.aiacol
 The reviewed backend accepts the public ACEVO and Gradsouthwest JobBoard.com roots, Emotiv and Gecko Travel Nodex search pages, Oliver Walters and Pearl Street Systems WP Job Manager boards, and ICBC and KAUST SAP SuccessFactors career search pages. The existing API shape is sufficient. The verified list, site limits and remaining cases are documented for reviewers. [Backend integration review](ANTIGRAVITY_BACKEND_REVIEW_2026-11-08.md)
 
 BrassRing source registration accepts the reviewed Halifax and Infosys unfiltered search URLs. The existing API response supplies the public job detail as the application entry. This is a single-page connector, so boards with additional pages fail the refresh and keep their prior jobs.
+
+The existing source API accepts the reviewed Gurus HR Consultancy eJobsiteSoftware board at `https://gurushrconsultancy.com/jobboard/job-search/`. Job cards use the existing application URL. Seasonal Jobs NZ is pending a successful complete run and is not offered for source registration.

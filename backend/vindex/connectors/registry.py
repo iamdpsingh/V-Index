@@ -161,6 +161,8 @@ def detect(url: str) -> tuple[str, str]:
             )
         return "successfactors", p.hostname
     if p.hostname in EJOBSITESOFTWARE_BOARDS:
+        if p.hostname == "seasonaljobs.co.nz":
+            raise ValueError("This eJobsiteSoftware board is pending live verification")
         base = EJOBSITESOFTWARE_BOARDS[p.hostname]
         if p.path.rstrip("/") not in {base, base + "/job-search"} or p.query or p.fragment:
             raise ValueError("Expected an unfiltered reviewed eJobsiteSoftware board")
