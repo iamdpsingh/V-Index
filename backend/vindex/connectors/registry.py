@@ -57,6 +57,8 @@ from vindex.connectors.oracle import HOST as ORACLE_HOST
 from vindex.connectors.oracle import SITE as ORACLE_SITE
 from vindex.connectors.oracle import OracleConnector
 from vindex.connectors.pageup import PageUpConnector
+from vindex.connectors.paradox import HOSTS as PARADOX_HOSTS
+from vindex.connectors.paradox import ParadoxConnector
 from vindex.connectors.paylocity import PaylocityConnector
 from vindex.connectors.personio import PersonioConnector
 from vindex.connectors.pinpoint import PinpointConnector
@@ -179,6 +181,10 @@ def detect(url: str) -> tuple[str, str]:
         if path not in RIVAL_PORTALS or p.query or p.fragment:
             raise ValueError("Expected an unfiltered reviewed Rival career portal")
         return "rival", path
+    if p.hostname in PARADOX_HOSTS:
+        if p.path not in {"", "/"} or p.query or p.fragment:
+            raise ValueError("Expected an unfiltered reviewed Paradox career site")
+        return "paradox", p.hostname
     if p.hostname in EXENZO_BOARDS:
         if p.path.rstrip("/") != EXENZO_BOARDS[p.hostname].rstrip("/") or p.query or p.fragment:
             raise ValueError("Expected an unfiltered reviewed Exenzo board")
@@ -410,6 +416,8 @@ def create_connector(
         return EJobsiteSoftwareConnector(slug, client)
     if provider == "rival":
         return RivalConnector(slug, client)
+    if provider == "paradox":
+        return ParadoxConnector(slug, client)
     if provider == "exenzo":
         return ExenzoConnector(slug, client)
     if provider == "jobboardhq":

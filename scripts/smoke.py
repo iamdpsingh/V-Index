@@ -15,6 +15,14 @@ from vindex.connectors.registry import create_connector
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
+    ("Paradox", "paradox", "flynnrgcareers.com", "Flynn Group", "https://flynnrgcareers.com/"),
+    (
+        "Paradox",
+        "paradox",
+        "careers.mwg.aaa.com",
+        "AAA Mountain West Group",
+        "https://careers.mwg.aaa.com/",
+    ),
     (
         "jobboardsoftware.com",
         "exenzo",
@@ -651,6 +659,7 @@ async def main():
                         "jobboardhq",
                         "rival",
                         "exenzo",
+                        "paradox",
                         "niceboard",
                         "jobkit",
                         "smartjobboard",
@@ -715,6 +724,10 @@ async def main():
                             ],
                             "SAP SuccessFactors": [
                                 "Reviewed public Career Site Builder portals at ICBC and KAUST, complete single-page unfiltered public search only; canonical full details respect robots and noindex",
+                            ],
+                            "Paradox": [
+                                "Reviewed Career Site Studio public roots; verifies every native result range and matching detail up to 200 jobs, then repeats the roster.",
+                                "Keeps the publisher's HTTPS application link without visiting it. Other installations and hosted freshness require separate verification.",
                             ],
                             "Rival": [
                                 "Reviewed public SilkRoad employer portals; reads the native page count, validates next controls and reconfirms every job ID and title.",
