@@ -1,0 +1,78 @@
+{
+  "scope": "Public source discovery on November 13, 2026 IST. No complete indexing runs.",
+  "platforms": {
+    "JobMount": {
+      "sites": [
+        {
+          "url": "https://www.jobsrus.com/candidate/job_search/quick/results",
+          "advertised_total": 809,
+          "first_page_unique_ids": 10,
+          "second_page_unique_ids": 10,
+          "ids_repeated_across_pages": 0,
+          "rss_entries": 100
+        },
+        {
+          "url": "https://www.nationaldiversitynetwork.com/candidate/job_search/quick/results",
+          "advertised_total": 12606,
+          "first_page_unique_ids": 10,
+          "second_page_unique_ids": 15,
+          "ids_repeated_across_pages": 5,
+          "rss_entries": 100
+        }
+      ],
+      "next_page": "Both sites advertised the same-origin /candidate/job_search/quick/results/1 route on their first page and /2 on their second."
+    },
+    "Wiley Madgex": {
+      "sites": [
+        {
+          "url": "https://jobs.sciencecareers.org/jobs/",
+          "advertised_total": 523,
+          "first_page_unique_ids": 20,
+          "second_page_unique_ids": 20,
+          "ids_repeated_across_pages": 0,
+          "rss_entries": 20
+        },
+        {
+          "url": "https://www.nature.com/naturecareers/jobs/",
+          "advertised_total_on_second_page": 1166,
+          "first_page_unique_ids": 20,
+          "second_page_unique_ids": 20,
+          "ids_repeated_across_pages": 0,
+          "rss": "Disallowed by robots.txt"
+        }
+      ]
+    },
+    "Jobiqo": {
+      "sites": [
+        {
+          "url": "https://www.lovelocaljobs.com/jobs",
+          "advertised_total": 1551,
+          "first_page_unique_ids": 10
+        },
+        {
+          "url": "https://jobs.thebookseller.com/candidate/job_search/featured/results",
+          "advertised_featured_total": 28,
+          "scope": "Featured collection with native pagination"
+        },
+        {
+          "url": "https://jobsource.bme.de/",
+          "observation": "HTTP 302 to /botchallenge.html. Redirect not followed."
+        }
+      ]
+    },
+    "Dover": {
+      "observation": "Robots disallowed the candidate roster paths on app.dover.com for both examined careers boards.",
+      "disallowed_paths_requested": 0
+    },
+    "Gem.com": {
+      "observations": [
+        ["https://api.gem.com/job_board/v0/nabla-bio/job_posts", 403],
+        ["https://api.gem.com/job_board/v0/nclusion/job_posts", 403]
+      ]
+    },
+    "Talenetic": {
+      "observation": "The Pro Contract Jobs home page loaded. Robots disallowed the unfiltered search path.",
+      "disallowed_paths_requested": 0
+    }
+  }
+}
