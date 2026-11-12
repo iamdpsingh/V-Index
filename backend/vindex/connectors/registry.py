@@ -36,6 +36,8 @@ from vindex.connectors.jboard import HOSTS as JBOARD_HOSTS
 from vindex.connectors.jboard import JBoardConnector
 from vindex.connectors.jobboardcom import HOSTS as JOBBOARDCOM_HOSTS
 from vindex.connectors.jobboardcom import JobBoardComConnector
+from vindex.connectors.jobboardhq import HOSTS as JOBBOARDHQ_HOSTS
+from vindex.connectors.jobboardhq import JobBoardHQConnector
 from vindex.connectors.jobboardio import HOSTS as JOBBOARDIO_HOSTS
 from vindex.connectors.jobboardio import JobBoardIOConnector
 from vindex.connectors.jobboardly import JobboardlyConnector
@@ -167,6 +169,10 @@ def detect(url: str) -> tuple[str, str]:
         if p.path.rstrip("/") not in {base, base + "/job-search"} or p.query or p.fragment:
             raise ValueError("Expected an unfiltered reviewed eJobsiteSoftware board")
         return "ejobsitesoftware_com", p.hostname
+    if p.hostname in JOBBOARDHQ_HOSTS:
+        if p.path.rstrip("/") not in {"", "/search"} or p.query or p.fragment:
+            raise ValueError("Expected an unfiltered reviewed JobBoardHQ board")
+        return "jobboardhq", p.hostname
     if p.hostname in JOBBOARDIO_HOSTS:
         if p.path not in {"", "/"} or p.query or p.fragment:
             raise ValueError("Expected a reviewed JobBoard.io board root")
@@ -388,6 +394,8 @@ def create_connector(
         return SuccessFactorsConnector(slug, client)
     if provider == "ejobsitesoftware_com":
         return EJobsiteSoftwareConnector(slug, client)
+    if provider == "jobboardhq":
+        return JobBoardHQConnector(slug, client)
     if provider == "jobboardio":
         return JobBoardIOConnector(provider, slug, company, client)
     if provider == "jboard":

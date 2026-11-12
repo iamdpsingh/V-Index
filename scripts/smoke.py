@@ -16,6 +16,20 @@ from vindex.connectors.registry import create_connector
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
     (
+        "jobBoardHQ",
+        "jobboardhq",
+        "jobboardhq.esc17.net",
+        "Region 17",
+        "https://jobboardhq.esc17.net/search",
+    ),
+    (
+        "jobBoardHQ",
+        "jobboardhq",
+        "resume.absc.org",
+        "Arkansas Baptist State Convention",
+        "https://resume.absc.org/search",
+    ),
+    (
         "ejobsitesoftware.com",
         "ejobsitesoftware_com",
         "seasonaljobs.co.nz",
@@ -606,6 +620,7 @@ async def main():
                         "brassring",
                         "ejobsitesoftware_com",
                         "jobboardio",
+                        "jobboardhq",
                         "niceboard",
                         "jobkit",
                         "smartjobboard",
