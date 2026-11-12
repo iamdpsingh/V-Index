@@ -1,0 +1,36 @@
+[
+  {
+    "provider": "JobBoardFire",
+    "url": "https://jobs.trellis.net/",
+    "at": "2026-11-12T20:34:50.058438+00:00",
+    "revision": "52050ab5e21856bc4d209b196e2252b4ad231f5b",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "b5d963f13db7dca104e6736633ab0564969654a2f2010d3b04a9eb173d4afc60",
+    "count": 18,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {
+      "location_missing": 6
+    },
+    "payload_sha256": "8c1903b6d638cfb0a211df1d888be05aab652a6a277ad00500844a55fb6461b1",
+    "finished_at": "2026-11-12T20:36:38.550771+00:00"
+  },
+  {
+    "provider": "JobBoardFire",
+    "url": "https://lpjc.jobboardfire.com/",
+    "at": "2026-11-12T20:36:39.051964+00:00",
+    "revision": "52050ab5e21856bc4d209b196e2252b4ad231f5b",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "b5d963f13db7dca104e6736633ab0564969654a2f2010d3b04a9eb173d4afc60",
+    "count": 6,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {
+      "location_missing": 1
+    },
+    "payload_sha256": "5ebe49c2a480aa6a23939a1386563f774abc426fed45cb30d1fdf2b4dac539b8",
+    "finished_at": "2026-11-12T20:37:39.050902+00:00"
+  }
+]

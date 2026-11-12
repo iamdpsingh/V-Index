@@ -360,3 +360,7 @@ The connector supports the reviewed public Flynn Group and AAA Mountain West Gro
 ## Phenom People
 
 The reviewed Phenom global-English and Blood Cancer United US-English boards expose native ten-result search offsets. The connector requires every offset to add unique jobs until it reaches the advertised total, then requires exact agreement with the robots-advertised job sitemap. Details must match the native job and sequence IDs, listing title and canonical URL. Native descriptions and titles take precedence. Explicitly blank descriptions and differing structured titles carry quality flags. The connector repeats the complete roster after reading the details. Larger or different templates require separate review.
+
+## JobBoardFire
+
+The reviewed Trellis and Launch Pad Job Club roots expose a single page of up to 20 public jobs. The connector checks the server-rendered search against the jobs sitemap discovered through robots.txt, requires every active detail to match, then repeats the roster. Requests are sequential with at least three seconds of pacing. Larger boards require pagination support. A failed or rate-limited run produces no closure evidence. [Job Board Fire customers](https://www.jobboardfire.com/customers/)

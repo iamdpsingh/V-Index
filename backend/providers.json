@@ -2982,30 +2982,34 @@
     "name": "JobBoardFire",
     "kind": "job_board",
     "implementation_status": "IMPLEMENTED",
-    "evidence_status": "FAILED",
+    "evidence_status": "LIVE_VERIFIED",
     "risk": "HIGH",
     "risk_basis": "Planning estimate; not validated provider behavior",
     "examples": [
       {
         "provider": "JobBoardFire",
         "url": "https://jobs.trellis.net/",
-        "at": "2026-11-12T20:33:02.734356+00:00",
-        "revision": "def30d7cf818991d0e6e79c58c4d9dca76936a73",
+        "at": "2026-11-12T20:34:50.058438+00:00",
+        "revision": "52050ab5e21856bc4d209b196e2252b4ad231f5b",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "56a1cbceb683575a70827b6be4f0796d2092ff34e0b4545d738dc597968134a6",
-        "count": 0,
-        "status": "FAILED",
-        "complete": false,
-        "error": "HTTPStatusError: Client error '429 Too Many Requests' for url 'https://jobs.trellis.net/j/director-of-growth-98477dd18b6e'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
-        "finished_at": "2026-11-12T20:33:38.341997+00:00"
+        "code_sha256": "b5d963f13db7dca104e6736633ab0564969654a2f2010d3b04a9eb173d4afc60",
+        "count": 18,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {
+          "location_missing": 6
+        },
+        "payload_sha256": "8c1903b6d638cfb0a211df1d888be05aab652a6a277ad00500844a55fb6461b1",
+        "finished_at": "2026-11-12T20:36:38.550771+00:00"
       },
       {
         "provider": "JobBoardFire",
         "url": "https://lpjc.jobboardfire.com/",
-        "at": "2026-11-12T20:33:38.843228+00:00",
-        "revision": "def30d7cf818991d0e6e79c58c4d9dca76936a73",
+        "at": "2026-11-12T20:36:39.051964+00:00",
+        "revision": "52050ab5e21856bc4d209b196e2252b4ad231f5b",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "56a1cbceb683575a70827b6be4f0796d2092ff34e0b4545d738dc597968134a6",
+        "code_sha256": "b5d963f13db7dca104e6736633ab0564969654a2f2010d3b04a9eb173d4afc60",
         "count": 6,
         "status": "LIVE_VERIFIED",
         "complete": true,
@@ -3014,12 +3018,12 @@
           "location_missing": 1
         },
         "payload_sha256": "5ebe49c2a480aa6a23939a1386563f774abc426fed45cb30d1fdf2b4dac539b8",
-        "finished_at": "2026-11-12T20:33:54.073262+00:00"
+        "finished_at": "2026-11-12T20:37:39.050902+00:00"
       }
     ],
-    "last_run_at": "2026-11-12T20:33:54.073262+00:00",
-    "extraction_count": 6,
-    "failure_reason": "HTTPStatusError: Client error '429 Too Many Requests' for url 'https://jobs.trellis.net/j/director-of-growth-98477dd18b6e'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+    "last_run_at": "2026-11-12T20:37:39.050902+00:00",
+    "extraction_count": 24,
+    "failure_reason": null,
     "limitations": [
       "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
       "Reviewed Trellis and Launch Pad Job Club boards; native public result set must exactly match the advertised jobs sitemap.",

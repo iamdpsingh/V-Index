@@ -70,8 +70,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | Jobboardly | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 1355 | 2026-11-06T08:31:19.986009+00:00 | https://recruiter-jobs.jobboardly.com/jobs (31; LIVE_VERIFIED); https://pennsylvania-communications.jobboardly.com/jobs (1324; LIVE_VERIFIED)  |
 | Jobiqo | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | JBoard.io | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 78 | 2026-11-07T04:16:03.139570+00:00 | https://jobs.aame.org/jobs (30; LIVE_VERIFIED); https://jobs.cisontario.ca/jobs (48; LIVE_VERIFIED)  |
-| JobBoardFire | job_board | IMPLEMENTED | FAILED | HIGH | 6 | 2026-11-12T20:33:54.073262+00:00 | https://jobs.trellis.net/ (0; FAILED); https://lpjc.jobboardfire.com/ (6; LIVE_VERIFIED) HTTPStatusError: Client error '429 Too Many Requests' for url 'https://jobs.trellis.net/j/director-of-growth-98477dd18b6e'
-For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429 |
+| JobBoardFire | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 24 | 2026-11-12T20:37:39.050902+00:00 | https://jobs.trellis.net/ (18; LIVE_VERIFIED); https://lpjc.jobboardfire.com/ (6; LIVE_VERIFIED)  |
 | SmartJobBoard | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 105 | 2026-11-08T03:31:39.192415+00:00 | https://americanbath.mysmartjobboard.com/jobs/ (28; LIVE_VERIFIED); https://jobs.psychologicalscience.org/jobs/ (77; LIVE_VERIFIED)  |
 | JobBoard.io | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 63 | 2026-11-07T07:07:19.433685+00:00 | https://www.nifajobs.com/ (2; LIVE_VERIFIED); https://www.cancercareers.org/ (61; LIVE_VERIFIED)  |
 | Wiley Madgex | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |

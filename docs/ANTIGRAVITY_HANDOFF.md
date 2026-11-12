@@ -87,3 +87,5 @@ The source API also accepts the reviewed Exenzo boards for `jobboardsoftware.com
 Source registration accepts the reviewed Paradox public roots `https://flynnrgcareers.com/` and `https://careers.mwg.aaa.com/` using the existing source API and job-card fields.
 
 The existing source API accepts the reviewed Phenom People search URLs `https://careers.phenom.com/global/en/search-results` and `https://careers.bloodcancerunited.org/us/en/search-results`. Listings with explicitly blank descriptions use the existing `description_missing` quality flag.
+
+The source API accepts the reviewed JobBoardFire roots `https://jobs.trellis.net/` and `https://lpjc.jobboardfire.com/`. Use the existing application URL for the publisher's HTTPS destination or native posting page.
