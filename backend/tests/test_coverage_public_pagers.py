@@ -2,6 +2,8 @@ import httpx
 import pytest
 from vindex.connectors.exenzo import ExenzoConnector
 from vindex.connectors.jobboardhq import JobBoardHQConnector
+from vindex.connectors.paradox import ParadoxConnector
+from vindex.connectors.phenompeople import PhenomPeopleConnector
 from vindex.connectors.registry import detect
 from vindex.connectors.rival import RivalConnector
 
@@ -56,3 +58,23 @@ def test_coverage_sources_accept_only_the_unfiltered_entry(url, provider):
     assert detect(url)[0] == provider
     with pytest.raises(ValueError, match="unfiltered"):
         detect(url + "?page=2")
+
+
+def test_paradox_rejects_repeated_first_page_at_second_offset():
+    connector = ParadoxConnector("flynnrgcareers.com", httpx.AsyncClient())
+    html = b'<html><p class="results-header__content">Showing 1-10 of 12 jobs</p></html>'
+    with pytest.raises(ValueError, match="Unexpected Paradox result range"):
+        connector.page(html, 2)
+
+
+def test_phenom_rejects_a_truncated_terminal_search_page():
+    connector = PhenomPeopleConnector("careers.phenom.com", httpx.AsyncClient())
+    html = b"""
+    <html><script>phApp.ddo = {"eagerLoadRefineSearch": {
+      "status": 200, "hits": 1, "totalHits": 12,
+      "eid": {"searchType": "allJobs", "query": ""},
+      "data": {"jobs": [{"jobId": "1", "jobSeqNo": "EXTERNAL1", "title": "Engineer"}]}
+    }};</script></html>
+    """
+    with pytest.raises(ValueError, match="incomplete Phenom search page"):
+        connector.page(html, 10)

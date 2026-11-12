@@ -85,3 +85,5 @@ Source registration accepts the reviewed Rival employer portals and jobBoardHQ s
 The source API also accepts the reviewed Exenzo boards for `jobboardsoftware.com`: `https://agconnect.exenzo.nl/` and `https://vacatures.ecommerce.nl/vacatures`. Use the existing application URL field for the publisher's direct link or the native job detail.
 
 Source registration accepts the reviewed Paradox public roots `https://flynnrgcareers.com/` and `https://careers.mwg.aaa.com/` using the existing source API and job-card fields.
+
+The existing source API accepts the reviewed Phenom People search URLs `https://careers.phenom.com/global/en/search-results` and `https://careers.bloodcancerunited.org/us/en/search-results`. Listings with explicitly blank descriptions use the existing `description_missing` quality flag.

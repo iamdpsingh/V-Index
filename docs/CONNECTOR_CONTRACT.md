@@ -356,3 +356,7 @@ The challenge domain responds with HTTP 301 to Exenzo's job-board product page. 
 ## Paradox
 
 The connector supports the reviewed public Flynn Group and AAA Mountain West Group Career Site Studio roots. It checks the advertised result count and each ten-item result range against native pagination, requires every scoped posting detail to match, and repeats the complete roster after extraction. The publisher's HTTPS application link is retained. [Paradox Career Site Studio](https://www.paradox.ai/products/career-site-studio)
+
+## Phenom People
+
+The reviewed Phenom global-English and Blood Cancer United US-English boards expose native ten-result search offsets. The connector requires every offset to add unique jobs until it reaches the advertised total, then requires exact agreement with the robots-advertised job sitemap. Details must match the native job and sequence IDs, listing title and canonical URL. Native descriptions and titles take precedence. Explicitly blank descriptions and differing structured titles carry quality flags. The connector repeats the complete roster after reading the details. Larger or different templates require separate review.
