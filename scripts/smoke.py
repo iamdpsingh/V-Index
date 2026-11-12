@@ -16,6 +16,20 @@ from vindex.connectors.registry import create_connector
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
     (
+        "ejobsitesoftware.com",
+        "ejobsitesoftware_com",
+        "seasonaljobs.co.nz",
+        "Seasonal Jobs NZ",
+        "https://seasonaljobs.co.nz/job-search/",
+    ),
+    (
+        "ejobsitesoftware.com",
+        "ejobsitesoftware_com",
+        "gurushrconsultancy.com",
+        "Gurus HR Consultancy",
+        "https://gurushrconsultancy.com/jobboard/job-search/",
+    ),
+    (
         "BrassRing",
         "brassring",
         "25749-5764",
@@ -590,6 +604,7 @@ async def main():
                     job = batch.jobs[0]
                     if provider in {
                         "brassring",
+                        "ejobsitesoftware_com",
                         "jobboardio",
                         "niceboard",
                         "jobkit",

@@ -20,6 +20,8 @@ from vindex.connectors.comeet import ComeetConnector
 from vindex.connectors.csod import CSODConnector
 from vindex.connectors.deel import DeelConnector
 from vindex.connectors.eightfold import EightfoldConnector
+from vindex.connectors.ejobsitesoftware import BOARDS as EJOBSITESOFTWARE_BOARDS
+from vindex.connectors.ejobsitesoftware import EJobsiteSoftwareConnector
 from vindex.connectors.firststage import FirstStageConnector
 from vindex.connectors.freshteam import FreshteamConnector
 from vindex.connectors.gohire import SLUG as GOHIRE_SLUG
@@ -158,6 +160,11 @@ def detect(url: str) -> tuple[str, str]:
                 "Expected an unfiltered reviewed SuccessFactors Career Site Builder board"
             )
         return "successfactors", p.hostname
+    if p.hostname in EJOBSITESOFTWARE_BOARDS:
+        base = EJOBSITESOFTWARE_BOARDS[p.hostname]
+        if p.path.rstrip("/") not in {base, base + "/job-search"} or p.query or p.fragment:
+            raise ValueError("Expected an unfiltered reviewed eJobsiteSoftware board")
+        return "ejobsitesoftware_com", p.hostname
     if p.hostname in JOBBOARDIO_HOSTS:
         if p.path not in {"", "/"} or p.query or p.fragment:
             raise ValueError("Expected a reviewed JobBoard.io board root")
@@ -377,6 +384,8 @@ def create_connector(
         return BrassRingConnector(slug, client)
     if provider == "successfactors":
         return SuccessFactorsConnector(slug, client)
+    if provider == "ejobsitesoftware_com":
+        return EJobsiteSoftwareConnector(slug, client)
     if provider == "jobboardio":
         return JobBoardIOConnector(provider, slug, company, client)
     if provider == "jboard":
