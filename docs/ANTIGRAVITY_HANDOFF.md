@@ -89,3 +89,5 @@ Source registration accepts the reviewed Paradox public roots `https://flynnrgca
 The existing source API accepts the reviewed Phenom People search URLs `https://careers.phenom.com/global/en/search-results` and `https://careers.bloodcancerunited.org/us/en/search-results`. Listings with explicitly blank descriptions use the existing `description_missing` quality flag.
 
 The source API accepts the reviewed JobBoardFire roots `https://jobs.trellis.net/` and `https://lpjc.jobboardfire.com/`. Use the existing application URL for the publisher's HTTPS destination or native posting page.
+
+The Jobiqo source adapter accepts the unfiltered public board URLs `https://www.agrajo.com/job` and `https://careers.unitedway.org/jobs`. Use the existing source form and job application URL fields. A failed or partial refresh must retain the last successful snapshot. See the coverage matrix for live verification status.

@@ -364,3 +364,9 @@ The reviewed Phenom global-English and Blood Cancer United US-English boards exp
 ## JobBoardFire
 
 The reviewed Trellis and Launch Pad Job Club roots expose a single page of up to 20 public jobs. The connector checks the server-rendered search against the jobs sitemap discovered through robots.txt, requires every active detail to match, then repeats the roster. Requests are sequential with at least three seconds of pacing. Larger boards require pagination support. A failed or rate-limited run produces no closure evidence. [Job Board Fire customers](https://www.jobboardfire.com/customers/)
+
+## Jobiqo reviewed public boards
+
+Agrajo and United Way are independently operated Jobiqo boards. Only their unfiltered reviewed roots are accepted. Each refresh checks the advertised total, reads every bounded numbered page, and requires a unique numeric card ID and canonical job URL for each result. It reads each public posting and repeats the full roster before reconciliation. Empty, oversized, inconsistent and incomplete results fail the refresh.
+
+Agrajo can publish direct links, email instructions or application controls on the posting. United Way exposes job identity and external application links in the server-rendered page state. An external description may be read only when the posting embeds the reviewed public publisher route, that origin permits the request, and its structured posting ID and title match. The connector leaves applications to the user.

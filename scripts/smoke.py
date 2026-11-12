@@ -15,6 +15,14 @@ from vindex.connectors.registry import create_connector
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
+    ("Jobiqo", "jobiqo", "www.agrajo.com", "Agrajo", "https://www.agrajo.com/job"),
+    (
+        "Jobiqo",
+        "jobiqo",
+        "careers.unitedway.org",
+        "United Way",
+        "https://careers.unitedway.org/jobs",
+    ),
     ("JobBoardFire", "jobboardfire", "jobs.trellis.net", "Trellis", "https://jobs.trellis.net/"),
     (
         "JobBoardFire",
@@ -684,6 +692,7 @@ async def main():
                         "paradox",
                         "phenompeople",
                         "jobboardfire",
+                        "jobiqo",
                         "niceboard",
                         "jobkit",
                         "smartjobboard",
@@ -748,6 +757,10 @@ async def main():
                             ],
                             "SAP SuccessFactors": [
                                 "Reviewed public Career Site Builder portals at ICBC and KAUST, complete single-page unfiltered public search only; canonical full details respect robots and noindex",
+                            ],
+                            "Jobiqo": [
+                                "Only the reviewed Agrajo and United Way roots; exact advertised totals, bounded numeric pages and canonical details. Repeats the full roster before publishing.",
+                                "United Way descriptions embedded on an external publisher are supported only for the reviewed public iframe route. No application forms are submitted or fetched.",
                             ],
                             "JobBoardFire": [
                                 "Reviewed Trellis and Launch Pad Job Club boards; native public result set must exactly match the advertised jobs sitemap.",
