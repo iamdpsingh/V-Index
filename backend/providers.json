@@ -3140,16 +3140,43 @@
   {
     "name": "jobBoardHQ",
     "kind": "job_board",
-    "implementation_status": "NOT_STARTED",
-    "evidence_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
+    "evidence_status": "FAILED",
     "risk": "HIGH",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
-    "failure_reason": null,
+    "examples": [
+      {
+        "provider": "jobBoardHQ",
+        "url": "https://jobboardhq.esc17.net/search",
+        "at": "2026-11-12T15:44:32.920517+00:00",
+        "revision": "5e3af719aa0ac827b9f20da755fa46436a0f3d06",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "3cee34b6deb6bd364317c4baeed808fe093f8b40f0b1ee80a94ceae878396985",
+        "count": 0,
+        "status": "FAILED",
+        "complete": false,
+        "error": "ValueError: JobBoardHQ visible identity mismatch for job xayw5b",
+        "finished_at": "2026-11-12T15:44:43.862288+00:00"
+      },
+      {
+        "provider": "jobBoardHQ",
+        "url": "https://resume.absc.org/search",
+        "at": "2026-11-12T15:44:44.363789+00:00",
+        "revision": "5e3af719aa0ac827b9f20da755fa46436a0f3d06",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "3cee34b6deb6bd364317c4baeed808fe093f8b40f0b1ee80a94ceae878396985",
+        "count": 0,
+        "status": "FAILED",
+        "complete": false,
+        "error": "ValueError: Malformed or repeated JobBoardHQ job",
+        "finished_at": "2026-11-12T15:44:48.498308+00:00"
+      }
+    ],
+    "last_run_at": "2026-11-12T15:44:48.498308+00:00",
+    "extraction_count": 0,
+    "failure_reason": "ValueError: JobBoardHQ visible identity mismatch for job xayw5b; ValueError: Malformed or repeated JobBoardHQ job",
     "limitations": [
-      "Connector not implemented"
+      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test"
     ]
   },
   {

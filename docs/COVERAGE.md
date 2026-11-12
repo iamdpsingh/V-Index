@@ -80,7 +80,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | JobBoard.com | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 22 | 2026-11-08T12:15:42.598392+00:00 | https://jobs.acevo.org.uk/ (15; LIVE_VERIFIED); https://www.gradsouthwest.com/ (7; LIVE_VERIFIED)  |
 | Artha | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | jobboardsoftware.com | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
-| jobBoardHQ | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
+| jobBoardHQ | job_board | IMPLEMENTED | FAILED | HIGH | 0 | 2026-11-12T15:44:48.498308+00:00 | https://jobboardhq.esc17.net/search (0; FAILED); https://resume.absc.org/search (0; FAILED) ValueError: JobBoardHQ visible identity mismatch for job xayw5b; ValueError: Malformed or repeated JobBoardHQ job |
 | Nodex | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 50 | 2026-11-08T12:16:39.627724+00:00 | https://www.emotivtech.co.uk/search (35; LIVE_VERIFIED); https://www.geckotravelrecruitment.co.uk/search (15; LIVE_VERIFIED)  |
 | eJobBoard | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | ejobsitesoftware.com | job_board | IMPLEMENTED | FAILED | HIGH | 7 | 2026-11-12T15:38:00.089174+00:00 | https://seasonaljobs.co.nz/job-search/ (0; FAILED); https://gurushrconsultancy.com/jobboard/job-search/ (7; LIVE_VERIFIED) UpstreamStatusError: Upstream HTTP 302 |

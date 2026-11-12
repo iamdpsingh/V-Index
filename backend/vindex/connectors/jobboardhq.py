@@ -14,7 +14,7 @@ from vindex.connectors.robots import RobotsPolicy
 from vindex.schemas import Enumeration, JobInput
 
 HOSTS = frozenset({"jobboardhq.esc17.net", "resume.absc.org"})
-JOB_PATH = re.compile(r"/job/([a-z0-9]{6})(?:/[A-Za-z0-9._~()-]+){1,4}/?")
+JOB_PATH = re.compile(r"/job/([a-z0-9]{6})(?:/(?:[A-Za-z0-9._~()-]|%[89a-fA-F][0-9a-fA-F])+){1,4}/?")
 PAGE_FIELD = "ctl00$MainContent$ddlPageRows"
 HIDDEN = {"__VIEWSTATE", "__VIEWSTATEGENERATOR", "ctl00$hfVerificationToken"}
 MAX_PAGES = 10
@@ -105,7 +105,7 @@ class JobBoardHQConnector:
         identifier, (url, expected_title), body = payload
         soup = document(body)
         canonical = soup.select('link[rel="canonical"][href]')
-        headers = soup.select("h1")
+        headers = soup.select("h1.pageTitle")
         if (
             len(canonical) != 1
             or canonical[0]["href"] != url
