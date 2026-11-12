@@ -8,6 +8,10 @@ from vindex.connectors.applicantpro import ApplicantProConnector
 from vindex.connectors.avature import PORTAL as AVATURE_PORTAL
 from vindex.connectors.avature import AvatureConnector
 from vindex.connectors.bamboohr import BambooHRConnector
+from vindex.connectors.brassring import HOST as BRASSRING_HOST
+from vindex.connectors.brassring import PATH as BRASSRING_PATH
+from vindex.connectors.brassring import PORTALS as BRASSRING_PORTALS
+from vindex.connectors.brassring import BrassRingConnector
 from vindex.connectors.breezy import BreezyConnector
 from vindex.connectors.careerplug import CareerPlugConnector
 from vindex.connectors.comeet import TENANT as COMEET_TENANT
@@ -129,6 +133,25 @@ def detect(url: str) -> tuple[str, str]:
         if p.path not in paths[p.hostname] or p.query or p.fragment:
             raise ValueError("Expected an unfiltered reviewed WP Job Manager board")
         return "wp_job_manager", p.hostname
+    if p.hostname == BRASSRING_HOST:
+        query = parse_qs(p.query, keep_blank_values=True)
+        partner = query.get("partnerid", [])
+        site = query.get("siteid", [])
+        if (
+            p.fragment
+            or len(partner) != 1
+            or len(site) != 1
+            or f"{partner[0]}-{site[0]}" not in BRASSRING_PORTALS
+            or not (
+                p.path.lower() == BRASSRING_PATH.lower()
+                and set(query) == {"partnerid", "siteid", "PageType"}
+                and query["PageType"] == ["searchResults"]
+                or p.path.lower() == "/tgnewui/search/home/home"
+                and set(query) == {"partnerid", "siteid"}
+            )
+        ):
+            raise ValueError("Expected an unfiltered reviewed BrassRing portal")
+        return "brassring", f"{partner[0]}-{site[0]}"
     if p.hostname in SUCCESSFACTORS_HOSTS:
         if p.path not in {"", "/", "/search", "/search/"} or p.query or p.fragment:
             raise ValueError(
@@ -350,6 +373,8 @@ def create_connector(
         return NodexConnector(slug, client)
     if provider == "wp_job_manager":
         return WPJobManagerConnector(slug, client)
+    if provider == "brassring":
+        return BrassRingConnector(slug, client)
     if provider == "successfactors":
         return SuccessFactorsConnector(slug, client)
     if provider == "jobboardio":

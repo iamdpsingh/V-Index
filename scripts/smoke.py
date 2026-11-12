@@ -15,6 +15,20 @@ from vindex.connectors.registry import create_connector
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
+    (
+        "BrassRing",
+        "brassring",
+        "25749-5764",
+        "Halifax Regional Municipality",
+        "https://sjobs.brassring.com/TGnewUI/Search/home/HomeWithPreLoad?partnerid=25749&siteid=5764&PageType=searchResults",
+    ),
+    (
+        "BrassRing",
+        "brassring",
+        "25633-5440",
+        "Infosys",
+        "https://sjobs.brassring.com/TGnewUI/Search/home/HomeWithPreLoad?partnerid=25633&siteid=5440&PageType=searchResults",
+    ),
     ("JobBoard.com", "jobboard_com", "jobs.acevo.org.uk", "ACEVO", "https://jobs.acevo.org.uk/"),
     (
         "JobBoard.com",
@@ -575,6 +589,7 @@ async def main():
                 if batch.jobs:
                     job = batch.jobs[0]
                     if provider in {
+                        "brassring",
                         "jobboardio",
                         "niceboard",
                         "jobkit",
@@ -640,6 +655,10 @@ async def main():
                             ],
                             "SAP SuccessFactors": [
                                 "Reviewed public Career Site Builder portals at ICBC and KAUST, complete single-page unfiltered public search only; canonical full details respect robots and noindex",
+                            ],
+                            "BrassRing": [
+                                "Reviewed Halifax and Infosys public portals only. The complete advertised roster must fit in the first response.",
+                                "Checks every native detail and reconfirms the full roster. Last-updated dates are preserved separately from original publication dates.",
                             ],
                             "SmartJobBoard": [
                                 "Reviewed American Bath Group and APS Employment Network origins only; reads native unfiltered 20-item public search pages and requires exact advertised total",
