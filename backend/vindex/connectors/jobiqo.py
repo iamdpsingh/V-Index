@@ -187,7 +187,7 @@ class JobiqoConnector:
             for anchor in soup.select(".node--full .field--name-body a[href]"):
                 paragraph = anchor.find_parent(["p", "li"])
                 if paragraph is not None and re.search(
-                    r"(?i)bewerben Sie sich unter folgendem Link|bewirb dich jetzt|submit your application (?:via|through)",
+                    r"(?i)bewerben Sie sich unter folgendem Link|nutzen Sie bitte die folgende URL|bewirb dich jetzt|submit your application (?:via|through)",
                     paragraph.get_text(" ", strip=True),
                 ):
                     advertised.append(str(anchor["href"]))
