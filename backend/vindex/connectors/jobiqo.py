@@ -401,21 +401,45 @@ class JobiqoConnector:
                 re.escape(publisher) + r"/bewerben/~applyID[0-9]{1,12}", str(link["href"])
             )
         }
+        if not apply:
+            publisher_url = str(canonical["href"])
+            canonical_host = urlsplit(publisher_url).netloc
+            canonical_http = PublicHTTP(self.http.client, {canonical_host})
+            canonical_policy = (
+                policy
+                if canonical_host == "www.publicjobs.ch"
+                else await RobotsPolicy.load(canonical_http, f"https://{canonical_host}")
+            )
+            canonical_policy.check(publisher_url)
+            await asyncio.sleep(canonical_policy.delay())
+            publisher_detail = document(await canonical_http.read(publisher_url))
+            publisher_postings = structured_postings(publisher_detail)
+            if (
+                len(publisher_postings) != 1
+                or normalized_linked_title(publisher_postings[0].get("title") or "")
+                != normalized_linked_title(title)
+                or not any(
+                    control.get_text(" ", strip=True) == "Auf Stelle bewerben"
+                    for control in publisher_detail.select("a, button")
+                )
+            ):
+                raise ValueError(f"Missing Publicjobs application entry for {identifier}")
+            publisher_description = text(publisher_postings[0].get("description") or "")
+            if not publisher_description:
+                raise ValueError(f"Missing Publicjobs description for {identifier}")
+            apply.add(publisher_url)
+        else:
+            publisher_description = description.get_text(" ", strip=True) if description else ""
         structured = postings[0]
         company = text(structured.get("hiringOrganization", {}).get("name") or "")
-        if (
-            description is None
-            or not description.get_text(" ", strip=True)
-            or len(apply) != 1
-            or not company
-        ):
+        if not publisher_description or len(apply) != 1 or not company:
             raise ValueError(f"Incomplete Kampajobs linked posting for {identifier}")
         employment = structured.get("employmentType")
         return JobInput(
             external_id=identifier,
             title=title,
             company=company,
-            description=description.get_text(" ", strip=True),
+            description=publisher_description,
             source_url=url,
             application_url=next(iter(apply)),
             location="; ".join(
