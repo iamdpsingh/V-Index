@@ -15,6 +15,7 @@ from vindex.schemas import Enumeration, JobInput
 
 HOSTS = frozenset({"lexpath.com.au", "joberly.eu"})
 JOB_PATH = re.compile(r"/job-detail/[a-zA-Z0-9_-]{1,250}")
+CANONICAL_PATH = re.compile(r"/(?:job-detail/)?[a-zA-Z0-9_-]{1,250}")
 MAP_PATH = re.compile(r"/jd/[1-9][0-9]{0,3}/sitemap\.xml")
 ASSET_ORIGIN = "https://cdn-static.arthajobboard.com/"
 
@@ -73,7 +74,7 @@ class ArthaConnector:
         canonical = soup.select('link[rel="canonical"][href]')
         if (
             len(canonical) != 1
-            or canonical[0]["href"] != url
+            or not self.scoped(str(canonical[0]["href"]), CANONICAL_PATH)
             or not any(
                 str(tag["src"]).startswith(ASSET_ORIGIN) for tag in soup.select("script[src]")
             )
@@ -104,10 +105,15 @@ class ArthaConnector:
         has_apply_control = any(
             node.get_text(" ", strip=True).casefold()
             in {"apply for this job", "apply now", "apply"}
-            and not node.has_attr("disabled")
             for node in soup.select("button, a")
         )
-        if action.get("@type") != "ApplyAction" or target != url or not has_apply_control:
+        active_states = set(re.findall(rb'isJobExpired\\?":(true|false)', body))
+        if (
+            active_states != {b"false"}
+            or action.get("@type") != "ApplyAction"
+            or target != url
+            or not has_apply_control
+        ):
             raise ValueError("Missing verified Artha application entry")
         location_rows = job.get("jobLocation") or []
         if isinstance(location_rows, dict):
@@ -137,7 +143,7 @@ class ArthaConnector:
                 title=title,
                 company=company,
                 description=description,
-                source_url=url,
+                source_url=str(canonical[0]["href"]),
                 application_url=url,
                 location="; ".join(locations),
                 employment_type=", ".join(employment)
@@ -155,7 +161,9 @@ class ArthaConnector:
         jobs = []
         for url in sorted(before):
             jobs.extend(self.parse((url, await self.read(url, policy))))
-        if len({job.external_id for job in jobs}) != len(before):
+        if len({job.external_id for job in jobs}) != len(before) or len(
+            {job.source_url for job in jobs}
+        ) != len(before):
             raise ValueError("Repeated Artha posting ID")
         if await self.roster(policy) != before:
             raise ValueError("Artha roster changed during refresh")
