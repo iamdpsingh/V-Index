@@ -93,3 +93,5 @@ The source API accepts the reviewed JobBoardFire roots `https://jobs.trellis.net
 The Jobiqo source adapter accepts the unfiltered public board URLs `https://www.agrajo.com/job` and `https://careers.unitedway.org/jobs`. Use the existing source form and job application URL fields. A failed or partial refresh must retain the last successful snapshot. See the coverage matrix for live verification status.
 
 The source form now accepts unfiltered ADP MyJobs board URLs at `https://myjobs.adp.com/{site}/cx/job-listing`. Each result links to the corresponding public ADP job detail, which is also the application entry.
+
+The source form accepts the reviewed Oseyo and eCarsTrade HiBob hosted board roots. Their public job detail links also serve as application entry points.

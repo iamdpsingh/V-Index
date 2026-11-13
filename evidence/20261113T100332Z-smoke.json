@@ -1,0 +1,32 @@
+[
+  {
+    "provider": "HiBob",
+    "url": "https://oseyo-c916b6e4132742.careers.hibob.com/",
+    "at": "2026-11-13T10:03:26.707266+00:00",
+    "revision": "2caa80cd50f162be417ea382024f22f004b78829",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "aa3563629dc4491f15ebe3dea492932e1f7875abc673aba7b12d730a49abbafb",
+    "count": 7,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "e80a19337d910975430a4cd8f9cbef233f8f477e835c756b223f287c186b4e4d",
+    "finished_at": "2026-11-13T10:03:30.089933+00:00"
+  },
+  {
+    "provider": "HiBob",
+    "url": "https://ecarstrade.careers.hibob.com/",
+    "at": "2026-11-13T10:03:30.591189+00:00",
+    "revision": "2caa80cd50f162be417ea382024f22f004b78829",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "aa3563629dc4491f15ebe3dea492932e1f7875abc673aba7b12d730a49abbafb",
+    "count": 11,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "9873cc983811fdd0652d62f6305ae82ed13b375e4166711ccfaf814612e939a5",
+    "finished_at": "2026-11-13T10:03:32.291539+00:00"
+  }
+]

@@ -374,3 +374,7 @@ Agrajo can publish direct links, email instructions or application controls on t
 ## ADP MyJobs
 
 The connector resolves the public site identity and employer name, then reads the public requisitions collection under that organization. It checks exact totals and unique IDs across all pages, reads each matching active detail, preserves the candidate-facing title and original listing title, and reconfirms the roster before publishing. Only MyJobs boards with up to 400 requisitions are supported. The public detail is the application entry. [Live evidence](../evidence/20261113T073432Z-smoke.json)
+
+## HiBob
+
+The reviewed Oseyo and eCarsTrade hosted sites expose their published job ads at the tenant's `/api/job-ad` route. Requests use the public tenant label as the company identifier and respect that host's robots policy. The connector requires two matching complete collection reads and rejects empty responses, malformed ads, duplicates and collections at or above 100 rows pending confirmation of the limit. Each job keeps its candidate-facing detail as the application entry, along with supplied employment, location, workplace and pay fields.
