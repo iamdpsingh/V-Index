@@ -174,6 +174,14 @@ class JobiqoConnector:
                 '[data-test-id="job-apply-submit-button"], a:has(> [data-test-id="job-apply-submit-button"])'
             )
         advertised = [str(control["href"]) for control in controls if control.get("href")]
+        if self.kampajobs:
+            for anchor in soup.select(".node--full .field--name-body a[href]"):
+                paragraph = anchor.find_parent(["p", "li"])
+                if paragraph is not None and re.search(
+                    r"(?i)bewerben Sie sich unter folgendem Link|submit your application (?:via|through)",
+                    paragraph.get_text(" ", strip=True),
+                ):
+                    advertised.append(str(anchor["href"]))
         board = {}
         if self.united_way:
             state = soup.select_one('script#__NEXT_DATA__[type="application/json"]')
