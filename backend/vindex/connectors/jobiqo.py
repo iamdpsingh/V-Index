@@ -163,7 +163,7 @@ class JobiqoConnector:
                 control
                 for control in soup.select(".public-profile a[href], .public-profile button")
                 if re.fullmatch(
-                    r"(?i)(?:(?:online |hier |jetzt )?bewerben(?: Sie sich)?|bewirb dich(?: jetzt)?|senden Sie bitte online|exclusively via our online portal|(?:direkt )?über unser Stellenportal|via unserem Bewerbungstool|(?:über das )?Online-?portal|Bewerbung hier einreichen)",
+                    r"(?i)(?:(?:online |hier |jetzt )?bewerben(?: Sie sich)?|bewirb dich(?: jetzt)?|senden Sie bitte online|exclusively via our online portal|(?:direkt )?über unser Stellenportal|via unserem Bewerbungstool|(?:über (?:das|unser) )?Online-?portal|Bewerbung hier einreichen)",
                     control.get_text(" ", strip=True),
                 )
                 or re.fullmatch(
