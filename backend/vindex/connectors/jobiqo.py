@@ -62,7 +62,8 @@ class JobiqoConnector:
     async def fetch(self, cursor: int = 0, policy: RobotsPolicy | None = None) -> bytes:
         if not 0 <= cursor < MAX_PAGES:
             raise ValueError("Jobiqo page is outside the supported range")
-        url = self.listing if not cursor else f"{self.listing}?page={cursor + 1}"
+        page_parameter = cursor if self.kampajobs else cursor + 1
+        url = self.listing if not cursor else f"{self.listing}?page={page_parameter}"
         return await self.read(url, policy or await RobotsPolicy.load(self.http, self.origin))
 
     def page(self, body: bytes) -> tuple[int, dict[str, str]]:
