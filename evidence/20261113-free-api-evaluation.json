@@ -1,0 +1,30 @@
+{
+  "date_ist": "2026-11-13",
+  "service": "Headcount Labs public MCP",
+  "endpoint": "https://api.headcountlabs.com/mcp/public",
+  "new_verified_platforms": 0,
+  "provider_reported_job_counts": {
+    "dayforce": 138861,
+    "dover": 11864,
+    "paycom": 179167,
+    "paycor": 71570,
+    "ukg": 226211
+  },
+  "platform_count_snapshot": "2026-11-13T15:33:20.472Z",
+  "platform_count_note": "Employer breakdowns timed out. UKG includes UKG Ready and cannot be treated as an UltiPro-only count.",
+  "maas_energy_works": {
+    "employer_roster_count": 24,
+    "api_records": 28,
+    "api_cursor_remaining": false,
+    "distinct_canonical_dayforce_ids": 28,
+    "matching_employer_ids": 24,
+    "api_records_with_same_posting_and_apply_url": 28,
+    "extra_ids_checked_at_source": [
+      {"id": 1896, "posting_status": 4},
+      {"id": 1900, "posting_status": 2, "expires_at": "2026-11-03T10:59:00+00:00"},
+      {"id": 1949, "posting_status": 4},
+      {"id": 1988, "posting_status": 2, "expires_at": "2026-11-05T10:59:00+00:00"}
+    ],
+    "comparison_status": "Two sampled jobs present on the employer roster had posting_status 1. The four extra records were absent from the employer roster and had different ATS states."
+  }
+}
