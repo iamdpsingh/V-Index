@@ -246,11 +246,28 @@ class JobiqoConnector:
     async def embedded_detail(self, body: bytes, identifier: str) -> dict[str, Any]:
         soup = document(body)
         frames = soup.select('[data-test-id="job_detail_container"] iframe[src]')
-        if len(frames) != 1:
-            raise ValueError(f"Missing or ambiguous Jobiqo embed for {identifier}")
+        if len(frames) == 1:
+            destination = str(frames[0]["src"])
+        elif not frames:
+            state = soup.select_one('script#__NEXT_DATA__[type="application/json"]')
+            if state is None:
+                raise ValueError(f"Missing United Way posting state for {identifier}")
+            board = json.loads(state.get_text())["props"]["pageProps"]["data"]["jobByPath"][
+                "content"
+            ]
+            if (
+                str(board["id"]) != identifier
+                or board.get("type") != "job_per_template"
+                or board.get("applicationWorkflow") != "external"
+                or not text(board.get("description") or "")
+            ):
+                raise ValueError(f"Missing Jobiqo publisher posting for {identifier}")
+            destination = board.get("applicationLink") or ""
+        else:
+            raise ValueError(f"Ambiguous Jobiqo embed for {identifier}")
         match = re.fullmatch(
             re.escape(EMBED_ORIGIN) + r"/jb\.do\?reqGK=([1-9][0-9]{0,15})&refresh=true",
-            str(frames[0]["src"]),
+            destination,
         )
         if match is None:
             raise ValueError(f"Unreviewed Jobiqo embed for {identifier}")
