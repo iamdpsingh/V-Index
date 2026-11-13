@@ -235,7 +235,7 @@ class JobiqoConnector:
         )
         if self.kampajobs and not controls and not links:
             email_application = re.search(
-                r"(?i)bewerb|melde dich bei|melden Sie sich bei|sende uns deine Unterlagen|bei Interesse erreichen Sie|please send your CV|Anfragen bitte per mail",
+                r"(?i)bewerb|melde dich bei|melden Sie sich (?:bitte |bei)|sende uns deine Unterlagen|bei Interesse erreichen Sie|please send your CV|Anfragen bitte per mail",
                 description,
             ) is not None and (
                 soup.select_one('.node--full .field--name-body a[href^="mailto:"]') is not None
