@@ -2,8 +2,9 @@
 
 import asyncio
 import json
+import math
 import random
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from email.utils import parsedate_to_datetime
 from typing import Any, Literal
 from urllib.parse import urlsplit
@@ -17,6 +18,32 @@ class UpstreamStatusError(ValueError):
     def __init__(self, status_code: int):
         self.status_code = status_code
         super().__init__(f"Upstream HTTP {status_code}")
+
+
+class RetryAfterError(UpstreamStatusError):
+    def __init__(self, status_code: int, retry_at: datetime):
+        super().__init__(status_code)
+        self.retry_at = retry_at
+        self.args = (f"Upstream HTTP {status_code}; Retry-After until {retry_at.isoformat()}",)
+
+
+def retry_after_at(value: str, observed_at: datetime) -> datetime | None:
+    try:
+        seconds = float(value)
+    except ValueError:
+        try:
+            target = parsedate_to_datetime(value)
+            if target.tzinfo is None:
+                target = target.replace(tzinfo=UTC)
+            return max(target, observed_at)
+        except (ValueError, TypeError, OverflowError):
+            return None
+    if not math.isfinite(seconds) or seconds < 0:
+        return None
+    try:
+        return observed_at + timedelta(seconds=seconds)
+    except OverflowError:
+        return datetime.max.replace(tzinfo=UTC)
 
 
 class PublicHTTP:
@@ -78,24 +105,19 @@ class PublicHTTP:
                             raise ValueError("Response exceeds 20 MB limit")
                     return bytes(body)
             except (httpx.TransportError, httpx.HTTPStatusError) as error:
-                if attempt == 2:
-                    raise
                 delay = 2**attempt + random.random()
                 if isinstance(error, httpx.HTTPStatusError):
-                    retry_after = error.response.headers.get("Retry-After")
-                    if retry_after:
-                        try:
-                            wait = float(retry_after)
-                        except ValueError:
-                            try:
-                                date = parsedate_to_datetime(retry_after)
-                                wait = (date - datetime.now(UTC)).total_seconds()
-                            except (ValueError, TypeError, OverflowError):
-                                wait = 0
-                        if wait > 30:
-                            # Fail the run into durable cooldown rather than retrying too soon.
-                            raise ValueError("Retry-After exceeds inline retry budget") from error
+                    observed_at = datetime.now(UTC)
+                    retry_at = retry_after_at(
+                        error.response.headers.get("Retry-After", ""), observed_at
+                    )
+                    if retry_at is not None:
+                        wait = (retry_at - observed_at).total_seconds()
+                        if attempt == 2 or wait > 30:
+                            raise RetryAfterError(error.response.status_code, retry_at) from error
                         delay = max(delay, wait)
+                if attempt == 2:
+                    raise
                 await asyncio.sleep(min(30, delay))
         raise RuntimeError("Retry budget exhausted")
 

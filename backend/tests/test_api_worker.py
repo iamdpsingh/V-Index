@@ -3,6 +3,7 @@ from contextlib import nullcontext
 from datetime import datetime, timedelta
 from unittest.mock import Mock
 
+import httpx
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import select
@@ -206,3 +207,32 @@ def test_worker_retires_abandoned_run_and_publishes_fresh_data(database, source,
         abandoned = session.get(Run, abandoned_id)
         assert abandoned.status == "failed" and abandoned.finished_at is not None
         assert session.get(Run, run_id).status == "success"
+
+
+def test_worker_preserves_long_upstream_retry_after(database, source, monkeypatch):
+    from vindex.connectors.http import PublicHTTP
+    from vindex.db import Source, now
+    from vindex.ingest import aware
+
+    monkeypatch.setattr(worker, "Session", database)
+    redis = Mock()
+    redis.lock.return_value = nullcontext()
+    monkeypatch.setattr(worker.Redis, "from_url", lambda url: redis)
+    requests = []
+
+    def respond(request):
+        requests.append(request)
+        return httpx.Response(429, headers={"Retry-After": "7200"})
+
+    async def discover():
+        async with httpx.AsyncClient(transport=httpx.MockTransport(respond)) as client:
+            await PublicHTTP(client, {"example.com"}).read("https://example.com/jobs")
+
+    monkeypatch.setattr(worker, "create_connector", lambda *args: Mock(discover=discover))
+    before = now()
+    run_id = asyncio.run(worker.refresh(source.id))
+
+    with database() as session:
+        assert session.get(Run, run_id).status == "failed"
+        assert aware(session.get(Source, source.id).next_check) >= before + timedelta(hours=2)
+    assert len(requests) == 1

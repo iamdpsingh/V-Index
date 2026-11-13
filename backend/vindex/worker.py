@@ -9,6 +9,7 @@ import httpx
 from redis import Redis
 from sqlalchemy import select, update
 
+from vindex.connectors.http import RetryAfterError
 from vindex.connectors.jobiqo import STAGED_HOSTS as STAGED_JOBIQO_HOSTS
 from vindex.connectors.registry import create_connector
 from vindex.db import Run, Session, Source, now
@@ -99,6 +100,8 @@ async def refresh(source_id: int, *, only_if_due: bool = False) -> int | None:
                 source.next_check = now() + timedelta(
                     minutes=min(1440, 15 * 2 ** min(source.failures, 7))
                 )
+                if isinstance(error, RetryAfterError):
+                    source.next_check = max(source.next_check, error.retry_at)
                 session.commit()
                 log.warning(
                     "refresh_failed source=%s run=%s error=%s", source_id, run_id, failed_run.error

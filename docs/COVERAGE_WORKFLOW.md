@@ -71,3 +71,24 @@ November 13 IST: HiBob passed on Oseyo (7 jobs) and eCarsTrade (11 jobs), bringi
 November 13 IST: The next live verification remains open at **64/78**. The Paycor host policy also disallows the public career paths linked by reviewed employers. Three reachable UltiPro host variants disallow the reviewed search route. Dover documents employer-authorized career postings access on ATS Premium; no tenant authorization was available for a live check. [Dover API overview](https://docs.dover.com/api/)
 
 November 13 IST: Switched the next verification effort to CareerSiteCloud. Aspen's product profile names GroupM, LEO Pharma, Amedisys and Multiemplois as customers. The current WPP Media and LEO Pharma pages exposed Greenhouse and SuccessFactors markers respectively. Amedisys returned a redirect, and Multiemplois failed hostname certificate validation. Both CareerSiteCloud vendor host variants returned HTTP 403 on policy lookup. This did not establish an active CareerSiteCloud roster. [Aspen product profile](https://www.linkedin.com/products/aspen-technology-labs-inc-careersitecloud/)
+
+The recovery plan below follows the latest live evidence. A documented interface is a lead until two independent sites pass complete runs.
+
+| Platform | Next verification step |
+|---|---|
+| Dayforce | Obtain an employer-published mirror or approved JobFeeds route. The documented default host disallowed the tested feed paths. |
+| Dover | Use the published-job-postings API with employer-issued ATS Premium access, or validate a complete employer-published careers feed. |
+| Paycom | Check for an employer-provided full export. The sampled public shell and restricted roster route did not establish completeness. |
+| Paycor | Verify a permitted employer feed or obtain approved integration access and confirm it covers public postings. |
+| UltiPro | Verify a UKG-approved employer feed that includes the full active roster and original links. |
+| Talenetic | Obtain the board owner's outbound XML job feed and reconcile it against the public count. |
+| CareerSiteCloud | Confirm currently active customer installations and documentation for their outbound feeds. |
+| Artha | Verify a permitted complete listings interface on independent live boards. A guest recommendation response needs total and pagination evidence before it qualifies. |
+| eJobBoard | Ask the challenge host for current vendor and installation URLs. The tested domains yielded a lander and a DNS failure. |
+| Wiley Madgex | Revisit checkpointed public detail extraction with bounded retries, or obtain complete exports from the publishers. |
+| JobMount | Prefer a complete outbound feed or reconcile the native pager. The observed RSS feeds cap at 100 entries. |
+| talentReef | Confirm a licensed or explicitly public route, then verify full pagination and detail coverage. |
+| Gem.com | Retest the vendor-documented Job Board API on permitted, verified tenants. Prior probes returned HTTP 403. |
+| ejobsitesoftware.com | Keep Gurus HR as the passing example and verify a second active board via its supported listing or export interface. |
+
+The existing HTTP client retries 429 and 5xx within a bounded budget. Automatic refreshes now preserve the upstream Retry-After deadline if it exceeds the normal retry schedule. A failed run leaves the last complete index in place.
