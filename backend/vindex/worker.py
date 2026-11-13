@@ -9,6 +9,7 @@ import httpx
 from redis import Redis
 from sqlalchemy import select
 
+from vindex.connectors.jobiqo import STAGED_HOSTS as STAGED_JOBIQO_HOSTS
 from vindex.connectors.registry import create_connector
 from vindex.db import Run, Session, Source, now
 from vindex.ingest import aware, ingest
@@ -44,7 +45,7 @@ async def refresh(source_id: int, *, only_if_due: bool = False) -> int | None:
                     ) as client:
                         if source.provider == "wileymadgex":
                             batch = await advance_madgex_refresh(session, source, client)
-                        elif source.provider == "jobiqo" and source.slug == "careers.unitedway.org":
+                        elif source.provider == "jobiqo" and source.slug in STAGED_JOBIQO_HOSTS:
                             batch = await advance_jobiqo_refresh(session, source, client)
                         else:
                             batch = await create_connector(

@@ -14,7 +14,12 @@ from vindex.connectors.public import text
 from vindex.connectors.robots import RobotsPolicy
 from vindex.schemas import Enumeration, JobInput
 
-BOARDS = {"www.agrajo.com": ("/job", 12), "careers.unitedway.org": ("/jobs", 10)}
+BOARDS = {
+    "www.agrajo.com": ("/job", 12),
+    "careers.unitedway.org": ("/jobs", 10),
+    "www.kampajobs.ch": ("/jobs", 20),
+}
+STAGED_HOSTS = frozenset({"careers.unitedway.org", "www.kampajobs.ch"})
 MAX_PAGES = 15
 EMBED_HOST = "j.brt.mv"
 EMBED_ORIGIN = f"https://{EMBED_HOST}"
@@ -43,6 +48,8 @@ class JobiqoConnector:
         path, self.page_size = BOARDS[host]
         self.listing = self.origin + path
         self.agrajo = host == "www.agrajo.com"
+        self.kampajobs = host == "www.kampajobs.ch"
+        self.united_way = host == "careers.unitedway.org"
         self.http = PublicHTTP(client, {host})
         self.embed_http = PublicHTTP(client, {EMBED_HOST})
         self.embed_policy: RobotsPolicy | None = None
@@ -69,14 +76,20 @@ class JobiqoConnector:
         if total is None or int(total[1]) > self.page_size * MAX_PAGES:
             raise ValueError("Missing or oversized Jobiqo advertised total")
         rows = {}
-        selector = '[id^="job-post-"]' if self.agrajo else '[data-test-id^="job-teaser-"]'
+        if self.kampajobs:
+            selector, attribute, prefix = "article.node-job[id]", "id", "node-"
+        elif self.agrajo:
+            selector, attribute, prefix = '[id^="job-post-"]', "id", "job-post-"
+        else:
+            selector, attribute, prefix = (
+                '[data-test-id^="job-teaser-"]',
+                "data-test-id",
+                "job-teaser-",
+            )
         for card in soup.select(selector):
-            identifier = (
-                re.fullmatch(r"job-post-([1-9][0-9]{0,15})", str(card["id"]))
-                if self.agrajo
-                else re.fullmatch(
-                    r"job-teaser-([1-9][0-9]{0,15})(?: [a-z-]+)*", str(card["data-test-id"]).strip()
-                )
+            identifier = re.fullmatch(
+                re.escape(prefix) + r"([1-9][0-9]{0,15})(?: [a-z-]+)*",
+                str(card[attribute]).strip(),
             )
             urls = set()
             for anchor in card.select("a[href]"):
@@ -92,7 +105,7 @@ class JobiqoConnector:
             if identifier is None or identifier[1] in rows or len(urls) != 1:
                 raise ValueError("Invalid or repeated Jobiqo job card")
             posting_url = next(iter(urls))
-            if not self.agrajo and not posting_url.endswith("-" + identifier[1]):
+            if self.united_way and not posting_url.endswith("-" + identifier[1]):
                 raise ValueError("United Way card and posting IDs differ")
             rows[identifier[1]] = posting_url
         return int(total[1]), rows
@@ -122,6 +135,8 @@ class JobiqoConnector:
         headings = soup.select("main h1" if self.agrajo else "h1")
         if len(canonical) != 1 or canonical[0]["href"] != url or len(headings) != 1:
             raise ValueError(f"Invalid Jobiqo canonical detail for {identifier}")
+        if self.kampajobs and not soup.select_one(f".node-job.node--full[id='node-{identifier}']"):
+            raise ValueError(f"Kampajobs detail ID mismatch for {identifier}")
         postings = structured_postings(soup)
         if not postings and embedded is None:
             raise MissingJobPosting(f"Missing Jobiqo structured posting for {identifier}")
@@ -142,13 +157,24 @@ class JobiqoConnector:
                 for control in soup.select("main a, main button")
                 if re.fullmatch(r"(?i)(?:hier |jetzt )?bewerben", control.get_text(" ", strip=True))
             ]
+        elif self.kampajobs:
+            controls = [
+                control
+                for control in soup.select(".public-profile a[href], .public-profile button")
+                if re.fullmatch(
+                    r"(?i)(?:online |hier |jetzt )?bewerben(?: Sie sich)?",
+                    control.get_text(" ", strip=True),
+                )
+                or "bewerben" in control.get_text(" ", strip=True).casefold()
+                and control.get("href")
+            ]
         else:
             controls = soup.select(
                 '[data-test-id="job-apply-submit-button"], a:has(> [data-test-id="job-apply-submit-button"])'
             )
         advertised = [str(control["href"]) for control in controls if control.get("href")]
         board = {}
-        if not self.agrajo:
+        if self.united_way:
             state = soup.select_one('script#__NEXT_DATA__[type="application/json"]')
             if state is None:
                 raise ValueError(f"Missing United Way posting state for {identifier}")
@@ -163,7 +189,7 @@ class JobiqoConnector:
                 and board.get("applicationLink")
             ):
                 advertised.append(board["applicationLink"])
-        else:
+        elif self.agrajo:
             advertised.extend(
                 re.findall(
                     r'(?i)\[(?:hier |jetzt )?bewerben\]\((https://[^\s)]+)(?: "[^"]*")?\)',
@@ -194,6 +220,11 @@ class JobiqoConnector:
                 )
             )
         )
+        if self.kampajobs and not controls and not links:
+            email_application = (
+                "bewerb" in description.casefold()
+                and soup.select_one('.node--full .field--name-body a[href^="mailto:"]') is not None
+            )
         if len(links) > 1 or (not controls and not links and not email_application):
             raise ValueError(f"Missing or ambiguous Jobiqo application entry for {identifier}")
         locations = []
@@ -289,7 +320,7 @@ class JobiqoConnector:
         try:
             return self.detail(body, identifier, url)
         except MissingJobPosting:
-            if self.agrajo:
+            if not self.united_way:
                 raise
             return self.detail(body, identifier, url, await self.embedded_detail(body, identifier))
 

@@ -1,4 +1,4 @@
-"""Resume United Way detail extraction within the worker's refresh lease."""
+"""Resume Jobiqo detail extraction within the worker's refresh lease."""
 
 from datetime import timedelta
 
@@ -34,7 +34,7 @@ async def advance_jobiqo_refresh(
     jobs = [JobInput.model_validate(record) for record in stage.jobs]
     completed = {job.external_id: job.source_url for job in jobs}
     if len(completed) != len(jobs) or any(roster.get(key) != url for key, url in completed.items()):
-        raise ValueError("Invalid United Way refresh checkpoint")
+        raise ValueError("Invalid Jobiqo refresh checkpoint")
 
     pending = [identifier for identifier in roster if identifier not in completed]
     for identifier in pending[:BATCH_SIZE]:
@@ -49,7 +49,7 @@ async def advance_jobiqo_refresh(
     if final_roster != roster or now() - aware(stage.started_at) >= SNAPSHOT_TTL:
         session.delete(stage)
         session.commit()
-        raise ValueError("United Way roster changed or expired during refresh")
+        raise ValueError("Jobiqo roster changed or expired during refresh")
 
     # The worker commits deletion together with ingestion.
     session.delete(stage)

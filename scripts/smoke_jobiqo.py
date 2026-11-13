@@ -1,4 +1,4 @@
-"""Run the production United Way checkpoint path using an isolated local database."""
+"""Run the production Jobiqo checkpoint path using an isolated local database."""
 
 import argparse
 import asyncio
@@ -10,17 +10,19 @@ from pathlib import Path
 import httpx
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from vindex.connectors.jobiqo import BOARDS, STAGED_HOSTS
 from vindex.db import JobiqoRefresh, Source, now
 from vindex.jobiqo_refresh import advance_jobiqo_refresh
-
-HOST = "careers.unitedway.org"
-URL = f"https://{HOST}/jobs"
 
 
 async def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("checkpoint", type=Path)
+    parser.add_argument("--host", choices=sorted(STAGED_HOSTS), default="careers.unitedway.org")
     args = parser.parse_args()
+    host = args.host
+    url = f"https://{host}{BOARDS[host][0]}"
+    revision = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
     args.checkpoint.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
     args.checkpoint.touch(mode=0o600, exist_ok=True)
     engine = create_engine(f"sqlite:///{args.checkpoint}")
@@ -37,11 +39,11 @@ async def main() -> None:
                 with sessions() as session:
                     source = session.get(Source, 1)
                     if source is None:
-                        source = Source(
-                            id=1, provider="jobiqo", slug=HOST, company="United Way", url=URL
-                        )
+                        source = Source(id=1, provider="jobiqo", slug=host, company=host, url=url)
                         session.add(source)
                         session.commit()
+                    if source.slug != host:
+                        raise ValueError("Checkpoint belongs to a different board")
                     async with asyncio.timeout(600):
                         batch = await advance_jobiqo_refresh(session, source, client)
                     session.commit()
@@ -49,11 +51,9 @@ async def main() -> None:
                         print(
                             json.dumps(
                                 {
-                                    "url": URL,
+                                    "url": url,
                                     "finished_at": now().isoformat(),
-                                    "revision": subprocess.check_output(
-                                        ["git", "rev-parse", "HEAD"], text=True
-                                    ).strip(),
+                                    "revision": revision,
                                     "count": len(batch.jobs),
                                     "complete": batch.complete,
                                     "payload_sha256": hashlib.sha256(
