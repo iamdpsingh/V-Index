@@ -1,0 +1,20 @@
+{
+  "scope": "United Way checkpoint retry and Kampajobs discovery",
+  "united_way": {
+    "url": "https://careers.unitedway.org/jobs",
+    "initial_roster_count": 67,
+    "durable_detail_count": 59,
+    "subsequent_roster_count": 66,
+    "blocking_job_id": "5152",
+    "blocking_job_still_advertised": true,
+    "publisher_result": "Error page with no structured JobPosting",
+    "complete": false
+  },
+  "kampajobs": {
+    "url": "https://www.kampajobs.ch/jobs",
+    "advertised_total": 124,
+    "first_page_unique_posting_urls": 20,
+    "sample_canonical_present": true,
+    "complete": false
+  }
+}
