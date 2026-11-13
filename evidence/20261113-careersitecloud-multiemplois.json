@@ -1,0 +1,17 @@
+{
+  "date_ist": "2026-11-13",
+  "new_verified_platforms": 0,
+  "vendor": "Aspen Technology Labs",
+  "historical_product_announcement": "https://www.prweb.com/releases/new_career_site_platform_for_employers_and_agencies_careersitecloud/prweb13819246.htm",
+  "current_product_overview": "https://aspentechlabs.com/about-us/",
+  "operator_directory": "https://multiemplois.ca/en/",
+  "directory_live_check": "Apex and www hosts failed TLS hostname validation.",
+  "network_sites": [
+    "https://soudeur.ca/view_all",
+    "https://camionneur.ca/",
+    "https://mecanicien.ca/",
+    "https://representant.ca/"
+  ],
+  "network_site_result": "All four pages were reachable and exposed a JobMount marker. None exposed a CareerSiteCloud marker. The four sites belong to the same network.",
+  "next_dependency": "Current CareerSiteCloud installation URLs or a vendor-confirmed export."
+}
