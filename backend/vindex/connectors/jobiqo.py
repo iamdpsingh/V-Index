@@ -26,6 +26,11 @@ EMBED_ORIGIN = f"https://{EMBED_HOST}"
 POST_PATH = re.compile(r"/job/[a-z0-9][a-z0-9-]{0,249}")
 
 
+def normalized_linked_title(value: str) -> str:
+    value = re.sub(r"(\d)\s*%?\s*[-–]\s*(\d+)\s*%", r"\1-\2%", value)
+    return " ".join(value.split())
+
+
 class MissingJobPosting(ValueError):
     pass
 
@@ -384,7 +389,8 @@ class JobiqoConnector:
                 str(canonical["href"]),
             )
             or upstream_heading is None
-            or upstream_heading.get_text(" ", strip=True) != title
+            or normalized_linked_title(upstream_heading.get_text(" ", strip=True))
+            != normalized_linked_title(title)
         ):
             raise ValueError(f"Kampajobs publisher identity mismatch for {identifier}")
         description = detail.select_one(".preview_body")
