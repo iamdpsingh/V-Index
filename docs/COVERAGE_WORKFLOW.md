@@ -1,5 +1,7 @@
 # Coverage-first workflow
 
+**Owner scope update (November 13):** Focus on extracting job data from the exact 78 platforms named in the challenge. A separate employer career page is optional evidence when it helps confirm platform identity or roster completeness. If an available source provides only part of a platform's listings, record the jobs actually extracted and the limits of that source. Move to another required platform when a source is blocked. Keep the live-verified count tied to complete runs and preserve the last complete index on partial or failed runs.
+
 **Latest owner release requirements (November 7):** read [PRODUCTION_RELEASE_REQUIREMENTS.md](PRODUCTION_RELEASE_REQUIREMENTS.md). Coverage remains first. Public launch now requires a verified custom domain on the free-tier plan, favicon, permitted badge removal, reviewed legal/privacy pages, accessibility and a full security review. Older preview-only vercel.app guidance does not authorize launch. No spending or automatic deployment is authorized.
 
 The owner has set the next priority: finish all 78 required live platform verifications before expanding the remaining backend/product work. Start with the largest gap: 19 job-board platforms; 14 ATS platforms also remain at the 45/78 baseline. A parser, fixture, blocked request, empty board or partial roster does not count. Preserve failed evidence and the acquisition acceptance criteria.
