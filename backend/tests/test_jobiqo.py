@@ -73,3 +73,44 @@ def test_kampajobs_uses_zero_based_page_parameter():
         "https://www.kampajobs.ch/jobs",
         "https://www.kampajobs.ch/jobs?page=1",
     ]
+
+
+def test_kampajobs_linked_job_requires_matching_publisher_identity():
+    import asyncio
+
+    url = "https://www.kampajobs.ch/job/engineer"
+    frame = "https://www.publicjobs.ch/jobs/~job123/~channel0123456789abcdef0123456789abcdef?ext"
+    posting = {"@type": "JobPosting", "hiringOrganization": {"name": "Employer"}}
+    body = f"""
+    <html><body class="page-node-42 node-type-job-per-link">
+    <div class="pane-node-title"><h2>Engineer</h2></div>
+    <iframe class="l-page-slim-iframe" src="{frame}"></iframe>
+    <script type="application/ld+json">{json.dumps(posting)}</script>
+    </body></html>
+    """.encode()
+
+    async def run(publisher_id):
+        def respond(request):
+            if request.url.path == "/robots.txt":
+                return httpx.Response(200, text="User-agent: *\nDisallow:\n")
+            assert str(request.url) == frame
+            return httpx.Response(
+                200,
+                text=f"""
+                <html><head><link rel="canonical"
+                    href="https://publicjobs.ch/jobs/region/sector/{publisher_id}-engineer">
+                </head><body><h1>Engineer</h1><div class="preview_body">
+                Full description.
+                <a href="https://www.publicjobs.ch/bewerben/~applyID321">Apply</a>
+                </div></body></html>
+                """,
+            )
+
+        async with httpx.AsyncClient(transport=httpx.MockTransport(respond)) as client:
+            return await JobiqoConnector("www.kampajobs.ch", client).kampajobs_linked_job(
+                body, "42", url
+            )
+
+    assert asyncio.run(run(123)).application_url.endswith("~applyID321")
+    with pytest.raises(ValueError, match="publisher identity mismatch"):
+        asyncio.run(run(124))

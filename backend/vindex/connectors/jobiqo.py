@@ -166,6 +166,10 @@ class JobiqoConnector:
                     r"(?i)(?:(?:online |hier |jetzt )?bewerben(?: Sie sich)?|bewirb dich(?: jetzt)?|senden Sie bitte online|exclusively via our online portal|(?:direkt )?über unser Stellenportal|via unserem Bewerbungstool|(?:über das )?Online-?portal)",
                     control.get_text(" ", strip=True),
                 )
+                or re.fullmatch(
+                    r'(?i)via the "Apply" button in this vacancy on cinfoPoste',
+                    control.get_text(" ", strip=True),
+                )
                 or "bewerben" in control.get_text(" ", strip=True).casefold()
                 and control.get("href")
             ]
