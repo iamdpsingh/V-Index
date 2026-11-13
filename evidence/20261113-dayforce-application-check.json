@@ -1,0 +1,16 @@
+{
+  "date_ist": "2026-11-13",
+  "new_verified_platforms": 0,
+  "application_route": "https://jobs.dayforcehcm.com/en-US/mew/CANDIDATEPORTAL/jobs/{id}/apply",
+  "application_observations": [
+    {"posting_id": 1745, "http_status": 200, "application_and_posting_markers": true},
+    {"posting_id": 2010, "http_status": 200, "application_and_posting_markers": true},
+    {"posting_id": 1900, "http_status": 307, "prior_posting_observation": "expired"}
+  ],
+  "candidate_search_observations": [
+    {"tenant": "mew", "http_status": 403},
+    {"tenant": "silklaser", "http_status": 403},
+    {"tenant": "couryhospitality", "http_status": 403}
+  ],
+  "redirects_followed": false
+}
