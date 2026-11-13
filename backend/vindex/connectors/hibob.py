@@ -36,7 +36,7 @@ class HiBobConnector:
         if (
             not isinstance(rows, list)
             or not 0 < len(rows) < 100
-            or not isinstance(payload.get("filterGroups"), list)
+            or not isinstance(payload.get("filterGroups"), dict)
             or not isinstance(payload.get("jobOpeningMetadata"), list)
             or set(payload) != {"jobAdDetails", "filterGroups", "jobOpeningMetadata"}
         ):

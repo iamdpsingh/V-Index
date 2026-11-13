@@ -879,16 +879,43 @@
   {
     "name": "HiBob",
     "kind": "ats",
-    "implementation_status": "NOT_STARTED",
-    "evidence_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
+    "evidence_status": "FAILED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
-    "failure_reason": null,
+    "examples": [
+      {
+        "provider": "HiBob",
+        "url": "https://oseyo-c916b6e4132742.careers.hibob.com/",
+        "at": "2026-11-13T10:03:05.693137+00:00",
+        "revision": "4ad8e5e656988922b79d8821403fea517fa2d4c0",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "debbdda67b6befdf3319511a63dc71892deeeb8425779c0051c577f99d1ab489",
+        "count": 0,
+        "status": "FAILED",
+        "complete": false,
+        "error": "ValueError: Unexpected or potentially truncated HiBob job collection",
+        "finished_at": "2026-11-13T10:03:07.825199+00:00"
+      },
+      {
+        "provider": "HiBob",
+        "url": "https://ecarstrade.careers.hibob.com/",
+        "at": "2026-11-13T10:03:08.326566+00:00",
+        "revision": "4ad8e5e656988922b79d8821403fea517fa2d4c0",
+        "working_tree_dirty_at_start": false,
+        "code_sha256": "debbdda67b6befdf3319511a63dc71892deeeb8425779c0051c577f99d1ab489",
+        "count": 0,
+        "status": "FAILED",
+        "complete": false,
+        "error": "ValueError: Unexpected or potentially truncated HiBob job collection",
+        "finished_at": "2026-11-13T10:03:09.811838+00:00"
+      }
+    ],
+    "last_run_at": "2026-11-13T10:03:09.811838+00:00",
+    "extraction_count": 0,
+    "failure_reason": "ValueError: Unexpected or potentially truncated HiBob job collection; ValueError: Unexpected or potentially truncated HiBob job collection",
     "limitations": [
-      "Connector not implemented"
+      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test"
     ]
   },
   {
