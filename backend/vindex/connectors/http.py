@@ -49,6 +49,12 @@ class PublicHTTP:
             "/public/staffing/v1/job-requisitions"
         ):
             allowed_headers = {"orgoid"}
+        if (
+            parsed.hostname
+            and parsed.hostname.endswith(".careers.hibob.com")
+            and parsed.path == "/api/job-ad"
+        ):
+            allowed_headers = {"companyidentifier"}
         if headers and set(headers) != allowed_headers:
             raise ValueError("Unsupported provider request header")
         for attempt in range(3):

@@ -31,6 +31,9 @@ from vindex.connectors.firststage import FirstStageConnector
 from vindex.connectors.freshteam import FreshteamConnector
 from vindex.connectors.gohire import SLUG as GOHIRE_SLUG
 from vindex.connectors.gohire import GoHireConnector
+from vindex.connectors.hibob import SUFFIX as HIBOB_SUFFIX
+from vindex.connectors.hibob import TENANTS as HIBOB_TENANTS
+from vindex.connectors.hibob import HiBobConnector
 from vindex.connectors.hirebridge import HireBridgeConnector
 from vindex.connectors.hirehive import HireHiveConnector
 from vindex.connectors.hireology import HireologyConnector
@@ -203,6 +206,16 @@ def detect(url: str) -> tuple[str, str]:
         if p.path.rstrip("/") != EXENZO_BOARDS[p.hostname].rstrip("/") or p.query or p.fragment:
             raise ValueError("Expected an unfiltered reviewed Exenzo board")
         return "exenzo", p.hostname
+    if p.hostname and p.hostname.endswith(HIBOB_SUFFIX):
+        tenant = p.hostname.removesuffix(HIBOB_SUFFIX)
+        if (
+            tenant not in HIBOB_TENANTS
+            or p.path not in {"", "/", "/jobs", "/jobs/"}
+            or p.query
+            or p.fragment
+        ):
+            raise ValueError("Expected an unfiltered reviewed HiBob career board")
+        return "hibob", tenant
     if p.hostname == ADP_HOST:
         match = re.fullmatch(rf"/({ADP_SLUG})(?:/cx/job-listing)?/?", p.path)
         if not match or p.query or p.fragment:
@@ -449,6 +462,8 @@ def create_connector(
         return ParadoxConnector(slug, client)
     if provider == "exenzo":
         return ExenzoConnector(slug, client)
+    if provider == "hibob":
+        return HiBobConnector(slug, client)
     if provider == "adp":
         return ADPConnector(slug, client)
     if provider == "jobiqo":
