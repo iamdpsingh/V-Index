@@ -78,7 +78,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | JobMount | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | CareerSiteCloud | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | JobBoard.com | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 22 | 2026-11-08T12:15:42.598392+00:00 | https://jobs.acevo.org.uk/ (15; LIVE_VERIFIED); https://www.gradsouthwest.com/ (7; LIVE_VERIFIED)  |
-| Artha | job_board | IMPLEMENTED | FAILED | HIGH | 0 | 2026-11-13T15:14:01.636487+00:00 | https://lexpath.com.au/ (0; FAILED); https://joberly.eu/ (0; FAILED) ValueError: Missing verified Artha application entry; ValueError: Invalid Artha posting origin or identity |
+| Artha | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 124 | 2026-11-13T15:17:31.930939+00:00 | https://lexpath.com.au/ (11; LIVE_VERIFIED); https://joberly.eu/ (113; LIVE_VERIFIED)  |
 | jobboardsoftware.com | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 4 | 2026-11-12T15:54:29.204254+00:00 | https://agconnect.exenzo.nl/ (3; LIVE_VERIFIED); https://vacatures.ecommerce.nl/vacatures (1; LIVE_VERIFIED)  |
 | jobBoardHQ | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 199 | 2026-11-12T15:51:51.973792+00:00 | https://jobboardhq.esc17.net/search (47; LIVE_VERIFIED); https://resume.absc.org/search (152; LIVE_VERIFIED)  |
 | Nodex | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 50 | 2026-11-08T12:16:39.627724+00:00 | https://www.emotivtech.co.uk/search (35; LIVE_VERIFIED); https://www.geckotravelrecruitment.co.uk/search (15; LIVE_VERIFIED)  |

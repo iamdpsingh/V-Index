@@ -1,0 +1,32 @@
+[
+  {
+    "provider": "Artha",
+    "url": "https://lexpath.com.au/",
+    "at": "2026-11-13T15:15:27.248952+00:00",
+    "revision": "03da313764bda25d5f4a866da4f4f268ffa780d3",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "f2f2d8e60317420e27563c8d418b564ddba930c3c4bdd52439da4a3b57f46847",
+    "count": 11,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "1f9657e98cbbbc5bfc188c1cf3757133d7b5ed3bc176f1ae5f883c175a828367",
+    "finished_at": "2026-11-13T15:15:35.700049+00:00"
+  },
+  {
+    "provider": "Artha",
+    "url": "https://joberly.eu/",
+    "at": "2026-11-13T15:15:36.201361+00:00",
+    "revision": "03da313764bda25d5f4a866da4f4f268ffa780d3",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "f2f2d8e60317420e27563c8d418b564ddba930c3c4bdd52439da4a3b57f46847",
+    "count": 113,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "d40206b721ee47b1c582d9ee27ccacff6bebf9d30ecd6157eeb06188461981ea",
+    "finished_at": "2026-11-13T15:17:31.930939+00:00"
+  }
+]

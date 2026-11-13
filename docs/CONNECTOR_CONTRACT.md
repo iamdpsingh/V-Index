@@ -378,3 +378,7 @@ The connector resolves the public site identity and employer name, then reads th
 ## HiBob
 
 The reviewed Oseyo and eCarsTrade hosted sites expose their published job ads at the tenant's `/api/job-ad` route. Requests use the public tenant label as the company identifier and respect that host's robots policy. The connector requires two matching complete collection reads and rejects empty responses, malformed ads, duplicates and collections at or above 100 rows pending confirmation of the limit. Each job keeps its candidate-facing detail as the application entry, along with supplied employment, location, workplace and pay fields.
+
+## Artha
+
+The reviewed LexPath and Joberly boards publish their job inventory through the robots-advertised sitemap index and its numbered job maps. The connector validates same-origin detail URLs and canonical aliases, requires matching structured job and application URLs plus the published active flag, and rejects duplicate posting IDs or canonical destinations. It reconfirms the complete published job URL set before reconciliation.

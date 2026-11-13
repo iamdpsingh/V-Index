@@ -95,3 +95,5 @@ The Jobiqo source adapter accepts the unfiltered public board URLs `https://www.
 The source form now accepts unfiltered ADP MyJobs board URLs at `https://myjobs.adp.com/{site}/cx/job-listing`. Each result links to the corresponding public ADP job detail, which is also the application entry.
 
 The source form accepts the reviewed Oseyo and eCarsTrade HiBob hosted board roots. Their public job detail links also serve as application entry points.
+
+The source form accepts the reviewed LexPath and Joberly Artha board URLs. Each job exposes its canonical source and the board's published application entry.
