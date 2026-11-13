@@ -15,6 +15,8 @@ from vindex.connectors.registry import create_connector
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
+    ("Artha", "artha", "lexpath.com.au", "LexPath", "https://lexpath.com.au/"),
+    ("Artha", "artha", "joberly.eu", "Joberly", "https://joberly.eu/"),
     (
         "HiBob",
         "hibob",
@@ -705,6 +707,7 @@ async def main():
                 if batch.jobs:
                     job = batch.jobs[0]
                     if provider in {
+                        "artha",
                         "hibob",
                         "adp",
                         "brassring",

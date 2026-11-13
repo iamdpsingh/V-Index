@@ -8,6 +8,8 @@ from vindex.connectors.adp import HOST as ADP_HOST
 from vindex.connectors.adp import SLUG as ADP_SLUG
 from vindex.connectors.adp import ADPConnector
 from vindex.connectors.applicantpro import ApplicantProConnector
+from vindex.connectors.artha import HOSTS as ARTHA_HOSTS
+from vindex.connectors.artha import ArthaConnector
 from vindex.connectors.avature import PORTAL as AVATURE_PORTAL
 from vindex.connectors.avature import AvatureConnector
 from vindex.connectors.bamboohr import BambooHRConnector
@@ -206,6 +208,10 @@ def detect(url: str) -> tuple[str, str]:
         if p.path.rstrip("/") != EXENZO_BOARDS[p.hostname].rstrip("/") or p.query or p.fragment:
             raise ValueError("Expected an unfiltered reviewed Exenzo board")
         return "exenzo", p.hostname
+    if p.hostname in ARTHA_HOSTS:
+        if p.path not in {"", "/", "/browse-jobs", "/browse-jobs/"} or p.query or p.fragment:
+            raise ValueError("Expected an unfiltered reviewed Artha board")
+        return "artha", p.hostname
     if p.hostname and p.hostname.endswith(HIBOB_SUFFIX):
         tenant = p.hostname.removesuffix(HIBOB_SUFFIX)
         if (
@@ -462,6 +468,8 @@ def create_connector(
         return ParadoxConnector(slug, client)
     if provider == "exenzo":
         return ExenzoConnector(slug, client)
+    if provider == "artha":
+        return ArthaConnector(slug, client)
     if provider == "hibob":
         return HiBobConnector(slug, client)
     if provider == "adp":
