@@ -67,3 +67,42 @@ def test_jobiqo_resumes_and_reconfirms_before_publishing(
     with database() as session:
         assert session.get(JobiqoRefresh, source.id) is None
     assert reads == ["1", "2"]
+
+
+@pytest.mark.parametrize("removed", [False, True])
+def test_jobiqo_detail_404_requires_confirmed_roster_change(database, source, monkeypatch, removed):
+    from vindex.connectors.http import UpstreamStatusError
+
+    rosters = [ROSTER, {"2": ROSTER["2"]} if removed else ROSTER]
+
+    async def roster(self, policy):
+        return rosters.pop(0)
+
+    async def read_job(self, identifier, url, policy):
+        raise UpstreamStatusError(404)
+
+    async def load(*args):
+        return object()
+
+    monkeypatch.setattr(JobiqoConnector, "roster", roster)
+    monkeypatch.setattr(JobiqoConnector, "read_job", read_job)
+    monkeypatch.setattr(jobiqo_refresh.RobotsPolicy, "load", load)
+
+    async def refresh():
+        async with httpx.AsyncClient() as client:
+            with database() as session:
+                item = session.get(type(source), source.id)
+                item.slug = "careers.unitedway.org"
+                await jobiqo_refresh.advance_jobiqo_refresh(session, item, client)
+
+    with pytest.raises(ValueError, match="roster changed" if removed else "HTTP 404"):
+        asyncio.run(refresh())
+
+    with database() as session:
+        stage = session.get(JobiqoRefresh, source.id)
+        if removed:
+            assert stage is None
+        else:
+            assert stage is not None
+            assert stage.roster == ROSTER
+            assert stage.jobs == []
