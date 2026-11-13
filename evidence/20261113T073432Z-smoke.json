@@ -1,0 +1,32 @@
+[
+  {
+    "provider": "ADP",
+    "url": "https://myjobs.adp.com/signatureperformancecareers/cx/job-listing",
+    "at": "2026-11-13T07:29:57.510205+00:00",
+    "revision": "cc0ddb2ef9c90d673e090697e9894edb1b29e7a0",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "70dc7bd8fdd3dc7288ad85d871d93812195b32546e980235e24916f3dd11e70a",
+    "count": 21,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "9d444f457c6de73ba049e841c5107a83e04e9d1e4b592d93367def4becc489a9",
+    "finished_at": "2026-11-13T07:30:27.338351+00:00"
+  },
+  {
+    "provider": "ADP",
+    "url": "https://myjobs.adp.com/wesbancocareers/cx/job-listing",
+    "at": "2026-11-13T07:30:27.839226+00:00",
+    "revision": "cc0ddb2ef9c90d673e090697e9894edb1b29e7a0",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "70dc7bd8fdd3dc7288ad85d871d93812195b32546e980235e24916f3dd11e70a",
+    "count": 178,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "3805de14884339f562316917f198a80d0a151cb12e0dffb638946746018f07a4",
+    "finished_at": "2026-11-13T07:34:32.088285+00:00"
+  }
+]

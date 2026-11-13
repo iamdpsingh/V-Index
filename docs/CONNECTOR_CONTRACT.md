@@ -370,3 +370,7 @@ The reviewed Trellis and Launch Pad Job Club roots expose a single page of up to
 Agrajo and United Way are independently operated Jobiqo boards. Only their unfiltered reviewed roots are accepted. Each refresh checks the advertised total, reads every bounded numbered page, and requires a unique numeric card ID and canonical job URL for each result. It reads each public posting and repeats the full roster before reconciliation. Empty, oversized, inconsistent and incomplete results fail the refresh.
 
 Agrajo can publish direct links, email instructions or application controls on the posting. United Way exposes job identity and external application links in the server-rendered page state. An external description may be read only when the posting embeds the reviewed public publisher route, that origin permits the request, and its structured posting ID and title match. The connector leaves applications to the user.
+
+## ADP MyJobs
+
+The connector resolves the public site identity and employer name, then reads the public requisitions collection under that organization. It checks exact totals and unique IDs across all pages, reads each matching active detail, preserves the candidate-facing title and original listing title, and reconfirms the roster before publishing. Only MyJobs boards with up to 400 requisitions are supported. The public detail is the application entry. [Live evidence](../evidence/20261113T073432Z-smoke.json)
