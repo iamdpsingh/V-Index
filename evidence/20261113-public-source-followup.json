@@ -1,0 +1,38 @@
+{
+  "date_ist": "2026-11-13",
+  "scope": "Public source probes with fixed HTTPS hosts, robots checks and redirects disabled",
+  "new_verified_platforms": 0,
+  "observations": [
+    {
+      "platform": "Dayforce",
+      "urls": [
+        "https://jobs.dayforcehcm.com/api/ymcasm/v1/jobfeeds",
+        "https://jobs.dayforcehcm.com/api/projectrenewal/v1/jobfeeds"
+      ],
+      "result": "Both paths passed robots checks and returned HTTP 403. No roster received."
+    },
+    {
+      "platform": "Paycom",
+      "urls": [
+        "https://communitybridges.org/careers/",
+        "https://www.palmershomecarellc.com/careers/"
+      ],
+      "result": "Both employer pages returned HTTP 200. Community Bridges publishes a recruitment announcement and links out to the ATS; Palmer's embeds the Paycom career portal. Neither provided a complete employer-side roster."
+    },
+    {
+      "platform": "CareerSiteCloud",
+      "urls": ["https://careers.amedisys.com/join/jobs"],
+      "result": "HTTP 200. The current site contains iCIMS and Jibe markers."
+    },
+    {
+      "platform": "Talenetic",
+      "urls": ["https://www.procontractjobs.com/Rss-Feed/sales---marketing/fixed-term-contracts/Remote%20OR%20Remote%20working%20OR%20Work%20from%20Home/oo-ps-jt-kw"],
+      "result": "Filtered RSS path advertised by the board was disallowed by robots and skipped."
+    },
+    {
+      "platform": "eJobBoard",
+      "urls": ["https://ejobboard.co.uk/", "https://www.ejobboard.co.uk/", "https://ejobboard.com/"],
+      "result": "UK domain variants failed DNS at robots lookup. The .com root returned HTTP 200 with a script pointing to /lander."
+    }
+  ]
+}
