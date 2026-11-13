@@ -44,3 +44,32 @@ def test_registry_accepts_only_unfiltered_jobiqo_board():
     assert detect("https://careers.unitedway.org/jobs") == ("jobiqo", "careers.unitedway.org")
     with pytest.raises(ValueError, match="unfiltered"):
         detect("https://careers.unitedway.org/jobs?page=2")
+
+
+def test_kampajobs_uses_zero_based_page_parameter():
+    import asyncio
+
+    requests = []
+
+    async def handler(request):
+        requests.append(request.url)
+        return httpx.Response(200, content=b"<html></html>")
+
+    async def fetch_pages():
+        from urllib.robotparser import RobotFileParser
+
+        from vindex.connectors.robots import RobotsPolicy
+
+        parser = RobotFileParser()
+        parser.parse([])
+        policy = RobotsPolicy(parser)
+        async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
+            connector = JobiqoConnector("www.kampajobs.ch", client)
+            await connector.fetch(0, policy)
+            await connector.fetch(1, policy)
+
+    asyncio.run(fetch_pages())
+    assert [str(url) for url in requests] == [
+        "https://www.kampajobs.ch/jobs",
+        "https://www.kampajobs.ch/jobs?page=1",
+    ]

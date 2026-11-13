@@ -223,7 +223,7 @@ class JobiqoConnector:
         )
         if self.kampajobs and not controls and not links:
             email_application = (
-                "bewerb" in description.casefold()
+                re.search(r"(?i)bewerb|melde dich bei|melden Sie sich bei", description) is not None
                 and soup.select_one('.node--full .field--name-body a[href^="mailto:"]') is not None
             )
         if len(links) > 1 or (not controls and not links and not email_application):
