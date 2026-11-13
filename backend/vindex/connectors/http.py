@@ -44,7 +44,12 @@ class PublicHTTP:
             raise ValueError("Outbound URL rejected")
         if form is not None and (method != "POST" or json_body is not None):
             raise ValueError("Form data requires a form-only POST")
-        if headers and set(headers) != {"Authorization"}:
+        allowed_headers = {"Authorization"}
+        if parsed.hostname == "myjobs.adp.com" and parsed.path.startswith(
+            "/public/staffing/v1/job-requisitions"
+        ):
+            allowed_headers = {"orgoid"}
+        if headers and set(headers) != allowed_headers:
             raise ValueError("Unsupported provider request header")
         for attempt in range(3):
             try:

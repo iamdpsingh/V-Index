@@ -4,6 +4,9 @@ import re
 from urllib.parse import parse_qs, urlsplit
 
 import httpx
+from vindex.connectors.adp import HOST as ADP_HOST
+from vindex.connectors.adp import SLUG as ADP_SLUG
+from vindex.connectors.adp import ADPConnector
 from vindex.connectors.applicantpro import ApplicantProConnector
 from vindex.connectors.avature import PORTAL as AVATURE_PORTAL
 from vindex.connectors.avature import AvatureConnector
@@ -200,6 +203,11 @@ def detect(url: str) -> tuple[str, str]:
         if p.path.rstrip("/") != EXENZO_BOARDS[p.hostname].rstrip("/") or p.query or p.fragment:
             raise ValueError("Expected an unfiltered reviewed Exenzo board")
         return "exenzo", p.hostname
+    if p.hostname == ADP_HOST:
+        match = re.fullmatch(rf"/({ADP_SLUG})(?:/cx/job-listing)?/?", p.path)
+        if not match or p.query or p.fragment:
+            raise ValueError("Expected an unfiltered ADP MyJobs board")
+        return "adp", match[1].lower()
     if p.hostname in JOBIQO_BOARDS:
         if p.path.rstrip("/") != JOBIQO_BOARDS[p.hostname][0] or p.query or p.fragment:
             raise ValueError("Expected an unfiltered reviewed Jobiqo board")
@@ -441,6 +449,8 @@ def create_connector(
         return ParadoxConnector(slug, client)
     if provider == "exenzo":
         return ExenzoConnector(slug, client)
+    if provider == "adp":
+        return ADPConnector(slug, client)
     if provider == "jobiqo":
         return JobiqoConnector(slug, client)
     if provider == "jobboardfire":

@@ -15,6 +15,20 @@ from vindex.connectors.registry import create_connector
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
+    (
+        "ADP",
+        "adp",
+        "signatureperformancecareers",
+        "Signature Performance",
+        "https://myjobs.adp.com/signatureperformancecareers/cx/job-listing",
+    ),
+    (
+        "ADP",
+        "adp",
+        "wesbancocareers",
+        "WesBanco",
+        "https://myjobs.adp.com/wesbancocareers/cx/job-listing",
+    ),
     ("Jobiqo", "jobiqo", "www.agrajo.com", "Agrajo", "https://www.agrajo.com/job"),
     (
         "Jobiqo",
@@ -683,6 +697,7 @@ async def main():
                 if batch.jobs:
                     job = batch.jobs[0]
                     if provider in {
+                        "adp",
                         "brassring",
                         "ejobsitesoftware_com",
                         "jobboardio",
