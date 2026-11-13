@@ -178,3 +178,31 @@ def test_public_detail_does_not_disclose_raw_or_internal_observations(client, da
         assert provenance["source_url"] == posting().source_url
     with database() as session:
         assert session.scalar(select(Observation)).data["raw"]["browser_token"] == canary
+
+
+def test_worker_retires_abandoned_run_and_publishes_fresh_data(database, source, monkeypatch):
+    from vindex.db import now
+
+    with database() as session:
+        abandoned = Run(
+            source_id=source.id,
+            started_at=now() - timedelta(seconds=worker.SOURCE_LEASE_SECONDS + 1),
+        )
+        session.add(abandoned)
+        session.commit()
+        abandoned_id = abandoned.id
+
+    monkeypatch.setattr(worker, "Session", database)
+    redis = Mock()
+    redis.lock.return_value = nullcontext()
+    monkeypatch.setattr(worker.Redis, "from_url", lambda url: redis)
+
+    async def discover():
+        return Enumeration(jobs=[posting()], complete=True)
+
+    monkeypatch.setattr(worker, "create_connector", lambda *args: Mock(discover=discover))
+    run_id = asyncio.run(worker.refresh(source.id))
+    with database() as session:
+        abandoned = session.get(Run, abandoned_id)
+        assert abandoned.status == "failed" and abandoned.finished_at is not None
+        assert session.get(Run, run_id).status == "success"

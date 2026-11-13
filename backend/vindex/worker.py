@@ -7,7 +7,7 @@ from datetime import timedelta
 
 import httpx
 from redis import Redis
-from sqlalchemy import select
+from sqlalchemy import select, update
 
 from vindex.connectors.jobiqo import STAGED_HOSTS as STAGED_JOBIQO_HOSTS
 from vindex.connectors.registry import create_connector
@@ -17,24 +17,42 @@ from vindex.jobiqo_refresh import advance_jobiqo_refresh
 from vindex.madgex_refresh import advance_madgex_refresh
 
 log = logging.getLogger("vindex.worker")
+REFRESH_TIMEOUT_SECONDS = 600
+SOURCE_LEASE_SECONDS = 900
+SCHEDULER_POLL_SECONDS = 30
 
 
 async def refresh(source_id: int, *, only_if_due: bool = False) -> int | None:
     redis = Redis.from_url(os.getenv("REDIS_URL", "redis://localhost:6379/0"))
     # 15-minute lease exceeds the bounded 10-minute refresh timeout.
-    with redis.lock(f"vindex:source:{source_id}", timeout=900, blocking_timeout=1):
+    with redis.lock(f"vindex:source:{source_id}", timeout=SOURCE_LEASE_SECONDS, blocking_timeout=1):
         with Session() as session:
             source = session.get(Source, source_id)
             if source is None:
                 raise ValueError("Source not found")
             if only_if_due and aware(source.next_check) > now():
                 return None
+            # A new lease can retire an attempt left behind by a stopped worker.
+            checked_at = now()
+            session.execute(
+                update(Run)
+                .where(
+                    Run.source_id == source_id,
+                    Run.status == "running",
+                    Run.started_at <= checked_at - timedelta(seconds=SOURCE_LEASE_SECONDS),
+                )
+                .values(
+                    status="failed",
+                    finished_at=checked_at,
+                    error="Worker stopped before the refresh finished",
+                )
+            )
             run = Run(source_id=source_id)
             session.add(run)
             session.commit()
             run_id = run.id
             try:
-                async with asyncio.timeout(600):
+                async with asyncio.timeout(REFRESH_TIMEOUT_SECONDS):
                     async with httpx.AsyncClient(
                         timeout=30,
                         trust_env=False,
@@ -71,7 +89,9 @@ async def refresh(source_id: int, *, only_if_due: bool = False) -> int | None:
                 assert failed_run is not None and source is not None
                 failed_run.status, failed_run.error = (
                     "failed",
-                    f"{type(error).__name__}: {str(error)[:500]}",
+                    f"Refresh exceeded {REFRESH_TIMEOUT_SECONDS // 60} minutes"
+                    if isinstance(error, TimeoutError) and not str(error)
+                    else f"{type(error).__name__}: {str(error)[:500]}",
                 )
                 failed_run.finished_at = now()
                 source.failures += 1
@@ -106,7 +126,7 @@ async def serve() -> None:
                 await refresh(source_id, only_if_due=True)
             except Exception:
                 log.exception("Worker infrastructure failure source=%s", source_id)
-        await asyncio.sleep(30)
+        await asyncio.sleep(SCHEDULER_POLL_SECONDS)
 
 
 if __name__ == "__main__":

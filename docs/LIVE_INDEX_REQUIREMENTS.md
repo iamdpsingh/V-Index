@@ -27,3 +27,5 @@ No instant upstream push protocol is implemented. If sub-hour ingestion or push 
 - Demonstrate the browser sees updated database data, avoids stale shared caches, retains current reading state and presents unknown/stale/error states truthfully.
 
 Continuous production operation has not yet been established by local scheduled runs or CI. The coverage objective and budget remain unchanged.
+
+A worker attempt allows up to 10 minutes for upstream collection. The scheduler checks for due work after each batch of sources, then waits 30 seconds. Once the source lease expires, the next eligible attempt marks an abandoned running entry as failed. Normal fetch failures retry after 30 minutes, then 60 minutes, then double up to a 24-hour cap. Staged providers schedule their next batch immediately, subject to the worker queue. Search continues serving the last complete index until a refresh succeeds.
