@@ -1,0 +1,27 @@
+{
+  "date_ist": "2026-11-13",
+  "new_verified_platforms": 0,
+  "talenetic": [
+    {
+      "board": "BritishMedicalJobs",
+      "hosts": ["britishmedicaljobs.com", "www.britishmedicaljobs.com"],
+      "result": "Both robots lookups returned HTTP 301 to an unrelated casino domain."
+    },
+    {
+      "board": "OilFinity",
+      "hosts": ["oilfinity.com", "www.oilfinity.com"],
+      "result": "Both homepages returned HTTP 302 to a domain marketplace listing."
+    },
+    {
+      "board": "TopEngineer",
+      "hosts": ["topengineer.com", "www.topengineer.com"],
+      "result": "Both policy lookups timed out."
+    }
+  ],
+  "ejobboard": {
+    "host": "www.ejobboard.com",
+    "result": "Homepage returned the same 114-byte shell pointing at /lander as the previously checked apex.",
+    "live_customer_installations_found": 0
+  },
+  "redirects_followed": false
+}
