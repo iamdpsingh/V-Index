@@ -1,0 +1,12 @@
+{
+  "date_ist": "2026-11-13",
+  "new_verified_platforms": 0,
+  "discovery": "Headcount Labs public MCP search_jobs with the paycom source filter",
+  "samples": [
+    {"employer": "Community Bridges", "api_candidates": 6, "sample_id": 176224, "original_detail_has_jobposting": true},
+    {"employer": "Simply Salad", "api_candidates": 21, "sample_id": 226517, "original_detail_has_jobposting": true},
+    {"employer": "Action for Children", "api_candidates": 7, "sample_id": 92699, "original_detail_has_jobposting": true}
+  ],
+  "ambiguous_query": "The Palmer name search returned 27 distinct URLs. The first three used a different tenant from the official Palmer's Home Care embed, so the result was excluded.",
+  "roster": "All three official career-page routes returned HTTP 200 JavaScript shells. The policy advertised no sitemaps. No authoritative roster or matching source-side count was established."
+}
