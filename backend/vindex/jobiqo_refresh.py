@@ -5,6 +5,7 @@ from datetime import timedelta
 import httpx
 from sqlalchemy.orm import Session
 
+from vindex.connectors.http import UpstreamStatusError
 from vindex.connectors.jobiqo import JobiqoConnector
 from vindex.connectors.robots import RobotsPolicy
 from vindex.db import JobiqoRefresh, Source, now
@@ -38,7 +39,14 @@ async def advance_jobiqo_refresh(
 
     pending = [identifier for identifier in roster if identifier not in completed]
     for identifier in pending[:BATCH_SIZE]:
-        job = await connector.read_job(identifier, roster[identifier], policy)
+        try:
+            job = await connector.read_job(identifier, roster[identifier], policy)
+        except UpstreamStatusError as error:
+            if error.status_code == 404 and await connector.roster(policy) != roster:
+                session.delete(stage)
+                session.commit()
+                raise ValueError("Jobiqo roster changed after a detail returned 404") from error
+            raise
         jobs.append(job)
         stage.jobs = [*stage.jobs, job.model_dump(mode="json")]
         session.commit()
