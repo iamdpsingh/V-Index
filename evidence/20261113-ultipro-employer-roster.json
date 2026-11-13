@@ -1,0 +1,25 @@
+{
+  "date_ist": "2026-11-13",
+  "new_verified_platforms": 0,
+  "ultipro": [
+    {
+      "employer_site": "https://www.infotechinc.com/careers/",
+      "job_board": "https://recruiting.ultipro.com/INF1010INFT/JobBoard/a1f626ce-9a88-4c30-86ee-6562ee8ea030/",
+      "board_http_status": 200,
+      "real_opportunity_ids_in_html": 0,
+      "load_search_results_allowed": false
+    },
+    {
+      "employer_site": "https://www.mdi.org/employment-services/",
+      "job_board": "https://recruiting.ultipro.com/MIN1008/JobBoard/ff06182d-f20a-27d5-27df-3c2fd67fead3/?q=&o=postedDateDesc",
+      "board_http_status": 200,
+      "real_opportunity_ids_in_html": 0,
+      "load_search_results_allowed": false
+    }
+  ],
+  "paycor": {
+    "accelerate_learning": "Employer careers page returned HTTP 200 and referenced recruitingbypaycor.com. No employer-published Atom feed was identified.",
+    "ctm": "Both checked employer career routes returned HTTP 301. Redirects were disabled."
+  },
+  "disallowed_endpoints_requested": 0
+}
