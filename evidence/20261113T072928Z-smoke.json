@@ -1,0 +1,28 @@
+[
+  {
+    "provider": "ADP",
+    "url": "https://myjobs.adp.com/signatureperformancecareers/cx/job-listing",
+    "at": "2026-11-13T07:29:13.074035+00:00",
+    "revision": "ea39fbabc860a1b1973ccfaae47b816cd204c640",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "ceb80685b53d378dcff08bc32562fdc9450bb0aae847d0bd152ca037210cb634",
+    "count": 0,
+    "status": "FAILED",
+    "complete": false,
+    "error": "ValueError: ADP detail identity mismatch for 5001235761306",
+    "finished_at": "2026-11-13T07:29:18.319443+00:00"
+  },
+  {
+    "provider": "ADP",
+    "url": "https://myjobs.adp.com/wesbancocareers/cx/job-listing",
+    "at": "2026-11-13T07:29:18.820618+00:00",
+    "revision": "ea39fbabc860a1b1973ccfaae47b816cd204c640",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "ceb80685b53d378dcff08bc32562fdc9450bb0aae847d0bd152ca037210cb634",
+    "count": 0,
+    "status": "FAILED",
+    "complete": false,
+    "error": "ValueError: ADP detail identity mismatch for 5001237621006",
+    "finished_at": "2026-11-13T07:29:27.959364+00:00"
+  }
+]

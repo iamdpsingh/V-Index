@@ -6,7 +6,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 
 | Platform | Kind | Implementation | Evidence | Risk | Count (sum) | Last run | Examples / failures |
 |---|---|---|---|---|---|---|---|
-| ADP | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
+| ADP | ats | IMPLEMENTED | FAILED | HIGH | 0 | 2026-11-13T07:29:27.959364+00:00 | https://myjobs.adp.com/signatureperformancecareers/cx/job-listing (0; FAILED); https://myjobs.adp.com/wesbancocareers/cx/job-listing (0; FAILED) ValueError: ADP detail identity mismatch for 5001235761306; ValueError: ADP detail identity mismatch for 5001237621006 |
 | ApplicantPro | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 5 | 2026-11-06T08:53:36.755511+00:00 | https://farbank.applicantpro.com/jobs/ (2; LIVE_VERIFIED); https://clarke.applicantpro.com/jobs/ (3; LIVE_VERIFIED)  |
 | Ashby | ats | IMPLEMENTED | LIVE_VERIFIED | LOW | 243 | 2026-11-05T16:42:19.453089+00:00 | https://jobs.ashbyhq.com/Ashby (72; LIVE_VERIFIED); https://jobs.ashbyhq.com/ramp (171; LIVE_VERIFIED)  |
 | Avature | ats | IMPLEMENTED | LIVE_VERIFIED | HIGH | 48 | 2026-11-06T18:28:04.539290+00:00 | https://careers.avature.net/en_US/main/SearchJobs (19; LIVE_VERIFIED); https://metrobank.avature.net/amazingcareers/SearchJobs (29; LIVE_VERIFIED)  |

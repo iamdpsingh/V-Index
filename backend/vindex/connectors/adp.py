@@ -75,10 +75,12 @@ class ADPConnector:
         if not isinstance(postings, list) or len(postings) != 1:
             raise ValueError("Missing or ambiguous ADP detail")
         item = postings[0]
+        published_title = text(item.get("publishedJobTitle") or item["jobTitle"])
         if (
             item["reqId"] != identifier
-            or item["jobTitle"] != title
+            or not published_title
             or item.get("canApply") is not True
+            or (item.get("careerSiteDomains") and self.slug not in item["careerSiteDomains"])
         ):
             raise ValueError(f"ADP detail identity mismatch for {identifier}")
         description = text(item.get("jobDescription") or "")
@@ -109,7 +111,7 @@ class ADPConnector:
         return [
             JobInput(
                 external_id=identifier,
-                title=text(item.get("publishedJobTitle") or title),
+                title=published_title,
                 company=company,
                 description="\n\n".join(filter(None, [description, qualifications])),
                 location="; ".join(locations),
@@ -118,6 +120,7 @@ class ADPConnector:
                 published_at=item.get("postingDate") or None,
                 employment_type=item.get("regularTemp") or None,
                 raw={
+                    "listing_title": title,
                     "pay_basis": item.get("salaried"),
                     "requisition_id": item.get("clientRequisitionID"),
                 },
