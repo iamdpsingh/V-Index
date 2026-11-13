@@ -163,7 +163,7 @@ class JobiqoConnector:
                 control
                 for control in soup.select(".public-profile a[href], .public-profile button")
                 if re.fullmatch(
-                    r"(?i)(?:(?:online |hier |jetzt )?bewerben(?: Sie sich)?|bewirb dich(?: jetzt)?)",
+                    r"(?i)(?:(?:online |hier |jetzt )?bewerben(?: Sie sich)?|bewirb dich(?: jetzt)?|senden Sie bitte online)",
                     control.get_text(" ", strip=True),
                 )
                 or "bewerben" in control.get_text(" ", strip=True).casefold()
@@ -268,7 +268,14 @@ class JobiqoConnector:
             ),
             salary=salary,
             published_at=board.get("published") or posting.get("datePosted"),
-            quality_flags=["application_by_email"] if email_application else [],
+            quality_flags=(["application_by_email"] if email_application else [])
+            + (
+                ["application_uses_http"]
+                if self.kampajobs
+                and not links
+                and any(urlsplit(destination).scheme == "http" for destination in advertised)
+                else []
+            ),
             raw={
                 "structured_title": posting.get("title"),
                 "valid_through": posting.get("validThrough") or board.get("expiration"),
