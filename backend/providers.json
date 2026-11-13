@@ -2943,7 +2943,7 @@
     "name": "Jobiqo",
     "kind": "job_board",
     "implementation_status": "IMPLEMENTED",
-    "evidence_status": "FAILED",
+    "evidence_status": "LIVE_VERIFIED",
     "risk": "HIGH",
     "risk_basis": "Planning estimate; not validated provider behavior",
     "examples": [
@@ -2965,26 +2965,24 @@
         "finished_at": "2026-11-12T21:37:56.977951+00:00"
       },
       {
+        "url": "https://www.kampajobs.ch/jobs",
+        "finished_at": "2026-11-13T10:01:28.202526+00:00",
+        "revision": "10e182c201c35bbe04b8f45882c324f17a2b7587",
+        "count": 123,
+        "complete": true,
+        "payload_sha256": "ae609bc967ad243cb9fed9279272a915f00931508177225c306ed8b2d810438f",
         "provider": "Jobiqo",
-        "url": "https://careers.unitedway.org/jobs",
-        "at": "2026-11-12T21:37:57.480276+00:00",
-        "revision": "e7eb1643f975208553a013df1be764d951c2a27f",
-        "working_tree_dirty_at_start": false,
-        "code_sha256": "c5c312493e8dc46a4e73a3b31da821551a61c39c77786619ccda981be487d86e",
-        "count": 0,
-        "status": "FAILED",
-        "complete": false,
-        "error": "TimeoutError: ",
-        "finished_at": "2026-11-12T21:47:57.483634+00:00"
+        "status": "LIVE_VERIFIED",
+        "error": null,
+        "method": "Checkpointed production connector; resumed across revisions as application formats were added"
       }
     ],
-    "last_run_at": "2026-11-12T21:47:57.483634+00:00",
-    "extraction_count": 99,
-    "failure_reason": "TimeoutError: ",
+    "last_run_at": "2026-11-13T10:01:28.202526+00:00",
+    "extraction_count": 222,
+    "failure_reason": null,
     "limitations": [
-      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
-      "Only the reviewed Agrajo and United Way roots; exact advertised totals, bounded numeric pages and canonical details. Repeats the full roster before publishing.",
-      "United Way descriptions embedded on an external publisher are supported only for the reviewed public iframe route. No application forms are submitted or fetched."
+      "Agrajo and Kampajobs verified; United Way remains available but its complete run is blocked by an upstream posting.",
+      "Kampajobs uses checkpointed detail fetches and exact final roster reconciliation."
     ]
   },
   {
