@@ -334,8 +334,95 @@ class JobiqoConnector:
             raise ValueError(f"Jobiqo embedded posting ID mismatch for {identifier}")
         return postings[0]
 
+    async def kampajobs_linked_job(self, body: bytes, identifier: str, url: str) -> JobInput:
+        soup = document(body)
+        frames = soup.select("iframe.l-page-slim-iframe[src]")
+        heading = soup.select_one(".pane-node-title h2")
+        postings = structured_postings(soup)
+        if (
+            not soup.select_one(f"body.page-node-{identifier}.node-type-job-per-link")
+            or len(frames) != 1
+            or heading is None
+            or len(postings) != 1
+        ):
+            raise ValueError(f"Invalid Kampajobs linked detail for {identifier}")
+        publisher = "https://www.publicjobs.ch"
+        frame = str(frames[0]["src"])
+        match = re.fullmatch(
+            re.escape(publisher) + r"/jobs/~job([0-9]{1,12})/~channel[a-f0-9]{32}\?ext",
+            frame,
+        )
+        if not match:
+            raise ValueError(f"Unreviewed Kampajobs publisher for {identifier}")
+        http = PublicHTTP(self.http.client, {"www.publicjobs.ch"})
+        policy = await RobotsPolicy.load(http, publisher)
+        policy.check(frame)
+        await asyncio.sleep(policy.delay())
+        detail = document(await http.read(frame))
+        canonical = detail.select_one('link[rel="canonical"][href]')
+        title = heading.get_text(" ", strip=True)
+        upstream_heading = detail.select_one("h1")
+        if (
+            canonical is None
+            or not re.fullmatch(
+                rf"https://(?:www\.)?publicjobs\.ch/jobs/(?:[a-z0-9-]+/){{2}}{match[1]}-[a-z0-9-]+",
+                str(canonical["href"]),
+            )
+            or upstream_heading is None
+            or upstream_heading.get_text(" ", strip=True) != title
+        ):
+            raise ValueError(f"Kampajobs publisher identity mismatch for {identifier}")
+        description = detail.select_one(".preview_body")
+        apply = {
+            str(link["href"])
+            for link in detail.select(".preview_body a[href]")
+            if re.fullmatch(
+                re.escape(publisher) + r"/bewerben/~applyID[0-9]{1,12}", str(link["href"])
+            )
+        }
+        structured = postings[0]
+        company = text(structured.get("hiringOrganization", {}).get("name") or "")
+        if (
+            description is None
+            or not description.get_text(" ", strip=True)
+            or len(apply) != 1
+            or not company
+        ):
+            raise ValueError(f"Incomplete Kampajobs linked posting for {identifier}")
+        employment = structured.get("employmentType")
+        return JobInput(
+            external_id=identifier,
+            title=title,
+            company=company,
+            description=description.get_text(" ", strip=True),
+            source_url=url,
+            application_url=next(iter(apply)),
+            location="; ".join(
+                ", ".join(
+                    value
+                    for value in (address.get("addressLocality"), address.get("addressCountry"))
+                    if value
+                )
+                for place in (
+                    [structured["jobLocation"]]
+                    if isinstance(structured.get("jobLocation"), dict)
+                    else structured.get("jobLocation") or []
+                )
+                if (address := place.get("address"))
+            ),
+            employment_type=", ".join(employment) if isinstance(employment, list) else employment,
+            published_at=structured.get("datePosted"),
+            salary=structured.get("baseSalary") or None,
+            raw={
+                "publisher_url": str(canonical["href"]),
+                "valid_through": structured.get("validThrough"),
+            },
+        )
+
     async def read_job(self, identifier: str, url: str, policy: RobotsPolicy) -> JobInput:
         body = await self.read(url, policy)
+        if self.kampajobs and b"node-type-job-per-link" in body:
+            return await self.kampajobs_linked_job(body, identifier, url)
         try:
             return self.detail(body, identifier, url)
         except MissingJobPosting:
