@@ -241,7 +241,17 @@ class JobiqoConnector:
                 soup.select_one('.node--full .field--name-body a[href^="mailto:"]') is not None
                 or EMAIL.search(description) is not None
             )
-        if len(links) > 1 or (not controls and not links and not email_application):
+        contact_entry = (
+            self.kampajobs
+            and not controls
+            and not links
+            and not email_application
+            and re.search(r"(?i)\bKontakt:\s*", description) is not None
+            and soup.select_one('.node--full .field--name-body a[href^="mailto:"]') is not None
+        )
+        if len(links) > 1 or (
+            not controls and not links and not email_application and not contact_entry
+        ):
             raise ValueError(f"Missing or ambiguous Jobiqo application entry for {identifier}")
         locations = []
         places = posting.get("jobLocation") or []
@@ -281,6 +291,7 @@ class JobiqoConnector:
             salary=salary,
             published_at=board.get("published") or posting.get("datePosted"),
             quality_flags=(["application_by_email"] if email_application else [])
+            + (["application_contact_only"] if contact_entry else [])
             + (
                 ["application_uses_http"]
                 if self.kampajobs
