@@ -1,0 +1,61 @@
+{
+  "date_ist": "2026-11-13",
+  "new_verified_platforms": 0,
+  "dover": {
+    "index": "https://jobs.dover.com/sitemap.xml",
+    "employer_sitemap": {
+      "url": "https://jobs.dover.com/feed/careers_sitemap",
+      "entries": 2933
+    },
+    "job_sitemap": {
+      "url": "https://jobs.dover.com/feed/jobs_sitemap",
+      "entries": 9895
+    },
+    "sample_tenants": [
+      "protosthetics",
+      "modernrelay",
+      "brainlyne"
+    ],
+    "sample_result": "All sampled posting URLs returned HTTP 200 JavaScript shells without posting content. The host policy disallows /api/. Completeness and active status could not be confirmed.",
+    "authorized_api": "https://docs.dover.com/api/reference/operations/externalapilistjobpostings/"
+  },
+  "dayforce": {
+    "roster": "https://www.maasenergy.com/careers",
+    "published_posting_ids": [
+      1745,
+      1749,
+      1781,
+      1786,
+      1800,
+      1818,
+      1855,
+      1862,
+      1870,
+      1904,
+      1918,
+      1928,
+      1932,
+      1936,
+      1942,
+      1955,
+      1959,
+      1973,
+      1977,
+      1980,
+      1984,
+      1997,
+      2001,
+      2010
+    ],
+    "unchanged_after_detail_reads": true,
+    "detail_pages_with_description": 24,
+    "result": "The employer page published 24 Dayforce job URLs, each with an embedded description on the original ATS posting. Application entries and completeness against the ATS roster remain unverified.",
+    "second_employer": "Both SILK Laser employer host variants returned HTTP 403 on robots lookup. The careers feed was skipped."
+  },
+  "talenetic": {
+    "historical_lead": "https://www.talenetic.com/about-us/",
+    "current_operator_platform_reference": "https://uk.linkedin.com/company/niche-jobs",
+    "terms": "https://www.talenetic.com/terms-of-service/",
+    "result": "Talenetic references the historic Nurses.co.uk launch; the board operator currently names Jobiqo as its platform partner. Talenetic's terms restrict launching web crawlers. An authorized export remains the next step."
+  }
+}
