@@ -61,3 +61,34 @@ def test_madgex_refresh_resumes_and_requires_roster_reconfirmation(database, sou
     assert [job.external_id for job in result.jobs] == ["1", "2", "3"]
     assert reads == [url for url, _ in ROSTER.values()]
     assert rosters == []
+
+
+def test_madgex_accepts_canonical_slug_alias_for_same_posting():
+    import pytest
+
+    listing_url = "https://jobs.sciencecareers.org/job/1/biologist-%ce%b2/"
+    canonical_url = "https://jobs.sciencecareers.org/job/1/biologist/"
+    body = f"""
+      <html><head>
+      <link rel="canonical" href="{canonical_url}">
+      <script type="application/ld+json">{{
+        "@type": "JobPosting", "title": "Biologist", "description": "Research",
+        "hiringOrganization": {{"name": "Example"}}
+      }}</script>
+      </head><body>
+      <h1 class="mds-font-s6">Biologist</h1>
+      <a href="/apply/1/biologist/">Apply</a>
+      </body></html>
+    """
+    async def check():
+        async with httpx.AsyncClient() as as_client:
+            connector = WileyMadgexConnector("jobs.sciencecareers.org", as_client)
+            job = connector.parse_detail("1", listing_url, "Biologist", body.encode())
+            assert job.source_url == canonical_url
+            assert job.application_url == "https://jobs.sciencecareers.org/apply/1/biologist/"
+            with pytest.raises(ValueError, match="visible posting mismatch"):
+                connector.parse_detail(
+                    "1", listing_url, "Biologist", body.replace("/job/1/", "/job/2/").encode()
+                )
+
+    asyncio.run(check())
