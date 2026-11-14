@@ -57,6 +57,9 @@ from vindex.connectors.jobiqo import BOARDS as JOBIQO_BOARDS
 from vindex.connectors.jobiqo import JobiqoConnector
 from vindex.connectors.jobkit import HOSTS as JOBKIT_HOSTS
 from vindex.connectors.jobkit import JobKitConnector
+from vindex.connectors.jobmount import HOSTS as JOBMOUNT_HOSTS
+from vindex.connectors.jobmount import SEARCH as JOBMOUNT_SEARCH
+from vindex.connectors.jobmount import JobMountConnector
 from vindex.connectors.jobvite import JobviteConnector
 from vindex.connectors.join import JoinConnector
 from vindex.connectors.kula import KulaConnector
@@ -184,6 +187,13 @@ def detect(url: str) -> tuple[str, str]:
                 "Expected an unfiltered reviewed SuccessFactors Career Site Builder board"
             )
         return "successfactors", p.hostname
+    if (
+        p.hostname in JOBMOUNT_HOSTS
+        and p.path == JOBMOUNT_SEARCH
+        and not p.query
+        and not p.fragment
+    ):
+        return "jobmount", p.hostname
     if p.hostname in MADGEX_BOARDS:
         prefix = MADGEX_BOARDS[p.hostname]
         if p.path.rstrip("/") not in {prefix, prefix + "/jobs"} or p.query or p.fragment:
@@ -448,6 +458,8 @@ def detect(url: str) -> tuple[str, str]:
 def create_connector(
     provider: str, slug: str, company: str, client: httpx.AsyncClient
 ) -> Connector:
+    if provider == "jobmount":
+        return JobMountConnector(slug, client)
     if provider == "smartjobboard":
         return SmartJobBoardConnector(slug, client)
     if provider == "jobkit":
