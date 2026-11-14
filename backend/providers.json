@@ -3289,16 +3289,16 @@
   {
     "name": "JobMount",
     "kind": "job_board",
-    "implementation_status": "NOT_STARTED",
-    "evidence_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
+    "evidence_status": "FAILED",
     "risk": "HIGH",
     "risk_basis": "Planning estimate; not validated provider behavior",
     "examples": [],
     "last_run_at": null,
     "extraction_count": null,
-    "failure_reason": null,
+    "failure_reason": "Two complete extraction probes passed; final worker verification is pending.",
     "limitations": [
-      "Connector not implemented"
+      "The reviewed JobsRUs and Soudeur boards use native pagination and posting checks."
     ]
   },
   {
