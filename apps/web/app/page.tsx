@@ -113,7 +113,7 @@ export default function Home() {
             <RolewispSymbol size={32} />
             <span className="brand-name">Rolewisp</span>
           </a>
-          <span className="header-note">Find your next opening.</span>
+
 
           {/* Consumer navigation: Find jobs, For you, Pricing */}
           <nav className="header-nav" aria-label="Main navigation">
@@ -174,7 +174,7 @@ export default function Home() {
 
       <main>
         {/* Render standard intro header for non-pricing views */}
-        {tab !== 'pricing' && (
+        {!['jobs', 'pricing'].includes(tab) && (
           <section className={`intro ${['jobs', 'for-you'].includes(tab) ? 'intro-consumer' : ''}`}>
             <div>
               {tab === 'coverage' && <div className="eyebrow">REVIEWER DIAGNOSTICS / COVERAGE</div>}
@@ -281,12 +281,10 @@ export default function Home() {
         <div className="footer-inner">
           <div className="footer-brand">
             <span className="footer-brand-title">Rolewisp</span>
-            <span>Original sources. Visible evidence.</span>
-          </div>
-
-          <div className="footer-nav">
 
           </div>
+
+
         </div>
       </footer>
     </>

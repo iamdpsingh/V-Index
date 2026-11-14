@@ -1860,3 +1860,139 @@ td .pill {
 .job-card .pill {
   border-radius: 3px;
 }
+
+/* Rolewisp product surfaces */
+:root {
+  --color-field: #202c25;
+  --color-paper: #f5f3ee;
+  --color-sheet: #fffdf8;
+  --color-ink: #222d25;
+  --color-muted: #556159;
+  --color-rule: #d7d8cd;
+  --color-edge: #818a7e;
+  --color-select: #e7ede2;
+  --radius-field: 3px;
+  --radius-control: 4px;
+  --content-max: 1280px;
+}
+
+header {
+  min-height: 68px;
+}
+
+.header-inner {
+  gap: clamp(1rem, 4vw, 3.5rem);
+}
+
+.search-opening {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  padding: clamp(1.25rem, 4vw, 3.25rem);
+  background: var(--color-field);
+  border-radius: 6px;
+}
+
+.search-opening-copy {
+  position: relative;
+  margin-bottom: clamp(1.25rem, 4vw, 2.75rem);
+}
+
+.search-opening h1 {
+  max-width: 14ch;
+  margin-bottom: .75rem;
+  color: #fffdf8;
+  font-size: clamp(2.35rem, 6vw, 5.2rem);
+  line-height: .99;
+  letter-spacing: -.065em;
+  text-wrap: balance;
+}
+
+.search-opening p {
+  margin: 0;
+  max-width: 54ch;
+  color: #d5dfd2;
+}
+
+.search-opening .search {
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr) minmax(0, 1fr) auto;
+  align-items: end;
+  gap: .75rem;
+  border: 0;
+  border-radius: 4px;
+  margin: 0;
+  padding: .875rem;
+}
+
+.search-opening .search input,
+.search-opening .search button {
+  min-height: 46px;
+}
+
+.job-layout {
+  gap: clamp(1rem, 3vw, 2.5rem);
+}
+
+.job-list-section {
+  gap: .45rem;
+}
+
+.job-card {
+  position: relative;
+  padding: 1rem 1.1rem;
+  background: var(--color-sheet);
+  border: 1px solid var(--color-rule);
+  border-radius: 4px;
+}
+
+.job-card.selected {
+  border-color: #647a60;
+  box-shadow: inset 3px 0 #486446;
+}
+
+.job-card h2 {
+  margin-block: .3rem;
+}
+
+.job-record h2 {
+  letter-spacing: -.045em;
+  text-wrap: balance;
+}
+
+.pricing-card, .profile-subcard, .modal-card {
+  border-radius: 6px;
+  box-shadow: 0 1px 2px #202c2512;
+}
+
+.modal-card {
+  max-height: calc(100dvh - 2rem);
+  overflow: auto;
+}
+
+.modal-card .auth-providers {
+  border-color: var(--color-rule);
+}
+
+@media (max-width: 760px) {
+  .search-opening .search {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .search-opening .search label:first-child,
+  .search-opening .search button {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 380px) {
+  .search-opening .search {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 760px) {
+  main:has(.job-layout.has-selection .mobile-visible) .search-opening,
+  main:has(.job-layout.has-selection .mobile-visible) .results-bar {
+    display: none;
+  }
+}

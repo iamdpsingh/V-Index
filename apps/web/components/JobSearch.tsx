@@ -262,10 +262,15 @@ export default function JobSearch({ error: externalError, onError }: JobSearchPr
   return (
     <>
       {/* Search form — compact with clear labels */}
-      <form className="search" onSubmit={handleSearch}>
+      <section className="search-opening" aria-labelledby="search-title">
+        <div className="search-opening-copy">
+          <h1 id="search-title">Find your next opening.</h1>
+          <p>Search roles by company or location and apply on the original site.</p>
+        </div>
+        <form className="search" onSubmit={handleSearch}>
         {(['keyword', 'company', 'location'] as const).map((key) => (
           <label key={key}>
-            {key}
+            {key === 'keyword' ? 'Role or keyword' : key === 'company' ? 'Company' : 'Location'}
             <input
               value={filters[key]}
               placeholder={
@@ -282,7 +287,8 @@ export default function JobSearch({ error: externalError, onError }: JobSearchPr
         <button className="primary" type="submit">
           Search jobs <span aria-hidden>↗</span>
         </button>
-      </form>
+        </form>
+      </section>
 
       {/* Non-intrusive live index freshness banner */}
       {pendingResults && (
@@ -412,7 +418,7 @@ export default function JobSearch({ error: externalError, onError }: JobSearchPr
               <div className="record-header">
                 <div className="eyebrow-row">
                   <span className="eyebrow">{selected.company}</span>
-                  <span className="record-ref">№ {String(selected.id).padStart(4, '0')}</span>
+
                 </div>
                 <h2>{selected.title}</h2>
                 <p className="record-location">{selected.location || 'Location unspecified'}</p>
@@ -445,14 +451,14 @@ export default function JobSearch({ error: externalError, onError }: JobSearchPr
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Open application · Apply at original source ↗
+                    Apply on the original site ↗
                   </a>
                 ) : (
-                  <span className="apply non-link" title="Apply destination is not a direct HTTPS link">
-                    Open application · Apply at original source ↗
+                  <span className="apply non-link">
+                    Application link unavailable
                   </span>
                 )}
-                <span className="apply-subtext">On the employer’s site</span>
+
               </div>
 
               {/* Quality flags notice when description is omitted by source */}
