@@ -129,3 +129,5 @@ November 14 IST: The eJobsiteSoftware live retry reconfirmed all seven Gurus HR 
 November 14 IST: eJobsiteSoftware passed clean live runs on Edutalentz (3 jobs) and Gurus HR Consultancy (7 jobs), bringing verified coverage to **66/78**. Both runs read every advertised posting detail and reconfirmed their rosters. Seasonal Jobs NZ remains pending. [Live evidence](../evidence/20261114T063407Z-smoke.json)
 
 November 14 IST: Science Careers listed an encoded slug for posting 681232 and returned a canonical URL with a different slug, the same posting ID and the same visible title. The connector now validates the canonical host, path and posting ID and preserves the canonical URL. The first-page rerun extracted all 20 jobs on each of the two Wiley Madgex boards. [Live rerun](../evidence/20261114-wiley-madgex-identity-recheck.json)
+
+November 14 IST: The full checkpointed Wiley Madgex run confirmed all 518 Science Careers postings and a matching final roster. Nature Careers hit a 502 during detail extraction and resumed from the recorded checkpoint. [Science Careers full run](../evidence/20261114-wiley-madgex-science-full.json)
