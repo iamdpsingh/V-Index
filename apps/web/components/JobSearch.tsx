@@ -355,10 +355,7 @@ export default function JobSearch({ error: externalError, onError }: JobSearchPr
                 <div className="job-top">
                   <span className="job-company">{job.company}</span>
                   <div className="job-top-meta">
-                    <span className="ref-number" title={`Index reference #${job.id}`}>
-                      № {String(job.id).padStart(4, '0')}
-                    </span>
-                    <span className="pill">{job.remote_status || 'Workplace unspecified'}</span>
+                    {job.remote_status && <span className="pill">{job.remote_status}</span>}
                   </div>
                 </div>
                 <h2>

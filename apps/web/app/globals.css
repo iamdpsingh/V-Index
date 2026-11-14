@@ -1834,3 +1834,29 @@ td .pill {
 .auth-provider-options button:disabled {
   cursor: not-allowed;
 }
+
+.intro.intro-consumer {
+  padding: clamp(1.5rem, 4vw, 3.75rem) clamp(1.25rem, 4vw, 3.5rem);
+  background: #e9eeea;
+  border: 1px solid #d3ddd5;
+  border-radius: 6px;
+}
+
+.intro-consumer h1 {
+  max-width: 17ch;
+  text-wrap: balance;
+  letter-spacing: -.045em;
+}
+
+.intro-consumer p {
+  max-width: 56ch;
+  color: #35473d;
+}
+
+.job-card .job-title {
+  text-wrap: pretty;
+}
+
+.job-card .pill {
+  border-radius: 3px;
+}

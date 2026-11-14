@@ -23,7 +23,7 @@ const TAB_HEADINGS: Record<Tab, string> = {
 };
 
 const TAB_SUBHEADINGS: Record<Tab, string> = {
-  jobs: 'Real openings. Original sources. A clearer place to search.',
+  jobs: 'Search by role, company, or location, then apply on the original site.',
   'for-you': 'Explainable recommendations scored against your desired roles, skills, and resume.',
   pricing: 'Start free. Choose more when you need it.',
   profile: 'Manage your professional background, encrypted resume, and account security.',
@@ -109,7 +109,7 @@ export default function Home() {
     <>
       <header>
         <div className="header-inner">
-          <a className="wordmark" href="/" aria-label="Rolewisp — Find your next opening">
+          <a className="wordmark" href="/" aria-label="Rolewisp home">
             <RolewispSymbol size={32} />
             <span className="brand-name">Rolewisp</span>
           </a>
@@ -280,27 +280,11 @@ export default function Home() {
       <footer>
         <div className="footer-inner">
           <div className="footer-brand">
-            <span className="footer-brand-title">Rolewisp — built in the V—Index repository</span>
+            <span className="footer-brand-title">Rolewisp</span>
             <span>Original sources. Visible evidence.</span>
           </div>
 
           <div className="footer-nav">
-            <button
-              type="button"
-              className="footer-link-btn"
-              aria-current={tab === 'coverage' ? 'page' : undefined}
-              onClick={() => switchTab('coverage')}
-            >
-              coverage
-            </button>
-            <button
-              type="button"
-              className="footer-link-btn"
-              aria-current={tab === 'sources' ? 'page' : undefined}
-              onClick={() => switchTab('sources')}
-            >
-              sources
-            </button>
 
           </div>
         </div>

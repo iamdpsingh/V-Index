@@ -10,13 +10,19 @@ from vindex.accounts.schemas import ProfessionalLink, ProfileHighlights
 HEADINGS = {
     "education": "education",
     "academic background": "education",
+    "academic qualifications": "education",
     "experience": "experience",
     "work experience": "experience",
     "professional experience": "experience",
     "employment history": "experience",
+    "work history": "experience",
+    "career history": "experience",
+    "internships": "experience",
     "projects": "projects",
     "personal projects": "projects",
     "selected projects": "projects",
+    "academic projects": "projects",
+    "project experience": "projects",
     "skills": "",
     "technical skills": "",
     "summary": "",
@@ -33,7 +39,7 @@ def suggest_profile(text: str) -> ProfileHighlights:
     entries: dict[str, list[str]] = {"education": [], "experience": [], "projects": []}
     section = ""
     for line in text.splitlines():
-        line = line.strip()
+        line = line.strip().lstrip("•▪◦").strip()
         name, delimiter, content = line.partition(":")
         heading = name.strip().casefold()
         if heading in HEADINGS:

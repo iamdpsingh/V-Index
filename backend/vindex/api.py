@@ -18,6 +18,7 @@ from vindex.accounts.email_verification import router as email_verification_rout
 from vindex.accounts.middleware import PRIVATE_PREFIXES, PrivateRequestMiddleware
 from vindex.accounts.recommendations import router as recommendations_router
 from vindex.accounts.resume_api import router as resume_router
+from vindex.accounts.security import rate_limit
 from vindex.connectors.registry import detect
 from vindex.db import Job, Observation, Run, Session, Source, now
 from vindex.ingest import aware
@@ -140,7 +141,13 @@ def runs(limit: int = Query(50, ge=1, le=100), offset: int = Query(0, ge=0)):
         ]
 
 
-@app.get("/api/v1/jobs", response_model=SearchOut)
+def limit_public_jobs(request: Request) -> None:
+    if os.getenv("PUBLIC_JOB_RATE_LIMIT_ENABLED", "false") == "true":
+        peer = request.client.host if request.client else "unknown"
+        rate_limit(f"public-jobs:{peer}", 120)
+
+
+@app.get("/api/v1/jobs", response_model=SearchOut, dependencies=[Depends(limit_public_jobs)])
 def jobs(
     keyword: str = Query("", max_length=200),
     company: str = Query("", max_length=200),
@@ -198,7 +205,7 @@ def jobs(
         }
 
 
-@app.get("/api/v1/jobs/{job_id}", response_model=JobOut)
+@app.get("/api/v1/jobs/{job_id}", response_model=JobOut, dependencies=[Depends(limit_public_jobs)])
 def job_detail(job_id: int):
     with Session() as session:
         job = session.get(Job, job_id)
