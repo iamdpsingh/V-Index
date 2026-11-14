@@ -64,10 +64,29 @@ def extract(data: bytes, kind: str) -> str:
                 raise ValueError("invalid_docx")
             xml_root = ElementTree.fromstring(archive.read("word/document.xml"), forbid_dtd=True)
             ns = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
-            text = "\n".join(
-                " ".join(node.text or "" for node in paragraph.iter(ns + "t"))
-                for paragraph in xml_root.iter(ns + "p")
-            )
+
+            def paragraph_text(paragraph):
+                return "".join(
+                    node.text or "" if node.tag == ns + "t" else "\n"
+                    for node in paragraph.iter()
+                    if node.tag in {ns + "t", ns + "br"}
+                )
+
+            body = xml_root.find(ns + "body")
+            if body is None:
+                raise ValueError("invalid_docx_body")
+            lines = []
+            for block in body:
+                if block.tag == ns + "tbl":
+                    for row in block.findall(ns + "tr"):
+                        cells = [
+                            " ".join(paragraph_text(p).strip() for p in cell.iter(ns + "p"))
+                            for cell in row.findall(ns + "tc")
+                        ]
+                        lines.append(" | ".join(cell for cell in cells if cell))
+                else:
+                    lines.extend(paragraph_text(p) for p in block.iter(ns + "p"))
+            text = "\n".join(lines)
     else:
         raise ValueError("unsupported_type")
     if len(text) > MAX_TEXT:

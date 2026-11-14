@@ -36,10 +36,21 @@ test('candidate profile opens read-only and discards cancelled edits', async ({ 
 });
 
 test('reviewing resume suggestions opens the profile editor', async ({ page }) => {
+  await page.route('**/api/v1/me/resume', (route) => route.fulfill({
+    json: { ...SAMPLE_RESUME, suggestions: {
+      projects: ['Search Index\nBuilt a job index.', 'Transit Map'],
+      education: ['Class XII | Example Junior College', 'Class X | Example High School'],
+    } },
+  }));
   await page.goto('/?tab=profile');
   await page.getByRole('button', { name: 'Review resume details in profile' }).click();
   await expect(page.getByRole('heading', { name: 'Edit profile' })).toBeFocused();
   await expect(page.locator('.interactive-tag', { hasText: 'FastAPI' })).toBeVisible();
+  await expect(page.getByLabel('Projects entry 1')).toHaveValue('Search Index\nBuilt a job index.');
+  await expect(page.getByLabel('Projects entry 2')).toHaveValue('Transit Map');
+  await expect(page.getByLabel('Education entry 2')).toHaveValue('Class X | Example High School');
+  await page.getByRole('button', { name: 'Remove project 1' }).click();
+  await expect(page.getByLabel('Projects entry 1')).toHaveValue('Transit Map');
 });
 
 test('adding desired role and skills updates tags and enables save', async ({ page }) => {

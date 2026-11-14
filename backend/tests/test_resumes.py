@@ -207,3 +207,32 @@ def test_chunked_private_upload_and_json_limits(private_client):
         headers={"Content-Type": "application/json"},
     )
     assert json_too_large.status_code == 413
+
+
+def test_docx_education_table_and_project_breaks_survive_upload(private_client):
+    namespace = "http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+    document = f"""
+    <w:document xmlns:w="{namespace}"><w:body>
+      <w:p><w:r><w:t>Education</w:t></w:r></w:p>
+      <w:tbl>
+        <w:tr><w:tc><w:p><w:r><w:t>Class XII</w:t></w:r></w:p></w:tc>
+              <w:tc><w:p><w:r><w:t>Example Junior College</w:t></w:r></w:p></w:tc></w:tr>
+        <w:tr><w:tc><w:p><w:r><w:t>Class X</w:t></w:r></w:p></w:tc>
+              <w:tc><w:p><w:r><w:t>Example High School</w:t></w:r></w:p></w:tc></w:tr>
+      </w:tbl>
+      <w:p><w:r><w:t>Projects</w:t></w:r></w:p>
+      <w:p><w:r><w:t>1. Search Index</w:t><w:br/><w:t>2. Transit Map</w:t></w:r></w:p>
+    </w:body></w:document>
+    """
+    data = io.BytesIO()
+    with zipfile.ZipFile(data, "w") as archive:
+        archive.writestr("[Content_Types].xml", "<Types/>")
+        archive.writestr("word/document.xml", document)
+    register(private_client)
+    response = upload(private_client, data.getvalue(), "candidate.docx")
+    assert response.status_code == 200
+    assert response.json()["suggestions"]["projects"] == ["Search Index", "Transit Map"]
+    assert response.json()["suggestions"]["education"] == [
+        "Class XII | Example Junior College",
+        "Class X | Example High School",
+    ]

@@ -117,16 +117,15 @@ export default function ResumeSection({ onSkillsUpdated, onUseSuggestions }: Res
   return (
     <div className="resume-section">
       <div className="section-header">
-        {resume && onUseSuggestions && (
-        <button type="button" className="btn-secondary" onClick={() => onUseSuggestions(resume)}>
-          Review resume details in profile
-        </button>
-      )}
-      <h3>Resume Document</h3>
+        <h3>Résumé</h3>
         <p className="section-desc">
-          Upload a readable PDF, DOCX, or TXT file (up to 5 MiB). Authenticated encryption in
-          database; text parsed locally for professional keyword matching.
+          Upload a readable PDF, DOCX, or TXT file up to 5 MiB to get private profile suggestions.
         </p>
+        {resume && onUseSuggestions && (
+          <button type="button" className="btn-secondary" onClick={() => onUseSuggestions(resume)}>
+            Review resume details in profile
+          </button>
+        )}
       </div>
 
       {error && (

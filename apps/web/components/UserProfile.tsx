@@ -25,7 +25,10 @@ function ProfileList({ title, items }: { title: string; items?: string[] }) {
   return (
     <section className="candidate-section">
       <h3>{title}</h3>
-      <ul>{items.map((item, index) => <li key={index}>{item}</li>)}</ul>
+      <ul className="candidate-entries">{items.map((item, index) => {
+        const [titleLine, ...details] = item.split('\n');
+        return <li key={index}>{titleLine}{details.length > 0 && <p>{details.join('\n')}</p>}</li>;
+      })}</ul>
     </section>
   );
 }
@@ -92,6 +95,7 @@ export default function UserProfile({
   });
 
   const [editing, setEditing] = useState(false);
+  const [reviewingResume, setReviewingResume] = useState(false);
   const savedProfile = useRef<ProfileInput | null>(null);
   const editingStarted = useRef(false);
   const editButton = useRef<HTMLButtonElement>(null);
@@ -112,6 +116,7 @@ export default function UserProfile({
     setNewSkill('');
     setNewLoc('');
     setError('');
+    setReviewingResume(false);
     setEditing(false);
   }
 
@@ -336,6 +341,7 @@ export default function UserProfile({
               </div>
             )}
             {editing && <form onSubmit={handleSaveProfile} className="profile-form candidate-edit-form">
+              {reviewingResume && <p className="card-sub">Check your résumé suggestions before saving. You can edit, remove, or add individual entries.</p>}
               <div className="form-row">
                 <label>
                   Full name
@@ -558,19 +564,40 @@ export default function UserProfile({
                 </label>
               </div>
 
-              {(['education', 'experience', 'projects'] as const).map((field) => (
-                <label key={field} className="form-field">
-                  <span>{field[0].toUpperCase() + field.slice(1)}</span>
-                  <textarea
-                    className="profile-textarea"
-                    rows={4}
-                    value={(profile[field] ?? []).join('\n')}
-                    onChange={(event) => setProfile({
-                      ...profile,
-                      [field]: event.target.value.split('\n').slice(0, 30),
-                    })}
-                  />
-                </label>
+              {([
+                ['experience', 'Experience', 'role'],
+                ['education', 'Education', 'qualification'],
+                ['projects', 'Projects', 'project'],
+              ] as const).map(([field, title, itemName]) => (
+                <fieldset key={field} className="candidate-links">
+                  <legend>{title}</legend>
+                  {(profile[field] ?? []).map((entry, index) => (
+                    <div className="candidate-entry" key={index}>
+                      <label>
+                        {title} entry {index + 1}
+                        <textarea
+                          className="profile-textarea"
+                          rows={entry.includes('\n') ? 3 : 2}
+                          maxLength={1000}
+                          value={entry}
+                          onChange={(event) => setProfile({
+                            ...profile,
+                            [field]: profile[field]?.map((item, i) => i === index ? event.target.value : item),
+                          })}
+                        />
+                      </label>
+                      <button className="btn-secondary" type="button" aria-label={`Remove ${itemName} ${index + 1}`}
+                        onClick={() => setProfile({
+                          ...profile,
+                          [field]: profile[field]?.filter((_, i) => i !== index),
+                        })}>Remove</button>
+                    </div>
+                  ))}
+                  <button className="btn-secondary" type="button" disabled={(profile[field]?.length ?? 0) >= 30}
+                    onClick={() => setProfile({ ...profile, [field]: [...(profile[field] ?? []), ''] })}>
+                    Add {itemName}
+                  </button>
+                </fieldset>
               ))}
               <fieldset className="candidate-links">
                 <legend>Professional links</legend>
@@ -610,6 +637,7 @@ export default function UserProfile({
           <div className="profile-aside-column">
             <ResumeSection onUseSuggestions={savedProfile.current && !saving ? (resume) => {
               setSaveSuccess(false);
+              setReviewingResume(true);
               setEditing(true);
               setProfile((current) => {
                 const next = { ...current };

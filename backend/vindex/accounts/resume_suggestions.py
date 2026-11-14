@@ -9,6 +9,8 @@ from vindex.accounts.schemas import ProfessionalLink, ResumeSuggestions
 
 HEADINGS = {
     "education": "education",
+    "education and qualifications": "education",
+    "educational qualifications": "education",
     "academic background": "education",
     "academic qualifications": "education",
     "experience": "experience",
@@ -19,11 +21,18 @@ HEADINGS = {
     "career history": "experience",
     "internships": "experience",
     "projects": "projects",
+    "project": "projects",
+    "technical projects": "projects",
+    "key projects": "projects",
     "personal projects": "projects",
     "selected projects": "projects",
+    "project work": "projects",
     "academic projects": "projects",
     "project experience": "projects",
     "skills": "",
+    "achievements": "",
+    "publications": "",
+    "references": "",
     "technical skills": "",
     "summary": "bio",
     "professional summary": "bio",
@@ -37,6 +46,37 @@ HEADINGS = {
     "languages": "",
 }
 URL_PATTERN = re.compile(r"""https://[^\s<>"']+""", re.IGNORECASE)
+
+
+BULLET = re.compile(r"^[•▪◦●‣–—*-]\s*|^\d{1,2}[.)]\s+")
+INLINE_BULLET = re.compile(r"\s+[•▪◦●‣]\s+|\s+(?=\d{1,2}[.)]\s+[A-Z])")
+QUALIFICATION = re.compile(
+    r"^(?:class|grade|standard|std\.?)\s*(?:xii|xi|x|ix|12(?:th)?|11(?:th)?|10(?:th)?|9(?:th)?)\b"
+    r"|^(?:10th|12th)\b|^(?:xii|x)(?=\s*[|()–—-]|$)"
+    r"|^(?:higher secondary|senior secondary|secondary school|secondary education|high school|"
+    r"highschool|intermediate|matriculation|ssc|hsc|sslc|cbse|icse|isc|"
+    r"bachelor|master|diploma|ph\.?d\.?|b\.?sc\.?|m\.?sc\.?|b\.?tech\.?|m\.?tech\.?|"
+    r"b\.?e\.?|bca|mca|bba|mba)\b",
+    re.IGNORECASE,
+)
+DETAIL = re.compile(
+    r"^(?:built|created|developed|designed|implemented|deployed|used|integrated|led|"
+    r"improved|automated|reduced|increased|worked|managed|delivered|engineered|"
+    r"description|tech stack|technologies|tools|github|demo|cgpa|gpa|percentage|score)\b",
+    re.IGNORECASE,
+)
+
+
+def add_entry(section: str, entries: list[str], line: str, marked: bool) -> None:
+    continuation = False
+    if entries and section == "education":
+        continuation = not QUALIFICATION.match(line) and (bool(DETAIL.match(line)) or not marked)
+    elif entries and section in {"experience", "projects"}:
+        continuation = bool(DETAIL.match(line))
+    if continuation:
+        entries[-1] = f"{entries[-1]}\n{line}"[:1000]
+    elif len(entries) < 30:
+        entries.append(line[:1000])
 
 
 ROLE = re.compile(
@@ -70,8 +110,10 @@ def suggest_profile(text: str) -> ResumeSuggestions:
     in_header = True
     header_lines = 0
     section = ""
-    for line in text.splitlines():
-        line = line.strip().lstrip("•▪◦").strip()
+    for raw in text.splitlines():
+        line = raw.strip()
+        marked = bool(BULLET.match(line))
+        line = BULLET.sub("", line, count=1).strip()
         if not line:
             continue
         name, delimiter, content = line.partition(":")
@@ -110,8 +152,12 @@ def suggest_profile(text: str) -> ResumeSuggestions:
                     if delimiter and heading in {"headline", "professional headline", "job title"}
                     else line
                 )
-        if section and line and not URL_PATTERN.fullmatch(line) and len(entries[section]) < 30:
-            entries[section].append(line[:1000])
+        if section and line and not URL_PATTERN.fullmatch(line):
+            parts = INLINE_BULLET.split(line) if section in {"education", "projects"} else [line]
+            for index, part in enumerate(parts):
+                part = BULLET.sub("", part, count=1).strip()
+                if part and not URL_PATTERN.fullmatch(part):
+                    add_entry(section, entries[section], part, marked or index > 0)
 
     links: list[ProfessionalLink] = []
     for value in dict.fromkeys(m.group().rstrip(".,);]}") for m in URL_PATTERN.finditer(text)):

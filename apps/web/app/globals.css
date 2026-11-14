@@ -2182,3 +2182,20 @@ header {
     justify-items: start;
   }
 }
+
+.candidate-entry {
+  margin-bottom: 1rem;
+}
+
+.candidate-entry textarea {
+  margin-top: 0;
+}
+
+.candidate-entry .btn-secondary {
+  margin-top: .5rem;
+}
+
+.candidate-entries p {
+  color: var(--color-muted);
+  font-size: .875rem;
+}
