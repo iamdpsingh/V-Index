@@ -76,10 +76,6 @@ export default function ResumeSection({ onSkillsUpdated, onUseSuggestions }: Res
         setError('Resume exceeds 5 MiB size limit.');
       } else if (msg.includes('415')) {
         setError('Unsupported format. Supported resume types are readable PDF, DOCX, and UTF-8 TXT.');
-      } else if (msg.includes('422')) {
-        setError(
-          'Could not parse resume text. Scanned images, encrypted/password-protected files, and active macros are not supported.'
-        );
       } else if (msg.includes('503')) {
         setError('Resume processing service is temporarily unavailable.');
       } else {

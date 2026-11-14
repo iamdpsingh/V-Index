@@ -50,6 +50,11 @@ def extract_text(data: bytes, kind: str) -> str:
             check=False,
         )
         parsed = json.loads(result.stdout)
+        if isinstance(parsed, dict) and parsed.get("error") == "no_selectable_text":
+            raise HTTPException(
+                422,
+                "This file has no selectable text. Export a text-based PDF, DOCX, or TXT file and try again.",
+            )
         if result.returncode or not isinstance(parsed.get("text"), str):
             raise ValueError("Unreadable resume")
         return parsed["text"]

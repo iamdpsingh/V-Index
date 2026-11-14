@@ -65,6 +65,6 @@ test('keyboard: Tab key reaches all consumer nav buttons', async ({ page }) => {
   }
 });
 
-test('footer is visible with API docs link', async ({ page }) => {
-  await expect(page.getByRole('link', { name: /API documentation/ })).toBeVisible();
+test('footer keeps API documentation off the public site', async ({ page }) => {
+  await expect(page.getByRole('link', { name: /API documentation/ })).toHaveCount(0);
 });

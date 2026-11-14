@@ -2,7 +2,6 @@
 
 import { FormEvent, useEffect, useState } from 'react';
 import {
-  changePassword,
   confirmEmailVerification,
   requestEmailVerification,
   deleteAccount,
@@ -89,13 +88,6 @@ export default function UserProfile({
   const [newTitle, setNewTitle] = useState('');
   const [newSkill, setNewSkill] = useState('');
   const [newLoc, setNewLoc] = useState('');
-
-  // Password change state
-  const [currentPw, setCurrentPw] = useState('');
-  const [newPw, setNewPw] = useState('');
-  const [pwSaving, setPwSaving] = useState(false);
-  const [pwSuccess, setPwSuccess] = useState(false);
-  const [pwError, setPwError] = useState('');
 
   // Account deletion state
   const [deletePw, setDeletePw] = useState('');
@@ -202,30 +194,6 @@ export default function UserProfile({
     const current = [...(profile[key] || [])];
     current.splice(index, 1);
     setProfile({ ...profile, [key]: current });
-  }
-
-  async function handleChangePassword(e: FormEvent) {
-    e.preventDefault();
-    setPwError('');
-    setPwSuccess(false);
-
-    if (Array.from(newPw).length < 15 || !newPw.trim()) {
-      setPwError('New password must be at least 15 characters.');
-      return;
-    }
-
-    setPwSaving(true);
-    try {
-      await changePassword({ password: currentPw, new_password: newPw });
-      setPwSuccess(true);
-      setCurrentPw('');
-      setNewPw('');
-      setTimeout(() => setPwSuccess(false), 4000);
-    } catch (err: unknown) {
-      setPwError(err instanceof Error ? err.message : 'Password change failed');
-    } finally {
-      setPwSaving(false);
-    }
   }
 
   async function handleDeleteAccount(e: FormEvent) {
@@ -596,41 +564,7 @@ export default function UserProfile({
                   </>
                 )}
               </div>
-              <form onSubmit={handleChangePassword} className="security-form">
-                {pwError && (
-                  <div className="notice error sub-error" role="alert">
-                    {pwError}
-                  </div>
-                )}
-                {pwSuccess && (
-                  <div className="notice success-notice" role="status">
-                    Password updated. Prior sessions rotated.
-                  </div>
-                )}
-                <label>
-                  Current password
-                  <input
-                    type="password"
-                    required
-                    value={currentPw}
-                    onChange={(e) => setCurrentPw(e.target.value)}
-                  />
-                </label>
-                <label>
-                  New password (15 to 128 characters)
-                  <input
-                    type="password"
-                    required
-                    minLength={15}
-                    maxLength={128}
-                    value={newPw}
-                    onChange={(e) => setNewPw(e.target.value)}
-                  />
-                </label>
-                <button type="submit" className="btn-secondary" disabled={pwSaving}>
-                  {pwSaving ? 'Updating…' : 'Update password'}
-                </button>
-              </form>
+
             </section>
 
             {/* Danger Zone: Account Deletion */}

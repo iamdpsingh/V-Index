@@ -236,12 +236,7 @@ export async function getMe(): Promise<AccountOut | null> {
   }
 }
 
-export async function changePassword(body: PasswordChange): Promise<void> {
-  return apiFetch<void>('me/password', '', {
-    method: 'POST',
-    body: JSON.stringify(body),
-  });
-}
+
 
 export async function deleteAccount(body: PasswordConfirmation): Promise<void> {
   return apiFetch<void>('me', '', {
@@ -387,5 +382,12 @@ export function confirmEmailVerification(code: string): Promise<void> {
   return apiFetch<void>('me/email/verification/confirm', '', {
     method: 'POST',
     body: JSON.stringify({ code }),
+  });
+}
+
+export function resetPassword(email: string, code?: string, password?: string): Promise<void> {
+  return apiFetch<void>(code ? 'auth/password-reset/confirm' : 'auth/password-reset', '', {
+    method: 'POST',
+    body: JSON.stringify(code ? { email, code, password } : { email }),
   });
 }

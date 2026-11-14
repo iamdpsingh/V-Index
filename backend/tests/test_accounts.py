@@ -117,25 +117,31 @@ def test_profiles_are_private_and_account_deletion_cascades(account_client, data
         assert session.scalar(select(func.count()).select_from(Profile)) == 1
 
 
-def test_password_change_revokes_other_sessions(account_client, database):
+def test_password_recovery_revokes_sessions(account_client, database, monkeypatch):
+    from vindex.accounts import email_verification
+
+    monkeypatch.setattr(email_verification, "Session", database)
+    monkeypatch.setenv("SMTP_HOST", "smtp.example.test")
+    monkeypatch.setenv("SMTP_FROM", "accounts@example.test")
+    codes = []
+    monkeypatch.setattr(email_verification, "deliver", lambda _, code, purpose: codes.append(code))
     register(account_client)
     with database() as session:
         user = session.scalar(select(Account))
-        session.add(
-            AccountSession(
-                token_hash="other-session", account_id=user.id, expires_at=now() + timedelta(days=1)
-            )
-        )
+        user.email_verified_at = now()
         session.commit()
-    changed = account_client.post(
-        "/api/v1/me/password",
-        json={"password": PASSWORD, "new_password": "An entirely different password 456!"},
-    )
-    assert changed.status_code == 204
-    assert account_client.get("/api/v1/me").status_code == 200
-    with database() as session:
-        assert session.get(AccountSession, "other-session") is None
-        assert session.scalar(select(func.count()).select_from(AccountSession)) == 1
+    endpoint = "/api/v1/auth/password-reset"
+    email = "first@example.com"
+    assert account_client.post(endpoint, json={"email": "unknown@example.com"}).status_code == 204
+    assert not codes
+    assert account_client.post(endpoint, json={"email": email}).status_code == 204
+    payload = {"email": email, "code": codes[0], "password": "An entirely different passphrase"}
+    assert account_client.post(endpoint + "/confirm", json=payload).status_code == 204
+    assert account_client.get("/api/v1/me").status_code == 401
+    assert account_client.post(endpoint + "/confirm", json=payload).status_code == 422
+    assert account_client.post(
+        "/api/v1/auth/login", json={"email": email, "password": payload["password"]}
+    ).status_code == 200
 
 
 def test_private_body_and_validation_limits_do_not_echo_passwords(account_client):

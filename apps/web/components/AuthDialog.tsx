@@ -1,7 +1,7 @@
 'use client';
 
 import { FormEvent, useEffect, useState } from 'react';
-import { authLogin, authRegister, type AccountOut } from '../lib/api';
+import { authLogin, authRegister, resetPassword, type AccountOut } from '../lib/api';
 
 interface AuthDialogProps {
   isOpen: boolean;
@@ -21,9 +21,17 @@ export default function AuthDialog({
   const [password, setPassword] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
+  const [recovery, setRecovery] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [code, setCode] = useState('');
+  const [notice, setNotice] = useState('');
 
   useEffect(() => {
     setMode(initialMode);
+    setRecovery(false);
+    setSent(false);
+    setCode('');
+    setNotice('');
     setError('');
     setPassword('');
   }, [initialMode, isOpen]);
@@ -43,6 +51,28 @@ export default function AuthDialog({
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     setError('');
+
+    if (recovery) {
+      setBusy(true);
+      try {
+        await resetPassword(email, sent ? code : undefined, sent ? password : undefined);
+        if (sent) {
+          setRecovery(false);
+          setSent(false);
+          setCode('');
+          setPassword('');
+          setNotice('Password reset. Sign in with your new password.');
+        } else {
+          setSent(true);
+          setNotice('If the address is verified, a reset code will arrive by email.');
+        }
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Password reset failed.');
+      } finally {
+        setBusy(false);
+      }
+      return;
+    }
 
     if (mode === 'register' && (Array.from(password).length < 15 || !password.trim())) {
       setError('Password must be at least 15 characters.');
@@ -99,6 +129,9 @@ export default function AuthDialog({
               className={`modal-tab ${mode === 'login' ? 'active' : ''}`}
               onClick={() => {
                 setMode('login');
+                setRecovery(false);
+                setSent(false);
+                setNotice('');
                 setError('');
               }}
             >
@@ -111,6 +144,9 @@ export default function AuthDialog({
               className={`modal-tab ${mode === 'register' ? 'active' : ''}`}
               onClick={() => {
                 setMode('register');
+                setRecovery(false);
+                setSent(false);
+                setNotice('');
                 setError('');
               }}
             >
@@ -128,14 +164,15 @@ export default function AuthDialog({
         </div>
 
         <h2 id="auth-dialog-title" className="auth-title">
-          {mode === 'login' ? 'Welcome back' : 'Create your account'}
+          {recovery ? 'Reset your password' : mode === 'login' ? 'Welcome back' : 'Create your account'}
         </h2>
         <p className="auth-sub">
-          {mode === 'login'
+          {recovery ? 'Use the email address on your account.' : mode === 'login'
             ? 'Sign in to access your saved profile, resume, and tailored recommendations.'
             : 'Save your profile and find jobs that match your skills.'}
         </p>
 
+        {notice && <p role="status">{notice}</p>}
         {error && (
           <div className="notice error auth-error" role="alert">
             {error}
@@ -157,26 +194,32 @@ export default function AuthDialog({
             />
           </label>
 
-          <label>
-            Password
+          {recovery && sent && <label>
+            Reset code
+            <input inputMode="numeric" autoComplete="one-time-code" pattern="[0-9]{8}" required
+              value={code} onChange={(event) => setCode(event.target.value)} />
+          </label>}
+          {(!recovery || sent) && <label>
+            {recovery ? 'New password' : 'Password'}
             <input
               type="password"
               required
-              autoComplete={mode === 'register' ? 'new-password' : 'current-password'}
-              minLength={mode === 'register' ? 15 : undefined}
+              autoComplete={mode === 'register' || recovery ? 'new-password' : 'current-password'}
+              minLength={mode === 'register' || recovery ? 15 : undefined}
               maxLength={128}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder={mode === 'register' ? 'At least 15 characters' : undefined}
               disabled={busy}
             />
-            {mode === 'register' && <small className="field-hint">Use 15 to 128 characters. A passphrase works too.</small>}
-          </label>
+            {(mode === 'register' || recovery) && <small className="field-hint">Use 15 to 128 characters. A passphrase works too.</small>}
+          </label>}
 
           <div className="auth-actions">
             <button type="submit" className="primary auth-submit" disabled={busy}>
               {busy
                 ? 'Processing…'
+                : recovery ? (sent ? 'Reset password' : 'Send reset code')
                 : mode === 'register'
                 ? 'Create account'
                 : 'Sign in'}
@@ -184,7 +227,13 @@ export default function AuthDialog({
           </div>
         </form>
 
-        <fieldset className="auth-providers" aria-describedby="auth-providers-status">
+        {mode === 'login' && !recovery && (
+          <button type="button" className="btn-secondary" disabled={busy}
+            onClick={() => { setRecovery(true); setPassword(''); setError(''); setNotice(''); }}>
+            Forgot password?
+          </button>
+        )}
+        {!recovery && <fieldset className="auth-providers" aria-describedby="auth-providers-status">
           <legend>Continue with</legend>
           <div className="auth-provider-options">
             {['Google', 'LinkedIn', 'GitHub'].map((provider) => (
@@ -194,7 +243,7 @@ export default function AuthDialog({
             ))}
           </div>
           <small id="auth-providers-status">Social sign-in is unavailable in this preview.</small>
-        </fieldset>
+        </fieldset>}
       </div>
     </div>
   );

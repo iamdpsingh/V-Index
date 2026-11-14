@@ -301,9 +301,7 @@ export default function Home() {
             >
               sources
             </button>
-            <a href="/docs" target="_blank" rel="noopener noreferrer" className="footer-doc-link">
-              API documentation ↗
-            </a>
+
           </div>
         </div>
       </footer>

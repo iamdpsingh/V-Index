@@ -8,7 +8,6 @@ from vindex.accounts.models import Account, AccountSession, Profile, Resume
 from vindex.accounts.schemas import (
     AccountOut,
     Credentials,
-    PasswordChange,
     PasswordConfirmation,
     ProfileInput,
     ProfileOut,
@@ -130,19 +129,6 @@ def save_profile(body: ProfileInput, request: Request):
                 409, "Account changed while saving profile; sign in again"
             ) from error
         return {**saved.data, "updated_at": saved.updated_at}
-
-
-@router.post("/me/password", status_code=204, dependencies=write_guard)
-def change_password(body: PasswordChange, request: Request, response: Response):
-    with Session() as session:
-        user = principal(request, session)
-        rate_limit(f"password:{user.id}", 5)
-        if not passwords.verify(body.password.get_secret_value(), user.password_hash):
-            raise HTTPException(401, "Current password is incorrect")
-        user.password_hash = passwords.hash(body.new_password.get_secret_value())
-        session.execute(delete(AccountSession).where(AccountSession.account_id == user.id))
-        issue_session(session, user, request, response)
-        session.commit()
 
 
 @router.delete("/me", status_code=204, dependencies=write_guard)

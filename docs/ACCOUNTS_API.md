@@ -19,7 +19,8 @@ Run `uv run alembic upgrade head` before starting the new API. The additive revi
 | POST `/api/v1/auth/login` | email, password | AccountOut + rotated session cookie |
 | POST `/api/v1/auth/logout` | none | 204, revoke current session and clear cookie |
 | GET `/api/v1/me` | none | current account only |
-| POST `/api/v1/me/password` | password, new_password | 204, revoke all prior sessions and issue a fresh one |
+| POST `/api/v1/auth/password-reset` | email | 204. Sends a code if the address is verified and mail is configured. |
+| POST `/api/v1/auth/password-reset/confirm` | email, code, password | 204. Consumes the code and revokes all sessions. |
 | DELETE `/api/v1/me` | password | 204, remove own live account/profile/resume/session rows |
 
 Use JSON for credentials. Browser mutations must carry Origin equal to PUBLIC_WEB_ORIGIN; same-origin browser fetches supply this automatically. Use same-origin `/api/v1` through Next's existing rewrite. Do not expose session tokens to JavaScript or store passwords/tokens in localStorage. Production uses a Secure/HttpOnly/SameSite=Lax `__Host-vindex_session` cookie; loopback HTTP uses a separate development cookie. Sessions expire after seven days, are hashed in SQL, and are capped at ten per account. Profile identity is separate from the existing ADMIN_TOKEN operator authorization. Personal login does not grant source-management permissions.

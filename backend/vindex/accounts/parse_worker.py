@@ -20,7 +20,7 @@ def extract(data: bytes, kind: str) -> str:
 
         if not data.startswith(b"%PDF-"):
             raise ValueError("invalid_pdf")
-        reader = PdfReader(io.BytesIO(data), strict=True)
+        reader = PdfReader(io.BytesIO(data), strict=False)
         if reader.is_encrypted or len(reader.pages) > 20:
             raise ValueError("encrypted_or_too_many_pages")
         root = reader.trailer["/Root"].get_object()
@@ -31,7 +31,12 @@ def extract(data: bytes, kind: str) -> str:
             names = names.get_object()
         if not isinstance(names, dict):
             raise ValueError("invalid_pdf_names")
-        if any(k in root for k in ("/OpenAction", "/AA", "/AcroForm")) or any(
+        opening = root.get("/OpenAction")
+        if opening is not None and hasattr(opening, "get_object"):
+            opening = opening.get_object()
+        if isinstance(opening, dict) and opening.get("/S") != "/GoTo":
+            raise ValueError("active_document")
+        if any(k in root for k in ("/AA", "/AcroForm")) or any(
             k in names for k in ("/JavaScript", "/EmbeddedFiles")
         ):
             raise ValueError("active_document")
@@ -65,8 +70,10 @@ def extract(data: bytes, kind: str) -> str:
             )
     else:
         raise ValueError("unsupported_type")
-    if len(text) > MAX_TEXT or len(text.strip()) < 20:
-        raise ValueError("unreadable_or_too_much_text")
+    if len(text) > MAX_TEXT:
+        raise ValueError("too_much_text")
+    if not text.strip():
+        raise ValueError("no_selectable_text")
     return text
 
 
@@ -83,13 +90,11 @@ def main():
             raise ValueError("too_large")
         text = extract(data, sys.argv[1])
         print(json.dumps({"text": text}))
-    except Exception:
+    except Exception as error:
         # Parser diagnostics must never reveal resume contents or local paths.
         print(
             json.dumps(
-                {
-                    "error": "Document is unreadable, unsupported, encrypted or exceeds parsing limits"
-                }
+                {"error": str(error) if str(error) == "no_selectable_text" else "unreadable"}
             )
         )
         raise SystemExit(1) from None
