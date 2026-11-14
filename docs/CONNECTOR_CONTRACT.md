@@ -386,3 +386,7 @@ The reviewed LexPath and Joberly boards publish their job inventory through the 
 ## Wiley Madgex
 
 The reviewed Science Careers and Nature Careers search URLs register for checkpointed background refresh. The worker validates pagination, reads canonical posting details and reconfirms the roster before reconciliation. Canonical slug variants may identify the same posting when the host, posting ID and visible title match.
+
+## JobMount
+
+The reviewed Soudeur and JobsRUs unfiltered results pages support JobMount registration. The connector follows the native pager, rejects repeated posting IDs across pages, reads each original posting and verifies the same-job application entry. It repeats the roster before reconciliation. JobMount refreshes have a 30-minute worker timeout and a matching lease with a five-minute margin.

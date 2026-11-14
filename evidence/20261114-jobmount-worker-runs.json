@@ -1,0 +1,24 @@
+[
+  {
+    "provider": "JobMount",
+    "url": "https://soudeur.ca/candidate/job_search/quick/results",
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "count": 153,
+    "at": "2026-11-14T07:21:39.171321+00:00",
+    "finished_at": "2026-11-14T07:23:52.320596+00:00",
+    "revision": "edf0cd7",
+    "error": null
+  },
+  {
+    "provider": "JobMount",
+    "url": "https://www.jobsrus.com/candidate/job_search/quick/results",
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "count": 805,
+    "at": "2026-11-14T07:21:39.142260+00:00",
+    "finished_at": "2026-11-14T07:32:32.789657+00:00",
+    "revision": "edf0cd7",
+    "error": null
+  }
+]

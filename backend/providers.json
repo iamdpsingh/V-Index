@@ -3290,15 +3290,38 @@
     "name": "JobMount",
     "kind": "job_board",
     "implementation_status": "IMPLEMENTED",
-    "evidence_status": "FAILED",
+    "evidence_status": "LIVE_VERIFIED",
     "risk": "HIGH",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
-    "failure_reason": "Two complete extraction probes passed; final worker verification is pending.",
+    "examples": [
+      {
+        "provider": "JobMount",
+        "url": "https://soudeur.ca/candidate/job_search/quick/results",
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "count": 153,
+        "at": "2026-11-14T07:21:39.171321+00:00",
+        "finished_at": "2026-11-14T07:23:52.320596+00:00",
+        "revision": "edf0cd7",
+        "error": null
+      },
+      {
+        "provider": "JobMount",
+        "url": "https://www.jobsrus.com/candidate/job_search/quick/results",
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "count": 805,
+        "at": "2026-11-14T07:21:39.142260+00:00",
+        "finished_at": "2026-11-14T07:32:32.789657+00:00",
+        "revision": "edf0cd7",
+        "error": null
+      }
+    ],
+    "last_run_at": "2026-11-14T07:32:32.789657+00:00",
+    "extraction_count": 958,
+    "failure_reason": null,
     "limitations": [
-      "The reviewed JobsRUs and Soudeur boards use native pagination and posting checks."
+      "Two reviewed JobMount boards verified through the local refresh worker."
     ]
   },
   {

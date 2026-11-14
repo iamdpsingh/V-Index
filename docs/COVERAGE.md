@@ -75,7 +75,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | JobBoard.io | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 63 | 2026-11-07T07:07:19.433685+00:00 | https://www.nifajobs.com/ (2; LIVE_VERIFIED); https://www.cancercareers.org/ (61; LIVE_VERIFIED)  |
 | Wiley Madgex | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 1681 | 2026-11-14T07:02:33.297361+00:00 | https://jobs.sciencecareers.org/jobs/ (518; LIVE_VERIFIED); https://www.nature.com/naturecareers/jobs/ (1163; LIVE_VERIFIED)  |
 | Talenetic | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
-| JobMount | job_board | IMPLEMENTED | FAILED | HIGH | None | None | Not tested Two complete extraction probes passed; final worker verification is pending. |
+| JobMount | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 958 | 2026-11-14T07:32:32.789657+00:00 | https://soudeur.ca/candidate/job_search/quick/results (153; LIVE_VERIFIED); https://www.jobsrus.com/candidate/job_search/quick/results (805; LIVE_VERIFIED)  |
 | CareerSiteCloud | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | JobBoard.com | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 22 | 2026-11-08T12:15:42.598392+00:00 | https://jobs.acevo.org.uk/ (15; LIVE_VERIFIED); https://www.gradsouthwest.com/ (7; LIVE_VERIFIED)  |
 | Artha | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 124 | 2026-11-13T15:17:31.930939+00:00 | https://lexpath.com.au/ (11; LIVE_VERIFIED); https://joberly.eu/ (113; LIVE_VERIFIED)  |
