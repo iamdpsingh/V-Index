@@ -84,8 +84,12 @@ def rate_limit(bucket: str, limit: int, window: int = 60) -> None:
 
 def credential_rate(request: Request, email: str, *, signup: bool = False) -> None:
     peer = request.client.host if request.client else "unknown"
-    rate_limit(f"credentials:ip:{peer}", 20 if signup else 60, 3600 if signup else 60)
-    rate_limit(f"credentials:email:{email}", 10)
+    if signup:
+        rate_limit(f"registration:ip:{peer}", 20, 3600)
+        rate_limit(f"registration:email:{email}", 5, 3600)
+    else:
+        rate_limit(f"credentials:ip:{peer}", 60)
+        rate_limit(f"credentials:email:{email}", 10)
 
 
 def principal(request: Request, session: Session) -> Account:

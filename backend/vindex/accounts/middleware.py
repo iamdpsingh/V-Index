@@ -4,6 +4,7 @@ from fastapi import HTTPException
 from starlette.responses import JSONResponse
 
 MAX_RESUME_BYTES = 5 * 1024 * 1024
+MAX_PHOTO_BYTES = 2 * 1024 * 1024
 PRIVATE_PREFIXES = ("/api/v1/auth/", "/api/v1/me")
 
 
@@ -15,6 +16,8 @@ class PrivateRequestMiddleware:
         if scope["type"] != "http" or not scope["path"].startswith(PRIVATE_PREFIXES):
             return await self.app(scope, receive, send)
         maximum = MAX_RESUME_BYTES if scope["path"] == "/api/v1/me/resume" else 64 * 1024
+        if scope["path"] == "/api/v1/me/profile/photo":
+            maximum = MAX_PHOTO_BYTES
         headers = dict(scope.get("headers", []))
         try:
             length = int(headers.get(b"content-length", b"0"))

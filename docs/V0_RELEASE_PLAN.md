@@ -29,3 +29,5 @@ Official documentation checked November 6, 2026:
 - [Vercel Daemons](https://vercel.com/docs/daemons): background daemons are documented on all plans, with CPU/memory quotas. Do not claim Vercel cannot run workers; assess the actual worker, storage, quota and plan requirements. No deployment of this worker there has been tested.
 
 No hosted deployment, account entitlement check, free backend capacity measurement or production cost verification has been completed by this document. Keep local development and CI available while these gates remain open.
+
+Import the canonical GitHub repository directly in Vercel when publishing the reviewer preview. Select the Next.js preset and set the project root to `apps/web`. Set `API_INTERNAL_URL` to the reachable HTTPS API, and configure account secrets only on the backend. This Git import publishes the frontend. The API, refresh worker, database and Redis need their own running services. The public privacy, cookie, terms and refund pages contain preview copy and still need launch review against actual operator details and deployment behavior.

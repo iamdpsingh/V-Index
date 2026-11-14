@@ -281,10 +281,14 @@ export default function Home() {
         <div className="footer-inner">
           <div className="footer-brand">
             <span className="footer-brand-title">Rolewisp</span>
-
+            <span>Search jobs and apply at the source.</span>
           </div>
-
-
+          <nav className="footer-nav" aria-label="Policies">
+            <a href="/privacy">Privacy</a>
+            <a href="/cookies">Cookies</a>
+            <a href="/terms">Terms</a>
+            <a href="/refunds">Refunds</a>
+          </nav>
         </div>
       </footer>
     </>

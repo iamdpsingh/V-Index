@@ -10,6 +10,7 @@ import {
   type AccountOut,
   type ProfileInput,
 } from '../lib/api';
+import ProfilePhoto from './ProfilePhoto';
 import ResumeSection from './ResumeSection';
 
 interface UserProfileProps {
@@ -214,6 +215,7 @@ export default function UserProfile({
     <div className="profile-container">
       {/* Account identity bar */}
       <div className="account-identity-bar">
+        <ProfilePhoto key={account.id} />
         <div className="identity-info">
           <span className="identity-email">{account.email}</span>
           <span className="identity-meta">

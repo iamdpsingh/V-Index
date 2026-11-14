@@ -67,3 +67,7 @@ Profile reads and writes support `education`, `experience`, and `projects` as ar
 New passwords use 15 to 128 characters. Passphrases and spaces are allowed. Existing users can still sign in with their current passwords.
 
 A signed-in user can request a verification code from Account Security. `POST /api/v1/me/email/verification` sends an eight-digit code and `POST /api/v1/me/email/verification/confirm` accepts `{"code":"12345678"}`. Codes expire after 15 minutes. Confirmation clears the stored code and updates `email_verified`. Configure SMTP over TLS with `SMTP_HOST`, `SMTP_FROM`, optional `SMTP_PORT` (465 by default), and credentials in `SMTP_USERNAME` and `SMTP_PASSWORD` if the relay requires them. Keep credentials server-side.
+
+Profile photos use authenticated `GET`, `PUT`, and `DELETE` at `/api/v1/me/profile/photo`. Upload raw JPEG, PNG, or WebP bytes up to 2 MB. The server limits decoded dimensions, resizes to at most 384 pixels on each side, removes metadata, and encrypts the stored JPEG with the existing private-file encryption key. Reads are private and use `Cache-Control: no-store`.
+
+Signup and login use independent Redis buckets. Signup allows 20 attempts per connecting IP per hour and five per email per hour. Login allows 60 attempts per connecting IP per minute and ten per email per minute. Both return HTTP 429 with Retry-After when the budget is exhausted. Confirm trusted proxy behavior in the hosted environment before relying on per-visitor IP limits.

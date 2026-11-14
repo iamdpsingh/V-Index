@@ -36,6 +36,7 @@ class Profile(Base):
     account_id: Mapped[str] = mapped_column(
         ForeignKey("accounts.id", ondelete="CASCADE"), primary_key=True
     )
+    photo_ciphertext: Mapped[bytes | None] = mapped_column(LargeBinary)
     data: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)
 
