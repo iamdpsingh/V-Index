@@ -1,0 +1,23 @@
+{
+  "provider": "JobMount",
+  "date_ist": "2026-11-14",
+  "production_registration": false,
+  "boards": [
+    {
+      "url": "https://soudeur.ca/candidate/job_search/quick/results",
+      "count": 153,
+      "complete": true,
+      "detail_errors": 0,
+      "roster_reconfirmed": true,
+      "revision": "04501b0"
+    },
+    {
+      "url": "https://www.jobsrus.com/candidate/job_search/quick/results",
+      "count": 805,
+      "complete": true,
+      "roster_reconfirmed": true,
+      "payload_sha256": "7b48abacf5cd36533bffb3dd9a51b307d5de108b7676083cb7e2d486997d9cd3",
+      "note": "The run started before the publisher-host guard was tightened. Runtime exceeded the standard worker timeout."
+    }
+  ]
+}
