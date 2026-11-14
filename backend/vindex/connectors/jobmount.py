@@ -24,6 +24,7 @@ class JobMountConnector:
     def __init__(self, host: str, client: httpx.AsyncClient):
         if host not in HOSTS:
             raise ValueError("Unreviewed JobMount origin")
+        self.host = host
         self.origin = f"https://{host}"
         self.http = PublicHTTP(client, {host})
 
@@ -81,9 +82,16 @@ class JobMountConnector:
             raise ValueError(f"Missing unique JobMount posting {identifier}")
         row = postings[0]
         published_url = page.select_one('meta[property="og:url"][content]')
-        detail_path = urlsplit(str(published_url["content"])).path if published_url else ""
-        match = POSTING.fullmatch(detail_path)
-        if not match or match[1] != identifier:
+        detail_url = urlsplit(str(published_url["content"])) if published_url else None
+        match = POSTING.fullmatch(detail_url.path) if detail_url else None
+        allowed_hosts = {self.host, self.host.removeprefix("www.")}
+        if (
+            detail_url is None
+            or detail_url.scheme != "https"
+            or detail_url.netloc not in allowed_hosts
+            or not match
+            or match[1] != identifier
+        ):
             raise ValueError(f"JobMount posting identity mismatch for {identifier}")
         forms = {
             match[0]
