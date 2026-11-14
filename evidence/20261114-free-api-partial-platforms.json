@@ -1,0 +1,290 @@
+{
+  "date_ist": "2026-11-14",
+  "service": "Headcount Labs public MCP",
+  "complete": false,
+  "scope": "Provider-reported current records; original URL patterns checked. Source-side freshness and application availability were not verified. Descriptions omitted from evidence.",
+  "platforms": [
+    {
+      "platform": "Dover",
+      "count": 2,
+      "records": [
+        {
+          "title": "Data Scientist",
+          "employer": "Cohere Commerce",
+          "snippet_present": true,
+          "source_url": "https://jobs.dover.com/cohere-commerce/80fe435e-b65f-4a02-b858-96f2baaf762b",
+          "application_entry": "https://jobs.dover.com/cohere-commerce/80fe435e-b65f-4a02-b858-96f2baaf762b"
+        },
+        {
+          "title": "Analytical Chemist",
+          "employer": "Supply Energetics",
+          "snippet_present": true,
+          "source_url": "https://jobs.dover.com/supply-energetics/56ccd8b0-589b-4cbd-980d-a7e55862c661",
+          "application_entry": "https://jobs.dover.com/supply-energetics/56ccd8b0-589b-4cbd-980d-a7e55862c661"
+        }
+      ]
+    },
+    {
+      "platform": "Gem.com",
+      "count": 5,
+      "records": [
+        {
+          "title": "People Business Partner - Growth",
+          "employer": "Nominal",
+          "snippet_present": true,
+          "source_url": "https://jobs.gem.com/nominal/am9icG9zdDqWfXG6twtYcDPNSllruKHK",
+          "application_entry": "https://jobs.gem.com/nominal/am9icG9zdDqWfXG6twtYcDPNSllruKHK"
+        },
+        {
+          "title": "Industrial Security Manager (FSO)",
+          "employer": "Nominal",
+          "snippet_present": true,
+          "source_url": "https://jobs.gem.com/nominal/am9icG9zdDrTpiFLJiQjprpUqLWhaKyY",
+          "application_entry": "https://jobs.gem.com/nominal/am9icG9zdDrTpiFLJiQjprpUqLWhaKyY"
+        },
+        {
+          "title": "Communications Strategist, Government & Product",
+          "employer": "Nominal",
+          "snippet_present": true,
+          "source_url": "https://jobs.gem.com/nominal/am9icG9zdDoZv0pD0oXwX17Pa8dG16ic",
+          "application_entry": "https://jobs.gem.com/nominal/am9icG9zdDoZv0pD0oXwX17Pa8dG16ic"
+        },
+        {
+          "title": "Lead Software Engineer, Backend - Growth & Monetization",
+          "employer": "Nominal",
+          "snippet_present": true,
+          "source_url": "https://jobs.gem.com/nominal/am9icG9zdDoismb3Lxk65kH4SSAmYMZW",
+          "application_entry": "https://jobs.gem.com/nominal/am9icG9zdDoismb3Lxk65kH4SSAmYMZW"
+        },
+        {
+          "title": "Staff Software Engineer, Agents",
+          "employer": "Nominal",
+          "snippet_present": true,
+          "source_url": "https://jobs.gem.com/nominal/am9icG9zdDpbhtDI2EeP7tnEhxkCLJKz",
+          "application_entry": "https://jobs.gem.com/nominal/am9icG9zdDpbhtDI2EeP7tnEhxkCLJKz"
+        }
+      ]
+    },
+    {
+      "platform": "Paycor",
+      "count": 4,
+      "records": [
+        {
+          "title": "Senior Product Manager",
+          "employer": "Accelerate Learning",
+          "snippet_present": true,
+          "source_url": "https://recruitingbypaycor.com/career/JobIntroduction.action?clientId=8a7883d08d19fedb018d57d02cda2d7c&id=8a7883aca0c941c501a0ea5db32b647e",
+          "application_entry": "https://recruitingbypaycor.com/career/JobIntroduction.action?clientId=8a7883d08d19fedb018d57d02cda2d7c&id=8a7883aca0c941c501a0ea5db32b647e"
+        },
+        {
+          "title": "Field Sales Associate- Math Curriculum (California only)",
+          "employer": "Accelerate Learning",
+          "snippet_present": true,
+          "source_url": "https://recruitingbypaycor.com/career/JobIntroduction.action?clientId=8a7883d08d19fedb018d57d02cda2d7c&id=8a7885ac96d0a1a00197374a6db915d4",
+          "application_entry": "https://recruitingbypaycor.com/career/JobIntroduction.action?clientId=8a7883d08d19fedb018d57d02cda2d7c&id=8a7885ac96d0a1a00197374a6db915d4"
+        },
+        {
+          "title": "Senior QA Analyst",
+          "employer": "Accelerate Learning",
+          "snippet_present": true,
+          "source_url": "https://recruitingbypaycor.com/career/JobIntroduction.action?clientId=8a7883d08d19fedb018d57d02cda2d7c&id=8a78859e9e46f63e019e4ca1219c19ae",
+          "application_entry": "https://recruitingbypaycor.com/career/JobIntroduction.action?clientId=8a7883d08d19fedb018d57d02cda2d7c&id=8a78859e9e46f63e019e4ca1219c19ae"
+        },
+        {
+          "title": "Software Architect",
+          "employer": "Accelerate Learning",
+          "snippet_present": true,
+          "source_url": "https://recruitingbypaycor.com/career/JobIntroduction.action?clientId=8a7883d08d19fedb018d57d02cda2d7c&id=8a78839e9fd3ba7b01a011713ec5642a",
+          "application_entry": "https://recruitingbypaycor.com/career/JobIntroduction.action?clientId=8a7883d08d19fedb018d57d02cda2d7c&id=8a78839e9fd3ba7b01a011713ec5642a"
+        }
+      ]
+    },
+    {
+      "platform": "talentReef",
+      "count": 5,
+      "records": [
+        {
+          "title": "Barista Supervisor - Caf\u00e9 Granada",
+          "employer": "JC Resorts",
+          "snippet_present": true,
+          "source_url": "https://secure.jobappnetwork.com/apply/c_jcr/l_en/RBI--Cafe-Granada-Supervisor-job-San-Diego-CA-US-11154984.html",
+          "application_entry": "https://secure.jobappnetwork.com/apply/c_jcr/l_en/RBI--Cafe-Granada-Supervisor-job-San-Diego-CA-US-11154984.html"
+        },
+        {
+          "title": "Banquet Food Server",
+          "employer": "JC Resorts",
+          "snippet_present": true,
+          "source_url": "https://secure.jobappnetwork.com/apply/c_jcr/l_en/SNS--Banquet-Food-Server-job-Laguna-Beach-CA-US-11167220.html",
+          "application_entry": "https://secure.jobappnetwork.com/apply/c_jcr/l_en/SNS--Banquet-Food-Server-job-Laguna-Beach-CA-US-11167220.html"
+        },
+        {
+          "title": "Engineer 3",
+          "employer": "JC Resorts",
+          "snippet_present": true,
+          "source_url": "https://secure.jobappnetwork.com/apply/c_jcr/l_en/RBI--Engineer-3-job-San-Diego-CA-US-11090011.html",
+          "application_entry": "https://secure.jobappnetwork.com/apply/c_jcr/l_en/RBI--Engineer-3-job-San-Diego-CA-US-11090011.html"
+        },
+        {
+          "title": "Golf Controller",
+          "employer": "JC Resorts",
+          "snippet_present": true,
+          "source_url": "https://secure.jobappnetwork.com/apply/c_jcr/l_en/RBI--Controller-job-San-Diego-CA-US-11034863.html",
+          "application_entry": "https://secure.jobappnetwork.com/apply/c_jcr/l_en/RBI--Controller-job-San-Diego-CA-US-11034863.html"
+        },
+        {
+          "title": "Self Inspector",
+          "employer": "JC Resorts",
+          "snippet_present": true,
+          "source_url": "https://secure.jobappnetwork.com/apply/c_jcr/l_en/RBI--Self-Inspector-job-San-Diego-CA-US-11069809.html",
+          "application_entry": "https://secure.jobappnetwork.com/apply/c_jcr/l_en/RBI--Self-Inspector-job-San-Diego-CA-US-11069809.html"
+        }
+      ]
+    },
+    {
+      "platform": "UltiPro",
+      "count": 20,
+      "records": [
+        {
+          "title": "Entry Level Manufacturing Engineer",
+          "employer": "RBC Bearings Incorporated",
+          "snippet_present": true,
+          "source_url": "https://recruiting.ultipro.com/rol1001rbcai/JobBoard/323503a8-be53-4e45-a425-31ab5d011434/OpportunityDetail?opportunityId=0e448113-033f-436a-bb14-532e865224d5",
+          "application_entry": "https://recruiting.ultipro.com/rol1001rbcai/JobBoard/323503a8-be53-4e45-a425-31ab5d011434/OpportunityDetail?opportunityId=0e448113-033f-436a-bb14-532e865224d5"
+        },
+        {
+          "title": "Secondary Milling Lathe Setup Operator",
+          "employer": "RBC Bearings Incorporated",
+          "snippet_present": true,
+          "source_url": "https://recruiting.ultipro.com/rol1001rbcai/JobBoard/323503a8-be53-4e45-a425-31ab5d011434/OpportunityDetail?opportunityId=3526534e-9a59-4452-a75a-0c54a42318e6",
+          "application_entry": "https://recruiting.ultipro.com/rol1001rbcai/JobBoard/323503a8-be53-4e45-a425-31ab5d011434/OpportunityDetail?opportunityId=3526534e-9a59-4452-a75a-0c54a42318e6"
+        },
+        {
+          "title": "Sales Development Associate - Aerospace",
+          "employer": "RBC Bearings Incorporated",
+          "snippet_present": true,
+          "source_url": "https://recruiting.ultipro.com/rol1001rbcai/JobBoard/323503a8-be53-4e45-a425-31ab5d011434/OpportunityDetail?opportunityId=9b18ddd6-270a-435a-a25c-dee707a8952e",
+          "application_entry": "https://recruiting.ultipro.com/rol1001rbcai/JobBoard/323503a8-be53-4e45-a425-31ab5d011434/OpportunityDetail?opportunityId=9b18ddd6-270a-435a-a25c-dee707a8952e"
+        },
+        {
+          "title": "Press Operator",
+          "employer": "RBC Bearings Incorporated",
+          "snippet_present": true,
+          "source_url": "https://recruiting.ultipro.com/rol1001rbcai/JobBoard/323503a8-be53-4e45-a425-31ab5d011434/OpportunityDetail?opportunityId=1782a64c-a7d6-4572-874f-e2f821a34a08",
+          "application_entry": "https://recruiting.ultipro.com/rol1001rbcai/JobBoard/323503a8-be53-4e45-a425-31ab5d011434/OpportunityDetail?opportunityId=1782a64c-a7d6-4572-874f-e2f821a34a08"
+        },
+        {
+          "title": "Sales Development Associate \u2013 Aerospace",
+          "employer": "RBC Bearings Incorporated",
+          "snippet_present": true,
+          "source_url": "https://recruiting.ultipro.com/rol1001rbcai/JobBoard/323503a8-be53-4e45-a425-31ab5d011434/OpportunityDetail?opportunityId=203ad047-08e8-4778-9b8d-d7a57ddc1825",
+          "application_entry": "https://recruiting.ultipro.com/rol1001rbcai/JobBoard/323503a8-be53-4e45-a425-31ab5d011434/OpportunityDetail?opportunityId=203ad047-08e8-4778-9b8d-d7a57ddc1825"
+        },
+        {
+          "title": "Sales Development Associate \u2013 Aerospace and Industrial",
+          "employer": "RBC Bearings Incorporated",
+          "snippet_present": true,
+          "source_url": "https://recruiting.ultipro.com/rol1001rbcai/JobBoard/323503a8-be53-4e45-a425-31ab5d011434/OpportunityDetail?opportunityId=52cd6947-d1a3-4747-ac92-a943c143c384",
+          "application_entry": "https://recruiting.ultipro.com/rol1001rbcai/JobBoard/323503a8-be53-4e45-a425-31ab5d011434/OpportunityDetail?opportunityId=52cd6947-d1a3-4747-ac92-a943c143c384"
+        },
+        {
+          "title": "Sales Development Associate \u2013 Aerospace (SALES006935)",
+          "employer": "RBC Bearings Incorporated",
+          "snippet_present": true,
+          "source_url": "https://recruiting.ultipro.com/rol1001rbcai/JobBoard/323503a8-be53-4e45-a425-31ab5d011434/OpportunityDetail?opportunityId=243aecfa-4e2e-415c-be77-4ec102e3ac4c",
+          "application_entry": "https://recruiting.ultipro.com/rol1001rbcai/JobBoard/323503a8-be53-4e45-a425-31ab5d011434/OpportunityDetail?opportunityId=243aecfa-4e2e-415c-be77-4ec102e3ac4c"
+        },
+        {
+          "title": "2nd Shift- Press Operator",
+          "employer": "RBC Bearings Incorporated",
+          "snippet_present": true,
+          "source_url": "https://recruiting.ultipro.com/rol1001rbcai/JobBoard/323503a8-be53-4e45-a425-31ab5d011434/OpportunityDetail?opportunityId=00934fc4-4312-41bf-abdd-63d952e24a37",
+          "application_entry": "https://recruiting.ultipro.com/rol1001rbcai/JobBoard/323503a8-be53-4e45-a425-31ab5d011434/OpportunityDetail?opportunityId=00934fc4-4312-41bf-abdd-63d952e24a37"
+        },
+        {
+          "title": "Sales Development Associate \u2013 Aerospace and Industrial",
+          "employer": "RBC Bearings Incorporated",
+          "snippet_present": true,
+          "source_url": "https://recruiting.ultipro.com/rol1001rbcai/JobBoard/323503a8-be53-4e45-a425-31ab5d011434/OpportunityDetail?opportunityId=c8ba8ad7-7a1e-4a4d-bb68-b832f5851ffe",
+          "application_entry": "https://recruiting.ultipro.com/rol1001rbcai/JobBoard/323503a8-be53-4e45-a425-31ab5d011434/OpportunityDetail?opportunityId=c8ba8ad7-7a1e-4a4d-bb68-b832f5851ffe"
+        },
+        {
+          "title": "Distribution Account Manager",
+          "employer": "RBC Bearings Incorporated",
+          "snippet_present": true,
+          "source_url": "https://recruiting.ultipro.com/rol1001rbcai/JobBoard/323503a8-be53-4e45-a425-31ab5d011434/OpportunityDetail?opportunityId=7c4506ad-613a-4226-a1e8-e6d481666afa",
+          "application_entry": "https://recruiting.ultipro.com/rol1001rbcai/JobBoard/323503a8-be53-4e45-a425-31ab5d011434/OpportunityDetail?opportunityId=7c4506ad-613a-4226-a1e8-e6d481666afa"
+        },
+        {
+          "title": "2nd Shift- Operator Teflon Class C",
+          "employer": "RBC Bearings Incorporated",
+          "snippet_present": true,
+          "source_url": "https://recruiting.ultipro.com/rol1001rbcai/JobBoard/323503a8-be53-4e45-a425-31ab5d011434/OpportunityDetail?opportunityId=f6fb5381-0bdf-4570-9a1d-471a571ae687",
+          "application_entry": "https://recruiting.ultipro.com/rol1001rbcai/JobBoard/323503a8-be53-4e45-a425-31ab5d011434/OpportunityDetail?opportunityId=f6fb5381-0bdf-4570-9a1d-471a571ae687"
+        },
+        {
+          "title": "Sales Development Associate \u2013 Aerospace (SALES006940)",
+          "employer": "RBC Bearings Incorporated",
+          "snippet_present": true,
+          "source_url": "https://recruiting.ultipro.com/rol1001rbcai/JobBoard/323503a8-be53-4e45-a425-31ab5d011434/OpportunityDetail?opportunityId=8de194ee-9e8f-4bd3-8b48-5375b41fd9f4",
+          "application_entry": "https://recruiting.ultipro.com/rol1001rbcai/JobBoard/323503a8-be53-4e45-a425-31ab5d011434/OpportunityDetail?opportunityId=8de194ee-9e8f-4bd3-8b48-5375b41fd9f4"
+        },
+        {
+          "title": "Entry Level Manufacturing Engineer",
+          "employer": "RBC Bearings Incorporated",
+          "snippet_present": true,
+          "source_url": "https://recruiting.ultipro.com/rol1001rbcai/JobBoard/323503a8-be53-4e45-a425-31ab5d011434/OpportunityDetail?opportunityId=cd036dd4-9bf0-4985-8ff9-3461e51f22d3",
+          "application_entry": "https://recruiting.ultipro.com/rol1001rbcai/JobBoard/323503a8-be53-4e45-a425-31ab5d011434/OpportunityDetail?opportunityId=cd036dd4-9bf0-4985-8ff9-3461e51f22d3"
+        },
+        {
+          "title": "IT Systems Tech - Kahr (ITHEL006667)",
+          "employer": "RBC Bearings Incorporated",
+          "snippet_present": true,
+          "source_url": "https://recruiting.ultipro.com/rol1001rbcai/JobBoard/323503a8-be53-4e45-a425-31ab5d011434/OpportunityDetail?opportunityId=5e9bfff3-6cd0-4264-afdd-fb84cd666a94",
+          "application_entry": "https://recruiting.ultipro.com/rol1001rbcai/JobBoard/323503a8-be53-4e45-a425-31ab5d011434/OpportunityDetail?opportunityId=5e9bfff3-6cd0-4264-afdd-fb84cd666a94"
+        },
+        {
+          "title": "Document Control Coordinator",
+          "employer": "RBC Bearings Incorporated",
+          "snippet_present": true,
+          "source_url": "https://recruiting.ultipro.com/rol1001rbcai/JobBoard/323503a8-be53-4e45-a425-31ab5d011434/OpportunityDetail?opportunityId=39dc13d5-96cf-4154-a6b0-1db22ce32396",
+          "application_entry": "https://recruiting.ultipro.com/rol1001rbcai/JobBoard/323503a8-be53-4e45-a425-31ab5d011434/OpportunityDetail?opportunityId=39dc13d5-96cf-4154-a6b0-1db22ce32396"
+        },
+        {
+          "title": "Sales Development Associate \u2013 Aerospace and Industrial",
+          "employer": "RBC Bearings Incorporated",
+          "snippet_present": true,
+          "source_url": "https://recruiting.ultipro.com/rol1001rbcai/JobBoard/323503a8-be53-4e45-a425-31ab5d011434/OpportunityDetail?opportunityId=462d0f3f-4bc7-4030-9004-7fcb74bc41cd",
+          "application_entry": "https://recruiting.ultipro.com/rol1001rbcai/JobBoard/323503a8-be53-4e45-a425-31ab5d011434/OpportunityDetail?opportunityId=462d0f3f-4bc7-4030-9004-7fcb74bc41cd"
+        },
+        {
+          "title": "Sales Development Associate \u2013 Aerospace (SALES006941)",
+          "employer": "RBC Bearings Incorporated",
+          "snippet_present": true,
+          "source_url": "https://recruiting.ultipro.com/rol1001rbcai/JobBoard/323503a8-be53-4e45-a425-31ab5d011434/OpportunityDetail?opportunityId=b4ed0d69-eb95-49d1-89df-e1c898a9a529",
+          "application_entry": "https://recruiting.ultipro.com/rol1001rbcai/JobBoard/323503a8-be53-4e45-a425-31ab5d011434/OpportunityDetail?opportunityId=b4ed0d69-eb95-49d1-89df-e1c898a9a529"
+        },
+        {
+          "title": "Entry Level Manufacturing Engineer",
+          "employer": "RBC Bearings Incorporated",
+          "snippet_present": true,
+          "source_url": "https://recruiting.ultipro.com/rol1001rbcai/JobBoard/323503a8-be53-4e45-a425-31ab5d011434/OpportunityDetail?opportunityId=46d125c8-ab5b-4033-83f1-a3d5b4d04be4",
+          "application_entry": "https://recruiting.ultipro.com/rol1001rbcai/JobBoard/323503a8-be53-4e45-a425-31ab5d011434/OpportunityDetail?opportunityId=46d125c8-ab5b-4033-83f1-a3d5b4d04be4"
+        },
+        {
+          "title": "Assembler - Bond Room - 1st Shift",
+          "employer": "RBC Bearings Incorporated",
+          "snippet_present": true,
+          "source_url": "https://recruiting.ultipro.com/rol1001rbcai/JobBoard/323503a8-be53-4e45-a425-31ab5d011434/OpportunityDetail?opportunityId=fc1103a3-e1c7-4cfa-99e4-b2f17ebdd019",
+          "application_entry": "https://recruiting.ultipro.com/rol1001rbcai/JobBoard/323503a8-be53-4e45-a425-31ab5d011434/OpportunityDetail?opportunityId=fc1103a3-e1c7-4cfa-99e4-b2f17ebdd019"
+        },
+        {
+          "title": "2nd Shift- Operator Teflon Class C",
+          "employer": "RBC Bearings Incorporated",
+          "snippet_present": true,
+          "source_url": "https://recruiting.ultipro.com/rol1001rbcai/JobBoard/323503a8-be53-4e45-a425-31ab5d011434/OpportunityDetail?opportunityId=dbfc2c2c-f72c-4268-90ad-a24a35ebf5bc",
+          "application_entry": "https://recruiting.ultipro.com/rol1001rbcai/JobBoard/323503a8-be53-4e45-a425-31ab5d011434/OpportunityDetail?opportunityId=dbfc2c2c-f72c-4268-90ad-a24a35ebf5bc"
+        }
+      ]
+    }
+  ]
+}
