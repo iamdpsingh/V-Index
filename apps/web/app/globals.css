@@ -2087,3 +2087,98 @@ header {
 .workspace-editor textarea {
   margin-bottom: 1rem;
 }
+
+.candidate-intro {
+  margin-top: 1.5rem;
+}
+
+.candidate-intro h3 {
+  margin: 0;
+  font-size: clamp(1.45rem, 3vw, 2rem);
+  line-height: 1.15;
+}
+
+.candidate-intro p {
+  margin: .45rem 0 0;
+}
+
+.candidate-meta {
+  color: var(--color-muted);
+  font-size: .875rem;
+}
+
+.candidate-summary {
+  overflow-wrap: anywhere;
+}
+
+.candidate-section {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-rule);
+}
+
+.candidate-section h3 {
+  font-size: 1rem;
+  margin: 0 0 .5rem;
+}
+
+.candidate-section p {
+  margin: 0;
+  white-space: pre-wrap;
+  line-height: 1.6;
+}
+
+.candidate-section ul {
+  margin: 0;
+  padding-inline-start: 1.125rem;
+}
+
+.candidate-section li + li {
+  margin-top: .3rem;
+}
+
+.candidate-edit-form {
+  margin-top: 1.5rem;
+}
+
+.candidate-edit-form .form-submit-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+}
+
+.candidate-edit-form .form-field {
+  margin-top: 1rem;
+}
+
+.candidate-edit-form .checkbox-label {
+  flex-direction: row;
+  align-items: baseline;
+}
+
+.candidate-links {
+  margin: 1.25rem 0 0;
+  padding: .75rem 0 0;
+  border: 0;
+  border-top: 1px solid var(--color-rule);
+  min-inline-size: 0;
+}
+
+.candidate-links legend {
+  padding: 0 .5rem 0 0;
+  font-weight: 600;
+}
+
+.candidate-link-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) auto;
+  gap: .5rem;
+  margin-bottom: .75rem;
+}
+
+@media (max-width: 640px) {
+  .candidate-link-row {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: start;
+  }
+}

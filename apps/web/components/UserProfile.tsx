@@ -1,6 +1,6 @@
 'use client';
 
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useEffect, useRef, useState } from 'react';
 import {
   confirmEmailVerification,
   requestEmailVerification,
@@ -18,6 +18,16 @@ interface UserProfileProps {
   account: AccountOut;
   onLogout: () => Promise<void>;
   onAccountDeleted: () => void;
+}
+
+function ProfileList({ title, items }: { title: string; items?: string[] }) {
+  if (!items?.length) return null;
+  return (
+    <section className="candidate-section">
+      <h3>{title}</h3>
+      <ul>{items.map((item, index) => <li key={index}>{item}</li>)}</ul>
+    </section>
+  );
 }
 
 export default function UserProfile({
@@ -81,6 +91,30 @@ export default function UserProfile({
     experience_years: null,
   });
 
+  const [editing, setEditing] = useState(false);
+  const savedProfile = useRef<ProfileInput | null>(null);
+  const editingStarted = useRef(false);
+  const editButton = useRef<HTMLButtonElement>(null);
+  const formHeading = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    if (editing) {
+      editingStarted.current = true;
+      formHeading.current?.focus();
+    } else if (editingStarted.current) {
+      editButton.current?.focus();
+    }
+  }, [editing]);
+
+  function cancelEditing() {
+    if (savedProfile.current) setProfile(savedProfile.current);
+    setNewTitle('');
+    setNewSkill('');
+    setNewLoc('');
+    setError('');
+    setEditing(false);
+  }
+
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
@@ -106,7 +140,7 @@ export default function UserProfile({
     setError('');
     try {
       const data = await getProfile();
-      setProfile({
+      const saved = {
         education: data.education || [],
         experience: data.experience || [],
         projects: data.projects || [],
@@ -121,7 +155,9 @@ export default function UserProfile({
         remote_only: Boolean(data.remote_only),
         use_resume_skills: data.use_resume_skills ?? true,
         experience_years: data.experience_years ?? null,
-      });
+      };
+      savedProfile.current = saved;
+      setProfile(saved);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Failed to load profile');
     } finally {
@@ -157,7 +193,7 @@ export default function UserProfile({
       };
 
       const updated = await updateProfile(payload);
-      setProfile({
+      const saved = {
         education: updated.education || [],
         experience: updated.experience || [],
         projects: updated.projects || [],
@@ -172,7 +208,10 @@ export default function UserProfile({
         remote_only: Boolean(updated.remote_only),
         use_resume_skills: updated.use_resume_skills ?? true,
         experience_years: updated.experience_years ?? null,
-      });
+      };
+      savedProfile.current = saved;
+      setProfile(saved);
+      cancelEditing();
       setSaveSuccess(true);
       setTimeout(() => setSaveSuccess(false), 4000);
     } catch (err: unknown) {
@@ -237,12 +276,15 @@ export default function UserProfile({
         <div className="profile-grid">
           {/* Main profile form */}
           <section className="profile-card">
-            <h2>Job-Seeker Profile</h2>
-            <p className="card-sub">
-              Your preferences drive recommendations on the <strong>For You</strong> tab. Signals are
-              matched using transparent keyword matching; no data is shared externally.
-            </p>
-
+            <header className="workspace-row">
+              <h2 ref={formHeading} tabIndex={-1}>{editing ? 'Edit profile' : 'Candidate profile'}</h2>
+              {!editing && savedProfile.current && (
+                <button type="button" className="btn-secondary" ref={editButton} onClick={() => {
+                  setSaveSuccess(false);
+                  setEditing(true);
+                }}>Edit profile</button>
+              )}
+            </header>
             {error && (
               <div className="notice error profile-error" role="alert">
                 {error}
@@ -255,7 +297,45 @@ export default function UserProfile({
               </div>
             )}
 
-            <form onSubmit={handleSaveProfile} className="profile-form">
+            {!savedProfile.current && (
+              <button type="button" className="btn-secondary" onClick={() => void loadProfileData()}>Retry loading profile</button>
+            )}
+            {savedProfile.current && !editing && (
+              <div className="candidate-summary">
+                <div className="candidate-intro">
+                  <h3>{profile.full_name || 'Your professional profile'}</h3>
+                  {profile.headline && <p>{profile.headline}</p>}
+                  {(profile.location || profile.experience_years != null) && (
+                    <p className="candidate-meta">
+                      {[profile.location, profile.experience_years != null
+                        ? `${profile.experience_years} ${profile.experience_years === 1 ? 'year' : 'years'} of experience`
+                        : ''].filter(Boolean).join(' · ')}
+                    </p>
+                  )}
+                  {!profile.full_name && !profile.headline && !profile.bio && (
+                    <p className="candidate-meta">Add your background and job preferences to get more relevant recommendations.</p>
+                  )}
+                </div>
+                {profile.bio && <section className="candidate-section"><h3>About</h3><p>{profile.bio}</p></section>}
+                <ProfileList title="Experience" items={profile.experience} />
+                <ProfileList title="Education" items={profile.education} />
+                <ProfileList title="Projects" items={profile.projects} />
+                <ProfileList title="Skills" items={profile.skills} />
+                <ProfileList title="Roles of interest" items={profile.desired_titles} />
+                <ProfileList title="Preferred locations" items={profile.remote_only
+                  ? [...(profile.preferred_locations ?? []), 'Remote only']
+                  : profile.preferred_locations} />
+                {!!profile.links?.length && (
+                  <section className="candidate-section">
+                    <h3>Links</h3>
+                    <ul>{profile.links.filter((link) => link.url.startsWith('https://')).map((link, index) => (
+                      <li key={index}><a href={link.url} target="_blank" rel="noopener noreferrer">{link.label || link.url}</a></li>
+                    ))}</ul>
+                  </section>
+                )}
+              </div>
+            )}
+            {editing && <form onSubmit={handleSaveProfile} className="profile-form candidate-edit-form">
               <div className="form-row">
                 <label>
                   Full name
@@ -305,7 +385,6 @@ export default function UserProfile({
                       });
                     }}
                   />
-                  <small className="field-hint">Note: Stored in profile; currently not used in ranking.</small>
                 </label>
               </div>
 
@@ -323,7 +402,7 @@ export default function UserProfile({
 
               {/* Desired Titles */}
               <div className="tag-field-group">
-                <label>Desired Job Titles (matches weigh 7× in recommendations)</label>
+                <label>Desired job titles</label>
                 <div className="tag-input-row">
                   <input
                     value={newTitle}
@@ -369,7 +448,7 @@ export default function UserProfile({
 
               {/* Skills */}
               <div className="tag-field-group">
-                <label>Skills & Technologies (matches weigh 3× in recommendations)</label>
+                <label>Skills</label>
                 <div className="tag-input-row">
                   <input
                     value={newSkill}
@@ -483,6 +562,7 @@ export default function UserProfile({
                 <label key={field} className="form-field">
                   <span>{field[0].toUpperCase() + field.slice(1)}</span>
                   <textarea
+                    className="profile-textarea"
                     rows={4}
                     value={(profile[field] ?? []).join('\n')}
                     onChange={(event) => setProfile({
@@ -492,10 +572,10 @@ export default function UserProfile({
                   />
                 </label>
               ))}
-              <fieldset>
+              <fieldset className="candidate-links">
                 <legend>Professional links</legend>
                 {(profile.links ?? []).map((link, index) => (
-                  <div key={index}>
+                  <div className="candidate-link-row" key={index}>
                     <input aria-label={`Link ${index + 1} label`} value={link.label} required
                       onChange={(event) => setProfile({
                         ...profile,
@@ -506,28 +586,31 @@ export default function UserProfile({
                         ...profile,
                         links: profile.links?.map((item, i) => i === index ? { ...item, url: event.target.value } : item),
                       })} />
-                    <button type="button" onClick={() => setProfile({
+                    <button className="btn-secondary" type="button" onClick={() => setProfile({
                       ...profile,
                       links: profile.links?.filter((_, i) => i !== index),
                     })}>Remove link</button>
                   </div>
                 ))}
-                <button type="button" disabled={(profile.links?.length ?? 0) >= 12}
+                <button className="btn-secondary" type="button" disabled={(profile.links?.length ?? 0) >= 12}
                   onClick={() => setProfile({ ...profile, links: [...(profile.links ?? []), { label: '', url: '' }] })}>
                   Add LinkedIn, GitHub, portfolio, or other link
                 </button>
               </fieldset>
               <div className="form-submit-row">
+                <button type="button" className="btn-secondary" disabled={saving} onClick={cancelEditing}>Cancel</button>
                 <button type="submit" className="primary" disabled={saving}>
                   {saving ? 'Saving…' : 'Save profile'}
                 </button>
               </div>
-            </form>
+            </form>}
           </section>
 
           {/* Right sidebar: Resume upload & Account security */}
           <div className="profile-aside-column">
-            <ResumeSection onUseSuggestions={(resume) => {
+            <ResumeSection onUseSuggestions={savedProfile.current && !saving ? (resume) => {
+              setSaveSuccess(false);
+              setEditing(true);
               setProfile((current) => {
                 const next = { ...current };
                 for (const field of ['full_name', 'headline', 'bio'] as const) {
@@ -546,7 +629,7 @@ export default function UserProfile({
                 next.links = [...links.values()].slice(0, 12);
                 return next;
               });
-            }} />
+            } : undefined} />
 
             {/* Account Settings / Password change */}
             <section className="profile-subcard">

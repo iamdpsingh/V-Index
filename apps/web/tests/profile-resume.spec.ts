@@ -18,18 +18,28 @@ test.beforeEach(async ({ page }) => {
   await mockResume(page);
 });
 
-test('profile screen loads saved name, headline, bio, desired roles, and skills', async ({ page }) => {
+test('candidate profile opens read-only and discards cancelled edits', async ({ page }) => {
   await page.goto('/?tab=profile');
 
-  // Verify form loaded with SAMPLE_PROFILE values
-  await expect(page.getByLabel('Full name')).toHaveValue('Alex Morgan');
-  await expect(page.getByLabel('Professional headline')).toHaveValue('Senior Systems Engineer');
-  await expect(page.getByLabel('Current location')).toHaveValue('London, UK');
-  await expect(page.locator('.profile-textarea')).toHaveValue(SAMPLE_PROFILE.bio);
+  await expect(page.getByRole('heading', { name: 'Alex Morgan' })).toBeVisible();
+  await expect(page.getByText('Senior Systems Engineer', { exact: true })).toBeVisible();
+  await expect(page.getByText(SAMPLE_PROFILE.bio)).toBeVisible();
+  await expect(page.getByLabel('Full name')).toHaveCount(0);
 
-  // Check tags
-  await expect(page.locator('.interactive-tag', { hasText: 'Systems Engineer' })).toBeVisible();
-  await expect(page.locator('.interactive-tag', { hasText: 'Python' })).toBeVisible();
+  const edit = page.getByRole('button', { name: 'Edit profile' });
+  await edit.click();
+  await expect(page.getByLabel('Full name')).toHaveValue('Alex Morgan');
+  await page.getByLabel('Full name').fill('Unsaved name');
+  await page.getByRole('button', { name: 'Cancel', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'Alex Morgan' })).toBeVisible();
+  await expect(edit).toBeFocused();
+});
+
+test('reviewing resume suggestions opens the profile editor', async ({ page }) => {
+  await page.goto('/?tab=profile');
+  await page.getByRole('button', { name: 'Review resume details in profile' }).click();
+  await expect(page.getByRole('heading', { name: 'Edit profile' })).toBeFocused();
+  await expect(page.locator('.interactive-tag', { hasText: 'FastAPI' })).toBeVisible();
 });
 
 test('adding desired role and skills updates tags and enables save', async ({ page }) => {
@@ -53,6 +63,8 @@ test('adding desired role and skills updates tags and enables save', async ({ pa
 
   await page.goto('/?tab=profile');
 
+  await page.getByRole('button', { name: 'Edit profile' }).click();
+
   // Add new desired title
   const titleInput = page.getByPlaceholder('e.g. Staff Software Engineer');
   await titleInput.fill('Principal Architect');
@@ -63,6 +75,8 @@ test('adding desired role and skills updates tags and enables save', async ({ pa
   // Save profile
   await page.getByRole('button', { name: 'Save profile' }).click();
   await expect(page.locator('.success-notice')).toHaveText('Profile saved successfully.');
+  await expect(page.getByLabel('Full name')).toHaveCount(0);
+  await expect(page.getByText('Principal Architect', { exact: true })).toBeVisible();
 
   expect(savedPayload).not.toBeNull();
   expect((savedPayload as unknown as Record<string, unknown>)?.desired_titles).toContain('Principal Architect');
