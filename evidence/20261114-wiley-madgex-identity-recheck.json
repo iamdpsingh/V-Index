@@ -1,0 +1,18 @@
+{
+  "checked_at": "2026-11-14T06:40:30.639169+00:00",
+  "complete": false,
+  "boards": [
+    {
+      "url": "https://jobs.sciencecareers.org/jobs/",
+      "sample_size": 20,
+      "count": 20,
+      "errors": []
+    },
+    {
+      "url": "https://www.nature.com/naturecareers/jobs/",
+      "sample_size": 20,
+      "count": 20,
+      "errors": []
+    }
+  ]
+}
