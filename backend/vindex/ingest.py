@@ -54,7 +54,11 @@ def ingest(session: Session, source: Source, batch: Enumeration, checked=None) -
             {k: v for k, v in data.items() if k != "raw" and not (k == "quality_flags" and not v)}
         )
         obs = existing.get(item.external_id)
-        key = identity(item)
+        key = (
+            digest([source.provider, source.slug])
+            if source.provider == "employer_posting"
+            else identity(item)
+        )
         canonical = session.scalar(select(Job).where(Job.identity == key))
         if canonical is None:
             canonical = Job(identity=key, data=data, first_seen=checked, last_changed=checked)

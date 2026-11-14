@@ -16,6 +16,8 @@ from vindex.accounts.api import router as account_router
 from vindex.accounts.email_verification import recovery_router
 from vindex.accounts.email_verification import router as email_verification_router
 from vindex.accounts.middleware import PRIVATE_PREFIXES, PrivateRequestMiddleware
+from vindex.accounts.oauth import router as oauth_router
+from vindex.accounts.postings import router as posting_router
 from vindex.accounts.profile_photo import router as profile_photo_router
 from vindex.accounts.recommendations import router as recommendations_router
 from vindex.accounts.resume_api import router as resume_router
@@ -31,6 +33,8 @@ app = FastAPI(
 )
 app.add_middleware(PrivateRequestMiddleware)
 app.include_router(account_router)
+app.include_router(oauth_router)
+app.include_router(posting_router)
 app.include_router(profile_photo_router)
 app.include_router(email_verification_router)
 app.include_router(recovery_router)

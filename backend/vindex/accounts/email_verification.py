@@ -4,6 +4,7 @@ import hmac
 import os
 import secrets
 import smtplib
+import ssl
 from datetime import timedelta
 from email.message import EmailMessage
 
@@ -38,10 +39,16 @@ def deliver(address: str, code: str, purpose: str = "Verify your Rolewisp email"
     message["Subject"] = purpose
     message.set_content(f"Your Rolewisp code is {code}. It expires in 15 minutes.")
     try:
-        with smtplib.SMTP_SSL(host, int(os.getenv("SMTP_PORT") or "465"), timeout=8) as connection:
+        with smtplib.SMTP_SSL(
+            host,
+            int(os.getenv("SMTP_PORT") or "465"),
+            timeout=8,
+            context=ssl.create_default_context(),
+        ) as connection:
             if username := os.getenv("SMTP_USERNAME"):
                 connection.login(username, os.environ["SMTP_PASSWORD"])
-            connection.send_message(message)
+            if connection.send_message(message):
+                raise smtplib.SMTPException("Recipient rejected")
     except (OSError, ValueError, KeyError) as error:
         raise HTTPException(503, "Email delivery is unavailable") from error
 

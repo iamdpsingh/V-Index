@@ -139,9 +139,12 @@ def test_password_recovery_revokes_sessions(account_client, database, monkeypatc
     assert account_client.post(endpoint + "/confirm", json=payload).status_code == 204
     assert account_client.get("/api/v1/me").status_code == 401
     assert account_client.post(endpoint + "/confirm", json=payload).status_code == 422
-    assert account_client.post(
-        "/api/v1/auth/login", json={"email": email, "password": payload["password"]}
-    ).status_code == 200
+    assert (
+        account_client.post(
+            "/api/v1/auth/login", json={"email": email, "password": payload["password"]}
+        ).status_code
+        == 200
+    )
 
 
 def test_private_body_and_validation_limits_do_not_echo_passwords(account_client):
@@ -216,3 +219,86 @@ def test_email_verification_code_is_required_and_single_use(account_client, data
     assert account_client.post(endpoint + "/confirm", json={"code": codes[0]}).status_code == 204
     assert account_client.get("/api/v1/me").json()["email_verified"] is True
     assert account_client.post(endpoint + "/confirm", json={"code": codes[0]}).status_code == 422
+
+
+def test_employer_posting_lifecycle_and_ownership(account_client, database, monkeypatch):
+    from vindex.accounts import postings
+    from vindex.db import Observation
+
+    monkeypatch.setattr(postings, "Session", database)
+    register(account_client)
+    fields = {
+        "title": "Backend Engineer",
+        "company": "Example Inc",
+        "description": "Build data pipelines",
+        "location": "Remote",
+        "application_url": "https://example.com/jobs/42",
+    }
+    root = "/api/v1/me/postings"
+    assert account_client.post(root, json=fields).status_code == 403
+    assert account_client.put("/api/v1/me/role", json={"role": "company"}).status_code == 200
+    draft = account_client.post(root, json=fields)
+    assert draft.status_code == 201, draft.text
+    url = root + "/" + draft.json()["id"]
+    assert account_client.post(url + "/publish").status_code == 403
+    with database() as session:
+        session.scalar(select(Account)).email_verified_at = now()
+        session.commit()
+    assert account_client.post(url + "/publish").json()["status"] == "published"
+    assert account_client.put(url, json={**fields, "title": "Staff Engineer"}).status_code == 200
+    with database() as session:
+        assert session.scalar(select(Observation)).status == "open"
+    assert account_client.post(url + "/close").json()["status"] == "closed"
+    with database() as session:
+        assert all(row.status == "closed" for row in session.scalars(select(Observation)))
+    account_client.post("/api/v1/auth/logout")
+    register(account_client, "other@example.com")
+    assert account_client.put("/api/v1/me/role", json={"role": "agency"}).status_code == 200
+    assert account_client.get(root).json() == []
+    assert account_client.put(url, json=fields).status_code == 404
+
+
+def test_social_signin_state_and_identity(account_client, database, monkeypatch):
+    from urllib.parse import parse_qs, urlparse
+
+    from vindex.accounts import oauth
+
+    redis = Mock()
+    states = {}
+    redis.setex.side_effect = lambda key, _, value: states.update({key: value.encode()})
+    redis.getdel.side_effect = lambda key: states.pop(key, None)
+    monkeypatch.setattr(oauth, "redis_client", lambda: redis)
+    monkeypatch.setattr(oauth, "Session", database)
+    monkeypatch.setenv("OAUTH_GOOGLE_CLIENT_ID", "test-id")
+    monkeypatch.setenv("OAUTH_GOOGLE_CLIENT_SECRET", "test-secret")
+    provider = Mock()
+    provider.post.return_value.json.return_value = {"access_token": "test-token"}
+    identity = {"email": "first@example.com", "email_verified": True, "sub": "subject-1"}
+    provider.get.return_value.json.side_effect = lambda: identity
+    transport = Mock()
+    transport.__enter__ = Mock(return_value=provider)
+    transport.__exit__ = Mock(return_value=False)
+    monkeypatch.setattr(oauth.httpx, "Client", Mock(return_value=transport))
+
+    root = "/api/v1/auth/oauth/google"
+
+    def authenticate():
+        start = account_client.get(root + "/start", follow_redirects=False)
+        query = parse_qs(urlparse(start.headers["location"]).query)
+        assert query["code_challenge_method"] == ["S256"]
+        args = {"state": query["state"][0], "code": "test-code"}
+        return account_client.get(root + "/callback", params=args, follow_redirects=False)
+
+    register(account_client)
+    account_client.post("/api/v1/auth/logout")
+    assert authenticate().headers["location"].endswith("auth_error=social")
+    assert account_client.get("/api/v1/me").status_code == 401
+
+    identity["email"] = "social@example.com"
+    assert authenticate().headers["location"].endswith("tab=profile")
+    assert account_client.get("/api/v1/me").json()["email_verified"]
+    account_client.post("/api/v1/auth/logout")
+    identity["email"] = "changed@example.com"
+    assert authenticate().headers["location"].endswith("tab=profile")
+    assert account_client.get("/api/v1/me").json()["email"] == "social@example.com"
+    assert not states

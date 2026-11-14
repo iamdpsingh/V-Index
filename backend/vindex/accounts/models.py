@@ -12,6 +12,7 @@ class Account(Base):
     __tablename__ = "accounts"
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     email: Mapped[str] = mapped_column(String(254), unique=True)
+    role: Mapped[str | None] = mapped_column(String(20))
     password_hash: Mapped[str] = mapped_column(String(500))
     email_verified_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     password_reset_hash: Mapped[str | None] = mapped_column(String(64))
@@ -53,3 +54,23 @@ class Resume(Base):
     size_bytes: Mapped[int]
     text_characters: Mapped[int]
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)
+
+
+class EmployerPosting(Base):
+    __tablename__ = "employer_postings"
+    id: Mapped[str] = mapped_column(String(36), primary_key=True)
+    account_id: Mapped[str] = mapped_column(
+        ForeignKey("accounts.id", ondelete="CASCADE"), index=True
+    )
+    source_id: Mapped[int | None] = mapped_column(ForeignKey("sources.id"))
+    status: Mapped[str] = mapped_column(String(20))
+    data: Mapped[dict[str, Any]] = mapped_column(JSON)
+
+
+class OAuthIdentity(Base):
+    __tablename__ = "account_oauth_identities"
+    provider: Mapped[str] = mapped_column(String(20), primary_key=True)
+    subject: Mapped[str] = mapped_column(String(255), primary_key=True)
+    account_id: Mapped[str] = mapped_column(
+        ForeignKey("accounts.id", ondelete="CASCADE"), index=True
+    )

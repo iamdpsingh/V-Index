@@ -35,6 +35,8 @@ async def refresh(source_id: int, *, only_if_due: bool = False) -> int | None:
             source = session.get(Source, source_id)
             if source is None:
                 raise ValueError("Source not found")
+            if source.provider == "employer_posting":
+                return None
             if only_if_due and aware(source.next_check) > now():
                 return None
             # A new lease can retire an attempt left behind by a stopped worker.
@@ -130,7 +132,7 @@ async def serve() -> None:
             ids = list(
                 session.scalars(
                     select(Source.id)
-                    .where(Source.next_check <= now())
+                    .where(Source.next_check <= now(), Source.provider != "employer_posting")
                     .order_by(Source.next_check)
                     .limit(20)
                 )

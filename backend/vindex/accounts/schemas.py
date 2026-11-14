@@ -50,6 +50,7 @@ class PasswordChange(PasswordConfirmation):
 class AccountOut(BaseModel):
     id: str
     email: str
+    role: str | None = None
     email_verified: bool = False
     created_at: datetime
 

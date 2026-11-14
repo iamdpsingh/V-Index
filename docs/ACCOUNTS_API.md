@@ -73,3 +73,32 @@ Profile photos use authenticated `GET`, `PUT`, and `DELETE` at `/api/v1/me/profi
 Signup and login use independent Redis buckets. Signup allows 20 attempts per connecting IP per hour and five per email per hour. Login allows 60 attempts per connecting IP per minute and ten per email per minute. Both return HTTP 429 with Retry-After when the budget is exhausted. Confirm trusted proxy behavior in the hosted environment before relying on per-visitor IP limits.
 
 Resume suggestions can also include `full_name`, `headline`, and `bio`. The parser looks for a name and professional title near the top of the document and a labeled Summary, Profile, or About Me section for the bio. The profile editor fills blank fields for review and leaves existing entries intact. No profile fields are persisted until the user saves.
+
+## Role onboarding and job postings
+
+Choose an account role with `PUT /api/v1/me/role` and a JSON body containing
+`role` set to `candidate`, `agency`, `company`, or `job_poster`.
+The last three roles can list and create drafts at `/api/v1/me/postings` and
+edit their own postings at `PUT /api/v1/me/postings/{id}`. Post to
+`/api/v1/me/postings/{id}/publish` or `/close` to change visibility.
+Publishing requires a verified email. Employer submissions have their own
+index identity so an employer account cannot overwrite an imported listing.
+
+## Social sign-in setup
+
+Set a provider's `OAUTH_*_CLIENT_ID` and `OAUTH_*_CLIENT_SECRET` on the API
+service and restart. Replace `*` with `GOOGLE`, `LINKEDIN`, or `GITHUB`.
+Use the public frontend origin as `PUBLIC_WEB_ORIGIN` and register
+`<PUBLIC_WEB_ORIGIN>/api/v1/auth/oauth/<provider>/callback` with the provider,
+using lowercase provider names. Enable Sign In with LinkedIn using OpenID
+Connect on the LinkedIn app. Redis is required for temporary sign-in state.
+Keep callback query strings out of proxy and application access logs.
+
+First-time social sign-in requires `ACCOUNT_REGISTRATION_ENABLED=true`.
+Accounts use the provider's stable account ID. If an email is already
+registered, use the original sign-in method. Account linking is unavailable.
+
+Before launch, test each configured social provider in a fresh browser
+session. For email, send a verification code to a controlled inbox, confirm
+it, then request and confirm a password reset. Check that the old password and
+old session no longer work.

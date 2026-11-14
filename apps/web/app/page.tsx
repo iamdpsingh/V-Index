@@ -39,12 +39,19 @@ export default function Home() {
   const [providerError, setProviderError] = useState('');
   const [account, setAccount] = useState<AccountOut | null>(null);
   const [authOpen, setAuthOpen] = useState(false);
+  const [socialError, setSocialError] = useState(false);
   const [authMode, setAuthMode] = useState<'login' | 'register'>('login');
 
   // Sync tab with URL search params on mount and on popstate
   useEffect(() => {
     if (typeof window === 'undefined') return;
     const params = new URLSearchParams(window.location.search);
+    if (params.get('auth_error') === 'social') {
+      setSocialError(true);
+      setAuthOpen(true);
+      params.delete('auth_error');
+      window.history.replaceState(null, '', params.size ? `?${params}` : window.location.pathname);
+    }
     const t = params.get('tab') as Tab | null;
     if (t && ['jobs', 'for-you', 'pricing', 'profile', 'sources', 'coverage'].includes(t)) {
       setTab(t);
@@ -265,10 +272,12 @@ export default function Home() {
 
       <AuthDialog
         isOpen={authOpen}
+        socialError={socialError}
         initialMode={authMode}
-        onClose={() => setAuthOpen(false)}
+        onClose={() => { setSocialError(false); setAuthOpen(false); }}
         onSuccess={(acc) => {
           setAccount(acc);
+          if (!acc.role) { switchTab('profile'); return; }
           if (tab === 'profile' || tab === 'for-you') {
             // Stay on current tab
           } else {

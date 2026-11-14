@@ -74,6 +74,7 @@ export type Provider = {
 
 // Private Account, Profile, Resume & Recommendation Types
 export type AccountOut = {
+  role?: "candidate" | "agency" | "company" | "job_poster" | null;
   id: string;
   email: string;
   email_verified: boolean;

@@ -1,21 +1,27 @@
 'use client';
 
 import { FormEvent, useEffect, useState } from 'react';
-import { authLogin, authRegister, resetPassword, type AccountOut } from '../lib/api';
+import { apiFetch, authLogin, authRegister, resetPassword, type AccountOut } from '../lib/api';
 
 interface AuthDialogProps {
   isOpen: boolean;
   initialMode?: 'login' | 'register';
   onClose: () => void;
+  socialError?: boolean;
   onSuccess: (account: AccountOut) => void;
 }
 
 export default function AuthDialog({
   isOpen,
   initialMode = 'login',
+  socialError = false,
   onClose,
   onSuccess,
 }: AuthDialogProps) {
+  const [providers, setProviders] = useState<string[]>([]);
+  useEffect(() => {
+    if (isOpen) apiFetch<string[]>('auth/oauth').then(setProviders).catch(() => setProviders([]));
+  }, [isOpen]);
   const [mode, setMode] = useState<'login' | 'register'>(initialMode);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -173,9 +179,9 @@ export default function AuthDialog({
         </p>
 
         {notice && <p role="status">{notice}</p>}
-        {error && (
+        {(error || socialError) && (
           <div className="notice error auth-error" role="alert">
-            {error}
+            {error || 'Social sign-in could not finish. Try again or sign in with your original method.'}
           </div>
         )}
 
@@ -237,12 +243,13 @@ export default function AuthDialog({
           <legend>Continue with</legend>
           <div className="auth-provider-options">
             {['Google', 'LinkedIn', 'GitHub'].map((provider) => (
-              <button key={provider} type="button" className="btn-secondary" disabled>
+              <button key={provider} type="button" className="btn-secondary" disabled={!providers.includes(provider.toLowerCase())}
+                onClick={() => { window.location.href = `/api/v1/auth/oauth/${provider.toLowerCase()}/start`; }}>
                 {provider}
               </button>
             ))}
           </div>
-          <small id="auth-providers-status">Social sign-in is unavailable in this preview.</small>
+          <small id="auth-providers-status">{providers.length ? 'Choose a connected provider.' : 'Social sign-in is unavailable in this preview.'}</small>
         </fieldset>}
       </div>
     </div>

@@ -1,10 +1,17 @@
 import os
 
 from fastapi import APIRouter, Depends, HTTPException, Request, Response
-from sqlalchemy import delete
+from sqlalchemy import delete, select, update
 from sqlalchemy.exc import IntegrityError
 
-from vindex.accounts.models import Account, AccountSession, Profile, Resume
+from vindex.accounts.models import (
+    Account,
+    AccountSession,
+    EmployerPosting,
+    OAuthIdentity,
+    Profile,
+    Resume,
+)
 from vindex.accounts.schemas import (
     AccountOut,
     Credentials,
@@ -25,7 +32,7 @@ from vindex.accounts.security import (
     require_origin,
     token_digest,
 )
-from vindex.db import Session, now
+from vindex.db import Observation, Session, now
 
 router = APIRouter(prefix="/api/v1", tags=["Private accounts"])
 write_guard = [Depends(require_origin)]
@@ -35,6 +42,7 @@ def account_data(account: Account) -> dict:
     return {
         "id": account.id,
         "email": account.email,
+        "role": account.role,
         "email_verified": account.email_verified_at is not None,
         "created_at": account.created_at,
     }
@@ -138,7 +146,15 @@ def delete_account(body: PasswordConfirmation, request: Request, response: Respo
         rate_limit(f"delete-account:{user.id}", 5)
         if not passwords.verify(body.password.get_secret_value(), user.password_hash):
             raise HTTPException(401, "Current password is incorrect")
-        for model in (AccountSession, Profile, Resume):
+        posting_sources = select(EmployerPosting.source_id).where(
+            EmployerPosting.account_id == user.id
+        )
+        session.execute(
+            update(Observation)
+            .where(Observation.source_id.in_(posting_sources))
+            .values(status="closed")
+        )
+        for model in (AccountSession, Profile, Resume, EmployerPosting, OAuthIdentity):
             session.execute(delete(model).where(model.account_id == user.id))
         session.delete(user)
         session.commit()

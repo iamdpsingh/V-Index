@@ -8,4 +8,4 @@ COPY alembic.ini ./
 ENV PYTHONPATH=/app/backend
 RUN useradd --create-home vindex
 USER vindex
-CMD ["/app/.venv/bin/uvicorn", "vindex.api:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["/app/.venv/bin/uvicorn", "vindex.api:app", "--host", "0.0.0.0", "--port", "8000", "--no-access-log"]

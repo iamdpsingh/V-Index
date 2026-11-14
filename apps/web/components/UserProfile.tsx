@@ -10,6 +10,7 @@ import {
   type AccountOut,
   type ProfileInput,
 } from '../lib/api';
+import EmployerWorkspace from './EmployerWorkspace';
 import ProfilePhoto from './ProfilePhoto';
 import ResumeSection from './ResumeSection';
 
@@ -227,6 +228,8 @@ export default function UserProfile({
         </button>
         {logoutError && <p role="alert">{logoutError}</p>}
       </div>
+
+      <EmployerWorkspace key={account.id} account={account} />
 
       {loading ? (
         <div className="loading-state">Loading your profile…</div>
