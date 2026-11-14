@@ -2052,3 +2052,38 @@ header {
 .role-options input {
   margin: 0;
 }
+
+.workspace-row,
+.workspace-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .75rem;
+}
+
+.workspace-row {
+  justify-content: space-between;
+}
+
+.workspace-listing,
+.workspace-editor {
+  border-top: 1px solid var(--color-rule);
+  margin-top: 1rem;
+  padding-top: 1rem;
+}
+
+.workspace-listing p {
+  color: var(--color-muted);
+  font-size: .875rem;
+  margin-top: .25rem;
+  overflow-wrap: anywhere;
+}
+
+.workspace-listing p span {
+  text-transform: capitalize;
+}
+
+.workspace-editor h3,
+.workspace-editor textarea {
+  margin-bottom: 1rem;
+}

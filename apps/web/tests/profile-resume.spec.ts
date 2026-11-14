@@ -6,6 +6,7 @@ import {
   mockProviders,
   mockResume,
   SAMPLE_PROFILE,
+  SAMPLE_ACCOUNT,
   SAMPLE_RESUME,
 } from './fixtures/mock-server';
 
@@ -118,4 +119,40 @@ test('resume upload rejection preserves prior file visibility', async ({ page })
 
   // Prior resume STILL visible
   await expect(page.locator('.resume-filename')).toHaveText('alex_morgan_cv.pdf');
+});
+
+test('employer reads postings and opens an editor only on demand', async ({ page }) => {
+  const employer = { ...SAMPLE_ACCOUNT, role: 'employer' };
+  await mockAuth(page, employer);
+  const posting = {
+    id: 'posting-1',
+    title: 'Backend Engineer',
+    company: 'Example Inc',
+    location: 'Remote',
+    description: 'Build data pipelines',
+    application_url: 'https://example.com/jobs/1',
+    status: 'draft',
+  };
+  await page.route('**/api/v1/me/postings', (route) => route.fulfill({ json: [posting] }));
+  await page.route('**/api/v1/me/postings/posting-1', (route) => route.fulfill({
+    json: { ...posting, ...route.request().postDataJSON() },
+  }));
+
+  await page.goto('/?tab=profile');
+  await expect(page.getByText('Backend Engineer', { exact: true })).toBeVisible();
+  await expect(page.getByLabel('Job title')).toHaveCount(0);
+
+  const edit = page.getByRole('button', { name: 'Edit', exact: true });
+  await edit.click();
+  await expect(page.getByLabel('Job title')).toHaveValue(posting.title);
+  await page.getByLabel('Job title').fill('Staff Engineer');
+  await page.getByRole('button', { name: 'Save changes' }).click();
+  await expect(page.getByText('Staff Engineer', { exact: true })).toBeVisible();
+  await expect(page.getByLabel('Job title')).toHaveCount(0);
+  await expect(edit).toBeFocused();
+
+  await page.getByRole('button', { name: 'New posting' }).click();
+  await expect(page.getByLabel('Job title')).toHaveValue('');
+  await page.getByRole('button', { name: 'Cancel', exact: true }).click();
+  await expect(page.getByLabel('Job title')).toHaveCount(0);
 });
