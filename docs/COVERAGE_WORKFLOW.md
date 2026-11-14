@@ -119,3 +119,5 @@ November 14 IST: The bounded Wiley Madgex run extracted 19 Science Careers listi
 November 14 IST: The publisher-advertised JobMount RSS feeds for JobsRUs and National Diversity Network each returned 100 distinct posting links with descriptions. Both extracts are partial and application entries still need verification. [RSS evidence](../evidence/20261114-jobmount-partial.json)
 
 November 14 IST: Gem's API host returned HTTP 403 at robots lookup. The permitted Nabla Bio and Nclusion hosted board pages loaded but exposed no structured posting data in their HTML. No extraction result was counted. [Gem Job Board API](https://api.gem.com/job_board/v0/reference)
+
+November 14 IST: Direct robots-checked requests to the TalentReef On the Border San Diego and JC Resorts boards returned 972-byte HTML shells without listing data. The provider advertises outbound partner integrations, but this pass did not establish an accessible source roster. [On the Border board](https://apply.jobappnetwork.com/otbsdjobs/en) · [JC Resorts board](https://apply.jobappnetwork.com/jcresortsjobs/en)
