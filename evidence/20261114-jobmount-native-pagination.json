@@ -1,0 +1,24 @@
+{
+  "provider": "JobMount",
+  "complete": false,
+  "boards": [
+    {
+      "url": "https://soudeur.ca/candidate/job_search/quick/results",
+      "pages": 7,
+      "unique_listing_ids": 153,
+      "repeated_listing_ids": 0,
+      "terminal_page_observed": true,
+      "normalized_detail_samples": 20,
+      "errors": []
+    },
+    {
+      "url": "https://www.jobsrus.com/candidate/job_search/quick/results",
+      "pages": 81,
+      "unique_listing_ids": 805,
+      "repeated_listing_ids": 0,
+      "terminal_page_observed": true,
+      "normalized_detail_samples": 10,
+      "errors": []
+    }
+  ]
+}
