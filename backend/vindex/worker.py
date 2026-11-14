@@ -21,12 +21,16 @@ log = logging.getLogger("vindex.worker")
 REFRESH_TIMEOUT_SECONDS = 600
 SOURCE_LEASE_SECONDS = 900
 SCHEDULER_POLL_SECONDS = 30
+JOBMOUNT_TIMEOUT_SECONDS = 1800
 
 
 async def refresh(source_id: int, *, only_if_due: bool = False) -> int | None:
     redis = Redis.from_url(os.getenv("REDIS_URL", "redis://localhost:6379/0"))
-    # 15-minute lease exceeds the bounded 10-minute refresh timeout.
-    with redis.lock(f"vindex:source:{source_id}", timeout=SOURCE_LEASE_SECONDS, blocking_timeout=1):
+    with Session() as lookup:
+        provider = lookup.scalar(select(Source.provider).where(Source.id == source_id))
+    refresh_timeout = JOBMOUNT_TIMEOUT_SECONDS if provider == "jobmount" else REFRESH_TIMEOUT_SECONDS
+    lease_timeout = refresh_timeout + (SOURCE_LEASE_SECONDS - REFRESH_TIMEOUT_SECONDS)
+    with redis.lock(f"vindex:source:{source_id}", timeout=lease_timeout, blocking_timeout=1):
         with Session() as session:
             source = session.get(Source, source_id)
             if source is None:
@@ -40,7 +44,7 @@ async def refresh(source_id: int, *, only_if_due: bool = False) -> int | None:
                 .where(
                     Run.source_id == source_id,
                     Run.status == "running",
-                    Run.started_at <= checked_at - timedelta(seconds=SOURCE_LEASE_SECONDS),
+                    Run.started_at <= checked_at - timedelta(seconds=lease_timeout),
                 )
                 .values(
                     status="failed",
@@ -53,7 +57,7 @@ async def refresh(source_id: int, *, only_if_due: bool = False) -> int | None:
             session.commit()
             run_id = run.id
             try:
-                async with asyncio.timeout(REFRESH_TIMEOUT_SECONDS):
+                async with asyncio.timeout(refresh_timeout):
                     async with httpx.AsyncClient(
                         timeout=30,
                         trust_env=False,
@@ -90,7 +94,7 @@ async def refresh(source_id: int, *, only_if_due: bool = False) -> int | None:
                 assert failed_run is not None and source is not None
                 failed_run.status, failed_run.error = (
                     "failed",
-                    f"Refresh exceeded {REFRESH_TIMEOUT_SECONDS // 60} minutes"
+                    f"Refresh exceeded {refresh_timeout // 60} minutes"
                     if isinstance(error, TimeoutError) and not str(error)
                     else f"{type(error).__name__}: {str(error)[:500]}",
                 )
