@@ -27,8 +27,7 @@ test('URL state: search submission updates window query params', async ({ page }
 
 test('URL state: switching tab updates window query param', async ({ page }) => {
   await page.goto('/');
-  const nav = page.getByRole('navigation');
-  await nav.getByRole('button', { name: 'coverage' }).click();
+  await page.getByRole('button', { name: 'coverage' }).click();
 
   await expect(page).toHaveURL(/tab=coverage/);
   await expect(page.getByRole('heading', { name: 'Coverage, with evidence.' })).toBeVisible();
@@ -37,8 +36,7 @@ test('URL state: switching tab updates window query param', async ({ page }) => 
 test('URL state: direct load with ?tab=coverage opens coverage tab directly', async ({ page }) => {
   await page.goto('/?tab=coverage');
   await expect(page.getByRole('heading', { name: 'Coverage, with evidence.' })).toBeVisible();
-  const nav = page.getByRole('navigation');
-  await expect(nav.getByRole('button', { name: 'coverage' })).toHaveAttribute('aria-current', 'page');
+  await expect(page.getByRole('button', { name: 'coverage' })).toHaveAttribute('aria-current', 'page');
 });
 
 test('Job record: index reference number (№ 0001) is displayed', async ({ page }) => {

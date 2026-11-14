@@ -1,21 +1,32 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { apiFetch, type Provider } from '../lib/api';
+import { apiFetch, authLogout, getMe, type AccountOut, type Provider } from '../lib/api';
+import AuthDialog from '../components/AuthDialog';
 import CoveragePage from '../components/CoveragePage';
 import JobSearch from '../components/JobSearch';
+import PricingPage from '../components/PricingPage';
+import RecommendationsView from '../components/RecommendationsView';
+import { RolewispSymbol } from '../components/RolewispLogo';
 import SourcesAdmin from '../components/SourcesAdmin';
+import UserProfile from '../components/UserProfile';
 
-type Tab = 'jobs' | 'sources' | 'coverage';
+export type Tab = 'jobs' | 'for-you' | 'pricing' | 'profile' | 'sources' | 'coverage';
 
 const TAB_HEADINGS: Record<Tab, string> = {
   jobs: 'Find your next opening.',
+  'for-you': 'Tailored to your signals.',
+  pricing: 'Find your next opening.',
+  profile: 'Your private workspace.',
   sources: 'Keep the index current.',
   coverage: 'Coverage, with evidence.',
 };
 
 const TAB_SUBHEADINGS: Record<Tab, string> = {
   jobs: 'Real openings. Original sources. A clearer place to search.',
+  'for-you': 'Explainable recommendations scored against your desired roles, skills, and resume.',
+  pricing: 'Start free. Choose more when you need it.',
+  profile: 'Manage your professional background, encrypted resume, and account security.',
   sources: 'Add a supported hosted career board and inspect its refresh history.',
   coverage:
     'Implementation and live verification are tracked separately for every required platform.',
@@ -25,20 +36,23 @@ export default function Home() {
   const [tab, setTab] = useState<Tab>('jobs');
   const [providers, setProviders] = useState<Provider[]>([]);
   const [token, setToken] = useState('');
-  const [error, setError] = useState('');
+  const [providerError, setProviderError] = useState('');
+  const [account, setAccount] = useState<AccountOut | null>(null);
+  const [authOpen, setAuthOpen] = useState(false);
+  const [authMode, setAuthMode] = useState<'login' | 'register'>('login');
 
   // Sync tab with URL search params on mount and on popstate
   useEffect(() => {
     if (typeof window === 'undefined') return;
     const params = new URLSearchParams(window.location.search);
-    const t = params.get('tab');
-    if (t === 'jobs' || t === 'sources' || t === 'coverage') {
+    const t = params.get('tab') as Tab | null;
+    if (t && ['jobs', 'for-you', 'pricing', 'profile', 'sources', 'coverage'].includes(t)) {
       setTab(t);
     }
     const handlePopState = () => {
       const p = new URLSearchParams(window.location.search);
-      const curTab = p.get('tab');
-      if (curTab === 'jobs' || curTab === 'sources' || curTab === 'coverage') {
+      const curTab = p.get('tab') as Tab | null;
+      if (curTab && ['jobs', 'for-you', 'pricing', 'profile', 'sources', 'coverage'].includes(curTab)) {
         setTab(curTab);
       }
     };
@@ -46,16 +60,22 @@ export default function Home() {
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
-  // Providers are fetched once at mount — used by both page intro and CoveragePage
+  // Check active account session on mount
+  useEffect(() => {
+    getMe()
+      .then((me) => setAccount(me))
+      .catch(() => setAccount(null));
+  }, []);
+
+  // Providers are fetched once at mount — used by reviewer CoveragePage & SourcesAdmin
   useEffect(() => {
     apiFetch<Provider[]>('providers')
       .then(setProviders)
-      .catch((e: Error) => setError(e.message));
+      .catch((e: Error) => setProviderError(e.message));
   }, []);
 
   function switchTab(next: Tab) {
     setTab(next);
-    setError('');
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
       if (next === 'jobs') {
@@ -68,58 +88,173 @@ export default function Home() {
     }
   }
 
-  // Counts for the index-note — LIVE_VERIFIED is evidence, not same as implemented
+  async function handleLogout() {
+    await authLogout();
+    setAccount(null);
+    switchTab('jobs');
+  }
+
+  function handleAccountDeleted() {
+    setAccount(null);
+    switchTab('jobs');
+  }
+
+  // Counts for the reviewer index-note — LIVE_VERIFIED is evidence, not same as implemented
   const verifiedCount = providers.filter(
-    (p) => p.evidence_status === 'LIVE_VERIFIED'
+    (p) => (p.evidence_status || '').toUpperCase() === 'LIVE_VERIFIED'
   ).length;
   const totalCount = providers.length || 0;
 
   return (
     <>
       <header>
-        <a className="wordmark" href="/">
-          V<span>—</span>Index
-        </a>
-        <span className="header-note">A source-first job index</span>
-        <nav aria-label="Main navigation">
-          {(['jobs', 'sources', 'coverage'] as Tab[]).map((name) => (
+        <div className="header-inner">
+          <a className="wordmark" href="/" aria-label="Rolewisp — Find your next opening">
+            <RolewispSymbol size={32} />
+            <span className="brand-name">Rolewisp</span>
+          </a>
+          <span className="header-note">Find your next opening.</span>
+
+          {/* Consumer navigation: Find jobs, For you, Pricing */}
+          <nav className="header-nav" aria-label="Main navigation">
             <button
-              key={name}
-              aria-current={tab === name ? 'page' : undefined}
-              onClick={() => switchTab(name)}
+              type="button"
+              className="nav-btn"
+              aria-current={tab === 'jobs' ? 'page' : undefined}
+              onClick={() => switchTab('jobs')}
             >
-              {name}
+              Find jobs
             </button>
-          ))}
-        </nav>
+            <button
+              type="button"
+              className="nav-btn"
+              aria-current={tab === 'for-you' ? 'page' : undefined}
+              onClick={() => switchTab('for-you')}
+            >
+              For you
+            </button>
+            <button
+              type="button"
+              className="nav-btn"
+              aria-current={tab === 'pricing' ? 'page' : undefined}
+              onClick={() => switchTab('pricing')}
+            >
+              Pricing
+            </button>
+          </nav>
+
+          {/* Account indicator in header */}
+          <div className="header-account">
+            {account ? (
+              <button
+                type="button"
+                className="account-pill-btn"
+                onClick={() => switchTab('profile')}
+                title={`Signed in as ${account.email}`}
+                aria-label={`Account profile: ${account.email}`}
+              >
+                <span className="account-dot" />
+                <span className="account-email-label">{account.email}</span>
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="header-signin-btn"
+                onClick={() => {
+                  setAuthMode('login');
+                  setAuthOpen(true);
+                }}
+              >
+                Sign In
+              </button>
+            )}
+          </div>
+        </div>
       </header>
 
       <main>
-        <div className="eyebrow">THE INDEX / {tab.toUpperCase()}</div>
+        {/* Render standard intro header for non-pricing views */}
+        {tab !== 'pricing' && (
+          <section className={`intro ${['jobs', 'for-you'].includes(tab) ? 'intro-consumer' : ''}`}>
+            <div>
+              {tab === 'coverage' && <div className="eyebrow">REVIEWER DIAGNOSTICS / COVERAGE</div>}
+              {tab === 'sources' && <div className="eyebrow">OPERATOR CONTROLS / SOURCES</div>}
+              <h1>{TAB_HEADINGS[tab]}</h1>
+              <p>{TAB_SUBHEADINGS[tab]}</p>
+            </div>
 
-        <section className="intro">
-          <div>
-            <h1>{TAB_HEADINGS[tab]}</h1>
-            <p>{TAB_SUBHEADINGS[tab]}</p>
-          </div>
-          {/* index-note: verified = live-checked evidence, not implemented count */}
-          <div className="index-note">
-            <span className="dot" />
-            {verifiedCount} / {totalCount || '—'} platforms live-checked
-            <small>Point-in-time evidence · initial release</small>
-          </div>
-        </section>
+            {/* Diagnostic index-note shown only on reviewer / operator screens */}
+            {(tab === 'coverage' || tab === 'sources') && (
+              <div className="index-note">
+                <span className="dot" />
+                {verifiedCount} / {totalCount || '—'} platforms live-checked
+                <small>Point-in-time evidence · initial release</small>
+              </div>
+            )}
+          </section>
+        )}
 
-        {/* Global error banner (providers fetch or other top-level errors) */}
-        {error && (
+        {/* Global error banner (providers fetch only) */}
+        {providerError && (tab === 'coverage' || tab === 'sources') && (
           <div className="notice error" role="alert">
-            {error}
+            {providerError}
           </div>
         )}
 
-        {tab === 'jobs' && (
-          <JobSearch token={token} error={error} onError={setError} />
+        {tab === 'jobs' && <JobSearch token={token} />}
+
+        {tab === 'for-you' && (
+          <RecommendationsView
+            account={account}
+            onOpenAuth={() => {
+              setAuthMode('login');
+              setAuthOpen(true);
+            }}
+            onGoToProfile={() => switchTab('profile')}
+          />
         )}
+
+        {tab === 'pricing' && (
+          <PricingPage onStartSearching={() => switchTab('jobs')} />
+        )}
+
+        {tab === 'profile' &&
+          (account ? (
+            <UserProfile
+              account={account}
+              onLogout={handleLogout}
+              onAccountDeleted={handleAccountDeleted}
+            />
+          ) : (
+            <div className="empty auth-required-panel">
+              <h2>Sign in to view your profile</h2>
+              <p>
+                Manage your desired job titles, professional skills, and encrypted resume.
+              </p>
+              <div className="empty-action-row" style={{ justifyContent: 'center' }}>
+                <button
+                  type="button"
+                  className="primary"
+                  onClick={() => {
+                    setAuthMode('login');
+                    setAuthOpen(true);
+                  }}
+                >
+                  Sign In →
+                </button>
+                <button
+                  type="button"
+                  className="filter-btn"
+                  onClick={() => {
+                    setAuthMode('register');
+                    setAuthOpen(true);
+                  }}
+                >
+                  Create Account
+                </button>
+              </div>
+            </div>
+          ))}
 
         {tab === 'coverage' && <CoveragePage providers={providers} />}
 
@@ -128,12 +263,49 @@ export default function Home() {
         )}
       </main>
 
+      <AuthDialog
+        isOpen={authOpen}
+        initialMode={authMode}
+        onClose={() => setAuthOpen(false)}
+        onSuccess={(acc) => {
+          setAccount(acc);
+          if (tab === 'profile' || tab === 'for-you') {
+            // Stay on current tab
+          } else {
+            switchTab('for-you');
+          }
+        }}
+      />
+
       <footer>
-        <span>V—Index</span>
-        <span>Original sources. Visible evidence.</span>
-        <a href="/docs" target="_blank" rel="noopener noreferrer">
-          API documentation ↗
-        </a>
+        <div className="footer-inner">
+          <div className="footer-brand">
+            <span className="footer-brand-title">Rolewisp — built in the V—Index repository</span>
+            <span>Original sources. Visible evidence.</span>
+          </div>
+
+          <div className="footer-nav">
+            <button
+              type="button"
+              className="footer-link-btn"
+              aria-current={tab === 'coverage' ? 'page' : undefined}
+              onClick={() => switchTab('coverage')}
+            >
+              coverage
+            </button>
+            <button
+              type="button"
+              className="footer-link-btn"
+              aria-current={tab === 'sources' ? 'page' : undefined}
+              onClick={() => switchTab('sources')}
+            >
+              sources
+            </button>
+            <a href="/docs" target="_blank" rel="noopener noreferrer" className="footer-doc-link">
+              API documentation ↗
+            </a>
+          </div>
+        </div>
       </footer>
     </>
   );

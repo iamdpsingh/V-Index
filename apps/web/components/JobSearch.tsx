@@ -1,18 +1,19 @@
 'use client';
 
-import { FormEvent, useEffect, useState, useCallback } from 'react';
+import { FormEvent, useEffect, useState, useCallback, useRef } from 'react';
 import { apiFetch, type JobOut, type SearchOut } from '../lib/api';
 import { formatDate, formatSalary } from '../lib/format';
 
 interface JobSearchProps {
-  token: string;
-  error: string;
-  onError: (msg: string) => void;
+  token?: string;
+  error?: string;
+  onError?: (msg: string) => void;
 }
 
 const PAGE_SIZE = 25;
+const POLL_INTERVAL_MS = 60_000; // 60 seconds visibility-based polling per LIVE_INDEX_REQUIREMENTS.md
 
-export default function JobSearch({ error, onError }: JobSearchProps) {
+export default function JobSearch({ error: externalError, onError }: JobSearchProps) {
   const [filters, setFilters] = useState({ keyword: '', company: '', location: '' });
   const [applied, setApplied] = useState({ keyword: '', company: '', location: '' });
   const [offset, setOffset] = useState(0);
@@ -20,6 +21,24 @@ export default function JobSearch({ error, onError }: JobSearchProps) {
   const [busy, setBusy] = useState(true);
   const [selected, setSelected] = useState<JobOut | null>(null);
   const [initialHydrated, setInitialHydrated] = useState(false);
+  const [internalError, setInternalError] = useState('');
+  const [lastPolledAt, setLastPolledAt] = useState<Date | null>(null);
+  const [pendingResults, setPendingResults] = useState<SearchOut | null>(null);
+
+  const selectedRef = useRef<JobOut | null>(null);
+  selectedRef.current = selected;
+
+  const resultsRef = useRef<SearchOut>(results);
+  resultsRef.current = results;
+
+  const searchError = externalError || internalError;
+  const setErrorMessage = useCallback(
+    (msg: string) => {
+      setInternalError(msg);
+      if (onError) onError(msg);
+    },
+    [onError]
+  );
 
   // Sync state from URL query parameters on initial mount and browser back/forward
   const readUrlState = useCallback(() => {
@@ -29,11 +48,15 @@ export default function JobSearch({ error, onError }: JobSearchProps) {
     const comp = params.get('company') || '';
     const loc = params.get('location') || '';
     const off = Math.max(0, parseInt(params.get('offset') || '0', 10) || 0);
+    const selId = params.get('selected');
 
     const newFilters = { keyword: q, company: comp, location: loc };
     setFilters(newFilters);
     setApplied(newFilters);
     setOffset(off);
+    if (!selId) {
+      setSelected(null);
+    }
     setInitialHydrated(true);
   }, []);
 
@@ -45,65 +68,157 @@ export default function JobSearch({ error, onError }: JobSearchProps) {
   }, [readUrlState]);
 
   // Update URL search parameters when search/pagination changes
-  const updateUrl = useCallback((newApplied: typeof applied, newOffset: number, selectedId?: number | null) => {
-    if (typeof window === 'undefined') return;
-    const params = new URLSearchParams();
-    if (newApplied.keyword) params.set('keyword', newApplied.keyword);
-    if (newApplied.company) params.set('company', newApplied.company);
-    if (newApplied.location) params.set('location', newApplied.location);
-    if (newOffset > 0) params.set('offset', String(newOffset));
-    if (selectedId) params.set('selected', String(selectedId));
+  const updateUrl = useCallback(
+    (newApplied: typeof applied, newOffset: number, selectedId?: number | null) => {
+      if (typeof window === 'undefined') return;
+      const params = new URLSearchParams();
+      if (newApplied.keyword) params.set('keyword', newApplied.keyword);
+      if (newApplied.company) params.set('company', newApplied.company);
+      if (newApplied.location) params.set('location', newApplied.location);
+      if (newOffset > 0) params.set('offset', String(newOffset));
+      if (selectedId) params.set('selected', String(selectedId));
 
-    const newQuery = params.toString();
-    const newUrl = newQuery ? `?${newQuery}` : window.location.pathname;
-    window.history.pushState(null, '', newUrl);
-  }, []);
+      const newQuery = params.toString();
+      const newUrl = newQuery ? `?${newQuery}` : window.location.pathname;
+      window.history.pushState(null, '', newUrl);
+    },
+    []
+  );
+
+  // Stable core fetch function
+  const fetchJobs = useCallback(
+    async (
+      currentApplied: typeof applied,
+      currentOffset: number,
+      signal?: AbortSignal,
+      isBackgroundPoll = false
+    ) => {
+      if (!isBackgroundPoll) {
+        setBusy(true);
+        setErrorMessage('');
+      }
+
+      const searchParams = new URLSearchParams({
+        ...currentApplied,
+        limit: String(PAGE_SIZE),
+        offset: String(currentOffset),
+      });
+
+      try {
+        const data = await apiFetch<SearchOut>(`jobs?${searchParams.toString()}`, '', { signal });
+        setLastPolledAt(new Date());
+
+        if (isBackgroundPoll) {
+          const currentTotal = resultsRef.current.total;
+          const currentItems = resultsRef.current.items;
+          const hasDifference =
+            data.total !== currentTotal ||
+            data.items.length !== currentItems.length ||
+            (data.items[0]?.id !== currentItems[0]?.id && currentItems.length > 0);
+
+          if (hasDifference) {
+            if (selectedRef.current || currentOffset > 0) {
+              setPendingResults(data);
+            } else {
+              setResults(data);
+            }
+          }
+        } else {
+          setResults(data);
+          setPendingResults(null);
+
+          // Check if URL specified a selected job ID
+          if (typeof window !== 'undefined') {
+            const params = new URLSearchParams(window.location.search);
+            const selId = params.get('selected');
+            if (selId) {
+              const found = data.items.find((item) => String(item.id) === selId);
+              if (found) {
+                setSelected(found);
+              }
+            } else {
+              setSelected(null);
+            }
+          }
+        }
+      } catch (e: unknown) {
+        if (signal?.aborted) return;
+        const msg = e instanceof Error ? e.message : 'Failed to search jobs';
+        if (!isBackgroundPoll) {
+          setErrorMessage(msg);
+        }
+      } finally {
+        if (!isBackgroundPoll) {
+          setBusy(false);
+        }
+      }
+    },
+    [setErrorMessage]
+  );
 
   // Fetch jobs whenever applied filters or offset change
   useEffect(() => {
     if (!initialHydrated) return;
-    let active = true;
-    setBusy(true);
-    onError('');
-
-    const searchParams = new URLSearchParams({
-      ...applied,
-      limit: String(PAGE_SIZE),
-      offset: String(offset),
-    });
-
-    apiFetch<SearchOut>(`jobs?${searchParams.toString()}`)
-      .then((data) => {
-        if (!active) return;
-        setResults(data);
-
-        // Check if URL specified a selected job ID
-        if (typeof window !== 'undefined') {
-          const params = new URLSearchParams(window.location.search);
-          const selId = params.get('selected');
-          if (selId) {
-            const found = data.items.find((item) => String(item.id) === selId);
-            if (found) setSelected(found);
-          }
-        }
-      })
-      .catch((e: Error) => {
-        if (active) onError(e.message);
-      })
-      .finally(() => {
-        if (active) setBusy(false);
-      });
+    const controller = new AbortController();
+    fetchJobs(applied, offset, controller.signal, false);
 
     return () => {
-      active = false;
+      controller.abort();
     };
-  }, [applied, offset, initialHydrated]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [applied, offset, initialHydrated, fetchJobs]);
+
+  // Live index freshness: visibility-aware polling and window focus trigger
+  useEffect(() => {
+    if (!initialHydrated) return;
+
+    let timerId: ReturnType<typeof setInterval> | null = null;
+
+    function handlePoll() {
+      if (document.visibilityState === 'visible') {
+        fetchJobs(applied, offset, undefined, true);
+      }
+    }
+
+    function startPolling() {
+      if (timerId) clearInterval(timerId);
+      timerId = setInterval(handlePoll, POLL_INTERVAL_MS);
+    }
+
+    function stopPolling() {
+      if (timerId) clearInterval(timerId);
+      timerId = null;
+    }
+
+    function handleVisibilityChange() {
+      if (document.visibilityState === 'visible') {
+        handlePoll();
+        startPolling();
+      } else {
+        stopPolling();
+      }
+    }
+
+    function handleWindowFocus() {
+      handlePoll();
+    }
+
+    startPolling();
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('focus', handleWindowFocus);
+
+    return () => {
+      stopPolling();
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('focus', handleWindowFocus);
+    };
+  }, [applied, offset, initialHydrated, fetchJobs]);
 
   function handleSearch(e: FormEvent) {
     e.preventDefault();
     setOffset(0);
     setApplied({ ...filters });
     setSelected(null);
+    setPendingResults(null);
     updateUrl(filters, 0, null);
   }
 
@@ -129,6 +244,13 @@ export default function JobSearch({ error, onError }: JobSearchProps) {
     setOffset(nextOffset);
     setSelected(null);
     updateUrl(applied, nextOffset, null);
+  }
+
+  function handleApplyPendingResults() {
+    if (pendingResults) {
+      setResults(pendingResults);
+      setPendingResults(null);
+    }
   }
 
   const totalPages = results.total;
@@ -162,22 +284,61 @@ export default function JobSearch({ error, onError }: JobSearchProps) {
         </button>
       </form>
 
-      {/* Results bar */}
+      {/* Non-intrusive live index freshness banner */}
+      {pendingResults && (
+        <div className="new-results-banner" role="status">
+          <span>
+            Fresh openings indexed{' '}
+            {pendingResults.total > results.total
+              ? `(+${pendingResults.total - results.total} new)`
+              : ''}
+            .
+          </span>
+          <button type="button" className="btn-update-results" onClick={handleApplyPendingResults}>
+            Show updated results
+          </button>
+        </div>
+      )}
+
+      {/* Results bar with live freshness status */}
       <div className="results-bar">
         <span aria-live="polite">
           {busy
             ? 'Searching…'
             : `${results.total.toLocaleString()} open ${results.total === 1 ? 'role' : 'roles'}`}
         </span>
-        <span>Recently indexed first</span>
+        <div className="results-bar-meta">
+          <button
+            type="button"
+            className="btn-refresh-index"
+            onClick={() => fetchJobs(applied, offset, undefined, false)}
+            disabled={busy}
+            title="Poll live index for recent updates"
+          >
+            {busy ? 'Polling…' : '↻ Refresh index'}
+          </button>
+          <span>Recently indexed first</span>
+          {lastPolledAt && (
+            <span className="polled-time" title={`Polled ${lastPolledAt.toISOString()}`}>
+              · Polled {lastPolledAt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+            </span>
+          )}
+        </div>
       </div>
 
       {/* Job layout: searchable index on the left, inspectable job record on the right */}
       <div className={`job-layout ${selected ? 'has-selection' : ''}`}>
         {/* Results list */}
         <section aria-label="Search results" aria-busy={busy} className="job-list-section">
+          {/* Inline search error */}
+          {searchError && (
+            <div className="notice error search-error" role="alert">
+              {searchError}
+            </div>
+          )}
+
           {/* Empty state */}
-          {!busy && !error && results.items.length === 0 && (
+          {!busy && !searchError && results.items.length === 0 && (
             <div className="empty">
               <h2>No openings here yet.</h2>
               <p>Add a source and let its first refresh finish, or try broader filters.</p>
@@ -287,13 +448,14 @@ export default function JobSearch({ error, onError }: JobSearchProps) {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Apply at original source ↗
+                    Open application · Apply at original source ↗
                   </a>
                 ) : (
                   <span className="apply non-link" title="Apply destination is not a direct HTTPS link">
-                    Apply at original source ↗
+                    Open application · Apply at original source ↗
                   </span>
                 )}
+                <span className="apply-subtext">On the employer’s site</span>
               </div>
 
               {/* Quality flags notice when description is omitted by source */}
@@ -314,14 +476,21 @@ export default function JobSearch({ error, onError }: JobSearchProps) {
                 {selected.description || 'The source did not provide a description.'}
               </p>
 
-              {/* Quiet provenance rail / Source history */}
+              {/* Quiet provenance rail / Source history with composite key */}
               <div className="provenance-section">
                 <h3>Source history</h3>
                 <div className="provenance-rail">
                   {selected.sources.map((s) => (
-                    <div key={s.source_id} className="provenance-item">
+                    <div
+                      key={`${s.source_id}-${s.source_url}-${s.application_url}`}
+                      className="provenance-item"
+                    >
                       <div className="prov-header">
-                        <span className={`status-badge ${s.status === 'ACTIVE' ? 'good' : ''}`}>
+                        <span
+                          className={`status-badge ${
+                            (s.status || '').toUpperCase() === 'ACTIVE' ? 'good' : ''
+                          }`}
+                        >
                           {s.status}
                         </span>
                         <span className="prov-time">checked {formatDate(s.last_checked_at)}</span>
@@ -371,4 +540,3 @@ export default function JobSearch({ error, onError }: JobSearchProps) {
     </>
   );
 }
-

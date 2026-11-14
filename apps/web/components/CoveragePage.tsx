@@ -15,13 +15,13 @@ export default function CoveragePage({ providers }: CoveragePageProps) {
   const [searchQuery, setSearchQuery] = useState('');
 
   const implementedCount = providers.filter(
-    (p) => p.implementation_status === 'IMPLEMENTED'
+    (p) => (p.implementation_status || '').toUpperCase() === 'IMPLEMENTED'
   ).length;
   const verifiedCount = providers.filter(
-    (p) => p.evidence_status === 'LIVE_VERIFIED'
+    (p) => (p.evidence_status || '').toUpperCase() === 'LIVE_VERIFIED'
   ).length;
   const unimplementedCount = providers.filter(
-    (p) => p.implementation_status === 'NOT_STARTED'
+    (p) => (p.implementation_status || '').toUpperCase() === 'NOT_STARTED'
   ).length;
 
   const atsCount = providers.filter((p) => p.kind === 'ats').length;
@@ -116,7 +116,9 @@ export default function CoveragePage({ providers }: CoveragePageProps) {
                   <td>{formatLabel(p.implementation_status)}</td>
                   <td>
                     <span
-                      className={`pill ${p.evidence_status === 'LIVE_VERIFIED' ? 'good' : ''}`}
+                      className={`pill ${
+                        (p.evidence_status || '').toUpperCase() === 'LIVE_VERIFIED' ? 'good' : ''
+                      }`}
                     >
                       {formatLabel(p.evidence_status)}
                     </span>

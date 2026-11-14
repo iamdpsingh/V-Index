@@ -21,7 +21,7 @@ test('mobile: nav buttons are visible and clickable', async ({ page }) => {
   await mockJobsEmpty(page);
   await page.goto('/');
   const nav = page.getByRole('navigation');
-  for (const name of ['jobs', 'sources', 'coverage']) {
+  for (const name of ['Find jobs', 'For you', 'Pricing']) {
     await expect(nav.getByRole('button', { name })).toBeVisible();
   }
 });

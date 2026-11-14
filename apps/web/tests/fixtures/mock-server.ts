@@ -73,6 +73,53 @@ export const SAMPLE_RUN_OUT: MockRunOut = {
   finished_at: '2026-10-01T00:05:00Z', status: 'SUCCESS', count: 150, error: null,
 };
 
+export const SAMPLE_ACCOUNT = {
+  id: 'acc-1',
+  email: 'alex@example.com',
+  email_verified: false,
+  created_at: '2026-10-01T00:00:00Z',
+};
+
+export const SAMPLE_PROFILE = {
+  full_name: 'Alex Morgan',
+  headline: 'Senior Systems Engineer',
+  location: 'London, UK',
+  bio: 'Distributed systems builder with passion for robust architecture.',
+  desired_titles: ['Systems Engineer', 'Backend Lead'],
+  skills: ['Python', 'PostgreSQL', 'Docker'],
+  preferred_locations: ['London', 'Remote'],
+  remote_only: false,
+  use_resume_skills: true,
+  experience_years: 6,
+  updated_at: '2026-10-01T12:00:00Z',
+};
+
+export const SAMPLE_RESUME = {
+  filename: 'alex_morgan_cv.pdf',
+  media_type: 'application/pdf',
+  size_bytes: 42000,
+  text_characters: 4500,
+  detected_skills: ['Python', 'SQL', 'FastAPI', 'Redis'],
+  updated_at: '2026-10-01T12:00:00Z',
+};
+
+export const SAMPLE_RECOMMENDATIONS = {
+  items: [
+    {
+      job: SAMPLE_JOB,
+      rank_score: 10,
+      reasons: ['Matches desired role: Engineer', 'Matches skill: Python'],
+    },
+  ],
+  total_candidates: 1,
+  candidates_ranked: 1,
+  candidate_limit: 1000,
+  truncated: false,
+  limit: 20,
+  offset: 0,
+  needs_preferences: false,
+};
+
 export async function mockProviders(page: Page, providers = SAMPLE_PROVIDERS) {
   await page.route('**/api/v1/providers', async (route) => {
     await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(providers) });
@@ -118,3 +165,72 @@ export async function mockRefreshError(page: Page, status: number, detail: strin
   });
 }
 
+export async function mockAuth(page: Page, account: typeof SAMPLE_ACCOUNT | null = SAMPLE_ACCOUNT) {
+  await page.route('**/api/v1/me', async (route) => {
+    if (route.request().method() === 'GET') {
+      if (account) {
+        await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(account) });
+      } else {
+        await route.fulfill({ status: 401, contentType: 'application/json', body: JSON.stringify({ detail: 'Authentication required' }) });
+      }
+    } else if (route.request().method() === 'DELETE') {
+      await route.fulfill({ status: 204 });
+    }
+  });
+
+  await page.route('**/api/v1/auth/login', async (route) => {
+    await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(account || SAMPLE_ACCOUNT) });
+  });
+
+  await page.route('**/api/v1/auth/register', async (route) => {
+    await route.fulfill({ status: 201, contentType: 'application/json', body: JSON.stringify(account || SAMPLE_ACCOUNT) });
+  });
+
+  await page.route('**/api/v1/auth/logout', async (route) => {
+    await route.fulfill({ status: 204 });
+  });
+}
+
+export async function mockProfile(page: Page, profile: typeof SAMPLE_PROFILE = SAMPLE_PROFILE) {
+  await page.route('**/api/v1/me/profile', async (route) => {
+    if (route.request().method() === 'GET') {
+      await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(profile) });
+    } else {
+      const data = route.request().postDataJSON();
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({ ...profile, ...data, updated_at: new Date().toISOString() }),
+      });
+    }
+  });
+}
+
+export async function mockResume(page: Page, resume: typeof SAMPLE_RESUME | null = SAMPLE_RESUME) {
+  await page.route('**/api/v1/me/resume', async (route) => {
+    if (route.request().method() === 'GET') {
+      if (resume) {
+        await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(resume) });
+      } else {
+        await route.fulfill({ status: 404, contentType: 'application/json', body: JSON.stringify({ detail: 'No resume saved' }) });
+      }
+    } else if (route.request().method() === 'DELETE') {
+      await route.fulfill({ status: 204 });
+    } else if (route.request().method() === 'PUT') {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify(resume || SAMPLE_RESUME),
+      });
+    }
+  });
+}
+
+export async function mockRecommendations(
+  page: Page,
+  recs: typeof SAMPLE_RECOMMENDATIONS = SAMPLE_RECOMMENDATIONS
+) {
+  await page.route('**/api/v1/me/recommendations**', async (route) => {
+    await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(recs) });
+  });
+}
