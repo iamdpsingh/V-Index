@@ -73,3 +73,11 @@
 - [ ] Enforce ownership and posting permissions in the API. Keep candidate onboarding and job recommendations available through the Candidate role.
 
 Start this work after all 78 required platforms are live-verified.
+
+## Resume-to-profile autofill and professional links
+
+- [ ] Extend existing resume extraction to return structured suggestions for skills, education, work experience, and projects. Preserve dates and organization names when present. Leave missing fields blank.
+- [ ] Show an editable preview before saving. Let users accept, edit, or discard suggestions and keep existing profile entries when a resume is replaced.
+- [ ] Let users paste and manage LinkedIn, GitHub, portfolio, and other professional links. Suggest links found in the resume for review. Validate URLs server-side and open approved links without fetching them during import.
+- [ ] Keep the uploaded resume and parsed details private. Use saved professional skills for recommendations under the existing account preferences.
+- [ ] Agree on the profile API contract before building the parser and frontend review flow independently. Test extraction, edit preservation, link validation, and account isolation before final integration.
