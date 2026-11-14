@@ -302,3 +302,17 @@ def test_social_signin_state_and_identity(account_client, database, monkeypatch)
     assert authenticate().headers["location"].endswith("tab=profile")
     assert account_client.get("/api/v1/me").json()["email"] == "social@example.com"
     assert not states
+
+
+def test_education_accepts_legacy_details_and_validates_qualification(account_client):
+    register(account_client)
+    education = [
+        "Existing qualification",
+        {"qualification": "higher_secondary", "details": "Example Junior College, 2024"},
+    ]
+    path = "/api/v1/me/profile"
+    assert account_client.put(path, json={"education": education}).status_code == 200
+    assert account_client.get(path).json()["education"] == education
+    invalid = {"qualification": "bogus", "details": "Example College"}
+    assert account_client.put(path, json={"education": [invalid]}).status_code == 422
+    assert account_client.get(path).json()["education"] == education

@@ -95,8 +95,23 @@ export type PasswordConfirmation = {
   password: string;
 };
 
+export const qualificationTypes = {
+  unspecified: 'Choose a qualification type',
+  secondary: 'Secondary school / Class X',
+  higher_secondary: 'Higher secondary / Class XII / Intermediate',
+  diploma: 'Diploma',
+  certificate: 'Certificate',
+  associate: 'Associate degree',
+  bachelors: 'Bachelor’s degree',
+  masters: 'Master’s degree',
+  doctorate: 'Doctorate',
+  other: 'Other',
+} as const;
+
+export type EducationEntry = { qualification: keyof typeof qualificationTypes; details: string };
+
 export type ProfileHighlights = {
-  education?: string[];
+  education?: (EducationEntry | string)[];
   experience?: string[];
   projects?: string[];
   links?: { label: string; url: string }[];

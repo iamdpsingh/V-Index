@@ -2158,3 +2158,98 @@ header {
   color: var(--color-muted);
   font-size: .875rem;
 }
+
+.profile-masthead {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem 0 1.25rem;
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.profile-masthead h1 {
+  margin: .25rem 0 0;
+  font-size: clamp(2rem, 6vw, 3.25rem);
+  line-height: 1.06;
+}
+
+.profile-masthead p,
+.qualification-list span {
+  color: var(--color-muted);
+  font-size: .8125rem;
+}
+
+.candidate-layout {
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  align-items: start;
+}
+
+.candidate-main {
+  min-width: 0;
+  padding: clamp(1.125rem, 3vw, 2rem);
+}
+
+.candidate-main > header h2 {
+  font-size: 1.125rem;
+}
+
+.candidate-intro {
+  padding: clamp(1rem, 3vw, 1.5rem) 0;
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.candidate-intro + .candidate-section {
+  margin-top: 0;
+  border-top: 0;
+}
+
+.candidate-section ul.qualification-list {
+  padding: 0;
+  list-style: none;
+}
+
+.qualification-list li {
+  padding: .65rem 0 .65rem 1rem;
+  border-inline-start: 2px solid var(--color-rule);
+}
+
+.qualification-list span {
+  display: block;
+  margin-bottom: .15rem;
+}
+
+.qualification-editor {
+  padding: 1rem;
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius-field);
+}
+
+.qualification-editor label + label {
+  margin-top: .75rem;
+}
+
+.qualification-editor select {
+  width: 100%;
+  padding: .65rem;
+  color: var(--color-ink);
+  background: var(--color-sheet);
+  border: 1px solid var(--color-edge);
+  border-radius: var(--radius-field);
+}
+
+.profile-account-email {
+  overflow-wrap: anywhere;
+  margin-bottom: .25rem;
+}
+
+.profile-account .profile-photo {
+  margin-top: .75rem;
+}
+
+@media (max-width: 850px) {
+  .candidate-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

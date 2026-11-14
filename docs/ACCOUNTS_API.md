@@ -59,7 +59,7 @@ Ranking considers at most the newest 1,000 SQL candidate jobs, then applies toke
 Antigravity screens and browser tests; email verification and identity recovery; trusted edge client-IP/rate policy (the current app uses the direct peer, so a shared proxy shares IP budgets); HTTPS deployment; encrypted-key/backup recovery drills; independent security review and production load validation. These are actual implementation gaps, not completed capabilities.
 
 
-Profile reads and writes support `education`, `experience`, and `projects` as arrays of up to 30 lines each. The `links` array accepts up to 12 objects with an editable `label` and an HTTPS `url`. Rolewisp does not fetch submitted links. Omitted new fields preserve saved values for older clients. Send an empty array to clear a field.
+Profile reads and writes support up to 30 entries each for `education`, `experience`, and `projects`. Education entries can use an object with a `qualification` category and plain-text `details`. Existing education strings are accepted and displayed without a category until assigned. The `links` array accepts up to 12 objects with an editable `label` and an HTTPS `url`. Rolewisp does not fetch submitted links. Omitted new fields preserve saved values for older clients. Send an empty array to clear a field.
 
 New passwords use 15 to 128 characters. Passphrases and spaces are allowed. Existing users can still sign in with their current passwords.
 

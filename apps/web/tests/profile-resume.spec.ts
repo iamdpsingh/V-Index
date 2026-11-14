@@ -161,3 +161,24 @@ test('employer reads postings and opens an editor only on demand', async ({ page
   await page.getByRole('button', { name: 'Cancel', exact: true }).click();
   await expect(page.getByLabel('Job title')).toHaveCount(0);
 });
+
+test('education preserves older entries and saves a qualification type', async ({ page }) => {
+  let saved = { ...SAMPLE_PROFILE, education: ['Example High School'] as unknown[] };
+  await page.route('**/api/v1/me/profile', async (route) => {
+    if (route.request().method() === 'PUT') saved = { ...saved, ...route.request().postDataJSON() };
+    await route.fulfill({ json: saved });
+  });
+  await page.goto('/?tab=profile');
+  await expect(page.getByText('Example High School', { exact: true })).toBeVisible();
+  await page.getByRole('button', { name: 'Edit profile' }).click();
+  await expect(page.getByLabel('Education details 1')).toHaveValue('Example High School');
+  await page.getByLabel('Qualification type 1').selectOption('secondary');
+  await page.getByRole('button', { name: 'Add qualification' }).click();
+  await page.getByLabel('Qualification type 2').selectOption('higher_secondary');
+  await page.getByLabel('Education details 2').fill('Example Junior College, 2024');
+  await page.getByRole('button', { name: 'Save profile' }).click();
+  await expect(page.locator('.qualification-list').getByText('Higher secondary / Class XII / Intermediate', { exact: true })).toBeVisible();
+  await expect(page.getByText('Example Junior College, 2024')).toBeVisible();
+  await page.reload();
+  await expect(page.locator('.qualification-list').getByText('Secondary school / Class X', { exact: true })).toBeVisible();
+});

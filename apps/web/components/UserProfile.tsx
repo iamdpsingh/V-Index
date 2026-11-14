@@ -7,6 +7,8 @@ import {
   deleteAccount,
   getProfile,
   updateProfile,
+  qualificationTypes,
+  type EducationEntry,
   type AccountOut,
   type ProfileInput,
 } from '../lib/api';
@@ -18,6 +20,10 @@ interface UserProfileProps {
   account: AccountOut;
   onLogout: () => Promise<void>;
   onAccountDeleted: () => void;
+}
+
+function asEducation(entry: EducationEntry | string): EducationEntry {
+  return typeof entry === 'string' ? { qualification: 'unspecified', details: entry } : entry;
 }
 
 function ProfileList({ title, items }: { title: string; items?: string[] }) {
@@ -174,7 +180,9 @@ export default function UserProfile({
 
     try {
       const payload: ProfileInput = {
-        education: (profile.education ?? []).map((line) => line.trim()).filter(Boolean),
+        education: (profile.education ?? []).map(asEducation)
+          .map((entry) => ({ ...entry, details: entry.details.trim() }))
+          .filter((entry) => entry.details),
         experience: (profile.experience ?? []).map((line) => line.trim()).filter(Boolean),
         projects: (profile.projects ?? []).map((line) => line.trim()).filter(Boolean),
         links: profile.links || [],
@@ -252,31 +260,26 @@ export default function UserProfile({
 
   return (
     <div className="profile-container">
-      {/* Account identity bar */}
-      <div className="account-identity-bar">
-        <ProfilePhoto key={account.id} />
-        <div className="identity-info">
-          <span className="identity-email">{account.email}</span>
-          <span className="identity-meta">
-            Joined {new Date(account.created_at).toLocaleDateString()} · Private profile
-          </span>
+      <header className="profile-masthead">
+        <div>
+          <p>Private workspace</p>
+          <h1>{account.role === 'employer' ? 'Your workspace' : 'Your profile'}</h1>
         </div>
         <button type="button" className="btn-secondary logout-btn" onClick={signOut} disabled={logoutPending}>
           Sign Out
         </button>
         {logoutError && <p role="alert">{logoutError}</p>}
-      </div>
-
+      </header>
       <EmployerWorkspace key={account.id} account={account} />
 
       {loading ? (
         <div className="loading-state">Loading your profile…</div>
       ) : (
-        <div className="profile-grid">
+        <div className="profile-grid candidate-layout">
           {/* Main profile form */}
-          <section className="profile-card">
+          <section className="profile-card candidate-main">
             <header className="workspace-row">
-              <h2 ref={formHeading} tabIndex={-1}>{editing ? 'Edit profile' : 'Candidate profile'}</h2>
+              <h2 ref={formHeading} tabIndex={-1}>{editing ? 'Edit profile' : 'Overview'}</h2>
               {!editing && savedProfile.current && (
                 <button type="button" className="btn-secondary" ref={editButton} onClick={() => {
                   setSaveSuccess(false);
@@ -317,7 +320,20 @@ export default function UserProfile({
                 </div>
                 {profile.bio && <section className="candidate-section"><h3>About</h3><p>{profile.bio}</p></section>}
                 <ProfileList title="Experience" items={profile.experience} />
-                <ProfileList title="Education" items={profile.education} />
+                {!!profile.education?.length && (
+                  <section className="candidate-section">
+                    <h3>Education</h3>
+                    <ul className="qualification-list">
+                      {profile.education.map((entry, index) => {
+                        const { qualification, details } = asEducation(entry);
+                        return <li key={index}>
+                          {qualification !== 'unspecified' && <span>{qualificationTypes[qualification]}</span>}
+                          <p>{details}</p>
+                        </li>;
+                      })}
+                    </ul>
+                  </section>
+                )}
                 <ProfileList title="Projects" items={profile.projects} />
                 <ProfileList title="Skills" items={profile.skills} />
                 <ProfileList title="Roles of interest" items={profile.desired_titles} />
@@ -548,9 +564,49 @@ export default function UserProfile({
 
               </div>
 
+              <fieldset className="candidate-links">
+                <legend>Education</legend>
+                {(profile.education ?? []).map((entry, index) => {
+                  const education = asEducation(entry);
+                  function changeEducation(updated: EducationEntry) {
+                    setProfile((current) => ({
+                      ...current,
+                      education: current.education?.map((item, i) => i === index ? updated : item),
+                    }));
+                  }
+                  return (
+                    <div className="candidate-entry qualification-editor" key={index}>
+                      <label>
+                        Qualification type {index + 1}
+                        <select value={education.qualification} onChange={(event) => changeEducation({
+                          ...education, qualification: event.target.value as EducationEntry['qualification'],
+                        })}>
+                          {Object.entries(qualificationTypes).map(([value, label]) => (
+                            <option value={value} key={value}>{label}</option>
+                          ))}
+                        </select>
+                      </label>
+                      <label>
+                        Education details {index + 1}
+                        <textarea className="profile-textarea" rows={2} maxLength={1000} required
+                          placeholder="Qualification, institution, and dates"
+                          value={education.details}
+                          onChange={(event) => changeEducation({ ...education, details: event.target.value })} />
+                      </label>
+                      <button className="btn-secondary" type="button" aria-label={`Remove qualification ${index + 1}`}
+                        onClick={() => setProfile({ ...profile, education: profile.education?.filter((_, i) => i !== index) })}>
+                        Remove
+                      </button>
+                    </div>
+                  );
+                })}
+                <button className="btn-secondary" type="button" disabled={(profile.education?.length ?? 0) >= 30}
+                  onClick={() => setProfile({
+                    ...profile, education: [...(profile.education ?? []), { qualification: 'unspecified', details: '' }],
+                  })}>Add qualification</button>
+              </fieldset>
               {([
                 ['experience', 'Experience', 'role'],
-                ['education', 'Education', 'qualification'],
                 ['projects', 'Projects', 'project'],
               ] as const).map(([field, title, itemName]) => (
                 <fieldset key={field} className="candidate-links">
@@ -619,6 +675,12 @@ export default function UserProfile({
 
           {/* Right sidebar: Resume upload & Account security */}
           <div className="profile-aside-column">
+            <section className="profile-subcard profile-account">
+              <h3>Account</h3>
+              <p className="profile-account-email">{account.email}</p>
+              <p className="candidate-meta">Joined {new Date(account.created_at).toLocaleDateString()}</p>
+              <ProfilePhoto key={account.id} />
+            </section>
             <ResumeSection />
 
             {/* Account Settings / Password change */}

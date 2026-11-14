@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Annotated
+from typing import Annotated, Literal
 from urllib.parse import urlsplit
 
 from pydantic import (
@@ -88,8 +88,25 @@ class ProfessionalLink(BaseModel):
         return value
 
 
+class EducationEntry(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    qualification: Literal[
+        "unspecified",
+        "secondary",
+        "higher_secondary",
+        "diploma",
+        "certificate",
+        "associate",
+        "bachelors",
+        "masters",
+        "doctorate",
+        "other",
+    ]
+    details: ProfileEntry
+
+
 class ProfileHighlights(BaseModel):
-    education: list[ProfileEntry] = Field(default_factory=list, max_length=30)
+    education: list[ProfileEntry | EducationEntry] = Field(default_factory=list, max_length=30)
     experience: list[ProfileEntry] = Field(default_factory=list, max_length=30)
     projects: list[ProfileEntry] = Field(default_factory=list, max_length=30)
     links: list[ProfessionalLink] = Field(default_factory=list, max_length=12)

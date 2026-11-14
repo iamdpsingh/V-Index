@@ -1236,9 +1236,16 @@
         "properties": {
           "education": {
             "items": {
-              "type": "string",
-              "maxLength": 1000,
-              "minLength": 1
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 1000,
+                  "minLength": 1
+                },
+                {
+                  "$ref": "#/components/schemas/EducationEntry"
+                }
+              ]
             },
             "type": "array",
             "maxItems": 30,
@@ -1353,9 +1360,16 @@
         "properties": {
           "education": {
             "items": {
-              "type": "string",
-              "maxLength": 1000,
-              "minLength": 1
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 1000,
+                  "minLength": 1
+                },
+                {
+                  "$ref": "#/components/schemas/EducationEntry"
+                }
+              ]
             },
             "type": "array",
             "maxItems": 30,
@@ -1850,6 +1864,39 @@
           "url"
         ],
         "title": "ProfessionalLink"
+      },
+      "EducationEntry": {
+        "properties": {
+          "qualification": {
+            "type": "string",
+            "enum": [
+              "unspecified",
+              "secondary",
+              "higher_secondary",
+              "diploma",
+              "certificate",
+              "associate",
+              "bachelors",
+              "masters",
+              "doctorate",
+              "other"
+            ],
+            "title": "Qualification"
+          },
+          "details": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Details"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "qualification",
+          "details"
+        ],
+        "title": "EducationEntry"
       }
     }
   }
