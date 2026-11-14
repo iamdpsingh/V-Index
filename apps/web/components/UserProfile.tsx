@@ -13,7 +13,7 @@ import ResumeSection from './ResumeSection';
 
 interface UserProfileProps {
   account: AccountOut;
-  onLogout: () => void;
+  onLogout: () => Promise<void>;
   onAccountDeleted: () => void;
 }
 
@@ -22,6 +22,21 @@ export default function UserProfile({
   onLogout,
   onAccountDeleted,
 }: UserProfileProps) {
+  const [logoutPending, setLogoutPending] = useState(false);
+  const [logoutError, setLogoutError] = useState('');
+
+  async function signOut() {
+    setLogoutPending(true);
+    setLogoutError('');
+    try {
+      await onLogout();
+    } catch {
+      setLogoutError('Could not sign out. Please try again.');
+    } finally {
+      setLogoutPending(false);
+    }
+  }
+
   const [profile, setProfile] = useState<ProfileInput>({
     full_name: '',
     headline: '',
@@ -195,9 +210,10 @@ export default function UserProfile({
             Joined {new Date(account.created_at).toLocaleDateString()} · Private profile
           </span>
         </div>
-        <button type="button" className="btn-secondary logout-btn" onClick={onLogout}>
+        <button type="button" className="btn-secondary logout-btn" onClick={signOut} disabled={logoutPending}>
           Sign Out
         </button>
+        {logoutError && <p role="alert">{logoutError}</p>}
       </div>
 
       {loading ? (

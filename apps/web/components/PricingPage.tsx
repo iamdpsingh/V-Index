@@ -39,7 +39,7 @@ export function formatPlanPrice(amountMinor: number, currency: string, exponent:
 }
 
 export default function PricingPage({ onStartSearching }: PricingPageProps) {
-  const [selectedCountry, setSelectedCountry] = useState<string>('IN');
+  const [selectedCountry, setSelectedCountry] = useState<string>('');
   const [plansData, setPlansData] = useState<PlansOut | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string>('');
@@ -50,7 +50,7 @@ export default function PricingPage({ onStartSearching }: PricingPageProps) {
     setLoading(true);
     setError('');
 
-    getPlans(selectedCountry)
+    getPlans(selectedCountry || undefined)
       .then((data) => {
         if (active) {
           setPlansData(data);
@@ -96,6 +96,7 @@ export default function PricingPage({ onStartSearching }: PricingPageProps) {
             }}
             aria-label="Select country for pricing and currency"
           >
+            <option value="">Select your country</option>
             {SUPPORTED_COUNTRIES.map((c) => (
               <option key={c.code} value={c.code}>
                 {c.label}

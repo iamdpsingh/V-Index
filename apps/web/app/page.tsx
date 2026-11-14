@@ -89,11 +89,7 @@ export default function Home() {
   }
 
   async function handleLogout() {
-    try {
-      await authLogout();
-    } catch {
-      // Ignore logout errors
-    }
+    await authLogout();
     setAccount(null);
     switchTab('jobs');
   }
