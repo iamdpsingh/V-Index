@@ -11,10 +11,11 @@ import {
 import { formatDate } from '../lib/format';
 
 interface ResumeSectionProps {
+  onUseSuggestions?: (resume: ResumeOut) => void;
   onSkillsUpdated?: () => void;
 }
 
-export default function ResumeSection({ onSkillsUpdated }: ResumeSectionProps) {
+export default function ResumeSection({ onSkillsUpdated, onUseSuggestions }: ResumeSectionProps) {
   const [resume, setResume] = useState<ResumeOut | null>(null);
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
@@ -120,7 +121,12 @@ export default function ResumeSection({ onSkillsUpdated }: ResumeSectionProps) {
   return (
     <div className="resume-section">
       <div className="section-header">
-        <h3>Resume Document</h3>
+        {resume && onUseSuggestions && (
+        <button type="button" className="btn-secondary" onClick={() => onUseSuggestions(resume)}>
+          Review resume details in profile
+        </button>
+      )}
+      <h3>Resume Document</h3>
         <p className="section-desc">
           Upload a readable PDF, DOCX, or TXT file (up to 5 MiB). Authenticated encryption in
           database; text parsed locally for professional keyword matching.

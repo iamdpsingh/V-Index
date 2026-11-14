@@ -94,7 +94,14 @@ export type PasswordConfirmation = {
   password: string;
 };
 
-export type ProfileInput = {
+export type ProfileHighlights = {
+  education?: string[];
+  experience?: string[];
+  projects?: string[];
+  links?: { label: string; url: string }[];
+};
+
+export type ProfileInput = ProfileHighlights & {
   full_name?: string;
   headline?: string;
   location?: string;
@@ -107,7 +114,7 @@ export type ProfileInput = {
   experience_years?: number | null;
 };
 
-export type ProfileOut = {
+export type ProfileOut = ProfileHighlights & {
   full_name: string;
   headline: string;
   location: string;
@@ -127,6 +134,7 @@ export type ResumeOut = {
   size_bytes: number;
   text_characters: number;
   detected_skills: string[];
+  suggestions?: ProfileHighlights;
   updated_at: string;
 };
 

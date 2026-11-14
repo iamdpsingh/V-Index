@@ -83,6 +83,10 @@ export default function UserProfile({
     try {
       const data = await getProfile();
       setProfile({
+        education: data.education || [],
+        experience: data.experience || [],
+        projects: data.projects || [],
+        links: data.links || [],
         full_name: data.full_name || '',
         headline: data.headline || '',
         location: data.location || '',
@@ -109,6 +113,10 @@ export default function UserProfile({
 
     try {
       const payload: ProfileInput = {
+        education: (profile.education ?? []).map((line) => line.trim()).filter(Boolean),
+        experience: (profile.experience ?? []).map((line) => line.trim()).filter(Boolean),
+        projects: (profile.projects ?? []).map((line) => line.trim()).filter(Boolean),
+        links: profile.links || [],
         full_name: profile.full_name || '',
         headline: profile.headline || '',
         location: profile.location || '',
@@ -126,6 +134,10 @@ export default function UserProfile({
 
       const updated = await updateProfile(payload);
       setProfile({
+        education: updated.education || [],
+        experience: updated.experience || [],
+        projects: updated.projects || [],
+        links: updated.links || [],
         full_name: updated.full_name || '',
         headline: updated.headline || '',
         location: updated.location || '',
@@ -464,6 +476,44 @@ export default function UserProfile({
                 </label>
               </div>
 
+              {(['education', 'experience', 'projects'] as const).map((field) => (
+                <label key={field} className="form-field">
+                  <span>{field[0].toUpperCase() + field.slice(1)}</span>
+                  <textarea
+                    rows={4}
+                    value={(profile[field] ?? []).join('\n')}
+                    onChange={(event) => setProfile({
+                      ...profile,
+                      [field]: event.target.value.split('\n').slice(0, 30),
+                    })}
+                  />
+                </label>
+              ))}
+              <fieldset>
+                <legend>Professional links</legend>
+                {(profile.links ?? []).map((link, index) => (
+                  <div key={index}>
+                    <input aria-label={`Link ${index + 1} label`} value={link.label} required
+                      onChange={(event) => setProfile({
+                        ...profile,
+                        links: profile.links?.map((item, i) => i === index ? { ...item, label: event.target.value } : item),
+                      })} />
+                    <input aria-label={`Link ${index + 1} URL`} type="url" placeholder="https://" value={link.url} required
+                      onChange={(event) => setProfile({
+                        ...profile,
+                        links: profile.links?.map((item, i) => i === index ? { ...item, url: event.target.value } : item),
+                      })} />
+                    <button type="button" onClick={() => setProfile({
+                      ...profile,
+                      links: profile.links?.filter((_, i) => i !== index),
+                    })}>Remove link</button>
+                  </div>
+                ))}
+                <button type="button" disabled={(profile.links?.length ?? 0) >= 12}
+                  onClick={() => setProfile({ ...profile, links: [...(profile.links ?? []), { label: '', url: '' }] })}>
+                  Add LinkedIn, GitHub, portfolio, or other link
+                </button>
+              </fieldset>
               <div className="form-submit-row">
                 <button type="submit" className="primary" disabled={saving}>
                   {saving ? 'Saving…' : 'Save profile'}
@@ -474,7 +524,19 @@ export default function UserProfile({
 
           {/* Right sidebar: Resume upload & Account security */}
           <div className="profile-aside-column">
-            <ResumeSection />
+            <ResumeSection onUseSuggestions={(resume) => {
+              setProfile((current) => {
+                const next = { ...current };
+                for (const field of ['education', 'experience', 'projects'] as const) {
+                  next[field] = [...new Set([...(current[field] ?? []), ...(resume.suggestions?.[field] ?? [])])].slice(0, 30);
+                }
+                next.skills = [...new Set([...(current.skills ?? []), ...resume.detected_skills])].slice(0, 50);
+                const links = new Map((resume.suggestions?.links ?? []).map((link) => [link.url, link]));
+                for (const link of current.links ?? []) links.set(link.url, link);
+                next.links = [...links.values()].slice(0, 12);
+                return next;
+              });
+            }} />
 
             {/* Account Settings / Password change */}
             <section className="profile-subcard">
