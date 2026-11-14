@@ -1,0 +1,34 @@
+{
+  "checked_at": "2026-11-14T06:24:46.726475+00:00",
+  "provider": "Wiley Madgex",
+  "complete": false,
+  "boards": [
+    {
+      "url": "https://jobs.sciencecareers.org/jobs/",
+      "sample_size": 20,
+      "advertised_total": 518,
+      "jobs_extracted": 19,
+      "sample_source_urls": [
+        "https://jobs.sciencecareers.org/job/681212/tenure-track-faculty-positions-at-the-institute-for-fluid-science/",
+        "https://jobs.sciencecareers.org/job/681247/postdoctoral-research-fellow-rashidian-lab/"
+      ],
+      "errors": [
+        {
+          "url": "https://jobs.sciencecareers.org/job/681232/postdoctoral-position-translational-control-and-metabolic-stress-in-pancreatic-%ce%b2-cells/",
+          "error": "Madgex visible posting mismatch for job 681232"
+        }
+      ]
+    },
+    {
+      "url": "https://www.nature.com/naturecareers/jobs/",
+      "sample_size": 20,
+      "advertised_total": null,
+      "jobs_extracted": 20,
+      "sample_source_urls": [
+        "https://www.nature.com/naturecareers/job/12866655/tenure-track-faculty-positions-at-the-institute-of-fluid-science-tohoku-university/",
+        "https://www.nature.com/naturecareers/job/12866749/four-phd-fellowships-in-ai-driven-plant-biology-university-of-copenhagen/"
+      ],
+      "errors": []
+    }
+  ]
+}
