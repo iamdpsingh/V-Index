@@ -9,7 +9,7 @@ import httpx
 from redis import Redis
 from sqlalchemy import select, update
 
-from vindex.connectors.http import RetryAfterError
+from vindex.connectors.http import RetryAfterError, UpstreamStatusError
 from vindex.connectors.jobiqo import STAGED_HOSTS as STAGED_JOBIQO_HOSTS
 from vindex.connectors.registry import create_connector
 from vindex.db import Run, Session, Source, now
@@ -100,10 +100,17 @@ async def refresh(source_id: int, *, only_if_due: bool = False) -> int | None:
                 )
                 failed_run.finished_at = now()
                 source.failures += 1
-                # Persistent backoff/circuit cooldown; no closures on failure.
-                source.next_check = now() + timedelta(
-                    minutes=min(1440, 15 * 2 ** min(source.failures, 7))
+                status = None
+                if isinstance(error, httpx.HTTPStatusError):
+                    status = error.response.status_code
+                elif isinstance(error, UpstreamStatusError):
+                    status = error.status_code
+                transient = isinstance(error, (TimeoutError, httpx.TransportError)) or (
+                    status is not None and (status == 429 or 500 <= status < 600)
                 )
+                exponent = min(source.failures - 1, 7)
+                delay = min(30, 2 * 2**exponent) if transient else min(1440, 30 * 2**exponent)
+                source.next_check = failed_run.finished_at + timedelta(minutes=delay)
                 if isinstance(error, RetryAfterError):
                     source.next_check = max(source.next_check, error.retry_at)
                 session.commit()

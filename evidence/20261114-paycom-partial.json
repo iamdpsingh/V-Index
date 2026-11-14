@@ -1,0 +1,70 @@
+{
+  "provider": "Paycom",
+  "complete": false,
+  "application_entries_verified": false,
+  "results": [
+    {
+      "url": "https://www.paycomonline.net/v4/ats/web.php/portal/5FDAD4C9F20D7D00310983697A309125/jobs/176224",
+      "title": "ADVOCATE I (LIMITED TERM)",
+      "company": "COMMUNITY BRIDGES",
+      "description_length": 6010,
+      "date_posted": "2026-11-11"
+    },
+    {
+      "url": "https://www.paycomonline.net/v4/ats/web.php/portal/5FDAD4C9F20D7D00310983697A309125/jobs/156968",
+      "title": "VAN DRIVER COMMERCIAL DRIVERS LICENSE",
+      "company": "COMMUNITY BRIDGES",
+      "description_length": 7335,
+      "date_posted": "2026-01-22"
+    },
+    {
+      "url": "https://www.paycomonline.net/v4/ats/web.php/portal/5FDAD4C9F20D7D00310983697A309125/jobs/176127",
+      "title": "VAN DRIVER NONCOMMERCIAL DRIVERS LICENSE",
+      "company": "COMMUNITY BRIDGES",
+      "description_length": 7364,
+      "date_posted": "2026-11-10"
+    },
+    {
+      "url": "https://www.paycomonline.net/v4/ats/web.php/portal/8A0A0CA05AD8A68F81E3CB991BEDBCDD/jobs/226517",
+      "title": "Team Member - Koreatown ($17.87/hr plus tips)",
+      "company": "Simply Salad Restaurants",
+      "description_length": 1869,
+      "date_posted": "2026-01-16"
+    },
+    {
+      "url": "https://www.paycomonline.net/v4/ats/web.php/portal/8A0A0CA05AD8A68F81E3CB991BEDBCDD/jobs/87075",
+      "title": "Team Member - Cerritos",
+      "company": "Simply Salad Restaurants",
+      "description_length": 1814,
+      "date_posted": "2024-01-14"
+    },
+    {
+      "url": "https://www.paycomonline.net/v4/ats/web.php/portal/8A0A0CA05AD8A68F81E3CB991BEDBCDD/jobs/66442",
+      "title": "Team Member - Cerritos ($17.50/hour plus tips)",
+      "company": "Simply Salad Restaurants",
+      "description_length": 1741,
+      "date_posted": "2023-04-14"
+    },
+    {
+      "url": "https://www.paycomonline.net/v4/ats/web.php/portal/3E7E5ADB1EDBD6EE6581646E848F89D8/jobs/92699",
+      "title": "Facilitator",
+      "company": "ACTION FOR CHILDREN",
+      "description_length": 4028,
+      "date_posted": "2026-11-12"
+    },
+    {
+      "url": "https://www.paycomonline.net/v4/ats/web.php/portal/3E7E5ADB1EDBD6EE6581646E848F89D8/jobs/92724",
+      "title": "Family and Community Support Specialist",
+      "company": "ACTION FOR CHILDREN",
+      "description_length": 4645,
+      "date_posted": "2026-11-12"
+    },
+    {
+      "url": "https://www.paycomonline.net/v4/ats/web.php/portal/3E7E5ADB1EDBD6EE6581646E848F89D8/jobs/89934",
+      "title": "Family Support Specialist",
+      "company": "ACTION FOR CHILDREN",
+      "description_length": 4972,
+      "date_posted": "2026-10-09"
+    }
+  ]
+}

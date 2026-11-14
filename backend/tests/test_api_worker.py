@@ -236,3 +236,26 @@ def test_worker_preserves_long_upstream_retry_after(database, source, monkeypatc
         assert session.get(Run, run_id).status == "failed"
         assert aware(session.get(Source, source.id).next_check) >= before + timedelta(hours=2)
     assert len(requests) == 1
+
+
+@pytest.mark.parametrize(("status", "minutes"), [(502, 2), (429, 2), (403, 30)])
+def test_refresh_retries_transient_responses_sooner(database, source, monkeypatch, status, minutes):
+    from vindex.db import Source
+
+    async def discover():
+        request = httpx.Request("GET", "https://example.com/jobs")
+        httpx.Response(status, request=request).raise_for_status()
+
+    monkeypatch.setattr(worker, "Session", database)
+    redis = Mock()
+    redis.lock.return_value = nullcontext()
+    monkeypatch.setattr(worker.Redis, "from_url", lambda url: redis)
+    monkeypatch.setattr(worker, "create_connector", lambda *args: Mock(discover=discover))
+
+    run_id = asyncio.run(worker.refresh(source.id))
+    with database() as session:
+        run = session.get(Run, run_id)
+        assert run.status == "failed"
+        assert session.get(Source, source.id).next_check - run.finished_at == timedelta(
+            minutes=minutes
+        )

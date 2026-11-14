@@ -143,3 +143,7 @@ November 14 IST: JobsRUs reached 805 normalized details and reconfirmed the full
 November 14 IST: Gem candidates from Nominal and The Boring Company published Gem posting references in their employer HTML. The sampled original Nominal posting returned an application shell with no posting description or visible application control. The hosted detail sample does not qualify as complete extraction. [Nominal careers](https://nominal.io/careers) · [The Boring Company careers](https://www.boringcompany.com/careers)
 
 November 14 IST: Both JobMount boards completed through the local worker and committed their results. Soudeur returned 153 jobs and JobsRUs returned 805, bringing coverage to **68/78**. [Worker run evidence](../evidence/20261114-jobmount-worker-runs.json)
+
+November 14 IST: Scheduled refresh retries for transient upstream errors now start after two minutes and back off to 30 minutes. Longer upstream Retry-After deadlines are honored. Existing checkpointed connectors resume from saved progress. Other failed runs preserve the prior index.
+
+November 14 IST: Nine original Paycom detail pages across three employers returned matching structured job records. The extract is partial and does not establish a complete active roster or validate application entries. [Live Paycom evidence](../evidence/20261114-paycom-partial.json)
