@@ -1,7 +1,8 @@
 from datetime import datetime
 from typing import Annotated
+from urllib.parse import urlsplit
 
-from pydantic import BaseModel, ConfigDict, EmailStr, Field, SecretStr
+from pydantic import BaseModel, ConfigDict, EmailStr, Field, SecretStr, field_validator
 
 from vindex.schemas import JobOut
 
@@ -30,7 +31,39 @@ class AccountOut(BaseModel):
     created_at: datetime
 
 
-class ProfileInput(BaseModel):
+ProfileEntry = Annotated[str, Field(min_length=1, max_length=1000)]
+
+
+class ProfessionalLink(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    label: Term
+    url: str = Field(max_length=2048)
+
+    @field_validator("url")
+    @classmethod
+    def validate_url(cls, value: str) -> str:
+        if any(c.isspace() or ord(c) < 32 or c == chr(92) for c in value):
+            raise ValueError("Expected a professional HTTPS URL")
+        parsed = urlsplit(value)
+        if (
+            parsed.scheme != "https"
+            or not parsed.hostname
+            or parsed.username is not None
+            or parsed.password is not None
+            or parsed.port not in (None, 443)
+        ):
+            raise ValueError("Expected a professional HTTPS URL")
+        return value
+
+
+class ProfileHighlights(BaseModel):
+    education: list[ProfileEntry] = Field(default_factory=list, max_length=30)
+    experience: list[ProfileEntry] = Field(default_factory=list, max_length=30)
+    projects: list[ProfileEntry] = Field(default_factory=list, max_length=30)
+    links: list[ProfessionalLink] = Field(default_factory=list, max_length=12)
+
+
+class ProfileInput(ProfileHighlights):
     model_config = ConfigDict(extra="forbid")
     full_name: str = Field(default="", max_length=100)
     headline: str = Field(default="", max_length=160)
@@ -54,6 +87,7 @@ class ResumeOut(BaseModel):
     size_bytes: int
     text_characters: int
     detected_skills: list[str]
+    suggestions: ProfileHighlights = Field(default_factory=ProfileHighlights)
     updated_at: datetime
 
 

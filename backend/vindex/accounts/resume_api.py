@@ -8,6 +8,7 @@ from starlette.concurrency import run_in_threadpool
 from vindex.accounts.matching import detected_skills
 from vindex.accounts.middleware import MAX_RESUME_BYTES
 from vindex.accounts.models import Account, Resume
+from vindex.accounts.resume_suggestions import suggest_profile
 from vindex.accounts.resumes import MEDIA, cipher, decrypt, extract_text, filename
 from vindex.accounts.schemas import ResumeOut
 from vindex.accounts.security import parser_slot, principal, rate_limit, require_origin
@@ -17,13 +18,15 @@ router = APIRouter(prefix="/api/v1/me", tags=["Private resumes"])
 
 
 def metadata(saved: Resume) -> dict:
+    text = decrypt(saved.text_ciphertext).decode()
     return {
         "filename": saved.filename,
         "media_type": saved.media_type,
         "size_bytes": saved.size_bytes,
         "text_characters": saved.text_characters,
         "updated_at": saved.updated_at,
-        "detected_skills": detected_skills(decrypt(saved.text_ciphertext).decode()),
+        "detected_skills": detected_skills(text),
+        "suggestions": suggest_profile(text),
     }
 
 

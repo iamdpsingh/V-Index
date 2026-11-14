@@ -113,7 +113,13 @@ def save_profile(body: ProfileInput, request: Request):
         if saved is None:
             saved = Profile(account_id=user.id)
             session.add(saved)
+        # Older clients send the original profile fields but omit resume highlights.
+        highlights = ("education", "experience", "projects", "links")
+        previous = saved.data or {}
         saved.data = body.model_dump()
+        for field in highlights:
+            if field not in body.model_fields_set and field in previous:
+                saved.data[field] = previous[field]
         saved.updated_at = now()
         try:
             session.commit()

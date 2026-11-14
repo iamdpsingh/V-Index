@@ -58,3 +58,7 @@ Ranking considers at most the newest 1,000 SQL candidate jobs, then applies toke
 ## Remaining release work
 
 Antigravity screens and browser tests; email verification and identity recovery; trusted edge client-IP/rate policy (the current app uses the direct peer, so a shared proxy shares IP budgets); parser isolation/abuse testing; HTTPS deployment; encrypted-key/backup recovery drills; independent security review and production load validation. These are actual implementation gaps, not completed capabilities.
+
+Resume metadata includes editable suggestions in `suggestions.education`, `suggestions.experience`, `suggestions.projects`, and `suggestions.links`. Suggested skills remain in `detected_skills`. Entries are extracted from explicitly labeled sections and may require editing. Uploading or replacing a resume leaves the saved profile alone.
+
+Profile reads and writes support `education`, `experience`, and `projects` as arrays of up to 30 lines each. The `links` array accepts up to 12 objects with an editable `label` and an HTTPS `url`. Rolewisp does not fetch submitted links. Omitted new fields preserve saved values for older clients. Send an empty array to clear a field.
