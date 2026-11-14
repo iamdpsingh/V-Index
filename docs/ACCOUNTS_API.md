@@ -62,3 +62,7 @@ Antigravity screens and browser tests; email verification and identity recovery;
 Resume metadata includes editable suggestions in `suggestions.education`, `suggestions.experience`, `suggestions.projects`, and `suggestions.links`. Suggested skills remain in `detected_skills`. Entries are extracted from explicitly labeled sections and may require editing. Uploading or replacing a resume leaves the saved profile alone.
 
 Profile reads and writes support `education`, `experience`, and `projects` as arrays of up to 30 lines each. The `links` array accepts up to 12 objects with an editable `label` and an HTTPS `url`. Rolewisp does not fetch submitted links. Omitted new fields preserve saved values for older clients. Send an empty array to clear a field.
+
+New passwords use 15 to 128 characters. Passphrases and spaces are allowed. Existing users can still sign in with their current passwords.
+
+A signed-in user can request a verification code from Account Security. `POST /api/v1/me/email/verification` sends an eight-digit code and `POST /api/v1/me/email/verification/confirm` accepts `{"code":"12345678"}`. Codes expire after 15 minutes. Confirmation clears the stored code and updates `email_verified`. Configure SMTP over TLS with `SMTP_HOST`, `SMTP_FROM`, optional `SMTP_PORT` (465 by default), and credentials in `SMTP_USERNAME` and `SMTP_PASSWORD` if the relay requires them. Keep credentials server-side.

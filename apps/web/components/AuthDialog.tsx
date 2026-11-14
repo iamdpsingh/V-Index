@@ -44,8 +44,8 @@ export default function AuthDialog({
     e.preventDefault();
     setError('');
 
-    if (password.length < 12) {
-      setError('Password must be at least 12 characters.');
+    if (mode === 'register' && (Array.from(password).length < 15 || !password.trim())) {
+      setError('Password must be at least 15 characters.');
       return;
     }
     if (password.length > 128) {
@@ -163,14 +163,14 @@ export default function AuthDialog({
               type="password"
               required
               autoComplete={mode === 'register' ? 'new-password' : 'current-password'}
-              minLength={12}
+              minLength={mode === 'register' ? 15 : undefined}
               maxLength={128}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder={mode === 'register' ? 'At least 12 characters' : undefined}
+              placeholder={mode === 'register' ? 'At least 15 characters' : undefined}
               disabled={busy}
             />
-            {mode === 'register' && <small className="field-hint">Use 12 to 128 characters.</small>}
+            {mode === 'register' && <small className="field-hint">Use 15 to 128 characters. A passphrase works too.</small>}
           </label>
 
           <div className="auth-actions">

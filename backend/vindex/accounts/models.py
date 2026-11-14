@@ -13,6 +13,9 @@ class Account(Base):
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     email: Mapped[str] = mapped_column(String(254), unique=True)
     password_hash: Mapped[str] = mapped_column(String(500))
+    email_verified_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    email_code_hash: Mapped[str | None] = mapped_column(String(64))
+    email_code_expires_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)
 
 

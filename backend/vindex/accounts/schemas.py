@@ -12,7 +12,25 @@ Term = Annotated[str, Field(min_length=1, max_length=100)]
 class Credentials(BaseModel):
     model_config = ConfigDict(extra="forbid")
     email: EmailStr = Field(max_length=254)
-    password: SecretStr = Field(min_length=12, max_length=128)
+    password: SecretStr = Field(min_length=1, max_length=128)
+
+
+def check_new_password(value: SecretStr) -> SecretStr:
+    password = value.get_secret_value()
+    if len(password) < 15 or password.isspace():
+        raise ValueError("Use a password with 15 to 128 characters")
+    return value
+
+
+class Registration(Credentials):
+    @field_validator("password")
+    @classmethod
+    def validate_password(cls, value: SecretStr) -> SecretStr:
+        return check_new_password(value)
+
+
+class EmailCode(BaseModel):
+    code: str = Field(pattern=r"^[0-9]{8}$")
 
 
 class PasswordConfirmation(BaseModel):
@@ -21,7 +39,12 @@ class PasswordConfirmation(BaseModel):
 
 
 class PasswordChange(PasswordConfirmation):
-    new_password: SecretStr = Field(min_length=12, max_length=128)
+    new_password: SecretStr = Field(min_length=15, max_length=128)
+
+    @field_validator("new_password")
+    @classmethod
+    def validate_password(cls, value: SecretStr) -> SecretStr:
+        return check_new_password(value)
 
 
 class AccountOut(BaseModel):

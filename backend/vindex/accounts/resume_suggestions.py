@@ -34,10 +34,12 @@ def suggest_profile(text: str) -> ProfileHighlights:
     section = ""
     for line in text.splitlines():
         line = line.strip()
-        heading = line.rstrip(":").casefold()
+        name, delimiter, content = line.partition(":")
+        heading = name.strip().casefold()
         if heading in HEADINGS:
             section = HEADINGS[heading]
-        elif section and line and len(entries[section]) < 30:
+            line = content.strip() if delimiter else ""
+        if section and line and not URL_PATTERN.fullmatch(line) and len(entries[section]) < 30:
             entries[section].append(line[:1000])
 
     links: list[ProfessionalLink] = []

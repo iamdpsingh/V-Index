@@ -194,3 +194,19 @@ def test_application_sqlite_connections_enable_foreign_keys():
     if engine.dialect.name == "sqlite":
         with engine.connect() as connection:
             assert connection.scalar(text("PRAGMA foreign_keys")) == 1
+
+
+def test_email_verification_code_is_required_and_single_use(account_client, database, monkeypatch):
+    from vindex.accounts import email_verification
+
+    codes = []
+    monkeypatch.setattr(email_verification, "Session", database)
+    monkeypatch.setattr(email_verification, "deliver", lambda _, code: codes.append(code))
+    register(account_client)
+    endpoint = "/api/v1/me/email/verification"
+    assert account_client.post(endpoint).status_code == 204
+    wrong = "00000000" if codes[0] != "00000000" else "00000001"
+    assert account_client.post(endpoint + "/confirm", json={"code": wrong}).status_code == 422
+    assert account_client.post(endpoint + "/confirm", json={"code": codes[0]}).status_code == 204
+    assert account_client.get("/api/v1/me").json()["email_verified"] is True
+    assert account_client.post(endpoint + "/confirm", json={"code": codes[0]}).status_code == 422

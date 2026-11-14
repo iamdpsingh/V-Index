@@ -12,6 +12,7 @@ from vindex.accounts.schemas import (
     PasswordConfirmation,
     ProfileInput,
     ProfileOut,
+    Registration,
 )
 from vindex.accounts.security import (
     DUMMY_HASH,
@@ -35,13 +36,13 @@ def account_data(account: Account) -> dict:
     return {
         "id": account.id,
         "email": account.email,
-        "email_verified": False,
+        "email_verified": account.email_verified_at is not None,
         "created_at": account.created_at,
     }
 
 
 @router.post("/auth/register", status_code=201, response_model=AccountOut, dependencies=write_guard)
-def register(body: Credentials, request: Request, response: Response):
+def register(body: Registration, request: Request, response: Response):
     if os.getenv("ACCOUNT_REGISTRATION_ENABLED", "false").lower() != "true":
         raise HTTPException(503, "Registration is not enabled")
     email = str(body.email).casefold()

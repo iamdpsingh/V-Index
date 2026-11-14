@@ -3,6 +3,8 @@
 import { FormEvent, useEffect, useState } from 'react';
 import {
   changePassword,
+  confirmEmailVerification,
+  requestEmailVerification,
   deleteAccount,
   getProfile,
   updateProfile,
@@ -22,6 +24,34 @@ export default function UserProfile({
   onLogout,
   onAccountDeleted,
 }: UserProfileProps) {
+  const [verified, setVerified] = useState(account.email_verified);
+  const [code, setCode] = useState('');
+  const [emailPending, setEmailPending] = useState(false);
+  const [emailNotice, setEmailNotice] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [codeSent, setCodeSent] = useState(false);
+
+  async function verifyEmail(confirm: boolean) {
+    setEmailPending(true);
+    setEmailError('');
+    setEmailNotice('');
+    try {
+      if (confirm) {
+        await confirmEmailVerification(code);
+        setVerified(true);
+        setCode('');
+      } else {
+        await requestEmailVerification();
+        setCodeSent(true);
+        setEmailNotice('Check your inbox for an 8-digit code.');
+      }
+    } catch (err) {
+      setEmailError(err instanceof Error ? err.message : 'Could not verify your email.');
+    } finally {
+      setEmailPending(false);
+    }
+  }
+
   const [logoutPending, setLogoutPending] = useState(false);
   const [logoutError, setLogoutError] = useState('');
 
@@ -179,8 +209,8 @@ export default function UserProfile({
     setPwError('');
     setPwSuccess(false);
 
-    if (newPw.length < 12) {
-      setPwError('New password must be at least 12 characters.');
+    if (Array.from(newPw).length < 15 || !newPw.trim()) {
+      setPwError('New password must be at least 15 characters.');
       return;
     }
 
@@ -531,8 +561,10 @@ export default function UserProfile({
                   next[field] = [...new Set([...(current[field] ?? []), ...(resume.suggestions?.[field] ?? [])])].slice(0, 30);
                 }
                 next.skills = [...new Set([...(current.skills ?? []), ...resume.detected_skills])].slice(0, 50);
-                const links = new Map((resume.suggestions?.links ?? []).map((link) => [link.url, link]));
-                for (const link of current.links ?? []) links.set(link.url, link);
+                const links = new Map((current.links ?? []).map((link) => [link.url, link]));
+                for (const link of resume.suggestions?.links ?? []) {
+                  if (!links.has(link.url)) links.set(link.url, link);
+                }
                 next.links = [...links.values()].slice(0, 12);
                 return next;
               });
@@ -541,6 +573,29 @@ export default function UserProfile({
             {/* Account Settings / Password change */}
             <section className="profile-subcard">
               <h3>Account Security</h3>
+              <div className="security-form">
+                <p>{verified ? 'Email verified' : 'Verify your email address'}</p>
+                {!verified && (
+                  <>
+                    <button type="button" className="btn-secondary" disabled={emailPending}
+                      onClick={() => void verifyEmail(false)}>
+                      {codeSent ? 'Resend code' : 'Send verification code'}
+                    </button>
+                    {codeSent && (
+                      <form onSubmit={(event) => { event.preventDefault(); void verifyEmail(true); }}>
+                        <label>Verification code
+                          <input inputMode="numeric" autoComplete="one-time-code" value={code}
+                            pattern="[0-9]{8}" maxLength={8} required
+                            onChange={(event) => setCode(event.target.value)} />
+                        </label>
+                        <button type="submit" className="btn-secondary" disabled={emailPending}>Verify email</button>
+                      </form>
+                    )}
+                    {emailNotice && <p role="status">{emailNotice}</p>}
+                    {emailError && <p role="alert">{emailError}</p>}
+                  </>
+                )}
+              </div>
               <form onSubmit={handleChangePassword} className="security-form">
                 {pwError && (
                   <div className="notice error sub-error" role="alert">
@@ -562,11 +617,11 @@ export default function UserProfile({
                   />
                 </label>
                 <label>
-                  New password (min 12 chars)
+                  New password (15 to 128 characters)
                   <input
                     type="password"
                     required
-                    minLength={12}
+                    minLength={15}
                     maxLength={128}
                     value={newPw}
                     onChange={(e) => setNewPw(e.target.value)}

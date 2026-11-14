@@ -377,3 +377,15 @@ export async function getPlans(country?: string): Promise<PlansOut> {
   const query = country ? `?country=${encodeURIComponent(country)}` : '';
   return apiFetch<PlansOut>(`plans${query}`);
 }
+
+
+export function requestEmailVerification(): Promise<void> {
+  return apiFetch<void>('me/email/verification', '', { method: 'POST' });
+}
+
+export function confirmEmailVerification(code: string): Promise<void> {
+  return apiFetch<void>('me/email/verification/confirm', '', {
+    method: 'POST',
+    body: JSON.stringify({ code }),
+  });
+}

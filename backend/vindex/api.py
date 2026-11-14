@@ -13,6 +13,7 @@ from sqlalchemy import func, select, text
 from sqlalchemy.exc import IntegrityError
 
 from vindex.accounts.api import router as account_router
+from vindex.accounts.email_verification import router as email_verification_router
 from vindex.accounts.middleware import PRIVATE_PREFIXES, PrivateRequestMiddleware
 from vindex.accounts.recommendations import router as recommendations_router
 from vindex.accounts.resume_api import router as resume_router
@@ -25,6 +26,7 @@ from vindex.schemas import JobOut, RunOut, SearchOut, SourceCreate, SourceOut
 app = FastAPI(title="Rolewisp API", version="0.1.0")
 app.add_middleware(PrivateRequestMiddleware)
 app.include_router(account_router)
+app.include_router(email_verification_router)
 app.include_router(recommendations_router)
 app.include_router(resume_router)
 app.include_router(plans_router)
