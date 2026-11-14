@@ -25,6 +25,7 @@ export default function AuthDialog({
   useEffect(() => {
     setMode(initialMode);
     setError('');
+    setPassword('');
   }, [initialMode, isOpen]);
 
   useEffect(() => {
@@ -127,12 +128,12 @@ export default function AuthDialog({
         </div>
 
         <h2 id="auth-dialog-title" className="auth-title">
-          {mode === 'login' ? 'Welcome back' : 'Create private account'}
+          {mode === 'login' ? 'Welcome back' : 'Create your account'}
         </h2>
         <p className="auth-sub">
           {mode === 'login'
             ? 'Sign in to access your saved profile, resume, and tailored recommendations.'
-            : 'Private saved profile and resume matching. No tokens stored in browser local storage.'}
+            : 'Save your profile and find jobs that match your skills.'}
         </p>
 
         {error && (
@@ -141,7 +142,7 @@ export default function AuthDialog({
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="auth-form" noValidate>
+        <form onSubmit={handleSubmit} className="auth-form">
           <label>
             Email address
             <input
@@ -166,10 +167,10 @@ export default function AuthDialog({
               maxLength={128}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Minimum 12 characters"
+              placeholder={mode === 'register' ? 'At least 12 characters' : undefined}
               disabled={busy}
             />
-            <small className="field-hint">12 to 128 characters.</small>
+            {mode === 'register' && <small className="field-hint">Use 12 to 128 characters.</small>}
           </label>
 
           <div className="auth-actions">
@@ -177,18 +178,23 @@ export default function AuthDialog({
               {busy
                 ? 'Processing…'
                 : mode === 'register'
-                ? 'Create Account →'
-                : 'Sign In →'}
+                ? 'Create account'
+                : 'Sign in'}
             </button>
           </div>
         </form>
 
-        <div className="auth-footer-note">
-          <small>
-            Honest state: Email verification and password recovery emails are not yet enabled.
-            Keep your credentials secure.
-          </small>
-        </div>
+        <fieldset className="auth-providers" aria-describedby="auth-providers-status">
+          <legend>Continue with</legend>
+          <div className="auth-provider-options">
+            {['Google', 'LinkedIn', 'GitHub'].map((provider) => (
+              <button key={provider} type="button" className="btn-secondary" disabled>
+                {provider}
+              </button>
+            ))}
+          </div>
+          <small id="auth-providers-status">Social sign-in is unavailable in this preview.</small>
+        </fieldset>
       </div>
     </div>
   );
