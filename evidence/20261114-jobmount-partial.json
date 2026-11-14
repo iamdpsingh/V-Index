@@ -1,0 +1,18 @@
+{
+  "date_ist": "2026-11-14",
+  "provider": "JobMount",
+  "complete": false,
+  "boards": [
+    {
+      "feed": "https://www.jobsrus.com/candidate/job_search/quick/results?rss=true",
+      "unique_posting_links": 100,
+      "entries_with_description": 100
+    },
+    {
+      "feed": "https://www.nationaldiversitynetwork.com/candidate/job_search/quick/results?rss",
+      "unique_posting_links": 100,
+      "entries_with_description": 100
+    }
+  ],
+  "scope": "Publisher-advertised RSS feeds. Application entries and completeness against the full roster were not checked."
+}
