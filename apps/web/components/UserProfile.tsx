@@ -527,6 +527,11 @@ export default function UserProfile({
             <ResumeSection onUseSuggestions={(resume) => {
               setProfile((current) => {
                 const next = { ...current };
+                for (const field of ['full_name', 'headline', 'bio'] as const) {
+                  if (!current[field]?.trim() && resume.suggestions?.[field]) {
+                    next[field] = resume.suggestions[field];
+                  }
+                }
                 for (const field of ['education', 'experience', 'projects'] as const) {
                   next[field] = [...new Set([...(current[field] ?? []), ...(resume.suggestions?.[field] ?? [])])].slice(0, 30);
                 }

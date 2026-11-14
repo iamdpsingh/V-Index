@@ -21,3 +21,20 @@ def test_explicit_resume_sections_and_links():
 def test_professional_links_reject_unsafe_schemes_credentials_and_ports(url):
     with pytest.raises(ValidationError):
         ProfessionalLink(label="Website", url=url)
+
+
+def test_resume_header_and_professional_summary_suggestions():
+    result = suggest_profile(
+        "Asha Mehta\nSenior Data Engineer\nasha@example.com\n"
+        "Professional Summary: Builds reliable data pipelines.\n"
+        "Leads migration projects.\nEducation\nBSc Computing"
+    )
+    assert result.full_name == "Asha Mehta"
+    assert result.headline == "Senior Data Engineer"
+    assert result.bio == "Builds reliable data pipelines. Leads migration projects."
+    assert result.education == ["BSc Computing"]
+
+
+def test_resume_without_identity_does_not_suggest_a_section_title():
+    result = suggest_profile("Work Experience\nSenior Data Engineer\nProjects\nIndexer")
+    assert (result.full_name, result.headline, result.bio) == ("", "", "")

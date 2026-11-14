@@ -134,7 +134,7 @@ export type ResumeOut = {
   size_bytes: number;
   text_characters: number;
   detected_skills: string[];
-  suggestions?: ProfileHighlights;
+  suggestions?: ProfileHighlights & { full_name?: string; headline?: string; bio?: string };
   updated_at: string;
 };
 

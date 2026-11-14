@@ -58,7 +58,9 @@ def test_private_resume_encryption_download_replace_and_delete(private_client, d
     response = upload(private_client)
     assert response.status_code == 200, response.text
     assert "Python" in response.json()["detected_skills"]
-    assert "Example Candidate" not in response.text
+    assert response.json()["suggestions"]["full_name"] == "Example Candidate"
+    assert "text" not in response.json()
+    assert response.headers["cache-control"] == "no-store"
     with database() as session:
         saved = session.scalar(select(Resume))
         assert TEXT not in saved.file_ciphertext and b"Python" not in saved.text_ciphertext

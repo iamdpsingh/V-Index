@@ -86,6 +86,12 @@ class ProfileHighlights(BaseModel):
     links: list[ProfessionalLink] = Field(default_factory=list, max_length=12)
 
 
+class ResumeSuggestions(ProfileHighlights):
+    full_name: str = Field(default="", max_length=100)
+    headline: str = Field(default="", max_length=160)
+    bio: str = Field(default="", max_length=2000)
+
+
 class ProfileInput(ProfileHighlights):
     model_config = ConfigDict(extra="forbid")
     full_name: str = Field(default="", max_length=100)
@@ -110,7 +116,7 @@ class ResumeOut(BaseModel):
     size_bytes: int
     text_characters: int
     detected_skills: list[str]
-    suggestions: ProfileHighlights = Field(default_factory=ProfileHighlights)
+    suggestions: ResumeSuggestions = Field(default_factory=ResumeSuggestions)
     updated_at: datetime
 
 
