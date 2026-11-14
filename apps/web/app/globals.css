@@ -2029,3 +2029,26 @@ header {
   border-top: 1px solid var(--color-rule);
   padding-block: 1rem;
 }
+
+.role-options {
+  margin: 0 0 1rem;
+  padding: 0;
+  border: 0;
+}
+
+.role-options legend {
+  margin-bottom: .5rem;
+  font-weight: 600;
+}
+
+.role-options label {
+  display: flex;
+  align-items: center;
+  gap: .625rem;
+  min-height: 2.75rem;
+  cursor: pointer;
+}
+
+.role-options input {
+  margin: 0;
+}

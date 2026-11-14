@@ -4,8 +4,7 @@ import { useEffect, useState, type FormEvent } from 'react';
 import { apiFetch, type AccountOut } from '../lib/api';
 
 const roles = [
-  ['candidate', 'Candidate'], ['agency', 'Hiring agency'],
-  ['company', 'Company'], ['job_poster', 'Job poster'],
+  ['candidate', 'Candidate'], ['employer', 'Employer'],
 ] as const;
 
 const empty = { title: '', company: '', location: '', description: '', application_url: '' };
@@ -18,7 +17,7 @@ export default function EmployerWorkspace({ account }: { account: AccountOut }) 
   const [editing, setEditing] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
-  const employer = role && role !== 'candidate';
+  const employer = role === 'employer';
 
   useEffect(() => {
     if (employer) apiFetch<Posting[]>('me/postings').then(setPostings).catch(() => setError('Could not load postings.'));
@@ -35,15 +34,30 @@ export default function EmployerWorkspace({ account }: { account: AccountOut }) 
   if (role === 'candidate') return null;
   return (
     <section className="profile-subcard">
-      <h2>{employer ? 'Your job postings' : 'How will you use Rolewisp?'}</h2>
+      {employer && <h2>Your job postings</h2>}
       {error && <p role="alert">{error}</p>}
-      {!role && roles.map(([key, label]) => (
-        <button key={key} className="btn-secondary" disabled={busy} type="button"
-          onClick={() => void update(async () => {
-            await apiFetch('me/role', '', { method: 'PUT', body: JSON.stringify({ role: key }) });
-            setRole(key);
-          })}>{label}</button>
-      ))}
+      {!role && (
+        <form onSubmit={(event) => {
+          event.preventDefault();
+          const selected = new FormData(event.currentTarget).get('role');
+          if (selected !== 'candidate' && selected !== 'employer') return;
+          void update(async () => {
+            await apiFetch('me/role', '', { method: 'PUT', body: JSON.stringify({ role: selected }) });
+            setRole(selected);
+          });
+        }}>
+          <fieldset className="role-options" disabled={busy}>
+            <legend>How will you use Rolewisp?</legend>
+            {roles.map(([key, label]) => (
+              <label key={key}>
+                <input type="radio" name="role" value={key} required />
+                {label}
+              </label>
+            ))}
+          </fieldset>
+          <button className="btn-secondary" disabled={busy} type="submit">Continue</button>
+        </form>
+      )}
       {employer && (
         <>
           <form className="security-form" onSubmit={(event: FormEvent) => {

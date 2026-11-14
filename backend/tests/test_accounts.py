@@ -236,7 +236,7 @@ def test_employer_posting_lifecycle_and_ownership(account_client, database, monk
     }
     root = "/api/v1/me/postings"
     assert account_client.post(root, json=fields).status_code == 403
-    assert account_client.put("/api/v1/me/role", json={"role": "company"}).status_code == 200
+    assert account_client.put("/api/v1/me/role", json={"role": "employer"}).status_code == 200
     draft = account_client.post(root, json=fields)
     assert draft.status_code == 201, draft.text
     url = root + "/" + draft.json()["id"]
@@ -253,7 +253,7 @@ def test_employer_posting_lifecycle_and_ownership(account_client, database, monk
         assert all(row.status == "closed" for row in session.scalars(select(Observation)))
     account_client.post("/api/v1/auth/logout")
     register(account_client, "other@example.com")
-    assert account_client.put("/api/v1/me/role", json={"role": "agency"}).status_code == 200
+    assert account_client.put("/api/v1/me/role", json={"role": "employer"}).status_code == 200
     assert account_client.get(root).json() == []
     assert account_client.put(url, json=fields).status_code == 404
 

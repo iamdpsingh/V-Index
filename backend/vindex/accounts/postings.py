@@ -18,7 +18,7 @@ guard = [Depends(require_origin)]
 
 
 class RoleSelection(BaseModel):
-    role: Literal["candidate", "agency", "company", "job_poster"]
+    role: Literal["candidate", "employer"]
 
 
 class PostingInput(BaseModel):
@@ -32,7 +32,7 @@ class PostingInput(BaseModel):
 def posting_owner(request, session) -> Account:
     user = principal(request, session)
     locked = session.scalar(select(Account).where(Account.id == user.id).with_for_update())
-    if not locked or locked.role not in {"agency", "company", "job_poster"}:
+    if not locked or locked.role != "employer":
         raise HTTPException(403, "Choose an employer role to manage postings")
     return locked
 

@@ -77,8 +77,8 @@ Resume suggestions can also include `full_name`, `headline`, and `bio`. The pars
 ## Role onboarding and job postings
 
 Choose an account role with `PUT /api/v1/me/role` and a JSON body containing
-`role` set to `candidate`, `agency`, `company`, or `job_poster`.
-The last three roles can list and create drafts at `/api/v1/me/postings` and
+`role` set to `candidate` or `employer`.
+Employers can list and create drafts at `/api/v1/me/postings` and
 edit their own postings at `PUT /api/v1/me/postings/{id}`. Post to
 `/api/v1/me/postings/{id}/publish` or `/close` to change visibility.
 Publishing requires a verified email. Employer submissions have their own
