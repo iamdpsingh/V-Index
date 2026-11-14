@@ -16,7 +16,11 @@ from vindex.connectors.jobboardio import document
 from vindex.connectors.robots import RobotsPolicy
 from vindex.schemas import Enumeration, JobInput
 
-BOARDS = {"seasonaljobs.co.nz": "", "gurushrconsultancy.com": "/jobboard"}
+BOARDS = {
+    "seasonaljobs.co.nz": "",
+    "gurushrconsultancy.com": "/jobboard",
+    "www.edutalentz.com": "",
+}
 JOB_PATH = r"/([1-9][0-9]{0,17})/[A-Za-z0-9_-]+/?"
 PAGE_SIZE = 10
 MAX_JOBS = 200

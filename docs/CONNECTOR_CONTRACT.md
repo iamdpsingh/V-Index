@@ -337,7 +337,7 @@ The BrassRing connector accepts the reviewed Halifax Regional Municipality and I
 
 ## ejobsitesoftware.com
 
-The `ejobsitesoftware_com` connector supports registration for the Gurus HR Consultancy board root and its unfiltered public job search URL. Seasonal Jobs NZ is available for connector smoke tests while its roster and detail pages disagree. These are listed by the vendor. [eJobsiteSoftware clients](https://ejobsitesoftware.com/clients/)
+The `ejobsitesoftware_com` connector supports the Edutalentz and Gurus HR Consultancy board roots and their unfiltered public job search URLs. Seasonal Jobs NZ remains pending while its roster and detail pages disagree. These are listed by the vendor. [eJobsiteSoftware clients](https://ejobsitesoftware.com/clients/)
 
 The connector submits the anonymous public search form and follows the board’s published paging controls. Seasonal’s search repeats some IDs across pages, and its sitemap omits some search results. The connector reconciles both sources to the advertised total, confirms a future expiry for sitemap-only jobs through the public preview endpoint, reads every job detail, and repeats the roster check. It accepts at most 200 jobs. An empty, incomplete, or changed snapshot fails the refresh without counting as closure evidence.
 

@@ -122,9 +122,9 @@ EXAMPLES = [
     (
         "ejobsitesoftware.com",
         "ejobsitesoftware_com",
-        "seasonaljobs.co.nz",
-        "Seasonal Jobs NZ",
-        "https://seasonaljobs.co.nz/job-search/",
+        "www.edutalentz.com",
+        "Edutalentz",
+        "https://www.edutalentz.com/job-search/",
     ),
     (
         "ejobsitesoftware.com",
@@ -814,7 +814,7 @@ async def main():
                                 "Reviewed AG Connect and Twinkle boards require an exact nonzero single-page total, every matching public JobPosting and roster reconfirmation.",
                             ],
                             "ejobsitesoftware.com": [
-                                "Public source registration is enabled for Gurus HR Consultancy. Seasonal Jobs NZ is smoke-test only while advertised postings redirect.",
+                                "Public source registration is enabled for Edutalentz and Gurus HR Consultancy. Seasonal Jobs NZ remains pending while advertised postings redirect.",
                                 "Uses bounded public search and mandatory full details. Seasonal search and sitemap must reconcile to the advertised total and remain stable after extraction.",
                                 "Point-in-time results do not establish coverage of other installations or hosted continuous operation.",
                             ],
