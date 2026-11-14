@@ -4,7 +4,7 @@ import asyncio
 import json
 import re
 from datetime import datetime
-from urllib.parse import unquote, urljoin, urlsplit
+from urllib.parse import urljoin, urlsplit
 
 import httpx
 from bs4 import BeautifulSoup
@@ -100,9 +100,16 @@ class WileyMadgexConnector:
         soup = document(body)
         canonical = soup.select('link[rel="canonical"][href]')
         headings = soup.select("h1.mds-font-s6")
+        canonical_url = urlsplit(str(canonical[0]["href"])) if len(canonical) == 1 else None
+        canonical_job = self.path.fullmatch(canonical_url.path) if canonical_url else None
         if (
-            len(canonical) != 1
-            or unquote(str(canonical[0]["href"])) != unquote(url)
+            canonical_url is None
+            or canonical_url.scheme != "https"
+            or canonical_url.netloc != self.host
+            or canonical_url.query
+            or canonical_url.fragment
+            or not canonical_job
+            or canonical_job[1] != identifier
             or len(headings) != 1
             or headings[0].get_text(" ", strip=True) != listed_title
         ):
@@ -121,7 +128,8 @@ class WileyMadgexConnector:
         description = text(description_html)
         if not structured_title or not company or not description:
             raise ValueError(f"Incomplete Madgex detail fields for job {identifier}")
-        application = url
+        source_url = canonical_url.geturl()
+        application = source_url
         native_apply = set()
         for anchor in soup.select("a[href]"):
             target = urlsplit(urljoin(url, str(anchor["href"]).strip()))
@@ -173,7 +181,7 @@ class WileyMadgexConnector:
             company=company,
             description=description,
             location="; ".join(locations),
-            source_url=url,
+            source_url=source_url,
             application_url=application,
             published_at=datetime.fromisoformat(date) if date else None,
             employment_type=employment,
