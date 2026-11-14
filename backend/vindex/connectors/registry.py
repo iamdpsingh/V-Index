@@ -99,6 +99,7 @@ from vindex.connectors.trakstar import TrakstarConnector
 from vindex.connectors.trinet import SLUG as TRINET_SLUG
 from vindex.connectors.trinet import TriNetConnector
 from vindex.connectors.werecruit import WeRecruitConnector
+from vindex.connectors.wileymadgex import BOARDS as MADGEX_BOARDS
 from vindex.connectors.workable import WorkableConnector
 from vindex.connectors.workday import HOST_PATTERN, SITE_PATTERN, WorkdayConnector
 from vindex.connectors.wp_job_manager import HOSTS as WP_JOB_MANAGER_HOSTS
@@ -183,6 +184,11 @@ def detect(url: str) -> tuple[str, str]:
                 "Expected an unfiltered reviewed SuccessFactors Career Site Builder board"
             )
         return "successfactors", p.hostname
+    if p.hostname in MADGEX_BOARDS:
+        prefix = MADGEX_BOARDS[p.hostname]
+        if p.path.rstrip("/") not in {prefix, prefix + "/jobs"} or p.query or p.fragment:
+            raise ValueError("Expected an unfiltered reviewed Wiley Madgex job board")
+        return "wileymadgex", p.hostname
     if p.hostname in EJOBSITESOFTWARE_BOARDS:
         if p.hostname == "seasonaljobs.co.nz":
             raise ValueError("This eJobsiteSoftware board is pending live verification")

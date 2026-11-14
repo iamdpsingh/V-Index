@@ -382,3 +382,7 @@ The reviewed Oseyo and eCarsTrade hosted sites expose their published job ads at
 ## Artha
 
 The reviewed LexPath and Joberly boards publish their job inventory through the robots-advertised sitemap index and its numbered job maps. The connector validates same-origin detail URLs and canonical aliases, requires matching structured job and application URLs plus the published active flag, and rejects duplicate posting IDs or canonical destinations. It reconfirms the complete published job URL set before reconciliation.
+
+## Wiley Madgex
+
+The reviewed Science Careers and Nature Careers search URLs register for checkpointed background refresh. The worker validates pagination, reads canonical posting details and reconfirms the roster before reconciliation. Canonical slug variants may identify the same posting when the host, posting ID and visible title match.

@@ -73,7 +73,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | JobBoardFire | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 24 | 2026-11-12T20:37:39.050902+00:00 | https://jobs.trellis.net/ (18; LIVE_VERIFIED); https://lpjc.jobboardfire.com/ (6; LIVE_VERIFIED)  |
 | SmartJobBoard | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 105 | 2026-11-08T03:31:39.192415+00:00 | https://americanbath.mysmartjobboard.com/jobs/ (28; LIVE_VERIFIED); https://jobs.psychologicalscience.org/jobs/ (77; LIVE_VERIFIED)  |
 | JobBoard.io | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 63 | 2026-11-07T07:07:19.433685+00:00 | https://www.nifajobs.com/ (2; LIVE_VERIFIED); https://www.cancercareers.org/ (61; LIVE_VERIFIED)  |
-| Wiley Madgex | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
+| Wiley Madgex | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 1681 | 2026-11-14T07:02:33.297361+00:00 | https://jobs.sciencecareers.org/jobs/ (518; LIVE_VERIFIED); https://www.nature.com/naturecareers/jobs/ (1163; LIVE_VERIFIED)  |
 | Talenetic | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | JobMount | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | CareerSiteCloud | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |

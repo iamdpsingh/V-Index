@@ -3235,16 +3235,40 @@
   {
     "name": "Wiley Madgex",
     "kind": "job_board",
-    "implementation_status": "NOT_STARTED",
-    "evidence_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
+    "evidence_status": "LIVE_VERIFIED",
     "risk": "HIGH",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
+    "examples": [
+      {
+        "provider": "Wiley Madgex",
+        "status": "LIVE_VERIFIED",
+        "revision": "f8a3e719cdf6f22bcb4efb44f0bfd23ac052784a",
+        "working_tree_dirty_at_start": false,
+        "url": "https://jobs.sciencecareers.org/jobs/",
+        "count": 518,
+        "complete": true,
+        "finished_at": "2026-11-14T06:50:27.211762+00:00",
+        "payload_sha256": "b03f6cdb1836d7f1cc5f731c6883ff70ab056e6cda325af6d347787f31b0be30"
+      },
+      {
+        "provider": "Wiley Madgex",
+        "status": "LIVE_VERIFIED",
+        "revision": "7bb76123c311654de3876f7420c09e4e0bbd3c4f",
+        "working_tree_dirty_at_start": false,
+        "url": "https://www.nature.com/naturecareers/jobs/",
+        "count": 1163,
+        "complete": true,
+        "checkpoint_started_at": "2026-11-14T06:41:14.084419",
+        "finished_at": "2026-11-14T07:02:33.297361+00:00",
+        "payload_sha256": "388c79f47c50f7c01d1b737199af0f0f8e2b970ec97c0ea48a69ffd696f40c6d"
+      }
+    ],
+    "last_run_at": "2026-11-14T07:02:33.297361+00:00",
+    "extraction_count": 1681,
     "failure_reason": null,
     "limitations": [
-      "Connector not implemented"
+      "Verified on Science Careers and Nature Careers using checkpointed enumeration and final roster reconfirmation."
     ]
   },
   {
