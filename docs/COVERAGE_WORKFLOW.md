@@ -123,3 +123,7 @@ November 14 IST: Gem's API host returned HTTP 403 at robots lookup. The permitte
 November 14 IST: Direct robots-checked requests to the TalentReef On the Border San Diego and JC Resorts boards returned 972-byte HTML shells without listing data. The provider advertises outbound partner integrations, but this pass did not establish an accessible source roster. [On the Border board](https://apply.jobappnetwork.com/otbsdjobs/en) · [JC Resorts board](https://apply.jobappnetwork.com/jcresortsjobs/en)
 
 November 14 IST: The eJobsiteSoftware live retry reconfirmed all seven Gurus HR jobs. Seasonal Jobs NZ returned HTTP 302 during full enumeration. The platform still has one passing board and remains outside the live-verified total. [Full smoke output](../evidence/20261114T063020Z-smoke.json)
+
+**Owner push update (November 14):** Keep coverage changes local until the exact-scope coverage work is complete. Then push the reviewed batch.
+
+November 14 IST: eJobsiteSoftware passed clean live runs on Edutalentz (3 jobs) and Gurus HR Consultancy (7 jobs), bringing verified coverage to **66/78**. Both runs read every advertised posting detail and reconfirmed their rosters. Seasonal Jobs NZ remains pending. [Live evidence](../evidence/20261114T063407Z-smoke.json)

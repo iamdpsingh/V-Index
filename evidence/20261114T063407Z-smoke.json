@@ -1,0 +1,32 @@
+[
+  {
+    "provider": "ejobsitesoftware.com",
+    "url": "https://www.edutalentz.com/job-search/",
+    "at": "2026-11-14T06:32:53.569218+00:00",
+    "revision": "3b730d3c698aef7c274a5bffac080b4f33306ba6",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "e2be6806d24e9ad06227877b0e6d05861c75b0c13a94e3828c8db81603bed5ea",
+    "count": 3,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "6418a3ddbab1cdfd9420e7ed0f74fe6acf0b2c4df105260b31c030375a60a698",
+    "finished_at": "2026-11-14T06:33:07.840860+00:00"
+  },
+  {
+    "provider": "ejobsitesoftware.com",
+    "url": "https://gurushrconsultancy.com/jobboard/job-search/",
+    "at": "2026-11-14T06:33:08.342006+00:00",
+    "revision": "3b730d3c698aef7c274a5bffac080b4f33306ba6",
+    "working_tree_dirty_at_start": false,
+    "code_sha256": "e2be6806d24e9ad06227877b0e6d05861c75b0c13a94e3828c8db81603bed5ea",
+    "count": 7,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "0eb52a37dd24d5508e9e89a08447888d0d2f45e952f5da799f4457803e6b3605",
+    "finished_at": "2026-11-14T06:34:06.878164+00:00"
+  }
+]
