@@ -3566,33 +3566,33 @@
       {
         "provider": "ejobsitesoftware.com",
         "url": "https://seasonaljobs.co.nz/job-search/",
-        "at": "2026-11-12T15:29:44.153778+00:00",
-        "revision": "c8b52caa355153775dd75651def05b1f70ac10fb",
+        "at": "2026-11-14T06:23:29.130992+00:00",
+        "revision": "1d1c0349bf3dda8e8648c96ec52842ebe547f790",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "37b799eecf76fa663e9275d19691e143ffbb773d401172243df45c25c1331080",
+        "code_sha256": "f2f2d8e60317420e27563c8d418b564ddba930c3c4bdd52439da4a3b57f46847",
         "count": 0,
         "status": "FAILED",
         "complete": false,
         "error": "UpstreamStatusError: Upstream HTTP 302",
-        "finished_at": "2026-11-12T15:37:03.825819+00:00"
+        "finished_at": "2026-11-14T06:29:18.883414+00:00"
       },
       {
         "provider": "ejobsitesoftware.com",
         "url": "https://gurushrconsultancy.com/jobboard/job-search/",
-        "at": "2026-11-12T15:37:04.327330+00:00",
-        "revision": "c8b52caa355153775dd75651def05b1f70ac10fb",
+        "at": "2026-11-14T06:29:19.383902+00:00",
+        "revision": "1d1c0349bf3dda8e8648c96ec52842ebe547f790",
         "working_tree_dirty_at_start": false,
-        "code_sha256": "37b799eecf76fa663e9275d19691e143ffbb773d401172243df45c25c1331080",
+        "code_sha256": "f2f2d8e60317420e27563c8d418b564ddba930c3c4bdd52439da4a3b57f46847",
         "count": 7,
         "status": "LIVE_VERIFIED",
         "complete": true,
         "error": null,
         "quality_flag_counts": {},
         "payload_sha256": "0eb52a37dd24d5508e9e89a08447888d0d2f45e952f5da799f4457803e6b3605",
-        "finished_at": "2026-11-12T15:38:00.089174+00:00"
+        "finished_at": "2026-11-14T06:30:20.225300+00:00"
       }
     ],
-    "last_run_at": "2026-11-12T15:38:00.089174+00:00",
+    "last_run_at": "2026-11-14T06:30:20.225300+00:00",
     "extraction_count": 7,
     "failure_reason": "UpstreamStatusError: Upstream HTTP 302",
     "limitations": [
