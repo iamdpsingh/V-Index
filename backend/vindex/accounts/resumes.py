@@ -1,8 +1,6 @@
-import json
+import io
 import os
-import subprocess
-import sys
-from pathlib import Path
+import zipfile
 
 from cryptography.fernet import Fernet, InvalidToken
 from fastapi import HTTPException
@@ -38,28 +36,24 @@ def filename(value: str | None) -> tuple[str, str]:
     return value, kind
 
 
-def extract_text(data: bytes, kind: str) -> str:
-    try:
-        result = subprocess.run(
-            [sys.executable, "-m", "vindex.accounts.parse_worker", kind],
-            input=data,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.DEVNULL,
-            timeout=10,
-            env={"PYTHONPATH": str(Path(__file__).resolve().parents[2])},
-            check=False,
-        )
-        parsed = json.loads(result.stdout)
-        if isinstance(parsed, dict) and parsed.get("error") == "no_selectable_text":
-            raise HTTPException(
-                422,
-                "This file has no selectable text. Export a text-based PDF, DOCX, or TXT file and try again.",
-            )
-        if result.returncode or not isinstance(parsed.get("text"), str):
-            raise ValueError("Unreadable resume")
-        return parsed["text"]
-    except (subprocess.TimeoutExpired, ValueError, KeyError, OSError) as error:
-        raise HTTPException(
-            422,
-            "Resume could not be read within limits; use a readable PDF, DOCX or UTF-8 TXT file",
-        ) from error
+def validate_file(data: bytes, kind: str) -> None:
+    # Files are stored as opaque attachments. Check the format without extracting content.
+    valid = False
+    if kind == "pdf":
+        valid = data.startswith(b"%PDF-") and data.rstrip().endswith(b"%%EOF")
+    elif kind == "docx":
+        if zipfile.is_zipfile(io.BytesIO(data)):
+            try:
+                with zipfile.ZipFile(io.BytesIO(data)) as archive:
+                    names = archive.namelist()
+                    valid = "[Content_Types].xml" in names and "word/document.xml" in names
+                    valid = valid and not any(name.lower().endswith(".bin") for name in names)
+            except (ValueError, zipfile.BadZipFile):
+                pass
+    else:
+        try:
+            valid = b"\x00" not in data and bool(data.decode("utf-8-sig").strip())
+        except UnicodeError:
+            pass
+    if not valid:
+        raise HTTPException(422, "Choose a valid PDF, DOCX, or UTF-8 TXT file")

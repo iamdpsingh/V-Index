@@ -1,7 +1,6 @@
 import hashlib
 import os
 import secrets
-from contextlib import contextmanager
 from datetime import timedelta
 from urllib.parse import urlsplit
 
@@ -150,29 +149,3 @@ def clear_cookie(response: Response) -> None:
         httponly=True,
         samesite="lax",
     )
-
-
-@contextmanager
-def parser_slot():
-    """Two bounded parser processes at once across API replicas using this Redis."""
-    client = redis_client()
-    acquired = None
-    try:
-        for index in range(2):
-            lock = client.lock(f"vindex:resume-parser:{index}", timeout=30)
-            if lock.acquire(blocking=False):
-                acquired = lock
-                break
-        if acquired is None:
-            raise HTTPException(
-                429, "Resume processing busy; retry shortly", headers={"Retry-After": "2"}
-            )
-        yield
-    except RedisError as error:
-        raise HTTPException(503, "Resume processing temporarily unavailable") from error
-    finally:
-        if acquired is not None:
-            try:
-                acquired.release()
-            except RedisError:
-                pass  # Lease expiry bounds recovery; no private content enters logs.

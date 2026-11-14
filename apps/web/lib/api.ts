@@ -111,7 +111,6 @@ export type ProfileInput = ProfileHighlights & {
   skills?: string[];
   preferred_locations?: string[];
   remote_only?: boolean;
-  use_resume_skills?: boolean;
   experience_years?: number | null;
 };
 
@@ -124,7 +123,6 @@ export type ProfileOut = ProfileHighlights & {
   skills: string[];
   preferred_locations: string[];
   remote_only: boolean;
-  use_resume_skills: boolean;
   experience_years: number | null;
   updated_at: string | null;
 };
@@ -133,9 +131,6 @@ export type ResumeOut = {
   filename: string;
   media_type: string;
   size_bytes: number;
-  text_characters: number;
-  detected_skills: string[];
-  suggestions?: ProfileHighlights & { full_name?: string; headline?: string; bio?: string };
   updated_at: string;
 };
 

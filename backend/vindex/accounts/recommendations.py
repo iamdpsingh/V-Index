@@ -1,9 +1,8 @@
 from fastapi import APIRouter, Query, Request
 from sqlalchemy import func, or_, select
 
-from vindex.accounts.matching import contains, detected_skills, unique
-from vindex.accounts.models import Profile, Resume
-from vindex.accounts.resumes import decrypt
+from vindex.accounts.matching import contains, unique
+from vindex.accounts.models import Profile
 from vindex.accounts.schemas import ProfileInput, RecommendationsOut
 from vindex.accounts.security import principal, rate_limit
 from vindex.db import Job, Observation, Session
@@ -21,15 +20,8 @@ def recommendations(
         rate_limit(f"recommendations:{user.id}", 30)
         saved = session.get(Profile, user.id)
         profile = ProfileInput.model_validate(saved.data if saved else {})
-        resume = session.get(Resume, user.id)
-        resume_terms = (
-            detected_skills(decrypt(resume.text_ciphertext).decode())
-            if resume and profile.use_resume_skills
-            else []
-        )
         titles = unique(profile.desired_titles)
-        explicit_skills = unique(profile.skills)
-        skills = unique(explicit_skills + resume_terms)
+        skills = unique(profile.skills)
         output = {
             "items": [],
             "total_candidates": 0,
@@ -77,12 +69,7 @@ def recommendations(
             if not matched_titles and not matched_skills:
                 continue
             reasons = [f"Matches your desired role: {term}" for term in matched_titles]
-            reasons += [
-                f"Matches your saved skill: {term}"
-                if term.casefold() in {s.casefold() for s in explicit_skills}
-                else f"Matches a resume keyword: {term}"
-                for term in matched_skills
-            ]
+            reasons += [f"Matches your saved skill: {term}" for term in matched_skills]
             if profile.preferred_locations:
                 reasons.append("Matches a saved location preference")
             if profile.remote_only:

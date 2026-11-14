@@ -35,24 +35,6 @@ test('candidate profile opens read-only and discards cancelled edits', async ({ 
   await expect(edit).toBeFocused();
 });
 
-test('reviewing resume suggestions opens the profile editor', async ({ page }) => {
-  await page.route('**/api/v1/me/resume', (route) => route.fulfill({
-    json: { ...SAMPLE_RESUME, suggestions: {
-      projects: ['Search Index\nBuilt a job index.', 'Transit Map'],
-      education: ['Class XII | Example Junior College', 'Class X | Example High School'],
-    } },
-  }));
-  await page.goto('/?tab=profile');
-  await page.getByRole('button', { name: 'Review resume details in profile' }).click();
-  await expect(page.getByRole('heading', { name: 'Edit profile' })).toBeFocused();
-  await expect(page.locator('.interactive-tag', { hasText: 'FastAPI' })).toBeVisible();
-  await expect(page.getByLabel('Projects entry 1')).toHaveValue('Search Index\nBuilt a job index.');
-  await expect(page.getByLabel('Projects entry 2')).toHaveValue('Transit Map');
-  await expect(page.getByLabel('Education entry 2')).toHaveValue('Class X | Example High School');
-  await page.getByRole('button', { name: 'Remove project 1' }).click();
-  await expect(page.getByLabel('Projects entry 1')).toHaveValue('Transit Map');
-});
-
 test('adding desired role and skills updates tags and enables save', async ({ page }) => {
   let savedPayload: Record<string, unknown> | null = null;
   await page.route('**/api/v1/me/profile', async (route) => {
@@ -93,18 +75,16 @@ test('adding desired role and skills updates tags and enables save', async ({ pa
   expect((savedPayload as unknown as Record<string, unknown>)?.desired_titles).toContain('Principal Architect');
 });
 
-test('resume section displays current file, size, and detected skill badges', async ({ page }) => {
+test('resume section displays the stored file and download action', async ({ page }) => {
   await page.goto('/?tab=profile');
 
   const resumeCard = page.locator('.resume-card');
   await expect(resumeCard).toBeVisible();
   await expect(resumeCard.locator('.resume-filename')).toHaveText('alex_morgan_cv.pdf');
+  await expect(resumeCard.getByRole('button', { name: 'Download' })).toBeVisible();
   await expect(resumeCard).toContainText('application/pdf');
 
   // Detected skills list
-  await expect(resumeCard.locator('.skill-chip', { hasText: 'Python' })).toBeVisible();
-  await expect(resumeCard.locator('.skill-chip', { hasText: 'SQL' })).toBeVisible();
-  await expect(resumeCard.locator('.skill-chip', { hasText: 'FastAPI' })).toBeVisible();
 });
 
 test('resume upload rejection preserves prior file visibility', async ({ page }) => {

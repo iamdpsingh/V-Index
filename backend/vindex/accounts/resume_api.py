@@ -3,30 +3,23 @@ from urllib.parse import quote, unquote
 from fastapi import APIRouter, Depends, Header, HTTPException, Request, Response
 from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
-from starlette.concurrency import run_in_threadpool
 
-from vindex.accounts.matching import detected_skills
 from vindex.accounts.middleware import MAX_RESUME_BYTES
 from vindex.accounts.models import Account, Resume
-from vindex.accounts.resume_suggestions import suggest_profile
-from vindex.accounts.resumes import MEDIA, cipher, decrypt, extract_text, filename
+from vindex.accounts.resumes import MEDIA, cipher, decrypt, filename, validate_file
 from vindex.accounts.schemas import ResumeOut
-from vindex.accounts.security import parser_slot, principal, rate_limit, require_origin
+from vindex.accounts.security import principal, rate_limit, require_origin
 from vindex.db import Session, now
 
 router = APIRouter(prefix="/api/v1/me", tags=["Private resumes"])
 
 
 def metadata(saved: Resume) -> dict:
-    text = decrypt(saved.text_ciphertext).decode()
     return {
         "filename": saved.filename,
         "media_type": saved.media_type,
         "size_bytes": saved.size_bytes,
-        "text_characters": saved.text_characters,
         "updated_at": saved.updated_at,
-        "detected_skills": detected_skills(text),
-        "suggestions": suggest_profile(text),
     }
 
 
@@ -47,7 +40,7 @@ def get_resume(request: Request):
     openapi_extra={
         "requestBody": {
             "required": True,
-            "description": "Raw readable PDF, DOCX or UTF-8 TXT bytes; maximum 5 MiB. X-Filename is percent-encoded UTF-8.",
+            "description": "Raw PDF, DOCX or UTF-8 TXT bytes; maximum 5 MiB. X-Filename is percent-encoded UTF-8.",
             "content": {
                 "application/octet-stream": {"schema": {"type": "string", "format": "binary"}}
             },
@@ -73,13 +66,8 @@ async def upload_resume(request: Request, x_filename: str = Header()):
             raise HTTPException(413, "Resume exceeds 5 MB")
     data = bytes(body)
 
-    def parse():
-        with parser_slot():
-            return extract_text(data, kind)
-
-    text = await run_in_threadpool(parse)
+    validate_file(data, kind)
     with Session() as session:
-        # Recheck identity/session after parsing; a concurrent logout/delete must take effect.
         account = principal(request, session)
         if account.id != account_id:
             raise HTTPException(401, "Session changed during upload")
@@ -91,9 +79,7 @@ async def upload_resume(request: Request, x_filename: str = Header()):
         saved.filename = name
         saved.media_type = MEDIA[kind]
         saved.file_ciphertext = encryption.encrypt(data)
-        saved.text_ciphertext = encryption.encrypt(text.encode())
         saved.size_bytes = len(data)
-        saved.text_characters = len(text)
         saved.updated_at = now()
         try:
             session.commit()

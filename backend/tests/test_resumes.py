@@ -1,34 +1,26 @@
-import io
 import os
 import uuid
-import zipfile
-from contextlib import nullcontext
 from unittest.mock import Mock
 
 import pytest
 from cryptography.fernet import Fernet
 from fastapi import HTTPException
 from fastapi.testclient import TestClient
-from pypdf import PdfWriter
-from pypdf.generic import DecodedStreamObject, DictionaryObject, NameObject
 from sqlalchemy import func, select
 from test_accounts import ORIGIN, PASSWORD, register
 from vindex import api
 from vindex.accounts import api as account_api
-from vindex.accounts import resume_api, security
-from vindex.accounts.matching import detected_skills
+from vindex.accounts import recommendations, resume_api, security
 from vindex.accounts.models import Resume
-from vindex.accounts.resumes import extract_text
 
 REAL_REDIS_CLIENT = security.redis_client
-REAL_PARSER_SLOT = security.parser_slot
 
 TEXT = b"Example Candidate\nProfessional skills: Python, PostgreSQL, Airflow and SQL.\nBuild reliable data pipelines."
 
 
 @pytest.fixture
 def private_client(database, monkeypatch):
-    for module in (account_api, resume_api):
+    for module in (account_api, recommendations, resume_api):
         monkeypatch.setattr(module, "Session", database)
     monkeypatch.setenv("PUBLIC_WEB_ORIGIN", ORIGIN)
     monkeypatch.setenv("ACCOUNT_REGISTRATION_ENABLED", "true")
@@ -36,7 +28,6 @@ def private_client(database, monkeypatch):
     redis = Mock()
     redis.eval.return_value = 1
     monkeypatch.setattr(security, "redis_client", lambda: redis)
-    monkeypatch.setattr(resume_api, "parser_slot", nullcontext)
     return TestClient(
         api.app,
         base_url=ORIGIN,
@@ -57,13 +48,13 @@ def test_private_resume_encryption_download_replace_and_delete(private_client, d
     register(private_client)
     response = upload(private_client)
     assert response.status_code == 200, response.text
-    assert "Python" in response.json()["detected_skills"]
-    assert response.json()["suggestions"]["full_name"] == "Example Candidate"
-    assert "text" not in response.json()
+    assert set(response.json()) == {"filename", "size_bytes", "media_type", "updated_at"}
+    assert private_client.get("/api/v1/me/profile").json()["full_name"] == ""
+    assert private_client.get("/api/v1/me/recommendations").json()["needs_preferences"]
     assert response.headers["cache-control"] == "no-store"
     with database() as session:
         saved = session.scalar(select(Resume))
-        assert TEXT not in saved.file_ciphertext and b"Python" not in saved.text_ciphertext
+        assert TEXT not in saved.file_ciphertext
     download = private_client.get("/api/v1/me/resume/download")
     assert download.content == TEXT and download.headers["cache-control"] == "no-store"
     assert "attachment" in download.headers["content-disposition"]
@@ -118,59 +109,13 @@ def test_encryption_key_rotation_requires_original_key(private_client, monkeypat
     assert private_client.delete("/api/v1/me/resume").status_code == 204
 
 
-def test_real_pdf_and_docx_subprocess_text_extraction():
-    writer = PdfWriter()
-    page = writer.add_blank_page(width=612, height=792)
-    font = DictionaryObject(
-        {
-            NameObject("/Type"): NameObject("/Font"),
-            NameObject("/Subtype"): NameObject("/Type1"),
-            NameObject("/BaseFont"): NameObject("/Helvetica"),
-        }
-    )
-    page[NameObject("/Resources")] = DictionaryObject(
-        {NameObject("/Font"): DictionaryObject({NameObject("/F1"): writer._add_object(font)})}
-    )
-    stream = DecodedStreamObject()
-    stream.set_data(
-        b"BT /F1 12 Tf 20 700 Td (Python SQL professional resume skills and data pipelines) Tj ET"
-    )
-    page[NameObject("/Contents")] = writer._add_object(stream)
-    out = io.BytesIO()
-    writer.write(out)
-    assert "Python SQL" in extract_text(out.getvalue(), "pdf")
-    doc = io.BytesIO()
-    with zipfile.ZipFile(doc, "w") as archive:
-        archive.writestr("[Content_Types].xml", "<Types/>")
-        archive.writestr(
-            "word/document.xml",
-            '<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body><w:p><w:r><w:t>Python SQL professional resume with experience</w:t></w:r></w:p></w:body></w:document>',
-        )
-    assert "Python SQL" in extract_text(doc.getvalue(), "docx")
-    writer.encrypt("private-password")
-    encrypted = io.BytesIO()
-    writer.write(encrypted)
-    with pytest.raises(HTTPException):
-        extract_text(encrypted.getvalue(), "pdf")
-    with pytest.raises(HTTPException):
-        extract_text(b"not a zip", "docx")
-
-
-def test_matching_does_not_treat_contact_urls_or_go_verb_as_skills():
-    skills = detected_skills(
-        "Go to market. Contact python@example.com or https://company.test/React for details. Golang developer."
-    )
-    assert skills == ["Go"]
-
-
 @pytest.mark.skipif(
     not os.getenv("TEST_REDIS_URL"),
     reason="Set TEST_REDIS_URL for real account/resume service checks",
 )
-def test_real_redis_rate_budget_and_resume_parser_lease(private_client, monkeypatch):
+def test_real_redis_rate_budget_and_private_resume_storage(private_client, monkeypatch):
     monkeypatch.setenv("REDIS_URL", os.environ["TEST_REDIS_URL"])
     monkeypatch.setattr(security, "redis_client", REAL_REDIS_CLIENT)
-    monkeypatch.setattr(resume_api, "parser_slot", REAL_PARSER_SLOT)
     register(private_client, f"service-{uuid.uuid4().hex}@example.com")
     assert upload(private_client).status_code == 200
     assert private_client.get("/api/v1/me/resume/download").content == TEXT
@@ -209,30 +154,9 @@ def test_chunked_private_upload_and_json_limits(private_client):
     assert json_too_large.status_code == 413
 
 
-def test_docx_education_table_and_project_breaks_survive_upload(private_client):
-    namespace = "http://schemas.openxmlformats.org/wordprocessingml/2006/main"
-    document = f"""
-    <w:document xmlns:w="{namespace}"><w:body>
-      <w:p><w:r><w:t>Education</w:t></w:r></w:p>
-      <w:tbl>
-        <w:tr><w:tc><w:p><w:r><w:t>Class XII</w:t></w:r></w:p></w:tc>
-              <w:tc><w:p><w:r><w:t>Example Junior College</w:t></w:r></w:p></w:tc></w:tr>
-        <w:tr><w:tc><w:p><w:r><w:t>Class X</w:t></w:r></w:p></w:tc>
-              <w:tc><w:p><w:r><w:t>Example High School</w:t></w:r></w:p></w:tc></w:tr>
-      </w:tbl>
-      <w:p><w:r><w:t>Projects</w:t></w:r></w:p>
-      <w:p><w:r><w:t>1. Search Index</w:t><w:br/><w:t>2. Transit Map</w:t></w:r></w:p>
-    </w:body></w:document>
-    """
-    data = io.BytesIO()
-    with zipfile.ZipFile(data, "w") as archive:
-        archive.writestr("[Content_Types].xml", "<Types/>")
-        archive.writestr("word/document.xml", document)
+def test_pdf_attachment_does_not_need_selectable_text(private_client):
     register(private_client)
-    response = upload(private_client, data.getvalue(), "candidate.docx")
+    document = b"%PDF-1.4\n% attachment without a text layer\n%%EOF\n"
+    response = upload(private_client, document, "resume.pdf")
     assert response.status_code == 200
-    assert response.json()["suggestions"]["projects"] == ["Search Index", "Transit Map"]
-    assert response.json()["suggestions"]["education"] == [
-        "Class XII | Example Junior College",
-        "Class X | Example High School",
-    ]
+    assert private_client.get("/api/v1/me/resume/download").content == document

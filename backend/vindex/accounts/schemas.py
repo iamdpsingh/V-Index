@@ -2,7 +2,15 @@ from datetime import datetime
 from typing import Annotated
 from urllib.parse import urlsplit
 
-from pydantic import BaseModel, ConfigDict, EmailStr, Field, SecretStr, field_validator
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    EmailStr,
+    Field,
+    SecretStr,
+    field_validator,
+    model_validator,
+)
 
 from vindex.schemas import JobOut
 
@@ -87,14 +95,16 @@ class ProfileHighlights(BaseModel):
     links: list[ProfessionalLink] = Field(default_factory=list, max_length=12)
 
 
-class ResumeSuggestions(ProfileHighlights):
-    full_name: str = Field(default="", max_length=100)
-    headline: str = Field(default="", max_length=160)
-    bio: str = Field(default="", max_length=2000)
-
-
 class ProfileInput(ProfileHighlights):
     model_config = ConfigDict(extra="forbid")
+
+    @model_validator(mode="before")
+    @classmethod
+    def discard_retired_preference(cls, values):
+        if isinstance(values, dict) and "use_resume_skills" in values:
+            values = {key: value for key, value in values.items() if key != "use_resume_skills"}
+        return values
+
     full_name: str = Field(default="", max_length=100)
     headline: str = Field(default="", max_length=160)
     location: str = Field(default="", max_length=100)
@@ -103,7 +113,6 @@ class ProfileInput(ProfileHighlights):
     skills: list[Term] = Field(default_factory=list, max_length=50)
     preferred_locations: list[Term] = Field(default_factory=list, max_length=10)
     remote_only: bool = False
-    use_resume_skills: bool = True
     experience_years: int | None = Field(default=None, ge=0, le=60)
 
 
@@ -115,9 +124,6 @@ class ResumeOut(BaseModel):
     filename: str
     media_type: str
     size_bytes: int
-    text_characters: int
-    detected_skills: list[str]
-    suggestions: ResumeSuggestions = Field(default_factory=ResumeSuggestions)
     updated_at: datetime
 
 

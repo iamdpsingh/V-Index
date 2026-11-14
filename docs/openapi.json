@@ -365,7 +365,7 @@
         },
         "requestBody": {
           "required": true,
-          "description": "Raw readable PDF, DOCX or UTF-8 TXT bytes; maximum 5 MiB. X-Filename is percent-encoded UTF-8.",
+          "description": "Raw PDF, DOCX or UTF-8 TXT bytes; maximum 5 MiB. X-Filename is percent-encoded UTF-8.",
           "content": {
             "application/octet-stream": {
               "schema": {
@@ -1234,6 +1234,44 @@
       },
       "ProfileInput": {
         "properties": {
+          "education": {
+            "items": {
+              "type": "string",
+              "maxLength": 1000,
+              "minLength": 1
+            },
+            "type": "array",
+            "maxItems": 30,
+            "title": "Education"
+          },
+          "experience": {
+            "items": {
+              "type": "string",
+              "maxLength": 1000,
+              "minLength": 1
+            },
+            "type": "array",
+            "maxItems": 30,
+            "title": "Experience"
+          },
+          "projects": {
+            "items": {
+              "type": "string",
+              "maxLength": 1000,
+              "minLength": 1
+            },
+            "type": "array",
+            "maxItems": 30,
+            "title": "Projects"
+          },
+          "links": {
+            "items": {
+              "$ref": "#/components/schemas/ProfessionalLink"
+            },
+            "type": "array",
+            "maxItems": 12,
+            "title": "Links"
+          },
           "full_name": {
             "type": "string",
             "maxLength": 100,
@@ -1292,11 +1330,6 @@
             "type": "boolean",
             "title": "Remote Only",
             "default": false
-          },
-          "use_resume_skills": {
-            "type": "boolean",
-            "title": "Use Resume Skills",
-            "default": true
           },
           "experience_years": {
             "anyOf": [
@@ -1318,6 +1351,44 @@
       },
       "ProfileOut": {
         "properties": {
+          "education": {
+            "items": {
+              "type": "string",
+              "maxLength": 1000,
+              "minLength": 1
+            },
+            "type": "array",
+            "maxItems": 30,
+            "title": "Education"
+          },
+          "experience": {
+            "items": {
+              "type": "string",
+              "maxLength": 1000,
+              "minLength": 1
+            },
+            "type": "array",
+            "maxItems": 30,
+            "title": "Experience"
+          },
+          "projects": {
+            "items": {
+              "type": "string",
+              "maxLength": 1000,
+              "minLength": 1
+            },
+            "type": "array",
+            "maxItems": 30,
+            "title": "Projects"
+          },
+          "links": {
+            "items": {
+              "$ref": "#/components/schemas/ProfessionalLink"
+            },
+            "type": "array",
+            "maxItems": 12,
+            "title": "Links"
+          },
           "full_name": {
             "type": "string",
             "maxLength": 100,
@@ -1376,11 +1447,6 @@
             "type": "boolean",
             "title": "Remote Only",
             "default": false
-          },
-          "use_resume_skills": {
-            "type": "boolean",
-            "title": "Use Resume Skills",
-            "default": true
           },
           "experience_years": {
             "anyOf": [
@@ -1541,17 +1607,6 @@
             "type": "integer",
             "title": "Size Bytes"
           },
-          "text_characters": {
-            "type": "integer",
-            "title": "Text Characters"
-          },
-          "detected_skills": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array",
-            "title": "Detected Skills"
-          },
           "updated_at": {
             "type": "string",
             "format": "date-time",
@@ -1563,8 +1618,6 @@
           "filename",
           "media_type",
           "size_bytes",
-          "text_characters",
-          "detected_skills",
           "updated_at"
         ],
         "title": "ResumeOut"
@@ -1775,6 +1828,28 @@
           "type"
         ],
         "title": "ValidationError"
+      },
+      "ProfessionalLink": {
+        "properties": {
+          "label": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Label"
+          },
+          "url": {
+            "type": "string",
+            "maxLength": 2048,
+            "title": "Url"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "label",
+          "url"
+        ],
+        "title": "ProfessionalLink"
       }
     }
   }

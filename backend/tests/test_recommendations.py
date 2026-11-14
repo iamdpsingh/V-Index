@@ -64,11 +64,16 @@ def test_recommendations_use_only_professional_terms_and_open_jobs(
         recommendation_client.get("/api/v1/me/recommendations").json()["needs_preferences"] is True
     )
     assert upload(recommendation_client).status_code == 200
+    assert recommendation_client.get("/api/v1/me/recommendations").json()["needs_preferences"]
+    assert (
+        recommendation_client.put("/api/v1/me/profile", json={"skills": ["Python"]}).status_code
+        == 200
+    )
     response = recommendation_client.get("/api/v1/me/recommendations")
     assert response.status_code == 200, response.text
     rows = response.json()["items"]
     assert len(rows) == 1 and rows[0]["job"]["title"] == "Backend Engineer"
-    assert any("resume keyword: Python" in reason for reason in rows[0]["reasons"])
+    assert any("saved skill: Python" in reason for reason in rows[0]["reasons"])
     assert rows[0]["job"]["sources"][0]["source_id"] == source.id
     recommendation_client.put(
         "/api/v1/me/profile", json={"skills": ["Java"], "use_resume_skills": False}

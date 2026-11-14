@@ -7,7 +7,7 @@ Implemented backend contracts; frontend integration remains with Antigravity. Th
 - `PUBLIC_WEB_ORIGIN`: exact browser origin, e.g. `http://127.0.0.1:3000` for local evaluation, or an HTTPS origin in production. Empty/invalid values disable private account endpoints. HTTP is accepted only for loopback development hosts.
 - `ACCOUNT_REGISTRATION_ENABLED=true`: explicitly enables signup; default false. Login remains available for existing accounts when the origin is configured.
 - `RESUME_ENCRYPTION_KEY`: privately generated Fernet key; required for resume encryption/decryption. Never put it in Git, browser code, screenshots or evidence. Back it up separately from the database. Losing it makes saved resumes unreadable. Key rotation requires re-encryption/migration; changing the variable alone is not rotation.
-- Redis is required for credential/upload/recommendation rate budgets and the global parser lease. Failures return 503; the API does not bypass those controls.
+- Redis is required for credential/upload/recommendation rate budgets. Failures return 503; the API does not bypass those controls.
 
 Run `uv run alembic upgrade head` before starting the new API. The additive revision creates accounts, hashed sessions, profiles and encrypted resumes. Production/database upgrades must retain the existing index. Only the API receives the private resume key in Compose; index workers do not need it.
 
@@ -29,24 +29,22 @@ Use JSON for credentials. Browser mutations must carry Origin equal to PUBLIC_WE
 
 ## Profile
 
-GET/PUT `/api/v1/me/profile` uses `ProfileInput`/`ProfileOut` in docs/openapi.json. Fields: full_name, headline, location, bio, desired_titles, skills, preferred_locations, remote_only, use_resume_skills and experience_years. PUT replaces the profile, including defaults for omitted fields; load current values before submitting a complete form. Inputs are bounded, unknown fields are rejected, and all content is plain text. Profiles and resume metadata are private database rows; profile fields/filenames are not individually encrypted by the resume key.
+GET/PUT `/api/v1/me/profile` uses `ProfileInput`/`ProfileOut` in docs/openapi.json. Fields: full_name, headline, location, bio, desired_titles, skills, preferred_locations, remote_only, and experience_years. PUT replaces the profile, including defaults for omitted fields; load current values before submitting a complete form. Inputs are bounded, unknown fields are rejected, and all content is plain text. Profiles and resume metadata are private database rows; profile fields/filenames are not individually encrypted by the resume key.
 
 ## Resume
 
 One resume per account. No account ID is accepted in these paths; ownership comes exclusively from the current session.
 
-- PUT `/api/v1/me/resume`: raw File bytes (not multipart or base64), at most 5 MiB. Send `X-Filename: encodeURIComponent(file.name)` and `Content-Type: application/octet-stream`. Supported readable formats: PDF, DOCX and UTF-8 TXT. The extension selects the parser and content must parse successfully. Existing resumes are replaced only after successful extraction; failed uploads preserve the previous file.
-- GET `/api/v1/me/resume`: metadata, detected professional keywords and updated_at; never the raw extracted text. 404 means none saved.
-- GET `/api/v1/me/resume/download`: own original bytes as an attachment with no-store/nosniff headers.
-- DELETE `/api/v1/me/resume`: remove own saved file/text; idempotent 204. Removing live data does not purport to erase retained database backups.
+- PUT `/api/v1/me/resume` stores up to 5 MiB of original PDF, DOCX, or UTF-8 TXT bytes. Send the encoded filename in `X-Filename` and use `application/octet-stream`. Failed uploads preserve the previous file.
+- GET `/api/v1/me/resume` returns the file name, size, media type, and last update. A 404 means there is no saved file.
+- GET `/api/v1/me/resume/download` returns the owner's original bytes as a private attachment.
+- DELETE `/api/v1/me/resume` removes the owner's saved file.
 
-Original bytes and extracted text use authenticated Fernet encryption in SQL. The parser runs in a separate process with a ten-second wall limit, five-second CPU limit, 100,000-character output limit, 20 PDF pages, and a 20 MiB expanded-DOCX budget. Linux also enforces a 512 MiB address-space limit; macOS has CPU/wall limits but no claimed equivalent memory limit. Two parser leases are allowed globally per Redis. PDF encryption/forms/known active features, XML DTD/entities, macro/embedded binary DOCX entries and unreadable/scanned text are rejected. No OCR or external resume service is used.
-
-Resource/process separation is not a security sandbox or malware scan. Before accepting public untrusted uploads at scale, isolate parser egress/filesystem/privileges and apply edge request/concurrency limits. The child inherits no application credentials, but still runs as the container user. Do not claim universal malware detection or guaranteed parsing of every resume layout.
+The original file is encrypted with Fernet. Profile details are entered and edited manually. Existing saved profile entries and original résumé files survive the upgrade that removes previously extracted text.
 
 ## Recommendations
 
-GET `/api/v1/me/recommendations?limit=20&offset=0` returns only currently open indexed jobs, source provenance, ordering scores and readable reasons. Explicit desired-role matches in titles weigh seven; professional skill/keyword matches weigh three. Contact URLs/emails and the ambiguous plain verb “go” are excluded from resume keyword detection. `use_resume_skills=false` disables resume-derived matching while retaining the file. Names, email, bio, age/protected traits and experience-year heuristics are not ranking inputs. No data is transmitted to external models or matching services.
+GET `/api/v1/me/recommendations?limit=20&offset=0` returns only currently open indexed jobs, source provenance, ordering scores and readable reasons. Explicit desired-role matches in titles weigh seven; saved skill matches weigh three. Names, email, bio, age/protected traits and experience-year heuristics are not ranking inputs. No data is transmitted to external models or matching services.
 
 The method is literal, explainable keyword matching; it does not validate qualifications, visa eligibility or hiring fit. Scores are sorting signals, not percentages. Missing preferences/recognized keywords yields needs_preferences=true and an empty list. Remote-only requires an explicit source remote label; unknown/hybrid roles are excluded. Location matching is text-based and does not establish country/work authorization.
 
@@ -58,9 +56,8 @@ Ranking considers at most the newest 1,000 SQL candidate jobs, then applies toke
 
 ## Remaining release work
 
-Antigravity screens and browser tests; email verification and identity recovery; trusted edge client-IP/rate policy (the current app uses the direct peer, so a shared proxy shares IP budgets); parser isolation/abuse testing; HTTPS deployment; encrypted-key/backup recovery drills; independent security review and production load validation. These are actual implementation gaps, not completed capabilities.
+Antigravity screens and browser tests; email verification and identity recovery; trusted edge client-IP/rate policy (the current app uses the direct peer, so a shared proxy shares IP budgets); HTTPS deployment; encrypted-key/backup recovery drills; independent security review and production load validation. These are actual implementation gaps, not completed capabilities.
 
-Resume metadata includes editable suggestions in `suggestions.education`, `suggestions.experience`, `suggestions.projects`, and `suggestions.links`. Suggested skills remain in `detected_skills`. Entries are extracted from explicitly labeled sections and may require editing. Uploading or replacing a resume leaves the saved profile alone.
 
 Profile reads and writes support `education`, `experience`, and `projects` as arrays of up to 30 lines each. The `links` array accepts up to 12 objects with an editable `label` and an HTTPS `url`. Rolewisp does not fetch submitted links. Omitted new fields preserve saved values for older clients. Send an empty array to clear a field.
 
@@ -72,7 +69,6 @@ Profile photos use authenticated `GET`, `PUT`, and `DELETE` at `/api/v1/me/profi
 
 Signup and login use independent Redis buckets. Signup allows 20 attempts per connecting IP per hour and five per email per hour. Login allows 60 attempts per connecting IP per minute and ten per email per minute. Both return HTTP 429 with Retry-After when the budget is exhausted. Confirm trusted proxy behavior in the hosted environment before relying on per-visitor IP limits.
 
-Resume suggestions can also include `full_name`, `headline`, and `bio`. The parser looks for a name and professional title near the top of the document and a labeled Summary, Profile, or About Me section for the bio. The profile editor fills blank fields for review and leaves existing entries intact. No profile fields are persisted until the user saves.
 
 ## Role onboarding and job postings
 

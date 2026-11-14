@@ -90,12 +90,10 @@ export default function UserProfile({
     skills: [],
     preferred_locations: [],
     remote_only: false,
-    use_resume_skills: true,
     experience_years: null,
   });
 
   const [editing, setEditing] = useState(false);
-  const [reviewingResume, setReviewingResume] = useState(false);
   const savedProfile = useRef<ProfileInput | null>(null);
   const editingStarted = useRef(false);
   const editButton = useRef<HTMLButtonElement>(null);
@@ -116,7 +114,6 @@ export default function UserProfile({
     setNewSkill('');
     setNewLoc('');
     setError('');
-    setReviewingResume(false);
     setEditing(false);
   }
 
@@ -158,7 +155,6 @@ export default function UserProfile({
         skills: data.skills || [],
         preferred_locations: data.preferred_locations || [],
         remote_only: Boolean(data.remote_only),
-        use_resume_skills: data.use_resume_skills ?? true,
         experience_years: data.experience_years ?? null,
       };
       savedProfile.current = saved;
@@ -190,7 +186,6 @@ export default function UserProfile({
         skills: profile.skills || [],
         preferred_locations: profile.preferred_locations || [],
         remote_only: profile.remote_only ?? false,
-        use_resume_skills: profile.use_resume_skills ?? true,
         experience_years:
           profile.experience_years !== null && profile.experience_years !== undefined
             ? Number(profile.experience_years)
@@ -211,7 +206,6 @@ export default function UserProfile({
         skills: updated.skills || [],
         preferred_locations: updated.preferred_locations || [],
         remote_only: Boolean(updated.remote_only),
-        use_resume_skills: updated.use_resume_skills ?? true,
         experience_years: updated.experience_years ?? null,
       };
       savedProfile.current = saved;
@@ -341,7 +335,6 @@ export default function UserProfile({
               </div>
             )}
             {editing && <form onSubmit={handleSaveProfile} className="profile-form candidate-edit-form">
-              {reviewingResume && <p className="card-sub">Check your résumé suggestions before saving. You can edit, remove, or add individual entries.</p>}
               <div className="form-row">
                 <label>
                   Full name
@@ -552,16 +545,7 @@ export default function UserProfile({
                   <span>Only recommend roles explicitly marked Remote</span>
                 </label>
 
-                <label className="checkbox-label">
-                  <input
-                    type="checkbox"
-                    checked={profile.use_resume_skills ?? true}
-                    onChange={(e) =>
-                      setProfile({ ...profile, use_resume_skills: e.target.checked })
-                    }
-                  />
-                  <span>Use keywords detected from your uploaded resume in job matching</span>
-                </label>
+
               </div>
 
               {([
@@ -635,29 +619,7 @@ export default function UserProfile({
 
           {/* Right sidebar: Resume upload & Account security */}
           <div className="profile-aside-column">
-            <ResumeSection onUseSuggestions={savedProfile.current && !saving ? (resume) => {
-              setSaveSuccess(false);
-              setReviewingResume(true);
-              setEditing(true);
-              setProfile((current) => {
-                const next = { ...current };
-                for (const field of ['full_name', 'headline', 'bio'] as const) {
-                  if (!current[field]?.trim() && resume.suggestions?.[field]) {
-                    next[field] = resume.suggestions[field];
-                  }
-                }
-                for (const field of ['education', 'experience', 'projects'] as const) {
-                  next[field] = [...new Set([...(current[field] ?? []), ...(resume.suggestions?.[field] ?? [])])].slice(0, 30);
-                }
-                next.skills = [...new Set([...(current.skills ?? []), ...resume.detected_skills])].slice(0, 50);
-                const links = new Map((current.links ?? []).map((link) => [link.url, link]));
-                for (const link of resume.suggestions?.links ?? []) {
-                  if (!links.has(link.url)) links.set(link.url, link);
-                }
-                next.links = [...links.values()].slice(0, 12);
-                return next;
-              });
-            } : undefined} />
+            <ResumeSection />
 
             {/* Account Settings / Password change */}
             <section className="profile-subcard">

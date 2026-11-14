@@ -77,8 +77,7 @@ export default function RecommendationsView({
         <div className="eyebrow">TAILORED RECOMMENDATIONS</div>
         <h2>Private recommendations for your background.</h2>
         <p>
-          Rolewisp matches open roles against your desired titles and skills (and optional resume
-          keywords) using transparent, explainable keyword scoring.
+          Rolewisp matches open roles against the job titles and skills you save in your profile.
         </p>
         <div className="gate-actions">
           <button type="button" className="primary" onClick={onOpenAuth}>
@@ -127,8 +126,7 @@ export default function RecommendationsView({
         <div className="empty preferences-needed">
           <h2>No matching signals configured.</h2>
           <p>
-            Add desired job titles, technical skills, or upload a resume to your profile to generate
-            tailored recommendations.
+            Add desired job titles or skills to your profile to get recommendations.
           </p>
           <div className="empty-action-row">
             <button type="button" className="primary" onClick={onGoToProfile}>

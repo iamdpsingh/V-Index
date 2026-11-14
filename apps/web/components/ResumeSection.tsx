@@ -10,12 +10,7 @@ import {
 } from '../lib/api';
 import { formatDate } from '../lib/format';
 
-interface ResumeSectionProps {
-  onUseSuggestions?: (resume: ResumeOut) => void;
-  onSkillsUpdated?: () => void;
-}
-
-export default function ResumeSection({ onSkillsUpdated, onUseSuggestions }: ResumeSectionProps) {
+export default function ResumeSection() {
   const [resume, setResume] = useState<ResumeOut | null>(null);
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
@@ -67,17 +62,16 @@ export default function ResumeSection({ onSkillsUpdated, onUseSuggestions }: Res
     try {
       const uploaded = await uploadResume(file);
       setResume(uploaded);
-      setSuccessNotice(`Resume "${uploaded.filename}" processed and saved successfully.`);
-      if (onSkillsUpdated) onSkillsUpdated();
+      setSuccessNotice(`Resume "${uploaded.filename}" saved.`);
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Upload failed';
       // Prior resume remains visible if replacement fails
       if (msg.includes('413')) {
         setError('Resume exceeds 5 MiB size limit.');
       } else if (msg.includes('415')) {
-        setError('Unsupported format. Supported resume types are readable PDF, DOCX, and UTF-8 TXT.');
+        setError('Unsupported format. Supported resume types are PDF, DOCX, and UTF-8 TXT.');
       } else if (msg.includes('503')) {
-        setError('Resume processing service is temporarily unavailable.');
+        setError('Résumé storage is temporarily unavailable.');
       } else {
         setError(msg);
       }
@@ -107,8 +101,7 @@ export default function ResumeSection({ onSkillsUpdated, onUseSuggestions }: Res
       await deleteResume();
       setResume(null);
       setDeleteConfirm(false);
-      setSuccessNotice('Saved resume and extracted keywords removed.');
-      if (onSkillsUpdated) onSkillsUpdated();
+      setSuccessNotice('Saved résumé removed.');
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Delete failed');
     }
@@ -119,13 +112,8 @@ export default function ResumeSection({ onSkillsUpdated, onUseSuggestions }: Res
       <div className="section-header">
         <h3>Résumé</h3>
         <p className="section-desc">
-          Upload a readable PDF, DOCX, or TXT file up to 5 MiB to get private profile suggestions.
+          Upload a PDF, DOCX, or TXT file up to 5 MiB to keep a private copy.
         </p>
-        {resume && onUseSuggestions && (
-          <button type="button" className="btn-secondary" onClick={() => onUseSuggestions(resume)}>
-            Review resume details in profile
-          </button>
-        )}
       </div>
 
       {error && (
@@ -191,26 +179,10 @@ export default function ResumeSection({ onSkillsUpdated, onUseSuggestions }: Res
             </div>
           </div>
 
-          {/* Extracted professional terms */}
-          <div className="resume-skills-block">
-            <span className="skills-label">Detected keywords ({resume.detected_skills.length}):</span>
-            {resume.detected_skills.length > 0 ? (
-              <div className="skill-chips">
-                {resume.detected_skills.map((skill) => (
-                  <span key={skill} className="skill-chip">
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            ) : (
-              <p className="skills-empty">No recognizable professional terms detected in document text.</p>
-            )}
-          </div>
-
           {/* Replace file control */}
           <div className="resume-replace-bar">
             <label className="file-upload-label">
-              <span>{uploading ? 'Processing replacement…' : 'Replace resume file…'}</span>
+              <span>{uploading ? 'Uploading replacement…' : 'Replace resume file…'}</span>
               <input
                 type="file"
                 accept=".pdf,.docx,.txt,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain"
@@ -231,7 +203,7 @@ export default function ResumeSection({ onSkillsUpdated, onUseSuggestions }: Res
               ☁
             </span>
             <span className="dropzone-title">
-              {uploading ? 'Extracting and encrypting…' : 'Choose a resume to upload'}
+              {uploading ? 'Uploading…' : 'Choose a resume to upload'}
             </span>
             <span className="dropzone-sub">PDF, DOCX, or UTF-8 TXT up to 5 MiB</span>
             <input
@@ -245,13 +217,7 @@ export default function ResumeSection({ onSkillsUpdated, onUseSuggestions }: Res
         </div>
       )}
 
-      <div className="parser-disclaimer">
-        <small>
-          Deterministic bounded extraction: 20 PDF pages, 100k character budget. No OCR, external AI
-          models, or third-party APIs are used. Password-protected files or image scans are
-          rejected.
-        </small>
-      </div>
+
     </div>
   );
 }

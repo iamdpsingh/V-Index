@@ -50,9 +50,7 @@ class Resume(Base):
     filename: Mapped[str] = mapped_column(String(120))
     media_type: Mapped[str] = mapped_column(String(100))
     file_ciphertext: Mapped[bytes] = mapped_column(LargeBinary)
-    text_ciphertext: Mapped[bytes] = mapped_column(LargeBinary)
     size_bytes: Mapped[int]
-    text_characters: Mapped[int]
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)
 
 

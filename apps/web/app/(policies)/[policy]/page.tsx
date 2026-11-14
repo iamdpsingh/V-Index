@@ -5,7 +5,7 @@ const policies = {
     title: 'Privacy notice',
     sections: [
       ['What Rolewisp stores', 'When you make an account, Rolewisp stores your email and password hash. Your profile, uploaded resume, and profile photo are available through your signed-in account.'],
-      ['How your information is used', 'Your profile helps you manage job preferences and receive recommendations. Resume skills are used for matching according to your preferences. Rolewisp stores the photo and resume files encrypted.'],
+      ['How your information is used', 'Your profile helps you manage job preferences and receive recommendations. Recommendations use the roles and skills you save in your profile. Rolewisp stores the photo and resume files encrypted.'],
       ['Managing your information', 'You can edit your profile, remove your photo or resume, and delete your account in your workspace. Review any original job site’s privacy terms before applying there.'],
     ],
   },

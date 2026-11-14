@@ -89,7 +89,6 @@ export const SAMPLE_PROFILE = {
   skills: ['Python', 'PostgreSQL', 'Docker'],
   preferred_locations: ['London', 'Remote'],
   remote_only: false,
-  use_resume_skills: true,
   experience_years: 6,
   updated_at: '2026-10-01T12:00:00Z',
 };
@@ -98,8 +97,6 @@ export const SAMPLE_RESUME = {
   filename: 'alex_morgan_cv.pdf',
   media_type: 'application/pdf',
   size_bytes: 42000,
-  text_characters: 4500,
-  detected_skills: ['Python', 'SQL', 'FastAPI', 'Redis'],
   updated_at: '2026-10-01T12:00:00Z',
 };
 
