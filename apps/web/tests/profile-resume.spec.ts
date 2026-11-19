@@ -182,3 +182,37 @@ test('education preserves older entries and saves a qualification type', async (
   await page.reload();
   await expect(page.locator('.qualification-list').getByText('Secondary school / Class X', { exact: true })).toBeVisible();
 });
+
+test('profile uses available width and keeps settings behind a disclosure', async ({ page, isMobile }) => {
+  const candidate = { ...SAMPLE_ACCOUNT, role: 'candidate' };
+  await mockAuth(page, candidate);
+  await page.route('**/api/v1/me/profile/photo', (route) => route.fulfill({ status: 404 }));
+  await mockProfile(page, {
+    ...SAMPLE_PROFILE,
+    education: ['BSc Computer Science, Example University'],
+    experience: ['Software Engineer\nBuilt data services.'],
+    projects: ['Job Index\nA searchable career index.'],
+  } as typeof SAMPLE_PROFILE);
+
+  await page.goto('/?tab=profile');
+  await expect(page.getByRole('heading', { level: 1, name: 'Alex Morgan' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Sign Out', exact: true })).toBeHidden();
+  await expect(page.locator('input[aria-label="Profile photo"]')).toBeHidden();
+
+  const main = await page.locator('main').boundingBox();
+  const viewport = page.viewportSize()!;
+  expect(main!.width).toBeGreaterThan(viewport.width * .9);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(viewport.width);
+  await page.locator('.profile-settings > summary').click();
+  await expect(page.getByRole('button', { name: 'Sign Out', exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Add profile photo' })).toBeVisible();
+
+  await page.getByRole('button', { name: 'Edit profile' }).click();
+  const editor = await page.locator('.candidate-main').boundingBox();
+  expect(editor!.width).toBeGreaterThan(viewport.width * (isMobile ? .85 : .8));
+  await expect(page.getByLabel('Full name')).toHaveValue('Alex Morgan');
+  await expect(page.getByLabel('Experience entry 1')).toHaveValue('Software Engineer\nBuilt data services.');
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(viewport.width);
+  await page.setViewportSize({ width: 320, height: 800 });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
+});

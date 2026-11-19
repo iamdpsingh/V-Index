@@ -1,6 +1,6 @@
 'use client';
 
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import {
   deleteResume,
   downloadResume,
@@ -11,6 +11,7 @@ import {
 import { formatDate } from '../lib/format';
 
 export default function ResumeSection() {
+  const uploadInput = useRef<HTMLInputElement>(null);
   const [resume, setResume] = useState<ResumeOut | null>(null);
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
@@ -109,6 +110,9 @@ export default function ResumeSection() {
 
   return (
     <div className="resume-section">
+      <input ref={uploadInput} type="file" hidden aria-label="Résumé file"
+        accept=".pdf,.docx,.txt,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain"
+        onChange={handleFileChange} disabled={uploading} />
       <div className="section-header">
         <h3>Résumé</h3>
         <p className="section-desc">
@@ -133,9 +137,6 @@ export default function ResumeSection() {
       ) : resume ? (
         <div className="resume-card">
           <div className="resume-main">
-            <div className="resume-icon" aria-hidden="true">
-              📄
-            </div>
             <div className="resume-meta">
               <h4 className="resume-filename">{resume.filename}</h4>
               <p className="resume-details">
@@ -150,7 +151,7 @@ export default function ResumeSection() {
                 onClick={handleDownload}
                 title="Download original file"
               >
-                Download ↓
+                Download
               </button>
               {deleteConfirm ? (
                 <div className="delete-confirm-group">
@@ -173,47 +174,25 @@ export default function ResumeSection() {
                   onClick={() => setDeleteConfirm(true)}
                   title="Delete saved resume"
                 >
-                  Remove ✕
+                  Remove
                 </button>
               )}
             </div>
           </div>
 
-          {/* Replace file control */}
           <div className="resume-replace-bar">
-            <label className="file-upload-label">
-              <span>{uploading ? 'Uploading replacement…' : 'Replace resume file…'}</span>
-              <input
-                type="file"
-                accept=".pdf,.docx,.txt,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain"
-                onChange={handleFileChange}
-                disabled={uploading}
-                className="hidden-file-input"
-              />
-            </label>
-            <small className="replace-hint">
-              If an upload is rejected, your current resume is retained.
-            </small>
+            <button type="button" className="file-upload-label" disabled={uploading}
+              onClick={() => uploadInput.current?.click()}>
+              {uploading ? 'Uploading…' : 'Replace file'}
+            </button>
           </div>
         </div>
       ) : (
         <div className="resume-empty-dropzone">
-          <label className="dropzone-label">
-            <span className="dropzone-icon" aria-hidden="true">
-              ☁
-            </span>
-            <span className="dropzone-title">
-              {uploading ? 'Uploading…' : 'Choose a resume to upload'}
-            </span>
-            <span className="dropzone-sub">PDF, DOCX, or UTF-8 TXT up to 5 MiB</span>
-            <input
-              type="file"
-              accept=".pdf,.docx,.txt,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain"
-              onChange={handleFileChange}
-              disabled={uploading}
-              className="hidden-file-input"
-            />
-          </label>
+          <button type="button" className="btn-secondary" disabled={uploading}
+            onClick={() => uploadInput.current?.click()}>
+            {uploading ? 'Uploading…' : 'Upload résumé'}
+          </button>
         </div>
       )}
 

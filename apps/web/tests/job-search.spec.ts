@@ -51,7 +51,7 @@ test('clicking a job card opens detail aside', async ({ page }) => {
   await mockJobs(page, oneJob());
   await page.goto('/');
   await page.getByRole('button', { name: 'Senior Engineer' }).click();
-  await expect(page.getByRole('link', { name: /Apply at original source/ })).toBeVisible();
+  await expect(page.getByRole('link', { name: /Apply on the original site/ })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'About the role' })).toBeVisible();
   await expect(page.getByText('A great role with interesting problems.')).toBeVisible();
 });
@@ -76,7 +76,7 @@ test('apply link has rel=noopener noreferrer when HTTPS', async ({ page }) => {
   await mockJobs(page, oneJob());
   await page.goto('/');
   await page.getByRole('button', { name: 'Senior Engineer' }).click();
-  const applyLink = page.getByRole('link', { name: /Apply at original source/ });
+  const applyLink = page.getByRole('link', { name: /Apply on the original site/ });
   await expect(applyLink).toHaveAttribute('rel', 'noopener noreferrer');
   await expect(applyLink).toHaveAttribute('target', '_blank');
   const href = await applyLink.getAttribute('href');
@@ -92,7 +92,7 @@ test('non-HTTPS apply link renders as text not anchor', async ({ page }) => {
   const applyLink = page.locator('a[href="http://insecure.example.com/apply"]');
   await expect(applyLink).toHaveCount(0);
   // The text is still shown
-  await expect(page.getByText('Apply at original source ↗')).toBeVisible();
+  await expect(page.getByText('Application link unavailable')).toBeVisible();
 });
 
 test('source history is shown in aside', async ({ page }) => {

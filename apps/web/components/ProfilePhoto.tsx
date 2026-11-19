@@ -4,7 +4,15 @@ import { useEffect, useRef, useState } from 'react';
 
 const endpoint = '/api/v1/me/profile/photo';
 
-export default function ProfilePhoto() {
+export default function ProfilePhoto({
+  name = '',
+  editable = true,
+  onChanged,
+}: {
+  name?: string;
+  editable?: boolean;
+  onChanged?: () => void;
+}) {
   const [photo, setPhoto] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
@@ -52,6 +60,7 @@ export default function ProfilePhoto() {
         currentUrl.current = URL.createObjectURL(await image.blob());
       }
       setPhoto(currentUrl.current);
+      onChanged?.();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Could not update your photo.');
     } finally {
@@ -61,22 +70,29 @@ export default function ProfilePhoto() {
 
   return (
     <div className="profile-photo">
-      {photo ? <img src={photo} alt="Your profile photo" width={72} height={72} /> : null}
-      <div>
-        <input ref={input} type="file" hidden aria-label="Profile photo"
-          accept="image/jpeg,image/png,image/webp"
-          onChange={(event) => {
-            const file = event.target.files?.[0];
-            event.target.value = '';
-            if (file) void change(file);
-          }} />
-        <button type="button" className="btn-secondary" disabled={busy} onClick={() => input.current?.click()}>
-          {photo ? 'Replace photo' : 'Add profile photo'}
-        </button>
-        {photo && <button type="button" className="btn-secondary" disabled={busy} onClick={() => void change()}>Remove photo</button>}
-        <small>Private · JPEG, PNG, or WebP · 2 MB max</small>
-        {error && <p role="alert">{error}</p>}
-      </div>
+      {photo
+        ? <img src={photo} alt="Your profile photo" width={88} height={88} />
+        : <span className="profile-monogram" aria-hidden="true">
+            {name.trim().split(/\s+/).filter(Boolean).slice(0, 2).map((part) => part[0]).join('').toUpperCase() || 'R'}
+          </span>}
+      {editable && (
+        <div>
+          <input ref={input} type="file" hidden aria-label="Profile photo"
+            accept="image/jpeg,image/png,image/webp"
+            onChange={(event) => {
+              const file = event.target.files?.[0];
+              event.target.value = '';
+              if (file) void change(file);
+            }} />
+          <button type="button" className="btn-secondary" disabled={busy} onClick={() => input.current?.click()}>
+            {photo ? 'Replace photo' : 'Add profile photo'}
+          </button>
+          {photo && <button type="button" className="btn-secondary" disabled={busy} onClick={() => void change()}>Remove photo</button>}
+          <small>Private · JPEG, PNG, or WebP · 2 MB max</small>
+          {error && <p role="alert">{error}</p>}
+        </div>
+      )}
+      {!editable && error && <p className="photo-error" role="alert">{error}</p>}
     </div>
   );
 }

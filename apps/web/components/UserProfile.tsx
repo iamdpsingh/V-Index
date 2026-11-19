@@ -33,7 +33,7 @@ function ProfileList({ title, items }: { title: string; items?: string[] }) {
       <h3>{title}</h3>
       <ul className="candidate-entries">{items.map((item, index) => {
         const [titleLine, ...details] = item.split('\n');
-        return <li key={index}>{titleLine}{details.length > 0 && <p>{details.join('\n')}</p>}</li>;
+        return <li key={index}><strong>{titleLine}</strong>{details.length > 0 && <p>{details.join('\n')}</p>}</li>;
       })}</ul>
     </section>
   );
@@ -44,6 +44,7 @@ export default function UserProfile({
   onLogout,
   onAccountDeleted,
 }: UserProfileProps) {
+  const [photoVersion, setPhotoVersion] = useState(0);
   const [verified, setVerified] = useState(account.email_verified);
   const [code, setCode] = useState('');
   const [emailPending, setEmailPending] = useState(false);
@@ -261,32 +262,38 @@ export default function UserProfile({
   return (
     <div className="profile-container">
       <header className="profile-masthead">
-        <div>
-          <p>Private workspace</p>
-          <h1>{account.role === 'employer' ? 'Your workspace' : 'Your profile'}</h1>
+        <div className="profile-identity">
+          <ProfilePhoto key={`${account.id}-${photoVersion}`} name={savedProfile.current?.full_name} editable={false} />
+          <div>
+            <p className="profile-context">{account.role === 'employer' ? 'Employer workspace' : 'Candidate profile'} <span>Private</span></p>
+            <h1>{savedProfile.current?.full_name || 'Your professional profile'}</h1>
+            {savedProfile.current?.headline && <p className="profile-headline">{savedProfile.current.headline}</p>}
+            <p className="profile-location">
+              {[savedProfile.current?.location, savedProfile.current?.experience_years != null
+                ? `${savedProfile.current.experience_years} ${savedProfile.current.experience_years === 1 ? 'year' : 'years'} of experience`
+                : ''].filter(Boolean).join(' · ')}
+            </p>
+          </div>
         </div>
-        <button type="button" className="btn-secondary logout-btn" onClick={signOut} disabled={logoutPending}>
-          Sign Out
-        </button>
-        {logoutError && <p role="alert">{logoutError}</p>}
+        {!editing && !loading && savedProfile.current && (
+          <button type="button" className="primary" ref={editButton} onClick={() => {
+            setSaveSuccess(false);
+            setEditing(true);
+          }}>Edit profile</button>
+        )}
       </header>
       <EmployerWorkspace key={account.id} account={account} />
 
       {loading ? (
         <div className="loading-state">Loading your profile…</div>
       ) : (
-        <div className="profile-grid candidate-layout">
+        <div className={`profile-grid candidate-layout ${editing ? 'is-editing' : ''}`}>
           {/* Main profile form */}
           <section className="profile-card candidate-main">
-            <header className="workspace-row">
-              <h2 ref={formHeading} tabIndex={-1}>{editing ? 'Edit profile' : 'Overview'}</h2>
-              {!editing && savedProfile.current && (
-                <button type="button" className="btn-secondary" ref={editButton} onClick={() => {
-                  setSaveSuccess(false);
-                  setEditing(true);
-                }}>Edit profile</button>
-              )}
-            </header>
+            <div className="profile-section-heading">
+              <h2 ref={formHeading} tabIndex={-1}>{editing ? 'Edit profile' : 'Career overview'}</h2>
+              {editing && <p>Update your details. Save when you’re ready.</p>}
+            </div>
             {error && (
               <div className="notice error profile-error" role="alert">
                 {error}
@@ -304,20 +311,12 @@ export default function UserProfile({
             )}
             {savedProfile.current && !editing && (
               <div className="candidate-summary">
-                <div className="candidate-intro">
-                  <h3>{profile.full_name || 'Your professional profile'}</h3>
-                  {profile.headline && <p>{profile.headline}</p>}
-                  {(profile.location || profile.experience_years != null) && (
-                    <p className="candidate-meta">
-                      {[profile.location, profile.experience_years != null
-                        ? `${profile.experience_years} ${profile.experience_years === 1 ? 'year' : 'years'} of experience`
-                        : ''].filter(Boolean).join(' · ')}
-                    </p>
-                  )}
-                  {!profile.full_name && !profile.headline && !profile.bio && (
-                    <p className="candidate-meta">Add your background and job preferences to get more relevant recommendations.</p>
-                  )}
-                </div>
+                {!profile.bio && !profile.experience?.length && !profile.education?.length && !profile.projects?.length && (
+                  <div className="profile-empty">
+                    <h3>Add your professional background.</h3>
+                    <p>Add your experience, education, and projects to keep your career details in one place.</p>
+                  </div>
+                )}
                 {profile.bio && <section className="candidate-section"><h3>About</h3><p>{profile.bio}</p></section>}
                 <ProfileList title="Experience" items={profile.experience} />
                 {!!profile.education?.length && (
@@ -335,22 +334,11 @@ export default function UserProfile({
                   </section>
                 )}
                 <ProfileList title="Projects" items={profile.projects} />
-                <ProfileList title="Skills" items={profile.skills} />
-                <ProfileList title="Roles of interest" items={profile.desired_titles} />
-                <ProfileList title="Preferred locations" items={profile.remote_only
-                  ? [...(profile.preferred_locations ?? []), 'Remote only']
-                  : profile.preferred_locations} />
-                {!!profile.links?.length && (
-                  <section className="candidate-section">
-                    <h3>Links</h3>
-                    <ul>{profile.links.filter((link) => link.url.startsWith('https://')).map((link, index) => (
-                      <li key={index}><a href={link.url} target="_blank" rel="noopener noreferrer">{link.label || link.url}</a></li>
-                    ))}</ul>
-                  </section>
-                )}
               </div>
             )}
             {editing && <form onSubmit={handleSaveProfile} className="profile-form candidate-edit-form">
+              <fieldset className="profile-editor-section">
+                <legend>Personal details</legend>
               <div className="form-row">
                 <label>
                   Full name
@@ -415,11 +403,16 @@ export default function UserProfile({
                 />
               </label>
 
+              </fieldset>
+              <fieldset className="profile-editor-section profile-preference-editor">
+                <legend>Job preferences</legend>
+                <div className="profile-preference-fields">
               {/* Desired Titles */}
               <div className="tag-field-group">
-                <label>Desired job titles</label>
+                <label htmlFor="profile-desired-title">Desired job titles</label>
                 <div className="tag-input-row">
                   <input
+                    id="profile-desired-title"
                     value={newTitle}
                     placeholder="e.g. Staff Software Engineer"
                     onChange={(e) => setNewTitle(e.target.value)}
@@ -463,9 +456,10 @@ export default function UserProfile({
 
               {/* Skills */}
               <div className="tag-field-group">
-                <label>Skills</label>
+                <label htmlFor="profile-skill">Skills</label>
                 <div className="tag-input-row">
                   <input
+                    id="profile-skill"
                     value={newSkill}
                     placeholder="e.g. TypeScript, PostgreSQL, Rust"
                     onChange={(e) => setNewSkill(e.target.value)}
@@ -509,9 +503,10 @@ export default function UserProfile({
 
               {/* Preferred Locations */}
               <div className="tag-field-group">
-                <label>Preferred Locations</label>
+                <label htmlFor="profile-preferred-location">Preferred locations</label>
                 <div className="tag-input-row">
                   <input
+                    id="profile-preferred-location"
                     value={newLoc}
                     placeholder="e.g. San Francisco, Remote, Berlin"
                     onChange={(e) => setNewLoc(e.target.value)}
@@ -550,6 +545,7 @@ export default function UserProfile({
                 </div>
               </div>
 
+                </div>
               {/* Matching Preferences Toggles */}
               <div className="checkbox-group">
                 <label className="checkbox-label">
@@ -564,8 +560,10 @@ export default function UserProfile({
 
               </div>
 
+              </fieldset>
               <fieldset className="candidate-links">
                 <legend>Education</legend>
+                <div className="profile-entry-grid">
                 {(profile.education ?? []).map((entry, index) => {
                   const education = asEducation(entry);
                   function changeEducation(updated: EducationEntry) {
@@ -600,6 +598,7 @@ export default function UserProfile({
                     </div>
                   );
                 })}
+                </div>
                 <button className="btn-secondary" type="button" disabled={(profile.education?.length ?? 0) >= 30}
                   onClick={() => setProfile({
                     ...profile, education: [...(profile.education ?? []), { qualification: 'unspecified', details: '' }],
@@ -611,6 +610,7 @@ export default function UserProfile({
               ] as const).map(([field, title, itemName]) => (
                 <fieldset key={field} className="candidate-links">
                   <legend>{title}</legend>
+                  <div className="profile-entry-grid">
                   {(profile[field] ?? []).map((entry, index) => (
                     <div className="candidate-entry" key={index}>
                       <label>
@@ -633,6 +633,7 @@ export default function UserProfile({
                         })}>Remove</button>
                     </div>
                   ))}
+                  </div>
                   <button className="btn-secondary" type="button" disabled={(profile[field]?.length ?? 0) >= 30}
                     onClick={() => setProfile({ ...profile, [field]: [...(profile[field] ?? []), ''] })}>
                     Add {itemName}
@@ -675,14 +676,36 @@ export default function UserProfile({
 
           {/* Right sidebar: Resume upload & Account security */}
           <div className="profile-aside-column">
-            <section className="profile-subcard profile-account">
-              <h3>Account</h3>
-              <p className="profile-account-email">{account.email}</p>
-              <p className="candidate-meta">Joined {new Date(account.created_at).toLocaleDateString()}</p>
-              <ProfilePhoto key={account.id} />
-            </section>
+            {!editing && (
+              <section className="profile-subcard profile-preferences">
+                <h2>Job preferences</h2>
+                {!profile.skills?.length && !profile.desired_titles?.length && (
+                  <p className="candidate-meta">Add roles and skills through Edit profile to get relevant recommendations.</p>
+                )}
+                <ProfileList title="Skills" items={profile.skills} />
+                <ProfileList title="Roles of interest" items={profile.desired_titles} />
+                <ProfileList title="Preferred locations" items={profile.remote_only
+                  ? [...(profile.preferred_locations ?? []), 'Remote only']
+                  : profile.preferred_locations} />
+                {!!profile.links?.length && (
+                  <section className="candidate-section">
+                    <h3>Links</h3>
+                    <ul>{profile.links.filter((link) => link.url.startsWith('https://')).map((link, index) => (
+                      <li key={index}><a href={link.url} target="_blank" rel="noopener noreferrer">{link.label || link.url}</a></li>
+                    ))}</ul>
+                  </section>
+                )}
+              </section>
+            )}
             <ResumeSection />
-
+            <details className="profile-settings">
+              <summary>Account settings<span aria-hidden="true">+</span></summary>
+              <div className="profile-settings-body">
+                <p className="profile-account-email">{account.email}</p>
+                <p className="candidate-meta">Joined {new Date(account.created_at).toLocaleDateString()}</p>
+                <ProfilePhoto key={account.id} name={savedProfile.current?.full_name} onChanged={() => setPhotoVersion((version) => version + 1)} />
+                <button type="button" className="btn-secondary" onClick={signOut} disabled={logoutPending}>Sign Out</button>
+                {logoutError && <p role="alert">{logoutError}</p>}
             {/* Account Settings / Password change */}
             <section className="profile-subcard">
               <h3>Account Security</h3>
@@ -760,6 +783,8 @@ export default function UserProfile({
                 </button>
               )}
             </section>
+              </div>
+            </details>
           </div>
         </div>
       )}

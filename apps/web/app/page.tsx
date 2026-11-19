@@ -24,7 +24,7 @@ const TAB_HEADINGS: Record<Tab, string> = {
 
 const TAB_SUBHEADINGS: Record<Tab, string> = {
   jobs: 'Search by role, company, or location, then apply on the original site.',
-  'for-you': 'Explainable recommendations scored against your desired roles, skills, and resume.',
+  'for-you': 'Find openings that match the roles and skills saved in your profile.',
   pricing: 'Start free. Choose more when you need it.',
   profile: 'Manage your professional background, encrypted resume, and account security.',
   sources: 'Add a supported hosted career board and inspect its refresh history.',
@@ -114,7 +114,7 @@ export default function Home() {
 
   return (
     <>
-      <header>
+      <header className="site-header">
         <div className="header-inner">
           <a className="wordmark" href="/" aria-label="Rolewisp home">
             <RolewispSymbol size={32} />
@@ -161,7 +161,7 @@ export default function Home() {
                 aria-label={`Account profile: ${account.email}`}
               >
                 <span className="account-dot" />
-                <span className="account-email-label">{account.email}</span>
+                <span className="account-email-label">My profile</span>
               </button>
             ) : (
               <button
@@ -179,9 +179,9 @@ export default function Home() {
         </div>
       </header>
 
-      <main>
+      <main className={tab === 'profile' && account ? 'workspace-page' : undefined}>
         {/* Render standard intro header for non-pricing views */}
-        {!['jobs', 'pricing'].includes(tab) && (
+        {!['jobs', 'pricing'].includes(tab) && !(tab === 'profile' && account) && (
           <section className={`intro ${['jobs', 'for-you'].includes(tab) ? 'intro-consumer' : ''}`}>
             <div>
               {tab === 'coverage' && <div className="eyebrow">REVIEWER DIAGNOSTICS / COVERAGE</div>}

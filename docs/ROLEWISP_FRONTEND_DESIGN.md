@@ -152,3 +152,19 @@ The new public detail response is the same JobOut schema as public search. sourc
 Public errors should explain the user's next action (retry, sign in, choose another file), not show stack traces, environment-variable names, parser internals, raw source payloads or request credentials. Configure HTML-layer nosniff, Referrer-Policy and a compatible tested CSP; self-host fonts, avoid third-party trackers and do not log private form data. API headers alone are not a substitute for HTML response headers. Test private-data caching and actual production bundles before release.
 
 Use the Anti-Slop rulebook as a reference when reviewing Rolewisp UI, copy and implementation for generic patterns. Keep the Rolewisp design specification and production release requirements as the source of direction. [Anti-Slop repository](https://github.com/miqdadbadjuber/anti-slop)
+
+## Next-week work
+
+- Use [JobIndex](https://jobindex.space/) as a reference for professional presentation and review its public coverage evidence. Check whether it shows successful runs for all 78 platforms, source links, and refresh history before drawing conclusions about its coverage or implementation.
+- Use [Google Chrome Modern Web Guidance](https://github.com/GoogleChrome/modern-web-guidance) during the redesign. Start with `npx modern-web-guidance@latest install` and consult its layout, forms, and accessibility guidance.
+- Redesign the candidate profile with a wider, less crowded desktop layout. Give the career overview and editor room, keep account controls compact, and check both views with a populated profile on desktop and mobile. Preserve manual editing, education qualification categories, and private résumé storage.
+
+## Profile and layout implementation review
+
+The candidate workspace now uses a wider content area, a single identity heading, a career overview with separate education and project entries, and a compact preferences and résumé column. Account controls are available through a native disclosure. Editing uses the full content width, with separate personal details, preferences, and career entry groups. Résumés remain private stored attachments and profile details are entered manually.
+
+Site navigation styles are scoped to the site header. Internal profile and employer headings use their own styling. Native hidden inputs remain hidden, résumé upload controls are keyboard operable buttons, and footer links wrap at narrow widths.
+
+Google Chrome Modern Web Guidance was installed in the local Codex skills directory. Its CSS layout and responsive design guidance informed flexible grid tracks, container queries, intrinsic size constraints, and bounded typography.
+
+JobIndex returned an explicit automated-access restriction during this review. Its current presentation and claimed platform coverage could not be independently verified in this pass.
