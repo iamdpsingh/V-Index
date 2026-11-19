@@ -49,6 +49,8 @@ jobs:
           cache-dependency-path: apps/web/package-lock.json
       - run: npm ci
       - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:browser -- --workers=2
 
   stack:
     runs-on: ubuntu-latest
@@ -74,7 +76,8 @@ jobs:
           curl -fsS --retry 15 --retry-all-errors --retry-delay 2 --max-time 5 --retry-max-time 60 http://127.0.0.1:8000/health
           curl -fsS --retry 15 --retry-all-errors --retry-delay 2 --max-time 5 --retry-max-time 60 http://127.0.0.1:3000/ -o /dev/null
           curl -fsS http://127.0.0.1:3000/api/v1/jobs | python3 -c 'import json,sys; data=json.load(sys.stdin); assert data["total"] == 0 and data["items"] == []'
-          curl -fsS http://127.0.0.1:3000/openapi.json | python3 -c 'import json,sys; data=json.load(sys.stdin); assert "/api/v1/jobs" in data["paths"]'
+          test "$(curl -sS -o /dev/null -w '%{http_code}' http://127.0.0.1:3000/openapi.json)" = 404
+          curl -fsS 'http://127.0.0.1:3000/api/v1/jobs?view=summary' | python3 -c 'import json,sys; data=json.load(sys.stdin); assert data["total"] == 0 and data["items"] == []'
           docker compose exec -T redis redis-cli ping
           docker compose exec -T api /app/.venv/bin/alembic current
           test "$(docker compose ps --status running -q worker | wc -l | tr -d ' ')" = 1

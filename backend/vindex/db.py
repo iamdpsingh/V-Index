@@ -6,6 +6,7 @@ from sqlalchemy import (
     JSON,
     DateTime,
     ForeignKey,
+    Index,
     Integer,
     String,
     UniqueConstraint,
@@ -32,7 +33,7 @@ class Source(Base):
     company: Mapped[str] = mapped_column(String(200))
     url: Mapped[str] = mapped_column(String(2048))
     refresh_minutes: Mapped[int] = mapped_column(default=360)
-    next_check: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)
+    next_check: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now, index=True)
     failures: Mapped[int] = mapped_column(default=0)
 
 
@@ -47,7 +48,10 @@ class Job(Base):
 
 class Observation(Base):
     __tablename__ = "observations"
-    __table_args__ = (UniqueConstraint("source_id", "external_id"),)
+    __table_args__ = (
+        UniqueConstraint("source_id", "external_id"),
+        Index("ix_observations_status_job", "status", "job_id"),
+    )
     id: Mapped[int] = mapped_column(primary_key=True)
     source_id: Mapped[int] = mapped_column(ForeignKey("sources.id"), index=True)
     external_id: Mapped[str] = mapped_column(String(500))

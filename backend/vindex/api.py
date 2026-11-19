@@ -3,7 +3,7 @@ import json
 import os
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Annotated
+from typing import Annotated, Literal
 
 from fastapi import Depends, FastAPI, Header, HTTPException, Query, Request
 from fastapi.exception_handlers import request_validation_exception_handler
@@ -26,7 +26,7 @@ from vindex.connectors.registry import detect
 from vindex.db import Job, Observation, Run, Session, Source, now
 from vindex.ingest import aware
 from vindex.plans import router as plans_router
-from vindex.schemas import JobOut, RunOut, SearchOut, SourceCreate, SourceOut
+from vindex.schemas import JobOut, RunOut, SearchOut, SearchSummaryOut, SourceCreate, SourceOut
 
 app = FastAPI(
     title="Rolewisp API", version="0.1.0", docs_url=None, redoc_url=None, openapi_url=None
@@ -153,13 +153,18 @@ def limit_public_jobs(request: Request) -> None:
         rate_limit(f"public-jobs:{peer}", 120)
 
 
-@app.get("/api/v1/jobs", response_model=SearchOut, dependencies=[Depends(limit_public_jobs)])
+@app.get(
+    "/api/v1/jobs",
+    response_model=SearchOut | SearchSummaryOut,
+    dependencies=[Depends(limit_public_jobs)],
+)
 def jobs(
     keyword: str = Query("", max_length=200),
     company: str = Query("", max_length=200),
     location: str = Query("", max_length=200),
     limit: int = Query(25, ge=1, le=100),
     offset: int = Query(0, ge=0),
+    view: Literal["full", "summary"] = "full",
 ):
     with Session() as session:
         active = select(Observation.job_id).where(Observation.status == "open")
@@ -183,15 +188,18 @@ def jobs(
             if selected
             else []
         )
-        return {
+        payload = {
             "total": total,
             "limit": limit,
             "offset": offset,
             "items": [
                 {
                     "id": j.id,
-                    **j.data,
-                    "raw": None,
+                    **{
+                        key: value
+                        for key, value in j.data.items()
+                        if key != "raw" and (view == "full" or key != "description")
+                    },
                     "first_seen_at": aware(j.first_seen).astimezone(UTC),
                     "last_changed_at": aware(j.last_changed).astimezone(UTC),
                     "sources": [
@@ -209,6 +217,9 @@ def jobs(
                 for j in selected
             ],
         }
+        if view == "summary":
+            return SearchSummaryOut.model_validate(payload)
+        return SearchOut.model_validate(payload)
 
 
 @app.get("/api/v1/jobs/{job_id}", response_model=JobOut, dependencies=[Depends(limit_public_jobs)])

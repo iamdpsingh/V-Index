@@ -85,12 +85,12 @@ test('capture desktop search and detail screenshots', async ({ page, isMobile })
   await page.screenshot({ path: path.join(SCREENSHOT_DIR, 'desktop-pricing-plans.png') });
 
   // Coverage page
-  await page.getByRole('button', { name: 'coverage' }).click();
+  await page.goto('/?tab=coverage');
   await page.screenshot({ path: path.join(SCREENSHOT_DIR, 'desktop-coverage-matrix.png') });
 
   // Sources page
   await mockSources(page, [SAMPLE_SOURCE_OUT], [SAMPLE_RUN_OUT]);
-  await page.getByRole('button', { name: 'sources' }).click();
+  await page.goto('/?tab=sources');
   await page.getByLabel('Admin token').fill('admin-secret-preview');
   await page.getByRole('button', { name: /Reload source status/ }).click();
   await page.screenshot({ path: path.join(SCREENSHOT_DIR, 'desktop-source-operations.png') });

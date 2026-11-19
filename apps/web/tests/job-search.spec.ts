@@ -199,3 +199,32 @@ test('quality_flags: role_description_missing explains partial omission', async 
   await page.getByRole('button', { name: 'Senior Engineer' }).click();
   await expect(page.locator('.quality-notice')).toContainText('Role description omitted by source');
 });
+
+test('a direct job link loads its complete details separately', async ({ page }) => {
+  await mockJobs(page, oneJob());
+  await page.goto('/?selected=1');
+  await expect(page.locator('.description')).toHaveText(SAMPLE_JOB.description);
+  await expect(page.getByRole('link', { name: /Apply on the original site/ })).toBeVisible();
+});
+
+test('changing selection cannot display a delayed older job', async ({ page, isMobile }) => {
+  const newer = { ...SAMPLE_JOB, id: 2, title: 'Data Engineer', description: 'The newer selection.' };
+  await mockJobs(page, { total: 2, limit: 25, offset: 0, items: [SAMPLE_JOB, newer] });
+  let releaseFirst: () => void = () => {};
+  let firstStarted: () => void = () => {};
+  const gate = new Promise<void>((resolve) => { releaseFirst = resolve; });
+  const started = new Promise<void>((resolve) => { firstStarted = resolve; });
+  await page.route('**/api/v1/jobs/1', async (route) => {
+    firstStarted();
+    await gate;
+    await route.fulfill({ json: SAMPLE_JOB }).catch(() => {});
+  });
+  await page.goto('/');
+  await page.getByRole('button', { name: SAMPLE_JOB.title, exact: true }).click();
+  await started;
+  if (isMobile) await page.getByRole('button', { name: 'Return to results', exact: true }).click();
+  await page.getByRole('button', { name: newer.title, exact: true }).click();
+  await expect(page.locator('.description')).toHaveText(newer.description);
+  releaseFirst();
+  await expect(page.locator('.job-record h2')).toHaveText(newer.title);
+});

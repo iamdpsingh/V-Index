@@ -4,6 +4,7 @@ WORKDIR /app
 COPY pyproject.toml uv.lock ./
 RUN uv sync --frozen --no-dev
 COPY backend backend
+COPY scripts/smoke.py scripts/register_verified_sources.py scripts/
 COPY alembic.ini ./
 ENV PYTHONPATH=/app/backend
 RUN useradd --create-home vindex

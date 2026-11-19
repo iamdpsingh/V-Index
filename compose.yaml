@@ -62,6 +62,9 @@ services:
         condition: service_completed_successfully
   worker:
     <<: *backend
+    environment:
+      <<: *backend-environment
+      WORKER_CONCURRENCY: ${WORKER_CONCURRENCY:-4}
     command: ["/app/.venv/bin/python", "-m", "vindex.worker"]
     depends_on:
       migrate:

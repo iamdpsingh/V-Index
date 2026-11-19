@@ -1,7 +1,7 @@
 'use client';
 
 import { FormEvent, useEffect, useState, useCallback, useRef } from 'react';
-import { apiFetch, type JobOut, type SearchOut } from '../lib/api';
+import { apiFetch, type JobOut, type JobSummaryOut, type SearchSummaryOut } from '../lib/api';
 import { formatDate, formatSalary } from '../lib/format';
 
 interface JobSearchProps {
@@ -17,18 +17,24 @@ export default function JobSearch({ error: externalError, onError }: JobSearchPr
   const [filters, setFilters] = useState({ keyword: '', company: '', location: '' });
   const [applied, setApplied] = useState({ keyword: '', company: '', location: '' });
   const [offset, setOffset] = useState(0);
-  const [results, setResults] = useState<SearchOut>({ total: 0, items: [], limit: PAGE_SIZE, offset: 0 });
+  const [results, setResults] = useState<SearchSummaryOut>({ total: 0, items: [], limit: PAGE_SIZE, offset: 0 });
   const [busy, setBusy] = useState(true);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [detailBusy, setDetailBusy] = useState(false);
+  const [detailError, setDetailError] = useState('');
+  const [detailVersion, setDetailVersion] = useState(0);
+  const listVersion = useRef(0);
+  const foregroundBusy = useRef(false);
   const [selected, setSelected] = useState<JobOut | null>(null);
   const [initialHydrated, setInitialHydrated] = useState(false);
   const [internalError, setInternalError] = useState('');
   const [lastPolledAt, setLastPolledAt] = useState<Date | null>(null);
-  const [pendingResults, setPendingResults] = useState<SearchOut | null>(null);
+  const [pendingResults, setPendingResults] = useState<SearchSummaryOut | null>(null);
 
-  const selectedRef = useRef<JobOut | null>(null);
-  selectedRef.current = selected;
+  const selectedRef = useRef<number | null>(null);
+  selectedRef.current = selectedId;
 
-  const resultsRef = useRef<SearchOut>(results);
+  const resultsRef = useRef<SearchSummaryOut>(results);
   resultsRef.current = results;
 
   const searchError = externalError || internalError;
@@ -54,9 +60,8 @@ export default function JobSearch({ error: externalError, onError }: JobSearchPr
     setFilters(newFilters);
     setApplied(newFilters);
     setOffset(off);
-    if (!selId) {
-      setSelected(null);
-    }
+    const id = Number(selId);
+    setSelectedId(Number.isSafeInteger(id) && id > 0 ? id : null);
     setInitialHydrated(true);
   }, []);
 
@@ -66,6 +71,26 @@ export default function JobSearch({ error: externalError, onError }: JobSearchPr
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
   }, [readUrlState]);
+
+  useEffect(() => {
+    setSelected(null);
+    setDetailError('');
+    if (!selectedId) {
+      setDetailBusy(false);
+      return;
+    }
+    const controller = new AbortController();
+    setDetailBusy(true);
+    apiFetch<JobOut>(`jobs/${selectedId}`, '', { signal: controller.signal })
+      .then((job) => { if (!controller.signal.aborted) setSelected(job); })
+      .catch((error: unknown) => {
+        if (!controller.signal.aborted) {
+          setDetailError(error instanceof Error ? error.message : 'Could not load this opening.');
+        }
+      })
+      .finally(() => { if (!controller.signal.aborted) setDetailBusy(false); });
+    return () => controller.abort();
+  }, [selectedId, detailVersion]);
 
   // Update URL search parameters when search/pagination changes
   const updateUrl = useCallback(
@@ -93,7 +118,10 @@ export default function JobSearch({ error: externalError, onError }: JobSearchPr
       signal?: AbortSignal,
       isBackgroundPoll = false
     ) => {
+      if (isBackgroundPoll && foregroundBusy.current) return;
+      const version = ++listVersion.current;
       if (!isBackgroundPoll) {
+        foregroundBusy.current = true;
         setBusy(true);
         setErrorMessage('');
       }
@@ -102,10 +130,12 @@ export default function JobSearch({ error: externalError, onError }: JobSearchPr
         ...currentApplied,
         limit: String(PAGE_SIZE),
         offset: String(currentOffset),
+        view: 'summary',
       });
 
       try {
-        const data = await apiFetch<SearchOut>(`jobs?${searchParams.toString()}`, '', { signal });
+        const data = await apiFetch<SearchSummaryOut>(`jobs?${searchParams.toString()}`, '', { signal });
+        if (signal?.aborted || version !== listVersion.current) return;
         setLastPolledAt(new Date());
 
         if (isBackgroundPoll) {
@@ -114,7 +144,10 @@ export default function JobSearch({ error: externalError, onError }: JobSearchPr
           const hasDifference =
             data.total !== currentTotal ||
             data.items.length !== currentItems.length ||
-            (data.items[0]?.id !== currentItems[0]?.id && currentItems.length > 0);
+            data.items.some((item, index) =>
+              item.id !== currentItems[index]?.id ||
+              item.last_changed_at !== currentItems[index]?.last_changed_at
+            );
 
           if (hasDifference) {
             if (selectedRef.current || currentOffset > 0) {
@@ -127,28 +160,16 @@ export default function JobSearch({ error: externalError, onError }: JobSearchPr
           setResults(data);
           setPendingResults(null);
 
-          // Check if URL specified a selected job ID
-          if (typeof window !== 'undefined') {
-            const params = new URLSearchParams(window.location.search);
-            const selId = params.get('selected');
-            if (selId) {
-              const found = data.items.find((item) => String(item.id) === selId);
-              if (found) {
-                setSelected(found);
-              }
-            } else {
-              setSelected(null);
-            }
-          }
         }
       } catch (e: unknown) {
-        if (signal?.aborted) return;
+        if (signal?.aborted || version !== listVersion.current) return;
         const msg = e instanceof Error ? e.message : 'Failed to search jobs';
         if (!isBackgroundPoll) {
           setErrorMessage(msg);
         }
       } finally {
-        if (!isBackgroundPoll) {
+        if (!isBackgroundPoll && version === listVersion.current) {
+          foregroundBusy.current = false;
           setBusy(false);
         }
       }
@@ -171,11 +192,12 @@ export default function JobSearch({ error: externalError, onError }: JobSearchPr
   useEffect(() => {
     if (!initialHydrated) return;
 
+    const controller = new AbortController();
     let timerId: ReturnType<typeof setInterval> | null = null;
 
     function handlePoll() {
       if (document.visibilityState === 'visible') {
-        fetchJobs(applied, offset, undefined, true);
+        fetchJobs(applied, offset, controller.signal, true);
       }
     }
 
@@ -208,6 +230,7 @@ export default function JobSearch({ error: externalError, onError }: JobSearchPr
 
     return () => {
       stopPolling();
+      controller.abort();
       document.removeEventListener('visibilitychange', handleVisibilityChange);
       window.removeEventListener('focus', handleWindowFocus);
     };
@@ -217,32 +240,32 @@ export default function JobSearch({ error: externalError, onError }: JobSearchPr
     e.preventDefault();
     setOffset(0);
     setApplied({ ...filters });
-    setSelected(null);
+    setSelectedId(null);
     setPendingResults(null);
     updateUrl(filters, 0, null);
   }
 
-  function handleSelectJob(job: JobOut) {
-    setSelected(job);
+  function handleSelectJob(job: JobSummaryOut) {
+    setSelectedId(job.id);
     updateUrl(applied, offset, job.id);
   }
 
   function handleClearSelection() {
-    setSelected(null);
+    setSelectedId(null);
     updateUrl(applied, offset, null);
   }
 
   function prevPage() {
     const nextOffset = Math.max(0, offset - PAGE_SIZE);
     setOffset(nextOffset);
-    setSelected(null);
+    setSelectedId(null);
     updateUrl(applied, nextOffset, null);
   }
 
   function nextPage() {
     const nextOffset = offset + PAGE_SIZE;
     setOffset(nextOffset);
-    setSelected(null);
+    setSelectedId(null);
     updateUrl(applied, nextOffset, null);
   }
 
@@ -333,7 +356,7 @@ export default function JobSearch({ error: externalError, onError }: JobSearchPr
       </div>
 
       {/* Job layout: searchable index on the left, inspectable job record on the right */}
-      <div className={`job-layout ${selected ? 'has-selection' : ''}`}>
+      <div className={`job-layout ${selectedId ? 'has-selection' : ''}`}>
         {/* Results list */}
         <section aria-label="Search results" aria-busy={busy} className="job-list-section">
           {/* Inline search error */}
@@ -356,7 +379,7 @@ export default function JobSearch({ error: externalError, onError }: JobSearchPr
             results.items.map((job) => (
               <article
                 key={job.id}
-                className={`job-card ${selected?.id === job.id ? 'selected' : ''}`}
+                className={`job-card ${selectedId === job.id ? 'selected' : ''}`}
               >
                 <div className="job-top">
                   <span className="job-company">{job.company}</span>
@@ -368,7 +391,7 @@ export default function JobSearch({ error: externalError, onError }: JobSearchPr
                   <button
                     className="job-title"
                     onClick={() => handleSelectJob(job)}
-                    aria-expanded={selected?.id === job.id}
+                    aria-expanded={selectedId === job.id}
                   >
                     {job.title}
                   </button>
@@ -400,7 +423,17 @@ export default function JobSearch({ error: externalError, onError }: JobSearchPr
         </section>
 
         {/* Detail aside / Inspectable job record */}
-        <aside className={selected ? 'mobile-visible' : ''}>
+        <aside className={selectedId ? 'mobile-visible' : ''} aria-busy={detailBusy}>
+          {selectedId && !selected && (
+            <div className="job-record">
+              <button type="button" className="btn-secondary" onClick={handleClearSelection}>Return to results</button>
+              {detailBusy && <p role="status">Loading job details…</p>}
+              {detailError && <div className="notice error" role="alert">
+                <p>{detailError}</p>
+                <button type="button" className="btn-secondary" onClick={() => setDetailVersion((version) => version + 1)}>Try again</button>
+              </div>}
+            </div>
+          )}
           {selected ? (
             <div className="job-record">
               {/* Mobile return button */}
@@ -523,7 +556,7 @@ export default function JobSearch({ error: externalError, onError }: JobSearchPr
                 </div>
               </div>
             </div>
-          ) : (
+          ) : !selectedId ? (
             <div className="empty-aside">
               <div className="eyebrow">TRACEABLE BY DESIGN</div>
               <h2>Every role has a source.</h2>
@@ -537,7 +570,7 @@ export default function JobSearch({ error: externalError, onError }: JobSearchPr
                 close.
               </p>
             </div>
-          )}
+          ) : null}
         </aside>
       </div>
     </>

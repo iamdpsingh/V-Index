@@ -33,6 +33,10 @@ test('refresh index button is visible and triggers fresh query', async ({ page }
 test('new results banner appears when background polling detects updates during reading', async ({ page }) => {
   let callCount = 0;
   await page.route('**/api/v1/jobs**', async (route) => {
+    if (new URL(route.request().url()).pathname.endsWith('/jobs/1')) {
+      await route.fulfill({ json: SAMPLE_JOB });
+      return;
+    }
     callCount++;
     if (callCount === 1) {
       await route.fulfill({

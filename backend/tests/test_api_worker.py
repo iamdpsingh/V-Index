@@ -259,3 +259,70 @@ def test_refresh_retries_transient_responses_sooner(database, source, monkeypatc
         assert session.get(Source, source.id).next_check - run.finished_at == timedelta(
             minutes=minutes
         )
+
+
+def test_lightweight_search_preserves_default_contract_and_detail(client, database, source):
+    description = "A long professional job description. " * 1000
+    with database() as session:
+        ingest(session, source, Enumeration(jobs=[posting(description=description)], complete=True))
+        session.commit()
+    full = client.get("/api/v1/jobs").json()
+    summary = client.get("/api/v1/jobs?view=summary").json()
+    assert full["total"] == summary["total"] == 1
+    assert full["items"][0]["description"] == description
+    assert "description" not in summary["items"][0]
+    assert "raw" not in summary["items"][0]
+    assert summary["items"][0]["sources"] == full["items"][0]["sources"]
+    detail = client.get(f"/api/v1/jobs/{summary['items'][0]['id']}").json()
+    assert detail["description"] == description
+    assert client.get("/api/v1/jobs?view=unknown").status_code == 422
+
+
+def test_scheduled_refreshes_are_bounded_and_isolate_failures(monkeypatch):
+    active = 0
+    peak = 0
+    visited = []
+
+    async def fake_refresh(source_id, *, only_if_due):
+        nonlocal active, peak
+        assert only_if_due
+        active += 1
+        peak = max(peak, active)
+        try:
+            await asyncio.sleep(0.01)
+            visited.append(source_id)
+            if source_id == 3:
+                raise RuntimeError("Synthetic failed refresh")
+        finally:
+            active -= 1
+
+    monkeypatch.setattr(worker, "refresh", fake_refresh)
+    asyncio.run(worker.refresh_due_sources([1, 2, 3, 4, 5], 2))
+    assert peak == 2
+    assert sorted(visited) == [1, 2, 3, 4, 5]
+    assert active == 0
+
+
+def test_postgresql_search_can_use_the_trigram_index(database, source):
+    from sqlalchemy import text
+
+    with database() as session:
+        if session.get_bind().dialect.name != "postgresql":
+            pytest.skip("PostgreSQL query planner check")
+        ingest(
+            session,
+            source,
+            Enumeration(jobs=[posting(title="Specialist Data Engineer")], complete=True),
+        )
+        session.commit()
+        session.execute(text("SET LOCAL enable_seqscan = off"))
+        query = select(api.Job.id).where(
+            api.Job.data["title"].as_string().icontains("specialist", autoescape=True)
+        )
+        sql = str(
+            query.compile(
+                dialect=session.get_bind().dialect, compile_kwargs={"literal_binds": True}
+            )
+        )
+        plan = "\n".join(session.execute(text("EXPLAIN " + sql)).scalars())
+        assert "ix_jobs_title_trgm" in plan

@@ -231,6 +231,12 @@ export default function AuthDialog({
                 : 'Sign in'}
             </button>
           </div>
+          {mode === 'register' && !recovery && (
+            <p className="field-hint">
+              By creating an account, you agree to the <a href="/terms" target="_blank" rel="noopener noreferrer">Terms</a>.
+              Read our <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy policy</a> for how we handle your information.
+            </p>
+          )}
         </form>
 
         {mode === 'login' && !recovery && (
@@ -249,7 +255,7 @@ export default function AuthDialog({
               </button>
             ))}
           </div>
-          <small id="auth-providers-status">{providers.length ? 'Choose a connected provider.' : 'Social sign-in is unavailable in this preview.'}</small>
+          <small id="auth-providers-status">{providers.length ? 'Choose a connected provider.' : 'Social sign-in is currently unavailable.'}</small>
         </fieldset>}
       </div>
     </div>

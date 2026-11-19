@@ -20,18 +20,17 @@ test('Rolewisp brand wordmark is visible with continuous ribbon R mark', async (
   );
 });
 
-test('tagline "Find your next opening." is present in header and intro', async ({ page }) => {
-  // Check header note
-  const headerNote = page.locator('.header-note');
-  await expect(headerNote).toHaveText('Find your next opening.');
-
+test('tagline "Find your next opening." is the search heading', async ({ page }) => {
   // Check main heading
   const h1 = page.getByRole('heading', { level: 1 });
   await expect(h1).toHaveText('Find your next opening.');
 });
 
-test('footer retains repository attribution to V-Index', async ({ page }) => {
+test('footer links privacy policies and keeps repository details out of the product', async ({ page }) => {
   const footer = page.locator('footer');
-  await expect(footer).toContainText('Rolewisp — built in the V—Index repository');
-  await expect(footer).toContainText('Original sources. Visible evidence.');
+  await expect(footer).toContainText('Rolewisp');
+  await expect(footer).not.toContainText('V-Index');
+  for (const name of ['Privacy', 'Cookies', 'Terms', 'Refunds']) {
+    await expect(footer.getByRole('link', { name, exact: true })).toBeVisible();
+  }
 });

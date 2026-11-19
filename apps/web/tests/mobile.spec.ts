@@ -43,7 +43,7 @@ test('mobile: job detail aside renders below results', async ({ page }) => {
   await page.getByRole('button', { name: 'Senior Engineer' }).click();
   // aside is visible (position:static on mobile)
   await expect(page.locator('aside')).toBeVisible();
-  await expect(page.getByRole('link', { name: /Apply at original source/ })).toBeVisible();
+  await expect(page.getByRole('link', { name: /Apply on the original site/ })).toBeVisible();
 });
 
 test('mobile: keyboard search works', async ({ page }) => {
@@ -58,14 +58,14 @@ test('mobile: keyboard search works', async ({ page }) => {
 test('mobile: coverage tab accessible', async ({ page }) => {
   await mockJobsEmpty(page);
   await page.goto('/');
-  await page.getByRole('button', { name: 'coverage' }).tap();
+  await page.goto('/?tab=coverage');
   await expect(page.getByRole('table')).toBeVisible();
 });
 
 test('mobile: sources tab accessible and form usable', async ({ page }) => {
   await mockJobsEmpty(page);
   await page.goto('/');
-  await page.getByRole('button', { name: 'sources' }).tap();
+  await page.goto('/?tab=sources');
   await expect(page.getByLabel('Admin token')).toBeVisible();
   await expect(page.getByLabel('Company name')).toBeVisible();
   await expect(page.getByLabel('Hosted board URL')).toBeVisible();

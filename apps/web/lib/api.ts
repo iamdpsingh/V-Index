@@ -27,6 +27,9 @@ export type JobOut = {
   sources: ProvenanceOut[];
 };
 
+export type JobSummaryOut = Omit<JobOut, 'description'>;
+export type SearchSummaryOut = Omit<SearchOut, 'items'> & { items: JobSummaryOut[] };
+
 export type SearchOut = {
   total: number;
   limit: number;

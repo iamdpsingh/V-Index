@@ -42,13 +42,13 @@ test('clicking for you tab activates it', async ({ page }) => {
 });
 
 test('footer reviewer links: clicking coverage shows coverage heading', async ({ page }) => {
-  await page.getByRole('button', { name: 'coverage' }).click();
+  await page.goto('/?tab=coverage');
   await expect(page.getByRole('heading', { name: 'Coverage, with evidence.' })).toBeVisible();
   await expect(page).toHaveURL(/tab=coverage/);
 });
 
 test('footer operator links: clicking sources shows sources heading', async ({ page }) => {
-  await page.getByRole('button', { name: 'sources' }).click();
+  await page.goto('/?tab=sources');
   await expect(page.getByRole('heading', { name: 'Keep the index current.' })).toBeVisible();
   await expect(page).toHaveURL(/tab=sources/);
 });

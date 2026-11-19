@@ -80,6 +80,7 @@ def test_madgex_accepts_canonical_slug_alias_for_same_posting():
       <a href="/apply/1/biologist/">Apply</a>
       </body></html>
     """
+
     async def check():
         async with httpx.AsyncClient() as as_client:
             connector = WileyMadgexConnector("jobs.sciencecareers.org", as_client)

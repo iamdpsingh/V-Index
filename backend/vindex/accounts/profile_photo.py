@@ -30,7 +30,9 @@ def normalize_photo(data: bytes) -> bytes:
             clean.save(output, "JPEG", quality=86)
             return output.getvalue()
     except (OSError, ValueError, Image.DecompressionBombError) as error:
-        raise HTTPException(422, "Choose a readable JPEG, PNG, or WebP photo within 2 MB.") from error
+        raise HTTPException(
+            422, "Choose a readable JPEG, PNG, or WebP photo within 2 MB."
+        ) from error
 
 
 @router.get("")

@@ -118,6 +118,31 @@ export const SAMPLE_RECOMMENDATIONS = {
 };
 
 export async function mockProviders(page: Page, providers = SAMPLE_PROVIDERS) {
+  await page.route('**/api/v1/me', (route) => route.fulfill({ status: 401, json: { detail: 'Authentication required' } }));
+  await page.route('**/api/v1/auth/oauth', (route) => route.fulfill({ json: [] }));
+  await page.route('**/api/v1/me/profile/photo', (route) => route.fulfill({ status: 404 }));
+  await page.route('**/api/v1/plans**', (route) => {
+    const country = new URL(route.request().url()).searchParams.get('country');
+    const prices: Record<string, [string, number, number]> = {
+      US: ['USD', 600, 2], IN: ['INR', 39900, 2], GB: ['GBP', 500, 2],
+      JP: ['JPY', 900, 0], DE: ['EUR', 600, 2], FR: ['EUR', 600, 2],
+      CA: ['CAD', 800, 2], AU: ['AUD', 900, 2], NZ: ['NZD', 1000, 2],
+      SG: ['SGD', 800, 2], AE: ['AED', 2200, 2], BR: ['BRL', 2900, 2],
+      MX: ['MXN', 9900, 2], CH: ['CHF', 600, 2],
+    };
+    const [currency, amount, exponent] = prices[country || 'US'] || prices.US;
+    const common = { currency, currency_exponent: exponent, interval: 'month' };
+    return route.fulfill({ json: {
+      country, currency, local_currencies: [currency], local_currency_available: !!country,
+      currency_selection_required: !country, price_version: 'test', pricing_basis: 'fixed_regional',
+      taxes_included: false, notice: country ? null : 'Select your country to see available local pricing. Prices are shown in USD.',
+      paid_checkout_available: false,
+      plans: [
+        { id: 'free', name: 'Free', amount_minor: 0, availability: 'available', features: ['Search jobs and open original applications'], ...common },
+        { id: 'plus', name: 'Plus', amount_minor: amount, availability: 'coming_soon', features: ['Paid membership is not available yet'], ...common },
+      ],
+    } });
+  });
   await page.route('**/api/v1/providers', async (route) => {
     await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(providers) });
   });
@@ -125,7 +150,17 @@ export async function mockProviders(page: Page, providers = SAMPLE_PROVIDERS) {
 
 export async function mockJobs(page: Page, jobs: MockJobs) {
   await page.route('**/api/v1/jobs**', async (route) => {
-    await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(jobs) });
+    const url = new URL(route.request().url());
+    const detail = url.pathname.match(/\/api\/v1\/jobs\/(\d+)$/);
+    if (detail) {
+      const job = jobs.items.find((item) => item.id === Number(detail[1]));
+      await route.fulfill({ status: job ? 200 : 404, json: job || { detail: 'Job not found' } });
+      return;
+    }
+    const items = url.searchParams.get('view') === 'summary'
+      ? jobs.items.map(({ description, ...summary }) => summary)
+      : jobs.items;
+    await route.fulfill({ status: 200, json: { ...jobs, items } });
   });
 }
 

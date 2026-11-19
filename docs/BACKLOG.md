@@ -4,7 +4,7 @@
 
 ## Current coverage-first status
 
-61 of 78 platforms have complete, nonempty live runs on two independent sites. nine ATS and eight job-board platforms remain. Antigravity's local coverage batch was reviewed and selectively integrated. Read the [backend review](ANTIGRAVITY_BACKEND_REVIEW_2026-11-08.md) for the remaining platform list, verified results and next actions. Older cohort numbers below are historical.
+68 of 78 platforms have complete, nonempty recorded runs across independent sites. Seven other platforms have partial extraction evidence. Three still lack usable live records. The remaining full-coverage work includes all ten. See [release status](RELEASE_STATUS.md) for the integrated product and actual validation results. Older cohort numbers below are historical.
 
 ## First slice
 - [x] Inspect empty folder/remote; initialize canonical main without replacing history.

@@ -12,7 +12,7 @@ from sqlalchemy import select, update
 from vindex.connectors.http import RetryAfterError, UpstreamStatusError
 from vindex.connectors.jobiqo import STAGED_HOSTS as STAGED_JOBIQO_HOSTS
 from vindex.connectors.registry import create_connector
-from vindex.db import Run, Session, Source, now
+from vindex.db import Run, Session, Source, engine, now
 from vindex.ingest import aware, ingest
 from vindex.jobiqo_refresh import advance_jobiqo_refresh
 from vindex.madgex_refresh import advance_madgex_refresh
@@ -28,7 +28,9 @@ async def refresh(source_id: int, *, only_if_due: bool = False) -> int | None:
     redis = Redis.from_url(os.getenv("REDIS_URL", "redis://localhost:6379/0"))
     with Session() as lookup:
         provider = lookup.scalar(select(Source.provider).where(Source.id == source_id))
-    refresh_timeout = JOBMOUNT_TIMEOUT_SECONDS if provider == "jobmount" else REFRESH_TIMEOUT_SECONDS
+    refresh_timeout = (
+        JOBMOUNT_TIMEOUT_SECONDS if provider == "jobmount" else REFRESH_TIMEOUT_SECONDS
+    )
     lease_timeout = refresh_timeout + (SOURCE_LEASE_SECONDS - REFRESH_TIMEOUT_SECONDS)
     with redis.lock(f"vindex:source:{source_id}", timeout=lease_timeout, blocking_timeout=1):
         with Session() as session:
@@ -122,8 +124,28 @@ async def refresh(source_id: int, *, only_if_due: bool = False) -> int | None:
             return run_id
 
 
+async def refresh_due_sources(ids: list[int], concurrency: int) -> None:
+    if not 1 <= concurrency <= 16:
+        raise ValueError("WORKER_CONCURRENCY must be between 1 and 16")
+    semaphore = asyncio.Semaphore(concurrency)
+
+    async def refresh_one(source_id: int) -> None:
+        async with semaphore:
+            try:
+                await refresh(source_id, only_if_due=True)
+            except Exception:
+                log.exception("Worker infrastructure failure source=%s", source_id)
+
+    await asyncio.gather(*(refresh_one(source_id) for source_id in ids))
+
+
 async def serve() -> None:
     logging.basicConfig(level=logging.INFO)
+    concurrency = int(os.getenv("WORKER_CONCURRENCY", "4"))
+    if not 1 <= concurrency <= 16:
+        raise ValueError("WORKER_CONCURRENCY must be between 1 and 16")
+    if engine.dialect.name == "sqlite":
+        concurrency = 1
     # Public source URLs can include browser read tokens. Keep transport URLs out of logs.
     logging.getLogger("httpx").setLevel(logging.WARNING)
     logging.getLogger("httpcore").setLevel(logging.WARNING)
@@ -137,11 +159,7 @@ async def serve() -> None:
                     .limit(20)
                 )
             )
-        for source_id in ids:
-            try:
-                await refresh(source_id, only_if_due=True)
-            except Exception:
-                log.exception("Worker infrastructure failure source=%s", source_id)
+        await refresh_due_sources(ids, concurrency)
         await asyncio.sleep(SCHEDULER_POLL_SECONDS)
 
 

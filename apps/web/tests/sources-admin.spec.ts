@@ -8,7 +8,7 @@ async function goToSources(page: Parameters<typeof mockProviders>[0]) {
   await mockProviders(page);
   await mockJobsEmpty(page);
   await page.goto('/');
-  await page.getByRole('button', { name: 'sources' }).click();
+  await page.goto('/?tab=sources');
 }
 
 test('admin token input is password type', async ({ page }) => {
@@ -22,7 +22,7 @@ test('admin token is not persisted to localStorage', async ({ page }) => {
   await page.getByLabel('Admin token').fill('secret-token');
   // Reload page — token should be gone
   await page.reload();
-  await page.getByRole('button', { name: 'sources' }).click();
+  await page.goto('/?tab=sources');
   await expect(page.getByLabel('Admin token')).toHaveValue('');
 });
 

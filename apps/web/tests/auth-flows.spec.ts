@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { mockJobsEmpty, mockProviders, SAMPLE_ACCOUNT } from './fixtures/mock-server';
+import { mockJobsEmpty, mockProviders, mockProfile, mockResume, SAMPLE_ACCOUNT } from './fixtures/mock-server';
 
 test.beforeEach(async ({ page }) => {
   await mockProviders(page);
@@ -20,7 +20,7 @@ test('Sign In button in header opens Auth dialog with mode tabs', async ({ page 
   await expect(dialog.getByRole('tab', { name: 'Create Account' })).toBeVisible();
 });
 
-test('inline validation rejects password under 12 characters', async ({ page }) => {
+test('signup validates the minimum password length', async ({ page }) => {
   await page.route('**/api/v1/me', async (route) => {
     await route.fulfill({ status: 401, contentType: 'application/json', body: JSON.stringify({ detail: 'Authentication required' }) });
   });
@@ -29,11 +29,11 @@ test('inline validation rejects password under 12 characters', async ({ page }) 
   await page.getByRole('button', { name: 'Sign In' }).click();
 
   const dialog = page.getByRole('dialog');
+  await dialog.getByRole('tab', { name: 'Create Account' }).click();
   await dialog.getByLabel('Email address').fill('user@example.com');
   await dialog.getByLabel('Password').fill('shortpass');
-  await dialog.getByRole('button', { name: /Sign In/ }).click();
-
-  await expect(dialog.locator('.auth-error')).toHaveText('Password must be at least 12 characters.');
+  await dialog.getByRole('button', { name: /^create account$/i }).click();
+  expect(await dialog.getByLabel('Password').evaluate((input: HTMLInputElement) => input.checkValidity())).toBe(false);
 });
 
 test('409 conflict displays "An account with this email already exists."', async ({ page }) => {
@@ -55,12 +55,12 @@ test('409 conflict displays "An account with this email already exists."', async
   await dialog.getByRole('tab', { name: 'Create Account' }).click();
   await dialog.getByLabel('Email address').fill('existing@example.com');
   await dialog.getByLabel('Password').fill('validpassword123');
-  await dialog.getByRole('button', { name: /Create Account/ }).click();
+  await dialog.getByRole('button', { name: /^create account$/i }).click();
 
   await expect(dialog.locator('.auth-error')).toHaveText('An account with this email already exists.');
 });
 
-test('successful login displays user email in header pill and allows logout', async ({ page }) => {
+test('successful login opens the private profile and supports logout', async ({ page }) => {
   await page.route('**/api/v1/me', async (route) => {
     if (route.request().method() === 'GET') {
       await route.fulfill({ status: 401, contentType: 'application/json', body: JSON.stringify({ detail: 'Authentication required' }) });
@@ -77,22 +77,27 @@ test('successful login displays user email in header pill and allows logout', as
     await route.fulfill({ status: 204 });
   });
 
+  await mockProfile(page);
+  await mockResume(page);
   await page.goto('/');
   await page.getByRole('button', { name: 'Sign In' }).click();
 
   const dialog = page.getByRole('dialog');
   await dialog.getByLabel('Email address').fill('alex@example.com');
   await dialog.getByLabel('Password').fill('validpassword123');
-  await dialog.getByRole('button', { name: /Sign In/ }).click();
+  await dialog.getByRole('button', { name: /^sign in$/i }).click();
 
-  // Dialog closes and header shows user email pill
+  // The account control exposes the signed-in identity through its accessible name.
   await expect(dialog).not.toBeVisible();
   const accountPill = page.locator('.account-pill-btn');
   await expect(accountPill).toBeVisible();
-  await expect(accountPill).toContainText('alex@example.com');
+  await expect(accountPill).toHaveAccessibleName('Account profile: alex@example.com');
 
   // Clicking email pill opens Profile tab
   await accountPill.click();
   await expect(page).toHaveURL(/tab=profile/);
+  await page.locator('.profile-settings > summary').click();
+  await page.getByRole('button', { name: 'Sign Out', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'Sign In', exact: true })).toBeVisible();
 });
 

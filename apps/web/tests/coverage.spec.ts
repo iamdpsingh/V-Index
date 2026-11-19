@@ -5,7 +5,7 @@ test.beforeEach(async ({ page }) => {
   await mockProviders(page, SAMPLE_PROVIDERS);
   await mockJobsEmpty(page);
   await page.goto('/');
-  await page.getByRole('button', { name: 'coverage' }).click();
+  await page.goto('/?tab=coverage');
 });
 
 test('coverage table is visible', async ({ page }) => {

@@ -19,4 +19,6 @@ def downgrade():
     # Derived text cannot be recovered by a schema rollback.
     with op.batch_alter_table("account_resumes") as batch:
         batch.add_column(sa.Column("text_ciphertext", sa.LargeBinary(), nullable=True))
-        batch.add_column(sa.Column("text_characters", sa.Integer(), server_default="0", nullable=False))
+        batch.add_column(
+            sa.Column("text_characters", sa.Integer(), server_default="0", nullable=False)
+        )

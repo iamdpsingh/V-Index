@@ -2,7 +2,7 @@
 
 **Rolewisp — Find your next opening.** Rolewisp is the owner-selected public product brand; V-Index remains this project's repository and folder name. See [branding](docs/BRANDING.md) for the identity direction and naming convention.
 
-A job index with source provenance, scheduled refreshes and conservative closure detection. This repository is an initial working vertical slice, not a complete 78-platform submission.
+A job index with source provenance, scheduled refreshes and conservative closure detection. The integrated product includes search, scheduled indexing, private candidate profiles, résumé storage, recommendations, and employer posting. Current release evidence and remaining gates are recorded in [release status](docs/RELEASE_STATUS.md).
 
 ## Local backend
 
@@ -18,7 +18,7 @@ uv run uvicorn vindex.api:app --reload
 
 For the web UI: `cd apps/web && npm ci && npm run dev`; open http://localhost:3000. Node 24+ is required.
 
-Open http://localhost:8000/docs for the API. In a second terminal start Redis and run `PYTHONPATH=backend uv run python -m vindex.worker`. Redis is required for refreshes. Without Redis you can run the connector smoke harness but scheduled ingestion does not run.
+The API specification is in `docs/openapi.json`. Public documentation routes are disabled. In a second terminal start Redis and run `PYTHONPATH=backend uv run python -m vindex.worker`. Redis is required for refreshes. Without Redis you can run the connector smoke harness but scheduled ingestion does not run.
 
 ```sh
 curl -X POST http://localhost:8000/api/v1/sources -H 'Authorization: Bearer local-review-token' -H 'Content-Type: application/json' -d '{"url":"https://jobs.ashbyhq.com/Ashby","company":"Ashby"}'
@@ -42,9 +42,9 @@ Smoke checks public provider APIs, feeds and boards and writes timestamped evide
 
 ## Status and limits
 
-**61 of 78 required platforms** have point-in-time live evidence across two independent employers or boards. That includes 49 ATS platforms and 12 job-board platforms. Each provider's examples, counts and supported scope are listed in the [coverage matrix](docs/COVERAGE.md).
+**68 of 78 required platforms** have point-in-time live evidence across two independent employers or boards. That includes 51 ATS platforms and 17 job-board platforms. Each provider's examples, counts and supported scope are listed in the [coverage matrix](docs/COVERAGE.md).
 
-The remaining 17 platforms and production acceptance are tracked in the [coverage workflow](docs/COVERAGE_WORKFLOW.md) and [acceptance criteria](docs/ACCEPTANCE_TESTS.md). The [frontend handoff](docs/ANTIGRAVITY_HANDOFF.md) records product design and source URL guidance for the separate frontend worktree.
+The remaining 10 platforms and production acceptance are tracked in the [coverage workflow](docs/COVERAGE_WORKFLOW.md) and [acceptance criteria](docs/ACCEPTANCE_TESTS.md). The [frontend handoff](docs/ANTIGRAVITY_HANDOFF.md) retains the product design and source URL guidance.
 
 ### Service-backed tests
 
@@ -61,3 +61,14 @@ The owner retained the frontend with Antigravity. Its account/profile/upload/rec
 ### Product and pricing handoff
 
 Rolewisp's current product design uses an original ribbon R identity and keeps engineering/acquisition evidence outside ordinary job-seeker flows. See [the design specification](docs/ROLEWISP_FRONTEND_DESIGN.md), [Free/Plus pricing API](docs/PLANS_AND_PRICING.md) and [scoped security review](docs/SECURITY_REVIEW_2026-11-07.md). Country-aware pricing supports 13 launch currencies with an explicit USD fallback. No payment provider is connected; Plus checkout and paid entitlements are not live. Public job details now expose normalized job/provenance fields only, while retaining original observations privately.
+
+
+For an initial reviewed source catalogue, run
+`PYTHONPATH=backend uv run python -m scripts.register_verified_sources`.
+Repeat with `--apply` to register and schedule missing sources. Keep the worker
+running to fetch actual jobs. The command can be repeated without duplicating sources.
+
+The web client uses lightweight search summaries and fetches a complete job when
+selected. Existing API clients retain the full list response by default. Use
+`view=summary` for the smaller response. PostgreSQL migrations install
+`pg_trgm` and GIN indexes for the existing substring filters.

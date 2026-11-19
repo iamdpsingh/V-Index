@@ -27,21 +27,23 @@ test('URL state: search submission updates window query params', async ({ page }
 
 test('URL state: switching tab updates window query param', async ({ page }) => {
   await page.goto('/');
-  await page.getByRole('button', { name: 'coverage' }).click();
+  await page.getByRole('button', { name: 'For you', exact: true }).click();
 
-  await expect(page).toHaveURL(/tab=coverage/);
-  await expect(page.getByRole('heading', { name: 'Coverage, with evidence.' })).toBeVisible();
+  await expect(page).toHaveURL(/tab=for-you/);
+  await expect(page.getByRole('heading', { name: 'Tailored to your signals.' })).toBeVisible();
 });
 
 test('URL state: direct load with ?tab=coverage opens coverage tab directly', async ({ page }) => {
   await page.goto('/?tab=coverage');
   await expect(page.getByRole('heading', { name: 'Coverage, with evidence.' })).toBeVisible();
-  await expect(page.getByRole('button', { name: 'coverage' })).toHaveAttribute('aria-current', 'page');
+  await expect(page.getByRole('navigation', { name: 'Main navigation' }).getByRole('button', { name: 'coverage' })).toHaveCount(0);
 });
 
-test('Job record: index reference number (№ 0001) is displayed', async ({ page }) => {
+test('Job cards show role and company without decorative numbering', async ({ page }) => {
   await page.goto('/');
-  await expect(page.locator('.ref-number')).toContainText('№ 0001');
+  await expect(page.getByRole('button', { name: SAMPLE_JOB.title })).toBeVisible();
+  await expect(page.getByText(SAMPLE_JOB.company, { exact: true })).toBeVisible();
+  await expect(page.locator('.ref-number')).toHaveCount(0);
 });
 
 test('Coverage controls: platform kind filters narrow the table', async ({ page }) => {

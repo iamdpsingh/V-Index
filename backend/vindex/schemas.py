@@ -48,12 +48,11 @@ class ProvenanceOut(BaseModel):
     last_checked_at: datetime
 
 
-class JobOut(BaseModel):
+class JobSummaryOut(BaseModel):
     id: int
     external_id: str
     title: str
     company: str
-    description: str
     quality_flags: list[str] = Field(default_factory=list)
     location: str
     source_url: str
@@ -65,6 +64,17 @@ class JobOut(BaseModel):
     first_seen_at: datetime
     last_changed_at: datetime
     sources: list[ProvenanceOut]
+
+
+class JobOut(JobSummaryOut):
+    description: str
+
+
+class SearchSummaryOut(BaseModel):
+    total: int
+    limit: int
+    offset: int
+    items: list[JobSummaryOut]
 
 
 class SearchOut(BaseModel):

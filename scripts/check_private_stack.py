@@ -32,12 +32,27 @@ def main():
             )
 
     password = secrets.token_urlsafe(32)
+    suffix = secrets.token_hex(6)
     account = call(
-        "/auth/register", "POST", {"email": "ci-private-check@example.com", "password": password}
+        "/auth/register",
+        "POST",
+        {"email": f"ci-private-{suffix}@example.com", "password": password},
     )
     assert not account["email_verified"]
-    call("/me/profile", "PUT", {"skills": ["Python", "SQL"], "desired_titles": ["Data Engineer"]})
-    assert call("/me/profile")["skills"] == ["Python", "SQL"]
+    call("/me/role", "PUT", {"role": "candidate"})
+    assert call("/me")["role"] == "candidate"
+    call(
+        "/me/profile",
+        "PUT",
+        {
+            "skills": ["Python", "SQL"],
+            "desired_titles": ["Data Engineer"],
+            "education": [{"qualification": "bachelors", "details": "CI synthetic qualification"}],
+        },
+    )
+    profile = call("/me/profile")
+    assert profile["skills"] == ["Python", "SQL"]
+    assert profile["education"][0]["qualification"] == "bachelors"
     resume = (
         b"Controlled CI resume fixture: professional Python SQL and data engineering experience."
     )
@@ -47,7 +62,8 @@ def main():
         data=resume,
         headers={"X-Filename": "ci-resume.txt", "Content-Type": "application/octet-stream"},
     )
-    assert "Python" in saved["detected_skills"]
+    assert saved["filename"] == "ci-resume.txt"
+    assert set(saved) == {"filename", "media_type", "size_bytes", "updated_at"}
     assert call("/me/resume/download") == resume
     result = call("/me/recommendations")
     assert result["items"] == [] and not result["needs_preferences"]
@@ -58,9 +74,37 @@ def main():
         assert error.code == 401
     else:
         raise AssertionError("Deleted account remained authenticated")
-    print(
-        "Private stack checks passed: account, profile, resume round-trip, recommendations and account deletion"
+    call(
+        "/auth/register",
+        "POST",
+        {
+            "email": f"ci-employer-{suffix}@example.com",
+            "password": password,
+        },
     )
+    call("/me/role", "PUT", {"role": "employer"})
+    posting = call(
+        "/me/postings",
+        "POST",
+        {
+            "title": "CI synthetic role",
+            "company": "CI synthetic company",
+            "location": "Remote",
+            "description": "Controlled CI posting fixture",
+            "application_url": "https://example.com/rolewisp-ci",
+        },
+    )
+    assert posting["status"] == "draft"
+    assert call("/me/postings")[0]["id"] == posting["id"]
+    try:
+        call(f"/me/postings/{posting['id']}/publish", "POST")
+    except urllib.error.HTTPError as error:
+        assert error.code == 403
+    else:
+        raise AssertionError("Unverified employer published a posting")
+    assert call(f"/me/postings/{posting['id']}/close", "POST")["status"] == "closed"
+    call("/me", "DELETE", {"password": password})
+    print("Private stack checks passed through the web proxy, including employer draft permissions")
 
 
 if __name__ == "__main__":

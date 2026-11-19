@@ -390,3 +390,6 @@ The reviewed Science Careers and Nature Careers search URLs register for checkpo
 ## JobMount
 
 The reviewed Soudeur and JobsRUs unfiltered results pages support JobMount registration. The connector follows the native pager, rejects repeated posting IDs across pages, reads each original posting and verifies the same-job application entry. It repeats the roster before reconciliation. JobMount refreshes have a 30-minute worker timeout and a matching lease with a five-minute margin.
+
+
+Search supports `GET /api/v1/jobs?view=summary` for lightweight result pages. This view includes the existing search metadata and source links and omits descriptions. The default full response remains supported. Clients load `GET /api/v1/jobs/{id}` when a job is opened and cancel obsolete detail requests when selection changes.
