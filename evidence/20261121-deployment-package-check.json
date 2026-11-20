@@ -1,0 +1,11 @@
+{
+  "recorded_at": "2026-11-20T21:15:58.177620+00:00",
+  "scope": "Actual Vercel CLI deployment input inspection",
+  "excluded_local_databases_and_caches": true,
+  "private_environment_files_excluded": true,
+  "file_count": 199,
+  "total_bytes": 1979669,
+  "worker_entrypoint_included": true,
+  "provider_catalogue_included": true,
+  "preceding_upload": "Cancelled before deployment promotion after discovering overly broad upload inputs; no public exposure confirmed"
+}

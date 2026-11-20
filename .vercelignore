@@ -16,3 +16,16 @@ ops
 *.dump
 *.sqlite
 *.sqlite-*
+
+# Explicit ignore files replace automatic Git exclusions in CLI deployments.
+.vercel
+.mypy_cache
+.pytest_cache
+.ruff_cache
+**/__pycache__
+**/*.db
+**/*.db-*
+**/*.sqlite3
+**/*.tsbuildinfo
+**/*.pem
+**/*.key
