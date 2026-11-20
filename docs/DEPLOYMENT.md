@@ -1,14 +1,15 @@
 # Deployment
 
-For the newly requested two-service Vercel configuration and exact environment
-variables, see [VERCEL_SERVICES.md](VERCEL_SERVICES.md). The owner confirmed
-service names/routing and authorized pushing; hosted activation remains unverified.
+The existing Vercel project now runs two request services and a persistent
+worker. For exact configuration and server-only environment variables, read
+[VERCEL_SERVICES.md](VERCEL_SERVICES.md). The working demo is
+https://rolewisp.vercel.app; hosted evidence is linked from [release status](RELEASE_STATUS.md).
 
 
-**Current owner update, November 20:** production/deployment and external submission are paused. Coverage expansion is paused without waiving the original 78-platform requirement. The integrated product is maintained in canonical main. [RELEASE_HANDOFF.md](RELEASE_HANDOFF.md) is the current implementation and reviewer entry point; earlier ownership and unbuilt-feature notes below are historical.
+**Current owner update, November 21:** production work and GitHub pushes are authorized. Coverage expansion remains paused without waiving the original 78-platform requirement. Canonical main contains the integrated product. [RELEASE_HANDOFF.md](RELEASE_HANDOFF.md) is the current implementation and reviewer entry point; earlier ownership and unbuilt-feature notes below are historical.
 
 
-The owner now targets v0 publishing with no additional spending and no purchased domain. See [V0_RELEASE_PLAN.md](V0_RELEASE_PLAN.md) for the canonical repository/worktree explanation, frontend import settings, required backend integration and unresolved hosting eligibility/budget gates. Compose below remains the tested integration baseline, not evidence of a hosted v0 release.
+The owner uses Vercel with no additional spending or purchased domain; the older v0 plan is historical. See [V0_RELEASE_PLAN.md](V0_RELEASE_PLAN.md) for the canonical repository/worktree explanation, frontend import settings, required backend integration and unresolved hosting eligibility/budget gates. Compose below remains the tested integration baseline, not evidence of a hosted v0 release.
 
 Docker Compose is the intended production-like local path. Install Docker first. Copy `.env.example` to `.env` and replace every placeholder. Choose a long random ADMIN_TOKEN and a private URL-safe POSTGRES_PASSWORD (for example, generated with secrets.token_urlsafe). Compose requires the latter and derives its internal connection URL from it. Run `docker compose up --build -d`; migrate is a one-shot dependency. API health: http://localhost:8000/health. Web: http://localhost:3000. Database and Redis are internal only.
 

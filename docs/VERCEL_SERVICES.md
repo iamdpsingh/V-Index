@@ -184,7 +184,7 @@ credentials are absent from the committed evidence.
 
 Owner update November 21: initial indexing and persistent refreshes are now
 requested for the existing Vercel project. `vercel.json` declares a production
-`worker` daemon using the existing root Dockerfile, one `1Gi` instance in
+`worker` daemon using `Dockerfile.worker`, one `1Gi` instance in
 `iad1`, and `scripts.start_production_worker` as its process. The API and web
 services retain their public routing and binding.
 
@@ -276,3 +276,30 @@ storage/dashboard ingestion is not asserted. The production indexing daemon
 remained ready with one alive instance after rollout.
 
 See [production CSP verification](../evidence/20261121-vaya-beacon-csp.json).
+
+
+## Hosted monitoring and private recovery, November 21
+
+The production worker now includes PostgreSQL 18 tools and a temporary loopback
+restore server. Daily AES-256-GCM snapshots are restored and count-checked before
+private upload. `BLOB_READ_WRITE_TOKEN`, `BLOB_STORE_ID` and
+`BACKUP_ENCRYPTION_KEY` are production-only server variables, independent of the
+resume key. The dedicated private Blob store is `rolewisp-production-backups`,
+iad1. The API/frontend never receive backup keys in client bundles.
+
+Provider-confirmed seven-day automatic expiry and a 512 MiB archive budget keep
+storage bounded. At the first measured 42,387,200-byte snapshot, seven retained
+daily archives would use about 297 MB, before dataset growth. This is a measured
+archive size and a projection, not a monthly bill. Blob Hobby includes 1 GB,
+2,000 advanced operations and 10 GB transfer per month; it stops at limits.
+A thirty-minute monitoring upload is about 1,440 PUTs per thirty days, leaving
+room within the advanced-operation allowance for daily archives and reports.
+Redeploys, manual probes and growing usage also consume allowances; monitor them.
+
+No actual invoice/CPU/runtime quota usage has been measured in this session.
+Existing PostgreSQL/Redis plan allowances and capacity must be verified by the
+account owner. No paid upgrade is authorized. Twenty-day continuity is conditional
+on all provider quotas; the memory calculation above alone is insufficient.
+
+[Recovery and private operator reports](OPERATIONS.md),
+[Blob limits](https://vercel.com/docs/vercel-blob/usage-and-pricing).

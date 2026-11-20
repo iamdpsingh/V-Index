@@ -1,15 +1,8 @@
 # Technical privacy and policy review
 
-November 21 runtime update: the owner added Vaya's shared analytics script and
-approved its exact image beacon path. Earlier observations of no third-party
-analytics describe the preceding review. The script sends pathname/referrer
-page-view data; this integration adds no calls to its identify API. Consumer
-policy copy was not revised in this narrowly scoped change, so previous
-no-analytics wording requires reconciliation in the product privacy review.
-
-
-November 20, 2026. Production is paused. This records application behavior and
-remaining release checks; it is not a legal-compliance certification.
+November 21, 2026: production is running. This is an engineering review, not a
+legal-compliance certification. The owner explicitly retains the placeholder
+support address and leaves inbox verification open.
 
 | Data | Purpose and access | Current retention/control |
 | --- | --- | --- |
@@ -25,12 +18,12 @@ remaining release checks; it is not a legal-compliance certification.
 | CSP classifications | Detect policy regressions | Directive/disposition counters expire after seven days; no URLs, code samples or report bodies stored |
 
 User deletion removes live private rows through foreign-key cascades. Expiry
-maintenance runs independently of long indexing fetches. The public policy
-reflects these practices, including conditional 30-day encrypted backup
-retention when backups are enabled. The backup timer/pruner is supplied but not
-installed. Restoring an old backup can restore deleted records; reconcile
-post-snapshot deletions before reopening. A durable deletion-ledger procedure
-and off-site backup configuration remain production gates.
+maintenance runs independently of indexing. Hosted backups are encrypted and
+provider-expire after seven days even if the worker stops; full isolated restore
+and private upload were verified. Restoring an old snapshot can resurrect deleted
+rows. Reconcile post-snapshot deletions and revoke sessions before exposing a
+restored database. Independent recovery-key custody/deletion reconciliation are
+still operator gates, not automated guarantees.
 
 ## Browser data and consent
 
@@ -39,13 +32,17 @@ cookies. Mutations require the exact configured Origin. Logout revokes the
 session and sends Clear-Site-Data for cookies, storage and cache. Private/API
 responses and nonce-bearing HTML are no-store.
 
-The source contains no advertising/analytics SDK or third-party embed. The
-real-data local browser review recorded no third-party browser origins. Based
-on this application behavior, no optional-cookie consent banner was added.
-This does not establish that future hosting injects no tooling or that every
-jurisdiction has identical notice/consent requirements. Recheck the deployed
-network, actual analytics switches and hosting disclosures before launch.
-Adding optional tracking requires a fresh assessment and meaningful choice.
+Vaya analytics is an optional shared-head script. It is absent by default until
+an affirmative Allow analytics choice, and remains off under GPC or DNT signals.
+Essential only is equally available; Cookie notice exposes persistent settings.
+The necessary preference cookie lasts six months. Withdrawal reloads the page
+to terminate the previously loaded third-party code. Our integration makes no
+identify calls and forwards no email/profile/resume fields. The reviewed script
+sends pathname/referrer and ordinary network request metadata to its beacon.
+The exact image-beacon path is CSP-allowed; other image destinations are not
+broadly enabled by this change. Browser tests intercept telemetry to avoid
+inflating challenge analytics. This is not a guarantee about future vendor-code
+changes or every jurisdiction's legal consent requirements.
 
 Email, profile and resume data is not sent to an AI parsing service. Social
 sign-in contacts a chosen provider only when configured and initiated. A job
@@ -81,5 +78,5 @@ Before public release, review the actual operator/hosting processors, locations,
 notice/consent and withdrawal, access/correction/erasure/grievance handling,
 children's data and age policy, retention/backups, incident response and
 cross-border processing. Current edit/delete controls are useful engineering
-measures; they are not a completed legal assessment. Production and support
-verification remain explicitly deferred.
+measures; they are not a completed legal assessment. Final legal/operator and support verification remain open; the owner retained
+the placeholder rather than supplying a working inbox.

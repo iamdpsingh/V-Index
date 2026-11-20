@@ -1,0 +1,67 @@
+{
+  "recorded_at": "2026-11-20T22:25:00.215874+00:00",
+  "scope": "Local automated suites plus separately linked hosted probes; not a security certification.",
+  "backend_full_suite": {
+    "passed": 1237,
+    "skipped": 1,
+    "postgresql_and_redis_enabled": true
+  },
+  "additional_failure_classification_cases": 7,
+  "browser_suite": {
+    "passed": 192,
+    "skipped": 10
+  },
+  "frontend_build": "passed",
+  "ruff": "passed",
+  "mypy": "passed",
+  "python_production_packages_audited": 44,
+  "known_python_vulnerabilities": 0,
+  "known_npm_vulnerabilities": 0,
+  "reachable_git_history_high_confidence_pattern_counts": {
+    "private_key": 0,
+    "github_token": 0,
+    "openai_project_key": 0,
+    "aws_access_key": 0
+  },
+  "secret_review_limitations": "Heuristic scanners are not exhaustive. Keyword/basic-auth candidates are test values, documentation placeholders and malformed public mailto HTML. Entropy matches include public data and lockfile hashes. Previously chat-pasted credentials need issuer-side rotation; rotation is not verified.",
+  "coverage": {
+    "verified": 71,
+    "required": 78,
+    "percent": 91.0
+  },
+  "dedupe_replay": {
+    "scope": "Deterministic synthetic reviewer replay; not live coverage or an upstream duplicate claim",
+    "observations": 4,
+    "canonical_jobs": 3,
+    "merged_sources": [
+      {
+        "source_id": 1,
+        "source_url": "https://example.org/source-a/1",
+        "application_url": "https://example.org/apply/1?utm_source=a",
+        "status": "open",
+        "first_seen_at": "2026-11-18 22:22:22.810417+00:00",
+        "last_changed_at": "2026-11-18 22:22:22.810417+00:00",
+        "last_checked_at": "2026-11-18 22:22:22.810417+00:00"
+      },
+      {
+        "source_id": 2,
+        "source_url": "https://example.org/source-b/1",
+        "application_url": "https://example.org/apply/1?utm_source=b",
+        "status": "open",
+        "first_seen_at": "2026-11-18 22:22:22.810417+00:00",
+        "last_changed_at": "2026-11-18 22:22:22.810417+00:00",
+        "last_checked_at": "2026-11-18 22:22:22.810417+00:00"
+      }
+    ],
+    "duplicate_tracking_variants_merged": true,
+    "different_requisition_kept_separate": true,
+    "different_location_kept_separate": true,
+    "partial_snapshot_rejected_without_closures": true,
+    "changed_description_visible": true,
+    "richer_active_metadata_preserved": true,
+    "borrowed_field_sources": {
+      "description": "https://example.org/source-a/1",
+      "salary": "https://example.org/source-a/1"
+    }
+  }
+}

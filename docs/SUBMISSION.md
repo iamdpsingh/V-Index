@@ -1,8 +1,8 @@
 # Vaya submission preparation
 
-Draft only. The owner paused production and external submission. No founder
-profile, repository connection, public demo connection or challenge submission
-has been changed by this release pass.
+Ready-to-review draft, November 21. The live demo is running. Authenticated Vaya
+access was unavailable in this session, so founder/profile/repository/demo
+connection and final submission remain unverified; no ranking is claimed.
 
 Startup name: **Rolewisp**
 
@@ -12,7 +12,7 @@ Operator/founder name supplied: **Dhruv Pratap Singh**
 
 Repository: https://github.com/iamdpsingh/V-Index
 
-Public demo: **deferred; use the verified deployment URL when production resumes**
+Public demo: https://rolewisp.vercel.app
 
 Public support address supplied: example@rolewisp.in, delivery unverified.
 Do not invent a founder email, LinkedIn profile, location, revenue or users.
@@ -34,6 +34,9 @@ and source-data limitations are disclosed for review.
 
 ## Technical review package
 
+- [Hosted release checks](../evidence/20261121-hosted-release-review.json),
+  [hosted backup](../evidence/20261121-hosted-backup.json), and
+  [release checklist](RELEASE_CHECKLIST.md).
 - [Release walkthrough](RELEASE_HANDOFF.md), [API reference](API.md) and
   [OpenAPI specification](openapi.json).
 - [Coverage matrix](COVERAGE.md), backend/providers.json and timestamped evidence.
@@ -49,9 +52,10 @@ and source-data limitations are disclosed for review.
 - [Operations](OPERATIONS.md), [privacy review](PRIVACY_REVIEW.md),
   deployment/recovery instructions, source constraints and dependencies.
 
-Before submitting, resume production explicitly, connect the actual healthy
-public demo, verify hosted refreshes and private/proxy behavior, verify support
-and provider flows, and record actual service bills/quotas. Copy only established
+Before submitting, connect the healthy public demo and repository in the actual
+Vaya account, verify the supplied founder fields, and disclose the open coverage,
+support/provider, operational and legal gates. Read the latest hosted evidence
+and record actual service bills/quotas. Copy only established
 founder facts into Vaya. Review the exact challenge/acquisition terms and
 coverage limitations before the final submission. A draft, local demo, historical
 CI result or imported Vercel repository does not establish submission or ranking.

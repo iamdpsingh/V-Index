@@ -16,7 +16,7 @@ async def monitor() -> None:
 
     await asyncio.sleep(20)  # Allow the independent worker heartbeat to start.
     previous = None
-    last_publish = -900.0
+    last_publish = -1800.0
     while True:
         try:
 
@@ -58,7 +58,7 @@ async def monitor() -> None:
                     redis.ltrim("vindex:operations:alerts", 0, 49)
                     redis.expire("vindex:operations:alerts", 7 * 86400)
                 previous = state
-            if os.getenv("BLOB_READ_WRITE_TOKEN") and time.monotonic() - last_publish >= 900:
+            if os.getenv("BLOB_READ_WRITE_TOKEN") and time.monotonic() - last_publish >= 1800:
                 await asyncio.to_thread(publish_report, "operations/latest.json", report)
                 last_publish = time.monotonic()
         except Exception as error:

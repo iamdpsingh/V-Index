@@ -1,236 +1,73 @@
 # Rolewisp release status
 
-Updated November 20, 2026. Production/deployment and submission are paused at
-the owner’s instruction. [Release handoff](RELEASE_HANDOFF.md) is the current
-walkthrough. Coverage expansion is paused without changing 71/78 acceptance.
+Updated November 21, 2026. [Rolewisp](https://rolewisp.vercel.app) is deployed
+with a persistent indexing worker. Coverage expansion remains paused at
+**71/78 platforms (91.0%)**. The [internal release checklist](RELEASE_CHECKLIST.md)
+passes **15/20 checks (75%)**, explicitly separate from coverage and Vaya scoring.
+The challenge criteria are not all complete.
 
-This document distinguishes the integrated software,
-local validation, platform evidence, and public launch work.
+## Measured production results
 
-## Integrated product
+- Public index: **7,937 jobs** at the recorded hosted review. Fresh initial
+  collection, not a copied local development database.
+- **142** registered sources; **127** with an initial complete success,
+  **15** without one, **14** with consecutive failures, zero stale/abandoned
+  sources at that snapshot. Counts overlap by definition. A running interrupted
+  source can appear in failed-run diagnostics while its next attempt is active.
+- A second real Ashby fetch completed with **78 jobs**, versus **77** initially;
+  the index increased by one. This was an operator-triggered native refresh,
+  not a claim that six hours of unattended operation were observed.
+- Hosted checks passed: private profile/resume ownership, employer ownership and
+  unverified-publish denial, operator authorization, login/signup limits with
+  Retry-After, signed proxy metadata, no-store and Secure/HttpOnly cookies.
+- Production backup: **42,387,200 encrypted bytes**, all **16 tables** restored
+  and count-matched in an isolated PostgreSQL 18 instance. Anonymous archive
+  access returned **403**; provider-confirmed expiry is **seven days**.
+- Actual desktop/mobile search, pagination, combined filters, details/apply links,
+  favicon and profile editing passed with no observed overflow or page errors.
 
-- Consistent public salary/employment/workplace output across search, detail, and
-  recommendations, with original values preserved and provenance timestamps.
-- Search by keyword, company, and location with pagination and original links.
-  The web client requests summary records and loads full details on selection.
-  Existing API consumers keep the default full response.
-- PostgreSQL trigram indexes support the existing substring search. Active-job
-  lookup and due-source scheduling have dedicated indexes.
-- Scheduled refreshes use source leases, transactions, cooldowns, and existing
-  completeness/closure rules. PostgreSQL workers default to four simultaneous
-  independent source refreshes. SQLite refreshes remain serial.
-- Candidate and Employer onboarding, private manual profiles, qualification
-  categories, profile photos, encrypted résumé storage, and recommendations.
-- Employer drafts, editing, publishing, and closing with ownership enforcement.
-  Publishing requires a verified email.
-- Email verification and recovery code flows, plus configurable Google,
-  LinkedIn, and GitHub OAuth callbacks. Live provider activation needs configured
-  accounts and callback URLs.
-- Privacy, terms, cookie, and refund pages, with policy links during signup.
-  The owner supplied operator details and a public contact address. Final legal review and contact delivery verification are still needed.
-- Free/Plus regional catalogue. Paid checkout remains deferred.
-- Repeatable registration of 142 reviewed source examples across the 71
-  live-verified platforms. Source registration schedules fresh work.
+[Hosted review](../evidence/20261121-hosted-release-review.json),
+[backup](../evidence/20261121-hosted-backup.json),
+[production UI](../evidence/20261121-production-product-review.json),
+[profile review](../evidence/20261121-production-private-profile-review.json).
 
-## Validation recorded locally
+## Integrated implementation and validation
 
-- 1,227 backend tests passed with PostgreSQL and Redis enabled. One
-  PostgreSQL-specific planner test was skipped in its SQLite fixture.
-- 182 browser checks passed. Ten device-specific cases were intentionally
-  skipped. Coverage includes search/detail navigation, private profile editing,
-  employer drafts, pricing display, keyboard operation, and operator views. Browser fixtures and screenshots use synthetic data and are separate from live connector evidence.
-- Production frontend build, Ruff checks, Ruff format checks, and mypy passed.
-- Private account/profile/qualification/resume and employer draft checks passed
-  through the production web proxy. The latest smoke used local SQLite and Redis; the backend suite separately exercised PostgreSQL.
-- A 25-job response from the local index shrank from 111,068 to 22,638 bytes when
-  requesting summaries, a 79.6% reduction. This is payload measurement on the
-  local dataset, not a claim about hosted latency or load capacity.
-- Python production dependency audit checked 37 packages and reported no known
-  vulnerabilities. npm reported zero known vulnerabilities during installation.
-- HTML headers were checked on the production build. The CSP now enforces
-  fresh script nonces and strict-dynamic, with private no-store HTML and
-  aggregate reporting. Trusted Types remains report-only; deployed security
-  validation remains deferred.
-- Current tracked-file and reachable-history heuristic scans were run. Historical
-  OpenAI-key-shaped matches were public Workday job-path fragments. No confirmed
-  credential was identified in the reviewed scope. This is not a security
-  certification or proof covering external systems, backups, or every leak form.
+Candidate/Employer onboarding, private manual profiles and qualification
+categories, encrypted resume/photo storage, recommendations, owned employer
+drafts, verification/recovery and OAuth backend are integrated. Live provider
+activation is a separate gate. Resume parsing was removed by owner request;
+paid checkout remains intentionally deferred.
 
-GitHub reruns backend, browser/build, and full Compose checks on push. Read the
-actual result for the submitted revision in the [Verify workflow](https://github.com/iamdpsingh/V-Index/actions/workflows/ci.yml).
+The full local backend run passed **1,237 tests**, one skipped, with PostgreSQL
+and Redis enabled. Seven additional failure-classification cases passed after
+that run. Browser suite: **192 passed, 10 skipped**. Frontend build, Ruff and
+mypy passed. Production Python audit checked **44 packages** with zero known
+vulnerabilities; npm audit also returned zero. Offline heuristic secret/history
+review found no confirmed credential in the reviewed scope, which is not a
+proof that all leak forms or all external systems are safe.
+[Validation](../evidence/20261121-release-validation.json). Read actual CI for
+the submitted revision in [Verify](https://github.com/iamdpsingh/V-Index/actions/workflows/ci.yml).
 
-## Platform acceptance remains open
+## Remaining exceptions
 
-The registry records 71 fully verified platforms, comprising 54 ATS platforms
-and 17 job-board platforms. The coverage workflow additionally records partial
-extracts on Paycom, Dover, Paycor, and UltiPro. Talenetic has one fully indexed board and an incomplete second board.
-Third-party samples do not establish upstream completeness or freshness.
+Current fetch failures include robots denials, HTTP 429 cooldowns, a removed
+route, a redirect, publisher/schema mismatches, incomplete native enumeration,
+conflicting descriptions and a deployment-interrupted attempt. They retain
+observations and never imply closure. Full initial-source success is open.
 
-Gem.com completed full live runs on Nabla Bio (3 jobs) and nclusion (7 jobs),
-then committed matching results through the real worker. Its public hosted-board
-GraphQL interface is separate from the blocked API host examined earlier.
+Full platform acceptance remains open: Paycom, Dover, Paycor and UltiPro have
+partial extraction; Talenetic has one complete board and an incomplete second
+board with required-field gaps. CareerSiteCloud and eJobBoard have no usable
+integrated live coverage. [Coverage matrix](COVERAGE.md),
+[workflow](COVERAGE_WORKFLOW.md), [record audit](../evidence/20261120-record-quality-local.json).
+These historical audits are not a current hosted census.
 
-TalentReef completed full runs on JC Resorts (87 jobs) and the On the Border
-board (24 jobs), then committed both through the worker. It uses the native
-public app's production gateway with tenant-scoped external-only queries,
-complete pagination, successful shard checks, and a second full collection read.
+External alerts, verified support, real provider email/OAuth checks, independent
+recovery-key custody, deletion reconciliation, credential rotation confirmation,
+custom-domain/legal review, measured bills/quotas and authenticated Vaya submission
+remain open. The owner explicitly retains example@rolewisp.in as an unverified
+placeholder. No leaderboard rank, full compliance or acquisition is claimed.
 
-Dayforce completed MAAS Energy Works (22 jobs) and SILK (38 jobs), including
-full public details and final roster reconfirmation, then committed both through
-the worker. The public app obtains a server-issued anonymous CSRF token/cookie
-pair before read-only search POSTs. Earlier requests omitted that handshake.
-No login, challenge bypass, or private candidate session is used.
-
-Talenetic has a resumable connector for two branded boards. Medical Update
-Online committed 2,844 active jobs after examining all 2,900 sitemap entries,
-validating 56 explicitly expired pages, and reconfirming the full sitemap.
-All active records carry the publisher-supplied company label “Partner Jobs”
-and are flagged accordingly; actual hiring-company names are not inferred.
-Final counts are audited in `evidence/20261120-talenetic-committed-record-audit.json`.
-The fresh Pro Contract Jobs sitemap had 36,523 candidate URLs, but the run
-stopped on a removed/invalid detail. It remains incomplete and unreconciled.
-
-CareerSiteCloud and eJobBoard are on hold at the owner’s request pending usable
-installation URLs. They are still required by the original challenge.
-
-All seven remaining platforms still need full reusable connector acceptance. The original
-78-platform requirement is open. See [coverage](COVERAGE.md) and
-[coverage workflow](COVERAGE_WORKFLOW.md).
-
-## Public release needs external configuration
-
-- A Vercel/v0 frontend deployment and a reachable API, PostgreSQL, Redis, and
-  persistent worker. Hosting, quotas, and actual operating costs need validation
-  within the owner's budget.
-- The approved public origin/domain, HTTPS, gateway/proxy rate behaviour,
-  secret injection, private caching checks, backups, and a restore drill.
-- Live SMTP delivery and inbox verification. Each configured OAuth provider
-  needs a browser login test using its real application registration.
-- Verify delivery to the supplied contact address, `example@rolewisp.in`. The owner supplied Dhruv Pratap Singh as operator. Privacy/legal and consent/tracking review against the deployed site remain open.
-- The Vaya project/repository/demo connection and submission. The public
-  leaderboard request redirected to sign-in, so ranking was not verified.
-
-## Competitor findings
-
-JobSweep's public coverage page reported 76 live platforms out of 78. Its
-definition of live requires a connector and an enabled site. Paycom and UltiPro
-are explicitly described as sampled coverage, while CareerSiteCloud showed no
-active jobs or successful crawl. Its public API returns compact summaries,
-separate job details, and cursor pagination.
-
-JobIndex returned an automated-access restriction for the homepage and the
-suggested jobs API page. Its current coverage and implementation could not be
-verified in this pass. Public endpoints do not disclose either site's private
-database design, infrastructure configuration, or implementation source.
-
-Sources are the [JobSweep coverage page](https://jobsweep.works/coverage),
-[public API schema](https://jobsweep.works/openapi.json), and
-[Vaya leaderboard](https://vayahq.com/leaderboard?challenge=build-a-job-board-indexer-for-10000).
-
-
-## Consistent-record acceptance, November 20
-
-The shared public serializer and stricter input validation are implemented.
-Merged first-seen/last-changed timestamps preserve source history and cannot move
-backwards on an older-source refresh. Public output includes last-checked times
-and each original source/application link. Source observations remain unchanged.
-Salary currencies, pay periods, employer names and missing descriptions are
-never guessed. See [the connector contract](CONNECTOR_CONTRACT.md#consistent-public-records-november-20).
-
-A strict audit of the isolated worker-committed Dayforce, Gem.com and talentReef
-validation database passed all **181 open records**: required fields, typed
-public output, timestamps, links and populated optional-field retention.
-[Recorded audit](../evidence/20261120-record-quality-new-platforms.json).
-This database is separate from the local demo population; the counts must not
-be added together.
-
-Talenetic remains incomplete. MedicalUpdate's committed 2,844 jobs use the
-publisher's generic “Partner Jobs” company label, and 102 lack structured
-location. Its 2,900-candidate run also observed 56 explicitly expired pages.
-The second ProContract board still advertises a removed detail: an allowed
-fresh read again returned HTTP 410. No partial snapshot was published, and no
-closure was inferred from that failure. Completing the second board would
-resolve the additional-board gate, but required employer/location quality
-would still need resolution for full challenge acceptance.
-[Record audit](../evidence/20261120-record-quality-talenetic.json),
-[fresh failing-detail recheck](../evidence/20261120-talenetic-second-board-recheck.json).
-
-The consistent-record acquisition criterion remains open while required source
-fields are missing. The audit reports these gaps explicitly; structural schema
-success must not be presented as complete source data or full 78-platform
-acceptance.
-
-
-The final local audit inspected **8,109 open observations** and their canonical
-records across 66 connector keys. Typed public contracts and optional-field
-retention passed with zero contract failures. It still found **74 blank
-descriptions and 182 blank locations**. The population includes 202 last-known
-observations retained while closure confirmation is pending. This is not a
-fresh upstream job census or an audit of every historically verified platform.
-[Local audit](../evidence/20261120-record-quality-local.json).
-
-Both reviewed Jobboardly boards (21 and 1,493 jobs) and both Nodex boards (35 and
-15 jobs) passed new full live runs and matching worker commits. Native-page
-fallback recovered three Jobboardly locations; other absent native fields
-remain flagged. Nodex now captures source salary and all supplied locations/
-employment types. [Live runs](../evidence/20261120T111115Z-smoke.json),
-[worker results](../evidence/20261120-record-enrichment-worker.json).
-
-A Talenetic detail also exposed a native employment label absent from JSON-LD.
-The parser now preserves that explicit field and its original HTML. One freshly
-fetched detail verified the recovery of “Permanent”. This is not a full board
-refresh; the earlier committed 2,844-job audit predates that recovery.
-[Native field check](../evidence/20261120-talenetic-native-field-recheck.json).
-
-
-A later November 20 investigation checked ProContract's unfiltered native
-search as an alternative to its stale sitemap. The current robots policy
-rejects `/job-search-results`; no request was sent to that route. Another
-possible installation, Oilfinity, is listed by recruitment integration provider
-[idibu](https://www.idibu.com/network/oilfinity/), but both reviewed HTTPS origins
-returned HTTP 302 on robots.txt and provided no validated current board.
-Neither investigation grants coverage or an alternate complete feed.
-[Search policy evidence](../evidence/20261120-talenetic-active-search-policy.json),
-[Oilfinity checks](../evidence/20261120-talenetic-oilfinity-research.json).
-
-
-## Local release finalization
-
-The automatic-update operations pass added an independent 15-second worker
-heartbeat, authenticated source-health diagnostics, failure/staleness alerts,
-structured event logs, graceful cancellation and hourly stale-attempt/auth
-artifact cleanup. Local watch mode is running. No external alert delivery is
-claimed. The recorded source inventory has 132/143 initial successes, 11 pending
-initial successes, 13 failing sources and one stale source. Four native-source
-schema/URL failures were repaired, without changing platform coverage.
-
-Deduplication now preserves nonempty description and optional metadata from
-active observations, records borrowed field origins, and keeps the searchable
-canonical projection consistent with public output. A newer changed observation
-is not replaced by an older unchanged mirror. Distinct requisitions and
-locations remain separate. Source observations and original links are retained.
-
-The latest PostgreSQL/Redis-backed suite passed 1,227 tests with one intentional
-SQLite fixture skip; 182 desktop/mobile browser checks passed with ten
-intentional device-specific skips. Production build/typecheck, Ruff and mypy
-passed. The complete new Compose build could not be rerun locally because
-Docker is unavailable; existing remote green CI predates these local changes.
-
-The encrypted PostgreSQL restore drill passed all 16 tables, including private
-resume/photo decryption and tamper/overwrite refusal. Daily backup/pruning and
-monitor service templates are supplied, not installed. Actual off-site backups
-and deployed restore verification remain deferred.
-
-Real-data desktop/mobile review passed filters, pagination, detail links,
-favicon, no horizontal overflow and no page errors. Private profile review
-confirmed read-only display until Edit and saved edits through the real API.
-Temporary accounts were deleted. The local security review found no confirmed
-high-confidence credential match or literal runtime secret in browser bundles;
-production dependency audits reported no known vulnerabilities. This is scoped
-local evidence, not proof that no vulnerability or secret form can exist.
-
-The public policies have updated retention copy. The operator/address remain
-as supplied; inbox verification, legal review against actual hosting, provider
-activation, deployed rate/caching tests, public demo and Vaya submission stay
-on hold. [Current handoff](RELEASE_HANDOFF.md), [operations](OPERATIONS.md),
-[privacy review](PRIVACY_REVIEW.md) and [submission draft](SUBMISSION.md).
+[Handoff](RELEASE_HANDOFF.md), [operations](OPERATIONS.md),
+[privacy](PRIVACY_REVIEW.md), [backlog](BACKLOG.md), [submission draft](SUBMISSION.md).

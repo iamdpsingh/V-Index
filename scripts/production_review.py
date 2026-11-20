@@ -12,6 +12,32 @@ from scripts.cloud_backup import publish_report
 ORIGIN = "https://rolewisp.vercel.app"
 
 
+def failure_category(message: str) -> str:
+    message = message.lower()
+    for term, label in [
+        ("429", "rate_limited"),
+        ("robots policy disallows", "robots_disallowed"),
+        ("robots", "robots_fetch_failure"),
+        ("404", "native_route_missing"),
+        ("403", "access_denied"),
+        ("301", "native_redirect"),
+        ("worker stopped", "deployment_interruption"),
+        ("identity mismatch", "publisher_identity_mismatch"),
+        ("description", "description_validation"),
+        ("sitemap", "incomplete_enumeration"),
+        ("disagree", "incomplete_enumeration"),
+        ("bootstrap", "native_schema_changed"),
+        ("unexpected paradox page", "native_schema_changed"),
+        ("timeout", "timeout"),
+        ("pagination", "incomplete_enumeration"),
+        ("enumeration", "incomplete_enumeration"),
+        ("externalpath", "native_schema_changed"),
+    ]:
+        if term in message:
+            return label
+    return "unclassified_fetch_failure"
+
+
 def run_review() -> dict:
     checks: dict[str, bool] = {}
     report: dict[str, Any] = {
@@ -201,22 +227,7 @@ def run_review() -> dict:
                 .where(Run.id.in_(latest_ids), Run.status == "failed")
                 .limit(150)
             ):
-                message = (run.error or "").lower()
-                category = "unclassified_fetch_failure"
-                for term, label in [
-                    ("robots", "robots_disallowed"),
-                    ("404", "native_route_missing"),
-                    ("403", "access_denied"),
-                    ("429", "rate_limited"),
-                    ("timeout", "timeout"),
-                    ("pagination", "incomplete_enumeration"),
-                    ("enumeration", "incomplete_enumeration"),
-                    ("externalpath", "native_schema_changed"),
-                    ("description", "description_validation"),
-                ]:
-                    if term in message:
-                        category = label
-                        break
+                category = failure_category(run.error or "")
                 failures.append(
                     {
                         "source_id": source.id,

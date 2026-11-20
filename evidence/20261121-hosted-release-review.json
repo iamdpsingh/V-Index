@@ -1,0 +1,156 @@
+{
+  "recorded_at": "2026-11-20T22:22:10.458414+00:00",
+  "scope": "Actual production HTTPS with deleted synthetic review accounts. Sanitized private operator report; no credentials or private records.",
+  "site": "https://rolewisp.vercel.app",
+  "status": "passed",
+  "checks": {
+    "private_profile_isolation_and_no_store": true,
+    "private_resume_ownership_and_download": true,
+    "employer_ownership_and_unverified_publish_denied": true,
+    "login_rate_limit_behind_public_proxy": true,
+    "signup_rate_limit_behind_public_proxy": true,
+    "trusted_proxy_metadata_verified": true,
+    "second_native_production_refresh": true,
+    "account_does_not_grant_operator_access": true,
+    "public_search_and_pagination": true,
+    "session_cookie_secure_httponly": true,
+    "temporary_account_cleanup": true
+  },
+  "indexed_jobs": 7937,
+  "source_counts": {
+    "sources": 142,
+    "initial_index_complete": 127,
+    "initial_index_pending": 15,
+    "failing": 14,
+    "stale": 0,
+    "abandoned_runs": 0
+  },
+  "live_workers": 1,
+  "fetch_failures": [
+    {
+      "source_id": 51,
+      "provider": "eightfold",
+      "failure_kind": "ValueError",
+      "category": "robots_disallowed",
+      "next_check_at": "2026-11-20T23:02:03.340717+00:00"
+    },
+    {
+      "source_id": 74,
+      "provider": "hireology",
+      "failure_kind": "ValueError",
+      "category": "native_schema_changed",
+      "next_check_at": "2026-11-20T23:06:28.778133+00:00"
+    },
+    {
+      "source_id": 138,
+      "provider": "jobiqo",
+      "failure_kind": "ValueError",
+      "category": "publisher_identity_mismatch",
+      "next_check_at": "2026-11-20T22:23:51.891850+00:00"
+    },
+    {
+      "source_id": 134,
+      "provider": "recruitee",
+      "failure_kind": "UpstreamStatusError",
+      "category": "native_route_missing",
+      "next_check_at": "2026-11-20T23:21:55.364094+00:00"
+    },
+    {
+      "source_id": 50,
+      "provider": "eightfold",
+      "failure_kind": "ValueError",
+      "category": "robots_disallowed",
+      "next_check_at": "2026-11-20T23:02:02.761867+00:00"
+    },
+    {
+      "source_id": 14,
+      "provider": "jobboardfire",
+      "failure_kind": "ValueError",
+      "category": "incomplete_enumeration",
+      "next_check_at": "2026-11-20T23:04:13.060357+00:00"
+    },
+    {
+      "source_id": 66,
+      "provider": "werecruit",
+      "failure_kind": "ValueError",
+      "category": "incomplete_enumeration",
+      "next_check_at": "2026-11-20T23:04:51.750484+00:00"
+    },
+    {
+      "source_id": 75,
+      "provider": "hireology",
+      "failure_kind": "ValueError",
+      "category": "native_schema_changed",
+      "next_check_at": "2026-11-20T23:06:30.094658+00:00"
+    },
+    {
+      "source_id": 142,
+      "provider": "wileymadgex",
+      "failure_kind": "Worker stopped before refresh finished",
+      "category": "deployment_interruption",
+      "next_check_at": "2026-11-20T22:23:17.696638+00:00"
+    },
+    {
+      "source_id": 136,
+      "provider": "workday",
+      "failure_kind": "HTTPStatusError",
+      "category": "rate_limited",
+      "next_check_at": "2026-11-20T22:33:32.971046+00:00"
+    },
+    {
+      "source_id": 137,
+      "provider": "workday",
+      "failure_kind": "HTTPStatusError",
+      "category": "rate_limited",
+      "next_check_at": "2026-11-20T22:31:31.741670+00:00"
+    },
+    {
+      "source_id": 76,
+      "provider": "join",
+      "failure_kind": "UpstreamStatusError",
+      "category": "native_redirect",
+      "next_check_at": "2026-11-20T23:06:31.767421+00:00"
+    },
+    {
+      "source_id": 106,
+      "provider": "gohire",
+      "failure_kind": "ValueError",
+      "category": "incomplete_enumeration",
+      "next_check_at": "2026-11-20T23:10:47.543916+00:00"
+    },
+    {
+      "source_id": 18,
+      "provider": "paradox",
+      "failure_kind": "ValueError",
+      "category": "native_schema_changed",
+      "next_check_at": "2026-11-20T23:01:26.959922+00:00"
+    },
+    {
+      "source_id": 55,
+      "provider": "avature",
+      "failure_kind": "ValueError",
+      "category": "description_validation",
+      "next_check_at": "2026-11-20T23:02:33.641040+00:00"
+    }
+  ],
+  "failure_classification_note": "Categories reconciled from private native diagnostics with current failure_category; raw diagnostics omitted.",
+  "production_refresh_example": {
+    "mode": "operator_triggered_native_refresh",
+    "source_id": 128,
+    "run_id": 198,
+    "status": "success",
+    "jobs": 78,
+    "finished_at": "2026-11-20T22:22:29.258196+00:00"
+  },
+  "first_source_count": 77,
+  "refreshed_source_count": 78,
+  "distinct_same_title_requisition_ids": [
+    7592,
+    7589
+  ],
+  "duplicate_example": "Current hosted sample had no multi-source canonical job. Use the separately labelled historical real duplicate and deterministic replay; no fabricated production duplicate.",
+  "continuous_clock_cycle_observed": false,
+  "support_inbox_verified": false,
+  "smtp_delivery_tested": false,
+  "vaya_submission_verified": false
+}

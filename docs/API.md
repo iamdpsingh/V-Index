@@ -2,7 +2,7 @@
 
 The versioned contract is [openapi.json](openapi.json). The local browser uses
 same-origin `/api/v1` through the web proxy. Direct local API origin is
-`http://127.0.0.1:8000`. Production base URLs are deferred. Public Swagger,
+`http://127.0.0.1:8000`. Production base URL is `https://rolewisp.vercel.app`; use the same `/api/v1` paths. Public Swagger,
 ReDoc and schema-serving routes are disabled; this is not a substitute for
 authentication or authorization.
 
@@ -26,7 +26,7 @@ A changing index can change totals between page requests; pagination is not a
 transactional snapshot cursor.
 
 ```sh
-curl 'http://localhost:3000/api/v1/jobs?keyword=engineer&company=example&location=london&limit=25&offset=0&view=summary'
+curl 'https://rolewisp.vercel.app/api/v1/jobs?keyword=engineer&limit=25&offset=0&view=summary'
 ```
 
 Each record preserves title, employer, description, location, original listing
@@ -55,5 +55,5 @@ operations have Redis-backed limits. 429 includes Retry-After; missing Redis
 fails closed for protected rate checks. Forged forwarding headers do not change
 rate buckets. The Vercel-side proxy can sign client IP/method/path/time with the
 server-only PROXY_SHARED_SECRET; the backend accepts only a fresh valid HMAC.
-Do not enable unrestricted Uvicorn forwarded-header trust. Real hosted proxy
-behavior is an explicit later deployment check.
+Do not enable unrestricted Uvicorn forwarded-header trust. Hosted proxy verification is recorded in the November 21 production review;
+repeat it after changes to the gateway, shared secret or hosting proxy.

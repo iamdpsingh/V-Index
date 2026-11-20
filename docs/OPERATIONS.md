@@ -1,9 +1,45 @@
 # Runtime operations and recovery
 
-November 20: production is on hold. These are tested local tools and future
-installation instructions, not a claim of active cloud monitoring or backups.
-The local demo uses SQLite; PostgreSQL 17/Redis are the intended production
-store/lease services. Coverage expansion remains paused.
+November 21: the Vercel worker is deployed. PostgreSQL/Redis are the production
+state/lease services; local SQLite is separate. Coverage expansion stays paused.
+The cloud worker fills either of its two slots as soon as a source finishes.
+
+## Hosted supervision and backup
+
+`HOSTED_OPERATIONS_ENABLED=true` is set by the production launcher. Monitoring
+runs independently of source fetches, caches current diagnostics in Redis, records
+bounded failure/staleness alert transitions for seven days and emits safe logs.
+Private Blob `operations/latest.json` updates every thirty minutes; it is an
+operator report, not a public endpoint. API `/api/v1/operations` requires the
+operator token. A worker cannot notify anyone after its entire host stops;
+independent external uptime/alert delivery still needs a real receiver.
+
+The daily hosted backup exports a consistent PostgreSQL snapshot, encrypts with
+a separate AES-256-GCM key, fully restores into a temporary PostgreSQL 18 instance
+on loopback, compares all table counts, and uploads only after success. The
+restore child environment excludes production credentials. Temporary database,
+plaintext dump and test instance are removed. No live production restore occurs.
+
+Dedicated private Vercel Blob `rolewisp-production-backups` (iad1) stores the
+archives. Anonymous downloads are denied. Provider-enforced seven-day expiry
+continues even if the worker stops; successful uploads require the provider to
+confirm expiry. Local inventory pruning also keeps recognized archive names
+within a 512 MiB budget, with a 128 MiB maximum per archive. Oversized snapshots
+fail visibly rather than exceed the budget. A Redis lock prevents overlapping
+daily backups; failures retry hourly and appear in monitoring.
+
+Required server-only variables: BLOB_READ_WRITE_TOKEN, BLOB_STORE_ID and
+BACKUP_ENCRYPTION_KEY. Keep backup and resume encryption keys in an independent
+secured recovery location. The project settings alone are not independent key
+custody. Do not rotate either encryption key without a data migration/recovery plan.
+Private reports `operations/backup-latest.json` and `operations/release-review.json`
+contain backup/probe outcomes, not credentials or private resume contents.
+
+Python Blob SDK 0.6 lacks TTL arguments. The narrow fixed-host upload hook uses
+the official @vercel/blob 2.9.0 wire headers `x-ttl-days: 7`, API version 13 and
+checks the returned `expiresAt`. See the [provider TTL announcement](https://vercel.com/changelog/vercel-blob-now-supports-ttls-for-automatic-deletion).
+Recheck this bridge when upgrading either SDK. No uncontrolled outbound host or
+environment proxy is used.
 
 ## Refreshes and failures
 
@@ -46,7 +82,7 @@ PYTHONPATH=backend uv run python -m scripts.monitor --watch --interval 60 --outp
 One-shot monitoring exits 1 for an alert, 0 for healthy. Watch mode atomically
 updates a private local file and logs state changes without repeating identical
 alerts. It does not send emails or webhooks. Connect a verified notification
-channel when production resumes; the example support address is not a receiver.
+channel; the example support address is not a receiver.
 `ops/rolewisp-monitor.service` is a hardened Linux template, not installed here.
 Host log retention and notification delivery still need deployment validation.
 
@@ -81,8 +117,10 @@ Pruning removes only this tool's recognized archives older than 30 days.
 `ops/rolewisp-backup.service` and `.timer` prepare a daily UTC schedule plus
 pruning; they are not installed or enabled. Replicate encrypted archives to an
 approved independent storage location before calling this an off-site backup.
-No off-site destination, cloud backup bill or actual notification receiver is
-configured in this pass.
+These local systemd templates are alternatives to the deployed cloud routine,
+not installed services. The cloud routine above uses seven-day provider TTL;
+the manual local prune command below retains its older thirty-day default.
+Never use that local default for public production retention promises.
 
 Test recovery without touching user data:
 
@@ -95,7 +133,8 @@ create/drop databases. The drill creates only randomly named databases,
 restores synthetic data, checks private file decryption and tamper/overwrite
 rejection, then removes those disposable databases. Its encryption keys are
 intentionally ephemeral. [Recorded drill](../evidence/20261120-backup-restore-drill.json).
-This does not replace restoring an actual hosted backup after deployment.
+The hosted routine above now verifies an actual production snapshot separately.
+This synthetic test also exercises private-file decryption and tamper guards.
 
 ## Privacy retention and recovery gates
 

@@ -1,0 +1,19 @@
+{
+  "recorded_at": "2026-11-20T22:19:01.432649+00:00",
+  "scope": "Actual production PostgreSQL snapshot restored only into a disposable loopback PostgreSQL 18 instance before private offsite upload.",
+  "status": "success",
+  "encrypted_bytes": 42387200,
+  "sha256": "6a85388b44a3bf03c2d60d01742cd9963ab758c37f072428286a17e2da38399a",
+  "tables_restored": 16,
+  "all_table_counts_match": true,
+  "production_database_mutated_by_restore": false,
+  "storage_access": "private",
+  "anonymous_http_status": 403,
+  "anonymous_access_denied": true,
+  "retention_days": 7,
+  "provider_expiry_verified": true,
+  "retained_bytes": 42387200,
+  "archives_pruned": 0,
+  "independent_recovery_key_custody_verified": false,
+  "post_snapshot_deletion_reconciliation_automated": false
+}
