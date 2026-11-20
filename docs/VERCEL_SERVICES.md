@@ -77,11 +77,11 @@ selected database before serving traffic. Do not migrate the shared database
 on every function import or preview build. Preserve backups and the existing
 private-file key when moving data.
 
-These two request services do not start `python -m vindex.worker`. A continuous
-worker/daemon needs separately confirmed hosting and budget, the same PostgreSQL
-and Redis, `PYTHONPATH=backend`, and optionally `WORKER_CONCURRENCY=4`. No new
-worker service, cron or daemon was guessed into this configuration. Without a
-running worker the website can search saved data but cannot maintain freshness.
+The two request services do not start the scheduler. The November 21 owner
+request added the separate production daemon documented below. It uses the
+same hosted PostgreSQL and Redis and maintains freshness independently of web
+requests or the operator computer. Removing that daemon from a later deployment
+stops the worker, so preserve the committed daemon configuration.
 
 `BACKUP_ENCRYPTION_KEY` is required on the separate backup operator host, not
 needed by the web request services. Keep it separate from the private-file key.
@@ -229,3 +229,34 @@ by a successful deployment. This configuration does not authorize an upgrade.
 
 References: [Vercel daemon quotas](https://vercel.com/docs/daemons/limits),
 [daemon configuration](https://vercel.com/docs/daemons/config-reference).
+
+
+### Hosted verification, November 21
+
+Deployment `dpl_E9yyFGqMYF89rJPUns9SupdXFbR7` promoted the worker and shared-head
+Vaya script to rolewisp.vercel.app. Vercel reported one ready/alive 1Gi instance
+in iad1. Fresh public job totals increased through 154, 235, 348 and 641 during
+the review. Search, filters, details and original application links passed
+on desktop and mobile, with no horizontal overflow or JavaScript page errors.
+The worker continues the first pass; the full source-success count has not
+been asserted. The local operator database connection was unavailable during
+this later progress check, so public observations and Vercel readiness are the
+verification sources. Runtime usage metrics were also unavailable; no measured
+CPU-consumption or twenty-day uptime claim is made.
+
+The analytics tag was verified in the head of home/privacy/terms. Its image
+beacon is blocked by the existing img-src policy. The owner has been asked to
+approve the exact beacon path; no policy change has been made without that
+answer. Test browsing blocked Vaya requests to avoid synthetic analytics.
+
+A deployment-input inspection caught a local database/cache inclusion. The
+initial upload was cancelled before promotion; an explicit .vercelignore was
+added and the final input list verified at 199 files / 1,979,669 bytes without
+local databases, private env files, keys or build caches. No public exposure
+was confirmed. The protected local database was retained unchanged.
+
+Evidence: [hosted worker](../evidence/20261121-production-worker.json),
+[product review](../evidence/20261121-production-product-review.json),
+[deployment packaging](../evidence/20261121-deployment-package-check.json).
+The deployment used the CLI from local commit ef9dc2d. GitHub pushing remains
+on the owner's established cadence; no early push was made in this pass.

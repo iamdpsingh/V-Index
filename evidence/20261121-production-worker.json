@@ -1,0 +1,93 @@
+{
+  "recorded_at": "2026-11-20T21:22:38.664290+00:00",
+  "scope": "Actual hosted daemon, production HTTP checks and fresh production listings; not full initial-source completion",
+  "site": "https://rolewisp.vercel.app",
+  "deployment_id": "dpl_E9yyFGqMYF89rJPUns9SupdXFbR7",
+  "source_commit": "ef9dc2d",
+  "daemon": {
+    "name": "worker",
+    "region": "iad1",
+    "instances": 1,
+    "ready": 1,
+    "memory": "1Gi",
+    "persistent_state": "PostgreSQL and Redis, no local database dependency"
+  },
+  "index_samples": [
+    {
+      "open_jobs": 0,
+      "stage": "Before worker setup"
+    },
+    {
+      "open_jobs": 154,
+      "stage": "First production probe"
+    },
+    {
+      "open_jobs": 235,
+      "stage": "Second production probe"
+    },
+    {
+      "open_jobs": 348,
+      "stage": "Desktop/mobile review"
+    },
+    {
+      "open_jobs": 641,
+      "stage": "Final production probe"
+    }
+  ],
+  "sample_fresh_records": [
+    {
+      "job_id": 641,
+      "source_url": "https://www.agrajo.com/job/lagermitarbeiter-mwd-31589",
+      "application_url": "https://www.agrajo.com/job/lagermitarbeiter-mwd-31589",
+      "last_checked_at": "2026-11-20T21:21:53.481206Z"
+    },
+    {
+      "job_id": 640,
+      "source_url": "https://www.agrajo.com/job/produktionsmitarbeiter-mwd-31640",
+      "application_url": "https://www.agrajo.com/job/produktionsmitarbeiter-mwd-31640",
+      "last_checked_at": "2026-11-20T21:21:53.481206Z"
+    },
+    {
+      "job_id": 639,
+      "source_url": "https://www.agrajo.com/job/mitarbeiter-mwd-maschinenreinigung-31734",
+      "application_url": "https://www.agrajo.com/job/mitarbeiter-mwd-maschinenreinigung-31734",
+      "last_checked_at": "2026-11-20T21:21:53.481206Z"
+    }
+  ],
+  "pages": [
+    {
+      "path": "/",
+      "status": 200,
+      "vaya_script_in_head": true
+    },
+    {
+      "path": "/privacy",
+      "status": 200,
+      "vaya_script_in_head": true
+    },
+    {
+      "path": "/terms",
+      "status": 200,
+      "vaya_script_in_head": true
+    }
+  ],
+  "validation": {
+    "backend_tests_passed": 1232,
+    "backend_tests_skipped": 1,
+    "next_production_build": "passed locally and on Vercel",
+    "desktop_mobile_real_data": "passed; pagination, filters, details and application links",
+    "operator_database_progress_query": "Unavailable from this machine; no all-source completion count claimed"
+  },
+  "analytics": "Script present on all checked pages; beacon remains blocked by existing img-src pending owner permission",
+  "budget": {
+    "verified_plan": "hobby",
+    "paid_upgrade_enabled": false,
+    "memory_gb_hours_monthly_quota": 420,
+    "active_cpu_hours_monthly_quota": 5,
+    "window": "November 21 to December 11 crosses December 1 UTC quota reset; memory fits if no other daemon usage, CPU/database/Redis caps still apply"
+  },
+  "remaining": [
+    "Initial indexing continues in the hosted worker; successful completion of every registered source has not been asserted",
+    "Await explicit owner answer for exact Vaya beacon CSP allowance"
+  ]
+}

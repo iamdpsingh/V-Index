@@ -1,5 +1,19 @@
 # Rolewisp release handoff
 
+Current hosted status, November 21: [Rolewisp](https://rolewisp.vercel.app) has
+an active production worker and fresh live listings. The observed open-job count
+increased from zero to 154, 235, 348 and 641 during verification. Initial
+indexing is still in progress; all-source completion has not been claimed.
+The same hosted worker continues scheduled refreshes independently of the
+operator computer. See [worker evidence](../evidence/20261121-production-worker.json)
+and [desktop/mobile production review](../evidence/20261121-production-product-review.json).
+The Vaya script is in the shared head; its image beacon still needs the owner's
+requested CSP decision. The free-tier window and monthly limits are documented
+in [Vercel setup](VERCEL_SERVICES.md#persistent-production-indexing-worker).
+
+The November 20 entries below are historical snapshots of the release pass.
+
+
 Production troubleshooting update, November 20: the owner authorized Vercel
 access and database repair. The production database was empty and is now
 migrated; public search returns 200 with zero jobs. Initial indexing and a

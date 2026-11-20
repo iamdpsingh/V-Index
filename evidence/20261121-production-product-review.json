@@ -1,0 +1,39 @@
+{
+  "scope": "Actual production site and live indexed jobs. Vaya requests blocked in this review context to avoid generating test analytics; no API data mocked",
+  "reviews": [
+    {
+      "viewport": "desktop",
+      "width": 1440,
+      "index_total": 348,
+      "pagination_exercised": true,
+      "filters_exercised": true,
+      "detail_and_application_link": true,
+      "favicon_status": 200,
+      "horizontal_overflow": false,
+      "script_csp_enforced": true,
+      "private_html_no_store": true,
+      "third_party_origins": [
+        "https://vayahq.com"
+      ],
+      "page_errors": [],
+      "interaction_elapsed_ms": 3051
+    },
+    {
+      "viewport": "mobile",
+      "width": 390,
+      "index_total": 348,
+      "pagination_exercised": true,
+      "filters_exercised": true,
+      "detail_and_application_link": true,
+      "favicon_status": 200,
+      "horizontal_overflow": false,
+      "script_csp_enforced": true,
+      "private_html_no_store": true,
+      "third_party_origins": [
+        "https://vayahq.com"
+      ],
+      "page_errors": [],
+      "interaction_elapsed_ms": 3115
+    }
+  ]
+}
