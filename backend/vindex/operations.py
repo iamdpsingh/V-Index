@@ -17,6 +17,16 @@ log = logging.getLogger("vindex.operations")
 HEARTBEAT_PREFIX = "vindex:worker-heartbeat:"
 
 
+def status_record(value) -> dict:
+    if not isinstance(value, (bytes, str)):
+        return {}
+    try:
+        decoded = json.loads(value)
+        return decoded if isinstance(decoded, dict) else {}
+    except (ValueError, UnicodeError):
+        return {}
+
+
 async def heartbeat() -> None:
     key = HEARTBEAT_PREFIX + uuid.uuid4().hex
     redis = redis_client()
@@ -113,6 +123,12 @@ def snapshot(session) -> dict:
                 int(count) if isinstance(count, (str, bytes, int)) else 0
             )
         result["csp_violations"] = violations
+        backup = redis.get("vindex:backup:last-result")
+        if isinstance(backup, (bytes, str)) and backup:
+            result["backup"] = status_record(backup)
+        latest = redis.get("vindex:operations:latest")
+        if isinstance(latest, (bytes, str)) and latest:
+            result["monitor"] = {"last_checked_at": status_record(latest).get("checked_at")}
     except RedisError:
         result.update(redis_available=False, workers={"live": 0, "heartbeats": []})
     counts = result["counts"]

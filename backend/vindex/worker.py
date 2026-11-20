@@ -176,6 +176,56 @@ async def refresh_due_sources(ids: list[int], concurrency: int) -> None:
     await asyncio.gather(*(refresh_one(source_id) for source_id in ids))
 
 
+def due_source_ids(limit: int, active_ids: set[int]) -> list[int]:
+    with Session() as session:
+        statement = select(Source.id).where(
+            Source.next_check <= now(), Source.provider != "employer_posting"
+        )
+        if active_ids:
+            statement = statement.where(Source.id.not_in(active_ids))
+        return list(session.scalars(statement.order_by(Source.next_check).limit(limit)))
+
+
+async def schedule(concurrency: int) -> None:
+    pending: dict[int, asyncio.Task[None]] = {}
+
+    async def one(source_id: int):
+        try:
+            await refresh(source_id, only_if_due=True)
+        except Exception as error:
+            log_event(
+                "worker_infrastructure_failure",
+                source_id=source_id,
+                error_kind=type(error).__name__,
+            )
+            # A failed lease/Redis connection must not become a hot retry loop.
+            await asyncio.sleep(SCHEDULER_POLL_SECONDS)
+
+    try:
+        while True:
+            for source_id, task in list(pending.items()):
+                if task.done():
+                    if not task.cancelled():
+                        task.result()
+                    del pending[source_id]
+            capacity = concurrency - len(pending)
+            if capacity:
+                for source_id in due_source_ids(capacity, set(pending)):
+                    pending[source_id] = asyncio.create_task(one(source_id))
+            if pending:
+                await asyncio.wait(
+                    pending.values(),
+                    timeout=SCHEDULER_POLL_SECONDS,
+                    return_when=asyncio.FIRST_COMPLETED,
+                )
+            else:
+                await asyncio.sleep(SCHEDULER_POLL_SECONDS)
+    finally:
+        for task in pending.values():
+            task.cancel()
+        await asyncio.gather(*pending.values(), return_exceptions=True)
+
+
 async def serve() -> None:
     logging.basicConfig(level=logging.INFO, format="%(message)s")
     concurrency = int(os.getenv("WORKER_CONCURRENCY", "4"))
@@ -186,6 +236,8 @@ async def serve() -> None:
     # Public source URLs can include browser read tokens. Keep transport URLs out of logs.
     logging.getLogger("httpx").setLevel(logging.WARNING)
     logging.getLogger("httpcore").setLevel(logging.WARNING)
+    logging.getLogger("httpx2").setLevel(logging.WARNING)
+    logging.getLogger("httpcore2").setLevel(logging.WARNING)
     task = asyncio.current_task()
     assert task is not None
     loop = asyncio.get_running_loop()
@@ -193,25 +245,25 @@ async def serve() -> None:
         loop.add_signal_handler(sig, task.cancel)
     pulse = asyncio.create_task(heartbeat())
     maintenance = asyncio.create_task(maintain())
+    hosted = []
+    if os.getenv("HOSTED_OPERATIONS_ENABLED") == "true":
+        from vindex.hosted_operations import backups, monitor, release_review
+
+        hosted = [
+            asyncio.create_task(monitor()),
+            asyncio.create_task(backups()),
+            asyncio.create_task(release_review()),
+        ]
     try:
-        while True:
-            with Session() as session:
-                ids = list(
-                    session.scalars(
-                        select(Source.id)
-                        .where(Source.next_check <= now(), Source.provider != "employer_posting")
-                        .order_by(Source.next_check)
-                        .limit(20)
-                    )
-                )
-            await refresh_due_sources(ids, concurrency)
-            await asyncio.sleep(SCHEDULER_POLL_SECONDS)
+        await schedule(concurrency)
     except asyncio.CancelledError:
         log_event("worker_stopped")
     finally:
         pulse.cancel()
         maintenance.cancel()
-        await asyncio.gather(pulse, maintenance, return_exceptions=True)
+        for task in hosted:
+            task.cancel()
+        await asyncio.gather(pulse, maintenance, *hosted, return_exceptions=True)
         for sig in (signal.SIGTERM, signal.SIGINT):
             loop.remove_signal_handler(sig)
 

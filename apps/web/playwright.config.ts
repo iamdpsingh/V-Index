@@ -9,6 +9,7 @@ export default defineConfig({
   use: {
     baseURL: process.env.BASE_URL || 'http://127.0.0.1:3100',
     trace: 'on-first-retry',
+    storageState: { cookies: [{ name: 'rolewisp_analytics', value: 'essential', domain: '127.0.0.1', path: '/', expires: -1, httpOnly: false, secure: false, sameSite: 'Lax' }], origins: [] },
   },
   projects: [
     {

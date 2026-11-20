@@ -1,0 +1,22 @@
+FROM python:3.12-slim-bookworm
+COPY --from=ghcr.io/astral-sh/uv:0.12.19 /uv /usr/local/bin/uv
+# PostgreSQL 18 tools match the hosted database. The server is used only for
+# isolated restore drills, bound to loopback in a temporary directory.
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates curl gpg \
+    && install -d /usr/share/postgresql-common/pgdg /etc/postgresql-common \
+    && curl --fail --max-time 30 https://www.postgresql.org/media/keys/ACCC4CF8.asc -o /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc \
+    && gpg --show-keys --with-colons /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc | grep -q B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8 \
+    && echo 'deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc] https://apt.postgresql.org/pub/repos/apt bookworm-pgdg main' > /etc/apt/sources.list.d/pgdg.list \
+    && echo 'create_main_cluster = false' > /etc/postgresql-common/createcluster.conf \
+    && apt-get update && apt-get install -y --no-install-recommends postgresql-18 \
+    && apt-get purge -y curl gpg && rm -rf /var/lib/apt/lists/*
+WORKDIR /app
+COPY pyproject.toml uv.lock ./
+RUN uv sync --frozen --no-dev
+COPY backend backend
+COPY scripts scripts
+COPY alembic.ini ./
+ENV PYTHONPATH=/app/backend PG_BIN=/usr/lib/postgresql/18/bin
+RUN useradd --create-home vindex
+USER vindex
+CMD ["/app/.venv/bin/python", "-m", "scripts.start_production_worker"]

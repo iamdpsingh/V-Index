@@ -22,6 +22,7 @@ def main() -> int:
     try:
         # The shared image starts no HTTP server or migrations in this process.
         os.environ.setdefault("WORKER_CONCURRENCY", "2")
+        os.environ.setdefault("HOSTED_OPERATIONS_ENABLED", "true")
         from vindex.worker import serve
 
         from scripts.register_verified_sources import register_sources

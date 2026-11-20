@@ -105,7 +105,10 @@ def counts(connection) -> dict[str, int]:
 
 
 def run_pg(binary: Path, args: list[str], env: dict) -> None:
-    result = subprocess.run([str(binary), *args], env=env, capture_output=True)
+    try:
+        result = subprocess.run([str(binary), *args], env=env, capture_output=True, timeout=900)
+    except subprocess.TimeoutExpired:
+        raise RuntimeError(f"{binary.name} exceeded the operator time budget") from None
     if result.returncode:
         # pg error text can contain connection or database details. Keep it private.
         raise RuntimeError(f"{binary.name} failed (exit {result.returncode})")
@@ -176,8 +179,9 @@ def backup(directory: Path, pg_bin: Path) -> dict:
         with connect(env) as connection:
             connection.execute("SET TRANSACTION ISOLATION LEVEL REPEATABLE READ READ ONLY")
             snapshot = connection.execute("SELECT pg_export_snapshot()").fetchone()[0]
-            manifest = {"created_at": at.isoformat(), "tables": counts(connection), "format": 1}
-            if "sources" not in manifest["tables"] or "alembic_version" not in manifest["tables"]:
+            table_counts = counts(connection)
+            manifest = {"created_at": at.isoformat(), "tables": table_counts, "format": 1}
+            if "sources" not in table_counts or "alembic_version" not in table_counts:
                 raise ValueError("The source is not a migrated Rolewisp database")
             run_pg(
                 pg_bin / "pg_dump",

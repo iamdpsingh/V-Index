@@ -7,9 +7,10 @@ const policies = {
       ['Operator', 'Rolewisp is operated by Dhruv Pratap Singh.'],
       ['What Rolewisp stores', 'When you make an account, Rolewisp stores your email and password hash. Your profile, uploaded resume, and profile photo are available through your signed-in account.'],
       ['How your information is used', 'Your profile helps you manage job preferences and receive recommendations. Recommendations use the roles and skills you save in your profile. Rolewisp stores the photo and resume files encrypted.'],
+      ['Optional analytics', 'If you allow analytics, the Vaya integration sends page paths and referral information and receives normal network request information, such as your IP address. Rolewisp does not pass your profile, resume, account email, or password to this integration. You can decline or withdraw optional analytics on the cookie notice page.'],
       ['Social sign-in', 'If you choose Google, LinkedIn, or GitHub sign-in, we receive the account identifier and email information needed to create or access your account.'],
       ['Public employer postings', 'A job you publish is publicly visible with its company, description, location, and application link. Your account email, profile, photo, and resume stay private to your account.'],
-      ['Storage and retention', 'Profile details, photos and resume files remain until you replace or delete them, or delete your account. Sessions expire after seven days. Verification and recovery codes expire after fifteen minutes; expired authentication records are removed by scheduled maintenance. Encrypted database backups, when enabled, have a thirty-day retention limit. Deleted information can remain in a backup until that backup expires. Public job observations and change records may remain after a listing closes.'],
+      ['Storage and retention', 'Profile details, photos and resume files remain until you replace or delete them, or delete your account. Sessions expire after seven days. Verification and recovery codes expire after fifteen minutes; expired authentication records are removed by scheduled maintenance. Hosted encrypted database backups expire automatically after seven days. Deleted information can remain in a backup until that backup expires. Public job observations and change records may remain after a listing closes.'],
       ['Managing your information', 'You can edit your profile, remove your photo or resume, and delete your account in your workspace. Review any original job site’s privacy terms before applying there.'],
     ],
   },
@@ -18,7 +19,8 @@ const policies = {
     sections: [
       ['Session cookie', 'Rolewisp uses a session cookie to keep you signed in. Signing out revokes the session and clears its cookie.'],
       ['Social sign-in cookie', 'When you start social sign-in, a temporary cookie helps connect the callback to the sign-in you started. It expires after ten minutes.'],
-      ['Optional tracking', 'Rolewisp does not currently set analytics or advertising cookies. The original job sites you visit may use their own cookies.'],
+      ['Analytics choice', 'Rolewisp stores your analytics preference in the rolewisp_analytics cookie for up to six months. Optional Vaya analytics loads only after you choose Allow analytics. Essential only keeps it off. Browser Do Not Track and Global Privacy Control signals also keep optional analytics off.'],
+      ['Optional tracking', 'When allowed, Vaya receives page-view requests including the page path and referrer, along with normal browser network information. Original job sites you visit may use their own cookies and tracking.'],
       ['Managing cookies', 'You can clear browser cookies in your browser settings. Clearing the session cookie across this site means you will need to sign in again.'],
     ],
   },
@@ -53,7 +55,7 @@ export default async function PolicyPage({ params }: { params: Promise<{ policy:
     <main className="policy-page">
       <a href="/">Rolewisp home</a>
       <h1>{policy.title}</h1>
-      <p>Updated November 20, 2026</p>
+      <p>Updated November 21, 2026</p>
       {policy.sections.map(([heading, body]) => (
         <section key={heading}>
           <h2>{heading}</h2>

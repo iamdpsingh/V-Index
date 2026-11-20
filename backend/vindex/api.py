@@ -23,7 +23,7 @@ from vindex.accounts.profile_photo import router as profile_photo_router
 from vindex.accounts.recommendations import router as recommendations_router
 from vindex.accounts.resume_api import router as resume_router
 from vindex.accounts.security import rate_limit, redis_client
-from vindex.client_ip import client_ip
+from vindex.client_ip import client_ip, verified_proxy_ip
 from vindex.connectors.registry import detect
 from vindex.db import Job, Observation, Run, Session, Source, now
 from vindex.ingest import aware
@@ -114,9 +114,11 @@ def health():
 
 
 @app.get("/api/v1/operations", dependencies=[Depends(admin)])
-def operations_status():
+def operations_status(request: Request):
     with Session() as session:
-        return snapshot(session)
+        report = snapshot(session)
+    report["request_controls"] = {"proxy_metadata_verified": verified_proxy_ip(request) is not None}
+    return report
 
 
 @app.post("/api/v1/security/csp-report", status_code=204)
