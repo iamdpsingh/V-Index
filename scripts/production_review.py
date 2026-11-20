@@ -222,6 +222,7 @@ def run_review() -> dict:
                         "source_id": source.id,
                         "provider": source.provider,
                         "failure_kind": (run.error or "").split(":", 1)[0][:60],
+                        "operator_diagnostic": (run.error or "")[:1000],
                         "category": category,
                         "next_check_at": source.next_check.isoformat(),
                     }
@@ -234,10 +235,10 @@ def run_review() -> dict:
                 .join(Run, Run.source_id == Source.id)
                 .where(
                     Run.status == "success",
-                    Run.count.between(1, 30),
+                    Run.count.between(1, 300),
                     Source.provider.in_(["ashby", "lever", "greenhouse"]),
                 )
-                .order_by(Run.finished_at)
+                .order_by(Run.count, Run.finished_at)
                 .limit(1)
             )
         if pilot is not None:

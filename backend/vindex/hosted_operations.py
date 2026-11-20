@@ -16,7 +16,7 @@ async def monitor() -> None:
 
     await asyncio.sleep(20)  # Allow the independent worker heartbeat to start.
     previous = None
-    last_publish = 0.0
+    last_publish = -900.0
     while True:
         try:
 
