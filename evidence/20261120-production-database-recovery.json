@@ -1,0 +1,50 @@
+{
+  "recorded_at": "2026-11-20T18:21:55.846233+00:00",
+  "scope": "Actual production database schema migration and public HTTPS checks",
+  "site": "https://rolewisp.vercel.app",
+  "cause": "Production PostgreSQL database had zero public tables and no Alembic migrations; jobs endpoint returned 500",
+  "remediation": "Applied repository Alembic migrations once from secured operator process; verified migration head and all expected model tables/columns",
+  "database_preexisting_public_tables": 0,
+  "database_schema_ready": true,
+  "missing_tables_after": [],
+  "missing_columns_after": [],
+  "checks": [
+    {
+      "path": "/",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/jobs?view=summary&limit=1",
+      "status": 200,
+      "total": 0,
+      "items": 0,
+      "no_store": true
+    },
+    {
+      "path": "/api/v1/jobs?keyword=engineer&company=example&location=remote&limit=25&offset=0",
+      "status": 200,
+      "total": 0,
+      "items": 0,
+      "no_store": true
+    },
+    {
+      "path": "/api/v1/providers",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/me",
+      "status": 401
+    },
+    {
+      "path": "/api/v1/auth/oauth",
+      "status": 200
+    }
+  ],
+  "deployment_rebuilt": false,
+  "remaining": [
+    "Production index contains zero jobs; source registration and initial indexing still needed",
+    "Continuous production worker not configured by this remediation",
+    "Database credential pasted in chat should be rotated in Neon and updated in Vercel"
+  ],
+  "credentials": "Not included in source, evidence or logs"
+}

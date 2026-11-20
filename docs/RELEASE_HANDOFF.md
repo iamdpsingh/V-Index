@@ -1,5 +1,12 @@
 # Rolewisp release handoff
 
+Production troubleshooting update, November 20: the owner authorized Vercel
+access and database repair. The production database was empty and is now
+migrated; public search returns 200 with zero jobs. Initial indexing and a
+continuous production worker are still open. See the [recorded repair](VERCEL_SERVICES.md#production-repair-recorded-november-20).
+Earlier pause/status notes below describe the preceding release pass.
+
+
 Updated November 20, 2026. This is the current release entry point. The owner
 paused coverage expansion and all production/deployment/submission actions.
 The existing GitHub repository has been imported into Vercel, but no hosted

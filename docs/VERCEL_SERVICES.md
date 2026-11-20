@@ -158,3 +158,24 @@ the public jobs endpoint be checked again. An empty newly migrated database
 will contain no indexed jobs until data is transferred or a worker indexes it.
 The local helper was checked against a disposable PostgreSQL database; this
 is not evidence that the production database was migrated.
+
+
+### Production repair recorded November 20
+
+After owner-authorized Vercel sign-in and a privately supplied database URL,
+the production PostgreSQL connection succeeded. The database contained zero
+public tables and no Alembic revision. All project migrations were applied once
+from the operator process. The subsequent check reported migration head, all
+expected tables/columns and `ready: true`.
+
+Public HTTPS checks then returned 200 for the homepage, jobs summary, filtered
+jobs search, provider catalogue and OAuth configuration. Unauthenticated `/me`
+returned the expected 401. Both search requests returned zero jobs. No deployment
+rebuild was needed for this schema repair. Source registration, initial indexing
+and continuous production worker operation remain open. Evidence is in
+[evidence/20261120-production-database-recovery.json](../evidence/20261120-production-database-recovery.json).
+
+The connection password was pasted into chat and should be rotated with Neon,
+then updated in Vercel and every other client using it. The temporary local
+connection/configuration copies used for this investigation were removed;
+credentials are absent from the committed evidence.
