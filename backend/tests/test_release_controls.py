@@ -196,3 +196,25 @@ def test_abandoned_run_cleanup_preserves_active_runs_and_job_lifecycle(database,
         assert old.status == "failed" and active.status == "running"
         observation = session.scalar(select(Observation))
         assert observation.status == "open" and observation.missing_count == 0
+
+
+@pytest.mark.parametrize("code,expected", [("42P01", True), ("PRIVATE_CANARY", False)])
+def test_database_failure_logs_only_bounded_sqlstate(monkeypatch, caplog, code, expected):
+    caplog.set_level("INFO", logger="vindex.operations")
+    from sqlalchemy.exc import ProgrammingError
+
+    class DriverError(Exception):
+        sqlstate = code
+
+    def failed():
+        raise ProgrammingError(
+            "SELECT PRIVATE_SQL_CANARY",
+            {"password": "PRIVATE_VALUE_CANARY"},
+            DriverError("PRIVATE_MESSAGE_CANARY"),
+        )
+
+    monkeypatch.setattr(api, "Session", failed)
+    response = TestClient(api.app).get("/api/v1/jobs")
+    assert response.status_code == 500
+    assert "CANARY" not in response.text and "CANARY" not in caplog.text
+    assert ('"sqlstate": "42P01"' in caplog.text) is expected

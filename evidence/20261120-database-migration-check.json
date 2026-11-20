@@ -1,0 +1,16 @@
+{
+  "recorded_at": "2026-11-20T18:12:46.211291+00:00",
+  "scope": "Disposable local PostgreSQL database, not production",
+  "empty_database_jobs_error": {
+    "class": "ProgrammingError",
+    "sqlstate": "42P01"
+  },
+  "checks": {
+    "missing_schema_detected": true,
+    "migrations_applied": true,
+    "all_model_tables_and_columns_present": true,
+    "second_run_preserves_existing_source": true,
+    "connection_url_not_printed": true
+  },
+  "production_cause": "Not confirmed: supplied production log has class only; production database is not accessible in this session"
+}

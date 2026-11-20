@@ -11,7 +11,7 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from redis.exceptions import RedisError
 from sqlalchemy import func, select, text
-from sqlalchemy.exc import IntegrityError
+from sqlalchemy.exc import DBAPIError, IntegrityError
 
 from vindex.accounts.api import router as account_router
 from vindex.accounts.email_verification import recovery_router
@@ -53,7 +53,12 @@ async def fresh_api_responses(request: Request, call_next):
         response = await call_next(request)
     except Exception as error:
         # Do not let database exception parameters become profile/credential logs.
-        log_event("api_failure", error_kind=type(error).__name__)
+        fields = {"error_kind": type(error).__name__}
+        if isinstance(error, DBAPIError):
+            code = getattr(error.orig, "sqlstate", None)
+            if isinstance(code, str) and len(code) == 5 and code.isascii() and code.isalnum():
+                fields["sqlstate"] = code
+        log_event("api_failure", **fields)
         response = JSONResponse(
             status_code=500, content={"detail": "Service temporarily unavailable"}
         )

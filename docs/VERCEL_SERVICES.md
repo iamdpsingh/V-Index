@@ -117,3 +117,44 @@ References: [Services](https://vercel.com/docs/services),
 [bindings](https://vercel.com/docs/services/bindings),
 [configuration](https://vercel.com/docs/services/config-reference),
 [FastAPI](https://vercel.com/docs/frameworks/backend/fastapi).
+
+## Jobs endpoint returns ProgrammingError
+
+A successful deployment does not create database tables. `ProgrammingError`
+alone does not prove which query failed: missing tables/columns, insufficient
+permissions and SQL errors can share that class. Runtime API diagnostics now
+include a bounded PostgreSQL SQLSTATE when available, while omitting SQL,
+parameters and credential-bearing exception messages. That diagnostic addition
+only applies after its code is deployed.
+
+From the local repository root, inspect the same database configured by Vercel:
+
+```sh
+uv run python -m scripts.check_database --prompt
+```
+
+Paste the complete PostgreSQL URI into the hidden Terminal prompt, without a
+`psql` prefix or surrounding quotes. Nothing is written to an environment file.
+The helper accepts both `postgresql://` and `postgresql+psycopg://` and selects
+the repository's installed psycopg driver. It reports schema revision status
+and missing known tables/columns without reading personal records.
+
+If pending migrations are reported, apply them explicitly:
+
+```sh
+uv run python -m scripts.check_database --prompt --migrate
+```
+
+Use the existing backup/recovery process before upgrades to a populated
+production database. The helper runs the repository's versioned migrations;
+it does not delete/recreate the database, stamp over missing migrations, or
+start a worker. If it fails, retain the result and investigate the reported
+SQLSTATE instead of resetting the database. A current but incompatible schema
+is reported as not ready rather than silently repaired.
+
+Expected final output contains `"schema_at_head": true`, empty missing-table
+and missing-column arrays, and `"ready": true`. Only after this succeeds should
+the public jobs endpoint be checked again. An empty newly migrated database
+will contain no indexed jobs until data is transferred or a worker indexes it.
+The local helper was checked against a disposable PostgreSQL database; this
+is not evidence that the production database was migrated.
