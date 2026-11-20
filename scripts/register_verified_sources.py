@@ -13,10 +13,7 @@ from scripts.smoke import EXAMPLES
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def main() -> None:
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--apply", action="store_true", help="Persist the reviewed source list")
-    args = parser.parse_args()
+def register_sources(*, apply: bool = False) -> dict:
     providers = json.loads((ROOT / "backend/providers.json").read_text())
     urls = {
         example["url"]
@@ -77,20 +74,23 @@ def main() -> None:
             for _, provider, slug, company, url in examples
             if (provider, slug) not in existing
         }
-        if args.apply:
+        if apply:
             session.add_all(pending.values())
             session.commit()
-    print(
-        json.dumps(
-            {
-                "applied": args.apply,
-                "verified_platforms": len(names),
-                "reviewed_examples": len(examples),
-                "new_sources": len(pending),
-                "indexing": "Sources are scheduled for a fresh fetch by the running worker",
-            }
-        )
-    )
+    return {
+        "applied": apply,
+        "verified_platforms": len(names),
+        "reviewed_examples": len(examples),
+        "new_sources": len(pending),
+        "indexing": "Sources are scheduled for a fresh fetch by the running worker",
+    }
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--apply", action="store_true", help="Persist the reviewed source list")
+    args = parser.parse_args()
+    print(json.dumps(register_sources(apply=args.apply)))
 
 
 if __name__ == "__main__":

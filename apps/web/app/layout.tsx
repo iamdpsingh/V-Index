@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { headers } from 'next/headers';
 import './globals.css';
 
 // A fresh nonce must authorize the framework scripts on every HTML response.
@@ -12,13 +13,17 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Layout({
+export default async function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const nonce = (await headers()).get('x-nonce') || undefined;
   return (
     <html lang="en">
+      <head>
+        <script async nonce={nonce} fetchPriority="low" src="https://vayahq.com/b/cda76eb26359277eec5b1dff04e1bc96.js" />
+      </head>
       <body>{children}</body>
     </html>
   );

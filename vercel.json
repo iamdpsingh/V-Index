@@ -31,5 +31,25 @@
         "service": "web"
       }
     }
-  ]
+  ],
+  "daemons": {
+    "worker": {
+      "root": ".",
+      "entrypoint": "Dockerfile",
+      "command": [
+        "/app/.venv/bin/python",
+        "-m",
+        "scripts.start_production_worker"
+      ],
+      "instances": {
+        "iad1": 1
+      },
+      "resources": {
+        "requests": {
+          "memory": "1Gi"
+        }
+      },
+      "terminationGracePeriodSeconds": 60
+    }
+  }
 }

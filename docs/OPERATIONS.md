@@ -113,3 +113,10 @@ deletion ledger/operating procedure remains a production privacy gate.
 
 Measure the running local index with `scripts.release_snapshot`; do not use
 local loopback timing or a synthetic restore as hosted SLA evidence.
+
+November 21 hosted-worker configuration: the existing Vercel project now has a
+single 1Gi `worker` daemon configuration with idempotent source registration and
+the persistent scheduler. Read [VERCEL_SERVICES.md](VERCEL_SERVICES.md#persistent-production-indexing-worker)
+for inspection, stopping, the November/December free-tier window and quota
+limits. A configured daemon becomes operational evidence only after its actual
+instance and successful production fetches are verified.

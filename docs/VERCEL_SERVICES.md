@@ -179,3 +179,53 @@ The connection password was pasted into chat and should be rotated with Neon,
 then updated in Vercel and every other client using it. The temporary local
 connection/configuration copies used for this investigation were removed;
 credentials are absent from the committed evidence.
+
+## Persistent production indexing worker
+
+Owner update November 21: initial indexing and persistent refreshes are now
+requested for the existing Vercel project. `vercel.json` declares a production
+`worker` daemon using the existing root Dockerfile, one `1Gi` instance in
+`iad1`, and `scripts.start_production_worker` as its process. The API and web
+services retain their public routing and binding.
+
+The daemon receives Vercel's production Secret variables directly at runtime;
+credentials are not exported locally or baked into the image. Startup validates
+PostgreSQL/Redis configuration, serializes reviewed-source registration with a
+Redis lease, registers missing sources idempotently, and starts the existing
+scheduler. Existing source schedules/failures are preserved on restart. This
+process does not run migrations. All fetch completeness, cooldown, original
+observation and two-miss closure safeguards remain in the worker.
+
+The small instance defaults to two simultaneous PostgreSQL source fetches;
+`WORKER_CONCURRENCY` can override that value. Reviewed sources retain their
+six-hour default refresh schedule. Source HTTP failures are recorded and retried
+with cooldowns; they are not successful empty results. Worker heartbeats and
+source metrics remain available through the authenticated operations endpoint.
+
+Operator checks:
+
+```sh
+npx vercel@latest daemons inspect worker --project v-index
+npx vercel@latest logs --project v-index --query 'source:daemon' --since 5m
+```
+
+Stop the hosted worker without deleting indexed data:
+
+```sh
+npx vercel@latest daemons scale worker iad1=0 --project v-index
+```
+
+### Free-tier window
+
+The account was verified as active Hobby. Vercel currently includes 420
+GB-hours of daemon provisioned memory and five active CPU-hours per calendar
+month. It stops Hobby daemons at either quota, with no daemon overage billing.
+One `1Gi` worker consumes about one GB-hour per running hour, even when waiting.
+November 21 through December 11 crosses the December 1 UTC reset: approximately
+ten running days fall in each month, fitting the memory allowance if there is
+no other daemon usage. Active CPU and database/Redis allowances must also remain
+within their limits; twenty days of uninterrupted operation is not guaranteed
+by a successful deployment. This configuration does not authorize an upgrade.
+
+References: [Vercel daemon quotas](https://vercel.com/docs/daemons/limits),
+[daemon configuration](https://vercel.com/docs/daemons/config-reference).
