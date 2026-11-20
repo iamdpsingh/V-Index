@@ -1,5 +1,13 @@
 # Technical privacy and policy review
 
+November 21 runtime update: the owner added Vaya's shared analytics script and
+approved its exact image beacon path. Earlier observations of no third-party
+analytics describe the preceding review. The script sends pathname/referrer
+page-view data; this integration adds no calls to its identify API. Consumer
+policy copy was not revised in this narrowly scoped change, so previous
+no-analytics wording requires reconciliation in the product privacy review.
+
+
 November 20, 2026. Production is paused. This records application behavior and
 remaining release checks; it is not a legal-compliance certification.
 

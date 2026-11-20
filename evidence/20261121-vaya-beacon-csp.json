@@ -1,0 +1,13 @@
+{
+  "recorded_at": "2026-11-20T21:27:35.106Z",
+  "scope": "Actual production CSP and Vaya loader, with all beacon requests intercepted to avoid synthetic analytics",
+  "site": "https://rolewisp.vercel.app",
+  "approved_image_path": "https://vayahq.com/api/beacon/cda76eb26359277eec5b1dff04e1bc96",
+  "loader_executed": true,
+  "allowed_pageview_request_observed": true,
+  "other_tracker_path_blocked": true,
+  "unrelated_vaya_image_blocked": true,
+  "real_beacon_sent": false,
+  "provider_ingestion_verified": false,
+  "security_browser_checks_passed": 8
+}

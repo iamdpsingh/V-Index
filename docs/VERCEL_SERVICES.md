@@ -260,3 +260,19 @@ Evidence: [hosted worker](../evidence/20261121-production-worker.json),
 [deployment packaging](../evidence/20261121-deployment-package-check.json).
 The deployment used the CLI from local commit ef9dc2d. GitHub pushing remains
 on the owner's established cadence; no early push was made in this pass.
+
+
+### Approved Vaya beacon allowance, November 21
+
+The owner explicitly approved the exact image endpoint
+`https://vayahq.com/api/beacon/cda76eb26359277eec5b1dff04e1bc96`.
+Deployment `dpl_BNJnVmQiVHLGTgQbQw8Ec9FqmmyT` adds only that path to img-src.
+Eight desktop/mobile security checks passed and the production build passed.
+A production browser loaded the real Vaya script and observed its page-view
+image request reaching the approved path; a different tracker ID and an
+unrelated Vaya image path were blocked. All beacon requests were intercepted
+in this verification context so no synthetic visits were sent to Vaya. Provider
+storage/dashboard ingestion is not asserted. The production indexing daemon
+remained ready with one alive instance after rollout.
+
+See [production CSP verification](../evidence/20261121-vaya-beacon-csp.json).

@@ -7,8 +7,8 @@ indexing is still in progress; all-source completion has not been claimed.
 The same hosted worker continues scheduled refreshes independently of the
 operator computer. See [worker evidence](../evidence/20261121-production-worker.json)
 and [desktop/mobile production review](../evidence/20261121-production-product-review.json).
-The Vaya script is in the shared head; its image beacon still needs the owner's
-requested CSP decision. The free-tier window and monthly limits are documented
+The Vaya script is in the shared head. The owner approved its exact image
+beacon path; that CSP allowance is deployed and browser-verified. The free-tier window and monthly limits are documented
 in [Vercel setup](VERCEL_SERVICES.md#persistent-production-indexing-worker).
 
 The November 20 entries below are historical snapshots of the release pass.
