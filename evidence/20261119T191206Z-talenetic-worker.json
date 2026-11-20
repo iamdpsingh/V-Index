@@ -1,0 +1,38 @@
+[
+  {
+    "provider": "Talenetic",
+    "url": "https://jobs.medicalupdateonline.com/",
+    "revision": "b083758512540ffee9d2f5badf886432c8f94d0f",
+    "code_sha256": "0ac7319d8b138047a4fcf76675c3ac751ef6b6742e158e44d80ebaed133a46b5",
+    "at": "2026-11-19T19:11:41.121655+00:00",
+    "status": "in_progress",
+    "complete": false,
+    "count": 0,
+    "staged_details": 57,
+    "roster_count": 2945,
+    "finished_at": "2026-11-19T19:11:58.021213+00:00",
+    "error_kind": null,
+    "roster_sha256": "5da729a684195c47faa51abf0129da1e37e25b68fd77bc635d0b1ed4a84b7260",
+    "quality_flag_counts": {
+      "publisher_supplied_company_label": 43
+    }
+  },
+  {
+    "provider": "Talenetic",
+    "url": "https://www.procontractjobs.com/",
+    "revision": "b083758512540ffee9d2f5badf886432c8f94d0f",
+    "code_sha256": "0ac7319d8b138047a4fcf76675c3ac751ef6b6742e158e44d80ebaed133a46b5",
+    "at": "2026-11-19T19:11:58.023788+00:00",
+    "status": "failed",
+    "complete": false,
+    "count": 0,
+    "staged_details": 6,
+    "roster_count": 36315,
+    "finished_at": "2026-11-19T19:12:06.544971+00:00",
+    "error_kind": "ValueError",
+    "roster_sha256": "f2e874cb3a8fd26a404c2faf109f794d2716a3041c2d1286a98e0b77370684ed",
+    "quality_flag_counts": {
+      "publisher_supplied_company_label": 6
+    }
+  }
+]

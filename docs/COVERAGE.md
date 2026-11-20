@@ -16,13 +16,13 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | CareerPlug | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 10 | 2026-11-06T12:34:45.510649+00:00 | https://app.careerplug.com/accounts/576036 (2; LIVE_VERIFIED); https://app.careerplug.com/accounts/579908 (8; LIVE_VERIFIED)  |
 | Comeet | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 33 | 2026-11-06T17:26:30.311458+00:00 | https://www.comeet.com/jobs/oriient/EA.005 (7; LIVE_VERIFIED); https://www.comeet.com/jobs/webbing/46.00E (26; LIVE_VERIFIED)  |
 | CSOD | ats | IMPLEMENTED | LIVE_VERIFIED | HIGH | 49 | 2026-11-06T17:50:13.376323+00:00 | https://portstephens.csod.com/ux/ats/careersite/1/home?c=portstephens (8; LIVE_VERIFIED); https://nswconnect.csod.com/ux/ats/careersite/1/home?c=nswconnect (41; LIVE_VERIFIED)  |
-| Dayforce | ats | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
+| Dayforce | ats | IMPLEMENTED | LIVE_VERIFIED | HIGH | 60 | 2026-11-20T10:19:40.802288+00:00 | https://jobs.dayforcehcm.com/en-US/mew/CANDIDATEPORTAL (22; LIVE_VERIFIED); https://jobs.dayforcehcm.com/en-AU/silklaser/CANDIDATEPORTAL (38; LIVE_VERIFIED)  |
 | Deel | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 34 | 2026-11-07T02:13:38.251589+00:00 | https://jobs.deel.com/dott (16; LIVE_VERIFIED); https://jobs.deel.com/offsec (18; LIVE_VERIFIED)  |
 | Dover | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
 | Eightfold AI | ats | IMPLEMENTED | LIVE_VERIFIED | HIGH | 189 | 2026-11-07T02:12:28.099811+00:00 | https://app.eightfold.ai/careers (46; LIVE_VERIFIED); https://insight.eightfold.ai/careers (143; LIVE_VERIFIED)  |
 | FirstStage | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 4 | 2026-11-06T17:28:28.660502+00:00 | https://firststage.firststage.co/jobs (1; LIVE_VERIFIED); https://quantumbase.firststage.co/jobs (3; LIVE_VERIFIED)  |
 | Freshteam | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 49 | 2026-11-06T12:12:34.049462+00:00 | https://sequoiaat.freshteam.com/jobs (26; LIVE_VERIFIED); https://talent360.freshteam.com/jobs (23; LIVE_VERIFIED)  |
-| Gem.com | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
+| Gem.com | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 10 | 2026-11-20T09:56:00.888343+00:00 | https://jobs.gem.com/nabla-bio (3; LIVE_VERIFIED); https://jobs.gem.com/nclusion (7; LIVE_VERIFIED)  |
 | GoHire | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 45 | 2026-11-06T07:43:13.012881+00:00 | https://jobs.gohire.io/dineamic-hospitality-fniota1h/ (22; LIVE_VERIFIED); https://jobs.gohire.io/digital-shift-o0hrqw5o/ (23; LIVE_VERIFIED)  |
 | Greenhouse | ats | IMPLEMENTED | LIVE_VERIFIED | LOW | 1226 | 2026-11-05T16:41:54.721525+00:00 | https://job-boards.greenhouse.io/stripe (762; LIVE_VERIFIED); https://job-boards.greenhouse.io/cloudflare (464; LIVE_VERIFIED)  |
 | HiBob | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 18 | 2026-11-13T10:03:32.291539+00:00 | https://oseyo-c916b6e4132742.careers.hibob.com/ (7; LIVE_VERIFIED); https://ecarstrade.careers.hibob.com/ (11; LIVE_VERIFIED)  |
@@ -54,7 +54,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | Rival | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 45 | 2026-11-12T15:49:08.609081+00:00 | https://jobs.silkroad.com/RSCS/Careers (2; LIVE_VERIFIED); https://jobs.silkroad.com/BlandLandscaping/Careers (43; LIVE_VERIFIED)  |
 | SAP SuccessFactors | ats | IMPLEMENTED | LIVE_VERIFIED | HIGH | 17 | 2026-11-08T12:17:29.883037+00:00 | https://careers.icbc.com/search/ (9; LIVE_VERIFIED); https://careers.kaust.edu.sa/search/ (8; LIVE_VERIFIED)  |
 | SmartRecruiters | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 90 | 2026-11-05T16:49:50.960317+00:00 | https://careers.smartrecruiters.com/SmartRecruiters (2; LIVE_VERIFIED); https://careers.smartrecruiters.com/Colliers (88; LIVE_VERIFIED)  |
-| talentReef | ats | NOT_STARTED | NOT_STARTED | MEDIUM | None | None | Not tested  |
+| talentReef | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 111 | 2026-11-20T10:09:12.989732+00:00 | https://apply.jobappnetwork.com/jcresortsjobs/en (87; LIVE_VERIFIED); https://apply.jobappnetwork.com/otbsdjobs/en (24; LIVE_VERIFIED)  |
 | Taleo | ats | IMPLEMENTED | LIVE_VERIFIED | HIGH | 135 | 2026-11-07T01:53:19.592777+00:00 | https://phf.tbe.taleo.net/phf03/ats/careers/v2/jobSearch?org=GRAYBARCANADA&cws=42 (32; LIVE_VERIFIED); https://phg.tbe.taleo.net/phg01/ats/careers/v2/jobSearch?org=GATEWAYVENT&cws=72 (103; LIVE_VERIFIED)  |
 | Teamtailor | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 26 | 2026-11-06T03:09:11.551818+00:00 | https://clearroute.teamtailor.com (22; LIVE_VERIFIED); https://omny.teamtailor.com (4; LIVE_VERIFIED)  |
 | Trakstar | ats | IMPLEMENTED | LIVE_VERIFIED | MEDIUM | 14 | 2026-11-06T12:16:37.653365+00:00 | https://bsglaw.hire.trakstar.com/ (3; LIVE_VERIFIED); https://worksuites.hire.trakstar.com/ (11; LIVE_VERIFIED)  |
@@ -74,7 +74,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | SmartJobBoard | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 105 | 2026-11-08T03:31:39.192415+00:00 | https://americanbath.mysmartjobboard.com/jobs/ (28; LIVE_VERIFIED); https://jobs.psychologicalscience.org/jobs/ (77; LIVE_VERIFIED)  |
 | JobBoard.io | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 63 | 2026-11-07T07:07:19.433685+00:00 | https://www.nifajobs.com/ (2; LIVE_VERIFIED); https://www.cancercareers.org/ (61; LIVE_VERIFIED)  |
 | Wiley Madgex | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 1681 | 2026-11-14T07:02:33.297361+00:00 | https://jobs.sciencecareers.org/jobs/ (518; LIVE_VERIFIED); https://www.nature.com/naturecareers/jobs/ (1163; LIVE_VERIFIED)  |
-| Talenetic | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
+| Talenetic | job_board | IMPLEMENTED | BLOCKED | HIGH | 2844 | 2026-11-20T10:21:35.635768+00:00 | https://jobs.medicalupdateonline.com/ (2844; LIVE_VERIFIED); https://www.procontractjobs.com/ (0; FAILED) One board passed completely; the second has stale or removed sitemap entries and has not completed. |
 | JobMount | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 958 | 2026-11-14T07:32:32.789657+00:00 | https://soudeur.ca/candidate/job_search/quick/results (153; LIVE_VERIFIED); https://www.jobsrus.com/candidate/job_search/quick/results (805; LIVE_VERIFIED)  |
 | CareerSiteCloud | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | JobBoard.com | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 22 | 2026-11-08T12:15:42.598392+00:00 | https://jobs.acevo.org.uk/ (15; LIVE_VERIFIED); https://www.gradsouthwest.com/ (7; LIVE_VERIFIED)  |

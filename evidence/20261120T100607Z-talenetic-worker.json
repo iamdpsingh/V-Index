@@ -1,0 +1,20 @@
+[
+  {
+    "provider": "Talenetic",
+    "url": "https://jobs.medicalupdateonline.com/",
+    "revision": "b083758512540ffee9d2f5badf886432c8f94d0f",
+    "code_sha256": "0ac7319d8b138047a4fcf76675c3ac751ef6b6742e158e44d80ebaed133a46b5",
+    "at": "2026-11-20T09:52:02.358856+00:00",
+    "status": "in_progress",
+    "complete": false,
+    "count": 0,
+    "staged_details": 2500,
+    "roster_count": 2900,
+    "finished_at": "2026-11-20T10:06:07.243215+00:00",
+    "error_kind": null,
+    "roster_sha256": "5623a875512b36210604c8e9d271e96687309e0a5f315be2e41e4bbd8fa9432b",
+    "quality_flag_counts": {
+      "publisher_supplied_company_label": 2451
+    }
+  }
+]

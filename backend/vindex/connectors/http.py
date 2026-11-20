@@ -4,6 +4,7 @@ import asyncio
 import json
 import math
 import random
+import re
 from datetime import UTC, datetime, timedelta
 from email.utils import parsedate_to_datetime
 from typing import Any, Literal
@@ -56,7 +57,7 @@ class PublicHTTP:
         *,
         method: Literal["GET", "POST"] = "GET",
         accept: str = "*/*",
-        json_body: dict[str, Any] | None = None,
+        json_body: dict[str, Any] | list[dict[str, Any]] | None = None,
         form: dict[str, str] | None = None,
         headers: dict[str, str] | None = None,
     ) -> bytes:
@@ -72,6 +73,16 @@ class PublicHTTP:
         if form is not None and (method != "POST" or json_body is not None):
             raise ValueError("Form data requires a form-only POST")
         allowed_headers = {"Authorization"}
+        if parsed.hostname == "jobs.dayforcehcm.com" and re.fullmatch(
+            r"/api/geo/[a-z0-9-]+/jobposting/search", parsed.path
+        ):
+            allowed_headers = {"X-CSRF-TOKEN"}
+            if headers and not re.fullmatch(r"[a-f0-9]{64}", headers.get("X-CSRF-TOKEN", "")):
+                raise ValueError("Invalid Dayforce public visitor CSRF token")
+        if parsed.hostname == "jobs.gem.com" and parsed.path == "/api/public/graphql/batch":
+            allowed_headers = {"batch"}
+            if headers and headers.get("batch") != "true":
+                raise ValueError("Unsupported Gem batch header")
         if parsed.hostname == "myjobs.adp.com" and parsed.path.startswith(
             "/public/staffing/v1/job-requisitions"
         ):
@@ -126,7 +137,7 @@ class PublicHTTP:
         url: str,
         *,
         method: Literal["GET", "POST"] = "GET",
-        json_body: dict[str, Any] | None = None,
+        json_body: dict[str, Any] | list[dict[str, Any]] | None = None,
         headers: dict[str, str] | None = None,
     ) -> Any:
         return json.loads(

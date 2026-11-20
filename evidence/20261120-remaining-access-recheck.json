@@ -1,0 +1,46 @@
+[
+  {
+    "platform": "Dayforce",
+    "url": "https://jobs.dayforcehcm.com/en-US/mew/CANDIDATEPORTAL",
+    "at": "2026-11-19T19:08:50.668146+00:00",
+    "bytes": 555154,
+    "body_sha256": "a2a3626c271a905dd7c6a72c0e877fb562df5948a4565caad5d6b4422d9fc38e",
+    "state": "PERMITTED_FETCH",
+    "text_sample": "Job Board | Dayforce Jobs Skip to Content Sign In Search Jobs Search by job title, keywords, req ID Location Distance Advanced search Save Search Clear All Search Jobs Loading \u00a92009-2026 Dayforce HCM, Inc. All Rights Reserved. Privacy Policy Statement of Accessibility Cookie Preferences",
+    "scripts": [
+      "__NEXT_DATA__"
+    ]
+  },
+  {
+    "platform": "Gem.com",
+    "url": "https://api.gem.com/job_board/v0/nabla-bio/job_posts/",
+    "at": "2026-11-19T19:08:50.677003+00:00",
+    "state": "BLOCKED_OR_FAILED",
+    "error_type": "UpstreamStatusError",
+    "error": "Upstream HTTP 403"
+  },
+  {
+    "platform": "Dover",
+    "url": "https://jobs.dover.com/api/v1/careers-page-slug/salsa",
+    "at": "2026-11-19T19:08:50.677241+00:00",
+    "state": "BLOCKED_OR_FAILED",
+    "error_type": "ValueError",
+    "error": "Career page robots policy disallows this request"
+  },
+  {
+    "platform": "eJobBoard",
+    "url": "https://www.ejobboard.co.uk/",
+    "at": "2026-11-19T19:08:50.677400+00:00",
+    "state": "BLOCKED_OR_FAILED",
+    "error_type": "ConnectError",
+    "error": "[Errno 8] nodename nor servname provided, or not known"
+  },
+  {
+    "platform": "CareerSiteCloud",
+    "url": "https://www.careersitecloud.com/",
+    "at": "2026-11-19T19:08:50.677547+00:00",
+    "state": "BLOCKED_OR_FAILED",
+    "error_type": "UpstreamStatusError",
+    "error": "Upstream HTTP 403"
+  }
+]

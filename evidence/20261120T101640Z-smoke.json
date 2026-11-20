@@ -1,0 +1,28 @@
+[
+  {
+    "provider": "Dayforce",
+    "url": "https://jobs.dayforcehcm.com/en-US/mew/CANDIDATEPORTAL",
+    "at": "2026-11-20T10:16:36.613902+00:00",
+    "revision": "b083758512540ffee9d2f5badf886432c8f94d0f",
+    "working_tree_dirty_at_start": true,
+    "code_sha256": "e84f6fb17e2299896058d9efdf5c9854ffdb900e9ccd3ffa853262ceb8b47918",
+    "count": 0,
+    "status": "FAILED",
+    "complete": false,
+    "error": "ValueError: Dayforce extraction requires an anonymous public visitor",
+    "finished_at": "2026-11-20T10:16:38.124836+00:00"
+  },
+  {
+    "provider": "Dayforce",
+    "url": "https://jobs.dayforcehcm.com/en-AU/silklaser/CANDIDATEPORTAL",
+    "at": "2026-11-20T10:16:38.627155+00:00",
+    "revision": "b083758512540ffee9d2f5badf886432c8f94d0f",
+    "working_tree_dirty_at_start": true,
+    "code_sha256": "e84f6fb17e2299896058d9efdf5c9854ffdb900e9ccd3ffa853262ceb8b47918",
+    "count": 0,
+    "status": "FAILED",
+    "complete": false,
+    "error": "ValueError: Dayforce extraction requires an anonymous public visitor",
+    "finished_at": "2026-11-20T10:16:40.307929+00:00"
+  }
+]

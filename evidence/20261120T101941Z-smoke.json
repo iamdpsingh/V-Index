@@ -1,0 +1,32 @@
+[
+  {
+    "provider": "Dayforce",
+    "url": "https://jobs.dayforcehcm.com/en-US/mew/CANDIDATEPORTAL",
+    "at": "2026-11-20T10:18:03.740653+00:00",
+    "revision": "b083758512540ffee9d2f5badf886432c8f94d0f",
+    "working_tree_dirty_at_start": true,
+    "code_sha256": "4312c4abd3f951fcae9596b03dbece5c7bde243b0f8d8980d82c15dc65d0d6c7",
+    "count": 22,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "f19c98b04fe312c4cec5c42fb7cc2906bef88afbcdab0b3b6d0ae56624048b03",
+    "finished_at": "2026-11-20T10:18:26.888206+00:00"
+  },
+  {
+    "provider": "Dayforce",
+    "url": "https://jobs.dayforcehcm.com/en-AU/silklaser/CANDIDATEPORTAL",
+    "at": "2026-11-20T10:18:27.390604+00:00",
+    "revision": "b083758512540ffee9d2f5badf886432c8f94d0f",
+    "working_tree_dirty_at_start": true,
+    "code_sha256": "4312c4abd3f951fcae9596b03dbece5c7bde243b0f8d8980d82c15dc65d0d6c7",
+    "count": 38,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "8b9bac0c30646b8b233160a07af96e44813c9d104494fc2ce076dbfd6fcf37fa",
+    "finished_at": "2026-11-20T10:19:40.802288+00:00"
+  }
+]

@@ -16,6 +16,7 @@ from vindex.db import Run, Session, Source, engine, now
 from vindex.ingest import aware, ingest
 from vindex.jobiqo_refresh import advance_jobiqo_refresh
 from vindex.madgex_refresh import advance_madgex_refresh
+from vindex.talenetic_refresh import advance_talenetic_refresh
 
 log = logging.getLogger("vindex.worker")
 REFRESH_TIMEOUT_SECONDS = 600
@@ -72,6 +73,8 @@ async def refresh(source_id: int, *, only_if_due: bool = False) -> int | None:
                     ) as client:
                         if source.provider == "wileymadgex":
                             batch = await advance_madgex_refresh(session, source, client)
+                        elif source.provider == "talenetic":
+                            batch = await advance_talenetic_refresh(session, source, client)
                         elif source.provider == "jobiqo" and source.slug in STAGED_JOBIQO_HOSTS:
                             batch = await advance_jobiqo_refresh(session, source, client)
                         else:

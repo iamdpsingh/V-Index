@@ -1,5 +1,15 @@
 # Antigravity frontend handoff
 
+**Backend coverage update, November 20:** Dayforce, Gem.com and talentReef passed
+complete independent live runs, bringing recorded coverage to **71/78**. Public
+API shapes are unchanged. Operator source registration now recognizes the
+reviewed Dayforce en-US/en-AU CandidatePortal URLs, Gem hosted board roots, and
+TalentReef English external career aliases. Exact URLs and limitations are in
+[the coverage matrix](COVERAGE.md). Dayforce's anonymous visitor CSRF exchange
+stays server-side. Talenetic has one full worker-committed board and an incomplete
+second board; do not display it as fully verified. CareerSiteCloud and eJobBoard
+are on hold at the owner's request and still remain in the required inventory.
+
 **Latest owner release requirements (November 7):** read [PRODUCTION_RELEASE_REQUIREMENTS.md](PRODUCTION_RELEASE_REQUIREMENTS.md). Coverage remains first. Public launch now requires a verified custom domain on the free-tier plan, favicon, permitted badge removal, reviewed legal/privacy pages, accessibility and a full security review. Older preview-only vercel.app guidance does not authorize launch. No spending or automatic deployment is authorized.
 
 **Frontend delivery review:** 66baef8 independently passes dependency install, build and typecheck. Preserve that implementation. Before release, fix swallowed logout errors and the hardcoded India default, and actually test logout rather than only opening Profile. See [FRONTEND_REVIEW_66baef8.md](FRONTEND_REVIEW_66baef8.md). This is a documented handoff, not an assumption that an agent has been notified.

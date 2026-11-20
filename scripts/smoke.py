@@ -15,6 +15,36 @@ from vindex.connectors.registry import create_connector
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
+    (
+        "Dayforce",
+        "dayforce",
+        "mew",
+        "MAAS Energy Works",
+        "https://jobs.dayforcehcm.com/en-US/mew/CANDIDATEPORTAL",
+    ),
+    (
+        "Dayforce",
+        "dayforce",
+        "silklaser",
+        "SILK Laser Clinics",
+        "https://jobs.dayforcehcm.com/en-AU/silklaser/CANDIDATEPORTAL",
+    ),
+    (
+        "talentReef",
+        "talentreef",
+        "jcresortsjobs",
+        "JC Resorts",
+        "https://apply.jobappnetwork.com/jcresortsjobs/en",
+    ),
+    (
+        "talentReef",
+        "talentreef",
+        "otbsdjobs",
+        "Dos Gringos",
+        "https://apply.jobappnetwork.com/otbsdjobs/en",
+    ),
+    ("Gem.com", "gem", "nabla-bio", "Nabla Bio", "https://jobs.gem.com/nabla-bio"),
+    ("Gem.com", "gem", "nclusion", "nclusion", "https://jobs.gem.com/nclusion"),
     ("Artha", "artha", "lexpath.com.au", "LexPath", "https://lexpath.com.au/"),
     ("Artha", "artha", "joberly.eu", "Joberly", "https://joberly.eu/"),
     (
@@ -707,6 +737,9 @@ async def main():
                 if batch.jobs:
                     job = batch.jobs[0]
                     if provider in {
+                        "dayforce",
+                        "talentreef",
+                        "gem",
                         "artha",
                         "hibob",
                         "adp",
@@ -773,6 +806,26 @@ async def main():
                     "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
                     *(
                         {
+                            "Dayforce": [
+                                "Reviewed MAAS Energy Works en-US and SILK en-AU public CandidatePortal boards only; locale redirects are not followed",
+                                "Uses the native server-issued anonymous CSRF token and cookie pair for read-only posting search; no login or private visitor state is used",
+                                "Exact 25-row paging, board identity, every full public posting and the complete listing metadata must be reconfirmed; maximum 400 jobs",
+                                "Header, role description, footer, native application route, publication date and published attributes are preserved",
+                                "Virtual-location availability is labelled Remote option; source location type codes and currency regions are not guessed into stronger claims",
+                            ],
+                            "talentReef": [
+                                "Reviewed JC Resorts and On the Border public external English career sites; internal, filtered and multi-client templates fail closed",
+                                "Uses only the production public career app's advertised gateway and tenant-scoped external-only posting search; no account or application APIs",
+                                "Exact totals, complete shards, bounded 50-row pages and a full record-set reconfirmation are required; maximum 2000 postings",
+                                "Unpublished compensation is removed; source publication dates, full descriptions and native application links are preserved",
+                            ],
+                            "Gem.com": [
+                                "Uses read-only public hosted-board GraphQL on jobs.gem.com; does not use the blocked api.gem.com REST host or private account APIs",
+                                "Maximum 400 postings; every full detail and hosted posting identity must succeed, then the entire listing metadata is reconfirmed",
+                                "Company identity must match the public board title; source company spelling is operator-supplied and checked case-insensitively",
+                                "Preserves intro, role description, compensation and outro; salary remains source text and original publication time is preserved in UTC",
+                                "Application entry is the original Gem hosted posting; no application is submitted and no private candidate data is requested",
+                            ],
                             "JobBoard.com": [
                                 "Only reviewed ACEVO and Gradsouthwest origins with one complete robots-advertised sitemap; same-origin full job details and application links",
                             ],

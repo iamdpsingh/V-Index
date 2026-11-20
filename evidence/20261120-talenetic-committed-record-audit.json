@@ -1,0 +1,15 @@
+{
+  "provider": "Talenetic",
+  "url": "https://jobs.medicalupdateonline.com/",
+  "worker_run_id": 74,
+  "complete": true,
+  "count": 2844,
+  "candidate_urls_examined": 2900,
+  "explicitly_expired_pages": 56,
+  "quality_flag_counts": {
+    "publisher_supplied_company_label": 2844
+  },
+  "worker_finished_at": "2026-11-20T10:12:11.992436",
+  "audit_recorded_at": "2026-11-20T10:24:50.364833+00:00",
+  "note": "Counts audited from committed observations. Earlier progress-report flags could describe the preceding partial batch; this audit supplies the final counts."
+}

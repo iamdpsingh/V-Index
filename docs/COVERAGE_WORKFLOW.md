@@ -147,3 +147,76 @@ November 14 IST: Both JobMount boards completed through the local worker and com
 November 14 IST: Scheduled refresh retries for transient upstream errors now start after two minutes and back off to 30 minutes. Longer upstream Retry-After deadlines are honored. Existing checkpointed connectors resume from saved progress. Other failed runs preserve the prior index.
 
 November 14 IST: Nine original Paycom detail pages across three employers returned matching structured job records. The extract is partial and does not establish a complete active roster or validate application entries. [Live Paycom evidence](../evidence/20261114-paycom-partial.json)
+
+November 20 IST: Gem.com passed complete live runs on Nabla Bio (3 jobs) and
+nclusion (7 jobs), bringing coverage to **69/78**. The public hosted-board
+GraphQL interface supplies the full roster and per-posting descriptions,
+publication times and compensation text. Every hosted posting identity and a
+second complete roster were checked. The real worker committed both collections.
+[Live runs](../evidence/20261120T095601Z-smoke.json) ·
+[Worker commits](../evidence/20261120-gem-worker-runs.json)
+
+November 20 IST: talentReef passed on JC Resorts (87 jobs) and the On the Border
+board (24 jobs), bringing coverage to **70/78**. The production public career
+app advertises a publicly reachable gateway. Queries are limited to the client
+IDs in published career configurations and external-only postings. Complete
+shards, exact totals, every native page and a full record-set reconfirmation
+are required. No candidate accounts or applications are accessed, and hidden
+compensation is removed. Both collections committed through the real worker.
+[Live runs](../evidence/20261120T100913Z-smoke.json) ·
+[Worker commits](../evidence/20261120-talentreef-worker-runs.json)
+
+November 20 IST: Dayforce passed on MAAS Energy Works (22 jobs) and SILK
+(38 jobs), bringing coverage to **71/78**. The native public visitor flow gets
+an anonymous CSRF token/cookie pair before read-only search POSTs; earlier
+requests omitted this required handshake. SILK's canonical locale is en-AU.
+Both complete rosters, every full detail, public application metadata and final
+roster reads passed, then committed through the real worker. No authentication
+or access restrictions were bypassed.
+[Live runs](../evidence/20261120T101941Z-smoke.json) ·
+[Worker commits](../evidence/20261120-dayforce-worker-runs.json)
+
+November 20 IST: Talenetic is implemented but remains outside the verified
+platform count. Medical Update Online committed 2,844 active details after
+examining all 2,900 sitemap entries and verifying 56 explicitly expired pages.
+The publisher labels all active employers “Partner Jobs”; that label is kept
+with a quality flag rather than guessing a company. Pro Contract Jobs supplied
+36,523 sitemap candidates, but its fresh run encountered removed/invalid pages
+and did not reconcile. Checkpoints preserve successful reads, never partial
+closures. The progress reporter now audits final flags from committed records
+and reads only flag arrays instead of loading every staged description.
+[Complete first board](../evidence/20261120T101212Z-talenetic-worker.json) ·
+[Committed-record audit](../evidence/20261120-talenetic-committed-record-audit.json)
+
+Owner update, November 20 IST: CareerSiteCloud and eJobBoard are on hold pending
+usable installation URLs. Neither is waived from the original 78 platforms.
+Remaining full acceptance: Dover, Paycom, Paycor, UltiPro, Talenetic,
+CareerSiteCloud and eJobBoard. Paycom's current public app disallows its posting
+search API in robots.txt, so no request to that endpoint was sent.
+[Current policy evidence](../evidence/20261120-paycom-portal-policy.json)
+
+The remaining active blockers are source-specific; changing HTTP libraries does
+not establish permission or a complete collection:
+
+| Platform | Current limitation | Next usable input |
+|---|---|---|
+| Dover | The reviewed hosted public roster API is disallowed. The official external API requires employer-approved access. | An approved public careers export or employer-authorized posting API access. |
+| Paycom | The native public portal app is accessible, but its posting-search route is disallowed. | An employer-authorized complete job feed/export. |
+| Paycor | The reviewed recruiting career route is disallowed. | An approved employer feed or scoped posting integration. |
+| UltiPro | The native page advertises `JobBoardView/LoadSearchResults`, which is disallowed. An earlier candidate route was not the real endpoint. | An approved UKG/employer job feed or integration. |
+| Talenetic | One full board passed. The second fresh sitemap still leads to removed/invalid detail pages, and the full snapshot fails safely. | A complete current outbound feed, a repaired sitemap, or a second usable installation. |
+
+These are limitations of the reviewed sources, not claims that every installation
+is inaccessible. [Native roster policy checks](../evidence/20261120-remaining-roster-policies.json).
+
+The reviewed source bootstrap now includes all **142 successful example URLs**
+across the 71 verified platforms, including the previously omitted Kampajobs
+checkpointed example. Registration schedules a new fetch and does not imply
+that the initial fetch has finished.
+
+To reproduce Talenetic verification, use a dedicated validation database and a
+separate Redis logical database, apply migrations, then run
+`PYTHONPATH=backend uv run python -m scripts.smoke_talenetic --host jobs.medicalupdateonline.com --batches 5`.
+The script requires `DATABASE_URL`; keep its database separate from user accounts.
+Successful details resume within six hours. A failed or partial run never
+reconciles or closes existing jobs.

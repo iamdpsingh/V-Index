@@ -1,0 +1,18 @@
+[
+  {
+    "provider": "talentReef",
+    "url": "https://apply.jobappnetwork.com/jcresortsjobs/en",
+    "status": "success",
+    "count": 87,
+    "committed_open_observations": 87,
+    "finished_at": "2026-11-20T10:10:47.872634"
+  },
+  {
+    "provider": "talentReef",
+    "url": "https://apply.jobappnetwork.com/otbsdjobs/en",
+    "status": "success",
+    "count": 24,
+    "committed_open_observations": 24,
+    "finished_at": "2026-11-20T10:10:52.968181"
+  }
+]

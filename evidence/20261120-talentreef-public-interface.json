@@ -1,0 +1,19 @@
+{
+  "observed_career_sites": [
+    "https://apply.jobappnetwork.com/jcresortsjobs/en",
+    "https://apply.jobappnetwork.com/otbsdjobs/en"
+  ],
+  "public_frontend_asset": "https://apply.jobappnetwork.com/static/js/main.fdcc1884.js",
+  "asset_sha256": "036a34b46a7a3455332d1ce7373bb430ef24d018e76c7285ce49a09423cffe5e",
+  "production_gateway": "https://prod-kong.internal.talentreef.com",
+  "gateway_resolved_only_to_public_ips": true,
+  "interface": "Native career template lookup and external-only posting search",
+  "scope": "Only the client IDs advertised by the selected published English career configurations",
+  "not_used": [
+    "Candidate account APIs",
+    "Application submission",
+    "Private network hosts",
+    "Development and QA hosts",
+    "Internal-only postings"
+  ]
+}

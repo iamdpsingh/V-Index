@@ -1,0 +1,32 @@
+[
+  {
+    "provider": "Dover",
+    "url": "https://jobs.dover.com/api/v1/careers-page-slug/salsa",
+    "at": "2026-11-20T10:27:50.099082+00:00",
+    "target_requested": false,
+    "robots_allowed": false
+  },
+  {
+    "provider": "Paycor",
+    "url": "https://recruitingbypaycor.com/career/CareerHome.action",
+    "at": "2026-11-20T10:27:50.139632+00:00",
+    "target_requested": false,
+    "robots_allowed": false
+  },
+  {
+    "provider": "UltiPro",
+    "url": "https://recruiting.ultipro.com/INF1010INFT/JobBoard/a1f626ce-9a88-4c30-86ee-6562ee8ea030/JobBoard/LoadSearchResults",
+    "at": "2026-11-20T10:27:50.143407+00:00",
+    "target_requested": false,
+    "robots_allowed": true,
+    "note": "Candidate route only; the native page advertises JobBoardView/LoadSearchResults instead. This permissive result does not establish access to the native roster."
+  },
+  {
+    "provider": "UltiPro",
+    "url": "https://recruiting.ultipro.com/INF1010INFT/JobBoard/a1f626ce-9a88-4c30-86ee-6562ee8ea030/JobBoardView/LoadSearchResults",
+    "native_route_from_public_page": true,
+    "robots_allowed": false,
+    "target_requested": false,
+    "at": "2026-11-20T10:29:25.717169+00:00"
+  }
+]

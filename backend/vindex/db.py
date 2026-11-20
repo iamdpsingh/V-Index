@@ -116,3 +116,23 @@ class JobiqoRefresh(Base):
     started_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)
     roster: Mapped[dict[str, str]] = mapped_column(JSON)
     jobs: Mapped[list[dict[str, Any]]] = mapped_column(JSON)
+
+
+class TaleneticRefresh(Base):
+    __tablename__ = "talenetic_refreshes"
+
+    source_id: Mapped[int] = mapped_column(
+        ForeignKey("sources.id", ondelete="CASCADE"), primary_key=True
+    )
+    started_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)
+    roster: Mapped[dict[str, str]] = mapped_column(JSON)
+
+
+class TaleneticDetail(Base):
+    __tablename__ = "talenetic_details"
+
+    source_id: Mapped[int] = mapped_column(
+        ForeignKey("talenetic_refreshes.source_id", ondelete="CASCADE"), primary_key=True
+    )
+    external_id: Mapped[str] = mapped_column(String(500), primary_key=True)
+    data: Mapped[dict[str, Any]] = mapped_column(JSON)

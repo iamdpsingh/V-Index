@@ -1,0 +1,16 @@
+[
+  {
+    "platform": "Paycom",
+    "url": "https://www.paycomonline.net/v4/ats/web.php/portal/5FDAD4C9F20D7D00310983697A309125",
+    "robots_allowed": true,
+    "target_requested": false,
+    "at": "2026-11-20T10:01:22.247848+00:00"
+  },
+  {
+    "platform": "Paycom",
+    "url": "https://portal-applicant-tracking.us-cent.paycomonline.net/api/ats/job-posting-previews/search",
+    "robots_allowed": false,
+    "target_requested": false,
+    "at": "2026-11-20T10:01:23.562299+00:00"
+  }
+]

@@ -1,6 +1,6 @@
 # Rolewisp release status
 
-Recorded November 19, 2026. This document distinguishes the integrated software,
+Updated November 20, 2026. This document distinguishes the integrated software,
 local validation, platform evidence, and public launch work.
 
 ## Integrated product
@@ -23,12 +23,12 @@ local validation, platform evidence, and public launch work.
 - Privacy, terms, cookie, and refund pages, with policy links during signup.
   The owner supplied operator details and a public contact address. Final legal review and contact delivery verification are still needed.
 - Free/Plus regional catalogue. Paid checkout remains deferred.
-- Repeatable registration of 135 reviewed source examples across the 68
+- Repeatable registration of 142 reviewed source examples across the 71
   live-verified platforms. Source registration schedules fresh work.
 
 ## Validation recorded locally
 
-- 1,151 backend tests passed with PostgreSQL and Redis enabled. One
+- 1,178 backend tests passed with PostgreSQL and Redis enabled. One
   PostgreSQL-specific planner test was skipped in its SQLite fixture.
 - 176 browser checks passed. Ten device-specific cases were intentionally
   skipped. Coverage includes search/detail navigation, private profile editing,
@@ -54,17 +54,39 @@ actual result for the submitted revision in the [Verify workflow](https://github
 
 ## Platform acceptance remains open
 
-The registry records 68 fully verified platforms, comprising 51 ATS platforms
+The registry records 71 fully verified platforms, comprising 54 ATS platforms
 and 17 job-board platforms. The coverage workflow additionally records partial
-extracts on Dayforce, Paycom, Dover, Gem.com, Paycor, talentReef, and UltiPro.
+extracts on Paycom, Dover, Paycor, and UltiPro. Talenetic has one fully indexed board and an incomplete second board.
 Third-party samples do not establish upstream completeness or freshness.
 
-Talenetic, CareerSiteCloud, and eJobBoard still lack usable integrated live
-coverage. During the current investigation, a branded Talenetic board exposed
-a permitted sitemap with 2,945 job URLs. That discovery is not a verified
-connector or a complete indexing run.
+Gem.com completed full live runs on Nabla Bio (3 jobs) and nclusion (7 jobs),
+then committed matching results through the real worker. Its public hosted-board
+GraphQL interface is separate from the blocked API host examined earlier.
 
-All ten platforms still need full reusable connector acceptance. The original
+TalentReef completed full runs on JC Resorts (87 jobs) and the On the Border
+board (24 jobs), then committed both through the worker. It uses the native
+public app's production gateway with tenant-scoped external-only queries,
+complete pagination, successful shard checks, and a second full collection read.
+
+Dayforce completed MAAS Energy Works (22 jobs) and SILK (38 jobs), including
+full public details and final roster reconfirmation, then committed both through
+the worker. The public app obtains a server-issued anonymous CSRF token/cookie
+pair before read-only search POSTs. Earlier requests omitted that handshake.
+No login, challenge bypass, or private candidate session is used.
+
+Talenetic has a resumable connector for two branded boards. Medical Update
+Online committed 2,844 active jobs after examining all 2,900 sitemap entries,
+validating 56 explicitly expired pages, and reconfirming the full sitemap.
+All active records carry the publisher-supplied company label “Partner Jobs”
+and are flagged accordingly; actual hiring-company names are not inferred.
+Final counts are audited in `evidence/20261120-talenetic-committed-record-audit.json`.
+The fresh Pro Contract Jobs sitemap had 36,523 candidate URLs, but the run
+stopped on a removed/invalid detail. It remains incomplete and unreconciled.
+
+CareerSiteCloud and eJobBoard are on hold at the owner’s request pending usable
+installation URLs. They are still required by the original challenge.
+
+All seven remaining platforms still need full reusable connector acceptance. The original
 78-platform requirement is open. See [coverage](COVERAGE.md) and
 [coverage workflow](COVERAGE_WORKFLOW.md).
 

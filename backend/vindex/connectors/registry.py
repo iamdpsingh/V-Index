@@ -23,6 +23,8 @@ from vindex.connectors.comeet import TENANT as COMEET_TENANT
 from vindex.connectors.comeet import UID as COMEET_UID
 from vindex.connectors.comeet import ComeetConnector
 from vindex.connectors.csod import CSODConnector
+from vindex.connectors.dayforce import BOARDS as DAYFORCE_BOARDS
+from vindex.connectors.dayforce import DayforceConnector
 from vindex.connectors.deel import DeelConnector
 from vindex.connectors.eightfold import EightfoldConnector
 from vindex.connectors.ejobsitesoftware import BOARDS as EJOBSITESOFTWARE_BOARDS
@@ -31,6 +33,7 @@ from vindex.connectors.exenzo import BOARDS as EXENZO_BOARDS
 from vindex.connectors.exenzo import ExenzoConnector
 from vindex.connectors.firststage import FirstStageConnector
 from vindex.connectors.freshteam import FreshteamConnector
+from vindex.connectors.gem import GemConnector
 from vindex.connectors.gohire import SLUG as GOHIRE_SLUG
 from vindex.connectors.gohire import GoHireConnector
 from vindex.connectors.hibob import SUFFIX as HIBOB_SUFFIX
@@ -94,6 +97,10 @@ from vindex.connectors.smartjobboard import SmartJobBoardConnector
 from vindex.connectors.smartrecruiters import SmartRecruitersConnector
 from vindex.connectors.successfactors import HOSTS as SUCCESSFACTORS_HOSTS
 from vindex.connectors.successfactors import SuccessFactorsConnector
+from vindex.connectors.talenetic import HOSTS as TALENETIC_HOSTS
+from vindex.connectors.talenetic import TaleneticConnector
+from vindex.connectors.talentreef import ALIASES as TALENTREEF_ALIASES
+from vindex.connectors.talentreef import TalentReefConnector
 from vindex.connectors.taleo import HOST as TALEO_HOST
 from vindex.connectors.taleo import ORG as TALEO_ORG
 from vindex.connectors.taleo import TaleoConnector
@@ -121,6 +128,28 @@ def detect(url: str) -> tuple[str, str]:
         or p.port not in (None, 443)
     ):
         raise ValueError("Use an HTTPS hosted career board URL without credentials or custom ports")
+    if p.hostname in TALENETIC_HOSTS:
+        if p.path not in {"", "/"} or p.query or p.fragment:
+            raise ValueError("Expected an unfiltered reviewed Talenetic board root")
+        return "talenetic", p.hostname
+    if p.hostname == "jobs.gem.com":
+        match = re.fullmatch(rf"/({TENANT})/?", p.path)
+        if not match or p.query or p.fragment:
+            raise ValueError("Expected a Gem hosted board root")
+        return "gem", match[1]
+    if p.hostname == "apply.jobappnetwork.com":
+        match = re.fullmatch(r"/([a-z0-9-]+)/en/?", p.path)
+        if not match or match[1] not in TALENTREEF_ALIASES or p.query or p.fragment:
+            raise ValueError("Expected a reviewed TalentReef external career site")
+        return "talentreef", match[1]
+    if p.hostname == "jobs.dayforcehcm.com":
+        match = re.fullmatch(r"/([a-z]{2}-[A-Z]{2})/([a-z0-9-]+)/([A-Za-z0-9_-]+)/?", p.path)
+        if not match or match[2] not in DAYFORCE_BOARDS or p.query or p.fragment:
+            raise ValueError("Expected a reviewed Dayforce public career board")
+        locale, code, _ = DAYFORCE_BOARDS[match[2]]
+        if match[1] != locale or match[3] != code:
+            raise ValueError("Expected the reviewed Dayforce board locale and code")
+        return "dayforce", match[2]
     for suffix, provider in (
         ("hire.trakstar.com", "trakstar"),
         ("freshteam.com", "freshteam"),
@@ -458,6 +487,14 @@ def detect(url: str) -> tuple[str, str]:
 def create_connector(
     provider: str, slug: str, company: str, client: httpx.AsyncClient
 ) -> Connector:
+    if provider == "dayforce":
+        return DayforceConnector(slug, client)
+    if provider == "talentreef":
+        return TalentReefConnector(slug, client)
+    if provider == "gem":
+        return GemConnector(slug, company, client)
+    if provider == "talenetic":
+        return TaleneticConnector(slug, client)
     if provider == "jobmount":
         return JobMountConnector(slug, client)
     if provider == "smartjobboard":

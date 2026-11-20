@@ -1,0 +1,18 @@
+[
+  {
+    "provider": "Gem.com",
+    "url": "https://jobs.gem.com/nabla-bio",
+    "status": "success",
+    "count": 3,
+    "committed_open_observations": 3,
+    "finished_at": "2026-11-20T10:00:12.370024"
+  },
+  {
+    "provider": "Gem.com",
+    "url": "https://jobs.gem.com/nclusion",
+    "status": "success",
+    "count": 7,
+    "committed_open_observations": 7,
+    "finished_at": "2026-11-20T10:00:31.768012"
+  }
+]

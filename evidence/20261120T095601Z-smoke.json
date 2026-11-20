@@ -1,0 +1,32 @@
+[
+  {
+    "provider": "Gem.com",
+    "url": "https://jobs.gem.com/nabla-bio",
+    "at": "2026-11-20T09:55:33.219345+00:00",
+    "revision": "b083758512540ffee9d2f5badf886432c8f94d0f",
+    "working_tree_dirty_at_start": true,
+    "code_sha256": "40e49f6f34cf7fa8bc67d6af2542425be3d777f9f9bc4fb6e7f79c95e8c0073f",
+    "count": 3,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "7d53d72df94670e17c9e8b31482c34a6c861b8163a71c89bd37f5a80257c9358",
+    "finished_at": "2026-11-20T09:55:41.845634+00:00"
+  },
+  {
+    "provider": "Gem.com",
+    "url": "https://jobs.gem.com/nclusion",
+    "at": "2026-11-20T09:55:42.346699+00:00",
+    "revision": "b083758512540ffee9d2f5badf886432c8f94d0f",
+    "working_tree_dirty_at_start": true,
+    "code_sha256": "40e49f6f34cf7fa8bc67d6af2542425be3d777f9f9bc4fb6e7f79c95e8c0073f",
+    "count": 7,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "206567c62512b56db4ccf655c6f431af4ce1855cb16113e65637cb7bb1dcdcda",
+    "finished_at": "2026-11-20T09:56:00.888343+00:00"
+  }
+]

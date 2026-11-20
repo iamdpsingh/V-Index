@@ -1,0 +1,14 @@
+[
+  {
+    "host": "jobs.seattletimes.com",
+    "at": "2026-11-20T10:18:58.603626+00:00",
+    "error_type": "ValueError",
+    "error": "Career page robots policy disallows this request"
+  },
+  {
+    "host": "www.topengineer.com",
+    "at": "2026-11-20T10:18:58.638150+00:00",
+    "error_type": "ConnectTimeout",
+    "error": ""
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "provider": "Dayforce",
+    "url": "https://jobs.dayforcehcm.com/en-US/mew/CANDIDATEPORTAL",
+    "status": "success",
+    "count": 22,
+    "committed_open_observations": 22,
+    "finished_at": "2026-11-20T10:20:42.461407"
+  },
+  {
+    "provider": "Dayforce",
+    "url": "https://jobs.dayforcehcm.com/en-AU/silklaser/CANDIDATEPORTAL",
+    "status": "success",
+    "count": 38,
+    "committed_open_observations": 38,
+    "finished_at": "2026-11-20T10:21:54.169477"
+  }
+]

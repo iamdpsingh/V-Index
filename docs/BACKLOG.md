@@ -4,7 +4,7 @@
 
 ## Current coverage-first status
 
-68 of 78 platforms have complete, nonempty recorded runs across independent sites. Seven other platforms have partial extraction evidence. Three still lack usable live records. The remaining full-coverage work includes all ten. See [release status](RELEASE_STATUS.md) for the integrated product and actual validation results. Older cohort numbers below are historical.
+71 of 78 platforms have complete, nonempty recorded runs across independent sites. Five other platforms have partial extraction evidence. Talenetic now has a checkpointed public connector with partial live records. CareerSiteCloud and eJobBoard remain on hold at the owner’s request. The remaining full-coverage work includes all seven. See [release status](RELEASE_STATUS.md) for the integrated product and actual validation results. Older cohort numbers below are historical.
 
 ## First slice
 - [x] Inspect empty folder/remote; initialize canonical main without replacing history.

@@ -1,0 +1,20 @@
+[
+  {
+    "provider": "Talenetic",
+    "url": "https://www.procontractjobs.com/",
+    "revision": "b083758512540ffee9d2f5badf886432c8f94d0f",
+    "code_sha256": "b8b925ff5a4e44046b5500e4e14d8a4b92a6dbf88a0c12f0fbedce1af254ba97",
+    "at": "2026-11-20T10:21:33.413655+00:00",
+    "status": "failed",
+    "complete": false,
+    "count": 0,
+    "staged_details": 77,
+    "roster_count": 36523,
+    "finished_at": "2026-11-20T10:21:35.635768+00:00",
+    "error_kind": "UpstreamStatusError",
+    "roster_sha256": "0c37613b1b4873f949109b00261a27a2c27e87b52df8d464a21b4012f55cacf9",
+    "quality_flag_counts": {
+      "publisher_supplied_company_label": 77
+    }
+  }
+]

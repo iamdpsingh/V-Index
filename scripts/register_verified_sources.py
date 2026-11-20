@@ -25,8 +25,9 @@ def main() -> None:
         for example in provider["examples"]
         if example["status"] == "LIVE_VERIFIED" and example["complete"]
     }
-    # These two providers have dedicated smoke/checkpoint runners.
+    # These providers have dedicated smoke/checkpoint runners.
     catalogue = EXAMPLES + [
+        ("Jobiqo", "jobiqo", "www.kampajobs.ch", "Kampajobs", "https://www.kampajobs.ch/jobs"),
         (
             "JobMount",
             "jobmount",

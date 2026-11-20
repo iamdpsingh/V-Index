@@ -1,0 +1,32 @@
+[
+  {
+    "provider": "talentReef",
+    "url": "https://apply.jobappnetwork.com/jcresortsjobs/en",
+    "at": "2026-11-20T10:09:01.045145+00:00",
+    "revision": "b083758512540ffee9d2f5badf886432c8f94d0f",
+    "working_tree_dirty_at_start": true,
+    "code_sha256": "8f52fc9c1494e9167a4ff42af08447abe6df7d2f9da9daec756ad622f10df196",
+    "count": 87,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "9180748f51ecefcce87a25b514521bd3ef0fd79b8062883eb30eb644d72b48b4",
+    "finished_at": "2026-11-20T10:09:08.357777+00:00"
+  },
+  {
+    "provider": "talentReef",
+    "url": "https://apply.jobappnetwork.com/otbsdjobs/en",
+    "at": "2026-11-20T10:09:08.859170+00:00",
+    "revision": "b083758512540ffee9d2f5badf886432c8f94d0f",
+    "working_tree_dirty_at_start": true,
+    "code_sha256": "8f52fc9c1494e9167a4ff42af08447abe6df7d2f9da9daec756ad622f10df196",
+    "count": 24,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "38f859e6e9af3cd819a82cb4ce3fd25d903ed00b6cd6d6a7a73649090333d449",
+    "finished_at": "2026-11-20T10:09:12.989732+00:00"
+  }
+]

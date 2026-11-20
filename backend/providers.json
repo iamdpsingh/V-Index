@@ -524,16 +524,51 @@
   {
     "name": "Dayforce",
     "kind": "ats",
-    "implementation_status": "NOT_STARTED",
-    "evidence_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
+    "evidence_status": "LIVE_VERIFIED",
     "risk": "HIGH",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
+    "examples": [
+      {
+        "provider": "Dayforce",
+        "url": "https://jobs.dayforcehcm.com/en-US/mew/CANDIDATEPORTAL",
+        "at": "2026-11-20T10:18:03.740653+00:00",
+        "revision": "b083758512540ffee9d2f5badf886432c8f94d0f",
+        "working_tree_dirty_at_start": true,
+        "code_sha256": "4312c4abd3f951fcae9596b03dbece5c7bde243b0f8d8980d82c15dc65d0d6c7",
+        "count": 22,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "f19c98b04fe312c4cec5c42fb7cc2906bef88afbcdab0b3b6d0ae56624048b03",
+        "finished_at": "2026-11-20T10:18:26.888206+00:00"
+      },
+      {
+        "provider": "Dayforce",
+        "url": "https://jobs.dayforcehcm.com/en-AU/silklaser/CANDIDATEPORTAL",
+        "at": "2026-11-20T10:18:27.390604+00:00",
+        "revision": "b083758512540ffee9d2f5badf886432c8f94d0f",
+        "working_tree_dirty_at_start": true,
+        "code_sha256": "4312c4abd3f951fcae9596b03dbece5c7bde243b0f8d8980d82c15dc65d0d6c7",
+        "count": 38,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "8b9bac0c30646b8b233160a07af96e44813c9d104494fc2ce076dbfd6fcf37fa",
+        "finished_at": "2026-11-20T10:19:40.802288+00:00"
+      }
+    ],
+    "last_run_at": "2026-11-20T10:19:40.802288+00:00",
+    "extraction_count": 60,
     "failure_reason": null,
     "limitations": [
-      "Connector not implemented"
+      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
+      "Reviewed MAAS Energy Works en-US and SILK en-AU public boards only; redirects and private authenticated sessions fail closed",
+      "Native anonymous CSRF token/cookie handshake for read-only posting search; no credentials are stored or account endpoints accessed",
+      "Exact 25-row pagination, full public detail identity and public application metadata, then full listing reconfirmation; maximum 400 jobs",
+      "Complete header/body/footer, publication times and published attributes are preserved; numeric location codes and currency regions are not guessed"
     ]
   },
   {
@@ -768,16 +803,51 @@
   {
     "name": "Gem.com",
     "kind": "ats",
-    "implementation_status": "NOT_STARTED",
-    "evidence_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
+    "evidence_status": "LIVE_VERIFIED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
+    "examples": [
+      {
+        "provider": "Gem.com",
+        "url": "https://jobs.gem.com/nabla-bio",
+        "at": "2026-11-20T09:55:33.219345+00:00",
+        "revision": "b083758512540ffee9d2f5badf886432c8f94d0f",
+        "working_tree_dirty_at_start": true,
+        "code_sha256": "40e49f6f34cf7fa8bc67d6af2542425be3d777f9f9bc4fb6e7f79c95e8c0073f",
+        "count": 3,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "7d53d72df94670e17c9e8b31482c34a6c861b8163a71c89bd37f5a80257c9358",
+        "finished_at": "2026-11-20T09:55:41.845634+00:00"
+      },
+      {
+        "provider": "Gem.com",
+        "url": "https://jobs.gem.com/nclusion",
+        "at": "2026-11-20T09:55:42.346699+00:00",
+        "revision": "b083758512540ffee9d2f5badf886432c8f94d0f",
+        "working_tree_dirty_at_start": true,
+        "code_sha256": "40e49f6f34cf7fa8bc67d6af2542425be3d777f9f9bc4fb6e7f79c95e8c0073f",
+        "count": 7,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "206567c62512b56db4ccf655c6f431af4ce1855cb16113e65637cb7bb1dcdcda",
+        "finished_at": "2026-11-20T09:56:00.888343+00:00"
+      }
+    ],
+    "last_run_at": "2026-11-20T09:56:00.888343+00:00",
+    "extraction_count": 10,
     "failure_reason": null,
     "limitations": [
-      "Connector not implemented"
+      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
+      "Read-only public GraphQL on jobs.gem.com; the api.gem.com host remains blocked and is not used",
+      "At most 400 postings; all full details, public posting identities, and the complete listing metadata must be reconfirmed",
+      "Company must match the public careers-page title; application entry is the original hosted posting",
+      "Intro, description, compensation and outro are retained; salary remains source text and posting dates use UTC"
     ]
   },
   {
@@ -2301,16 +2371,51 @@
   {
     "name": "talentReef",
     "kind": "ats",
-    "implementation_status": "NOT_STARTED",
-    "evidence_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
+    "evidence_status": "LIVE_VERIFIED",
     "risk": "MEDIUM",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
+    "examples": [
+      {
+        "provider": "talentReef",
+        "url": "https://apply.jobappnetwork.com/jcresortsjobs/en",
+        "at": "2026-11-20T10:09:01.045145+00:00",
+        "revision": "b083758512540ffee9d2f5badf886432c8f94d0f",
+        "working_tree_dirty_at_start": true,
+        "code_sha256": "8f52fc9c1494e9167a4ff42af08447abe6df7d2f9da9daec756ad622f10df196",
+        "count": 87,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "9180748f51ecefcce87a25b514521bd3ef0fd79b8062883eb30eb644d72b48b4",
+        "finished_at": "2026-11-20T10:09:08.357777+00:00"
+      },
+      {
+        "provider": "talentReef",
+        "url": "https://apply.jobappnetwork.com/otbsdjobs/en",
+        "at": "2026-11-20T10:09:08.859170+00:00",
+        "revision": "b083758512540ffee9d2f5badf886432c8f94d0f",
+        "working_tree_dirty_at_start": true,
+        "code_sha256": "8f52fc9c1494e9167a4ff42af08447abe6df7d2f9da9daec756ad622f10df196",
+        "count": 24,
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "error": null,
+        "quality_flag_counts": {},
+        "payload_sha256": "38f859e6e9af3cd819a82cb4ce3fd25d903ed00b6cd6d6a7a73649090333d449",
+        "finished_at": "2026-11-20T10:09:12.989732+00:00"
+      }
+    ],
+    "last_run_at": "2026-11-20T10:09:12.989732+00:00",
+    "extraction_count": 111,
     "failure_reason": null,
     "limitations": [
-      "Connector not implemented"
+      "Point-in-time public API/feed enumeration; continuous operation is not established by this smoke test",
+      "Only reviewed jcresortsjobs and otbsdjobs public English external career sites; filtered, internal and multi-client templates fail closed",
+      "Uses the production public career app advertised gateway, which resolves publicly; fixed hosts, robots checks, no authentication or account endpoints",
+      "External-only tenant-scoped queries, exact totals, successful shards, bounded 50-row pages and full record-set reconfirmation; maximum 2000 postings",
+      "Unpublished compensation is removed; original public application links retained; no candidate accounts or applications are accessed"
     ]
   },
   {
@@ -3274,16 +3379,60 @@
   {
     "name": "Talenetic",
     "kind": "job_board",
-    "implementation_status": "NOT_STARTED",
-    "evidence_status": "NOT_STARTED",
+    "implementation_status": "IMPLEMENTED",
+    "evidence_status": "BLOCKED",
     "risk": "HIGH",
     "risk_basis": "Planning estimate; not validated provider behavior",
-    "examples": [],
-    "last_run_at": null,
-    "extraction_count": null,
-    "failure_reason": null,
+    "examples": [
+      {
+        "provider": "Talenetic",
+        "url": "https://jobs.medicalupdateonline.com/",
+        "revision": "b083758512540ffee9d2f5badf886432c8f94d0f",
+        "code_sha256": "358fdee4ac2ec6134a97331b1a2da3f8f182abd24f7f4168905e6f3d16273514",
+        "at": "2026-11-20T10:09:55.431909+00:00",
+        "status": "LIVE_VERIFIED",
+        "complete": true,
+        "count": 2844,
+        "staged_details": 0,
+        "roster_count": 2900,
+        "finished_at": "2026-11-20T10:12:12.011522+00:00",
+        "error_kind": null,
+        "roster_sha256": "5623a875512b36210604c8e9d271e96687309e0a5f315be2e41e4bbd8fa9432b",
+        "quality_flag_counts": {
+          "publisher_supplied_company_label": 2844
+        },
+        "error": null
+      },
+      {
+        "provider": "Talenetic",
+        "url": "https://www.procontractjobs.com/",
+        "revision": "b083758512540ffee9d2f5badf886432c8f94d0f",
+        "code_sha256": "b8b925ff5a4e44046b5500e4e14d8a4b92a6dbf88a0c12f0fbedce1af254ba97",
+        "at": "2026-11-20T10:21:33.413655+00:00",
+        "status": "FAILED",
+        "complete": false,
+        "count": 0,
+        "staged_details": 77,
+        "roster_count": 36523,
+        "finished_at": "2026-11-20T10:21:35.635768+00:00",
+        "error_kind": "UpstreamStatusError",
+        "roster_sha256": "0c37613b1b4873f949109b00261a27a2c27e87b52df8d464a21b4012f55cacf9",
+        "quality_flag_counts": {
+          "publisher_supplied_company_label": 77
+        },
+        "error": "Full snapshot incomplete; a sitemap-linked detail failed validation or returned HTTP 410"
+      }
+    ],
+    "last_run_at": "2026-11-20T10:21:35.635768+00:00",
+    "extraction_count": 2844,
+    "failure_reason": "One board passed completely; the second has stale or removed sitemap entries and has not completed.",
     "limitations": [
-      "Connector not implemented"
+      "Reviewed Medical Update Online and Pro Contract Jobs boards only; platform coverage is not verified until two complete runs pass",
+      "Robots-advertised sitemaps are fully enumerated and reconfirmed; all active details require matching native and structured data",
+      "Explicit expired pages require a matching posting ID and source expiry message; HTTP errors and malformed pages fail the snapshot and never close jobs",
+      "Worker checkpoints each detail independently, with a six-hour snapshot window and bounded pacing/concurrency; no partial reconciliation",
+      "The source often supplies Partner Jobs as company; this publisher-provided label is preserved and flagged, rather than guessing an employer from prose",
+      "Snapshot bound 50000 candidates, maximum 10000 URLs per sitemap partition; anonymous public pages only"
     ]
   },
   {
