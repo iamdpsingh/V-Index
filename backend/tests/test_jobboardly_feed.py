@@ -51,7 +51,7 @@ def page(path=PATH):
     return f'<p>Showing <span>1</span> to <span>1</span></p><nav aria-label="Pagination"><span aria-disabled="true">Next</span></nav><a href="{path}">Engineer</a>'
 
 
-def run(body=None, confirm=None, html=None, status=200):
+def run(body=None, confirm=None, html=None, status=200, detail=None):
     calls = 0
 
     async def discover():
@@ -70,9 +70,9 @@ def run(body=None, confirm=None, html=None, status=200):
                     if body is not None
                     else feed(),
                 )
-            assert (
-                request.url.path == "/jobs"
-            )  # Full descriptions come from the public feed, no detail/external requests.
+            if request.url.path == PATH and detail is not None:
+                return httpx.Response(200, text=detail)
+            assert request.url.path == "/jobs"
             return httpx.Response(200, text=html if html is not None else page())
 
         async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
@@ -94,6 +94,35 @@ def test_documented_xml_job_fields_and_application_preserved():
     }
     assert job.published_at.hour == 9 and job.application_url == "https://employer.example/apply"
     assert "<expires_at>" in job.raw["xml"]
+
+
+def test_missing_feed_fields_enriched_only_from_matching_native_posting():
+    from test_jobboardly import detail
+
+    original = feed(location="", html_description="")
+    batch = run(body=original, detail=detail())
+    job = batch.jobs[0]
+    assert batch.complete and job.location == "London, UK"
+    assert job.description == "Build systems" and "description_missing" not in job.quality_flags
+    assert job.application_url == "https://employer.example/apply"
+    assert "<location />" in job.raw["xml"]
+    assert set(job.raw["detail_enrichment"]["fields"]) == {"location", "description"}
+    assert job.salary["minimum"] == "50000"  # Keep populated feed optional fields.
+    with pytest.raises(ValueError, match="identity mismatch"):
+        run(body=original, detail=detail(identifier=2))
+    with pytest.raises(ValueError, match="changed during enumeration"):
+        run(body=original, detail=detail(), confirm=feed(location="", title="Changed"))
+
+
+def test_blank_native_description_stays_blank_instead_of_inventing_text():
+    from test_jobboardly import detail
+
+    job = run(
+        body=feed(location="", html_description=""),
+        detail=detail().replace("<p>Build systems</p>", ""),
+    ).jobs[0]
+    assert job.description == "" and "description_missing" in job.quality_flags
+    assert job.location == "London, UK"
 
 
 @pytest.mark.parametrize(

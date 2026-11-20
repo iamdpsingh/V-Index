@@ -89,19 +89,25 @@ class NodexConnector:
         description = text(job_data.get("description", ""))
         flags = [] if description else ["description_missing"]
 
-        location = ""
+        locations = []
         loc_obj = job_data.get("jobLocation")
-        if isinstance(loc_obj, list) and loc_obj:
-            loc_obj = loc_obj[0]
         if isinstance(loc_obj, dict):
-            addr = loc_obj.get("address")
+            loc_obj = [loc_obj]
+        for place in loc_obj if isinstance(loc_obj, list) else []:
+            if not isinstance(place, dict):
+                raise ValueError("Malformed Nodex job location")
+            addr = place.get("address")
             if isinstance(addr, dict):
                 parts = [
                     addr.get("addressLocality"),
                     addr.get("addressRegion"),
                     addr.get("addressCountry"),
                 ]
-                location = ", ".join(str(p).strip() for p in parts if p and str(p).strip())
+                location = ", ".join(
+                    dict.fromkeys(str(p).strip() for p in parts if p and str(p).strip())
+                )
+                if location and location not in locations:
+                    locations.append(location)
 
         published_at: datetime | None = None
         date_str = job_data.get("datePosted")
@@ -109,12 +115,17 @@ class NodexConnector:
             try:
                 published_at = datetime.fromisoformat(date_str)
             except ValueError:
-                pass
+                flags.append("publication_date_invalid")
 
         employment: str | None = None
         emp_raw = job_data.get("employmentType")
         if isinstance(emp_raw, list) and emp_raw:
-            employment = str(emp_raw[0]).strip() or None
+            if not all(isinstance(value, str) for value in emp_raw):
+                raise ValueError("Malformed Nodex employment types")
+            employment = (
+                "; ".join(dict.fromkeys(value.strip() for value in emp_raw if value.strip()))
+                or None
+            )
         elif isinstance(emp_raw, str):
             employment = emp_raw.strip() or None
 
@@ -124,10 +135,11 @@ class NodexConnector:
             company=company,
             description=description,
             quality_flags=flags,
-            location=location,
+            location="; ".join(locations),
             source_url=url,
             application_url=url,
             employment_type=employment,
+            salary=job_data.get("baseSalary"),
             published_at=published_at,
             raw=job_data,
         )

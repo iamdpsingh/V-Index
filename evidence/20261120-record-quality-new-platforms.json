@@ -1,0 +1,63 @@
+{
+  "recorded_at": "2026-11-20T11:09:45.177983+00:00",
+  "capture_started_at": "2026-11-20T11:09:45.138619+00:00",
+  "capture_finished_at": "2026-11-20T11:09:45.171067+00:00",
+  "grain": "Open source observations; active canonical jobs audited separately",
+  "read_only": true,
+  "scope": "Current database snapshot, not all historical platform smoke runs",
+  "url_check": "HTTPS syntax and local/private literal restrictions; not a live reachability audit",
+  "counts": {
+    "open_observations": 181,
+    "source_optional:employment_type": 122,
+    "normalized_optional:employment_type": 122,
+    "source_optional:remote_status": 10,
+    "normalized_optional:remote_status": 10,
+    "source_optional:published_at": 181,
+    "normalized_optional:published_at": 181,
+    "required_fields_present_without_publisher_company_label": 181,
+    "source_optional:salary": 82,
+    "normalized_optional:salary": 82,
+    "active_canonical_jobs": 181
+  },
+  "missing_required_rates": {
+    "title": 0.0,
+    "company": 0.0,
+    "description": 0.0,
+    "location": 0.0,
+    "source_url": 0.0,
+    "application_url": 0.0
+  },
+  "contract_failures": {},
+  "quality_flags": {
+    "publication_timezone_unspecified": 111,
+    "employment_type_unmapped": 1
+  },
+  "by_connector": {
+    "dayforce": {
+      "records": 60,
+      "source_optional:published_at": 60,
+      "source_optional:salary": 2,
+      "source_optional:employment_type": 1
+    },
+    "gem": {
+      "records": 10,
+      "source_optional:employment_type": 10,
+      "source_optional:remote_status": 10,
+      "source_optional:published_at": 10,
+      "source_optional:salary": 3
+    },
+    "talentreef": {
+      "records": 111,
+      "source_optional:employment_type": 111,
+      "source_optional:published_at": 111,
+      "source_optional:salary": 77
+    }
+  },
+  "strict_required_field_pass": true,
+  "limitations": [
+    "Blank source fields are reported, never invented or silently removed",
+    "Open observations include last-known records retained while closure confirmation is pending",
+    "Optional-field absence is not a required-field failure",
+    "The audit does not prove upstream completeness, source freshness SLAs or every employer identity"
+  ]
+}

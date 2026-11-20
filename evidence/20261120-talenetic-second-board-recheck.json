@@ -1,0 +1,10 @@
+{
+  "provider": "Talenetic",
+  "url": "https://www.procontractjobs.com/jobs/4635361/mechanical-designer-in-portsmouth-hampshire-morson-edge/",
+  "recorded_at": "2026-11-20T11:02:55.989684+00:00",
+  "purpose": "Recheck first uncommitted sitemap detail; not a full enumeration",
+  "complete": false,
+  "status": "failed",
+  "error_type": "UpstreamStatusError",
+  "error": "Upstream HTTP 410"
+}

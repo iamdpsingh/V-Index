@@ -1,0 +1,48 @@
+{
+  "recorded_at": "2026-11-20T11:15:53.093452+00:00",
+  "scope": "Latest worker runs on the local demo; recovered fields counted from current retained native-enrichment observations",
+  "runs": [
+    {
+      "provider": "nodex",
+      "url": "https://www.emotivtech.co.uk/search",
+      "worker_run_id": 361,
+      "status": "success",
+      "complete": true,
+      "count": 35,
+      "finished_at": "2026-11-20T11:05:40.255713+00:00",
+      "native_fields_recovered": {}
+    },
+    {
+      "provider": "nodex",
+      "url": "https://www.geckotravelrecruitment.co.uk/search",
+      "worker_run_id": 362,
+      "status": "success",
+      "complete": true,
+      "count": 15,
+      "finished_at": "2026-11-20T11:05:54.675149+00:00",
+      "native_fields_recovered": {}
+    },
+    {
+      "provider": "jobboardly",
+      "url": "https://recruiter-jobs.jobboardly.com/jobs",
+      "worker_run_id": 363,
+      "status": "success",
+      "complete": true,
+      "count": 21,
+      "finished_at": "2026-11-20T11:06:06.207691+00:00",
+      "native_fields_recovered": {}
+    },
+    {
+      "provider": "jobboardly",
+      "url": "https://pennsylvania-communications.jobboardly.com/jobs",
+      "worker_run_id": 364,
+      "status": "success",
+      "complete": true,
+      "count": 1493,
+      "finished_at": "2026-11-20T11:15:31.899321+00:00",
+      "native_fields_recovered": {
+        "location": 3
+      }
+    }
+  ]
+}

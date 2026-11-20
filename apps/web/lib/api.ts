@@ -6,6 +6,24 @@ export type ProvenanceOut = {
   application_url: string;
   status: string;
   last_checked_at: string; // date-time
+  first_seen_at?: string | null;
+  last_changed_at?: string | null;
+};
+
+export type SalaryOut = {
+  min: number | null;
+  max: number | null;
+  currency: string | null;
+  period: string | null;
+  text: string | null;
+  ranges: {
+    min: number | null;
+    max: number | null;
+    currency: string | null;
+    period: string | null;
+    label: string | null;
+  }[];
+  source: Record<string, unknown>;
 };
 
 export type JobOut = {
@@ -20,10 +38,13 @@ export type JobOut = {
   application_url: string;
   employment_type: string | null;
   remote_status: string | null;
-  salary: Record<string, unknown> | null;
+  employment_type_source?: string | null;
+  remote_status_source?: string | null;
+  salary: SalaryOut | null;
   published_at: string | null; // date-time
   first_seen_at: string; // date-time
   last_changed_at: string; // date-time
+  last_checked_at?: string | null;
   sources: ProvenanceOut[];
 };
 

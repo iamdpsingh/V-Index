@@ -26,6 +26,7 @@ from vindex.connectors.registry import detect
 from vindex.db import Job, Observation, Run, Session, Source, now
 from vindex.ingest import aware
 from vindex.plans import router as plans_router
+from vindex.records import public_job
 from vindex.schemas import JobOut, RunOut, SearchOut, SearchSummaryOut, SourceCreate, SourceOut
 
 app = FastAPI(
@@ -192,30 +193,7 @@ def jobs(
             "total": total,
             "limit": limit,
             "offset": offset,
-            "items": [
-                {
-                    "id": j.id,
-                    **{
-                        key: value
-                        for key, value in j.data.items()
-                        if key != "raw" and (view == "full" or key != "description")
-                    },
-                    "first_seen_at": aware(j.first_seen).astimezone(UTC),
-                    "last_changed_at": aware(j.last_changed).astimezone(UTC),
-                    "sources": [
-                        {
-                            "source_id": o.source_id,
-                            "source_url": o.data["source_url"],
-                            "application_url": o.data["application_url"],
-                            "status": o.status,
-                            "last_checked_at": aware(o.last_checked).astimezone(UTC),
-                        }
-                        for o in observations
-                        if o.job_id == j.id
-                    ],
-                }
-                for j in selected
-            ],
+            "items": [public_job(j, observations, description=view == "full") for j in selected],
         }
         if view == "summary":
             return SearchSummaryOut.model_validate(payload)
@@ -231,19 +209,4 @@ def job_detail(job_id: int):
         observations = list(
             session.scalars(select(Observation).where(Observation.job_id == job_id))
         )
-        return {
-            "id": job.id,
-            **job.data,
-            "first_seen_at": aware(job.first_seen).astimezone(UTC),
-            "last_changed_at": aware(job.last_changed).astimezone(UTC),
-            "sources": [
-                {
-                    "source_id": o.source_id,
-                    "source_url": o.data["source_url"],
-                    "application_url": o.data["application_url"],
-                    "status": o.status,
-                    "last_checked_at": aware(o.last_checked).astimezone(UTC),
-                }
-                for o in observations
-            ],
-        }
+        return public_job(job, observations)

@@ -1,6 +1,6 @@
 # Connector contract
 
-`detect(url) -> (provider, slug)` is deterministic and rejects unknown hosts. `PublicConnector(provider, slug, company, client)` holds only validated tenant configuration. `fetch(cursor=0)` performs one bounded request and returns JSON. `parse(payload) -> list[JobInput]` validates every record; errors reject the enumeration. `discover() -> Enumeration` traverses every page, rejects repeated identifiers and confirms totals where provided. Normalization is performed during typed JobInput construction; original fields stay in raw.
+`detect(url) -> (provider, slug)` is deterministic and rejects unknown hosts. `PublicConnector(provider, slug, company, client)` holds only validated tenant configuration. `fetch(cursor=0)` performs one bounded request and returns JSON. `parse(payload) -> list[JobInput]` validates every record; errors reject the enumeration. `discover() -> Enumeration` traverses every page, rejects repeated identifiers and confirms totals where provided. Connector extraction is validated through typed JobInput construction; shared public normalization is applied at read time without rewriting original observations. Original fields stay in raw.
 
 `complete=True` is required for any reconciliation. Missing arrays, invalid required fields, exceeded response/page limits, repeated pages and total mismatches raise errors. Greenhouse and Ashby expose full arrays; Lever uses skip/limit until a short page (including a final empty page after an exact page multiple). Missing/unlisted Ashby jobs are intentionally excluded when isListed=false. Network failures do not yield empty successful batches.
 
@@ -294,7 +294,7 @@ Supported source: `https://jobs.deel.com/{organization}`. Parse rendered public 
 
 ## November 7 public projection hardening
 
-GET /api/v1/jobs/{id} now returns JobOut, matching list-item projection. Each sources[] entry is only source_id, source_url, application_url, status, last_checked_at. No raw payload, observation.data, fingerprint or reconciliation bookkeeping is returned. Original observations remain in database storage for audit. Existing public fields and original links are retained. Regenerate frontend types from docs/openapi.json; never use a private/raw structure as a browser response.
+GET /api/v1/jobs/{id} returns JobOut, matching the full list-item projection. Each sources[] entry contains source_id, source_url, application_url, status, first_seen_at, last_changed_at and last_checked_at. No raw transport payload, observation.data, fingerprint or reconciliation bookkeeping is returned. Original observations remain in database storage for audit. Existing public fields and original links are retained. Regenerate frontend types from docs/openapi.json; never use a private/raw structure as a browser response.
 
 ## JBoard.io public boards
 
@@ -393,3 +393,59 @@ The reviewed Soudeur and JobsRUs unfiltered results pages support JobMount regis
 
 
 Search supports `GET /api/v1/jobs?view=summary` for lightweight result pages. This view includes the existing search metadata and source links and omits descriptions. The default full response remains supported. Clients load `GET /api/v1/jobs/{id}` when a job is opened and cancel obsolete detail requests when selection changes.
+
+
+## Consistent public records, November 20
+
+`vindex.records.public_job` is shared by full search, summaries, detail, and
+private recommendations. Source `JobInput` observations remain unchanged in
+storage. Required identity strings reject whitespace-only values. Job links must
+be HTTPS, without credentials, control characters, nonstandard ports, localhost,
+or private/reserved IP literals. These checks do not certify DNS or live link
+reachability. Malformed records fail the refresh without reconciliation; worker
+validation errors omit rejected input values.
+
+Public salary has one shape: `min`, `max`, `currency`, `period`, `text`, `ranges`,
+and `source`. The last field preserves the original public compensation object,
+not the connector's raw transport payload. Multi-location/multi-currency ranges
+stay separate. Only explicit numeric amounts, currency codes and pay periods are
+normalized; no country-based currency guesses, annualization, equity-to-salary
+conversion or salary-prose parsing. Unknown structures remain available through
+`source` with a quality flag. Nonfinite JSON numbers are rejected.
+
+Known employment and workplace aliases use consistent labels. Original changed
+values are retained in `employment_type_source` and `remote_status_source`.
+Qualified remote text is retained, not broadened into unrestricted remote work.
+Missing optional values stay null. Aware publication timestamps are UTC; dates
+without a timezone retain that limitation through a quality flag. Never relabel
+an update or indexing timestamp as original publication.
+
+Public records and each source link expose first-seen, last-changed and
+last-checked times. Canonical first-seen uses the earliest contributing
+observation. Canonical last-changed cannot move backwards when an older source
+is refreshed. Re-identifying a changed title preserves the source observation's
+original first-seen time. Last-checked uses the latest open source observation,
+falling back to all provenance only when none is open.
+
+Jobboardly XML records missing description or location now read the same native
+job page, with robots/pacing, a 400-detail bound, matching ID/URL/title/employer,
+and complete HTML/XML reconfirmation. Only missing fields are filled. Both
+original XML and the matching native observation are retained. A failed detail,
+identity mismatch or changed roster rejects the entire refresh. Blank native
+text remains blank. Nodex also preserves source salary, every structured
+location, and all employment types rather than only the first.
+
+Run `PYTHONPATH=backend DATABASE_URL=... uv run python scripts/audit_job_records.py
+--output evidence/<dated-name>.json [--strict]`. It reads only source/job tables,
+reports required blanks, optional-value retention, typed public contract errors,
+timestamp ordering, duplicate source IDs and orphan references. `--strict`
+fails for missing required fields or generic publisher company labels. Snapshot
+capture spans multiple queries; concurrent refreshes can change the population.
+This is a data-quality check, not proof of all upstream jobs or freshness SLAs.
+
+
+Talenetic additionally preserves a unique native `dd[itemprop=employmentType]`
+when structured employment is empty, retaining the native HTML separately from
+the original JSON-LD. Multiple native fields fail as ambiguous. Structured
+multiple employment values remain separate labels. A single refreshed detail
+check is evidence for this fallback, not a second-board or full-refresh claim.

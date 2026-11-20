@@ -6,6 +6,7 @@ import os
 from datetime import timedelta
 
 import httpx
+from pydantic import ValidationError
 from redis import Redis
 from sqlalchemy import select, update
 
@@ -101,7 +102,15 @@ async def refresh(source_id: int, *, only_if_due: bool = False) -> int | None:
                 assert failed_run is not None and source is not None
                 failed_run.status, failed_run.error = (
                     "failed",
-                    f"Refresh exceeded {refresh_timeout // 60} minutes"
+                    "Invalid job records: "
+                    + "; ".join(
+                        f"{'.'.join(str(part) for part in item['loc'])}: {item['type']}"
+                        for item in error.errors(
+                            include_input=False, include_context=False, include_url=False
+                        )
+                    )[:400]
+                    if isinstance(error, ValidationError)
+                    else f"Refresh exceeded {refresh_timeout // 60} minutes"
                     if isinstance(error, TimeoutError) and not str(error)
                     else f"{type(error).__name__}: {str(error)[:500]}",
                 )

@@ -74,6 +74,39 @@ def test_exact_provider_inventory(client):
     assert sum(r["kind"] == "ats" for r in rows) == 58
 
 
+def test_search_summary_and_detail_share_normalized_fields_without_rewriting_observations(
+    client, database, source
+):
+    original = {"minimum": "50000", "maximum": "60000", "currency": "gbp", "schedule": "yearly"}
+    with database() as session:
+        ingest(
+            session,
+            source,
+            Enumeration(
+                jobs=[
+                    posting(
+                        salary=original, employment_type="FULL_TIME", remote_status="telecommute"
+                    )
+                ],
+                complete=True,
+            ),
+        )
+        session.commit()
+    full = client.get("/api/v1/jobs?limit=1").json()["items"][0]
+    summary = client.get("/api/v1/jobs?limit=1&view=summary").json()["items"][0]
+    detail = client.get(f"/api/v1/jobs/{full['id']}").json()
+    assert full == detail
+    assert summary == {k: v for k, v in full.items() if k != "description"}
+    assert full["salary"]["min"] == 50000 and full["salary"]["period"] == "year"
+    assert full["salary"]["currency"] == "GBP" and full["salary"]["source"] == original
+    assert full["employment_type"] == "Full-time" and full["remote_status"] == "Remote"
+    assert full["last_checked_at"] == full["sources"][0]["last_checked_at"]
+    with database() as session:
+        observation = session.scalar(select(Observation))
+        assert observation.data["salary"] == original
+        assert observation.data["employment_type"] == "FULL_TIME"
+
+
 def test_api_reads_updated_index_without_cached_snapshot(client, database, source):
     with database() as session:
         ingest(session, source, Enumeration(jobs=[posting()], complete=True))
@@ -146,6 +179,27 @@ def test_fetch_failure_recorded_without_closing(database, source, monkeypatch):
         assert obs.status == "open" and obs.missing_count == 0
 
 
+def test_rejected_job_values_are_not_copied_into_worker_errors(database, source, monkeypatch):
+    monkeypatch.setattr(worker, "Session", database)
+    redis = Mock()
+    redis.lock.return_value = nullcontext()
+    monkeypatch.setattr(worker.Redis, "from_url", lambda url: redis)
+    canary = "NEVER_LOG_REJECTED_CREDENTIAL"
+
+    async def failed():
+        return Enumeration(
+            jobs=[posting(application_url=f"https://user:{canary}@example.org/apply")],
+            complete=True,
+        )
+
+    monkeypatch.setattr(worker, "create_connector", lambda *args: Mock(discover=failed))
+    run_id = asyncio.run(worker.refresh(source.id))
+    with database() as session:
+        run = session.get(Run, run_id)
+        assert run.status == "failed" and "application_url" in run.error
+        assert canary not in run.error and "user:" not in run.error
+
+
 def test_public_detail_does_not_disclose_raw_or_internal_observations(client, database, source):
     canary = "PRIVATE_INGESTION_CANARY_NEVER_PUBLIC"
     with database() as session:
@@ -175,6 +229,8 @@ def test_public_detail_does_not_disclose_raw_or_internal_observations(client, da
             "application_url",
             "status",
             "last_checked_at",
+            "first_seen_at",
+            "last_changed_at",
         }
         assert provenance["source_url"] == posting().source_url
     with database() as session:

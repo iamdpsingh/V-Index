@@ -68,6 +68,18 @@ def test_talenetic_sitemap_rejects_duplicates_and_entities():
             connector.xml_urls(invalid, index=False)
 
 
+def test_talenetic_native_employment_preserved_when_structured_field_is_absent():
+    connector = TaleneticConnector(HOST, httpx.AsyncClient())
+    native = b'<dd itemprop="employmentType"><a href="/search/permanent">Permanent</a></dd>'
+    body = detail().replace(b"</html>", native + b"</html>")
+    job = connector.parse((URL, body))[0]
+    assert job.employment_type == "Permanent"
+    assert 'itemprop="employmentType"' in job.raw["native_employment_html"]
+    assert "employmentType" not in job.raw["job_posting"]
+    with pytest.raises(ValueError, match="Ambiguous"):
+        connector.parse((URL, body.replace(b"</html>", native + b"</html>")))
+
+
 def test_talenetic_expired_pages_require_explicit_identity():
     connector = TaleneticConnector(HOST, httpx.AsyncClient())
     body = b"""<html><h1 class="expired-title">This job has <span>expired</span></h1>

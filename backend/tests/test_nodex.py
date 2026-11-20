@@ -59,6 +59,25 @@ SAMPLE_DETAIL_HTML = f"""<!DOCTYPE html>
 """.encode()
 
 
+def test_nodex_retains_all_locations_employment_types_and_public_salary():
+    schema = {
+        **SAMPLE_DETAIL_SCHEMA,
+        "jobLocation": [
+            {"address": {"addressLocality": "London"}},
+            {"address": {"addressLocality": "Bristol"}},
+        ],
+        "employmentType": ["FULL_TIME", "PART_TIME"],
+        "baseSalary": {"currency": "GBP", "value": {"value": "55000"}},
+    }
+    body = f'<html><script type="application/ld+json">{json.dumps(schema)}</script></html>'.encode()
+    job = NodexConnector("www.emotivtech.co.uk", httpx.AsyncClient()).parse_detail(
+        "846", schema["url"], body
+    )
+    assert job.location == "London; Bristol"
+    assert job.employment_type == "FULL_TIME; PART_TIME"
+    assert job.salary == schema["baseSalary"] and job.raw == schema
+
+
 def test_nodex_rejects_unreviewed_origin():
     client = httpx.AsyncClient()
     with pytest.raises(ValueError, match="Unreviewed Nodex origin"):

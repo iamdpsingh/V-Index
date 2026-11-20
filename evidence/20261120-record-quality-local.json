@@ -1,0 +1,465 @@
+{
+  "recorded_at": "2026-11-20T11:15:52.806339+00:00",
+  "capture_started_at": "2026-11-20T11:15:51.811304+00:00",
+  "capture_finished_at": "2026-11-20T11:15:52.432906+00:00",
+  "grain": "Open source observations; active canonical jobs audited separately",
+  "read_only": true,
+  "scope": "Current database snapshot, not all historical platform smoke runs",
+  "url_check": "HTTPS syntax and local/private literal restrictions; not a live reachability audit",
+  "counts": {
+    "open_observations": 8109,
+    "source_optional:published_at": 7193,
+    "normalized_optional:published_at": 7193,
+    "required_fields_present_without_publisher_company_label": 7853,
+    "open_observations_pending_closure": 202,
+    "missing:location": 182,
+    "source_optional:remote_status": 2960,
+    "normalized_optional:remote_status": 2960,
+    "source_optional:salary": 2591,
+    "normalized_optional:salary": 2591,
+    "source_optional:employment_type": 5389,
+    "normalized_optional:employment_type": 5389,
+    "missing:description": 74,
+    "active_canonical_jobs": 8109
+  },
+  "missing_required_rates": {
+    "title": 0.0,
+    "company": 0.0,
+    "description": 0.009125662843753853,
+    "location": 0.022444197804908125,
+    "source_url": 0.0,
+    "application_url": 0.0
+  },
+  "contract_failures": {},
+  "quality_flags": {
+    "location_missing": 182,
+    "employment_type_unmapped": 316,
+    "salary_structure_unmapped": 222,
+    "role_description_missing": 1,
+    "remote_status_unmapped": 153,
+    "application_by_email": 29,
+    "publication_timezone_unspecified": 1553,
+    "publication_date_missing": 47,
+    "publication_date_only": 86,
+    "source_contact_protected": 26,
+    "structured_posting_missing": 1,
+    "application_http_source": 2,
+    "structured_job_metadata_missing": 105,
+    "company_from_source_configuration": 345,
+    "structured_title_differs": 22,
+    "description_section_missing": 1,
+    "jsonld_literal_whitespace": 13,
+    "jobposting_schema_missing": 105,
+    "description_missing": 74,
+    "workplace_type_unmapped": 26
+  },
+  "by_connector": {
+    "adp": {
+      "records": 214,
+      "source_optional:published_at": 214
+    },
+    "applicantpro": {
+      "records": 6,
+      "source_optional:salary": 5,
+      "source_optional:employment_type": 6,
+      "source_optional:remote_status": 6,
+      "source_optional:published_at": 6
+    },
+    "artha": {
+      "records": 124,
+      "source_optional:published_at": 124,
+      "missing:location": 1,
+      "source_optional:remote_status": 1,
+      "source_optional:salary": 76,
+      "source_optional:employment_type": 78
+    },
+    "ashby": {
+      "records": 274,
+      "source_optional:salary": 274,
+      "source_optional:employment_type": 274,
+      "source_optional:remote_status": 274,
+      "source_optional:published_at": 274
+    },
+    "avature": {
+      "records": 37,
+      "source_optional:published_at": 23,
+      "source_optional:salary": 9
+    },
+    "bamboohr": {
+      "records": 26,
+      "source_optional:employment_type": 26,
+      "source_optional:published_at": 26,
+      "source_optional:salary": 16
+    },
+    "brassring": {
+      "records": 45,
+      "missing:location": 9
+    },
+    "breezy": {
+      "records": 78,
+      "source_optional:employment_type": 78,
+      "source_optional:remote_status": 76,
+      "source_optional:published_at": 78,
+      "source_optional:salary": 2
+    },
+    "careerplug": {
+      "records": 5,
+      "source_optional:employment_type": 5,
+      "source_optional:published_at": 5,
+      "source_optional:salary": 1
+    },
+    "comeet": {
+      "records": 31,
+      "source_optional:remote_status": 31,
+      "source_optional:employment_type": 8
+    },
+    "csod": {
+      "records": 33,
+      "source_optional:published_at": 33
+    },
+    "deel": {
+      "records": 39,
+      "source_optional:salary": 12,
+      "source_optional:employment_type": 39,
+      "source_optional:remote_status": 35,
+      "source_optional:published_at": 39
+    },
+    "eightfold": {
+      "records": 43,
+      "source_optional:employment_type": 43,
+      "source_optional:published_at": 43,
+      "missing:location": 6,
+      "source_optional:remote_status": 15
+    },
+    "ejobsitesoftware_com": {
+      "records": 7,
+      "source_optional:salary": 7,
+      "source_optional:published_at": 7,
+      "source_optional:employment_type": 6
+    },
+    "exenzo": {
+      "records": 5,
+      "source_optional:employment_type": 5,
+      "source_optional:published_at": 5
+    },
+    "firststage": {
+      "records": 4,
+      "source_optional:salary": 4,
+      "source_optional:employment_type": 4,
+      "source_optional:remote_status": 4,
+      "source_optional:published_at": 4
+    },
+    "freshteam": {
+      "records": 49,
+      "source_optional:employment_type": 49,
+      "source_optional:published_at": 49,
+      "source_optional:remote_status": 1
+    },
+    "gohire": {
+      "records": 23,
+      "source_optional:salary": 23,
+      "source_optional:employment_type": 23,
+      "source_optional:published_at": 23
+    },
+    "greenhouse": {
+      "records": 1541,
+      "source_optional:published_at": 1541
+    },
+    "hibob": {
+      "records": 21,
+      "source_optional:salary": 8,
+      "source_optional:employment_type": 21,
+      "source_optional:remote_status": 21,
+      "source_optional:published_at": 21
+    },
+    "hirebridge": {
+      "records": 28,
+      "source_optional:remote_status": 12
+    },
+    "hirehive": {
+      "records": 60,
+      "source_optional:employment_type": 60,
+      "source_optional:published_at": 60,
+      "source_optional:remote_status": 1
+    },
+    "hiringthing": {
+      "records": 5,
+      "source_optional:salary": 5,
+      "source_optional:published_at": 5
+    },
+    "icims": {
+      "records": 64,
+      "source_optional:employment_type": 64,
+      "source_optional:published_at": 64,
+      "source_optional:salary": 60,
+      "source_optional:remote_status": 60
+    },
+    "isolvedhire": {
+      "records": 5,
+      "source_optional:employment_type": 5,
+      "source_optional:remote_status": 5,
+      "source_optional:published_at": 4
+    },
+    "jazzhr": {
+      "records": 111,
+      "source_optional:employment_type": 111
+    },
+    "jboard": {
+      "records": 26,
+      "source_optional:salary": 25,
+      "source_optional:published_at": 26,
+      "missing:location": 1
+    },
+    "jobboard_com": {
+      "records": 22,
+      "missing:location": 1,
+      "source_optional:employment_type": 22,
+      "source_optional:remote_status": 2,
+      "source_optional:published_at": 22,
+      "source_optional:salary": 8
+    },
+    "jobboardfire": {
+      "records": 23,
+      "missing:location": 5,
+      "source_optional:remote_status": 5,
+      "source_optional:published_at": 23
+    },
+    "jobboardhq": {
+      "records": 201,
+      "source_optional:published_at": 201,
+      "source_optional:salary": 25
+    },
+    "jobboardio": {
+      "records": 63,
+      "source_optional:salary": 1,
+      "source_optional:employment_type": 63,
+      "source_optional:published_at": 63,
+      "source_optional:remote_status": 1
+    },
+    "jobboardly": {
+      "records": 1534,
+      "missing:location": 143,
+      "source_optional:salary": 740,
+      "source_optional:employment_type": 1392,
+      "source_optional:remote_status": 1534,
+      "source_optional:published_at": 1534,
+      "missing:description": 70
+    },
+    "jobiqo": {
+      "records": 107,
+      "source_optional:salary": 107,
+      "source_optional:employment_type": 107,
+      "source_optional:remote_status": 71,
+      "source_optional:published_at": 107,
+      "missing:location": 1
+    },
+    "jobkit": {
+      "records": 23,
+      "source_optional:employment_type": 23,
+      "source_optional:remote_status": 23,
+      "source_optional:published_at": 23,
+      "source_optional:salary": 4
+    },
+    "jobmount": {
+      "records": 969,
+      "source_optional:salary": 969,
+      "source_optional:employment_type": 969,
+      "source_optional:published_at": 969
+    },
+    "jobvite": {
+      "records": 56,
+      "source_optional:remote_status": 1
+    },
+    "join": {
+      "records": 5,
+      "source_optional:employment_type": 5,
+      "source_optional:remote_status": 5,
+      "source_optional:published_at": 5,
+      "source_optional:salary": 1
+    },
+    "kula": {
+      "records": 63,
+      "source_optional:employment_type": 63,
+      "source_optional:remote_status": 63,
+      "source_optional:published_at": 63
+    },
+    "lever": {
+      "records": 401,
+      "source_optional:employment_type": 397,
+      "source_optional:remote_status": 401,
+      "source_optional:salary": 1
+    },
+    "manatal": {
+      "records": 12,
+      "missing:location": 2,
+      "source_optional:salary": 2
+    },
+    "niceboard": {
+      "records": 27,
+      "source_optional:salary": 25,
+      "source_optional:employment_type": 27,
+      "source_optional:published_at": 27,
+      "source_optional:remote_status": 1
+    },
+    "nodex": {
+      "records": 51,
+      "source_optional:salary": 50,
+      "source_optional:employment_type": 51,
+      "source_optional:published_at": 51,
+      "missing:location": 1,
+      "missing:description": 1
+    },
+    "oracle": {
+      "records": 49,
+      "source_optional:employment_type": 49,
+      "source_optional:remote_status": 42,
+      "source_optional:published_at": 49
+    },
+    "pageup": {
+      "records": 158,
+      "source_optional:salary": 21,
+      "source_optional:employment_type": 158,
+      "source_optional:published_at": 158
+    },
+    "paradox": {
+      "records": 141,
+      "source_optional:published_at": 141
+    },
+    "paylocity": {
+      "records": 4,
+      "source_optional:salary": 4,
+      "source_optional:employment_type": 4,
+      "source_optional:remote_status": 4,
+      "source_optional:published_at": 4
+    },
+    "personio-de": {
+      "records": 45,
+      "source_optional:employment_type": 45
+    },
+    "phenompeople": {
+      "records": 122,
+      "source_optional:employment_type": 122,
+      "source_optional:published_at": 122,
+      "source_optional:remote_status": 4,
+      "missing:description": 3
+    },
+    "pinpoint": {
+      "records": 48,
+      "source_optional:salary": 6,
+      "source_optional:employment_type": 48,
+      "source_optional:remote_status": 48
+    },
+    "polymer": {
+      "records": 6,
+      "source_optional:salary": 4,
+      "source_optional:employment_type": 6,
+      "source_optional:remote_status": 6,
+      "source_optional:published_at": 6,
+      "missing:location": 1
+    },
+    "recooty": {
+      "records": 28,
+      "source_optional:employment_type": 28,
+      "source_optional:remote_status": 28,
+      "source_optional:published_at": 28,
+      "source_optional:salary": 2
+    },
+    "recruitee": {
+      "records": 25,
+      "source_optional:salary": 25,
+      "source_optional:employment_type": 25,
+      "source_optional:remote_status": 25,
+      "source_optional:published_at": 25
+    },
+    "rival": {
+      "records": 46,
+      "source_optional:employment_type": 46,
+      "source_optional:salary": 44,
+      "source_optional:published_at": 44
+    },
+    "smartjobboard": {
+      "records": 69,
+      "source_optional:employment_type": 59,
+      "source_optional:published_at": 69,
+      "source_optional:remote_status": 1
+    },
+    "smartrecruiters": {
+      "records": 96,
+      "source_optional:employment_type": 96,
+      "source_optional:remote_status": 96,
+      "source_optional:published_at": 96,
+      "source_optional:salary": 1
+    },
+    "successfactors": {
+      "records": 24,
+      "source_optional:published_at": 24
+    },
+    "taleo-tbe": {
+      "records": 142,
+      "source_optional:employment_type": 37,
+      "source_optional:published_at": 37
+    },
+    "teamtailor": {
+      "records": 28,
+      "source_optional:employment_type": 28,
+      "source_optional:remote_status": 28,
+      "source_optional:published_at": 28,
+      "missing:location": 1
+    },
+    "trakstar": {
+      "records": 13,
+      "source_optional:employment_type": 13,
+      "source_optional:published_at": 13,
+      "source_optional:remote_status": 1
+    },
+    "trinet": {
+      "records": 17,
+      "source_optional:employment_type": 17,
+      "source_optional:remote_status": 12
+    },
+    "werecruit": {
+      "records": 13,
+      "source_optional:salary": 13,
+      "source_optional:employment_type": 13,
+      "source_optional:published_at": 13
+    },
+    "wileymadgex": {
+      "records": 519,
+      "source_optional:employment_type": 519,
+      "source_optional:published_at": 519,
+      "source_optional:remote_status": 4,
+      "missing:location": 1
+    },
+    "workable": {
+      "records": 4,
+      "source_optional:employment_type": 4,
+      "source_optional:published_at": 4,
+      "source_optional:remote_status": 3
+    },
+    "wp_job_manager": {
+      "records": 5,
+      "source_optional:published_at": 5,
+      "source_optional:employment_type": 2
+    },
+    "zoho-com": {
+      "records": 35,
+      "source_optional:employment_type": 35,
+      "source_optional:published_at": 35
+    },
+    "zoho-eu": {
+      "records": 11,
+      "source_optional:salary": 11,
+      "source_optional:employment_type": 11,
+      "source_optional:published_at": 11,
+      "missing:location": 9,
+      "source_optional:remote_status": 9
+    }
+  },
+  "strict_required_field_pass": false,
+  "limitations": [
+    "Blank source fields are reported, never invented or silently removed",
+    "Open observations include last-known records retained while closure confirmation is pending",
+    "Optional-field absence is not a required-field failure",
+    "The audit does not prove upstream completeness, source freshness SLAs or every employer identity"
+  ]
+}

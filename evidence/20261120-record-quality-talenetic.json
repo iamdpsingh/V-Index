@@ -1,0 +1,47 @@
+{
+  "recorded_at": "2026-11-20T11:09:45.899364+00:00",
+  "capture_started_at": "2026-11-20T11:09:45.423906+00:00",
+  "capture_finished_at": "2026-11-20T11:09:45.655967+00:00",
+  "grain": "Open source observations; active canonical jobs audited separately",
+  "read_only": true,
+  "scope": "Current database snapshot, not all historical platform smoke runs",
+  "url_check": "HTTPS syntax and local/private literal restrictions; not a live reachability audit",
+  "counts": {
+    "open_observations": 2844,
+    "source_optional:salary": 2844,
+    "normalized_optional:salary": 2844,
+    "source_optional:published_at": 2844,
+    "normalized_optional:published_at": 2844,
+    "missing:location": 102,
+    "active_canonical_jobs": 2844
+  },
+  "missing_required_rates": {
+    "title": 0.0,
+    "company": 0.0,
+    "description": 0.0,
+    "location": 0.035864978902953586,
+    "source_url": 0.0,
+    "application_url": 0.0
+  },
+  "contract_failures": {},
+  "quality_flags": {
+    "publisher_supplied_company_label": 2844,
+    "publication_timezone_unspecified": 2844,
+    "location_missing": 102
+  },
+  "by_connector": {
+    "talenetic": {
+      "records": 2844,
+      "source_optional:salary": 2844,
+      "source_optional:published_at": 2844,
+      "missing:location": 102
+    }
+  },
+  "strict_required_field_pass": false,
+  "limitations": [
+    "Blank source fields are reported, never invented or silently removed",
+    "Open observations include last-known records retained while closure confirmation is pending",
+    "Optional-field absence is not a required-field failure",
+    "The audit does not prove upstream completeness, source freshness SLAs or every employer identity"
+  ]
+}

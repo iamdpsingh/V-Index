@@ -6,6 +6,7 @@ from vindex.accounts.models import Profile
 from vindex.accounts.schemas import ProfileInput, RecommendationsOut
 from vindex.accounts.security import principal, rate_limit
 from vindex.db import Job, Observation, Session
+from vindex.records import public_job
 
 router = APIRouter(prefix="/api/v1/me", tags=["Private recommendations"])
 CANDIDATE_LIMIT = 1000
@@ -56,7 +57,18 @@ def recommendations(
                 )
             )
         if profile.remote_only:
-            stmt = stmt.where(func.lower(Job.data["remote_status"].as_string()) == "remote")
+            stmt = stmt.where(
+                func.lower(Job.data["remote_status"].as_string()).in_(
+                    (
+                        "remote",
+                        "fully remote",
+                        "fully_remote",
+                        "fullyremote",
+                        "telecommute",
+                        "telecommuting",
+                    )
+                )
+            )
         total = session.scalar(select(func.count()).select_from(stmt.subquery())) or 0
         candidates = list(session.scalars(stmt.order_by(Job.id.desc()).limit(CANDIDATE_LIMIT)))
         ranked = []
@@ -91,26 +103,9 @@ def recommendations(
         )
         items = []
         for score, job, reasons in chosen:
-            sources = [
-                {
-                    "source_id": o.source_id,
-                    "source_url": o.data["source_url"],
-                    "application_url": o.data["application_url"],
-                    "status": o.status,
-                    "last_checked_at": o.last_checked,
-                }
-                for o in provenance
-                if o.job_id == job.id
-            ]
             items.append(
                 {
-                    "job": {
-                        "id": job.id,
-                        **{k: v for k, v in job.data.items() if k != "raw"},
-                        "first_seen_at": job.first_seen,
-                        "last_changed_at": job.last_changed,
-                        "sources": sources,
-                    },
+                    "job": public_job(job, provenance),
                     "rank_score": score,
                     "reasons": reasons,
                 }

@@ -5,6 +5,8 @@ local validation, platform evidence, and public launch work.
 
 ## Integrated product
 
+- Consistent public salary/employment/workplace output across search, detail, and
+  recommendations, with original values preserved and provenance timestamps.
 - Search by keyword, company, and location with pagination and original links.
   The web client requests summary records and loads full details on selection.
   Existing API consumers keep the default full response.
@@ -28,7 +30,7 @@ local validation, platform evidence, and public launch work.
 
 ## Validation recorded locally
 
-- 1,178 backend tests passed with PostgreSQL and Redis enabled. One
+- 1,209 backend tests passed with PostgreSQL and Redis enabled. One
   PostgreSQL-specific planner test was skipped in its SQLite fixture.
 - 176 browser checks passed. Ten device-specific cases were intentionally
   skipped. Coverage includes search/detail navigation, private profile editing,
@@ -119,3 +121,58 @@ database design, infrastructure configuration, or implementation source.
 Sources are the [JobSweep coverage page](https://jobsweep.works/coverage),
 [public API schema](https://jobsweep.works/openapi.json), and
 [Vaya leaderboard](https://vayahq.com/leaderboard?challenge=build-a-job-board-indexer-for-10000).
+
+
+## Consistent-record acceptance, November 20
+
+The shared public serializer and stricter input validation are implemented.
+Merged first-seen/last-changed timestamps preserve source history and cannot move
+backwards on an older-source refresh. Public output includes last-checked times
+and each original source/application link. Source observations remain unchanged.
+Salary currencies, pay periods, employer names and missing descriptions are
+never guessed. See [the connector contract](CONNECTOR_CONTRACT.md#consistent-public-records-november-20).
+
+A strict audit of the isolated worker-committed Dayforce, Gem.com and talentReef
+validation database passed all **181 open records**: required fields, typed
+public output, timestamps, links and populated optional-field retention.
+[Recorded audit](../evidence/20261120-record-quality-new-platforms.json).
+This database is separate from the local demo population; the counts must not
+be added together.
+
+Talenetic remains incomplete. MedicalUpdate's committed 2,844 jobs use the
+publisher's generic “Partner Jobs” company label, and 102 lack structured
+location. Its 2,900-candidate run also observed 56 explicitly expired pages.
+The second ProContract board still advertises a removed detail: an allowed
+fresh read again returned HTTP 410. No partial snapshot was published, and no
+closure was inferred from that failure. Completing the second board would
+resolve the additional-board gate, but required employer/location quality
+would still need resolution for full challenge acceptance.
+[Record audit](../evidence/20261120-record-quality-talenetic.json),
+[fresh failing-detail recheck](../evidence/20261120-talenetic-second-board-recheck.json).
+
+The consistent-record acquisition criterion remains open while required source
+fields are missing. The audit reports these gaps explicitly; structural schema
+success must not be presented as complete source data or full 78-platform
+acceptance.
+
+
+The final local audit inspected **8,109 open observations** and their canonical
+records across 66 connector keys. Typed public contracts and optional-field
+retention passed with zero contract failures. It still found **74 blank
+descriptions and 182 blank locations**. The population includes 202 last-known
+observations retained while closure confirmation is pending. This is not a
+fresh upstream job census or an audit of every historically verified platform.
+[Local audit](../evidence/20261120-record-quality-local.json).
+
+Both reviewed Jobboardly boards (21 and 1,493 jobs) and both Nodex boards (35 and
+15 jobs) passed new full live runs and matching worker commits. Native-page
+fallback recovered three Jobboardly locations; other absent native fields
+remain flagged. Nodex now captures source salary and all supplied locations/
+employment types. [Live runs](../evidence/20261120T111115Z-smoke.json),
+[worker results](../evidence/20261120-record-enrichment-worker.json).
+
+A Talenetic detail also exposed a native employment label absent from JSON-LD.
+The parser now preserves that explicit field and its original HTML. One freshly
+fetched detail verified the recovery of “Permanent”. This is not a full board
+refresh; the earlier committed 2,844-job audit predates that recovery.
+[Native field check](../evidence/20261120-talenetic-native-field-recheck.json).

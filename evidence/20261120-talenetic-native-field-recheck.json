@@ -1,0 +1,16 @@
+{
+  "provider": "Talenetic",
+  "url": "https://jobs.medicalupdateonline.com/job-detail/105732/supervising-social-worker-in-west-midlands-nonstop-consulting/",
+  "fetched_at": "2026-11-20T11:14:07.190552+00:00",
+  "scope": "One permitted native detail fetched this turn and reparsed after the employment fix; not a full board refresh",
+  "complete": false,
+  "structured_employment_present": false,
+  "native_employment": "Permanent",
+  "quality_flags": [
+    "publisher_supplied_company_label",
+    "location_missing",
+    "publication_timezone_unspecified"
+  ],
+  "location_present": false,
+  "company_label": "Partner Jobs"
+}

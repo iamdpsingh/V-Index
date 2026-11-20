@@ -67,7 +67,7 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | Niceboard | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 29 | 2026-11-08T03:25:18.002538+00:00 | https://jobs.aiacolorado.org/ (14; LIVE_VERIFIED); https://jobs.medicalalley.org/ (15; LIVE_VERIFIED)  |
 | WP Job Manager | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 5 | 2026-11-08T12:16:58.227605+00:00 | https://oliver-walters.com/job-listings/ (3; LIVE_VERIFIED); https://pearlstreetsystems.com/careers/ (2; LIVE_VERIFIED)  |
 | JobKit | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 39 | 2026-11-08T03:25:49.097273+00:00 | https://jobs.rubyonrails.org/ (13; LIVE_VERIFIED); https://welpora.jobkit.io/ (26; LIVE_VERIFIED)  |
-| Jobboardly | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 1355 | 2026-11-06T08:31:19.986009+00:00 | https://recruiter-jobs.jobboardly.com/jobs (31; LIVE_VERIFIED); https://pennsylvania-communications.jobboardly.com/jobs (1324; LIVE_VERIFIED)  |
+| Jobboardly | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 1514 | 2026-11-20T11:11:15.069124+00:00 | https://recruiter-jobs.jobboardly.com/jobs (21; LIVE_VERIFIED); https://pennsylvania-communications.jobboardly.com/jobs (1493; LIVE_VERIFIED)  |
 | Jobiqo | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 222 | 2026-11-13T10:01:28.202526+00:00 | https://www.agrajo.com/job (99; LIVE_VERIFIED); https://www.kampajobs.ch/jobs (123; LIVE_VERIFIED)  |
 | JBoard.io | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 78 | 2026-11-07T04:16:03.139570+00:00 | https://jobs.aame.org/jobs (30; LIVE_VERIFIED); https://jobs.cisontario.ca/jobs (48; LIVE_VERIFIED)  |
 | JobBoardFire | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 24 | 2026-11-12T20:37:39.050902+00:00 | https://jobs.trellis.net/ (18; LIVE_VERIFIED); https://lpjc.jobboardfire.com/ (6; LIVE_VERIFIED)  |
@@ -81,6 +81,6 @@ IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieve
 | Artha | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 124 | 2026-11-13T15:17:31.930939+00:00 | https://lexpath.com.au/ (11; LIVE_VERIFIED); https://joberly.eu/ (113; LIVE_VERIFIED)  |
 | jobboardsoftware.com | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 4 | 2026-11-12T15:54:29.204254+00:00 | https://agconnect.exenzo.nl/ (3; LIVE_VERIFIED); https://vacatures.ecommerce.nl/vacatures (1; LIVE_VERIFIED)  |
 | jobBoardHQ | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 199 | 2026-11-12T15:51:51.973792+00:00 | https://jobboardhq.esc17.net/search (47; LIVE_VERIFIED); https://resume.absc.org/search (152; LIVE_VERIFIED)  |
-| Nodex | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 50 | 2026-11-08T12:16:39.627724+00:00 | https://www.emotivtech.co.uk/search (35; LIVE_VERIFIED); https://www.geckotravelrecruitment.co.uk/search (15; LIVE_VERIFIED)  |
+| Nodex | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 50 | 2026-11-20T11:01:55.606856+00:00 | https://www.emotivtech.co.uk/search (35; LIVE_VERIFIED); https://www.geckotravelrecruitment.co.uk/search (15; LIVE_VERIFIED)  |
 | eJobBoard | job_board | NOT_STARTED | NOT_STARTED | HIGH | None | None | Not tested  |
 | ejobsitesoftware.com | job_board | IMPLEMENTED | LIVE_VERIFIED | HIGH | 10 | 2026-11-14T06:34:06.878164+00:00 | https://www.edutalentz.com/job-search/ (3; LIVE_VERIFIED); https://gurushrconsultancy.com/jobboard/job-search/ (7; LIVE_VERIFIED)  |

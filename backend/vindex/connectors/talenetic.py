@@ -193,6 +193,15 @@ class TaleneticConnector:
             if isinstance(address.get(k), str) and address[k]
         ]
         salary: dict[str, Any] | None = row.get("baseSalary") or None
+        employment_nodes = soup.select('dd[itemprop="employmentType"]')
+        if len(employment_nodes) > 1:
+            raise ValueError("Ambiguous Talenetic native employment type")
+        native_employment = (
+            employment_nodes[0].get_text(" ", strip=True) if employment_nodes else ""
+        )
+        employment = row.get("employmentType") or native_employment or None
+        if isinstance(employment, list) and all(isinstance(value, str) for value in employment):
+            employment = "; ".join(dict.fromkeys(employment)) or None
         return [
             JobInput(
                 external_id=identifier,
@@ -202,12 +211,18 @@ class TaleneticConnector:
                 location=", ".join(dict.fromkeys(locations)),
                 source_url=url,
                 application_url=application,
-                employment_type=row.get("employmentType") or None,
+                employment_type=employment,
                 remote_status="Remote" if row.get("jobLocationType") == "TELECOMMUTE" else None,
                 salary=salary,
                 published_at=row.get("datePosted"),
                 quality_flags=flags,
-                raw={"job_posting": row, "application_entry": "Native posting application control"},
+                raw={
+                    "job_posting": row,
+                    "native_employment_html": str(employment_nodes[0])
+                    if employment_nodes
+                    else None,
+                    "application_entry": "Native posting application control",
+                },
             )
         ]
 

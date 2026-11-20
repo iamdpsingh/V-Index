@@ -107,3 +107,16 @@ The source form now accepts unfiltered ADP MyJobs board URLs at `https://myjobs.
 The source form accepts the reviewed Oseyo and eCarsTrade HiBob hosted board roots. Their public job detail links also serve as application entry points.
 
 The source form accepts the reviewed LexPath and Joberly Artha board URLs. Each job exposes its canonical source and the board's published application entry.
+
+
+## November 20 consistent-record contract
+
+Search, detail and recommendations now share normalized salary and employment/
+workplace output. `docs/openapi.json` and `apps/web/lib/api.ts` carry the contract.
+Salary keeps min/max/currency/period, literal text, separate ranges and original
+public compensation in `source`. Do not assume currency or a yearly period when
+unknown. Original changed employment/workplace strings are additive metadata.
+Public records and provenance now include first-seen/last-changed/last-checked
+tracking times. Descriptions remain plain text, source gaps stay flagged, and
+none of this grants additional platform coverage. Talenetic still has a failed
+second board and generic employer labels; do not advertise full verification.

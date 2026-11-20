@@ -1,0 +1,70 @@
+[
+  {
+    "provider": "Nodex",
+    "url": "https://www.emotivtech.co.uk/search",
+    "at": "2026-11-20T11:01:05.422897+00:00",
+    "revision": "fa050205903fc01427635793826c0a6bc28f36f4",
+    "working_tree_dirty_at_start": true,
+    "code_sha256": "60fe614285097abc8081cfffed262ad2f7317825afe90d7cb2ea43e3099cdffb",
+    "count": 35,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {
+      "description_missing": 1
+    },
+    "payload_sha256": "7868b176e2ad4cb9a4498906f2bed131706fe44feb53ba365a2d0bccc7685d36",
+    "finished_at": "2026-11-20T11:01:38.998149+00:00"
+  },
+  {
+    "provider": "Nodex",
+    "url": "https://www.geckotravelrecruitment.co.uk/search",
+    "at": "2026-11-20T11:01:39.500388+00:00",
+    "revision": "fa050205903fc01427635793826c0a6bc28f36f4",
+    "working_tree_dirty_at_start": true,
+    "code_sha256": "60fe614285097abc8081cfffed262ad2f7317825afe90d7cb2ea43e3099cdffb",
+    "count": 15,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {},
+    "payload_sha256": "2ff8c743124df31a20efb8d07d0a895c5d4812a7260556b6b9457ee2fb94db0f",
+    "finished_at": "2026-11-20T11:01:55.606856+00:00"
+  },
+  {
+    "provider": "Jobboardly",
+    "url": "https://recruiter-jobs.jobboardly.com/jobs",
+    "at": "2026-11-20T11:01:56.108943+00:00",
+    "revision": "fa050205903fc01427635793826c0a6bc28f36f4",
+    "working_tree_dirty_at_start": true,
+    "code_sha256": "60fe614285097abc8081cfffed262ad2f7317825afe90d7cb2ea43e3099cdffb",
+    "count": 21,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {
+      "application_by_email": 2
+    },
+    "payload_sha256": "7a5f1a4390ae2051101e2944124401bc0f492951f8510c3fd500649d671dcbce",
+    "finished_at": "2026-11-20T11:02:07.824025+00:00"
+  },
+  {
+    "provider": "Jobboardly",
+    "url": "https://pennsylvania-communications.jobboardly.com/jobs",
+    "at": "2026-11-20T11:02:08.326271+00:00",
+    "revision": "fa050205903fc01427635793826c0a6bc28f36f4",
+    "working_tree_dirty_at_start": true,
+    "code_sha256": "60fe614285097abc8081cfffed262ad2f7317825afe90d7cb2ea43e3099cdffb",
+    "count": 1493,
+    "status": "LIVE_VERIFIED",
+    "complete": true,
+    "error": null,
+    "quality_flag_counts": {
+      "application_by_email": 5,
+      "jobposting_schema_missing": 101,
+      "description_missing": 70
+    },
+    "payload_sha256": "1ee500d6061d90067c3eabcab4b982f6bb80d7a052d4677481c401da1b56a71d",
+    "finished_at": "2026-11-20T11:11:15.069124+00:00"
+  }
+]

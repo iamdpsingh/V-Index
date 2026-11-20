@@ -280,6 +280,49 @@ class JobboardlyConnector:
             paths = await self.listings(policy, MAX_FEED_JOBS)
             if {self.origin + path for path in paths} != {job.source_url for job in jobs}:
                 raise ValueError("JobBoardly XML feed and complete HTML roster disagree")
+            enriched = []
+            missing = [
+                job for job in jobs if not job.description.strip() or not job.location.strip()
+            ]
+            if len(missing) > MAX_DETAILS:
+                raise ValueError("JobBoardly missing-field detail budget exceeded")
+            for job in jobs:
+                if job.description.strip() and job.location.strip():
+                    enriched.append(job)
+                    continue
+                policy.check(job.source_url)
+                await asyncio.sleep(policy.delay())
+                native = self.parse(
+                    (urlsplit(job.source_url).path, await self.http.read(job.source_url))
+                )[0]
+                if any(
+                    getattr(native, field) != getattr(job, field)
+                    for field in ("external_id", "source_url", "title", "company")
+                ):
+                    raise ValueError("JobBoardly XML/detail identity mismatch during enrichment")
+                updates = {
+                    field: getattr(native, field)
+                    for field in ("description", "location")
+                    if not getattr(job, field).strip() and getattr(native, field).strip()
+                }
+                flags = list(dict.fromkeys([*job.quality_flags, *native.quality_flags]))
+                if updates.get("description") or job.description.strip():
+                    flags = [flag for flag in flags if flag != "description_missing"]
+                enriched.append(
+                    job.model_copy(
+                        update={
+                            **updates,
+                            "quality_flags": flags,
+                            "raw": {
+                                **job.raw,
+                                "detail_enrichment": {
+                                    "fields": list(updates),
+                                    "observation": native.model_dump(mode="json"),
+                                },
+                            },
+                        }
+                    )
+                )
             if await self.listings(policy, MAX_FEED_JOBS) != paths:
                 raise ValueError("JobBoardly complete HTML roster changed during feed extraction")
             await asyncio.sleep(policy.delay())
@@ -290,7 +333,7 @@ class JobboardlyConnector:
                 j.external_id: j.model_dump() for j in jobs
             }:
                 raise ValueError("JobBoardly complete XML feed changed during enumeration")
-            return Enumeration(jobs=jobs, complete=True)
+            return Enumeration(jobs=enriched, complete=True)
         paths = await self.listings(policy)
         jobs = []
         seen_ids = set()

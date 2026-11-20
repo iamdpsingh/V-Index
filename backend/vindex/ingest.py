@@ -91,7 +91,9 @@ def ingest(session: Session, source: Source, batch: Enumeration, checked=None) -
                 session.add(Event(observation_id=obs.id, kind=kind, occurred_at=checked))
             obs.last_checked, obs.status = checked, "open"
             obs.missing_count, obs.missing_since = 0, None
-        canonical.data, canonical.last_changed = data, obs.last_changed
+        canonical.data = data
+        canonical.first_seen = min(aware(canonical.first_seen), aware(obs.first_seen))
+        canonical.last_changed = max(aware(canonical.last_changed), aware(obs.last_changed))
     for external_id, obs in existing.items():
         if external_id in ids or obs.status == "closed":
             continue
