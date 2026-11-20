@@ -123,7 +123,7 @@ export default function CoveragePage({ providers }: CoveragePageProps) {
                       {formatLabel(p.evidence_status)}
                     </span>
                   </td>
-                  <td>{p.extraction_count ?? '—'}</td>
+                  <td>{p.extraction_count ?? 'Not measured'}</td>
                   <td>
                     {formatDate(p.last_run_at)}
                     <small>

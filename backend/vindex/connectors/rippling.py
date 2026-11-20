@@ -76,7 +76,12 @@ class RipplingConnector:
             raise ValueError("Missing unique Rippling public jobs collection")
         query = queries[0]
         key = query["queryKey"]
-        if len(key) != 5 or type(key[3]) is not bool or key[3] != board["groupJobsByLocation"]:
+        if (
+            len(key) not in (5, 6)
+            or (len(key) == 6 and key[5] != "en-US")
+            or type(key[3]) is not bool
+            or key[3] != board["groupJobsByLocation"]
+        ):
             raise ValueError("Unsupported Rippling jobs query")
         params = key[4]
         if (

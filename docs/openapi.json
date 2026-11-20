@@ -916,6 +916,61 @@
         }
       }
     },
+    "/api/v1/operations": {
+      "get": {
+        "summary": "Operations Status",
+        "operationId": "operations_status_api_v1_operations_get",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/security/csp-report": {
+      "post": {
+        "summary": "Csp Report",
+        "operationId": "csp_report_api_v1_security_csp_report_post",
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          }
+        }
+      }
+    },
     "/api/v1/providers": {
       "get": {
         "summary": "Providers",
@@ -1462,6 +1517,13 @@
             "type": "array",
             "title": "Quality Flags"
           },
+          "field_sources": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Field Sources"
+          },
           "location": {
             "type": "string",
             "title": "Location"
@@ -1618,6 +1680,13 @@
             },
             "type": "array",
             "title": "Quality Flags"
+          },
+          "field_sources": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Field Sources"
           },
           "location": {
             "type": "string",

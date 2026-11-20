@@ -15,7 +15,7 @@ from vindex.connectors.robots import RobotsPolicy
 from vindex.schemas import Enumeration, JobInput
 
 HOSTS = frozenset({"americanbath.mysmartjobboard.com", "jobs.psychologicalscience.org"})
-JOB_PATH = r"/job/([1-9][0-9]{0,17})/[a-zA-Z0-9][a-zA-Z0-9_.~-]*/"
+JOB_PATH = r"/job/([1-9][0-9]{0,17})/[\w][\w.~-]{0,500}/"
 PAGE_SIZE = 20
 MAX_JOBS = 200
 

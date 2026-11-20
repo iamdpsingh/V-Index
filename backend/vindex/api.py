@@ -9,6 +9,7 @@ from fastapi import Depends, FastAPI, Header, HTTPException, Query, Request
 from fastapi.exception_handlers import request_validation_exception_handler
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
+from redis.exceptions import RedisError
 from sqlalchemy import func, select, text
 from sqlalchemy.exc import IntegrityError
 
@@ -21,10 +22,12 @@ from vindex.accounts.postings import router as posting_router
 from vindex.accounts.profile_photo import router as profile_photo_router
 from vindex.accounts.recommendations import router as recommendations_router
 from vindex.accounts.resume_api import router as resume_router
-from vindex.accounts.security import rate_limit
+from vindex.accounts.security import rate_limit, redis_client
+from vindex.client_ip import client_ip
 from vindex.connectors.registry import detect
 from vindex.db import Job, Observation, Run, Session, Source, now
 from vindex.ingest import aware
+from vindex.operations import log_event, snapshot
 from vindex.plans import router as plans_router
 from vindex.records import public_job
 from vindex.schemas import JobOut, RunOut, SearchOut, SearchSummaryOut, SourceCreate, SourceOut
@@ -46,7 +49,14 @@ app.include_router(plans_router)
 
 @app.middleware("http")
 async def fresh_api_responses(request: Request, call_next):
-    response = await call_next(request)
+    try:
+        response = await call_next(request)
+    except Exception as error:
+        # Do not let database exception parameters become profile/credential logs.
+        log_event("api_failure", error_kind=type(error).__name__)
+        response = JSONResponse(
+            status_code=500, content={"detail": "Service temporarily unavailable"}
+        )
     if request.url.path.startswith("/api/v1/") or request.url.path == "/health":
         # Polling must read the current index, not a browser/CDN snapshot.
         # Private middleware retains its additional cookie/security headers.
@@ -71,7 +81,9 @@ async def redact_private_validation(request: Request, error: RequestValidationEr
     return await request_validation_exception_handler(request, error)
 
 
-def admin(authorization: Annotated[str | None, Header()] = None):
+def admin(request: Request, authorization: Annotated[str | None, Header()] = None):
+    if os.getenv("ADMIN_RATE_LIMIT_ENABLED", "false") == "true":
+        rate_limit(f"admin:{client_ip(request)}", 120)
     token = os.getenv("ADMIN_TOKEN")
     if not token:
         raise HTTPException(503, "Source management is temporarily unavailable")
@@ -94,6 +106,72 @@ def health():
     with Session() as session:
         session.execute(text("SELECT 1"))
     return {"status": "ok"}
+
+
+@app.get("/api/v1/operations", dependencies=[Depends(admin)])
+def operations_status():
+    with Session() as session:
+        return snapshot(session)
+
+
+@app.post("/api/v1/security/csp-report", status_code=204)
+async def csp_report(request: Request):
+    rate_limit(f"csp:{client_ip(request)}", 60)
+    body = bytearray()
+    async for chunk in request.stream():
+        body.extend(chunk)
+        if len(body) > 16384:
+            raise HTTPException(413, "Report exceeds size limit")
+    try:
+        payload = json.loads(body)
+    except (ValueError, UnicodeDecodeError) as error:
+        raise HTTPException(400, "Invalid security report") from error
+    reports = payload if isinstance(payload, list) else [payload]
+    if len(reports) > 10:
+        raise HTTPException(413, "Too many reports")
+    allowed = {
+        "script-src",
+        "script-src-elem",
+        "script-src-attr",
+        "style-src",
+        "style-src-elem",
+        "style-src-attr",
+        "connect-src",
+        "img-src",
+        "font-src",
+        "default-src",
+        "require-trusted-types-for",
+        "trusted-types",
+        "object-src",
+        "frame-ancestors",
+        "base-uri",
+        "form-action",
+    }
+    try:
+        redis = redis_client()
+        for report in reports:
+            if not isinstance(report, dict):
+                continue
+            data = report.get("csp-report", report.get("body", {}))
+            if not isinstance(data, dict):
+                continue
+            directive = data.get("effective-directive", data.get("effectiveDirective"))
+            disposition = data.get("disposition", "enforce")
+            if (
+                not isinstance(directive, str)
+                or directive not in allowed
+                or disposition not in ("enforce", "report")
+            ):
+                continue
+            # Only bounded classifications survive. Never save URLs, samples or user data.
+            key = f"vindex:csp:{directive}:{disposition}"
+            redis.eval(
+                "local n=redis.call('INCR',KEYS[1]); if n==1 then redis.call('EXPIRE',KEYS[1],604800) end; return n",
+                1,
+                key,
+            )
+    except RedisError as error:
+        raise HTTPException(503, "Security reporting temporarily unavailable") from error
 
 
 @app.get("/api/v1/providers")
@@ -150,7 +228,7 @@ def runs(limit: int = Query(50, ge=1, le=100), offset: int = Query(0, ge=0)):
 
 def limit_public_jobs(request: Request) -> None:
     if os.getenv("PUBLIC_JOB_RATE_LIMIT_ENABLED", "false") == "true":
-        peer = request.client.host if request.client else "unknown"
+        peer = client_ip(request)
         rate_limit(f"public-jobs:{peer}", 120)
 
 

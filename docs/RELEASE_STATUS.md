@@ -1,6 +1,10 @@
 # Rolewisp release status
 
-Updated November 20, 2026. This document distinguishes the integrated software,
+Updated November 20, 2026. Production/deployment and submission are paused at
+the owner’s instruction. [Release handoff](RELEASE_HANDOFF.md) is the current
+walkthrough. Coverage expansion is paused without changing 71/78 acceptance.
+
+This document distinguishes the integrated software,
 local validation, platform evidence, and public launch work.
 
 ## Integrated product
@@ -30,22 +34,23 @@ local validation, platform evidence, and public launch work.
 
 ## Validation recorded locally
 
-- 1,209 backend tests passed with PostgreSQL and Redis enabled. One
+- 1,227 backend tests passed with PostgreSQL and Redis enabled. One
   PostgreSQL-specific planner test was skipped in its SQLite fixture.
-- 176 browser checks passed. Ten device-specific cases were intentionally
+- 182 browser checks passed. Ten device-specific cases were intentionally
   skipped. Coverage includes search/detail navigation, private profile editing,
   employer drafts, pricing display, keyboard operation, and operator views. Browser fixtures and screenshots use synthetic data and are separate from live connector evidence.
 - Production frontend build, Ruff checks, Ruff format checks, and mypy passed.
 - Private account/profile/qualification/resume and employer draft checks passed
-  through the production web proxy against PostgreSQL and Redis.
+  through the production web proxy. The latest smoke used local SQLite and Redis; the backend suite separately exercised PostgreSQL.
 - A 25-job response from the local index shrank from 111,068 to 22,638 bytes when
   requesting summaries, a 79.6% reduction. This is payload measurement on the
   local dataset, not a claim about hosted latency or load capacity.
-- Python dependency audit checked 48 packages and reported no known
+- Python production dependency audit checked 37 packages and reported no known
   vulnerabilities. npm reported zero known vulnerabilities during installation.
-- HTML headers were checked on the production build. The CSP currently protects
-  framing, object embedding, base URLs, and form targets. Script nonce/hash CSP
-  enforcement and deployed security validation remain launch work.
+- HTML headers were checked on the production build. The CSP now enforces
+  fresh script nonces and strict-dynamic, with private no-store HTML and
+  aggregate reporting. Trusted Types remains report-only; deployed security
+  validation remains deferred.
 - Current tracked-file and reachable-history heuristic scans were run. Historical
   OpenAI-key-shaped matches were public Workday job-path fragments. No confirmed
   credential was identified in the reviewed scope. This is not a security
@@ -187,3 +192,45 @@ returned HTTP 302 on robots.txt and provided no validated current board.
 Neither investigation grants coverage or an alternate complete feed.
 [Search policy evidence](../evidence/20261120-talenetic-active-search-policy.json),
 [Oilfinity checks](../evidence/20261120-talenetic-oilfinity-research.json).
+
+
+## Local release finalization
+
+The automatic-update operations pass added an independent 15-second worker
+heartbeat, authenticated source-health diagnostics, failure/staleness alerts,
+structured event logs, graceful cancellation and hourly stale-attempt/auth
+artifact cleanup. Local watch mode is running. No external alert delivery is
+claimed. The recorded source inventory has 132/143 initial successes, 11 pending
+initial successes, 13 failing sources and one stale source. Four native-source
+schema/URL failures were repaired, without changing platform coverage.
+
+Deduplication now preserves nonempty description and optional metadata from
+active observations, records borrowed field origins, and keeps the searchable
+canonical projection consistent with public output. A newer changed observation
+is not replaced by an older unchanged mirror. Distinct requisitions and
+locations remain separate. Source observations and original links are retained.
+
+The latest PostgreSQL/Redis-backed suite passed 1,227 tests with one intentional
+SQLite fixture skip; 182 desktop/mobile browser checks passed with ten
+intentional device-specific skips. Production build/typecheck, Ruff and mypy
+passed. The complete new Compose build could not be rerun locally because
+Docker is unavailable; existing remote green CI predates these local changes.
+
+The encrypted PostgreSQL restore drill passed all 16 tables, including private
+resume/photo decryption and tamper/overwrite refusal. Daily backup/pruning and
+monitor service templates are supplied, not installed. Actual off-site backups
+and deployed restore verification remain deferred.
+
+Real-data desktop/mobile review passed filters, pagination, detail links,
+favicon, no horizontal overflow and no page errors. Private profile review
+confirmed read-only display until Edit and saved edits through the real API.
+Temporary accounts were deleted. The local security review found no confirmed
+high-confidence credential match or literal runtime secret in browser bundles;
+production dependency audits reported no known vulnerabilities. This is scoped
+local evidence, not proof that no vulnerability or secret form can exist.
+
+The public policies have updated retention copy. The operator/address remain
+as supplied; inbox verification, legal review against actual hosting, provider
+activation, deployed rate/caching tests, public demo and Vaya submission stay
+on hold. [Current handoff](RELEASE_HANDOFF.md), [operations](OPERATIONS.md),
+[privacy review](PRIVACY_REVIEW.md) and [submission draft](SUBMISSION.md).

@@ -27,10 +27,6 @@ const config: NextConfig = {
             value: 'DENY',
           },
           {
-            key: 'Content-Security-Policy',
-            value: "frame-ancestors 'none'; object-src 'none'; base-uri 'none'; form-action 'self'",
-          },
-          {
             key: 'Permissions-Policy',
             value: 'camera=(), microphone=(), geolocation=()',
           },

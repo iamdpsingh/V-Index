@@ -1,0 +1,33 @@
+{
+  "scope": "Disposable local PostgreSQL databases; synthetic accounts and resume only",
+  "table_counts_match": true,
+  "tables": {
+    "account_oauth_identities": 0,
+    "account_profiles": 1,
+    "account_resumes": 1,
+    "account_sessions": 0,
+    "accounts": 1,
+    "alembic_version": 1,
+    "change_events": 1,
+    "employer_postings": 0,
+    "fetch_runs": 0,
+    "jobiqo_refreshes": 0,
+    "jobs": 1,
+    "madgex_refreshes": 0,
+    "observations": 1,
+    "sources": 1,
+    "talenetic_details": 0,
+    "talenetic_refreshes": 0
+  },
+  "private_resume_and_photo_decrypt": true,
+  "tampering_rejected": true,
+  "nonempty_target_refused": true,
+  "same_database_refused": true,
+  "plaintext_canary_absent_from_archive": true,
+  "archive_mode": "0o600",
+  "encrypted_bytes": 38210,
+  "archive_sha256": "9a2fc2161fc4379882355d5309c790749b132546dead36088b12f84a50678e08",
+  "source_snapshot_at": "2026-11-20T17:08:50.853510+00:00",
+  "restore_seconds": 0.056,
+  "total_drill_seconds": 0.265
+}

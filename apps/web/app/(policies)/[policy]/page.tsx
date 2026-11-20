@@ -9,7 +9,7 @@ const policies = {
       ['How your information is used', 'Your profile helps you manage job preferences and receive recommendations. Recommendations use the roles and skills you save in your profile. Rolewisp stores the photo and resume files encrypted.'],
       ['Social sign-in', 'If you choose Google, LinkedIn, or GitHub sign-in, we receive the account identifier and email information needed to create or access your account.'],
       ['Public employer postings', 'A job you publish is publicly visible with its company, description, location, and application link. Your account email, profile, photo, and resume stay private to your account.'],
-      ['Storage and retention', 'Saved profile details and resume files remain associated with your account until you replace or delete them. Operational records and any retained backups may remain for their applicable retention period. Public job observations and change records may be retained after a listing closes.'],
+      ['Storage and retention', 'Profile details, photos and resume files remain until you replace or delete them, or delete your account. Sessions expire after seven days. Verification and recovery codes expire after fifteen minutes; expired authentication records are removed by scheduled maintenance. Encrypted database backups, when enabled, have a thirty-day retention limit. Deleted information can remain in a backup until that backup expires. Public job observations and change records may remain after a listing closes.'],
       ['Managing your information', 'You can edit your profile, remove your photo or resume, and delete your account in your workspace. Review any original job site’s privacy terms before applying there.'],
     ],
   },
@@ -53,7 +53,7 @@ export default async function PolicyPage({ params }: { params: Promise<{ policy:
     <main className="policy-page">
       <a href="/">Rolewisp home</a>
       <h1>{policy.title}</h1>
-      <p>Updated November 19, 2026</p>
+      <p>Updated November 20, 2026</p>
       {policy.sections.map(([heading, body]) => (
         <section key={heading}>
           <h2>{heading}</h2>

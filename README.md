@@ -2,17 +2,18 @@
 
 **Rolewisp — Find your next opening.** Rolewisp is the owner-selected public product brand; V-Index remains this project's repository and folder name. See [branding](docs/BRANDING.md) for the identity direction and naming convention.
 
-A job index with source provenance, scheduled refreshes and conservative closure detection. The integrated product includes search, scheduled indexing, private candidate profiles, résumé storage, recommendations, and employer posting. Current release evidence and remaining gates are recorded in [release status](docs/RELEASE_STATUS.md).
+A job index with source provenance, scheduled refreshes and conservative closure detection. The integrated product includes search, scheduled indexing, private candidate profiles, résumé storage, recommendations, and employer posting. Current release evidence and remaining gates are recorded in [release status](docs/RELEASE_STATUS.md). Start the review with [the release handoff](docs/RELEASE_HANDOFF.md). Production and submission are paused at the owner's request.
 
 ## Local backend
 
 Requires Python 3.12+, uv. SQLite is supported for a quick local evaluation; production uses PostgreSQL.
 
 ```sh
+umask 077
 uv sync --frozen
 uv run alembic upgrade head
 export PYTHONPATH=backend
-export ADMIN_TOKEN=local-review-token
+export ADMIN_TOKEN="$(python3 -c 'import secrets; print(secrets.token_urlsafe(32))')"
 uv run uvicorn vindex.api:app --reload
 ```
 
@@ -21,7 +22,7 @@ For the web UI: `cd apps/web && npm ci && npm run dev`; open http://localhost:30
 The API specification is in `docs/openapi.json`. Public documentation routes are disabled. In a second terminal start Redis and run `PYTHONPATH=backend uv run python -m vindex.worker`. Redis is required for refreshes. Without Redis you can run the connector smoke harness but scheduled ingestion does not run.
 
 ```sh
-curl -X POST http://localhost:8000/api/v1/sources -H 'Authorization: Bearer local-review-token' -H 'Content-Type: application/json' -d '{"url":"https://jobs.ashbyhq.com/Ashby","company":"Ashby"}'
+curl -X POST http://localhost:8000/api/v1/sources -H "Authorization: Bearer $ADMIN_TOKEN" -H 'Content-Type: application/json' -d '{"url":"https://jobs.ashbyhq.com/Ashby","company":"Ashby"}'
 curl 'http://localhost:8000/api/v1/jobs?keyword=engineer&limit=10'
 ```
 

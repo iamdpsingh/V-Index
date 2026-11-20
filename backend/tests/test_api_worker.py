@@ -162,7 +162,7 @@ def test_fetch_failure_recorded_without_closing(database, source, monkeypatch):
     monkeypatch.setattr(worker, "Session", database)
     redis = Mock()
     redis.lock.return_value = nullcontext()
-    monkeypatch.setattr(worker.Redis, "from_url", lambda url: redis)
+    monkeypatch.setattr(worker.Redis, "from_url", lambda url, **kwargs: redis)
 
     async def failed(self):
         raise ValueError("Incomplete pagination")
@@ -183,7 +183,7 @@ def test_rejected_job_values_are_not_copied_into_worker_errors(database, source,
     monkeypatch.setattr(worker, "Session", database)
     redis = Mock()
     redis.lock.return_value = nullcontext()
-    monkeypatch.setattr(worker.Redis, "from_url", lambda url: redis)
+    monkeypatch.setattr(worker.Redis, "from_url", lambda url, **kwargs: redis)
     canary = "NEVER_LOG_REJECTED_CREDENTIAL"
 
     async def failed():
@@ -252,7 +252,7 @@ def test_worker_retires_abandoned_run_and_publishes_fresh_data(database, source,
     monkeypatch.setattr(worker, "Session", database)
     redis = Mock()
     redis.lock.return_value = nullcontext()
-    monkeypatch.setattr(worker.Redis, "from_url", lambda url: redis)
+    monkeypatch.setattr(worker.Redis, "from_url", lambda url, **kwargs: redis)
 
     async def discover():
         return Enumeration(jobs=[posting()], complete=True)
@@ -273,7 +273,7 @@ def test_worker_preserves_long_upstream_retry_after(database, source, monkeypatc
     monkeypatch.setattr(worker, "Session", database)
     redis = Mock()
     redis.lock.return_value = nullcontext()
-    monkeypatch.setattr(worker.Redis, "from_url", lambda url: redis)
+    monkeypatch.setattr(worker.Redis, "from_url", lambda url, **kwargs: redis)
     requests = []
 
     def respond(request):
@@ -305,7 +305,7 @@ def test_refresh_retries_transient_responses_sooner(database, source, monkeypatc
     monkeypatch.setattr(worker, "Session", database)
     redis = Mock()
     redis.lock.return_value = nullcontext()
-    monkeypatch.setattr(worker.Redis, "from_url", lambda url: redis)
+    monkeypatch.setattr(worker.Redis, "from_url", lambda url, **kwargs: redis)
     monkeypatch.setattr(worker, "create_connector", lambda *args: Mock(discover=discover))
 
     run_id = asyncio.run(worker.refresh(source.id))

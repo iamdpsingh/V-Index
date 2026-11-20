@@ -148,6 +148,15 @@ def test_complete_public_ssr_preserves_role_without_signed_assets_or_form_settin
     ) and "applicationConfirmationTemplate" not in json.dumps(job.raw)
 
 
+def test_native_english_locale_query_key_retains_all_completeness_checks():
+    value = listing_state()
+    value["dehydratedState"]["queries"][0]["queryKey"].append("en-US")
+    assert run(listing=value).complete
+    value["dehydratedState"]["queries"][0]["queryKey"][-1] = "unknown"
+    with pytest.raises(ValueError, match="Unsupported"):
+        run(listing=value)
+
+
 @pytest.mark.parametrize(
     "mutation",
     [

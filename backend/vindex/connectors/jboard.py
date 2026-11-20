@@ -21,7 +21,7 @@ from vindex.schemas import Enumeration, JobInput
 # No arbitrary/custom user-supplied host, CNAME or vendor API access is enabled.
 HOSTS = frozenset({"jobs.aame.org", "jobs.cisontario.ca"})
 NS = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
-JOB_PATH = r"/jobs/([1-9][0-9]*)-[a-z0-9][a-z0-9!_-]*"
+JOB_PATH = r"/jobs/([1-9][0-9]*)-[a-z0-9](?:[a-z0-9!_|-]|%7[Cc]){0,500}"
 
 
 def document(body: bytes) -> BeautifulSoup:

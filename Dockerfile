@@ -4,9 +4,9 @@ WORKDIR /app
 COPY pyproject.toml uv.lock ./
 RUN uv sync --frozen --no-dev
 COPY backend backend
-COPY scripts/smoke.py scripts/register_verified_sources.py scripts/
+COPY scripts scripts
 COPY alembic.ini ./
 ENV PYTHONPATH=/app/backend
 RUN useradd --create-home vindex
 USER vindex
-CMD ["/app/.venv/bin/uvicorn", "vindex.api:app", "--host", "0.0.0.0", "--port", "8000", "--no-access-log"]
+CMD ["/app/.venv/bin/uvicorn", "vindex.api:app", "--host", "0.0.0.0", "--port", "8000", "--no-access-log", "--no-proxy-headers"]

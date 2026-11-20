@@ -233,3 +233,54 @@ def test_merged_timestamps_never_regress_and_title_changes_keep_first_seen(datab
         assert payload["last_checked_at"] == changed + timedelta(hours=2)
         assert payload["sources"][0]["first_seen_at"] == start
         JobOut.model_validate(payload)
+
+
+def test_dedup_projection_preserves_richer_active_metadata_and_field_origin(database, source):
+    start = now() - timedelta(days=1)
+    full = JobInput(
+        external_id="full",
+        title="Engineer",
+        company="Example",
+        location="London",
+        description="Complete responsibilities",
+        salary={"min": 100, "currency": "USD"},
+        source_url="https://example.org/original",
+        application_url="https://example.org/apply/1",
+    )
+    sparse = full.model_copy(
+        update={
+            "external_id": "sparse",
+            "description": "",
+            "salary": None,
+            "source_url": "https://example.org/mirror",
+            "quality_flags": ["description_missing"],
+        }
+    )
+    with database() as session:
+        second = Source(
+            provider="lever", slug="mirror", company="Example", url="https://jobs.lever.co/mirror"
+        )
+        session.add(second)
+        session.flush()
+        ingest(session, source, Enumeration(jobs=[full], complete=True), start)
+        ingest(
+            session, second, Enumeration(jobs=[sparse], complete=True), start + timedelta(hours=1)
+        )
+        session.commit()
+        job = session.scalar(select(Job))
+        rows = list(session.scalars(select(Observation).where(Observation.job_id == job.id)))
+        projected = public_job(job, rows)
+        assert job.data["description"] == full.description and job.data["salary"] == full.salary
+        assert projected["description"] == full.description and projected["salary"]["min"] == 100
+        assert projected["field_sources"] == {
+            "description": full.source_url,
+            "salary": full.source_url,
+        }
+        assert "description_missing" not in projected["quality_flags"]
+        assert len(projected["sources"]) == 2
+        assert next(row for row in rows if row.source_id == second.id).data["description"] == ""
+        donor = next(row for row in rows if row.source_id == source.id)
+        donor.status = "closed"
+        projected = public_job(job, rows)
+        assert projected["salary"] is None and projected["description"] == ""
+        assert "description_missing" in projected["quality_flags"]

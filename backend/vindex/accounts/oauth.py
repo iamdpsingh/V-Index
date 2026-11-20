@@ -22,6 +22,7 @@ from vindex.accounts.security import (
     rate_limit,
     redis_client,
 )
+from vindex.client_ip import client_ip
 from vindex.db import Session, now
 
 router = APIRouter(prefix="/api/v1/auth/oauth")
@@ -79,7 +80,7 @@ def callback_url(provider: str) -> str:
 @router.get("/{provider}/start")
 def start(provider: str, request: Request):
     client_id, _ = configured(provider)
-    rate_limit(f"oauth:{request.client.host if request.client else 'unknown'}", 20)
+    rate_limit(f"oauth:{client_ip(request)}", 20)
     authorize, _, _, scope, pkce = PROVIDERS[provider]
     state, verifier = secrets.token_urlsafe(32), secrets.token_urlsafe(48)
     try:

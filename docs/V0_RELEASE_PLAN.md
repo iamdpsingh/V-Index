@@ -1,5 +1,8 @@
 # One repository, v0 release target, zero-spend budget
 
+**Current owner update, November 20:** production/deployment and external submission are paused. Coverage expansion is paused without waiving the original 78-platform requirement. The integrated product is maintained in canonical main. [RELEASE_HANDOFF.md](RELEASE_HANDOFF.md) is the current implementation and reviewer entry point; earlier ownership and unbuilt-feature notes below are historical.
+
+
 **Latest owner release requirements (November 7):** read [PRODUCTION_RELEASE_REQUIREMENTS.md](PRODUCTION_RELEASE_REQUIREMENTS.md). Coverage remains first. Public launch now requires a verified custom domain on the free-tier plan, favicon, permitted badge removal, reviewed legal/privacy pages, accessibility and a full security review. Older preview-only vercel.app guidance does not authorize launch. No spending or automatic deployment is authorized.
 
 Owner update, November 6, 2026: use v0 for the publishing workflow; available budget is the owner's existing $5 v0 credit and no additional spending. Do not buy a domain, upgrade a plan or provision a paid service. This changes the deployment target, not the acquisition objective or frontend ownership.

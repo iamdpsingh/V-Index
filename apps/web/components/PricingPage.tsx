@@ -184,7 +184,7 @@ export default function PricingPage({ onStartSearching }: PricingPageProps) {
             type="button"
             className="plan-cta-btn plus-cta-btn"
             disabled
-            aria-label="Paid membership opens later — Coming soon"
+            aria-label="Paid membership opens later. Coming soon"
           >
             Paid membership opens later
           </button>

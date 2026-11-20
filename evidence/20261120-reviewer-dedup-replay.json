@@ -1,0 +1,35 @@
+{
+  "scope": "Deterministic synthetic reviewer replay; not live coverage or an upstream duplicate claim",
+  "observations": 4,
+  "canonical_jobs": 3,
+  "merged_sources": [
+    {
+      "source_id": 1,
+      "source_url": "https://example.org/source-a/1",
+      "application_url": "https://example.org/apply/1?utm_source=a",
+      "status": "open",
+      "first_seen_at": "2026-11-18 16:55:53.404231+00:00",
+      "last_changed_at": "2026-11-18 16:55:53.404231+00:00",
+      "last_checked_at": "2026-11-18 16:55:53.404231+00:00"
+    },
+    {
+      "source_id": 2,
+      "source_url": "https://example.org/source-b/1",
+      "application_url": "https://example.org/apply/1?utm_source=b",
+      "status": "open",
+      "first_seen_at": "2026-11-18 16:55:53.404231+00:00",
+      "last_changed_at": "2026-11-18 16:55:53.404231+00:00",
+      "last_checked_at": "2026-11-18 16:55:53.404231+00:00"
+    }
+  ],
+  "duplicate_tracking_variants_merged": true,
+  "different_requisition_kept_separate": true,
+  "different_location_kept_separate": true,
+  "partial_snapshot_rejected_without_closures": true,
+  "changed_description_visible": true,
+  "richer_active_metadata_preserved": true,
+  "borrowed_field_sources": {
+    "description": "https://example.org/source-a/1",
+    "salary": "https://example.org/source-a/1"
+  }
+}

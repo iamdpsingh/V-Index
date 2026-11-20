@@ -71,6 +71,22 @@ def test_partial_and_duplicate_snapshots_never_close(database, source):
         assert s.scalar(select(Observation)).missing_count == 0
 
 
+def test_spa_requisition_fragments_and_generic_apply_pages_do_not_merge_distinct_roles():
+    first = posting(application_url="https://example.org/application/#/job/123")
+    second = posting(external_id="2", application_url="https://example.org/application/#/job/456")
+    assert identity(first) != identity(second)
+    for url in (
+        "https://example.org/",
+        "https://example.org/apply",
+        "https://example.org/jobs?lang=en",
+    ):
+        first = posting(application_url=url)
+        second = posting(
+            external_id="2", source_url="https://example.org/jobs/2", application_url=url
+        )
+        assert identity(first) != identity(second)
+
+
 def test_conservative_cross_source_dedupe_and_provenance(database, source):
     with database() as s:
         second = Source(

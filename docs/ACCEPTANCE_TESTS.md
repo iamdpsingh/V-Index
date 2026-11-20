@@ -1,17 +1,24 @@
-# Acceptance checklist
+# Release acceptance status
 
-**Latest owner release requirements (November 7):** read [PRODUCTION_RELEASE_REQUIREMENTS.md](PRODUCTION_RELEASE_REQUIREMENTS.md). Coverage remains first. Public launch now requires a verified custom domain on the free-tier plan, favicon, permitted badge removal, reviewed legal/privacy pages, accessibility and a full security review. Older preview-only vercel.app guidance does not authorize launch. No spending or automatic deployment is authorized.
+November 20, 2026. The owner paused production/deployment and submission, and
+paused coverage expansion. Local proof does not satisfy deferred hosted checks.
+[Release handoff](RELEASE_HANDOFF.md) is the current reviewer walkthrough.
 
-- [ ] All 78 exact platforms have reusable connectors and successful live runs across multiple independent tenants (or explicitly documented blockers; blockers do not meet full coverage).
-- [ ] Live smoke evidence has URL, timestamp, count, completeness, connector revision, payload digest and failure reasons.
-- [ ] Full API/worker/PostgreSQL/Redis/Next.js stack starts from clone with migrations.
-- [ ] Add a source, fetch genuine jobs, search keyword/company/location and paginate deterministically.
-- [ ] Changed content updates; two completed misses over 24h close; reappearance reopens.
-- [ ] Failed/partial/malformed/paginated-error fetches leave lifecycle unchanged.
-- [ ] Cross-source duplicate merges preserve provenance; different requisitions never merge based only on title.
-- [ ] Refresh schedules survive restart; concurrent workers do not ingest the same source; crashed-run recovery tested.
-- [ ] SSRF, HTML/script injection, oversized payload, bad token, invalid URL and rate-limit behavior tested.
-- [ ] Desktop/mobile keyboard-accessible UI and original application navigation pass browser checks.
-- [ ] Handoff includes costs, dependencies, credentials inventory, backup/restore, migration/recovery procedures.
+| Requirement | Local evidence | Public acceptance |
+| --- | --- | --- |
+| Exact 78-platform inventory and live coverage | 71/78 with independent live examples | Incomplete; remaining platforms not waived |
+| Consistent required/optional records | Shared normalization and audits; source gaps disclosed | Incomplete while required source fields are absent |
+| Automatic refreshes | Running scheduler, repeated real refreshes, heartbeat and diagnostics | Deployed refresh proof deferred; 11 sources await initial success |
+| Lifecycle safety | Complete-enumeration/two-miss-24h guards, cancellation and failure tests | Hosted observation window deferred |
+| Deduplication | Historical live duplicate plus isolated replay; links and richer active fields preserved; distinct requisitions/locations separate | Reviewer walkthrough prepared |
+| Search and API | Real local build, required filters, deterministic pagination, documented schema | Public deployment/reliability deferred |
+| Private product | Candidate/Employer, profiles, resume storage, drafts, OAuth/SMTP backend and ownership tests | Real provider flows and inbox verification deferred |
+| Security | Authorization/rate/cancellation checks, nonce CSP, no-store, signed proxy IPs, scoped scans | Actual deployed gateway/caching/secrets review deferred; Trusted Types report-only |
+| Operations | Local heartbeat/alerts, backup tools and successful synthetic PostgreSQL restore | External notification, off-site backups and deployed restore deferred |
+| Product review | Desktop/mobile real-data and profile editing; keyboard/focus/contrast tests; favicon and policy links | Public-domain browser review deferred |
+| Handoff and costs | Code, specs, measured local resources/timing, dependencies and reviewer guide | Actual hosting setup/bills unmeasured while paused |
+| Submission | Founder/startup pitch and evidence package drafted | Repository/demo connection and final submission unverified |
 
-Current automated results must be read from actual test output and CI; unchecked items remain unverified.
+Failed or partial requests must never close jobs. Do not substitute fixtures,
+unit tests, historic CI, a GitHub import or a synthetic restore for live platform
+coverage, hosted operation or completed challenge submission.

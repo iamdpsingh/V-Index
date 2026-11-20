@@ -1,0 +1,36 @@
+{
+  "recorded_at": "2026-11-20T17:26:34.715092+00:00",
+  "scope": "Actual successful refreshes through the local worker; four existing sources, not additional platform verification",
+  "repairs": {
+    "89": "Rippling en-US locale query key",
+    "90": "Rippling en-US locale query key",
+    "41": "SmartJobBoard Unicode native slug",
+    "50": "JBoard native pipe-containing slug"
+  },
+  "runs": [
+    {
+      "source_id": 89,
+      "run_id": 509,
+      "status": "success",
+      "count": 4
+    },
+    {
+      "source_id": 90,
+      "run_id": 510,
+      "status": "success",
+      "count": 6
+    },
+    {
+      "source_id": 41,
+      "run_id": 512,
+      "status": "success",
+      "count": 26
+    },
+    {
+      "source_id": 50,
+      "run_id": 513,
+      "status": "success",
+      "count": 48
+    }
+  ]
+}

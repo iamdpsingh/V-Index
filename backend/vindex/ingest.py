@@ -3,10 +3,11 @@ import json
 from datetime import UTC, timedelta
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
-from sqlalchemy import select
+from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
 from vindex.db import Event, Job, Observation, Source, now
+from vindex.records import merge_records
 from vindex.schemas import Enumeration, JobInput
 
 
@@ -22,15 +23,31 @@ def identity(job: JobInput) -> str:
         for k, v in parse_qsl(p.query, keep_blank_values=True)
         if not k.lower().startswith("utm_") and k.lower() not in {"gh_src"}
     ]
-    link = urlunsplit((p.scheme, p.netloc.lower(), p.path, urlencode(sorted(query)), ""))
-    return digest(
-        [
-            link,
-            job.company.strip().casefold(),
-            job.title.strip().casefold(),
-            job.location.strip().casefold(),
-        ]
+    # SPA fragments can contain a requisition ID; never discard them as tracking.
+    link = urlunsplit((p.scheme, p.netloc.lower(), p.path, urlencode(sorted(query)), p.fragment))
+    generic = p.path.rstrip("/").casefold() in {"", "/apply", "/jobs", "/careers", "/careers/apply"}
+    identifier_keys = {
+        "id",
+        "job",
+        "jobid",
+        "job_id",
+        "posting",
+        "postingid",
+        "requisitionid",
+        "requisition_id",
+    }
+    unproven_destination = generic and not any(
+        k.casefold() in identifier_keys and v for k, v in query
     )
+    parts: list[object] = [
+        link,
+        job.company.strip().casefold(),
+        job.title.strip().casefold(),
+        job.location.strip().casefold(),
+    ]
+    if unproven_destination:
+        parts.append([job.source_url, job.external_id])
+    return digest(parts)
 
 
 def aware(value):
@@ -48,6 +65,8 @@ def ingest(session: Session, source: Source, batch: Enumeration, checked=None) -
         o.external_id: o
         for o in session.scalars(select(Observation).where(Observation.source_id == source.id))
     }
+    touched: set[int] = set()
+    moved: set[int] = set()
     for item in batch.jobs:
         data = item.model_dump(mode="json")
         fingerprint = digest(
@@ -79,6 +98,8 @@ def ingest(session: Session, source: Source, batch: Enumeration, checked=None) -
             session.flush()
             session.add(Event(observation_id=obs.id, kind="created", occurred_at=checked))
         else:
+            if obs.job_id != canonical.id:
+                moved.add(obs.job_id)
             kind = (
                 "reopened"
                 if obs.status == "closed"
@@ -94,6 +115,7 @@ def ingest(session: Session, source: Source, batch: Enumeration, checked=None) -
         canonical.data = data
         canonical.first_seen = min(aware(canonical.first_seen), aware(obs.first_seen))
         canonical.last_changed = max(aware(canonical.last_changed), aware(obs.last_changed))
+        touched.add(canonical.id)
     for external_id, obs in existing.items():
         if external_id in ids or obs.status == "closed":
             continue
@@ -104,3 +126,22 @@ def ingest(session: Session, source: Source, batch: Enumeration, checked=None) -
         if obs.missing_count >= 2 and checked - aware(obs.missing_since) >= timedelta(hours=24):
             obs.status, obs.last_changed = "closed", checked
             session.add(Event(observation_id=obs.id, kind="closed", occurred_at=checked))
+            touched.add(obs.job_id)
+    # Re-project only merged or re-identified jobs. Original observations stay intact.
+    affected = set(moved)
+    all_ids = sorted(touched | moved)
+    for offset in range(0, len(all_ids), 500):
+        affected.update(
+            session.scalars(
+                select(Observation.job_id)
+                .where(Observation.job_id.in_(all_ids[offset : offset + 500]))
+                .group_by(Observation.job_id)
+                .having(func.count() > 1)
+            )
+        )
+    for job_id in affected:
+        rows = list(session.scalars(select(Observation).where(Observation.job_id == job_id)))
+        if rows:
+            canonical = session.get(Job, job_id)
+            assert canonical is not None
+            canonical.data = merge_records(canonical.data, rows)[0]

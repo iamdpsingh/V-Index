@@ -1,0 +1,253 @@
+{
+  "recorded_at": "2026-11-20T17:25:57.647591+00:00",
+  "scope": "Local production web build and running local index; not hosted performance or billing",
+  "index": {
+    "canonical_open_jobs": 8410,
+    "open_observations": 8410,
+    "database_kind": "sqlite",
+    "database_allocated_bytes": 294219776
+  },
+  "operations": {
+    "counts": {
+      "sources": 143,
+      "initial_index_complete": 132,
+      "initial_index_pending": 11,
+      "failing": 13,
+      "stale": 1,
+      "abandoned_runs": 0
+    },
+    "alerts": [
+      "failing",
+      "stale"
+    ],
+    "live_workers": 1
+  },
+  "source_failures": [
+    {
+      "source_id": 13,
+      "provider": "recruitee",
+      "initial_index_complete": false,
+      "last_success_at": null,
+      "success_age_seconds": null,
+      "next_check_at": "2026-11-20T17:50:54.515713+00:00",
+      "last_attempt_status": "failed",
+      "last_attempt_count": 0,
+      "failure_kind": "UpstreamStatusError",
+      "consecutive_failures": 5,
+      "stale": false,
+      "abandoned_run": false
+    },
+    {
+      "source_id": 54,
+      "provider": "eightfold",
+      "initial_index_complete": false,
+      "last_success_at": null,
+      "success_age_seconds": null,
+      "next_check_at": "2026-11-20T19:27:00.038128+00:00",
+      "last_attempt_status": "failed",
+      "last_attempt_count": 0,
+      "failure_kind": "ValueError",
+      "consecutive_failures": 5,
+      "stale": false,
+      "abandoned_run": false
+    },
+    {
+      "source_id": 58,
+      "provider": "avature",
+      "initial_index_complete": true,
+      "last_success_at": "2026-11-19T19:07:00.233269+00:00",
+      "success_age_seconds": 80337,
+      "next_check_at": "2026-11-20T18:40:29.712362+00:00",
+      "last_attempt_status": "failed",
+      "last_attempt_count": 0,
+      "failure_kind": "ValueError",
+      "consecutive_failures": 4,
+      "stale": true,
+      "abandoned_run": false
+    },
+    {
+      "source_id": 69,
+      "provider": "werecruit",
+      "initial_index_complete": false,
+      "last_success_at": null,
+      "success_age_seconds": null,
+      "next_check_at": "2026-11-20T19:27:02.002519+00:00",
+      "last_attempt_status": "failed",
+      "last_attempt_count": 0,
+      "failure_kind": "ValueError",
+      "consecutive_failures": 5,
+      "stale": false,
+      "abandoned_run": false
+    },
+    {
+      "source_id": 77,
+      "provider": "hireology",
+      "initial_index_complete": false,
+      "last_success_at": null,
+      "success_age_seconds": null,
+      "next_check_at": "2026-11-20T19:27:06.143206+00:00",
+      "last_attempt_status": "failed",
+      "last_attempt_count": 0,
+      "failure_kind": "ValueError",
+      "consecutive_failures": 5,
+      "stale": false,
+      "abandoned_run": false
+    },
+    {
+      "source_id": 78,
+      "provider": "hireology",
+      "initial_index_complete": false,
+      "last_success_at": null,
+      "success_age_seconds": null,
+      "next_check_at": "2026-11-20T19:27:10.397471+00:00",
+      "last_attempt_status": "failed",
+      "last_attempt_count": 0,
+      "failure_kind": "ValueError",
+      "consecutive_failures": 5,
+      "stale": false,
+      "abandoned_run": false
+    },
+    {
+      "source_id": 85,
+      "provider": "careerplug",
+      "initial_index_complete": false,
+      "last_success_at": null,
+      "success_age_seconds": null,
+      "next_check_at": "2026-11-20T19:27:31.160757+00:00",
+      "last_attempt_status": "failed",
+      "last_attempt_count": 0,
+      "failure_kind": "ValueError",
+      "consecutive_failures": 5,
+      "stale": false,
+      "abandoned_run": false
+    },
+    {
+      "source_id": 109,
+      "provider": "gohire",
+      "initial_index_complete": false,
+      "last_success_at": null,
+      "success_age_seconds": null,
+      "next_check_at": "2026-11-20T19:35:01.384813+00:00",
+      "last_attempt_status": "failed",
+      "last_attempt_count": 0,
+      "failure_kind": "ValueError",
+      "consecutive_failures": 5,
+      "stale": false,
+      "abandoned_run": false
+    },
+    {
+      "source_id": 129,
+      "provider": "personio-de",
+      "initial_index_complete": true,
+      "last_success_at": "2026-11-20T11:06:32.540503+00:00",
+      "success_age_seconds": 22765,
+      "next_check_at": "2026-11-20T17:40:40.317446+00:00",
+      "last_attempt_status": "failed",
+      "last_attempt_count": 0,
+      "failure_kind": "ValueError",
+      "consecutive_failures": 1,
+      "stale": false,
+      "abandoned_run": false
+    },
+    {
+      "source_id": 131,
+      "provider": "workday",
+      "initial_index_complete": false,
+      "last_success_at": null,
+      "success_age_seconds": null,
+      "next_check_at": "2026-11-20T17:55:52.168338+00:00",
+      "last_attempt_status": "failed",
+      "last_attempt_count": 0,
+      "failure_kind": "HTTPStatusError",
+      "consecutive_failures": 21,
+      "stale": false,
+      "abandoned_run": false
+    },
+    {
+      "source_id": 132,
+      "provider": "workday",
+      "initial_index_complete": false,
+      "last_success_at": null,
+      "success_age_seconds": null,
+      "next_check_at": "2026-11-21T16:15:56.820545+00:00",
+      "last_attempt_status": "failed",
+      "last_attempt_count": 0,
+      "failure_kind": "KeyError",
+      "consecutive_failures": 19,
+      "stale": false,
+      "abandoned_run": false
+    },
+    {
+      "source_id": 136,
+      "provider": "wileymadgex",
+      "initial_index_complete": false,
+      "last_success_at": null,
+      "success_age_seconds": null,
+      "next_check_at": "2026-11-21T04:51:41.898088+00:00",
+      "last_attempt_status": "failed",
+      "last_attempt_count": 0,
+      "failure_kind": "ValueError",
+      "consecutive_failures": 6,
+      "stale": false,
+      "abandoned_run": false
+    },
+    {
+      "source_id": 143,
+      "provider": "jobiqo",
+      "initial_index_complete": false,
+      "last_success_at": null,
+      "success_age_seconds": null,
+      "next_check_at": "2026-11-20T19:05:11.530224+00:00",
+      "last_attempt_status": "failed",
+      "last_attempt_count": 0,
+      "failure_kind": "ValueError",
+      "consecutive_failures": 4,
+      "stale": false,
+      "abandoned_run": false
+    }
+  ],
+  "repeat_refreshes": [
+    {
+      "run_id": 466,
+      "provider": "ashby",
+      "source_url": "https://jobs.ashbyhq.com/Ashby",
+      "count": 79,
+      "started_at": "2026-11-20T15:51:39.536302+00:00",
+      "finished_at": "2026-11-20T15:51:41.042712+00:00"
+    },
+    {
+      "run_id": 252,
+      "provider": "ashby",
+      "source_url": "https://jobs.ashbyhq.com/Ashby",
+      "count": 79,
+      "started_at": "2026-11-20T09:50:48.974474+00:00",
+      "finished_at": "2026-11-20T09:50:50.075766+00:00"
+    }
+  ],
+  "search_measurement": {
+    "samples": 10,
+    "statuses": [
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200
+    ],
+    "median_ms": 12.61,
+    "maximum_ms": 429.02,
+    "median_response_bytes": 28832.0,
+    "limit": 25,
+    "view": "summary"
+  },
+  "cost_measurement": {
+    "new_paid_services_provisioned": false,
+    "new_service_charges_usd": 0,
+    "hosted_operating_cost_measured": false,
+    "excluded": "Existing computer, electricity and internet are not metered; hosting is paused"
+  }
+}

@@ -1,6 +1,6 @@
 # Private accounts, profiles, resumes and recommendations
 
-Implemented backend contracts; frontend integration remains with Antigravity. This feature expansion does not change the 78-platform indexing requirement. Do not call this a production account release until the remaining identity/recovery and UI gates below pass.
+Accounts and the integrated candidate/employer interface are implemented and checked locally. This feature expansion does not change the 78-platform indexing requirement. Production activation is paused by the owner; see RELEASE_HANDOFF.md for current evidence and hosted release gates.
 
 ## Configuration
 
@@ -15,7 +15,7 @@ Run `uv run alembic upgrade head` before starting the new API. The additive revi
 
 | Method/path | Body | Result |
 |---|---|---|
-| POST `/api/v1/auth/register` | email, password (12–128 characters) | 201 AccountOut + new session cookie |
+| POST `/api/v1/auth/register` | email, password (15–128 characters) | 201 AccountOut + new session cookie |
 | POST `/api/v1/auth/login` | email, password | AccountOut + rotated session cookie |
 | POST `/api/v1/auth/logout` | none | 204, revoke current session and clear cookie |
 | GET `/api/v1/me` | none | current account only |
@@ -25,7 +25,7 @@ Run `uv run alembic upgrade head` before starting the new API. The additive revi
 
 Use JSON for credentials. Browser mutations must carry Origin equal to PUBLIC_WEB_ORIGIN; same-origin browser fetches supply this automatically. Use same-origin `/api/v1` through Next's existing rewrite. Do not expose session tokens to JavaScript or store passwords/tokens in localStorage. Production uses a Secure/HttpOnly/SameSite=Lax `__Host-vindex_session` cookie; loopback HTTP uses a separate development cookie. Sessions expire after seven days, are hashed in SQL, and are capped at ten per account. Profile identity is separate from the existing ADMIN_TOKEN operator authorization. Personal login does not grant source-management permissions.
 
-`email_verified` is explicitly false: there is no email-ownership verification, password-reset mail or federated login yet. Email is currently a private login identifier, not a verified identity or communication destination. Signup returns 409 for duplicates, which remains an account-enumeration consideration despite credential rate limits. No mail is sent.
+`email_verified` starts false. Verification, password recovery and Google/LinkedIn/GitHub OAuth are implemented; configuration and real-provider inbox/browser checks remain deferred. Do not treat a new local account as a verified communication destination. Signup returns 409 for duplicates, which remains an account-enumeration consideration despite credential rate limits. This review sent no real email.
 
 ## Profile
 
@@ -56,7 +56,7 @@ Ranking considers at most the newest 1,000 SQL candidate jobs, then applies toke
 
 ## Remaining release work
 
-Antigravity screens and browser tests; email verification and identity recovery; trusted edge client-IP/rate policy (the current app uses the direct peer, so a shared proxy shares IP budgets); HTTPS deployment; encrypted-key/backup recovery drills; independent security review and production load validation. These are actual implementation gaps, not completed capabilities.
+The current integrated interface, verification/recovery logic, signed proxy IP metadata, per-route rate controls and encrypted backup/restore drill have local evidence in RELEASE_HANDOFF.md. Remaining hosted gates include HTTPS and matching proxy secrets, real SMTP/OAuth round trips, support inbox verification, offsite backup/key custody, independent security review and production load validation. Forwarded IP headers alone are ignored; direct-peer buckets apply when trusted proxy metadata is unavailable. Deployment and external activation remain paused.
 
 
 Profile reads and writes support up to 30 entries each for `education`, `experience`, and `projects`. Education entries can use an object with a `qualification` category and plain-text `details`. Existing education strings are accepted and displayed without a category until assigned. The `links` array accepts up to 12 objects with an editable `label` and an HTTPS `url`. Rolewisp does not fetch submitted links. Omitted new fields preserve saved values for older clients. Send an empty array to clear a field.

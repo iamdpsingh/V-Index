@@ -1,5 +1,8 @@
 # V-Index product design standard
 
+**Current owner update, November 20:** production/deployment and external submission are paused. Coverage expansion is paused without waiving the original 78-platform requirement. The integrated product is maintained in canonical main. [RELEASE_HANDOFF.md](RELEASE_HANDOFF.md) is the current implementation and reviewer entry point; earlier ownership and unbuilt-feature notes below are historical.
+
+
 **Latest owner instruction — November 7:** Codex supplies the frontend design; **Antigravity implements it** in its existing separate frontend worktree. This supersedes the frontend hold and earlier Codex-frontend takeover notes. Read [ROLEWISP_FRONTEND_DESIGN.md](ROLEWISP_FRONTEND_DESIGN.md) and [ANTIGRAVITY_DESIGN_TASK.md](ANTIGRAVITY_DESIGN_TASK.md) first. Preserve frontend commit `3bc0a54` and existing API wiring; no external agent is assumed launched or notified. Codex continues backend and coverage. The original 78-platform objective is unchanged.
 
 

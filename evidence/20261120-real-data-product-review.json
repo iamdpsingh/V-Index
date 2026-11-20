@@ -1,0 +1,35 @@
+{
+  "scope": "Production Next build against the actual local job index; no hosted-deployment claim",
+  "reviews": [
+    {
+      "viewport": "desktop",
+      "width": 1440,
+      "index_total": 8400,
+      "pagination_exercised": true,
+      "filters_exercised": true,
+      "detail_and_application_link": true,
+      "favicon_status": 200,
+      "horizontal_overflow": false,
+      "script_csp_enforced": true,
+      "private_html_no_store": true,
+      "third_party_origins": [],
+      "page_errors": [],
+      "interaction_elapsed_ms": 469
+    },
+    {
+      "viewport": "mobile",
+      "width": 390,
+      "index_total": 8400,
+      "pagination_exercised": true,
+      "filters_exercised": true,
+      "detail_and_application_link": true,
+      "favicon_status": 200,
+      "horizontal_overflow": false,
+      "script_csp_enforced": true,
+      "private_html_no_store": true,
+      "third_party_origins": [],
+      "page_errors": [],
+      "interaction_elapsed_ms": 471
+    }
+  ]
+}

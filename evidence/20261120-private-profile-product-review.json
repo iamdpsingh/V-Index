@@ -1,0 +1,17 @@
+{
+  "scope": "Synthetic temporary account through the real local production web proxy; account deleted after review",
+  "checks": [
+    {
+      "viewport": "desktop",
+      "read_only_until_edit": true,
+      "editing_saved": true,
+      "horizontal_overflow": false
+    },
+    {
+      "viewport": "mobile",
+      "read_only_until_edit": true,
+      "editing_saved": true,
+      "horizontal_overflow": false
+    }
+  ]
+}

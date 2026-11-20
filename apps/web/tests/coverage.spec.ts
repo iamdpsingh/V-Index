@@ -48,10 +48,10 @@ test('failure_reason is shown for providers that have it', async ({ page }) => {
   await expect(page.getByText('Requires API key')).toBeVisible();
 });
 
-test('extraction count shows dash for unimplemented', async ({ page }) => {
+test('extraction count labels unmeasured providers explicitly', async ({ page }) => {
   const rows = page.getByRole('row');
   const workday = rows.filter({ hasText: 'Workday' });
-  await expect(workday).toContainText('—');
+  await expect(workday).toContainText('Not measured');
 });
 
 test('index-note shows live-checked count not implemented count', async ({ page }) => {

@@ -194,7 +194,7 @@ export default function Home() {
             {(tab === 'coverage' || tab === 'sources') && (
               <div className="index-note">
                 <span className="dot" />
-                {verifiedCount} / {totalCount || '—'} platforms live-checked
+                {verifiedCount} / {totalCount || 'pending'} platforms live-checked
                 <small>Point-in-time evidence · initial release</small>
               </div>
             )}

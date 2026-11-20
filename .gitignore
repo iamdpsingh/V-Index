@@ -22,3 +22,5 @@ node_modules/
 *.sqlite3
 *.pem
 *.key
+*.rwbackup
+*.dump

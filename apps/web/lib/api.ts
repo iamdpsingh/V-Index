@@ -33,6 +33,7 @@ export type JobOut = {
   company: string;
   description: string;
   quality_flags?: string[];
+  field_sources?: Record<string, string>;
   location: string;
   source_url: string;
   application_url: string;

@@ -119,6 +119,7 @@ class JobSummaryOut(BaseModel):
     title: str
     company: str
     quality_flags: list[str] = Field(default_factory=list)
+    field_sources: dict[str, str] = Field(default_factory=dict)
     location: str
     source_url: str
     application_url: str

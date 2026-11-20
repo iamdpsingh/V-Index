@@ -449,3 +449,22 @@ when structured employment is empty, retaining the native HTML separately from
 the original JSON-LD. Multiple native fields fail as ambiguous. Structured
 multiple employment values remain separate labels. A single refreshed detail
 check is evidence for this fallback, not a second-board or full-refresh claim.
+
+
+## Release deduplication projection
+
+The shared projection chooses the newest changed active observation, with check
+time and stable observation ID as tie breakers. Missing description, salary,
+employment, remote status or publication time can borrow nonempty values from
+another active observation. `field_sources` identifies each borrowed field's
+source URL. Closed observations are excluded as donors while any open source
+remains. Source data is unchanged. The ingestion path re-projects merged and
+re-identified canonical jobs so search uses the same preserved metadata.
+
+Runtime refresh repairs in this pass preserve existing scope: Rippling accepts
+its observed trailing en-US query-key locale while retaining every unfiltered
+parameter/total check; SmartJobBoard accepts native accented slugs without
+allowing another host; JBoard accepts the native pipe slug and its %7C spelling
+without accepting encoded separators, queries or fragments. Counts remain 71/78.
+
+Job identity preserves URL fragments used by native application routers. A generic application portal without a specific job identifier is qualified by the original source URL and external ID, so two distinct same-title roles are not merged solely because they share a portal. Existing specific application-URL identities retain their original digest.

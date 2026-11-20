@@ -37,6 +37,8 @@ services:
       ADMIN_TOKEN: ${ADMIN_TOKEN:?Set ADMIN_TOKEN in .env}
       PUBLIC_WEB_ORIGIN: ${PUBLIC_WEB_ORIGIN:-}
       PUBLIC_JOB_RATE_LIMIT_ENABLED: ${PUBLIC_JOB_RATE_LIMIT_ENABLED:-true}
+      ADMIN_RATE_LIMIT_ENABLED: ${ADMIN_RATE_LIMIT_ENABLED:-true}
+      PROXY_SHARED_SECRET: ${PROXY_SHARED_SECRET:-}
       ACCOUNT_REGISTRATION_ENABLED: ${ACCOUNT_REGISTRATION_ENABLED:-false}
       RESUME_ENCRYPTION_KEY: ${RESUME_ENCRYPTION_KEY:-}
       OAUTH_GOOGLE_CLIENT_ID: ${OAUTH_GOOGLE_CLIENT_ID:-}
@@ -60,6 +62,8 @@ services:
     depends_on:
       migrate:
         condition: service_completed_successfully
+      redis:
+        condition: service_healthy
   worker:
     <<: *backend
     environment:
@@ -77,6 +81,7 @@ services:
       dockerfile: Dockerfile.web
     environment:
       API_INTERNAL_URL: http://api:8000
+      PROXY_SHARED_SECRET: ${PROXY_SHARED_SECRET:-}
     ports: ["127.0.0.1:3000:3000"]
     depends_on:
       api:

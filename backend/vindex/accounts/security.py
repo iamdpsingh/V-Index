@@ -12,6 +12,7 @@ from sqlalchemy import delete, select
 from sqlalchemy.orm import Session
 
 from vindex.accounts.models import Account, AccountSession
+from vindex.client_ip import client_ip
 from vindex.db import now
 from vindex.ingest import aware
 
@@ -82,7 +83,7 @@ def rate_limit(bucket: str, limit: int, window: int = 60) -> None:
 
 
 def credential_rate(request: Request, email: str, *, signup: bool = False) -> None:
-    peer = request.client.host if request.client else "unknown"
+    peer = client_ip(request)
     if signup:
         rate_limit(f"registration:ip:{peer}", 20, 3600)
         rate_limit(f"registration:email:{email}", 5, 3600)
@@ -142,6 +143,7 @@ def issue_session(session: Session, account: Account, request: Request, response
 
 
 def clear_cookie(response: Response) -> None:
+    response.headers["Clear-Site-Data"] = '"cookies", "storage", "cache"'
     response.delete_cookie(
         cookie_name(),
         path="/",

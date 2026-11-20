@@ -286,17 +286,45 @@ def utc(stamp: datetime) -> datetime:
     return stamp.replace(tzinfo=UTC) if stamp.tzinfo is None else stamp.astimezone(UTC)
 
 
+def merge_records(fallback: dict, rows: list[Observation]) -> tuple[dict, dict[str, str]]:
+    active = [row for row in rows if row.status == "open"] or rows
+    ordered = sorted(
+        active, key=lambda row: (utc(row.last_changed), utc(row.last_checked), row.id), reverse=True
+    )
+    # Refreshing an unchanged older duplicate must not replace a newer version.
+    merged = dict(ordered[0].data if ordered else fallback)
+    field_sources: dict[str, str] = {}
+
+    def populated(value: Any) -> bool:
+        return bool(value.strip()) if isinstance(value, str) else value not in (None, {}, [])
+
+    for field in ("description", "salary", "employment_type", "remote_status", "published_at"):
+        if populated(merged.get(field)):
+            continue
+        donor = next((row for row in ordered if populated(row.data.get(field))), None)
+        if donor is not None:
+            merged[field] = donor.data[field]
+            field_sources[field] = donor.data["source_url"]
+    if isinstance(merged.get("description"), str) and merged["description"].strip():
+        merged["quality_flags"] = [
+            flag for flag in merged.get("quality_flags", []) if flag != "description_missing"
+        ]
+    return merged, field_sources
+
+
 def public_job(
     job: Job, observations: list[Observation], *, description: bool = True
 ) -> dict[str, Any]:
     rows = [row for row in observations if row.job_id == job.id]
     active = [row for row in rows if row.status == "open"] or rows
-    data = public_record(job.data)
+    merged, field_sources = merge_records(job.data, rows)
+    data = public_record(merged)
     if not description:
         data.pop("description", None)
     return {
         "id": job.id,
         **data,
+        "field_sources": field_sources,
         "first_seen_at": min([utc(job.first_seen), *(utc(row.first_seen) for row in rows)]),
         "last_changed_at": max([utc(job.last_changed), *(utc(row.last_changed) for row in rows)]),
         "last_checked_at": max((utc(row.last_checked) for row in active), default=None),

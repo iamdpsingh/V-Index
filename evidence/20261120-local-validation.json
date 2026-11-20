@@ -1,0 +1,48 @@
+{
+  "recorded_at": "2026-11-20T17:26:34.715092+00:00",
+  "scope": "Local validation, not deployed CI or hosted acceptance",
+  "backend": {
+    "passed": 1227,
+    "skipped": 1,
+    "warnings": 1,
+    "services": [
+      "PostgreSQL 17",
+      "Redis"
+    ],
+    "skip": "PostgreSQL planner assertion in SQLite fixture",
+    "warning": "Starlette httpx deprecation"
+  },
+  "browser": {
+    "passed": 182,
+    "skipped": 10,
+    "skip": "Device-specific test selection",
+    "production_build": true
+  },
+  "static_checks": {
+    "ruff_check": "passed",
+    "ruff_format": "passed: 195 files",
+    "mypy": "passed: 101 source files",
+    "git_diff_check": "passed"
+  },
+  "private_proxy": {
+    "result": "passed",
+    "database": "local SQLite with Redis",
+    "temporary_accounts_deleted": true
+  },
+  "final_local_smoke": {
+    "homepage": 200,
+    "public_search": 200,
+    "unauthenticated_me": 401,
+    "unauthenticated_operations": 401,
+    "interactive_docs": 404,
+    "openapi_route": 404,
+    "script_nonce_csp": true,
+    "html_no_store": true,
+    "live_worker_count": 1
+  },
+  "not_verified": [
+    "New full Docker Compose build: Docker executable unavailable locally",
+    "Remote CI for this unpushed revision",
+    "Hosted provider/security/performance checks: production paused"
+  ]
+}

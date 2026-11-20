@@ -1,0 +1,25 @@
+{
+  "recorded_at": "2026-11-20T16:48:46.550739+00:00",
+  "scope": "Reachable Git patch history, current changes, detector candidates, local browser bundle, dependency audits and automated authorization tests; no deployed-service claim",
+  "high_confidence_findings": [],
+  "reviewed_public_workday_job_path_matches": 0,
+  "runtime_secret_values_found_in_client_bundle": [],
+  "runtime_variables_checked": [
+    "ADMIN_TOKEN",
+    "RESUME_ENCRYPTION_KEY"
+  ],
+  "detector_candidate_counts": {
+    "Basic Auth Credentials": 7,
+    "Secret Keyword": 3,
+    "Hex High Entropy String": 957,
+    "Base64 High Entropy String": 73
+  },
+  "candidate_review": "Keyword/basic-auth matches were reviewed as test credentials, placeholders or a malformed http://mailto email link in public Polymer job HTML. Entropy detectors also match public payload digests, lockfile integrity and native public metadata; an entropy match is not a confirmed credential. This is not proof that every possible secret form is absent.",
+  "dependencies": {
+    "python_production_packages": 37,
+    "python_known_vulnerabilities": 0,
+    "npm_known_vulnerabilities": 0
+  },
+  "remaining_review": "Hosted proxy trust, platform secrets/logs/caching, notification delivery and provider OAuth/SMTP are deferred with production. Trusted Types is report-only until framework sinks are fully verified.",
+  "current_files_scanned": 688
+}

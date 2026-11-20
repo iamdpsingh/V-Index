@@ -19,6 +19,8 @@ evidence
 **/*.sqlite3
 **/*.pem
 **/*.key
+**/*.rwbackup
+**/*.dump
 **/.git
 **/node_modules
 **/.next

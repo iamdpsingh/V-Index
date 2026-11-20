@@ -3,6 +3,7 @@
 import asyncio
 import logging
 import os
+import signal
 from datetime import timedelta
 
 import httpx
@@ -17,6 +18,8 @@ from vindex.db import Run, Session, Source, engine, now
 from vindex.ingest import aware, ingest
 from vindex.jobiqo_refresh import advance_jobiqo_refresh
 from vindex.madgex_refresh import advance_madgex_refresh
+from vindex.operations import heartbeat, log_event
+from vindex.retention import maintain
 from vindex.talenetic_refresh import advance_talenetic_refresh
 
 log = logging.getLogger("vindex.worker")
@@ -27,7 +30,11 @@ JOBMOUNT_TIMEOUT_SECONDS = 1800
 
 
 async def refresh(source_id: int, *, only_if_due: bool = False) -> int | None:
-    redis = Redis.from_url(os.getenv("REDIS_URL", "redis://localhost:6379/0"))
+    redis = Redis.from_url(
+        os.getenv("REDIS_URL", "redis://localhost:6379/0"),
+        socket_connect_timeout=2,
+        socket_timeout=2,
+    )
     with Session() as lookup:
         provider = lookup.scalar(select(Source.provider).where(Source.id == source_id))
     refresh_timeout = (
@@ -94,7 +101,18 @@ async def refresh(source_id: int, *, only_if_due: bool = False) -> int | None:
                 run.finished_at, source.failures = now(), 0
                 source.next_check = now() + timedelta(minutes=source.refresh_minutes)
                 session.commit()
-                log.info("refresh_success source=%s run=%s count=%s", source_id, run_id, run.count)
+                log_event("refresh_success", source_id=source_id, run_id=run_id, count=run.count)
+            except asyncio.CancelledError:
+                session.rollback()
+                interrupted = session.get(Run, run_id)
+                source = session.get(Source, source_id)
+                if interrupted is not None and source is not None:
+                    interrupted.status = "failed"
+                    interrupted.error = "Worker stopped before refresh finished"
+                    interrupted.finished_at = now()
+                    source.next_check = now() + timedelta(minutes=2)
+                    session.commit()
+                raise
             except Exception as error:
                 session.rollback()
                 failed_run = session.get(Run, run_id)
@@ -130,8 +148,11 @@ async def refresh(source_id: int, *, only_if_due: bool = False) -> int | None:
                 if isinstance(error, RetryAfterError):
                     source.next_check = max(source.next_check, error.retry_at)
                 session.commit()
-                log.warning(
-                    "refresh_failed source=%s run=%s error=%s", source_id, run_id, failed_run.error
+                log_event(
+                    "refresh_failed",
+                    source_id=source_id,
+                    run_id=run_id,
+                    error_kind=type(error).__name__,
                 )
             return run_id
 
@@ -145,14 +166,18 @@ async def refresh_due_sources(ids: list[int], concurrency: int) -> None:
         async with semaphore:
             try:
                 await refresh(source_id, only_if_due=True)
-            except Exception:
-                log.exception("Worker infrastructure failure source=%s", source_id)
+            except Exception as error:
+                log_event(
+                    "worker_infrastructure_failure",
+                    source_id=source_id,
+                    error_kind=type(error).__name__,
+                )
 
     await asyncio.gather(*(refresh_one(source_id) for source_id in ids))
 
 
 async def serve() -> None:
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(level=logging.INFO, format="%(message)s")
     concurrency = int(os.getenv("WORKER_CONCURRENCY", "4"))
     if not 1 <= concurrency <= 16:
         raise ValueError("WORKER_CONCURRENCY must be between 1 and 16")
@@ -161,18 +186,34 @@ async def serve() -> None:
     # Public source URLs can include browser read tokens. Keep transport URLs out of logs.
     logging.getLogger("httpx").setLevel(logging.WARNING)
     logging.getLogger("httpcore").setLevel(logging.WARNING)
-    while True:
-        with Session() as session:
-            ids = list(
-                session.scalars(
-                    select(Source.id)
-                    .where(Source.next_check <= now(), Source.provider != "employer_posting")
-                    .order_by(Source.next_check)
-                    .limit(20)
+    task = asyncio.current_task()
+    assert task is not None
+    loop = asyncio.get_running_loop()
+    for sig in (signal.SIGTERM, signal.SIGINT):
+        loop.add_signal_handler(sig, task.cancel)
+    pulse = asyncio.create_task(heartbeat())
+    maintenance = asyncio.create_task(maintain())
+    try:
+        while True:
+            with Session() as session:
+                ids = list(
+                    session.scalars(
+                        select(Source.id)
+                        .where(Source.next_check <= now(), Source.provider != "employer_posting")
+                        .order_by(Source.next_check)
+                        .limit(20)
+                    )
                 )
-            )
-        await refresh_due_sources(ids, concurrency)
-        await asyncio.sleep(SCHEDULER_POLL_SECONDS)
+            await refresh_due_sources(ids, concurrency)
+            await asyncio.sleep(SCHEDULER_POLL_SECONDS)
+    except asyncio.CancelledError:
+        log_event("worker_stopped")
+    finally:
+        pulse.cancel()
+        maintenance.cancel()
+        await asyncio.gather(pulse, maintenance, return_exceptions=True)
+        for sig in (signal.SIGTERM, signal.SIGINT):
+            loop.remove_signal_handler(sig)
 
 
 if __name__ == "__main__":

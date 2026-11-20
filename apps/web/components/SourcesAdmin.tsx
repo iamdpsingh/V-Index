@@ -26,10 +26,10 @@ function classifyError(e: Error): string {
     return `Validation error: ${msg}`;
   }
   if (msg.includes('503') || msg.toLowerCase().includes('service unavailable')) {
-    return 'Service unavailable — try again shortly';
+    return 'Service unavailable. Try again shortly';
   }
   if (msg.toLowerCase().includes('failed to fetch') || msg.toLowerCase().includes('networkerror')) {
-    return 'Network error — check your connection and try again';
+    return 'Network error. Check your connection and try again';
   }
   return msg;
 }
@@ -249,7 +249,7 @@ export default function SourcesAdmin({
                 <td>{r.count}</td>
                 <td>{formatDate(r.started_at)}</td>
                 <td>{formatDate(r.finished_at)}</td>
-                <td className={r.error ? 'cell-error' : ''}>{r.error || '—'}</td>
+                <td className={r.error ? 'cell-error' : ''}>{r.error || 'None'}</td>
               </tr>
             ))}
           </tbody>

@@ -1,0 +1,21 @@
+[Unit]
+Description=Rolewisp source and worker monitoring
+After=network-online.target
+
+[Service]
+User=rolewisp
+WorkingDirectory=/srv/rolewisp
+EnvironmentFile=/etc/rolewisp/backend.env
+Environment=PYTHONPATH=backend
+ExecStart=/srv/rolewisp/.venv/bin/python -m scripts.monitor --watch --interval 60 --output /var/lib/rolewisp/monitor.json
+Restart=on-failure
+RestartSec=15
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/rolewisp
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target
