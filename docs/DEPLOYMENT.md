@@ -1,5 +1,10 @@
 # Deployment
 
+For the newly requested two-service Vercel configuration and exact environment
+variables, see [VERCEL_SERVICES.md](VERCEL_SERVICES.md). The owner confirmed
+service names/routing and authorized pushing; hosted activation remains unverified.
+
+
 **Current owner update, November 20:** production/deployment and external submission are paused. Coverage expansion is paused without waiving the original 78-platform requirement. The integrated product is maintained in canonical main. [RELEASE_HANDOFF.md](RELEASE_HANDOFF.md) is the current implementation and reviewer entry point; earlier ownership and unbuilt-feature notes below are historical.
 
 

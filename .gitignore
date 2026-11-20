@@ -24,3 +24,6 @@ node_modules/
 *.key
 *.rwbackup
 *.dump
+
+# Vercel local linkage and generated service artifacts
+.vercel/

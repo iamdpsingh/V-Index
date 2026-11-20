@@ -73,3 +73,5 @@ The web client uses lightweight search summaries and fetches a complete job when
 selected. Existing API clients retain the full list response by default. Use
 `view=summary` for the smaller response. PostgreSQL migrations install
 `pg_trgm` and GIN indexes for the existing substring filters.
+
+Vercel multi-service setup and environment variables: [deployment configuration](docs/VERCEL_SERVICES.md).

@@ -1,0 +1,29 @@
+{
+  "recorded_at": "2026-11-20T17:33:09.864636+00:00",
+  "scope": "Local only; hosted deployment and owner routing confirmation pending",
+  "services": [
+    "app",
+    "web"
+  ],
+  "public_service": "web",
+  "internal_service": "app",
+  "binding": "web -> app via BACKEND_URL",
+  "checks": {
+    "official_schema": "passed",
+    "vercel_cli_version": "66.6.0",
+    "vercel_dev_local": "Both services started; homepage and bound search 200, unauthenticated me/operations 401, backend-only /health and /openapi.json not publicly exposed",
+    "next_production_build": "passed",
+    "runtime_gateway": "prefix/query, bounded uploads, credentials, separate cookies, manual redirects, caller proxy spoof stripping, failed upstream, HEAD, bodyless 204, early authentication rejection and oversized upload checks passed",
+    "private_proxy_smoke": "passed against local API/SQLite/Redis; temporary synthetic accounts deleted",
+    "typescript": "passed",
+    "ruff": "passed",
+    "mypy": "passed"
+  },
+  "not_included": [
+    "No hosted service provisioning or deployment",
+    "Continuous worker/daemon hosting remains separate",
+    "No paid purchase",
+    "No GitHub push before requested routing confirmation"
+  ],
+  "fixed_during_review": "Chunked upstream uploads could turn an early 401 into 502. Request bodies are now buffered with a 6 MiB cap. Bodyless responses are forwarded explicitly without a body."
+}

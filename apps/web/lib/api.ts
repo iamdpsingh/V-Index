@@ -194,7 +194,7 @@ export type RecommendationsOut = {
 
 /**
  * Typed fetch helper for the V-Index API.
- * Uses same-origin /api/v1/ (proxied via Next.js rewrite to API_INTERNAL_URL).
+ * Uses same-origin /api/v1/ (proxied via a Next.js server route using BACKEND_URL at runtime).
  * Passes credentials: 'include' for HttpOnly session cookie persistence.
  */
 export async function apiFetch<T>(
