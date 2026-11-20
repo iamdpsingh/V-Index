@@ -1,3 +1,5 @@
+> **Historical reference, classified November 21, 2026.** Earlier frontend/connector handoff and changing milestone assignments. Current state: [release status](RELEASE_STATUS.md); current instructions: [handoff](../handoff/README.md). Original dated content below is preserved.
+
 # Antigravity frontend handoff
 
 **Current owner update, November 21:** production work and GitHub pushes are authorized; Rolewisp is running on Vercel. Coverage expansion stays paused without waiving the original 78-platform requirement. The integrated product is maintained in canonical main. Older ownership/pause entries below are historical. [RELEASE_HANDOFF.md](RELEASE_HANDOFF.md) is the current implementation and reviewer entry point; earlier ownership and unbuilt-feature notes below are historical.

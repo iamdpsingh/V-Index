@@ -1,5 +1,7 @@
 # Provider coverage
 
+> Documentation reconciled November 21, 2026. This is an active reference; dated evidence retains its original scope. [Documentation register](README.md) · [Complete handoff](../handoff/README.md).
+
 Exactly 58 ATS + 20 job-board platforms. Risk is a planning estimate, not a verified access limitation.
 
 IMPLEMENTED means code exists. LIVE_VERIFIED means the latest smoke run retrieved non-empty, complete jobs for all configured example tenants. This is a point-in-time connector check, not full production acceptance. FAILED and BLOCKED retain genuine limitations. NOT_STARTED providers have no connector.

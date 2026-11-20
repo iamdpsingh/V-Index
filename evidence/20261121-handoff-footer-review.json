@@ -1,0 +1,96 @@
+{
+  "recorded_at": "2026-11-20T22:53:47.033Z",
+  "scope": "Local production Next.js build, no live coverage claim. Footer on main application and all four policy routes, desktop/mobile. Vaya telemetry blocked.",
+  "checks": [
+    {
+      "viewport": "desktop",
+      "path": "/",
+      "one_shared_footer": true,
+      "copyright_visible": true,
+      "owner_link_correct_and_focusable": true,
+      "policy_links_visible": true,
+      "horizontal_overflow": false
+    },
+    {
+      "viewport": "desktop",
+      "path": "/privacy",
+      "one_shared_footer": true,
+      "copyright_visible": true,
+      "owner_link_correct_and_focusable": true,
+      "policy_links_visible": true,
+      "horizontal_overflow": false
+    },
+    {
+      "viewport": "desktop",
+      "path": "/terms",
+      "one_shared_footer": true,
+      "copyright_visible": true,
+      "owner_link_correct_and_focusable": true,
+      "policy_links_visible": true,
+      "horizontal_overflow": false
+    },
+    {
+      "viewport": "desktop",
+      "path": "/cookies",
+      "one_shared_footer": true,
+      "copyright_visible": true,
+      "owner_link_correct_and_focusable": true,
+      "policy_links_visible": true,
+      "horizontal_overflow": false
+    },
+    {
+      "viewport": "desktop",
+      "path": "/refunds",
+      "one_shared_footer": true,
+      "copyright_visible": true,
+      "owner_link_correct_and_focusable": true,
+      "policy_links_visible": true,
+      "horizontal_overflow": false
+    },
+    {
+      "viewport": "mobile",
+      "path": "/",
+      "one_shared_footer": true,
+      "copyright_visible": true,
+      "owner_link_correct_and_focusable": true,
+      "policy_links_visible": true,
+      "horizontal_overflow": false
+    },
+    {
+      "viewport": "mobile",
+      "path": "/privacy",
+      "one_shared_footer": true,
+      "copyright_visible": true,
+      "owner_link_correct_and_focusable": true,
+      "policy_links_visible": true,
+      "horizontal_overflow": false
+    },
+    {
+      "viewport": "mobile",
+      "path": "/terms",
+      "one_shared_footer": true,
+      "copyright_visible": true,
+      "owner_link_correct_and_focusable": true,
+      "policy_links_visible": true,
+      "horizontal_overflow": false
+    },
+    {
+      "viewport": "mobile",
+      "path": "/cookies",
+      "one_shared_footer": true,
+      "copyright_visible": true,
+      "owner_link_correct_and_focusable": true,
+      "policy_links_visible": true,
+      "horizontal_overflow": false
+    },
+    {
+      "viewport": "mobile",
+      "path": "/refunds",
+      "one_shared_footer": true,
+      "copyright_visible": true,
+      "owner_link_correct_and_focusable": true,
+      "policy_links_visible": true,
+      "horizontal_overflow": false
+    }
+  ]
+}

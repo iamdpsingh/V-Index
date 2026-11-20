@@ -1,5 +1,7 @@
 # Current release backlog
 
+> Documentation reconciled November 21, 2026. This is an active reference; dated evidence retains its original scope. [Documentation register](README.md) · [Complete handoff](../handoff/README.md).
+
 Updated November 21, 2026. Production work and the GitHub push are authorized.
 Coverage expansion is paused at 71/78; full 78-platform acceptance remains unmet.
 [Handoff](RELEASE_HANDOFF.md) and [release checklist](RELEASE_CHECKLIST.md) replace

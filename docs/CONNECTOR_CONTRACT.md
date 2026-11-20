@@ -1,6 +1,8 @@
 # Connector contract
 
-`detect(url) -> (provider, slug)` is deterministic and rejects unknown hosts. `PublicConnector(provider, slug, company, client)` holds only validated tenant configuration. `fetch(cursor=0)` performs one bounded request and returns JSON. `parse(payload) -> list[JobInput]` validates every record; errors reject the enumeration. `discover() -> Enumeration` traverses every page, rejects repeated identifiers and confirms totals where provided. Connector extraction is validated through typed JobInput construction; shared public normalization is applied at read time without rewriting original observations. Original fields stay in raw.
+> Documentation reconciled November 21, 2026. This is an active reference; dated evidence retains its original scope. [Documentation register](README.md) · [Complete handoff](../handoff/README.md).
+
+`detect(url) -> (provider, slug)` is deterministic and rejects unknown hosts. `PublicConnector(provider, slug, company, client)` holds only validated tenant configuration. The original JSON PublicConnector uses bounded `fetch(cursor=0)` and `parse(payload)` helpers. Other provider adapters use feed/HTML/native-specific methods; the shared acceptance boundary is typed `discover() -> Enumeration`, not a universal JSON endpoint. Errors reject the enumeration. `discover() -> Enumeration` traverses every page, rejects repeated identifiers and confirms totals where provided. Connector extraction is validated through typed JobInput construction; shared public normalization is applied at read time without rewriting original observations. Original fields stay in raw.
 
 `complete=True` is required for any reconciliation. Missing arrays, invalid required fields, exceeded response/page limits, repeated pages and total mismatches raise errors. Greenhouse and Ashby expose full arrays; Lever uses skip/limit until a short page (including a final empty page after an exact page multiple). Missing/unlisted Ashby jobs are intentionally excluded when isListed=false. Network failures do not yield empty successful batches.
 
@@ -11,7 +13,7 @@ Provider API references:
 - https://github.com/lever/postings-api
 - https://developers.ashbyhq.com/docs/public-job-posting-api
 
-Adding a provider requires schema fixtures, completeness/pagination tests, failure tests, multiple live tenants, coverage evidence, constraints and documentation. Structured public API first, feed/JSON-LD second, HTML third, browser only with evidence of necessity. Custom-domain detection is backlog.
+Adding a provider requires schema fixtures, completeness/pagination tests, failure tests, multiple live tenants, coverage evidence, constraints and documentation. Structured public API first, feed/JSON-LD second, HTML third, browser only with evidence of necessity. Arbitrary custom-domain detection remains unsupported; explicitly reviewed installations are documented per provider below.
 
 ## Cohort 2
 
@@ -55,13 +57,13 @@ Pinpoint uses its documented [public postings feed](https://developers.pinpointh
 
 Jobboardly (source brand: Job Boardly) is a distinct required platform. Its hosted sites expose `/jobs` HTML with explicit sequential Next controls, disabled terminal controls, and Showing range counters. The adapter requires all three, validates unique same-host posting paths and every detail's single JobPosting/canonical URL, and preserves actual Apply now destinations without fetching those external destinations. JSON-LD preserves employer, description, salary, employment type, locations and source datePosted; explicit visible workplace badges are retained. A failed detail, invalid range, repeated page/identifier or changed first-page snapshot aborts the run. It is bounded to 400 details/100 pages, rejects empty pages rather than assuming closure, and currently registers only hosted jobboardly.com tenants. Public HTML/JSON-LD behavior was observed on https://recruiter-jobs.jobboardly.com/jobs and https://pennsylvania-communications.jobboardly.com/jobs; no vendor API guarantee is claimed.
 
-Niceboard remains unimplemented. `evidence/cohort5-niceboard-discovery.json` records public root/API probes: AvA and Pro Bono Australia robots policies disallowed `/api/jobs`, so those requests were not made. Jobs in Carbon allowed the request but returned a validation error, not job records. Allowed public HTML is largely a client template; this is not evidence of complete enumeration. Do not bypass robots via browser requests or count these responses as live coverage. A permitted complete feed or a different independently accessible deployment is still needed.
+Historical Niceboard investigation initially had no implementation; the later “Niceboard and JobKit public boards” section documents the now-verified reviewed installations. `evidence/cohort5-niceboard-discovery.json` records public root/API probes: AvA and Pro Bono Australia robots policies disallowed `/api/jobs`, so those requests were not made. Jobs in Carbon allowed the request but returned a validation error, not job records. Allowed public HTML is largely a client template; this is not evidence of complete enumeration. Do not bypass robots via browser requests or count these responses as live coverage. A permitted complete feed or a different independently accessible deployment is still needed.
 
 The first Jobboardly runs exposed email-only applications and public postings without Google JobPosting metadata. Email destinations stay raw; the normalized application URL points to the original HTTPS posting and carries `application_by_email`. HTML-only postings require matching canonical/Open Graph URL/title, the source's numeric job ID in its Open Graph image path, an employer link, full rich-text description and actual apply destination. Explicit visible employment/workplace/salary/location labels are retained. Relative age labels stay raw without inventing an original posting date. The omission carries `jobposting_schema_missing`; raw.jobposting remains null, and original HTML observations are stored separately rather than fabricating source JSON-LD. Missing/ambiguous identity still fails. Original failure evidence remains committed.
 
 JazzHR hosted applytojob.com sites expose a server-rendered Current Openings list. The adapter requires that template marker, unique validated same-host links/titles and complete HTML documents, then verifies each detail's canonical URL/title, Organization identity, description element and native application form action. It never submits a form or stores candidate form fields/tokens. Description/header HTML remains raw, employment/location labels are preserved and a location explicitly labelled Remote retains that fact. No original publication date or structured salary is invented when this template supplies none; source text remains intact. Maximum 400 details, no custom-domain support, and empty/unexpectedly paginated lists fail closed. A final complete link/title comparison is required. Primary employer examples: https://lapmasterwolters.applytojob.com/apply and https://belaytechnologies.applytojob.com/apply. These are observed public templates, not an authenticated JazzHR account API; demo/sandbox accounts are not coverage examples.
 
-Jobboardly capacity finding: Pennsylvania Communications had at least nine 50-link list pages with further pagination, and the original full detail run timed out at ten minutes. It is not a successful indexing example. The connector now enumerates all list pages within its 400-detail budget before fetching any details, then reconfirms every list page after extraction, including later-page changes. Boards beyond that bound fail early without expensive detail fetches or reconciliations. The known large-board limit is explicit; Jobboardly stays FAILED until its multi-board acceptance is resolved.
+Jobboardly capacity finding: Pennsylvania Communications had at least nine 50-link list pages with further pagination, and the original full detail run timed out at ten minutes. It is not a successful indexing example. The connector now enumerates all list pages within its 400-detail budget before fetching any details, then reconfirms every list page after extraction, including later-page changes. Boards beyond that bound fail early without expensive detail fetches or reconciliations. The known large-board limit is explicit; This was the historical failed HTML-only milestone; later XML-feed expansion and recorded multi-board verification supersede that status. Current acceptance is in the coverage matrix.
 
 ## HireHive hosted structured template
 
@@ -91,7 +93,7 @@ Validate every next/previous link against the fixed host/path and exact query pa
 
 Original description, locations and visible salary currency/range are retained; salary period is not inferred. Employment type, remote status and original publication time remain null where this template supplies no independent fields; any corresponding source text stays in the description. New tenant subdomain themes/custom domains and empty-board closure verification remain unsupported. No application page/form or candidate data is fetched.
 
-Dover investigation remains unimplemented: older app.dover.com career aliases redirect to jobs.dover.com; direct public-shell assets identify listing routes, but the jobs host's robots policy disallows the collection identity request. The API request was not made. evidence/dover-public-discovery.json records this research blocker; it is not live coverage.
+Historical Dover investigation at this stage had no native implementation (current Dover is partial, not verified): older app.dover.com career aliases redirect to jobs.dover.com; direct public-shell assets identify listing routes, but the jobs host's robots policy disallows the collection identity request. The API request was not made. evidence/dover-public-discovery.json records this research blocker; it is not live coverage.
 
 Manatal's first formal run failed because SoupSieve selectors skipped the inert Vue fallback template even though it contained server-rendered jobs. The adapter now parses the specific pre-JavaScript fallback list as its own HTML fragment, preserving the same visible-title/total validation rather than dropping that cross-check. Both failed live runs are retained in evidence/20261106T075732Z-smoke.json.
 
@@ -468,3 +470,30 @@ allowing another host; JBoard accepts the native pipe slug and its %7C spelling
 without accepting encoded separators, queries or fragments. Counts remain 71/78.
 
 Job identity preserves URL fragments used by native application routers. A generic application portal without a specific job identifier is qualified by the original source URL and external ID, so two distinct same-title roles are not merged solely because they share a portal. Existing specific application-URL identities retain their original digest.
+
+
+## November 21 reconciliation: later native platforms and evidence
+
+The dated cohorts above preserve earlier extraction limits and failures. Later
+source-specific sections and the current registry supersede earlier milestone
+status sentences; historical failures remain evidence, never successful snapshots.
+
+- Dayforce (`dayforce`): reviewed CandidatePortal URLs, native anonymous CSRF
+  exchange before read-only search, complete native details and final roster
+  reconfirmation. See [implementation](../backend/vindex/connectors/dayforce.py)
+  and the [181-record audit](../evidence/20261120-record-quality-new-platforms.json).
+- Gem.com (`gem`): public hosted-board GraphQL extraction with tenant/job identity,
+  detail and complete roster checks; separate from the blocked native API host
+  investigated earlier. [Implementation](../backend/vindex/connectors/gem.py).
+- talentReef (`talentreef`): native public production gateway, tenant-scoped
+  external-only queries, full pagination/shard checks and a second full collection
+  read. [Implementation](../backend/vindex/connectors/talentreef.py).
+- Talenetic: staged details/checkpoints support a complete first board and an
+  incomplete second. Generic employer labels/field gaps and failing native details
+  remain blockers, not complete platform acceptance.
+- Dover, Paycom, Paycor and UltiPro remain partial; CareerSiteCloud/eJobBoard lack
+  usable integrated coverage. Holds/third-party samples do not grant full acceptance.
+
+[Exact platform/tenant inventory](COVERAGE.md), [records contract](API.md),
+[historical workflow](COVERAGE_WORKFLOW.md). Reusable native extraction and
+complete live evidence are required independently of presence in the source tree.

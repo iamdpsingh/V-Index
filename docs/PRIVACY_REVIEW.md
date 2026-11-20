@@ -1,5 +1,7 @@
 # Technical privacy and policy review
 
+> Documentation reconciled November 21, 2026. This is an active reference; dated evidence retains its original scope. [Documentation register](README.md) · [Complete handoff](../handoff/README.md).
+
 November 21, 2026: production is running. This is an engineering review, not a
 legal-compliance certification. The owner explicitly retains the placeholder
 support address and leaves inbox verification open.

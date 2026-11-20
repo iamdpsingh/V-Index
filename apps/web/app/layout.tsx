@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { cookies, headers } from 'next/headers';
 import AnalyticsChoices from '../components/AnalyticsChoices';
+import SiteFooter from '../components/SiteFooter';
 import './globals.css';
 
 // A fresh nonce must authorize the framework scripts on every HTML response.
@@ -31,6 +32,7 @@ export default async function Layout({
       </head>
       <body>
         {children}
+        <SiteFooter />
         <AnalyticsChoices initialChoice={choice} privacySignal={privacySignal} />
       </body>
     </html>

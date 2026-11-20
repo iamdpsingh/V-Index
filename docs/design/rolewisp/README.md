@@ -1,3 +1,5 @@
+> **Design asset archive, reviewed November 21, 2026.** These studies/mockup counts are not the shipped UI or current live metrics. Follow [current product design](../../PRODUCT_DESIGN.md) and preserve bundled font licenses.
+
 # Opening Lines design package
 
 Start with [the design specification](../../ROLEWISP_FRONTEND_DESIGN.md) and [the Antigravity task](../../ANTIGRAVITY_DESIGN_TASK.md).

@@ -1,31 +1,70 @@
 # V-Index shared engineering instructions
 
-Develop only in this repository. Preserve existing work and canonical remote https://github.com/iamdpsingh/V-Index. Primary branch: main. No force pushes or secrets. Do not count stubs, fixtures or unit tests as live coverage.
+Current instructions reconciled November 21, 2026. Earlier changing ownership,
+coverage targets and deployment holds are preserved in Git history at 74c0b08;
+they do not override the latest owner scope below.
 
-Latest owner update (2026-11-06): Codex owns backend/, scripts/, database migrations, deployment, CI, shared API specifications and, after today's coverage target, apps/web/ and browser tests. This explicitly supersedes earlier Antigravity frontend ownership. Preserve its existing branch/worktree and review existing commits before frontend integration. Read docs/ANTIGRAVITY_HANDOFF.md first. Never run both tools in the same worktree. Coordinate through commits and reviewed merges; no assumption of agent messaging. No external agent has been launched by this repository setup.
+## Workspace, ownership and authorization
 
-Before editing, inspect git status and relevant files. Tests: uv run pytest; uv run ruff check backend scripts; uv run mypy. Web: cd apps/web && npm ci && npm run build. Keep lockfiles committed. Document real failures, do not invent evidence.
+- Develop in the canonical V-Index repository only. Preserve other worktrees and
+  unrelated user changes. Remote: https://github.com/iamdpsingh/V-Index; branch main.
+  No force-push, secret commits, personal resumes/account data or empty commits.
+- Inspect git status and relevant files before editing. Never run concurrent editing agents/tools in the same worktree. No external agent is assumed active or notified.
+- Integrated backend, scripts, migrations, CI/deployment and apps/web are maintained
+  in canonical main. Old Antigravity briefs are historical requirements/reviews;
+  preserve their branches/commits rather than assuming an unreviewed merge is needed.
+- Current scope: production/product/operations/handoff work. Production and reviewed
+  pushes are authorized for the existing Vercel project. Coverage expansion is
+  paused at 71/78, without waiving the original 78-platform acceptance requirement.
+- No paid purchase, upgrade or domain purchase is authorized. Keep existing-provider
+  failure repairs honest; never count partial/blocked runs or third-party samples
+  as complete reusable platform coverage. No promise of challenge rank/acquisition.
 
-Never infer closures from failures, malformed payloads or partial pagination. Require complete enumeration plus two misses separated by 24 hours. Keep original observations and links. Validate URLs, use fixed public API hosts, disable redirects and environment proxies, bound response sizes and retries. Never bypass access controls. UI renders descriptions as text.
+## Engineering invariants
 
-All 78 platform names must remain distinct (JBoard.io and JobBoard.io are different). Coverage evidence belongs in evidence/ and backend/providers.json. Do not mark the acquisition criteria complete while blockers remain.
+- No closures from exceptions, malformed payloads or partial pagination. Require
+  complete enumeration and two misses separated by at least 24 hours. Preserve
+  original observations, source/application links, failure records and timestamps.
+- Validate URLs and source identity, use fixed public API hosts or explicitly reviewed
+  installations, disable redirects/environment proxies, bound responses/retries/
+  pages/timeouts and respect native robots/rate/access policy. Never bypass controls.
+- All 78 names stay distinct, especially JBoard.io and JobBoard.io. Evidence belongs
+  in evidence/ and backend/providers.json. Stubs/fixtures/tests are not live coverage.
+- UI descriptions remain text. Private payloads, secrets and raw candidate data
+  never enter logs/evidence, public responses, browser bundles or deployment uploads.
+- Preserve account ownership, role, exact-Origin and operator authorization checks;
+  rate limits, private caching and signed proxy metadata must survive changes.
+- Keep production indexing on a persistent scheduler, not a frozen development DB.
+  Browser polling is not provider ingestion. Declare freshness and platform limits.
 
-Product quality: read docs/PRODUCT_DESIGN.md for the owner’s frontend identity and backend quality requirements. The current UI is a scaffold, not the final design. Require real-data visual and interaction review; never replace engineering correctness or coverage evidence with visual polish.
+## Product decisions and release gates
 
-Owner update (2026-11-06): target November 7 IST; add private accounts, saved profiles/resumes and professional-term job recommendations without replacing the indexer challenge. The owner explicitly retained frontend work with Antigravity. See docs/ANTIGRAVITY_ACCOUNTS_HANDOFF.md. Make small substantive commits; do not inflate counts with empty commits. Never commit credentials, personal resumes or account data.
+- Public brand: Rolewisp; internal repo/folder: V-Index. Owner/copyright: Dhruv Pratap
+  Singh; LinkedIn https://www.linkedin.com/in/dhruvpratapsingh30/.
+- Read docs/PRODUCT_DESIGN.md and docs/BRANDING.md for the restrained original UI.
+  No fake metrics/reviews, purple gradients, generic slop or acquisition/testing
+  diagnostics in consumer flows. Require real-data visual/interaction review.
+- Candidate/Employer onboarding, manual profiles/qualification categories, encrypted
+  resume/photo storage and recommendations are integrated. Resume parsing was
+  intentionally removed. Keep private data owner-only. Employer publish needs
+  verified email. SMTP/OAuth are not live without real configuration and tests.
+- Free/Plus is a regional catalogue; no payment gateway, fake activation or paid
+  entitlement. Keep paid checkout unavailable pending separately approved work.
+- example@rolewisp.in is an owner-retained unverified placeholder. External alerts,
+  real provider delivery, key custody/deletion reconciliation, credential rotation,
+  domain/legal/cost checks and authenticated Vaya submission remain explicit gates.
+- The authored twenty-check matrix is not a project-completion percentage or Vaya
+  score. Use actual criteria, scoped evidence and named open tasks.
 
-Latest owner priority (2026-11-06, superseding the previous frontend pause): Codex prioritizes coverage; Antigravity resumes the premium Rolewisp frontend, branding assets, account/profile/resume/recommendation screens and browser tests in parallel in its existing separate worktree. Read docs/ANTIGRAVITY_START_HERE.md. Production must keep indexing new/changed jobs on a running scheduler, not serve a frozen development dataset; follow docs/LIVE_INDEX_REQUIREMENTS.md. Target November 6 IST: 35 total fully verified platforms (21 additional from the current 14), not a promised result or permission to count partial runs. Preserve all 78-platform acceptance gates and report actual progress. Hosting/budget and production release gates remain unresolved; no paid purchases are authorized.
+## Verification and documentation
 
-Latest sequencing (2026-11-06): finish today's target of 35 total live-verified platforms before frontend implementation. Current verified baseline is 17/78, requiring 18 more. Codex will then take over Rolewisp frontend design, brand assets, account screens and browser verification. Existing Antigravity briefs remain requirements/reference material, not current task assignment. No frontend agent is assumed running, and no frontend changes should be made concurrently in the same worktree.
-
-Latest owner update (2026-11-06): frontend is ON HOLD, including all frontend implementation. Today's target is now 45 total live-verified platforms, superseding the earlier 35 target. Continue coverage/backend work and substantive local commits, but do not push to GitHub until 45 platforms are genuinely verified. At the update, 33/78 were verified. Save frontend resources for later: https://github.com/nutlope/hallmark and the owner's named design libraries; no frontend agent is assumed running.
-
-Latest owner update (2026-11-07): 45 live-verified platforms passed and the push condition is satisfied; 33 required platforms remain. Codex designs the production-facing Rolewisp UI, original logo and plan/API specifications; Antigravity implements apps/web in its existing separate worktree. Keep testing/acquisition diagnostics out of consumer flows. Preserve existing frontend work and every coverage/backend requirement. No payment provider exists: Free/Plus regional catalogue is implemented, paid checkout/entitlements require real provider integration and verified events; never fake activation. Read docs/PLANS_AND_PRICING.md and docs/SECURITY_REVIEW_2026-11-07.md.
-
-Latest owner update (2026-11-07): finish all 78 verified platforms before expanding remaining backend work. Commit locally; batch reviewed pushes every 12 hours, with no early push or empty commit. Update frontend documentation alongside backend changes. Antigravity implementation at 66baef8 is preserved in its existing worktree; no automatic merge. Keep profile/auth/logout/resume/recommendations and honest no-provider billing state. See docs/COVERAGE_WORKFLOW.md.
-
-Latest owner release gates (2026-11-07): coverage first. Store and follow docs/PRODUCTION_RELEASE_REQUIREMENTS.md for original, restrained product design, custom-domain launch, favicon, permitted badge removal, privacy/terms/cookies/refunds/DPDP review, accessibility, credential protection and full security audit. Treat any unsupported release claim as a blocker. Keep the 12-hour push cadence and no-spend constraint.
-
-Owner update (2026-11-20): CareerSiteCloud and eJobBoard are on hold because no usable installation URLs are available. Continue the other remaining coverage work. Both platforms remain in the original 78-platform acceptance requirement; the hold does not waive them or grant coverage.
-
-Owner update (2026-11-20, release finalization): pause platform-coverage expansion and prioritize the remaining product, correctness, security, operations and handoff work. Existing-provider fetch-failure repairs are allowed; do not change the recorded 71/78 into full challenge acceptance. The owner imported the GitHub repository into Vercel but explicitly put production/deployment work on hold. Do not deploy, configure provider accounts or submit Vaya until resumed. Keep example@rolewisp.in as supplied, with inbox delivery unverified. The integrated apps/web code is now maintained in canonical main; older Antigravity ownership/integration notes are historical. See docs/RELEASE_HANDOFF.md.
+- Backend: uv run pytest; uv run ruff check backend scripts;
+  uv run ruff format --check backend scripts; uv run mypy.
+  Service-backed tests need disposable TEST_DATABASE_URL and TEST_REDIS_URL.
+- Web: cd apps/web && npm ci && npm run build; run relevant browser checks.
+  Keep lockfiles committed. Follow apps/web/AGENTS.md and local Next.js docs.
+- Validate actual CI/deployment/daemon after release. Document real failures and
+  exact evidence scopes; never fabricate success or treat historical checks as new.
+- Start with handoff/README.md and docs/README.md. Update affected current references
+  with contract/infrastructure/retention/scope changes. Preserve historical run
+  evidence and third-party licenses. Do not rewrite old evidence to look current.

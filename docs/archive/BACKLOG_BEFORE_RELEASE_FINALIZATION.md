@@ -1,10 +1,12 @@
+> **Historical backlog.** Archived requirements and old completion states are not current assignments. Use [current backlog](../BACKLOG.md) and [handoff](../../handoff/README.md).
+
 # Execution backlog
 
-**Latest owner update — November 7:** coverage first, then remaining backend work. Batch pushes every 12 hours; maintain the frontend handoff alongside connector/API additions. Antigravity's implementation is present at `66baef8` and remains in its separate worktree pending reviewed integration. See [COVERAGE_WORKFLOW.md](COVERAGE_WORKFLOW.md).
+**Latest owner update — November 7:** coverage first, then remaining backend work. Batch pushes every 12 hours; maintain the frontend handoff alongside connector/API additions. Antigravity's implementation is present at `66baef8` and remains in its separate worktree pending reviewed integration. See [COVERAGE_WORKFLOW.md](../COVERAGE_WORKFLOW.md).
 
 ## Current coverage-first status
 
-71 of 78 platforms have complete, nonempty recorded runs across independent sites. Five other platforms have partial extraction evidence. Talenetic now has a checkpointed public connector with partial live records. CareerSiteCloud and eJobBoard remain on hold at the owner’s request. The remaining full-coverage work includes all seven. See [release status](RELEASE_STATUS.md) for the integrated product and actual validation results. Older cohort numbers below are historical.
+71 of 78 platforms have complete, nonempty recorded runs across independent sites. Five other platforms have partial extraction evidence. Talenetic now has a checkpointed public connector with partial live records. CareerSiteCloud and eJobBoard remain on hold at the owner’s request. The remaining full-coverage work includes all seven. See [release status](../RELEASE_STATUS.md) for the integrated product and actual validation results. Older cohort numbers below are historical.
 
 ## First slice
 - [x] Inspect empty folder/remote; initialize canonical main without replacing history.

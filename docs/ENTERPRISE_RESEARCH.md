@@ -1,3 +1,5 @@
+> **Historical reference, classified November 21, 2026.** Historical native-interface investigations, not present platform acceptance. Current state: [release status](RELEASE_STATUS.md); current instructions: [handoff](../handoff/README.md). Original dated content below is preserved.
+
 # Enterprise ATS investigation — 2026-11-05
 
 These are research findings, not verified connectors. None of these platforms is added to the live coverage count. No authentication, access-control or anti-bot bypass was attempted.

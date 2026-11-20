@@ -1,3 +1,5 @@
+> **Historical reference, classified November 21, 2026.** Dated scoped security review, not current hosted certification. Current state: [release status](RELEASE_STATUS.md); current instructions: [handoff](../handoff/README.md). Original dated content below is preserved.
+
 # Scoped credential and data-exposure review — November 7
 
 This is engineering/reviewer documentation, not public product copy or a security certification. Baseline: a6b2308 and reachable refs including feat/frontend. No hosted deployment was available to audit. No credential values or private resumes are included in this report.

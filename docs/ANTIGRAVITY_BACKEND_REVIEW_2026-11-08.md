@@ -1,3 +1,5 @@
+> **Historical reference, classified November 21, 2026.** Dated independent backend review and count at that revision. Current state: [release status](RELEASE_STATUS.md); current instructions: [handoff](../handoff/README.md). Original dated content below is preserved.
+
 # November 8 backend integration review
 
 Antigravity's local branch `review/antigravity-backend` is preserved at `072a18b`. It proposed 13 new verified rows over the previous 50 and documented access issues for 15 more. Independent review checked the published rosters, connector code, live sources and tests. The acceptance rule is a nonempty, complete enumeration on two independently operated supported sites. The live provider matrix is the source of truth. [Coverage matrix](COVERAGE.md)

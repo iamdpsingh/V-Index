@@ -1,3 +1,5 @@
+> **Historical reference, classified November 21, 2026.** Earlier design implementation assignment; no external agent is assumed active. Current state: [release status](RELEASE_STATUS.md); current instructions: [handoff](../handoff/README.md). Original dated content below is preserved.
+
 # Copy this task into Antigravity
 
 Implement the Rolewisp **Opening Lines** design from `docs/ROLEWISP_FRONTEND_DESIGN.md` and `docs/design/rolewisp/`. Codex has supplied editable SVGs, PNG studies, design tokens, licensed fonts and real captured job examples. The concepts are not shipped UI or live-coverage evidence.

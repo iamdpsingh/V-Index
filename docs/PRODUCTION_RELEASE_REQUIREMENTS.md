@@ -1,6 +1,12 @@
 # Rolewisp production release requirements
 
-Owner instructions recorded November 7, 2026 (IST). **Coverage comes first:** finish all 78 required platform verifications before expanding the remaining product/backend work. Continue updating frontend documentation alongside connector/API changes. Batch reviewed pushes every 12 hours. This file records launch requirements, not completed verification or permission to deploy.
+Current release requirements, reconciled November 21, 2026. Production work and
+pushes are authorized and the Vercel demo is running. Coverage expansion is
+paused at 71/78, without waiving the original 78-platform criterion. Earlier
+coverage-first sequencing, push milestones and frontend assignments are
+historical. No paid purchase/upgrade is authorized. This document preserves
+release requirements, not a claim all of them have passed. See [status](RELEASE_STATUS.md)
+and [open gates](../handoff/08_RISKS_AND_NEXT_ACTIONS.md).
 
 ## Product and visual requirements
 

@@ -1,25 +1,68 @@
 # Architecture
 
-FastAPI exposes versioned JSON and OpenAPI. SQLAlchemy targets PostgreSQL; SQLite supports local tests. Alembic owns schema deployment. Redis leases serialize workers by source, a PostgreSQL source-row lock protects reconciliation, and the entire index update commits atomically. A worker polls the durable due time in sources; a crash before commit leaves the source due for replay. Crashed running fetch records currently require operator investigation.
+Current reference, November 21, 2026. See [system diagram and component inventory](../handoff/02_SYSTEM_ARCHITECTURE.md).
 
-## Data flow
+## Runtime and data flow
 
-Source URL -> exact provider/tenant detection -> fixed-host API request -> complete enumeration -> typed normalization -> conservative identity -> canonical job and source observation -> search.
+Next.js `web` is public; its same-origin gateway calls internal FastAPI `app`
+through the runtime BACKEND_URL binding. A separate persistent Vercel `worker`
+collects due sources. PostgreSQL stores durable index/private data and schedules;
+Redis stores leases, rate/state/heartbeat/monitoring information. Alembic owns
+schema changes. SQLite/Compose are local alternatives, not production storage.
 
-Seven platform connectors are implemented: Greenhouse, Lever, Ashby, SmartRecruiters, Personio, Recruitee and bounded hosted Workday. Provider definitions (78 required entries) live in backend/providers.json. Source rows represent individual boards with independent schedule, company label and failure state. Canonical jobs hold representative normalized data. Observations retain each source's original payload and metadata. Change events record create/update/close/reopen. Fetch runs retain source, time, count and errors.
+Validated source URL → provider/tenant detection → bounded native public fetch →
+complete enumeration → typed records → conservative identity and atomic ingestion
+→ canonical jobs/source observations/change events → search/detail API.
+71 platforms have independent historical live verification; registry contains all
+78 required names. Do not infer connector acceptance from module presence.
 
-Only exact application URL plus normalized company/title/location merges observations. Known attribution parameters are removed; all unknown parameters remain. No fuzzy title matching. This sacrifices recall to avoid merging distinct requisitions. Old unreferenced canonical rows are retained for audit and excluded from active search. Conflict-aware field enrichment and immutable per-run observation history remain backlog.
+## Correctness and search
 
-Descriptions become plain text. Original payloads remain in observations. Search currently uses parameterized case-insensitive JSON-field contains queries with literal wildcard escaping and deterministic descending IDs. PostgreSQL full-text indexes are planned once representative volume is measured; current filters are correct but will scan at scale.
+Redis source leases plus PostgreSQL row locking serialize reconciliation.
+Partial/failed collection never publishes a successful replacement or closes
+jobs. Closure requires two complete misses at least 24 hours apart; reappearance
+can reopen observations. SQL checkpoints support staged Jobiqo, Madgex and
+Talenetic collection. A stage is not a published complete snapshot.
 
-## Security boundary
+Identity combines normalized application URL/company/title/location, stripping
+known tracking parameters and retaining unknown ones. Active-source enrichment
+preserves useful metadata with field provenance; original observations remain
+private. Full immutable per-run observation snapshots are not implemented.
 
-User URLs are parsed as identifiers only; exact hosted-domain allowlist and restricted slug characters map to fixed HTTPS API hosts or validated hosted tenant labels under Personio, Recruitee and Workday vendor domains. User input cannot select outbound hosts, ports, headers, paths outside a tenant segment, or redirects. Proxy environment is disabled; HTTPS certificate verification remains enabled. Response decompressed bytes, page counts, timeouts and refresh execution are bounded. A network egress allowlist remains necessary for defense against DNS compromise; do not enable arbitrary custom-domain fetching until DNS pinning and private-IP checks are implemented.
+Public serializers expose normalized fields, flags and source/provenance
+tracking times while leaving raw source payloads private. Descriptions render
+as text. Parameterized substring filters use pg_trgm indexes on PostgreSQL,
+active-job/due-source indexes and descending-ID offset pagination. A changing
+index can change pages; no snapshot cursor or full-text ranking is claimed.
 
-Source mutation/status requires a configured bearer admin token. Public job queries remain read-only. Use TLS and rate limits at a gateway before exposure. No authentication, CAPTCHA or anti-bot bypass. Only documented public APIs are requested; custom HTML scraping and robots handling are not yet implemented. Public job details now use the same typed allowlist as search; raw ingestion payloads and full observation rows remain private in storage.
+## Scheduling and recovery
 
-## Reliability limits
+Generic PostgreSQL concurrency defaults four (configurable 1–16); hosted launcher
+defaults two; SQLite uses one. Free slots refill when a fetch completes, with a
+30-second due-work polling ceiling. Sources default six-hour intervals. Most
+attempts allow 600 seconds with 900-second leases; JobMount uses 1,800/2,100
+seconds. Bounded request retries respect Retry-After. Transient failures use
+shorter exponential cooldowns; other failures can back off to 24 hours.
 
-Retries are bounded to three attempts with jitter for transport errors, 429 and 5xx. Per-source cooldown grows exponentially to 24 hours. Worker processes sources sequentially (global concurrency one); Lever pages are separated by 0.5 seconds. Redis lease is 15 minutes; refresh is bounded to ten minutes. Retry-After is honored within the inline retry budget; add per-host distributed limits before scaling workers. PostgreSQL migrations, API/lifecycle behavior, real Redis worker serialization and rollback after reconciliation failure have service-backed tests. Wider distributed concurrency, deployment recovery and migration rollback remain unverified. Workers recheck the persisted due time after acquiring a lease, so a stale scheduler selection does not repeat a completed refresh.
+Independent 15-second heartbeats expire after 90 seconds. Hourly maintenance
+retires abandoned runs and expired authentication artifacts. Monitoring caches
+status, logs alert changes and publishes private reports every thirty minutes.
+Daily encrypted PostgreSQL backups undergo full disposable loopback restore
+before private upload, with provider-enforced seven-day expiry. External alert
+delivery and independent key custody remain open.
 
-Cohort 3 adds read-only Workday career-search POSTs and detail GETs under explicit tenant/data-center/site validation, with robots policy/pacing and first-page reconfirmation. It fails closed at its documented size/response limits. Recruitee uses the documented XML feed and preserves custom-domain output links. Per-request media negotiation separates text robots, JSON APIs and generic/XML feeds; a client-wide JSON Accept header must not leak into text requests.
+## Trust boundaries
+
+Operator routes require a private bearer token; private account routes require
+sessions, exact mutation Origin and ownership/role checks. Redis-backed limits
+and fresh HMAC proxy metadata protect deployed budgets. API/private HTML uses
+no-store; nonce script CSP is enforced and Trusted Types is report-only.
+
+Outbound destinations are restricted/validated by the reviewed connector rules,
+with fixed API hosts or explicitly permitted installations, disabled environment
+proxies/redirect following, bounded response sizes/pages/timeouts and robots
+handling. Custom hosts are supported only where explicitly reviewed; arbitrary
+URL fetching, private-network access and access-control bypass are forbidden.
+Network-level egress defense and broad distributed host budgets still require
+review before scaling. [Collector details](CONNECTOR_CONTRACT.md),
+[security/privacy](../handoff/06_SECURITY_AND_PRIVACY.md).

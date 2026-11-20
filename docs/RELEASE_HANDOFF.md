@@ -1,5 +1,7 @@
 # Rolewisp release handoff
 
+> Documentation reconciled November 21, 2026. This is an active reference; dated evidence retains its original scope. [Documentation register](README.md) · [Complete handoff](../handoff/README.md).
+
 Updated November 21, 2026. Production is authorized and running at
 https://rolewisp.vercel.app. Coverage expansion is paused at **71/78 (91.0%)**;
 this does not waive the remaining acquisition requirements. Earlier November 20

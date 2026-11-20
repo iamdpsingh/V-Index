@@ -1,77 +1,96 @@
-# V-Index
+# V-Index · Rolewisp
 
-**Rolewisp — Find your next opening.** Rolewisp is the owner-selected public product brand; V-Index remains this project's repository and folder name. See [branding](docs/BRANDING.md) for the identity direction and naming convention.
+**Rolewisp · Find your next opening.** V-Index is the engineering repository;
+Rolewisp is the public product. Owner: Dhruv Pratap Singh.
 
-A job index with source provenance, scheduled refreshes and conservative closure detection. The integrated product includes search, scheduled indexing, private candidate profiles, résumé storage, recommendations, and employer posting. Current release evidence and remaining gates are recorded in [release status](docs/RELEASE_STATUS.md). Start the review with [the release handoff](docs/RELEASE_HANDOFF.md). Production and submission are paused at the owner's request.
+A source-backed job index with scheduled native collection, conservative
+lifecycle handling, deduplication, searchable records and private candidate/
+employer workspaces. [Working demo](https://rolewisp.vercel.app).
 
-## Local backend
+## Start here
 
-Requires Python 3.12+, uv. SQLite is supported for a quick local evaluation; production uses PostgreSQL.
+- **Taking over the project:** [complete handoff package](handoff/README.md).
+- **Engineering reference:** [documentation register](docs/README.md).
+- **Actual results and gaps:** [release status](docs/RELEASE_STATUS.md),
+  [challenge acceptance](docs/ACCEPTANCE_TESTS.md), [coverage matrix](docs/COVERAGE.md).
+- **Operations:** [deployment](docs/DEPLOYMENT.md), [monitoring/recovery](docs/OPERATIONS.md).
+- **Ownership:** [copyright](COPYRIGHT.md),
+  [Dhruv Pratap Singh on LinkedIn](https://www.linkedin.com/in/dhruvpratapsingh30/).
+
+## Current scope and evidence
+
+The registry records **71/78 platforms (91.0%)** with independent live examples.
+Seven requirements remain unmet; coverage expansion is paused, not waived.
+Production runs on Vercel with public Next.js `web`, internal FastAPI `app`,
+PostgreSQL, Redis and a persistent two-slot indexing worker. Private Blob holds
+encrypted backups and operator reports. Last reviewed public index: 7,937 jobs;
+142 sources, 127 initial successes. These are dated November 21 observations,
+not a live count or proof all sources currently succeed.
+
+Search supports keyword/company/location, pagination, summaries and full details
+with original source/application links. Accounts support Candidate/Employer,
+manual private profiles and qualification categories, photos, encrypted resume
+storage, recommendations and owned employer drafts. Resume parsing was removed
+by request. SMTP/OAuth backend exists but real providers need activation/tests.
+Free/Plus is a regional catalogue; paid checkout is unavailable.
+
+The internal 20-check release matrix is a verification aid, **not an overall
+project-completion percentage or official Vaya score**. Missing coverage,
+source-data quality and external gates still prevent complete challenge acceptance.
+
+## Local evaluation
+
+Requires Python 3.12+, uv, Node 24+ and Redis. PostgreSQL is the production store;
+SQLite is a single-process local alternative. Inject private settings from the
+ignored `.env` or your service manager; never use production data for evaluation.
+The example file does not automatically configure every command.
 
 ```sh
-umask 077
 uv sync --frozen
+# Configure a private development environment, then:
 uv run alembic upgrade head
-export PYTHONPATH=backend
-export ADMIN_TOKEN="$(python3 -c 'import secrets; print(secrets.token_urlsafe(32))')"
-uv run uvicorn vindex.api:app --reload
+PYTHONPATH=backend uv run uvicorn vindex.api:app --host 127.0.0.1 --port 8000
+# Separate terminal, same backend configuration:
+PYTHONPATH=backend uv run python -m vindex.worker
+# Web terminal:
+cd apps/web
+npm ci
+npm run dev
 ```
 
-For the web UI: `cd apps/web && npm ci && npm run dev`; open http://localhost:3000. Node 24+ is required.
+Open http://localhost:3000. Enable registration only with a trusted
+PUBLIC_WEB_ORIGIN; resume/photo operations require the original private key.
+For full Compose setup, source registration, migration and rollback see
+[the development/release runbook](handoff/03_DEVELOPMENT_AND_RELEASE.md).
 
-The API specification is in `docs/openapi.json`. Public documentation routes are disabled. In a second terminal start Redis and run `PYTHONPATH=backend uv run python -m vindex.worker`. Redis is required for refreshes. Without Redis you can run the connector smoke harness but scheduled ingestion does not run.
-
-```sh
-curl -X POST http://localhost:8000/api/v1/sources -H "Authorization: Bearer $ADMIN_TOKEN" -H 'Content-Type: application/json' -d '{"url":"https://jobs.ashbyhq.com/Ashby","company":"Ashby"}'
-curl 'http://localhost:8000/api/v1/jobs?keyword=engineer&limit=10'
-```
-
-The worker finds due sources every 30 seconds. Creating a source schedules its first refresh immediately. A refresh request sets it due; it does not claim a successful fetch. `GET /api/v1/runs` records success/failure and counts.
-
-## Validation
+## Validation and contracts
 
 ```sh
 uv run pytest
 uv run ruff check backend scripts
+uv run ruff format --check backend scripts
 uv run mypy
-PYTHONPATH=backend uv run python scripts/smoke.py
-# Focus on a cohort:
-PYTHONPATH=backend uv run python scripts/smoke.py --provider SmartRecruiters --provider Personio
+cd apps/web
+npm ci
+npm run build
+npm run test:browser
 ```
 
-Smoke checks public provider APIs, feeds and boards and writes timestamped evidence. Inspect failures rather than treating all requests as successful. See [coverage](docs/COVERAGE.md), [deployment](docs/DEPLOYMENT.md), [frontend handoff](docs/ANTIGRAVITY_HANDOFF.md) and [backlog](docs/BACKLOG.md).
+Service-backed tests need disposable TEST_DATABASE_URL and TEST_REDIS_URL;
+otherwise relevant tests skip. Fixtures/tests do not count as native coverage.
+[Baseline CI](https://github.com/iamdpsingh/V-Index/actions/runs/44828958174)
+passed 1,244 backend tests, one skipped, plus frontend/full-stack checks.
 
-## Status and limits
+[Public API](docs/API.md), [private API](docs/ACCOUNTS_API.md),
+[OpenAPI](docs/openapi.json), [collector contract](docs/CONNECTOR_CONTRACT.md).
+Interactive debug/schema endpoints are disabled in the product.
 
-**71 of 78 required platforms** have point-in-time live evidence across two independent employers or boards. That includes 54 ATS platforms and 17 job-board platforms. Each provider's examples, counts and supported scope are listed in the [coverage matrix](docs/COVERAGE.md).
+No closures from failures or partial pagination. Closure needs complete
+enumeration plus two misses separated by 24 hours. No access-control bypass,
+fake metrics, committed secrets/resumes or paid upgrades. Source-specific limits
+remain explicit in the coverage/connector references. Support remains the
+unverified placeholder example@rolewisp.in. External alerts, real provider flows,
+independent key custody/deletion reconciliation, legal/domain/cost checks and
+Vaya submission remain open; consult the [risk register](handoff/08_RISKS_AND_NEXT_ACTIONS.md).
 
-The remaining 7 platforms and production acceptance are tracked in the [coverage workflow](docs/COVERAGE_WORKFLOW.md) and [acceptance criteria](docs/ACCEPTANCE_TESTS.md). The [frontend handoff](docs/ANTIGRAVITY_HANDOFF.md) retains the product design and source URL guidance.
-
-### Service-backed tests
-
-Set `TEST_DATABASE_URL` to a PostgreSQL database where the test user may create schemas, and `TEST_REDIS_URL` to a dedicated test Redis database (for example database 15). Run `uv run pytest`. Each SQL test creates, migrates and removes only its own randomly named schema; existing tables are not modified. Without these variables, service-dependent cases are explicitly skipped. CI provisions PostgreSQL and Redis. Tests do not fetch live jobs; use the separate smoke harness for actual provider evidence.
-
-Workday currently rejects boards above 400 jobs and reported totals at/above its observed 2,000 ceiling. It supports hosted myworkdayjobs.com URLs, not every Workday URL variant. These restrictions are visible failures rather than partial successful snapshots. Recruitee uses its XML feed to avoid relying on unauthenticated JSON calls that are scheduled to require tokens in February 2027. See docs/CONNECTOR_CONTRACT.md for exact scope.
-
-## Optional private job-seeker features
-
-The backend now includes signup/login, saved profiles, encrypted saved PDF/DOCX/TXT resumes and explainable job recommendations. These APIs are separate from operator ADMIN_TOKEN access. Account routes require an explicit PUBLIC_WEB_ORIGIN; registration is disabled by default and resume operations require a privately generated RESUME_ENCRYPTION_KEY. Apply migrations before startup. Read [the private API contract](docs/ACCOUNTS_API.md) for configuration, limits and remaining production gates.
-
-The owner retained the frontend with Antigravity. Its account/profile/upload/recommendation screens and browser tests are pending; [the concrete frontend handoff](docs/ANTIGRAVITY_ACCOUNTS_HANDOFF.md) lists every route, payload and required flow. Do not treat working backend APIs as a completed public account release.
-
-### Product and pricing handoff
-
-Rolewisp's current product design uses an original ribbon R identity and keeps engineering/acquisition evidence outside ordinary job-seeker flows. See [the design specification](docs/ROLEWISP_FRONTEND_DESIGN.md), [Free/Plus pricing API](docs/PLANS_AND_PRICING.md) and [scoped security review](docs/SECURITY_REVIEW_2026-11-07.md). Country-aware pricing supports 13 launch currencies with an explicit USD fallback. No payment provider is connected; Plus checkout and paid entitlements are not live. Public job details now expose normalized job/provenance fields only, while retaining original observations privately.
-
-
-For an initial reviewed source catalogue, run
-`PYTHONPATH=backend uv run python -m scripts.register_verified_sources`.
-Repeat with `--apply` to register and schedule missing sources. Keep the worker
-running to fetch actual jobs. The command can be repeated without duplicating sources.
-
-The web client uses lightweight search summaries and fetches a complete job when
-selected. Existing API clients retain the full list response by default. Use
-`view=summary` for the smaller response. PostgreSQL migrations install
-`pg_trgm` and GIN indexes for the existing substring filters.
-
-Vercel multi-service setup and environment variables: [deployment configuration](docs/VERCEL_SERVICES.md).
+Copyright © 2026 Dhruv Pratap Singh. Third-party notices remain applicable.

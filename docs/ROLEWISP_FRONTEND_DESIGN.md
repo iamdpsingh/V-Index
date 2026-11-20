@@ -1,3 +1,5 @@
+> **Historical reference, classified November 21, 2026.** Design studies and earlier copy/assignments; implemented UI and current brand rules take precedence. Current state: [release status](RELEASE_STATUS.md); current instructions: [handoff](../handoff/README.md). Original dated content below is preserved.
+
 # Rolewisp: Opening Lines
 
 Owner instruction, November 7, 2026: **Codex designs; Antigravity implements the frontend.** Backend coverage remains Codex's responsibility. This supersedes the frontend hold and earlier Codex-implementation notes. The acquisition objective and all 78 platform requirements are unchanged.

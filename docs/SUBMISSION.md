@@ -1,5 +1,7 @@
 # Vaya submission preparation
 
+> Documentation reconciled November 21, 2026. This is an active reference; dated evidence retains its original scope. [Documentation register](README.md) · [Complete handoff](../handoff/README.md).
+
 Ready-to-review draft, November 21. The live demo is running. Authenticated Vaya
 access was unavailable in this session, so founder/profile/repository/demo
 connection and final submission remain unverified; no ranking is claimed.
@@ -15,8 +17,9 @@ Repository: https://github.com/iamdpsingh/V-Index
 Public demo: https://rolewisp.vercel.app
 
 Public support address supplied: example@rolewisp.in, delivery unverified.
-Do not invent a founder email, LinkedIn profile, location, revenue or users.
-GitHub is the only established social link: https://github.com/iamdpsingh.
+Do not invent a founder email, location, revenue or users.
+Owner-supplied LinkedIn: https://www.linkedin.com/in/dhruvpratapsingh30/.
+GitHub: https://github.com/iamdpsingh.
 
 ## Pitch draft
 

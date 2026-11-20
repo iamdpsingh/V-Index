@@ -1,3 +1,5 @@
+> **Historical reference, classified November 21, 2026.** Earlier hosting/credit plan; actual Vercel services/worker configuration supersedes it. Current state: [release status](RELEASE_STATUS.md); current instructions: [handoff](../handoff/README.md). Original dated content below is preserved.
+
 # One repository, v0 release target, zero-spend budget
 
 **Current owner update, November 20:** production/deployment and external submission are paused. Coverage expansion is paused without waiving the original 78-platform requirement. The integrated product is maintained in canonical main. [RELEASE_HANDOFF.md](RELEASE_HANDOFF.md) is the current implementation and reviewer entry point; earlier ownership and unbuilt-feature notes below are historical.

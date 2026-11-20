@@ -1,3 +1,5 @@
+> **Historical reference, classified November 21, 2026.** Historical coverage investigation log; latest priorities and registry supersede old target/count notes. Current state: [release status](RELEASE_STATUS.md); current instructions: [handoff](../handoff/README.md). Original dated content below is preserved.
+
 # Coverage-first workflow
 
 **Owner scope update (November 14):** The extraction target is the exact 78 challenge platforms. A platform counts toward the owner’s target once usable live job records are extracted from that platform, including partial extracts. Preserve the stricter live-verified status for complete runs. Employer career pages are optional evidence when they help identify the source or establish the roster. Failed and partial runs cannot close jobs. Push once all 78 have live extraction evidence.

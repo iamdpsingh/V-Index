@@ -1,11 +1,15 @@
 # Internal release checklist
 
-November 21, 2026. **15 of 20 checks passed: 75%.** This is an explicit,
-unweighted delivery checklist for this release pass, not a measurement of code
-written, an official Vaya score, or 75% acquisition readiness. A single open
-critical gate can still prevent release. Coverage is measured separately:
-**71/78 independent live-verified platforms, 91.0%**. Historical connector
-verification does not mean every source currently fetches successfully.
+November 21, 2026. **Fifteen recorded passes and five grouped open areas** in
+an internally authored twenty-check review. These checks were chosen for the
+release pass; Vaya did not supply this denominator. They have unequal scope,
+effort and risk. Row 18 alone contains multiple separate tasks. **Do not use
+this as an overall project-completion percentage or an official challenge score.**
+A critical open gate can prevent acceptance regardless of how many others pass.
+
+Coverage is separate: 71/78 historically live-verified platforms, 91.0%.
+Historical connector verification does not guarantee current source health.
+See [the original challenge criteria](ACCEPTANCE_TESTS.md) and [explanation](../handoff/07_ACCEPTANCE_AND_EVIDENCE.md).
 
 | # | Check | Status and evidence |
 | --- | --- | --- |

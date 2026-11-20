@@ -3,7 +3,8 @@
 Updated November 21, 2026. [Rolewisp](https://rolewisp.vercel.app) is deployed
 with a persistent indexing worker. Coverage expansion remains paused at
 **71/78 platforms (91.0%)**. The [internal release checklist](RELEASE_CHECKLIST.md)
-passes **15/20 checks (75%)**, explicitly separate from coverage and Vaya scoring.
+records fifteen passes and five grouped open areas; this is not an overall
+completion percentage or Vaya score.
 The challenge criteria are not all complete.
 
 ## Measured production results
@@ -39,9 +40,9 @@ drafts, verification/recovery and OAuth backend are integrated. Live provider
 activation is a separate gate. Resume parsing was removed by owner request;
 paid checkout remains intentionally deferred.
 
-The full local backend run passed **1,237 tests**, one skipped, with PostgreSQL
-and Redis enabled. Seven additional failure-classification cases passed after
-that run. Browser suite: **192 passed, 10 skipped**. Frontend build, Ruff and
+Baseline CI passed **1,244 backend tests**, one skipped, with PostgreSQL
+and Redis enabled. The preceding local full run passed 1,237 followed by seven
+classification cases; the original evidence preserves those separate scopes. Browser suite: **192 passed, 10 skipped**. Frontend build, Ruff and
 mypy passed. Production Python audit checked **44 packages** with zero known
 vulnerabilities; npm audit also returned zero. Offline heuristic secret/history
 review found no confirmed credential in the reviewed scope, which is not a

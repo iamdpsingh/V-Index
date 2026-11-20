@@ -1,5 +1,7 @@
 # Runtime operations and recovery
 
+> Documentation reconciled November 21, 2026. This is an active reference; dated evidence retains its original scope. [Documentation register](README.md) · [Complete handoff](../handoff/README.md).
+
 November 21: the Vercel worker is deployed. PostgreSQL/Redis are the production
 state/lease services; local SQLite is separate. Coverage expansion stays paused.
 The cloud worker fills either of its two slots as soon as a source finishes.

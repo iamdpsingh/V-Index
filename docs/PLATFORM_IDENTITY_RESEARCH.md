@@ -1,3 +1,5 @@
+> **Historical reference, classified November 21, 2026.** Historical platform identity research, not live connector evidence. Current state: [release status](RELEASE_STATUS.md); current instructions: [handoff](../handoff/README.md). Original dated content below is preserved.
+
 # Remaining platform identity research — November 6, 2026
 
 These notes identify products and potential discovery routes. They are not connector implementations, successful indexing runs or additions to live coverage. Keep the required inventory names unchanged.

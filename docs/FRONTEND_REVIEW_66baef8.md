@@ -1,3 +1,5 @@
+> **Historical reference, classified November 21, 2026.** Dated review of a preserved frontend revision, not current release acceptance. Current state: [release status](RELEASE_STATUS.md); current instructions: [handoff](../handoff/README.md). Original dated content below is preserved.
+
 # Frontend implementation review — 66baef8
 
 Reviewed November 7 without modifying Antigravity's worktree. Exported the exact frontend commit into an ignored local build snapshot. Independently ran npm ci, npm run build and npm run typecheck: all passed. The implementation contains the Opening Lines design, ribbon R, pricing, prior signup/login/profile/resume/recommendation work and a logout handler.

@@ -1,3 +1,5 @@
+> **Historical reference, classified November 21, 2026.** Unpublished historical challenge-update draft; dated counts must not be posted as current. Current state: [release status](RELEASE_STATUS.md); current instructions: [handoff](../handoff/README.md). Original dated content below is preserved.
+
 # Ready-to-post challenge update
 
 Draft only. Not published or sent to the challenge host.

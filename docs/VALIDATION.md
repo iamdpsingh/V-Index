@@ -1,3 +1,5 @@
+> **Historical reference, classified November 21, 2026.** Append-only historical validation ledger; each result belongs to its stated revision/environment. Current state: [release status](RELEASE_STATUS.md); current instructions: [handoff](../handoff/README.md). Original dated content below is preserved.
+
 # Validation record
 
 ## Initial slice checks (historical)

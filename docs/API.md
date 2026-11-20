@@ -1,5 +1,7 @@
 # Developer API reference
 
+> Documentation reconciled November 21, 2026. This is an active reference; dated evidence retains its original scope. [Documentation register](README.md) · [Complete handoff](../handoff/README.md).
+
 The versioned contract is [openapi.json](openapi.json). The local browser uses
 same-origin `/api/v1` through the web proxy. Direct local API origin is
 `http://127.0.0.1:8000`. Production base URL is `https://rolewisp.vercel.app`; use the same `/api/v1` paths. Public Swagger,
@@ -8,7 +10,7 @@ authentication or authorization.
 
 | Endpoint | Access | Behavior |
 | --- | --- | --- |
-| `GET /health` | Public | Database/API liveness only; not worker health |
+| `GET /health` | API liveness; internal on Vercel | Database/API only; not exposed by the public web gateway or proof of worker health |
 | `GET /api/v1/jobs` | Public, rate limited when enabled | Paginated open-job search |
 | `GET /api/v1/jobs/{id}` | Public, same job-rate limiter | Full job and source provenance |
 | `GET /api/v1/providers` | Public | Exact inventory, point-in-time evidence and limitations |

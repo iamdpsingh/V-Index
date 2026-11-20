@@ -1,17 +1,47 @@
 # Product requirements
 
-Source: https://vayahq.com/challenge/build-a-job-board-indexer-for-10000, fetched successfully on 2026-11-05. The official page embeds entryDeadline="November 30, 2026" and endsAt="2026-11-30T23:59:00.000Z". This converts to 2026-12-01 05:29 IST. Use November 30 as the internal delivery date and reconfirm with the organizer before submission. The visible page says 26 days left. See evidence/challenge-deadline.json.
+Current scope, November 21, 2026. Original challenge requirements remain intact;
+[project brief](../handoff/01_PROJECT_BRIEF.md) and [acceptance status](ACCEPTANCE_TESTS.md)
+separate delivered behavior from remaining gates.
 
-Required outcome: a continuously refreshed search index spanning exactly 58 ATS and 20 job-board platforms, reusable across multiple employers/boards per platform. User provides a supported career URL, sees genuine jobs, provenance and application links, and can search by keyword/company/location with pagination. Preserve optional source salary, employment type, remote status and publication date without inventing missing values.
+## Original challenge
 
-Source lifecycle must distinguish complete snapshots, partial results, access restrictions and transport failures. Closure requires documented grace/reconfirmation. Same opening across sources retains provenance; distinct roles remain separate. Reviewer gets repository, working demo, live coverage checklist, sanitized fixtures, run timestamps/counts/errors, deployment/runbooks/costs and dependency inventory.
+- Exact 58 ATS and 20 job-board platforms, reusable across independent employers/
+  boards, with real complete native indexing evidence. All 78 names stay distinct.
+- Consistent title/company/description/location/source/application fields, optional
+  source salary/employment/remote/publication details and tracking timestamps.
+- Scheduled new/changed/removed-job handling, explicit failures, safe conservative
+  closure and retained last complete observations.
+- Dedupe with preserved provenance/useful data while keeping distinct roles separate.
+- Working searchable UI and documented API with pagination and keyword/company/
+  location filters; source/deployment/operations/cost/dependency handoff.
+- Founder/startup profile, connected source/demo and coverage evidence submitted
+  for technical review. Acquisition is competitive, not guaranteed.
 
-No fake demo data or counts, no superficial connector stubs, no placeholder claims. The acquisition offer and conditions require verification with the organizer; this repository does not assert guaranteed acceptance.
+The official page was captured November 5 with deadline November 30, 2026
+23:59 UTC (December 1, 05:29 IST); see [captured deadline](../evidence/challenge-deadline.json).
+This is historical capture, not a newly verified deadline or submission status;
+reconfirm actual organizer terms before relying on it. Airflow was mentioned in
+the invitation as experience, not established as required infrastructure.
 
-## Initial pitch clarification
+## Owner-approved product additions
 
-The founder reports that the original pitch described a competitive selection: Vaya will acquire the company that executes the job-board indexer challenge best for $10,000, with no users or revenue required. Meeting the technical checklist should not be represented as guaranteeing acquisition. Prioritize reliable complete coverage, current data, reviewer evidence and a maintainable handoff. Python and Airflow were mentioned as relevant experience in the invitation; this does not establish Airflow as a required implementation technology. The current Redis-backed scheduling architecture remains the baseline pending demonstrated need for a different orchestrator.
+Candidate/Employer onboarding, authentication/logout, email verification/recovery,
+configurable Google/LinkedIn/GitHub OAuth, manual private profiles with qualification
+categories, profile photos, encrypted saved resumes, transparent recommendations
+and owned employer posting workflows. Resume parsing was subsequently removed
+by owner request. SMTP/OAuth live activation requires real providers and tests.
 
-## Owner scope expansion — 2026-11-06
+Free/Plus regional catalogue remains display-only for paid plans; checkout,
+subscriptions and paid entitlements are deferred. Privacy/terms/cookie/refund
+pages, default-off optional analytics, accessibility and restrained Rolewisp
+branding are required. Consumer flows must not expose repo/testing/acquisition
+controls or unsupported metrics. Copyright credits Dhruv Pratap Singh.
 
-The owner requests accounts and saved profiles, private saved resumes, and job recommendations derived from professional resume/profile details. The internal completion target is November 7, 2026 IST. The original indexer challenge and 78-platform requirement remain in force. This supersedes the earlier appearance-only restriction for these explicitly requested features; it does not transfer frontend file ownership. Small substantive commits are preferred; commit-count inflation is prohibited. See DELIVERY_PLAN.md.
+## Current execution constraint
+
+Coverage expansion is paused at 71/78, without waiving the original requirement.
+Production is running on Vercel; the current priority is truthful operation,
+remaining release gates and a reproducible handoff. No spend, access-control
+bypass, fabricated evidence or commit inflation is authorized. Historical
+milestone dates and frontend assignments do not override this scope.

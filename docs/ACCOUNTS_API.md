@@ -1,6 +1,6 @@
 # Private accounts, profiles, resumes and recommendations
 
-Accounts and the integrated candidate/employer interface are implemented and checked locally. This feature expansion does not change the 78-platform indexing requirement. Production activation is paused by the owner; see RELEASE_HANDOFF.md for current evidence and hosted release gates.
+Current reference, November 21, 2026. Accounts and the integrated Candidate/Employer interface are deployed. Hosted private ownership, cookies, proxy rates and caching were checked; live SMTP/OAuth activation remains open. The 78-platform objective is unchanged. See [release handoff](RELEASE_HANDOFF.md) and [access transfer](../handoff/04_CONFIGURATION_AND_ACCESS.md).
 
 ## Configuration
 
@@ -50,13 +50,20 @@ The method is literal, explainable keyword matching; it does not validate qualif
 
 Ranking considers at most the newest 1,000 SQL candidate jobs, then applies token checks and deterministic rank/ID sorting. total_candidates, candidates_ranked, candidate_limit and truncated disclose that scope. They are not a global match-count promise. Preserve these facts in the UI when truncated. Pagination applies to the ranked candidate set.
 
-## Verified backend milestone
+## Historical backend milestone (November 6)
 
 155 automated tests passed locally with PostgreSQL and Redis enabled. Executable revision 2d54f7f passed backend, frontend build and the real Docker/private web-proxy flow in GitHub Actions: https://github.com/iamdpsingh/V-Index/actions/runs/42151836186. The test account and document were ephemeral synthetic fixtures; no personal data or credentials are in the evidence artifact.
 
 ## Remaining release work
 
-The current integrated interface, verification/recovery logic, signed proxy IP metadata, per-route rate controls and encrypted backup/restore drill have local evidence in RELEASE_HANDOFF.md. Remaining hosted gates include HTTPS and matching proxy secrets, real SMTP/OAuth round trips, support inbox verification, offsite backup/key custody, independent security review and production load validation. Forwarded IP headers alone are ignored; direct-peer buckets apply when trusted proxy metadata is unavailable. Deployment and external activation remain paused.
+The integrated interface and actual production ownership/rate/proxy/cookie/
+no-store checks have November 21 evidence in [release status](RELEASE_STATUS.md).
+A production backup restored all tables before private upload. Remaining gates
+are real SMTP/OAuth round trips, support verification, independent recovery-key
+custody/deletion reconciliation, environment isolation, independent security and
+load review. Forwarded IP headers alone are ignored; direct-peer buckets apply
+when trusted proxy metadata is unavailable. Production is deployed; live provider
+activation remains open.
 
 
 Profile reads and writes support up to 30 entries each for `education`, `experience`, and `projects`. Education entries can use an object with a `qualification` category and plain-text `details`. Existing education strings are accepted and displayed without a category until assigned. The `links` array accepts up to 12 objects with an editable `label` and an HTTPS `url`. Rolewisp does not fetch submitted links. Omitted new fields preserve saved values for older clients. Send an empty array to clear a field.

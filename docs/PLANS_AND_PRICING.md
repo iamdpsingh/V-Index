@@ -1,5 +1,7 @@
 # Rolewisp Free and Plus
 
+> Documentation reconciled November 21, 2026. This is an active reference; dated evidence retains its original scope. [Documentation register](README.md) · [Complete handoff](../handoff/README.md).
+
 Owner update, November 7: add a Free tier and one paid tier, with country-aware currency presentation. The owner has no payment-provider account yet. This is a real server-owned pricing catalogue and frontend handoff; paid checkout and subscriptions are not activated. No payment credentials, charges, revenue or paying users are implied.
 
 ## Product presentation

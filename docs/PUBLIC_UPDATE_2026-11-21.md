@@ -3,8 +3,9 @@
 Rolewisp is live: https://rolewisp.vercel.app
 
 Coverage stands at **71 of 78 required platforms, 91.0%**, backed by independent
-live-run evidence. Our separate internal release checklist is **75% complete
-(15/20 checks)**; this is not an official challenge score.
+live-run evidence. Our internal review records fifteen passed checks and open
+operational/release gates. It is not an overall project-completion percentage
+or an official challenge score.
 
 This week we shipped a persistent production indexing worker, searchable jobs
 with filters and pagination, source/application links, private Candidate and
