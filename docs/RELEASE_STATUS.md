@@ -176,3 +176,14 @@ The parser now preserves that explicit field and its original HTML. One freshly
 fetched detail verified the recovery of “Permanent”. This is not a full board
 refresh; the earlier committed 2,844-job audit predates that recovery.
 [Native field check](../evidence/20261120-talenetic-native-field-recheck.json).
+
+
+A later November 20 investigation checked ProContract's unfiltered native
+search as an alternative to its stale sitemap. The current robots policy
+rejects `/job-search-results`; no request was sent to that route. Another
+possible installation, Oilfinity, is listed by recruitment integration provider
+[idibu](https://www.idibu.com/network/oilfinity/), but both reviewed HTTPS origins
+returned HTTP 302 on robots.txt and provided no validated current board.
+Neither investigation grants coverage or an alternate complete feed.
+[Search policy evidence](../evidence/20261120-talenetic-active-search-policy.json),
+[Oilfinity checks](../evidence/20261120-talenetic-oilfinity-research.json).

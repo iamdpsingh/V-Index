@@ -3436,7 +3436,8 @@
       "Explicit expired pages require a matching posting ID and source expiry message; HTTP errors and malformed pages fail the snapshot and never close jobs",
       "Worker checkpoints each detail independently, with a six-hour snapshot window and bounded pacing/concurrency; no partial reconciliation",
       "The source often supplies Partner Jobs as company; this publisher-provided label is preserved and flagged, rather than guessing an employer from prose",
-      "Snapshot bound 50000 candidates, maximum 10000 URLs per sitemap partition; anonymous public pages only"
+      "Snapshot bound 50000 candidates, maximum 10000 URLs per sitemap partition; anonymous public pages only",
+      "Pro Contract Jobs unfiltered active-search route /job-search-results is disallowed by current robots policy, so it was not requested as an alternative to stale sitemap discovery"
     ]
   },
   {

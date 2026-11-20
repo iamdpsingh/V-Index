@@ -1,0 +1,12 @@
+{
+  "provider": "Talenetic",
+  "route": "https://www.procontractjobs.com/job-search-results",
+  "recorded_at": "2026-11-20T16:05:56.455408+00:00",
+  "robots_sha256": "1d4f106931976e17c477f119ce3ec3466788589deaa02b036cea39c6b682e9bd",
+  "complete": false,
+  "job_search_requests_sent": 0,
+  "reason": "Testing whether the native unfiltered search could replace stale sitemap discovery",
+  "allowed": false,
+  "status": "policy_blocked",
+  "note": "The active-search route was not requested; no route encoding, identity changes or alternative request methods were used"
+}

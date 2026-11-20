@@ -1,0 +1,26 @@
+[
+  {
+    "host": "oilfinity.com",
+    "at": "2026-11-20T16:05:15.842651+00:00",
+    "complete": false,
+    "status": "blocked",
+    "error_type": "UpstreamStatusError",
+    "error": "Upstream HTTP 302",
+    "discovery_reference": "https://www.idibu.com/network/oilfinity/",
+    "failed_request_path": "/robots.txt",
+    "homepage_requested": false,
+    "note": "Redirects disabled; no platform identity or job roster was verified"
+  },
+  {
+    "host": "www.oilfinity.com",
+    "at": "2026-11-20T16:05:18.064024+00:00",
+    "complete": false,
+    "status": "blocked",
+    "error_type": "UpstreamStatusError",
+    "error": "Upstream HTTP 302",
+    "discovery_reference": "https://www.idibu.com/network/oilfinity/",
+    "failed_request_path": "/robots.txt",
+    "homepage_requested": false,
+    "note": "Redirects disabled; no platform identity or job roster was verified"
+  }
+]
