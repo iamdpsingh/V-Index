@@ -29,7 +29,7 @@ export function proxy(request: NextRequest) {
     `script-src 'nonce-${nonce}' 'strict-dynamic' 'report-sample'${dev ? " 'unsafe-eval'" : ''}`,
     // React components use style attributes; this does not permit inline scripts.
     "style-src 'self' 'unsafe-inline'",
-    "img-src 'self' data: blob:",
+    "img-src 'self' data: blob: https://vayahq.com/api/beacon/cda76eb26359277eec5b1dff04e1bc96",
     "font-src 'self'",
     `connect-src 'self'${dev ? ' ws: wss:' : ''}`,
     "object-src 'none'", "base-uri 'none'", "frame-ancestors 'none'",
