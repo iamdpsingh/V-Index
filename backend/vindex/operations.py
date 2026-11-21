@@ -11,6 +11,7 @@ from sqlalchemy import func, select
 
 from vindex.accounts.security import redis_client
 from vindex.db import Run, Source, now
+from vindex.failure_classification import failure_category
 from vindex.ingest import aware
 
 log = logging.getLogger("vindex.operations")
@@ -82,6 +83,7 @@ def source_health(session, checked=None) -> dict:
                 "last_attempt_status": run.status if run else "not_started",
                 "last_attempt_count": run.count if run else None,
                 "failure_kind": run.error.split(":", 1)[0][:80] if run and run.error else None,
+                "failure_category": failure_category(run.error) if run and run.error else None,
                 "consecutive_failures": source.failures,
                 "stale": stale,
                 "abandoned_run": abandoned,

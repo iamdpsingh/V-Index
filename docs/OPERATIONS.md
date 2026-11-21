@@ -204,3 +204,10 @@ A fresh full LPJC native probe collected nine jobs while public provenance showe
 its production source was stale. A one-time startup recovery may reschedule only
 that reviewed board's prior JobBoardFire ValueError, not policy/rate failures.
 Actual production recovery must be recorded separately.
+
+Monitoring source-issue entries include source ID/provider, classified cause,
+last success and next check (at most 200, with an explicit truncation flag).
+They intentionally exclude URLs/raw errors/private records. This makes a failed
+external check actionable without exposing ADMIN_TOKEN or expanding the monitor
+token into operator authorization. A successful local native probe alone does
+not prove a source succeeds from the hosted worker's network.

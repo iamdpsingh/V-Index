@@ -60,3 +60,8 @@ rate buckets. The Vercel-side proxy can sign client IP/method/path/time with the
 server-only PROXY_SHARED_SECRET; the backend accepts only a fresh valid HMAC.
 Do not enable unrestricted Uvicorn forwarded-header trust. Hosted proxy verification is recorded in the November 21 production review;
 repeat it after changes to the gateway, shared secret or hosting proxy.
+
+The monitoring response additionally exposes a bounded (maximum 200) list of
+issue source IDs/providers, safe diagnostic categories, last success and next
+check. It omits source URLs, raw errors and all private-account data. Truncation
+is explicit. The dedicated token still cannot read/write operator or account APIs.

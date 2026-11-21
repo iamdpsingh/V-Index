@@ -111,6 +111,25 @@ def monitoring_status():
     with Session() as session:
         report = snapshot(session)
     backup = report.get("backup", {})
+    issues = [
+        {
+            key: source.get(key)
+            for key in (
+                "source_id",
+                "provider",
+                "failure_kind",
+                "failure_category",
+                "initial_index_complete",
+                "stale",
+                "last_success_at",
+                "next_check_at",
+            )
+        }
+        for source in report["sources"]
+        if source.get("stale")
+        or source.get("consecutive_failures")
+        or not source.get("initial_index_complete")
+    ]
     return {
         "checked_at": report["checked_at"],
         "counts": report["counts"],
@@ -118,6 +137,8 @@ def monitoring_status():
         "redis_available": report["redis_available"],
         "backup": {"status": backup.get("status"), "at": backup.get("at")},
         "alerts": report["alerts"],
+        "source_issues": issues[:200],
+        "issues_truncated": len(issues) > 200,
     }
 
 

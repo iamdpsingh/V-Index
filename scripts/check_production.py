@@ -77,6 +77,8 @@ def run() -> dict:
         "indexed_jobs": jobs["total"],
         "live_workers": report["live_workers"],
         "counts": report["counts"],
+        "source_issues": report.get("source_issues", []),
+        "issues_truncated": report.get("issues_truncated", False),
         "backup": report["backup"],
         "critical_alerts": alerts,
         "controlled_drill": drill,
