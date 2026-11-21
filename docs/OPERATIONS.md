@@ -201,9 +201,10 @@ recovered board unchecked for most of a day. Robots denial and HTTP 429 retain
 policy/cooldown/Retry-After handling; no complete-enumeration guard is waived.
 
 A fresh full LPJC native probe collected nine jobs while public provenance showed
-its production source was stale. A one-time startup recovery may reschedule only
-that reviewed board's prior JobBoardFire ValueError, not policy/rate failures.
-Actual production recovery must be recorded separately.
+its production source was stale. The conditional operator retry found no eligible parser failure and scheduled
+zero sources; the hosted failure was an upstream access denial. That temporary
+retry helper was removed after diagnosis. No policy/rate-limit failure was
+rescheduled or presented as production recovery.
 
 Monitoring source-issue entries include source ID/provider, classified cause,
 last success and next check (at most 200, with an explicit truncation flag).

@@ -121,3 +121,14 @@ from being mistaken for HTTP statuses. Provider/inbox/submission holds, external
 notification delivery, key/deletion/legal/domain and measured-cost gates remain
 explicitly open. No full 20/20 or acquisition acceptance is claimed.
 [Current evidence](../evidence/20261121-current-release-gate-outcomes.json).
+
+
+The temporary LPJC retry helper was retired after diagnostics confirmed the
+hosted problem was access denial, not an eligible parser failure. It scheduled
+zero sources. Bounded snapshot-churn retries remain implemented, while upstream
+access denials retain their safeguards and continue producing real alerts.
+
+Final cleanup validation: **1,269 passed, one skipped**, with PostgreSQL/Redis.
+Six prototype-specific cases were removed together with the unused LPJC retry
+helper; the snapshot safety/retry tests remain. Earlier test totals belong to
+their recorded revisions and are not platform-coverage measurements.

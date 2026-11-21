@@ -11,8 +11,6 @@ from vindex.db import Observation, Run, Source
 from vindex.ingest import aware, ingest
 from vindex.schemas import Enumeration
 
-from scripts.start_production_worker import requeue_recovered_lpjc
-
 
 @pytest.mark.parametrize("churn,minutes", [(True, 2), (False, 30)])
 def test_snapshot_churn_retries_sooner_without_publishing_or_closing(
@@ -43,23 +41,3 @@ def test_snapshot_churn_retries_sooner_without_publishing_or_closing(
             < 1
         )
         assert observation.status == "open" and observation.missing_count == 0
-
-
-@pytest.mark.parametrize(
-    "error,expected",
-    [
-        ("ValueError: Job Board Fire search and sitemap do not agree", True),
-        ("HTTPStatusError: 429 Too Many Requests", False),
-        ("ValueError: Career page robots policy disallows this request", False),
-    ],
-)
-def test_lpjc_recovery_never_requeues_policy_or_rate_limit_failures(
-    database, source, error, expected
-):
-    with database() as session:
-        stored = session.get(Source, source.id)
-        stored.provider = "jobboardfire"
-        stored.slug = "lpjc.jobboardfire.com"
-        session.add(Run(source_id=source.id, status="failed", error=error))
-        session.commit()
-        assert requeue_recovered_lpjc(session) == ([source.id] if expected else [])
