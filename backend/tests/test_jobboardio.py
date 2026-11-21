@@ -5,6 +5,7 @@ import json
 
 import httpx
 import pytest
+from vindex.connectors.http import SnapshotChangedError
 from vindex.connectors.jobboardio import MAP, JobBoardIOConnector
 from vindex.connectors.registry import create_connector, detect
 
@@ -210,6 +211,17 @@ def test_reject_incomplete_or_unsafe_data(change):
 
 def test_source_expiry_conflict_preserved():
     assert "source_expiry_elapsed_while_listed" in run("expired").jobs[0].quality_flags
+
+
+def test_expired_detail_still_in_sitemap_is_retryable_not_a_complete_snapshot():
+    connector = JobBoardIOConnector("jobboardio", HOST, "Board", httpx.AsyncClient())
+    body = (
+        '<html><div class="expiredJobDetail"><div class="expiration-notice">'
+        "This listing expired on Nov 21. Applications are no longer accepted."
+        "</div></div></html>"
+    )
+    with pytest.raises(SnapshotChangedError, match="sitemap still advertises an expired listing"):
+        connector.parse(("1", url(1), body.encode()))
 
 
 def test_masked_source_contact_never_persisted():

@@ -1,0 +1,111 @@
+{
+  "recorded_at": "2026-11-21T16:45:38.391071+00:00",
+  "scope": "Actual scheduled production monitor plus fresh local connector diagnostics. Local checks do not establish hosted recovery.",
+  "production_run": "https://github.com/iamdpsingh/V-Index/actions/runs/44926300920",
+  "indexed_jobs": 9228,
+  "live_workers": 1,
+  "backup": {
+    "at": "2026-11-20T22:19:01.432649+00:00",
+    "status": "success"
+  },
+  "counts": {
+    "abandoned_runs": 0,
+    "failing": 17,
+    "initial_index_complete": 130,
+    "initial_index_pending": 12,
+    "sources": 142,
+    "stale": 5
+  },
+  "critical_alerts": [
+    "stale_sources_or_abandoned_runs"
+  ],
+  "stale_source_issues": [
+    {
+      "failure_category": "access_denied",
+      "failure_kind": "UpstreamStatusError",
+      "initial_index_complete": true,
+      "last_success_at": "2026-11-20T21:22:42.537627+00:00",
+      "next_check_at": "2026-11-21T18:56:25.505227+00:00",
+      "provider": "jobboardfire",
+      "source_id": 15,
+      "stale": true
+    },
+    {
+      "failure_category": "access_denied",
+      "failure_kind": "UpstreamStatusError",
+      "initial_index_complete": true,
+      "last_success_at": "2026-11-20T21:28:55.564182+00:00",
+      "next_check_at": "2026-11-21T19:00:27.525861+00:00",
+      "provider": "jobkit",
+      "source_id": 42,
+      "stale": true
+    },
+    {
+      "failure_category": "access_denied",
+      "failure_kind": "UpstreamStatusError",
+      "initial_index_complete": true,
+      "last_success_at": "2026-11-20T21:29:02.237860+00:00",
+      "next_check_at": "2026-11-21T19:00:58.650809+00:00",
+      "provider": "jobkit",
+      "source_id": 43,
+      "stale": true
+    },
+    {
+      "failure_category": "access_denied",
+      "failure_kind": "UpstreamStatusError",
+      "initial_index_complete": true,
+      "last_success_at": "2026-11-20T21:29:05.668826+00:00",
+      "next_check_at": "2026-11-21T19:00:59.055591+00:00",
+      "provider": "jobboardio",
+      "source_id": 44,
+      "stale": true
+    },
+    {
+      "failure_category": "access_denied",
+      "failure_kind": "UpstreamStatusError",
+      "initial_index_complete": true,
+      "last_success_at": "2026-11-20T21:29:37.472132+00:00",
+      "next_check_at": "2026-11-21T19:01:29.913933+00:00",
+      "provider": "jobboardio",
+      "source_id": 45,
+      "stale": true
+    }
+  ],
+  "local_diagnostics": [
+    {
+      "provider": "jobkit",
+      "host": "jobs.rubyonrails.org",
+      "complete": true,
+      "count": 12
+    },
+    {
+      "provider": "jobkit",
+      "host": "welpora.jobkit.io",
+      "complete": true,
+      "count": 10
+    },
+    {
+      "provider": "jobboardio",
+      "host": "www.nifajobs.com",
+      "complete": true,
+      "count": 1
+    },
+    {
+      "provider": "jobboardio",
+      "host": "www.cancercareers.org",
+      "complete": false,
+      "cause": "Sitemap includes job 604572155 whose native detail explicitly says applications are no longer accepted. Reclassified as retryable snapshot inconsistency; no ingestion or closure."
+    },
+    {
+      "provider": "jobboardfire",
+      "host": "lpjc.jobboardfire.com",
+      "complete": false,
+      "cause": "Public search and sitemap disagree; SnapshotChangedError retained."
+    }
+  ],
+  "changes": [
+    "Keep freshness failure exit status, identify affected sources in the Actions error annotation.",
+    "Treat explicit expired JobBoard.io details still advertised in sitemap as retryable inconsistent snapshots."
+  ],
+  "unresolved": "Hosted upstream access-denied requests require a publisher-approved route or access permission; no access bypass, retry override, synthetic success or freshness-threshold change."
+}

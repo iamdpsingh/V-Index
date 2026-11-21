@@ -2,6 +2,7 @@
 
 import json
 import os
+import re
 import ssl
 import urllib.error
 import urllib.request
@@ -9,6 +10,37 @@ from datetime import UTC, datetime, timedelta
 
 ORIGIN = "https://rolewisp.vercel.app"
 MAX_BODY = 200_000
+
+
+def alert_message(alert: str, report: dict) -> str:
+    if alert == "stale_sources_or_abandoned_runs":
+        counts = report["counts"]
+        sources = []
+        for issue in report.get("source_issues", []):
+            provider, source_id = issue.get("provider"), issue.get("source_id")
+            if (
+                issue.get("stale")
+                and isinstance(provider, str)
+                and re.fullmatch(r"[a-z0-9_]{1,40}", provider)
+                and type(source_id) is int
+                and source_id > 0
+            ):
+                sources.append(f"{provider} #{source_id}")
+        detail = ", ".join(sources[:200]) or "inspect source health diagnostics"
+        return (
+            f"{counts.get('stale', 0)} stale sources; "
+            f"{counts.get('abandoned_runs', 0)} abandoned runs. Affected: {detail}. "
+            "Inspect the recorded failure category and next retry in the JSON report. "
+            "An upstream denial requires publisher permission or an approved feed; "
+            "do not bypass access controls or treat a failed fetch as a closure."
+        )
+    return {
+        "worker_or_redis_unavailable": "Production worker heartbeat or Redis is unavailable.",
+        "stale_monitoring_response": "The production monitoring response is out of date.",
+        "backup_not_successful": "The last production backup was not successful.",
+        "backup_overdue": "No successful production backup within the 36-hour budget.",
+        "controlled_alert_drill_not_a_real_outage": "Controlled alert drill; not a real outage.",
+    }.get(alert, "Production health check failed; inspect the JSON report.")
 
 
 class NoRedirect(urllib.request.HTTPRedirectHandler):
@@ -99,9 +131,8 @@ def main() -> None:
             "::warning title=Rolewisp source health::Some sources are failing; inspect operator diagnostics"
         )
     if report["critical_alerts"]:
-        print(
-            "::error title=Rolewisp production monitor::Critical condition or explicitly labelled alert drill"
-        )
+        for alert in report["critical_alerts"]:
+            print("::error title=Rolewisp production monitor::" + alert_message(alert, report))
         raise SystemExit(1)
 
 

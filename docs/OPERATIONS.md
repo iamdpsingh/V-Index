@@ -212,3 +212,24 @@ They intentionally exclude URLs/raw errors/private records. This makes a failed
 external check actionable without exposing ADMIN_TOKEN or expanding the monitor
 token into operator authorization. A successful local native probe alone does
 not prove a source succeeds from the hosted worker's network.
+
+## November 21 scheduled freshness incident
+
+The scheduled [16:45 UTC probe](https://github.com/iamdpsingh/V-Index/actions/runs/44926300920)
+confirmed public search, one live worker and a successful backup, but failed on
+five stale sources: JobBoardFire 15, JobKit 42/43 and JobBoard.io 44/45. Their
+hosted requests were access-denied. Keep that alert open until actual hosted
+refreshes succeed; a local run or workflow re-run cannot establish recovery.
+Request publisher approval/allowlisting or an approved public feed where needed;
+do not change identity, rotate networks or bypass the restriction.
+
+Fresh local checks completed both JobKit boards and NIFA. LPJC still had a native
+search/sitemap disagreement. CancerCareers' sitemap still advertised an expired
+detail whose native page explicitly said applications were no longer accepted.
+That detail is now a retryable `SnapshotChangedError`, preserving the prior
+snapshot instead of ingesting incomplete data or inferring closures. Existing
+bounded transient retry timing applies; HTTP access/rate cooldowns are unchanged.
+
+Actions critical annotations now name the stale source IDs/providers and counts
+instead of a generic critical-condition message. The failure exit status and
+freshness budget are unchanged. [Incident evidence](../evidence/20261121-production-freshness-incident.json).

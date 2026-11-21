@@ -13,7 +13,7 @@ import httpx
 from bs4 import BeautifulSoup, Tag
 from defusedxml import ElementTree
 from defusedxml.common import DefusedXmlException
-from vindex.connectors.http import PublicHTTP
+from vindex.connectors.http import PublicHTTP, SnapshotChangedError
 from vindex.connectors.public import text
 from vindex.connectors.robots import RobotsPolicy
 from vindex.schemas import Enumeration, JobInput
@@ -167,6 +167,14 @@ class JobBoardIOConnector:
     def parse(self, payload: Any) -> list[JobInput]:
         identifier, url, body = payload
         soup = document(body)
+        # Publishers can expire a detail before removing it from their sitemap.
+        # This is an inconsistent snapshot, never a complete empty enumeration.
+        expired = soup.select(".expiredJobDetail .expiration-notice")
+        if any(
+            "Applications are no longer accepted." in node.get_text(" ", strip=True)
+            for node in expired
+        ):
+            raise SnapshotChangedError("JobBoard.io sitemap still advertises an expired listing")
         rows = [json.loads(t.get_text()) for t in soup.select('script[type="application/ld+json"]')]
         rows = [r for r in rows if isinstance(r, dict) and r.get("@type") == "JobPosting"]
         canonical = soup.select('link[rel="canonical"]')

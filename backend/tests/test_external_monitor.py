@@ -5,7 +5,7 @@ import pytest
 from fastapi.testclient import TestClient
 from vindex import api
 
-from scripts.check_production import evaluate
+from scripts.check_production import alert_message, evaluate, main
 
 
 def healthy():
@@ -69,3 +69,32 @@ def test_monitoring_token_is_scoped_and_aggregate_only(monkeypatch):
     assert issue["source_id"] == 15 and issue["failure_category"] == "access_denied"
     assert "source_url" not in issue and "raw_error" not in issue
     assert client.get("/api/v1/sources", headers=headers).status_code == 401
+
+
+def test_stale_sources_still_fail_with_actionable_safe_annotations(monkeypatch, capsys):
+    report = {
+        **healthy(),
+        "critical_alerts": ["stale_sources_or_abandoned_runs"],
+        "source_issues": [
+            {"source_id": 15, "provider": "jobboardfire", "stale": True},
+            {"source_id": 42, "provider": "jobkit", "stale": True},
+            {"source_id": 43, "provider": "\n::error::PRIVATE_CANARY", "stale": True},
+        ],
+    }
+    report["counts"]["stale"] = 3
+    monkeypatch.setattr("scripts.check_production.run", lambda: report)
+    with pytest.raises(SystemExit) as stopped:
+        main()
+    assert stopped.value.code == 1
+    annotations = [
+        line for line in capsys.readouterr().out.splitlines() if line.startswith("::error")
+    ]
+    assert len(annotations) == 1
+    assert "3 stale sources" in annotations[0]
+    assert "jobboardfire #15, jobkit #42" in annotations[0]
+    assert "PRIVATE_CANARY" not in annotations[0]
+    assert "do not bypass access controls" in annotations[0]
+
+
+def test_alert_drill_annotation_does_not_claim_a_real_outage():
+    assert "not a real outage" in alert_message("controlled_alert_drill_not_a_real_outage", {})
