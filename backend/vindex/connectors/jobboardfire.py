@@ -9,7 +9,7 @@ from typing import Any
 from urllib.parse import urlsplit
 
 import httpx
-from vindex.connectors.http import PublicHTTP
+from vindex.connectors.http import PublicHTTP, SnapshotChangedError
 from vindex.connectors.jobboardio import document, xml_urls
 from vindex.connectors.public import text
 from vindex.connectors.robots import RobotsPolicy
@@ -221,7 +221,7 @@ class JobBoardFireConnector:
                 raise ValueError("Unexpected Job Board Fire job sitemap scope")
             urls = xml_urls(await read(jobs_map), index=False)
             if {self.origin + "/j/" + slug for slug in rows} != set(urls):
-                raise ValueError("Job Board Fire search and sitemap do not agree")
+                raise SnapshotChangedError("Job Board Fire search and sitemap do not agree")
             return rows
 
         before = await roster()
@@ -229,5 +229,5 @@ class JobBoardFireConnector:
         for slug, identity in before.items():
             jobs.extend(self.parse((slug, identity, await read(self.origin + "/j/" + slug))))
         if await roster() != before:
-            raise ValueError("Job Board Fire roster changed during enumeration")
+            raise SnapshotChangedError("Job Board Fire roster changed during enumeration")
         return Enumeration(jobs=jobs, complete=True)

@@ -1,0 +1,7 @@
+{
+  "at": "2026-11-21T09:32:21.108113+00:00",
+  "complete": true,
+  "jobs": 9,
+  "scope": "Fresh complete native LPJC JobBoardFire recheck respecting robots/three-second pacing. Public provenance identifies it as stale production source 15; this connector-only probe is not production recovery evidence.",
+  "url": "https://lpjc.jobboardfire.com/"
+}

@@ -189,3 +189,18 @@ the authenticated pre-sanitization snapshot; target session count subsequently
 becomes zero. The source is unchanged. Post-snapshot account-deletion
 reconciliation remains mandatory and is not automated by session revocation.
 [Actual isolated drill](../evidence/20261121-recovery-auth-revocation.json).
+
+## Snapshot churn retry correction
+
+A JobBoardFire roster/sitemap disagreement or a roster changing during collection
+is now a distinct SnapshotChangedError. The attempt still fails without ingestion
+or closures, but retries follow the bounded transient schedule (2/4/8/16, then at
+most 30 minutes) instead of backing off like a persistent schema/policy failure
+up to 24 hours. This prevents a short native-index inconsistency from leaving a
+recovered board unchecked for most of a day. Robots denial and HTTP 429 retain
+policy/cooldown/Retry-After handling; no complete-enumeration guard is waived.
+
+A fresh full LPJC native probe collected nine jobs while public provenance showed
+its production source was stale. A one-time startup recovery may reschedule only
+that reviewed board's prior JobBoardFire ValueError, not policy/rate failures.
+Actual production recovery must be recorded separately.

@@ -516,3 +516,8 @@ coverage and does not raise the 71/78 platform count. The production launcher
 schedules only the exact obsolete-bootstrap failures once per repair marker;
 it never resets source failures or overrides robots/HTTP 429 cooldowns.
 [Native probe](../evidence/20261121-hireology-ssr-repair-live.json).
+
+JobBoardFire snapshot disagreement/churn is classified separately for bounded
+transient retries. Complete roster/sitemap/detail checks remain unchanged, and
+failed/partial attempts do not reconcile or close records. A fresh full LPJC
+probe collected nine jobs; [native probe](../evidence/20261121-lpjc-native-recovery-probe.json).

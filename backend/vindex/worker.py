@@ -11,7 +11,7 @@ from pydantic import ValidationError
 from redis import Redis
 from sqlalchemy import select, update
 
-from vindex.connectors.http import RetryAfterError, UpstreamStatusError
+from vindex.connectors.http import RetryAfterError, SnapshotChangedError, UpstreamStatusError
 from vindex.connectors.jobiqo import STAGED_HOSTS as STAGED_JOBIQO_HOSTS
 from vindex.connectors.registry import create_connector
 from vindex.db import Run, Session, Source, engine, now
@@ -139,9 +139,9 @@ async def refresh(source_id: int, *, only_if_due: bool = False) -> int | None:
                     status = error.response.status_code
                 elif isinstance(error, UpstreamStatusError):
                     status = error.status_code
-                transient = isinstance(error, (TimeoutError, httpx.TransportError)) or (
-                    status is not None and (status == 429 or 500 <= status < 600)
-                )
+                transient = isinstance(
+                    error, (TimeoutError, httpx.TransportError, SnapshotChangedError)
+                ) or (status is not None and (status == 429 or 500 <= status < 600))
                 exponent = min(source.failures - 1, 7)
                 delay = min(30, 2 * 2**exponent) if transient else min(1440, 30 * 2**exponent)
                 source.next_check = failed_run.finished_at + timedelta(minutes=delay)

@@ -15,6 +15,10 @@ import httpx
 MAX_RESPONSE_BYTES = 20_000_000
 
 
+class SnapshotChangedError(ValueError):
+    """A complete snapshot could not be established; retry without publishing partial data."""
+
+
 class UpstreamStatusError(ValueError):
     def __init__(self, status_code: int):
         self.status_code = status_code

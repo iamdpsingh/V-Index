@@ -1,0 +1,30 @@
+{
+  "recorded_at": "2026-11-21T09:25:58.969589+00:00",
+  "scope": "Actual hosted worker after native SSR repair; successful complete ingestion of both previously failing registered Hireology sources. No platform-count increment.",
+  "source_revision": "7060046",
+  "obsolete_parser_failures_requeued_once": 2,
+  "runs": [
+    {
+      "at": "2026-11-21T09:25:03.103577+00:00",
+      "count": 3,
+      "event": "refresh_success",
+      "run_id": 501,
+      "source_id": 75
+    },
+    {
+      "at": "2026-11-21T09:24:57.878905+00:00",
+      "count": 4,
+      "event": "refresh_success",
+      "run_id": 500,
+      "source_id": 74
+    }
+  ],
+  "backend_service_suite": {
+    "passed": 1262,
+    "skipped": 1
+  },
+  "platform_coverage_unchanged": {
+    "verified": 71,
+    "required": 78
+  }
+}
