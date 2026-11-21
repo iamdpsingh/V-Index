@@ -43,10 +43,15 @@ application sites have their own policies. Do not send tests into real telemetry
 
 ## Mandatory receiving-team review
 
-- Verify live environment target isolation. Existing Vercel shared variables do
-  not establish per-service least privilege or independent preview databases.
+- Preview target mappings were removed in the November 21 repair; all observed
+  existing deployments were production. Future previews need dedicated resources.
+  Recheck after changes; shared server variables still do not establish per-service
+  least privilege.
 - Confirm rotation of any previously chat-pasted credential at its issuer.
   Preserve encryption keys unless a migration/re-encryption plan is executed.
+- Restored sessions/verification/recovery codes are now automatically revoked
+  after snapshot count verification in the isolated target. This does not replace
+  independent recovery-key custody or reconciliation of post-snapshot deletions.
 - Secure independent recovery-key custody and reconcile post-snapshot deletions
   before a restored database is exposed.
 - Configure real SMTP/OAuth only with live delivery/callback tests. Placeholder

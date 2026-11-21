@@ -56,3 +56,14 @@ power, internet and engineering time are not zero merely because unmetered here.
 References checked for the recorded baseline: [daemon limits](https://vercel.com/docs/daemons/limits),
 [Blob pricing/limits](https://vercel.com/docs/vercel-blob/usage-and-pricing),
 [Blob TTL](https://vercel.com/changelog/vercel-blob-now-supports-ttls-for-automatic-deletion).
+
+
+## Actual provider inquiry, November 21 follow-up
+
+Vercel confirms Hobby/active, but billing-usage retrieval for November 1–21
+returned data unavailable, explicitly not zero usage. A 24-hour function CPU
+query was rejected as requiring a paid Observability tier; no upgrade occurred.
+A permitted short-window query measured **976 ms of request-function CPU**
+from 08:43–09:09 UTC (14:13–14:39 IST). This excludes daemon CPU and is not a
+monthly cost/capacity projection. DB/Redis actual costs remain unmeasured.
+[Sanitized inquiry and isolation evidence](../evidence/20261121-release-gate-progress.json).

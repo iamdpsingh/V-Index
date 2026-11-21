@@ -156,6 +156,7 @@ def verify_restore(archive: Path, pg_bin: Path) -> dict:
             result = restore(archive, pg_bin)
             return {
                 "table_counts_match": result["table_counts_match"],
+                "authentication_revoked": result["authentication_revoked"],
                 "tables": result["tables"],
                 "isolated_loopback_target": True,
             }

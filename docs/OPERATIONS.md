@@ -161,3 +161,31 @@ the persistent scheduler. Read [VERCEL_SERVICES.md](VERCEL_SERVICES.md#persisten
 for inspection, stopping, the November/December free-tier window and quota
 limits. A configured daemon becomes operational evidence only after its actual
 instance and successful production fetches are verified.
+
+
+## Independent external probe, November 21
+
+`.github/workflows/production-monitor.yml` checks from GitHub runners twice an
+hour (cron minutes 17/47) and supports manual dispatch. It uses a separately
+generated `MONITOR_TOKEN` in Vercel Production and GitHub Actions Secrets. This
+token accesses only `/api/v1/monitoring` aggregate health; it cannot authorize
+operator/source/private-account APIs. Do not copy ADMIN_TOKEN into Actions.
+
+The probe checks public search, no-store, live worker/Redis, monitoring timestamp,
+backup success/age (36-hour budget), stale sources and abandoned runs. Source
+failures are warnings, never automatic closures. Critical conditions fail the
+workflow and create GitHub check-run error annotations. `exercise_alert=true`
+produces an explicitly labelled controlled failed run after live checks; it
+does not stop services or pretend a real outage occurred.
+
+The scheduled/manual workflow is an independent probe, not guaranteed email/SMS
+delivery. A real notification receiver remains unverified at the owner's request.
+GitHub scheduling can be delayed; this is not an uptime/SLA guarantee.
+[Schedule semantics](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule).
+
+Restore now verifies original table counts first, then invalidates sessions and
+verification/recovery codes only in the isolated target. Result counts describe
+the authenticated pre-sanitization snapshot; target session count subsequently
+becomes zero. The source is unchanged. Post-snapshot account-deletion
+reconciliation remains mandatory and is not automated by session revocation.
+[Actual isolated drill](../evidence/20261121-recovery-auth-revocation.json).

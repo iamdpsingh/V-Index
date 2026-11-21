@@ -33,11 +33,13 @@ older local-only/pause notes as the current instructions.
   drop sources or publish partial snapshots to improve the percentage.
 - Historical platform evidence and required-field gaps remain documented;
   public source data cannot be fabricated. Coverage expansion stays paused.
-- External uptime monitoring and delivered alerts need a real destination.
+- Independent GitHub production monitoring is configured; verified notification
+  delivery still needs a real destination.
 - The owner retains example@rolewisp.in as an unverified placeholder. Do not send
   user recovery/support promises to a nonexistent verified inbox. Live SMTP and
   Google/LinkedIn/GitHub sign-in still need credentials and real flow tests.
-- Independent recovery-key custody and post-snapshot account-deletion reconciliation
+- Restored authentication is revoked after count verification; independent
+  recovery-key custody and post-snapshot account-deletion reconciliation
   need operator completion. Rotate any credential previously pasted in chat at its
   issuing provider; changing local text alone is not credential rotation.
 - Actual provider usage and bills are unmeasured. Free-tier quotas can stop service.

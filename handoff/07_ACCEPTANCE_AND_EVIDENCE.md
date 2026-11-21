@@ -50,3 +50,15 @@ Before technical acceptance, the receiving team should repeat critical checks
 at the transferred revision/environment and record exceptions. A document,
 unit test, smoke fixture or successful frontend build cannot replace missing
 native runs, real delivery or authenticated challenge submission.
+
+
+## Follow-up after the initial twenty-check review
+
+The current matrix records fifteen passes, one partial area and four held/open
+areas. Independent GitHub live/controlled-alert probes and preview isolation were
+verified; restored authentication is revoked in the recovery target. Actual
+email/SMS notification, provider activation, support, submission and remaining
+source/cost/recovery-owner gates have not been relabelled as complete.
+[New monitoring proof](../evidence/20261121-external-monitor-verification.json),
+[recovery drill](../evidence/20261121-recovery-auth-revocation.json),
+[isolation/cost review](../evidence/20261121-release-gate-progress.json).

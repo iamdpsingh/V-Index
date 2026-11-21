@@ -1,0 +1,68 @@
+{
+  "recorded_at": "2026-11-21T09:16:19.704995+00:00",
+  "scope": "Actual independent GitHub Actions runner to production HTTPS; no website interruption, private account data or third-party analytics.",
+  "normal_run": {
+    "url": "https://github.com/iamdpsingh/V-Index/actions/runs/44888525743",
+    "conclusion": "success",
+    "report": {
+      "backup": {
+        "at": "2026-11-20T22:19:01.432649+00:00",
+        "status": "success"
+      },
+      "checked_at": "2026-11-21T09:13:16.760663+00:00",
+      "controlled_drill": false,
+      "counts": {
+        "abandoned_runs": 0,
+        "failing": 19,
+        "initial_index_complete": 128,
+        "initial_index_pending": 14,
+        "sources": 142,
+        "stale": 0
+      },
+      "critical_alerts": [],
+      "indexed_jobs": 9180,
+      "live_workers": 1,
+      "scope": "Independent HTTPS probe; aggregate metadata only"
+    }
+  },
+  "controlled_alert_drill": {
+    "url": "https://github.com/iamdpsingh/V-Index/actions/runs/44888528922",
+    "conclusion": "failure_expected",
+    "report": {
+      "backup": {
+        "at": "2026-11-20T22:19:01.432649+00:00",
+        "status": "success"
+      },
+      "checked_at": "2026-11-21T09:13:24.582176+00:00",
+      "controlled_drill": true,
+      "counts": {
+        "abandoned_runs": 0,
+        "failing": 19,
+        "initial_index_complete": 128,
+        "initial_index_pending": 14,
+        "sources": 142,
+        "stale": 0
+      },
+      "critical_alerts": [
+        "controlled_alert_drill_not_a_real_outage"
+      ],
+      "indexed_jobs": 9180,
+      "live_workers": 1,
+      "scope": "Independent HTTPS probe; aggregate metadata only"
+    }
+  },
+  "alert_channel_verified": "GitHub workflow status/error annotations",
+  "email_sms_delivery_verified": false,
+  "recurrence": "Twice-hourly schedule, subject to GitHub scheduling limitations",
+  "dedicated_token_scope": "Aggregate monitoring only, not operator or private account access",
+  "public_repository": true,
+  "backend_tests": {
+    "passed": 1249,
+    "skipped": 1
+  },
+  "initial_local_test_attempt": {
+    "fixture_error": "Local test PostgreSQL started on default port instead of configured 55479",
+    "infrastructure_errors": 55,
+    "corrected_and_full_rerun_passed": true
+  }
+}

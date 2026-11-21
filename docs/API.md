@@ -13,6 +13,7 @@ authentication or authorization.
 | `GET /health` | API liveness; internal on Vercel | Database/API only; not exposed by the public web gateway or proof of worker health |
 | `GET /api/v1/jobs` | Public, rate limited when enabled | Paginated open-job search |
 | `GET /api/v1/jobs/{id}` | Public, same job-rate limiter | Full job and source provenance |
+| `GET /api/v1/monitoring` | Dedicated MONITOR_TOKEN, read-only/rate-limited | Aggregate worker/source/backup health; no source URLs, private records or admin rights |
 | `GET /api/v1/providers` | Public | Exact inventory, point-in-time evidence and limitations |
 | `GET, POST /api/v1/sources` | Operator bearer token | Inspect/register a supported source |
 | `POST /api/v1/sources/{id}/refresh` | Operator bearer token | Schedule a refresh, return 202 |

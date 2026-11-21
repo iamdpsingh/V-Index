@@ -43,8 +43,9 @@ for seven days. No real email or analytics is needed for this probe.
 Vercel project variables are shared between server runtimes unless separately
 isolated; worker-only intent is not proof of enforced per-service secret scope.
 Keep private values server-only. Preview/Development must have separate data,
-Redis and keys. Audit current target scopes; no claim of completed environment
-isolation follows from the successful production tests. API_INTERNAL_URL is a
+Redis and keys. November 21 scope repair removed production settings and preview-only Blob/review
+mappings from previews; all eleven existing deployments were production. Future
+previews intentionally need dedicated resources. Recheck later integration changes. API_INTERNAL_URL is a
 local/Compose fallback and should be unset in this services project.
 
 ## Database and worker activation
@@ -125,3 +126,8 @@ Primary references: [Services](https://vercel.com/docs/services),
 [daemon limits](https://vercel.com/docs/daemons/limits),
 [daemon configuration](https://vercel.com/docs/daemons/config-reference),
 [Blob limits](https://vercel.com/docs/vercel-blob/usage-and-pricing).
+
+
+The independent GitHub workflow uses a dedicated production `MONITOR_TOKEN`
+also stored as a repository Actions Secret. It reads `/api/v1/monitoring`, never
+admin/source/private data. [External probe](OPERATIONS.md#independent-external-probe-november-21).

@@ -21,8 +21,10 @@ an approved private channel/password manager. The recipient is not yet assigned.
 The Vercel project currently shares environment variables across services;
 “server-only” does not imply least-privilege isolation between those runtimes.
 Do not expose them through NEXT_PUBLIC variables, props, debug output or bundles.
-Audit target scopes during transfer: previews must not inherit production data,
-keys or Redis rate counters. Scope isolation is a verification task, not assumed.
+The November 21 repair removed production settings from preview targets and
+preview-only Blob/review mappings; all eleven then-existing deployments were
+production. Future previews intentionally lack data/secrets until dedicated
+resources are configured. Recheck target scopes after later integrations/changes.
 
 ## Environment inventory
 
@@ -42,6 +44,7 @@ keys or Redis rate counters. Scope isolation is a verification task, not assumed
 | BLOB_READ_WRITE_TOKEN | Worker backup/report access | Production secret for dedicated private store |
 | BLOB_STORE_ID | Worker store identifier | Required with token; not a browser setting |
 | RELEASE_REVIEW_ID | One-shot deployed control probe | Change only intentionally; runs disposable-account tests, marker lasts seven days |
+| MONITOR_TOKEN | Read-only aggregate health for independent GitHub probe | Separate Production/Actions Secret; cannot grant operator/private access |
 | BACKEND_URL | Web-to-app service binding | Vercel injects it; do not set manually or read during build/middleware |
 | API_INTERNAL_URL | Local/Compose fallback | Unset in the production services project |
 | POSTGRES_PASSWORD | Local Compose database | Not the hosted DATABASE_URL; changing env text does not rotate a DB role |

@@ -26,8 +26,9 @@ not complete source freshness, and is internal on Vercel. Use provider dashboard
 and private reports rather than exposing tokens in URLs or public screenshots.
 Private Blob `operations/latest.json` updates every thirty minutes; Redis/API
 status is more current. Reports and bounded alert history expire after seven
-days. Internal monitoring cannot notify after the entire host stops. External
-uptime monitoring/delivered alerts still need a verified receiver.
+days. Internal monitoring cannot notify after the entire host stops. An independent GitHub Actions public-search/aggregate-health probe is now
+configured; email/SMS delivery still needs a verified receiver. See the new
+external-probe section in the detailed operations reference.
 
 ## Incident response
 
@@ -72,6 +73,8 @@ See [recorded backup](../evidence/20261121-hosted-backup.json).
    recovery target. The restore utility refuses source or nonempty targets.
 4. Run `PYTHONPATH=backend uv run python -m scripts.backup_database restore --archive /secure/recovery/selected.rwbackup`.
    Verify authentication, manifest/table counts, schema head and private-file keys.
+   The restore utility then revokes snapshot sessions/verification/recovery codes
+   in the target only; source data is untouched.
 5. Reconcile account deletions made after the snapshot, revoke sessions as needed,
    inspect source schedules/leases, test authorization/search and get responsible
    operator acceptance before exposing recovered data. A durable deletion ledger

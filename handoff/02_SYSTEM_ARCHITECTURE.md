@@ -5,6 +5,7 @@ Baseline: November 21, 2026. Detailed reference: [architecture](../docs/ARCHITEC
 ```mermaid
 flowchart LR
   Browser[Browser] --> Web[Next.js web and API gateway]
+  Probe[Independent GitHub probe] -->|read-only monitoring token| Web
   Web -->|runtime BACKEND_URL binding| API[Internal FastAPI app]
   API --> SQL[(PostgreSQL)]
   API --> Redis[(Redis)]

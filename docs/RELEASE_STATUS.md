@@ -72,3 +72,29 @@ placeholder. No leaderboard rank, full compliance or acquisition is claimed.
 
 [Handoff](RELEASE_HANDOFF.md), [operations](OPERATIONS.md),
 [privacy](PRIVACY_REVIEW.md), [backlog](BACKLOG.md), [submission draft](SUBMISSION.md).
+
+
+## November 21, 14:43 IST follow-up
+
+The independent read-only monitoring probe checked 9,180 jobs, one live worker,
+128/142 sources with an initial success, fourteen without one and nineteen with
+consecutive failures; zero stale/abandoned sources. These are new dated metrics,
+not retroactive changes to the earlier evidence.
+
+Preview production-setting mappings and preview-only Blob/review mappings were
+removed; all eleven then-existing deployments were production. Future previews
+need their own resources. A daily restore now invalidates snapshot sessions and
+verification/recovery codes after original count checks; an isolated drill
+confirmed private-file recovery and untouched source authentication.
+
+An independent GitHub production-monitor workflow passed, and a labelled failure
+drill produced the expected error annotation without a real outage. Delivered
+email/SMS remains unverified. Backend suite: 1,249 passed, one skipped; Verify
+on executable 3cc971c passed backend/frontend/stack.
+
+The owner explicitly retains the placeholder and leaves SMTP/OAuth activation
+and Vaya submission open. Billing retrieval returned unavailable, not zero;
+long-range CPU metrics require a paid tier and no upgrade was performed.
+Thus there is no full 20/20 acceptance. [Monitoring evidence](../evidence/20261121-external-monitor-verification.json),
+[isolation/cost review](../evidence/20261121-release-gate-progress.json),
+[recovery drill](../evidence/20261121-recovery-auth-revocation.json).

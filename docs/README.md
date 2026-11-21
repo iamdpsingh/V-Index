@@ -98,3 +98,11 @@ across desktop and mobile (ten combinations), including the exact LinkedIn URL,
 keyboard focus and absence of horizontal overflow. [Recorded footer review](../evidence/20261121-handoff-footer-review.json).
 This is documentation/UI verification, not additional platform coverage or a
 new security/legal certification.
+
+
+November 21 follow-up adds `scripts/check_production.py`, the independent
+production-monitor workflow, its scoped monitoring API/OpenAPI reference and
+[actual live/drill evidence](../evidence/20261121-external-monitor-verification.json).
+[Preview isolation/cost inquiry](../evidence/20261121-release-gate-progress.json)
+and [authentication-revoking restore drill](../evidence/20261121-recovery-auth-revocation.json)
+extend the baseline without rewriting earlier evidence.
