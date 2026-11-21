@@ -96,6 +96,31 @@ def admin(request: Request, authorization: Annotated[str | None, Header()] = Non
         raise HTTPException(401, "Invalid admin token")
 
 
+def monitor_access(authorization: Annotated[str | None, Header()] = None):
+    token = os.getenv("MONITOR_TOKEN", "")
+    if len(token) < 32:
+        raise HTTPException(503, "External monitoring is not configured")
+    if not hmac.compare_digest((authorization or "").encode(), ("Bearer " + token).encode()):
+        raise HTTPException(401, "Invalid monitoring token")
+    rate_limit("external-monitor", 6)
+
+
+@app.get("/api/v1/monitoring", dependencies=[Depends(monitor_access)])
+def monitoring_status():
+    # The dedicated token cannot read source URLs, runs, profiles or operator details.
+    with Session() as session:
+        report = snapshot(session)
+    backup = report.get("backup", {})
+    return {
+        "checked_at": report["checked_at"],
+        "counts": report["counts"],
+        "live_workers": report["workers"]["live"],
+        "redis_available": report["redis_available"],
+        "backup": {"status": backup.get("status"), "at": backup.get("at")},
+        "alerts": report["alerts"],
+    }
+
+
 def row(value):
     values = {c.name: getattr(value, c.name) for c in value.__table__.columns}
     # Bookkeeping timestamps are written in UTC; SQLite does not retain tzinfo.

@@ -205,6 +205,15 @@ def backup(directory: Path, pg_bin: Path) -> dict:
     }
 
 
+def revoke_restored_authentication(connection) -> None:
+    """Invalidate snapshot credentials only in the separate recovery target."""
+    connection.execute("DELETE FROM public.account_sessions")
+    connection.execute(
+        "UPDATE public.accounts SET email_code_hash=NULL, email_code_expires_at=NULL, "
+        "password_reset_hash=NULL, password_reset_expires_at=NULL"
+    )
+
+
 def restore(archive: Path, pg_bin: Path) -> dict:
     key, env = encryption_key(), database_env("RESTORE_DATABASE_URL")
     source = make_url(os.environ["DATABASE_URL"])
@@ -240,11 +249,15 @@ def restore(archive: Path, pg_bin: Path) -> dict:
             actual = counts(connection)
         if actual != manifest["tables"]:
             raise ValueError("Restored table counts do not match the exported snapshot")
+        with connect(env) as connection:
+            revoke_restored_authentication(connection)
     return {
         "restored_at": datetime.now(UTC).isoformat(),
         "table_counts_match": True,
         "tables": actual,
         "source_snapshot_at": manifest["created_at"],
+        "authentication_revoked": True,
+        "post_snapshot_deletion_reconciliation_required": True,
     }
 
 

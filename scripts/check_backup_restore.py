@@ -5,6 +5,7 @@ import json
 import os
 import time
 import uuid
+from datetime import timedelta
 from pathlib import Path
 
 import psycopg
@@ -16,8 +17,8 @@ from psycopg import sql
 from sqlalchemy import create_engine, select
 from sqlalchemy.engine import make_url
 from sqlalchemy.orm import Session
-from vindex.accounts.models import Account, Profile, Resume
-from vindex.db import Source
+from vindex.accounts.models import Account, AccountSession, Profile, Resume
+from vindex.db import Source, now
 from vindex.ingest import ingest
 from vindex.schemas import Enumeration, JobInput
 
@@ -71,6 +72,15 @@ def main() -> None:
             session.add(source)
             session.flush()
             account_id = account.id
+            account.email_code_hash = "synthetic-expired-by-recovery"
+            account.password_reset_hash = "synthetic-expired-by-recovery"
+            session.add(
+                AccountSession(
+                    token_hash="synthetic-session-from-snapshot",
+                    account_id=account.id,
+                    expires_at=now() + timedelta(days=1),
+                )
+            )
             session.add(
                 Profile(
                     account_id=account.id,
@@ -122,6 +132,13 @@ def main() -> None:
             assert cipher.decrypt(resumed.file_ciphertext) == private
             assert cipher.decrypt(profile.photo_ciphertext) == private
             assert session.scalar(select(Source)).slug == "restore-example"
+            assert session.scalar(select(AccountSession)) is None
+            restored_account = session.get(Account, account_id)
+            assert restored_account.email_code_hash is None
+            assert restored_account.password_reset_hash is None
+        with Session(source_engine) as session:
+            assert session.get(AccountSession, "synthetic-session-from-snapshot") is not None
+            assert session.get(Account, account_id).email_code_hash is not None
         try:
             restore(archive, args.pg_bin)
             raise AssertionError("Nonempty restore target accepted")
@@ -139,6 +156,8 @@ def main() -> None:
         report = {
             "scope": "Disposable local PostgreSQL databases; synthetic accounts and resume only",
             "table_counts_match": result["table_counts_match"],
+            "restored_authentication_revoked": result["authentication_revoked"],
+            "source_authentication_untouched": True,
             "tables": result["tables"],
             "private_resume_and_photo_decrypt": True,
             "tampering_rejected": True,

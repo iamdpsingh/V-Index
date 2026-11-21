@@ -1,0 +1,27 @@
+name: Production monitor
+on:
+  schedule:
+    - cron: '17,47 * * * *'
+  workflow_dispatch:
+    inputs:
+      exercise_alert:
+        description: 'Controlled failure drill; does not disrupt the production service'
+        required: false
+        type: boolean
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: production-monitor
+  cancel-in-progress: false
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check public search, independent worker health and backup freshness
+        env:
+          MONITOR_TOKEN: ${{ secrets.MONITOR_TOKEN }}
+          MONITOR_ALERT_DRILL: ${{ inputs.exercise_alert || false }}
+        run: python3 -m scripts.check_production
