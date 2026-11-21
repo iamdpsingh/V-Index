@@ -110,3 +110,10 @@ extend the baseline without rewriting earlier evidence.
 [Hireology's current native-template repair](../evidence/20261121-hireology-ssr-repair-live.json)
 rechecks two existing installations, without adding platform coverage. The
 connector contract records its roster/identity safeguards and bounded scope.
+
+
+[Latest release-gate outcomes](../evidence/20261121-current-release-gate-outcomes.json)
+separate repaired Hireology production ingestion, real hosted upstream denials,
+genuine monitor alerts and owner-held items. The authored twenty-check matrix
+remains incomplete; tests and local native probes are not substituted for hosted
+success or external activation/submission.

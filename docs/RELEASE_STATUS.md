@@ -98,3 +98,26 @@ long-range CPU metrics require a paid tier and no upgrade was performed.
 Thus there is no full 20/20 acceptance. [Monitoring evidence](../evidence/20261121-external-monitor-verification.json),
 [isolation/cost review](../evidence/20261121-release-gate-progress.json),
 [recovery drill](../evidence/20261121-recovery-auth-revocation.json).
+
+
+## Latest source recovery and genuine alert, November 21, 15:16 IST
+
+The actual worker committed Hireology's two complete native boards (4/3 jobs),
+bringing the recorded initial-success count to **130/142** and the index to
+**9,187**. Twelve sources still lack an initial success. The independent probe
+reported eighteen failing sources and five stale ones, all five with upstream
+access-denied classifications. This is a real source-freshness alert, not a
+website outage or the earlier controlled drill. Web/API and worker remain live.
+
+JobBoardFire snapshot churn now uses bounded transient retries without relaxing
+complete-enumeration/closure safeguards. LPJC passed a local nine-job native
+probe, but its hosted access error remained ineligible for a parser-error retry.
+No access denial, robots policy or 429 cooldown was bypassed. Other native
+schema/identity/enumeration problems remain to investigate/repair.
+
+The full service-backed suite passed **1,272 tests**, one skipped. Three new
+HTTP-code-classification regression cases passed separately, preventing job IDs
+from being mistaken for HTTP statuses. Provider/inbox/submission holds, external
+notification delivery, key/deletion/legal/domain and measured-cost gates remain
+explicitly open. No full 20/20 or acquisition acceptance is claimed.
+[Current evidence](../evidence/20261121-current-release-gate-outcomes.json).

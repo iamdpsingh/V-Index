@@ -7,6 +7,9 @@ from scripts.production_review import failure_category
     ("message", "expected"),
     [
         ("HTTP 429 fetching robots.txt", "rate_limited"),
+        ("Publisher identity mismatch for job 429", "publisher_identity_mismatch"),
+        ("Native schema changed for job 404", "unclassified_fetch_failure"),
+        ("Client error '403 Forbidden' for URL /jobs/429", "access_denied"),
         ("Career page robots policy disallows this request", "robots_disallowed"),
         ("Worker stopped before refresh finished", "deployment_interruption"),
         ("Publisher identity mismatch", "publisher_identity_mismatch"),

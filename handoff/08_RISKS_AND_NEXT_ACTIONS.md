@@ -45,3 +45,12 @@ two existing sources. Complete native rechecks returned 4 and 3 jobs; actual
 production integration is separate evidence. Other source failures and the
 original 71/78 coverage gap remain open. The startup repair requeues only that
 exact old parser error once, without resetting failure counts or policy cooldowns.
+
+
+Latest recorded follow-up: **130/142 initial successes**, twelve pending,
+eighteen consecutive-failure sources and five stale sources returning upstream
+access-denied errors from the hosted worker. Hireology recovered in production;
+LPJC's local success did not clear its hosted denial. The independent monitor
+correctly reports the real stale-source alert. Owner-held provider/submission
+items and other native repairs remain open; do not mark the matrix 20/20.
+[Current evidence](../evidence/20261121-current-release-gate-outcomes.json).

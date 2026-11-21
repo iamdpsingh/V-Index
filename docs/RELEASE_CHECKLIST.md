@@ -15,7 +15,7 @@ See [the original challenge criteria](ACCEPTANCE_TESTS.md) and [explanation](../
 | --- | --- | --- |
 | 1 | Hosted web and API | Passed: production search and real-data UI review |
 | 2 | Persistent hosted worker | Passed: ready/alive Vercel daemon and heartbeat |
-| 3 | Complete initial success on every registered source | Open: latest follow-up 128/142 initially successful; fourteen still lack an initial success |
+| 3 | Complete initial success on every registered source | Open: latest follow-up 130/142 initially successful; twelve still lack an initial success |
 | 4 | Second native production fetch | Passed: Ashby 77 to 78 jobs, operator-triggered; a full unattended six-hour cycle is not yet observed |
 | 5 | Failure/partial fetch lifecycle safety | Passed: transactional guards, cancellation tests and reviewer replay; failures are not closures |
 | 6 | Duplicate merge with provenance | Passed: deterministic replay plus separately labelled historical live example |
@@ -58,3 +58,20 @@ not establish daemon/DB/Redis or monthly cost. Full 20/20 is not verified.
 [External monitoring](../evidence/20261121-external-monitor-verification.json),
 [isolation/cost inquiry](../evidence/20261121-release-gate-progress.json),
 [recovery drill](../evidence/20261121-recovery-auth-revocation.json).
+
+
+## Final checked state of this pass, November 21
+
+Hireology's two repaired sources were successfully ingested by the hosted
+worker (4 and 3 jobs). Current recorded probe: **9,187 jobs, 130/142 initial
+successes, twelve pending, eighteen consecutive-failure sources and five stale
+sources**. All five stale sources reported upstream access denial. The real
+monitor is correctly failing for stale data; it has not been muted or passed
+off as a drill. LPJC's local nine-job probe did not establish hosted success,
+and the narrow startup retry correctly skipped its noneligible access failure.
+
+There are still fifteen recorded passes, one partial notification-delivery area
+and four held/open groups. Those include unresolved native-source work as well
+as upstream access and explicit owner holds. Full **20/20 is not verified**.
+[Current outcomes](../evidence/20261121-current-release-gate-outcomes.json),
+[actual Hireology ingestion](../evidence/20261121-hireology-production-repair.json).

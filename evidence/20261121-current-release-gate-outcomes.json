@@ -1,0 +1,235 @@
+{
+  "recorded_at": "2026-11-21T09:52:54.708002+00:00",
+  "scope": "Actual independent hosted monitoring after Hireology ingestion repair. The failed workflow is a genuine stale-source alert, not the earlier controlled drill. No source URLs/raw errors/private accounts included.",
+  "monitor_run": "https://github.com/iamdpsingh/V-Index/actions/runs/44891101354",
+  "monitor_conclusion": "failure_due_to_actual_stale_sources",
+  "probe": {
+    "backup": {
+      "at": "2026-11-20T22:19:01.432649+00:00",
+      "status": "success"
+    },
+    "checked_at": "2026-11-21T09:45:54.646767+00:00",
+    "controlled_drill": false,
+    "counts": {
+      "abandoned_runs": 0,
+      "failing": 18,
+      "initial_index_complete": 130,
+      "initial_index_pending": 12,
+      "sources": 142,
+      "stale": 5
+    },
+    "critical_alerts": [
+      "stale_sources_or_abandoned_runs"
+    ],
+    "indexed_jobs": 9187,
+    "issues_truncated": false,
+    "live_workers": 1,
+    "scope": "Independent HTTPS probe; aggregate metadata only",
+    "source_issues": [
+      {
+        "failure_category": "robots_disallowed",
+        "failure_kind": "ValueError",
+        "initial_index_complete": false,
+        "last_success_at": null,
+        "next_check_at": "2026-11-21T13:02:18.867938+00:00",
+        "provider": "eightfold",
+        "source_id": 50,
+        "stale": false
+      },
+      {
+        "failure_category": "robots_disallowed",
+        "failure_kind": "ValueError",
+        "initial_index_complete": false,
+        "last_success_at": null,
+        "next_check_at": "2026-11-21T13:02:19.249060+00:00",
+        "provider": "eightfold",
+        "source_id": 51,
+        "stale": false
+      },
+      {
+        "failure_category": "native_schema_changed",
+        "failure_kind": "ValueError",
+        "initial_index_complete": false,
+        "last_success_at": null,
+        "next_check_at": "2026-11-21T13:02:20.150530+00:00",
+        "provider": "paradox",
+        "source_id": 18,
+        "stale": false
+      },
+      {
+        "failure_category": "description_validation",
+        "failure_kind": "ValueError",
+        "initial_index_complete": false,
+        "last_success_at": null,
+        "next_check_at": "2026-11-21T13:04:20.291422+00:00",
+        "provider": "avature",
+        "source_id": 55,
+        "stale": false
+      },
+      {
+        "failure_category": "unclassified_fetch_failure",
+        "failure_kind": "ValueError",
+        "initial_index_complete": true,
+        "last_success_at": "2026-11-21T03:28:02.710721+00:00",
+        "next_check_at": "2026-11-21T09:59:31.722238+00:00",
+        "provider": "brassring",
+        "source_id": 29,
+        "stale": false
+      },
+      {
+        "failure_category": "access_denied",
+        "failure_kind": "UpstreamStatusError",
+        "initial_index_complete": false,
+        "last_success_at": null,
+        "next_check_at": "2026-11-21T13:04:53.819336+00:00",
+        "provider": "jobboardfire",
+        "source_id": 14,
+        "stale": false
+      },
+      {
+        "failure_category": "access_denied",
+        "failure_kind": "UpstreamStatusError",
+        "initial_index_complete": true,
+        "last_success_at": "2026-11-20T21:22:42.537627+00:00",
+        "next_check_at": "2026-11-21T10:56:15.900587+00:00",
+        "provider": "jobboardfire",
+        "source_id": 15,
+        "stale": true
+      },
+      {
+        "failure_category": "access_denied",
+        "failure_kind": "UpstreamStatusError",
+        "initial_index_complete": true,
+        "last_success_at": "2026-11-20T21:28:55.564182+00:00",
+        "next_check_at": "2026-11-21T10:59:57.431336+00:00",
+        "provider": "jobkit",
+        "source_id": 42,
+        "stale": true
+      },
+      {
+        "failure_category": "access_denied",
+        "failure_kind": "UpstreamStatusError",
+        "initial_index_complete": true,
+        "last_success_at": "2026-11-20T21:29:02.237860+00:00",
+        "next_check_at": "2026-11-21T11:00:28.436304+00:00",
+        "provider": "jobkit",
+        "source_id": 43,
+        "stale": true
+      },
+      {
+        "failure_category": "access_denied",
+        "failure_kind": "UpstreamStatusError",
+        "initial_index_complete": true,
+        "last_success_at": "2026-11-20T21:29:05.668826+00:00",
+        "next_check_at": "2026-11-21T11:00:28.549729+00:00",
+        "provider": "jobboardio",
+        "source_id": 44,
+        "stale": true
+      },
+      {
+        "failure_category": "access_denied",
+        "failure_kind": "UpstreamStatusError",
+        "initial_index_complete": true,
+        "last_success_at": "2026-11-20T21:29:37.472132+00:00",
+        "next_check_at": "2026-11-21T11:00:59.429301+00:00",
+        "provider": "jobboardio",
+        "source_id": 45,
+        "stale": true
+      },
+      {
+        "failure_category": "incomplete_enumeration",
+        "failure_kind": "ValueError",
+        "initial_index_complete": false,
+        "last_success_at": null,
+        "next_check_at": "2026-11-21T13:05:25.252291+00:00",
+        "provider": "werecruit",
+        "source_id": 66,
+        "stale": false
+      },
+      {
+        "failure_category": "native_redirect",
+        "failure_kind": "UpstreamStatusError",
+        "initial_index_complete": false,
+        "last_success_at": null,
+        "next_check_at": "2026-11-21T13:07:03.654313+00:00",
+        "provider": "join",
+        "source_id": 76,
+        "stale": false
+      },
+      {
+        "failure_category": "incomplete_enumeration",
+        "failure_kind": "ValueError",
+        "initial_index_complete": false,
+        "last_success_at": null,
+        "next_check_at": "2026-11-21T13:11:11.313367+00:00",
+        "provider": "gohire",
+        "source_id": 106,
+        "stale": false
+      },
+      {
+        "failure_category": "rate_limited",
+        "failure_kind": "HTTPStatusError",
+        "initial_index_complete": false,
+        "last_success_at": null,
+        "next_check_at": "2026-11-21T10:08:11.644124+00:00",
+        "provider": "workday",
+        "source_id": 137,
+        "stale": false
+      },
+      {
+        "failure_category": "rate_limited",
+        "failure_kind": "HTTPStatusError",
+        "initial_index_complete": false,
+        "last_success_at": null,
+        "next_check_at": "2026-11-21T10:12:08.661717+00:00",
+        "provider": "workday",
+        "source_id": 136,
+        "stale": false
+      },
+      {
+        "failure_category": "native_route_missing",
+        "failure_kind": "UpstreamStatusError",
+        "initial_index_complete": false,
+        "last_success_at": null,
+        "next_check_at": "2026-11-21T13:22:12.790414+00:00",
+        "provider": "recruitee",
+        "source_id": 134,
+        "stale": false
+      },
+      {
+        "failure_category": "publisher_identity_mismatch",
+        "failure_kind": "ValueError",
+        "initial_index_complete": false,
+        "last_success_at": null,
+        "next_check_at": "2026-11-21T13:27:31.658741+00:00",
+        "provider": "jobiqo",
+        "source_id": 138,
+        "stale": false
+      }
+    ]
+  },
+  "lpjc_operator_retry": {
+    "eligible_source_count": 0,
+    "safeguard_preserved": true,
+    "hosted_failure_kind": "UpstreamStatusError",
+    "hosted_category": "access_denied",
+    "local_complete_probe_jobs": 9,
+    "local_probe_not_equivalent_to_hosted_success": true
+  },
+  "validation": {
+    "full_service_suite_passed": 1272,
+    "full_service_suite_skipped": 1,
+    "additional_http_code_classification_cases_passed": 3
+  },
+  "checklist_outcome": {
+    "verified_passes": 15,
+    "partial_areas": 1,
+    "held_or_open_areas": 4,
+    "full_twenty_verified": false
+  },
+  "owner_decisions": {
+    "retain_placeholder_inbox": true,
+    "leave_provider_activation_open": true,
+    "leave_vaya_submission_open": true
+  }
+}
