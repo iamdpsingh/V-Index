@@ -39,3 +39,9 @@ live coverage. Holds and missing URLs do not remove them from the required 78.
 
 Do not collapse this register into a completion percentage. Effort, impact and
 external dependencies differ substantially between rows.
+
+November 21 follow-up repaired the obsolete Hireology bootstrap parser for the
+two existing sources. Complete native rechecks returned 4 and 3 jobs; actual
+production integration is separate evidence. Other source failures and the
+original 71/78 coverage gap remain open. The startup repair requeues only that
+exact old parser error once, without resetting failure counts or policy cooldowns.

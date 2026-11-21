@@ -8,6 +8,30 @@ from urllib.parse import urlsplit
 from redis import Redis
 
 
+def requeue_repaired_hireology(session) -> list[int]:
+    """Retry only obsolete parser failures; never override policy/429 cooldowns."""
+    from sqlalchemy import func, select
+    from vindex.db import Run, Source, now
+
+    latest = select(func.max(Run.id)).group_by(Run.source_id)
+    sources = list(
+        session.scalars(
+            select(Source)
+            .join(Run, Run.source_id == Source.id)
+            .where(
+                Source.provider == "hireology",
+                Run.id.in_(latest),
+                Run.status == "failed",
+                Run.error == "ValueError: Missing unique Hireology public career bootstrap",
+            )
+        )
+    )
+    for source in sources:
+        source.next_check = now()
+    session.commit()
+    return [source.id for source in sources]
+
+
 def main() -> int:
     logging.basicConfig(level=logging.INFO, format="%(message)s")
     log = logging.getLogger("vindex.bootstrap")
@@ -33,6 +57,14 @@ def main() -> int:
                 "vindex:reviewed-source-registration", timeout=120, blocking_timeout=30
             ):
                 result = register_sources(apply=True)
+                repair_key = "vindex:repair:hireology-ssr-v1"
+                if not redis.exists(repair_key):
+                    from vindex.db import Session
+
+                    with Session() as session:
+                        repaired = requeue_repaired_hireology(session)
+                    redis.setex(repair_key, 7 * 86400, "scheduled")
+                    log.info("Repaired Hireology sources scheduled: count=%s", len(repaired))
         log.info(
             "Reviewed sources registered: platforms=%s sources=%s new=%s",
             result["verified_platforms"],

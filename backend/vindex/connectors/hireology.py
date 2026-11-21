@@ -5,6 +5,7 @@ import json
 import re
 from decimal import Decimal, InvalidOperation
 from typing import Any
+from urllib.parse import parse_qs, urlsplit
 
 import httpx
 from bs4 import BeautifulSoup
@@ -52,6 +53,8 @@ class HireologyConnector:
             for matched in re.finditer(r"var startingData\s*=\s*", code):
                 value, _ = json.JSONDecoder().raw_decode(code[matched.end() :])
                 values.append(value)
+        if not values:
+            return self.rendered_board(soup)
         if len(values) != 1:
             raise ValueError("Missing unique Hireology public career bootstrap")
         value = values[0]
@@ -74,6 +77,55 @@ class HireologyConnector:
             "company": title.removeprefix("Jobs for "),
             "careersPath": self.slug,
             "pageSize": 10,
+        }
+
+    def rendered_board(self, soup: BeautifulSoup) -> dict:
+        """Current native SSR board: bind the complete visible roster to the public API."""
+        title = soup.title.get_text(" ", strip=True) if soup.title else ""
+        canonical = soup.select('link[rel="canonical"]')
+        headings = [node.get_text(" ", strip=True) for node in soup.select("h1")]
+        if (
+            len(canonical) != 1
+            or canonical[0].get("href") != self.origin + "/" + self.slug
+            or headings != ["Available Jobs"]
+            or not title.startswith("Jobs for ")
+            or not title.removeprefix("Jobs for ").strip()
+        ):
+            raise ValueError("Unrecognized Hireology rendered board identity")
+        jobs = {}
+        for anchor in soup.select('a[href*="/description"]'):
+            href = anchor.get("href")
+            if not isinstance(href, str):
+                raise ValueError("Invalid Hireology native listing link")
+            parsed = urlsplit(href)
+            match = re.fullmatch(
+                r"/" + re.escape(self.slug) + r"/([1-9][0-9]*)/description", parsed.path
+            )
+            query = parse_qs(parsed.query, keep_blank_values=True)
+            if (
+                parsed.scheme != "https"
+                or parsed.netloc != "careers.hireology.com"
+                or parsed.fragment
+                or match is None
+                or any(
+                    query.get(key) not in (None, [value])
+                    for key, value in {"ref": "career_site", "ref_m": "api"}.items()
+                )
+                or not set(query) <= {"ref", "ref_m"}
+            ):
+                raise ValueError("Hireology rendered listing host/path/query mismatch")
+            identifier = int(match.group(1))
+            name = anchor.get_text(" ", strip=True)
+            if identifier in jobs or not name:
+                raise ValueError("Duplicate or unnamed Hireology rendered listing")
+            jobs[identifier] = name
+        if not 0 < len(jobs) <= 10:
+            raise ValueError("Hireology rendered roster empty or beyond verified page budget")
+        return {
+            "company": title.removeprefix("Jobs for "),
+            "careersPath": self.slug,
+            "pageSize": 10,
+            "native_jobs": jobs,
         }
 
     def public_row(self, row: dict, board: dict) -> dict:
@@ -117,6 +169,10 @@ class HireologyConnector:
             if job["id"] in result:
                 raise ValueError("Duplicate Hireology public job ID")
             result[job["id"]] = job
+        if "native_jobs" in board and board["native_jobs"] != {
+            identifier: row["name"] for identifier, row in result.items()
+        }:
+            raise ValueError("Hireology rendered roster and complete public API disagree")
         if len({r["organization"]["id"] for r in result.values()}) != 1:
             raise ValueError("Mixed Hireology organization IDs")
         return result

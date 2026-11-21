@@ -497,3 +497,22 @@ status sentences; historical failures remain evidence, never successful snapshot
 [Exact platform/tenant inventory](COVERAGE.md), [records contract](API.md),
 [historical workflow](COVERAGE_WORKFLOW.md). Reusable native extraction and
 complete live evidence are required independently of presence in the source tree.
+
+## Hireology current server-rendered board repair, November 21
+
+The reviewed Hireology boards no longer embed startingData. The adapter now
+also accepts the native server-rendered template only with a unique exact
+canonical board URL, named employer title, Available Jobs heading and a bounded
+unique visible job roster. Every native job path/title must equal the complete
+public API collection; each full detail and the final API/native roster are
+reconfirmed. Unrelated React state, frontend tokens and form data are discarded.
+The existing small-board ten-job/page bound is unchanged. Missing/extra jobs,
+changed titles/identity, malformed hosts/query parameters and partial/policy
+failures still abort without reconciliation.
+
+Fresh complete runs recovered Beach Chevrolet (4 jobs) and PIP / Dynamark (3),
+with required fields and original native/application links. This repairs existing
+coverage and does not raise the 71/78 platform count. The production launcher
+schedules only the exact obsolete-bootstrap failures once per repair marker;
+it never resets source failures or overrides robots/HTTP 429 cooldowns.
+[Native probe](../evidence/20261121-hireology-ssr-repair-live.json).

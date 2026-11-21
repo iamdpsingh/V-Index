@@ -106,3 +106,7 @@ production-monitor workflow, its scoped monitoring API/OpenAPI reference and
 [Preview isolation/cost inquiry](../evidence/20261121-release-gate-progress.json)
 and [authentication-revoking restore drill](../evidence/20261121-recovery-auth-revocation.json)
 extend the baseline without rewriting earlier evidence.
+
+[Hireology's current native-template repair](../evidence/20261121-hireology-ssr-repair-live.json)
+rechecks two existing installations, without adding platform coverage. The
+connector contract records its roster/identity safeguards and bounded scope.

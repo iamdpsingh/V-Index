@@ -1,0 +1,27 @@
+{
+  "scope": "Fresh complete native rechecks of the two already-verified Hireology installations; existing-source repair, not additional platform coverage. No tokens/authentication or access-policy bypass. This connector-only probe does not establish production worker integration; separate hosted evidence is required.",
+  "recorded_at": "2026-11-21T09:22:03.537709+00:00",
+  "source_code_sha256": "1a49d844d49a583cd80e773823c74f56098dbe06746e6458a1e74f2e321beb42",
+  "runs": [
+    {
+      "url": "https://careers.hireology.com/beachchevrolet",
+      "started_at": "2026-11-21T09:21:45.046842+00:00",
+      "finished_at": "2026-11-21T09:21:55.208192+00:00",
+      "complete": true,
+      "jobs": 4,
+      "company": "Beach Chevrolet",
+      "all_required_fields_present": true,
+      "payload_sha256": "49eccdbd2356e0823e674b3a92382a1960c3d7ae00e386186cb0d74fe6a87d4c"
+    },
+    {
+      "url": "https://careers.hireology.com/pipprinting01151",
+      "started_at": "2026-11-21T09:21:55.209145+00:00",
+      "finished_at": "2026-11-21T09:22:03.537041+00:00",
+      "complete": true,
+      "jobs": 3,
+      "company": "PIP / Dynamark",
+      "all_required_fields_present": true,
+      "payload_sha256": "4a196b851aaf38e6e6464783c9a09e856215277d433cb6ff9ab1fc9b544179c5"
+    }
+  ]
+}

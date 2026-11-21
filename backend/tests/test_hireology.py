@@ -195,3 +195,67 @@ def test_robots_denial_aborts():
 def test_bootstrap_must_match_named_native_unfiltered_site(replacement):
     with pytest.raises(ValueError):
         run(html=board().replace(*replacement))
+
+
+def rendered_board():
+    return (
+        "<html><title>Jobs for Example</title>"
+        '<link rel="canonical" href="https://careers.hireology.com/example">'
+        "<h1>Available Jobs</h1>"
+        '<a href="https://careers.hireology.com/example/12/description?ref=career_site&amp;ref_m=api">Engineer</a>'
+        '<script>self.__next_f.push([1,"unrelated state must not be retained"])</script>'
+        "</html>"
+    )
+
+
+def test_current_native_ssr_board_requires_complete_html_api_agreement():
+    batch = run(html=rendered_board())
+    assert batch.complete and len(batch.jobs) == 1
+    assert batch.jobs[0].company == "Example"
+    assert "unrelated state" not in batch.model_dump_json()
+
+
+@pytest.mark.parametrize(
+    "before,after",
+    [
+        ("Available Jobs", "Featured Jobs"),
+        ("Jobs for Example", "Jobs for Another Employer"),
+        ("/example/12/description", "/another/12/description"),
+        (">Engineer</a>", ">Different role</a>"),
+        ("ref_m=api", "private_key=secret"),
+        ('href="https://careers.hireology.com/example">', 'href="https://evil.example/example">'),
+    ],
+)
+def test_rendered_board_rejects_identity_filter_and_roster_changes(before, after):
+    with pytest.raises(ValueError):
+        run(html=rendered_board().replace(before, after))
+
+
+@pytest.mark.parametrize(
+    "failure,expected",
+    [
+        ("ValueError: Missing unique Hireology public career bootstrap", True),
+        ("ValueError: Career page robots policy disallows this request", False),
+        ("HTTPStatusError: HTTP 429 Too Many Requests", False),
+    ],
+)
+def test_repair_only_requeues_the_exact_obsolete_parser_failure(
+    database, source, failure, expected
+):
+    from datetime import timedelta
+
+    from vindex.db import Run, now
+
+    from scripts.start_production_worker import requeue_repaired_hireology
+
+    future = now() + timedelta(hours=12)
+    with database() as session:
+        stored = session.get(type(source), source.id)
+        stored.provider = "hireology"
+        stored.next_check = future
+        session.add(Run(source_id=source.id, status="failed", error=failure))
+        session.commit()
+        assert requeue_repaired_hireology(session) == ([source.id] if expected else [])
+        session.refresh(stored)
+        # SQLite strips the UTC offset; compare naive UTC for both supported stores.
+        assert (stored.next_check.replace(tzinfo=None) < future.replace(tzinfo=None)) == expected
